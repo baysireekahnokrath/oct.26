@@ -34,20 +34,29 @@ def wing(a, b, kind, w, depth=None):
     if kind == "circle":
         return Point(mx, my).buffer(w, 64)
     d = depth or w
+    if kind == "bud":                                   # round base keeps leather round the slit tips, pointed tip for the look
+        tip = Polygon([(mx - tx * w * 0.75, my - ty * w * 0.75), (mx + nx * d, my + ny * d), (mx + tx * w * 0.75, my + ty * w * 0.75)])
+        return Point(mx, my).buffer(w, 64).union(tip.buffer(-1.5).buffer(1.5, 16))
     tri = Polygon([(mx - tx * w, my - ty * w), (mx + nx * d, my + ny * d), (mx + tx * w, my + ty * w)])
     return tri.buffer(-2.5).buffer(2.5, 32).union(Polygon([(mx - tx * w, my - ty * w), (mx + tx * w, my + ty * w),
                                                         (mx + tx * w - nx * 3, my + ty * w - ny * 3), (mx - tx * w - nx * 3, my - ty * w - ny * 3)]))
 
 def piece(core, edges):
-    """core: CCW points. edges: per edge (gender 'T'|'S'|None, joint, wing kind, wing half-width, depth)."""
+    """core: CCW points. edges: per edge (gender 'T'|'S'|None, joint, wing kind, wing half-width, depth).
+    A tab's two neck slots run along the fold line from the neck out through the outline, plus OVERRUN,
+    so the tab wing is free of its neighbours even where the wings overlap at a corner (as on 03)."""
     shapes = [Polygon(core)]
+    for i, e in enumerate(edges):
+        if e[0] is not None:
+            a, b = core[i], core[(i + 1) % len(core)]
+            shapes.append(wing(a, b, e[2], e[3], e[4]))
+    outline = unary_union(shapes)
     folds, cuts = [], []
     for i, e in enumerate(edges):
         a, b = core[i], core[(i + 1) % len(core)]
         g, joint, kind, w, depth = e
         if g is None:
             continue
-        shapes.append(wing(a, b, kind, w, depth))
         folds.append((a, b))
         mx, my = (a[0] + b[0]) / 2, (a[1] + b[1]) / 2
         tx, ty = b[0] - a[0], b[1] - a[1]; L = math.hypot(tx, ty); tx, ty = tx / L, ty / L
@@ -55,10 +64,16 @@ def piece(core, edges):
             h = joint["slit"] / 2
             cuts.append(((mx - tx * h, my - ty * h), (mx + tx * h, my + ty * h)))
         else:
-            h, r = joint["neck"] / 2, min(w + OVERRUN, L / 2 - 0.5)
+            h = joint["neck"] / 2
             for s in (-1, 1):
-                cuts.append(((mx + s * tx * h, my + s * ty * h), (mx + s * tx * r, my + s * ty * r)))
-    outline = unary_union(shapes)
+                p0 = (mx + s * tx * h, my + s * ty * h)
+                ray = LineString([p0, (mx + s * tx * 120, my + s * ty * 120)])
+                inside = ray.intersection(outline.buffer(-0.05))     # strict interior: a cut along the outline is no cut
+                parts = [inside] if inside.geom_type == "LineString" else list(getattr(inside, "geoms", []))
+                part = min(parts, key=lambda q: q.distance(Point(p0)))
+                far = max(part.coords, key=lambda q: math.dist(q, p0))
+                r = math.dist(far, (mx, my)) + OVERRUN
+                cuts.append((p0, (mx + s * tx * r, my + s * ty * r)))
     # centre in the die block
     minx, miny, maxx, maxy = outline.bounds
     dx, dy = (BOX - (maxx - minx)) / 2 - minx, (BOX - (maxy - miny)) / 2 - miny
@@ -79,12 +94,17 @@ def tagline(p):
 def hexcore(edge):
     return regular(6, edge, 0.0)                       # flat top: a vertex on the x axis
 
+# sizes set so every closed slit tip keeps at least LIG mm of leather to the outline (see ligaments())
+LIG = 8.0
+SIZE = dict(hex_edge=32, hex_r=15.5, link_w=48, link_h=40, link_r=23, mini=32, mini_r=15.5,
+            taper_top=63.6, taper_bot=48.0, taper_h=55.0, taper_r=15.5, petal_w=12, petal_d=18)
+
 def p07():
-    c = hexcore(30)
-    return piece(c, [("T" if i % 2 == 0 else "S", S30, "circle", 13, None) for i in range(6)])
+    c = hexcore(SIZE["hex_edge"])
+    return piece(c, [("T" if i % 2 == 0 else "S", S30, "circle", SIZE["hex_r"], None) for i in range(6)])
 
 def p08():
-    w, h = 44, 40
+    w, h = SIZE["link_w"], SIZE["link_h"]
     c = [(-w / 2, h / 2), (-w / 2, -h / 2), (w / 2, -h / 2), (w / 2, h / 2)]   # CCW in y-down screen space is CW; fix below
     c = c[::-1]
     # edges after reversal: 0 top? compute by midpoint so genders land on the short ends
@@ -93,21 +113,22 @@ def p08():
         a, b = c[i], c[(i + 1) % 4]
         if abs(a[1] - b[1]) < 1e-6:                      # horizontal edge = an end of the link
             g = "T" if a[1] + b[1] > 0 else "S"
-            edges.append((g, S64, "circle", 20, None))
+            edges.append((g, S64, "circle", SIZE["link_r"], None))
         else:
             edges.append((None, None, None, 0, None))
     return piece(c, edges)
 
 def p09():
-    c = hexcore(30)
-    return piece(c, [("T" if i % 2 == 0 else "S", S30, "petal", 13, 16) for i in range(6)])
+    c = hexcore(SIZE["hex_edge"])
+    return piece(c, [("T", S30, "petal", SIZE["petal_w"], SIZE["petal_d"]) if i % 2 == 0 else ("S", S30, "circle", SIZE["hex_r"], None)
+                     for i in range(6)])
 
 def p10():
-    c = regular(4, 30, math.pi / 4)
-    return piece(c, [("T" if i % 2 == 0 else "S", S30, "circle", 13, None) for i in range(4)])
+    c = regular(4, SIZE["mini"], math.pi / 4)
+    return piece(c, [("T" if i % 2 == 0 else "S", S30, "circle", SIZE["mini_r"], None) for i in range(4)])
 
 def p11():
-    top, bot, h = 63.6, 48.0, 55.0
+    top, bot, h = SIZE["taper_top"], SIZE["taper_bot"], SIZE["taper_h"]
     c = [(-top / 2, -h / 2), (top / 2, -h / 2), (bot / 2, h / 2), (-bot / 2, h / 2)]
     if Polygon(c).exterior.is_ccw is False:
         c = c[::-1]
@@ -118,8 +139,22 @@ def p11():
             edges.append((None, None, None, 0, None))
         else:
             g = "T" if a[0] + b[0] < 0 else "S"
-            edges.append((g, S30, "circle", 12, None))
+            edges.append((g, S30, "circle", SIZE["taper_r"], None))
     return piece(c, edges)
+
+def ligaments(p):
+    """Leather left round each closed cut tip, mm: to the outline and to every other cut.
+    Tips that run past the outline are skipped."""
+    segs = [LineString(c) for c in p["cuts"]]
+    out = []
+    for i, g in enumerate(segs):
+        for e in g.coords:
+            P = Point(e)
+            if not p["outline"].contains(P) or p["outline"].exterior.distance(P) < 0.3:
+                continue
+            others = [g2.distance(P) for j, g2 in enumerate(segs) if j != i]
+            out.append(min([p["outline"].exterior.distance(P)] + others))
+    return min(out) if out else None
 
 # ---------------------------------------------------------------- drawing: one pattern, 1:1 in mm
 def pattern_svg(p, uid):
@@ -249,7 +284,7 @@ def prism(n, r_bot, r_top, h, cx, cy, rot, fill_front, fill_top=None, open_top=F
 
 def prod_hexbox():
     W, H = 320, 260
-    R = 30.0                                            # hex side 30 = circumradius 30
+    R = 32.0                                            # hex side 32 = circumradius 32
     body = prism(6, R, R, 30, 160, 175, 0, LEATHER, "var(--l2)", scale=3.0)
     return W, H, body, "กล่องหกเหลี่ยม 07 × 2 + 10 × 6"
 
@@ -258,8 +293,8 @@ def prod_mobile():
     g = ['<rect class="rod" x="40" y="20" width="280" height="7" rx="3.5"/>']
     for k, (x, L) in enumerate(((80, 120), (180, 220), (280, 160))):
         g.append(f'<line class="string" x1="{x}" y1="27" x2="{x}" y2="{L}"/>')
-        g.append(prism(4, 21.2, 21.2, 30, x, L + 70, math.pi / 4 + k * 0.3, [LEATHER[(k + 1) % 3], LEATHER[k % 3]], LEATHER[(k + 2) % 3], scale=2.0))
-    return W, H, "".join(g), "โมบายลูกบาศก์ 30 มม. 3 ลูก ลูกละ 6 ชิ้น"
+        g.append(prism(4, 22.6, 22.6, 32, x, L + 70, math.pi / 4 + k * 0.3, [LEATHER[(k + 1) % 3], LEATHER[k % 3]], LEATHER[(k + 2) % 3], scale=2.0))
+    return W, H, "".join(g), "โมบายลูกบาศก์ 32 มม. 3 ลูก ลูกละ 6 ชิ้น"
 
 def prod_planter():
     W, H = 320, 330
@@ -292,7 +327,7 @@ def build():
     B = P["09"]
     D = [
         ("07", "รังผึ้ง", "Honeycomb", S30, P["07"],
-         "หกเหลี่ยมด้านละ 30 มม. ปีกกับร่องสลับกันรอบชิ้น 3 + 3 ด้านตรงข้ามจึงเป็นปีกกับร่องเสมอ ทุกชิ้นวางทิศเดียวกันแล้วต่อเป็นรังผึ้งได้ทุกทิศ ไม่ต้องหมุนสลับเหมือนสี่เหลี่ยม",
+         "หกเหลี่ยมด้านละ 32 มม. ปีกกับร่องสลับกันรอบชิ้น 3 + 3 ด้านตรงข้ามจึงเป็นปีกกับร่องเสมอ ทุกชิ้นวางทิศเดียวกันแล้วต่อเป็นรังผึ้งได้ทุกทิศ ไม่ต้องหมุนสลับเหมือนสี่เหลี่ยม",
          [(prod_trivet(), "7 ชิ้น · กว้างราว 16 ซม.", "ร้านอาหาร ครัวบ้าน"),
           (prod_runner(), "27 ชิ้น · ราว 15 × 42 ซม. ต่อยาวได้อีก", "โฮมเดคอร์ ของขวัญขึ้นบ้านใหม่")]),
         ("08", "ข้อโซ่", "Link", S64, P["08"],
@@ -304,9 +339,9 @@ def build():
          [(prod_coaster(B), "1 ชิ้น · กว้างราว 8 ซม.", "คาเฟ่ ของชำร่วย"),
           (prod_curtain(B), "18 ชิ้น · ยาวตามหน้าต่าง", "ตกแต่งหน้าต่าง ร้านคาเฟ่")]),
         ("10", "สี่เหลี่ยมจิ๋ว", "Mini square", S30, P["10"],
-         "สี่เหลี่ยมด้านละ 30 มม. ปีกคู่หนึ่ง ร่องคู่หนึ่ง กฎเดียวกับ 03–06 แต่ใช้เศษเล็กสุดแค่ 56 มม. ข้อต่อ S30 เท่ากับ 07 จึงต่อเป็นผนังของกล่องหกเหลี่ยมได้",
+         "สี่เหลี่ยมด้านละ 32 มม. ปีกคู่หนึ่ง ร่องคู่หนึ่ง กฎเดียวกับ 03–06 แต่ใช้เศษเล็กแค่ 63 มม. ด้านยาวเท่ากับ 07 และข้อต่อ S30 เหมือนกัน จึงต่อเป็นผนังของกล่องหกเหลี่ยมได้",
          [(prod_hexbox(), "ฝา-ก้น 07 สองชิ้น + ผนัง 10 หกชิ้น", "กล่องชา ขนม ของขวัญ"),
-          (prod_mobile(), "18 ชิ้น · ลูกบาศก์ 3 ซม.", "ห้องเด็ก โฮมเดคอร์")]),
+          (prod_mobile(), "18 ชิ้น · ลูกบาศก์ 3.2 ซม.", "ห้องเด็ก โฮมเดคอร์")]),
         ("11", "ทรงสอบ", "Taper", S30, P["11"],
          "สี่เหลี่ยมคางหมู บน 63.6 ล่าง 48 สูง 55 มม. ปีกด้านซ้าย ร่องด้านขวา ต่อเรียงเป็นวงรอบได้กี่ชิ้นก็ได้ 4 ชิ้นได้ทรงสี่เหลี่ยม 8 ชิ้นได้ทรงแปดเหลี่ยม ปีกที่รอยต่อตั้งเป็นครีบด้านนอก",
          [(prod_planter(), "4 ชิ้น · ปาก 6.4 ซม. ต่อด้าน", "ร้านต้นไม้ ของขวัญ"),
@@ -422,6 +457,7 @@ a:focus-visible{{outline:2px solid var(--tomato);outline-offset:2px}}
     <li><b>คอปีกเล็กกว่า slit 0.5 มม.</b>สอดผ่านได้ แต่ตัวปีกกว้างกว่า จึงกางล็อกด้านหลัง</li>
     <li><b>ต่อที่แนวพับ</b>มุมต่อได้ตั้งแต่แผ่นเรียบจนถึงกล่อง</li>
     <li><b>ข้อต่อสองขนาดมาตรฐาน</b>S64 ของเดิม และ S30 ใหม่สำหรับเศษชิ้นเล็ก</li>
+    <li><b>เนื้อหนังรอบปลาย slit อย่างน้อย 8 มม.</b>ปีกจึงกว้างกว่า slit ข้างละ 8 มม. ขึ้นไป ทุกแบบในหน้านี้ผ่านเกณฑ์นี้ เท่ากับแม่พิมพ์ 01–06 ที่สั่งไปแล้ว</li>
   </ul>
   <p class="note">นี่คือภาพแนวคิดจากเรขาคณิตจริง ยังไม่ใช่ไฟล์แม่พิมพ์ ทุกแบบต้องตัดต้นแบบ วัดความหนาหนัง และลองดึงก่อนสั่งทำบล็อก (ราว 550–600 บาทต่อแบบ ตามใบเสนอราคา 15 ต.ค.)</p>
 </section>
