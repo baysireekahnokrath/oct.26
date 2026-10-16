@@ -1,0 +1,58 @@
+[
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/bag.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/bag.png",
+  "w": 610,
+  "h": 830,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/booth.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/booth.png",
+  "w": 760,
+  "h": 700,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/card.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/card.png",
+  "w": 780,
+  "h": 982,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/edition.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/edition.png",
+  "w": 780,
+  "h": 780,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/map.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/map.png",
+  "w": 720,
+  "h": 560,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/pattern.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/pattern.png",
+  "w": 987,
+  "h": 610,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/tag-love.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/tag-love.png",
+  "w": 982,
+  "h": 780,
+  "scale": 1
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/bible/svg/tag-soi2.svg",
+  "out": "/home/user/oct.26/brand-20261014/guidelines/img/tag-soi2.png",
+  "w": 982,
+  "h": 780,
+  "scale": 1
+ }
+]
