@@ -274,7 +274,7 @@ def build():
     sheets = []
     for i in range(0, len(pages), 2):
         pair = pages[i:i + 2] + ['<section class="a5 blank"></section>'] * (2 - len(pages[i:i + 2]))
-        sheets.append(f'<div class="sheet">{"".join(pair)}<span class="cut">✂</span></div>')
+        sheets.append(f'<div class="sheet">{"".join(pair)}<span class="cut">ตัด</span></div>')
     out = f'<!doctype html><html lang="th"><head><meta charset="utf-8"><title>OCT. 26 How-to A5</title><style>{CSS}</style></head><body>{"".join(sheets)}</body></html>'
     open(os.path.join(HERE, "howto.html"), "w").write(out)
     print("sheets", len(sheets), "pages", len(pages))
