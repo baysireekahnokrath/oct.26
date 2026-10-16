@@ -1,0 +1,879 @@
+<title>ทางเลือกแบรนด์ Luxury</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500&family=Noto+Serif+Thai:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: a lookbook. One full-width brand board per option, details in a two-column spec sheet below it. */
+  --bg:#F1EEE8;--paper:#FBFAF7;--ink:#1A1814;--muted:#6B655C;--line:#DDD7CD;--accent:#8C4A26;--chip:#E8E3DA;
+  --display:"Noto Serif Thai","Bodoni Moda",Georgia,serif;
+  --body:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141311;--paper:#1D1B18;--ink:#EEEAE2;--muted:#ABA397;--line:#34302A;--accent:#D08B5C;--chip:#2A2723;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141311;--paper:#1D1B18;--ink:#EEEAE2;--muted:#ABA397;--line:#34302A;--accent:#D08B5C;--chip:#2A2723;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 72px}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:56px}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.25;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,6.5vw,46px)}h2{font-size:clamp(24px,5vw,32px)}h3{font-size:18px}
+p{margin:0}
+a{color:var(--accent)}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:64ch}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:10px max(16px,env(safe-area-inset-left,0px));display:flex;gap:6px;overflow-x:auto}
+nav.top a{flex:none;font-size:14px;letter-spacing:.06em;text-decoration:none;color:var(--ink);background:var(--chip);border-radius:99px;padding:5px 13px}
+nav.top a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.opt{display:flex;flex-direction:column;gap:18px;scroll-margin-top:64px}
+.head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.num{font-family:var(--display);font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+.boards{display:grid;grid-template-columns:minmax(0,2.14fr) minmax(0,1fr);gap:12px}
+.boards img{border-radius:6px;width:100%}
+.spec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.spec>div{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.k{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sw{display:flex;gap:8px;flex-wrap:wrap}.sw span{display:flex;align-items:center;gap:6px;font-size:13px}
+.sw i{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);display:inline-block}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:500;font-size:12.5px;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.chipx{font-size:13px;background:var(--chip);border-radius:99px;padding:3px 11px}
+.ini{display:flex;gap:10px;flex-wrap:wrap}.ini label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.ini input{width:56px;height:56px;font-size:26px;text-align:center;text-transform:uppercase;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font-family:var(--body)}
+.ini input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.word{font-size:20px;font-weight:500;letter-spacing:.12em;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-variant-numeric:tabular-nums}
+.taken{font-size:13px;letter-spacing:.04em;background:#8E2B23;color:#FBF6EE;border-radius:99px;padding:2px 10px}
+.risk{font-size:14px;color:var(--muted);border-left:3px solid var(--accent);padding-left:12px}
+.pick{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:20px;display:flex;flex-direction:column;gap:10px}
+ul,ol{margin:0;padding-left:1.3em}
+@media (max-width:640px){.boards,.spec{grid-template-columns:minmax(0,1fr)}.boards img:last-child{max-width:260px}}
+</style>
+<nav class="top" aria-label="ทางเลือก"><a href="#d2610">26·10</a><a href="#soi">soi.</a><a href="#soi26">SOI 26</a><a href="#oct">oct.</a><a href="#xxvi">XXVI·X</a><a href="#clicker">CLICKER</a><a href="#makedo">MAKE DO</a><a href="#d2310">23·10</a><a href="#initials">อักษรแรกห้าคน</a><a href="#soi5">SOI 5</a><a href="#mai">mai.</a><a href="#dee">dee.</a><a href="#lek">lek.</a><a href="#fun">fun.</a><a href="#jai">jai.</a><a href="#dad">dad.</a><a href="#kid">kid.</a><a href="#sis">sis.</a><a href="#fam">fam.</a><a href="#us">us.</a><a href="#tab">tab.</a><a href="#fit">fit.</a><a href="#kin">kin.</a><a href="#one">one.</a><a href="#mom">mom.</a><a href="#ours">MAISON OURS</a><a href="#cinq">MAISON CINQ</a><a href="#tuck">MAISON TUCK</a><a href="#fold">MAISON FOLD</a><a href="#mend">MAISON MEND</a><a href="#bit">bit.</a><a href="#kit">kit.</a><a href="#hold">hold.</a><a href="#left">left.</a><a href="#pal">pal.</a><a href="#prajam">PRAJAM</a><a href="#koojai">KOOJAI</a><a href="#chaidee">CHAIDEE</a><a href="#wanwan">WANWAN</a><a href="#khunmue">KHUNMUE</a><a href="#lamiad">LAMIAD</a><a href="#benja">BENJA</a><a href="#banjong">BANJONG</a><a href="#kanok">KANOK</a><a href="#hattha">HATTHA</a><a href="#remnant">REMNANT</a><a href="#unsewn">UNSEWN</a><a href="#interlock">INTERLOCK</a><a href="#aftercut">AFTERCUT</a><a href="#quint">QUINT</a><a href="#khad">KHAD</a><a href="#sansfil">SANSFIL</a><a href="#pointfive">POINT FIVE</a><a href="#praneet">PRANEET</a><a href="#monohide">MONO/HIDE</a><a href="#pick">ที่เลือก</a></nav>
+<div class="wrap">
+<header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">Brand directions · 14 ต.ค. 2569</span>
+<h1>ห้าสิบห้าทางเลือก และชื่อที่เลือก OCT. 26</h1>
+<p class="lead">สินค้า บล็อกตัด และครอบครัวเดิมทั้งหมด สิ่งที่เปลี่ยนคือชื่อ ลุค และระดับราคา ทุกโลโก้ในหน้านี้เป็นไฟล์จริงที่แปลงตัวอักษรเป็นเส้นแล้ว ส่วนป้ายห้อยเป็นตัวอย่างการใช้งานบนสินค้า</p>
+<p style="font-size:14px;color:var(--muted)">ต้นทุนในตารางใช้สูตรเดียวกับ Google Sheet แต่เปลี่ยนถุง 5 บาทเป็นกล่องพรีเมียมประมาณ 40 บาท ราคาแบรนด์หรูต้องมาพร้อมงานเก็บขอบหนัง การคัดหนังเกรดดี และบรรจุภัณฑ์ที่ดีขึ้น</p>
+</header>
+<section class="opt pick" id="pick"><span class="eyebrow">เลือกแล้ว · 14 ต.ค. 2569</span><h2>OCT. 26 · our crafted things.</h2>
+<p>ชื่อที่เลือกมาจาก oct. ในชุดที่ 12 บวกวันเกิด 26 OCT. ย่อจาก our crafted things และเป็นเดือนตุลาคม 26 คือวันเกิดของแม่</p>
+<p>คอลเลกชันแรกชื่อ SOI. 02 และหมีห้าตัวเป็นซับแบรนด์ ห้าหมี FIVE BEARS by OCT. 26 คอลเลกชันแรกของห้าหมีชื่อ Love โลโก้ชุดเต็ม Brand Book โปสเตอร์ 30 ตัว และสไลด์วันเกิด ทำใหม่เป็น OCT. 26 แล้ว ชื่ออื่นในหน้านี้เก็บไว้ดูย้อนหลัง</p></section>
+<p class="eyebrow">ชุดที่ 12 · ใหม่ · ตัวย่อ ชื่อซอย และวันเกิด 26.10</p><p style="font-size:14px;color:var(--muted)">วันที่ 26 ตุลาคมคือวันเกิดภรรยา ตรงกับวันถัดจากวันออกบูธวันสุดท้าย เปิดตัวแบรนด์และให้ของขวัญในวันเดียวกันได้</p><section class="opt" id="d2610">
+<div class="head"><span class="num">51</span><h2>26·10</h2><span style="color:var(--muted)">วันเกิดของเธอ</span></div>
+<div class="boards"><img src="img/d2610-board.png" alt="โลโก้ 26·10 บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/d2610-tag.png" alt="ป้ายห้อยสินค้า 26·10 ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · วันเกิดภรรยา</span><p>ใช้วันเกิดของภรรยาเป็นชื่อแบรนด์ตรง ๆ วันที่ 26 ตุลาคมคือวันถัดจากวันออกบูธวันสุดท้าย เปิดตัวแบรนด์และให้ของขวัญในวันเดียวกัน</p><p class="k" style="text-transform:none;letter-spacing:.02em">ใช้คู่กับ</p><div class="sw"><span class="chipx">คอลเลกชัน 26·10 ทุกปี</span><span class="chipx">รุ่นจำกัด 26 ชิ้น</span><span class="chipx">เลขรุ่น No. 26</span><span class="chipx">เปิดตัววันที่ 26 ตุลาคม</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>ตัวเลขที่คนในบ้านรู้ความหมายทันที คนนอกถามว่าแปลว่าอะไร ก็ได้เล่าว่าแบรนด์นี้ตั้งตามวันเกิดของแม่</p><p><b>Born on her birthday.</b><br>เกิดในวันเกิดของเธอ</p></div>
+<div><span class="k">ลุค</span><p>ตัวเลขใหญ่แบบโปสเตอร์ พื้นขาว ตัวเลขดำ จุดกลางสีแดงหัวใจ</p><div class="sw"><span><i style="background:#F6F5F2"></i>White <span class="k" style="letter-spacing:0">#F6F5F2</span></span><span><i style="background:#141414"></i>Black <span class="k" style="letter-spacing:0">#141414</span></span><span><i style="background:#D6453D"></i>Heart <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#9B978F"></i>Grey <span class="k" style="letter-spacing:0">#9B978F</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @twentysix.ten</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ทุกปีวันที่ 26 ตุลาคม ออกของรุ่นพิเศษ 26 ชิ้น ลูก ๆ เลือกสี และเป็นวันที่ครอบครัวฉลองวันเกิดแม่ไปพร้อมวันเกิดร้าน</p></div>
+<div><span class="k">ขายใคร</span><p>ทุกกลุ่ม ของขวัญที่มีเรื่องเล่า ของรุ่นจำกัด</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>490</b></td><td class="n">78</td><td class="n">84%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>250</b></td><td class="n">62</td><td class="n">75%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>190</b></td><td class="n">45</td><td class="n">76%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ ตัวเลขล้วนจดเครื่องหมายยาก ต้องจดเป็นโลโก้ และชื่อบัญชีต้องเป็นคำ เช่น twentysix.ten</p>
+
+</section><section class="opt" id="soi">
+<div class="head"><span class="num">52</span><h2>soi.</h2><span style="color:var(--muted)">ซอย</span></div>
+<div class="boards"><img src="img/soi-board.png" alt="โลโก้ soi. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/soi-tag.png" alt="ป้ายห้อยสินค้า soi. ตัวอย่างกับที่ห้อยกระเป๋าหมีหัวใจ" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · ตัวย่อ + ซอย</span><p>รวมสองแนวที่ชอบ เป็นตัวย่อแบบ dot และอ่านว่า ซอย ได้ในคำเดียว s.o.i. ย่อมาจาก something of ours ของบางอย่างที่เป็นของเรา</p><p class="k" style="text-transform:none;letter-spacing:.02em">คอลเลกชันตั้งตามซอย</p><div class="sw"><span class="chipx">ซอย 26 (รุ่นวันเกิด)</span><span class="chipx">ซอยบ้านจริง</span><span class="chipx">ซอย 5 (ห้าคน)</span><span class="chipx">ตรอก</span><span class="chipx">แยก</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>ซอยคือที่ที่บ้านเราอยู่ ของในร้านคือของของเรา คอลเลกชันตั้งชื่อตามเลขซอย ซอย 26 เป็นรุ่นวันเกิดภรรยา</p><p><b>something of ours.</b><br>ของบางอย่างที่เป็นของเรา</p></div>
+<div><span class="k">ลุค</span><p>ป้ายซอยกรุงเทพ พื้นน้ำเงิน ตัวหนังสือขาว จุดเหลืองแบบขอบฟุตบาท</p><div class="sw"><span><i style="background:#1F4E9C"></i>Street blue <span class="k" style="letter-spacing:0">#1F4E9C</span></span><span><i style="background:#FFFFFF"></i>Sign white <span class="k" style="letter-spacing:0">#FFFFFF</span></span><span><i style="background:#F2C230"></i>Kerb yellow <span class="k" style="letter-spacing:0">#F2C230</span></span><span><i style="background:#3A3A3A"></i>Asphalt <span class="k" style="letter-spacing:0">#3A3A3A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Manrope · ภาษาไทย Anuphan · @soi.ours</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ทุกคอลเลกชันเป็นซอยหนึ่ง ซอยแรกคือ ซอย 26 เปิดในวันเกิดภรรยา ลูก ๆ ตั้งเลขซอยต่อไปเอง</p></div>
+<div><span class="k">ขายใคร</span><p>นักท่องเที่ยว คนเมือง ของฝากจากกรุงเทพ ของใช้ทุกวัน</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ป้ายห้อยของขวัญ</td><td class="n">39</td><td class="n"><b>59</b></td><td class="n">21</td><td class="n">65%</td></tr><tr><td>ที่รองแก้วหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บเจอร้านอาหาร SOI Bangkok ในโรงแรม ASAI สาทร คนละหมวด soi เป็นคำทั่วไป ต้องจดทั้งชุดคู่คำว่า something of ours</p>
+
+</section><section class="opt" id="soi26">
+<div class="head"><span class="num">53</span><h2>SOI 26</h2><span style="color:var(--muted)">ซอย ๒๖</span></div>
+<div class="boards"><img src="img/soi26-board.png" alt="โลโก้ SOI 26 บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/soi26-tag.png" alt="ป้ายห้อยสินค้า SOI 26 ตัวอย่างกับป้ายห้อยของขวัญ" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · ชื่อซอย + วันเกิด</span><p>ใช้ป้ายซอยเป็นโลโก้ แต่เลขซอยคือวันที่ในวันเกิดภรรยา คนทั่วไปเห็นเป็นป้ายซอยกรุงเทพ คนในบ้านรู้ว่าคือวันเกิดแม่</p><p class="k" style="text-transform:none;letter-spacing:.02em">คอลเลกชันตั้งตามบ้านในซอย</p><div class="sw"><span class="chipx">บ้านเลขที่ 1–5 ตามคนในบ้าน</span><span class="chipx">ซอย 26 แยก 10</span><span class="chipx">ปากซอย</span><span class="chipx">ท้ายซอย</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>ซอย 26 แยก 10 คือ 26 ตุลาคม ซ่อนวันเกิดไว้ในป้ายถนน เป็นของขวัญที่คนนอกมองไม่ออก</p><p><b>Made in Soi 26.</b><br>ทำในซอยที่ชื่อวันเกิดเธอ</p></div>
+<div><span class="k">ลุค</span><p>ป้ายซอยกรุงเทพสีน้ำเงิน ภาษาไทยอยู่บน อังกฤษอยู่ล่าง</p><div class="sw"><span><i style="background:#1F4E9C"></i>Street blue <span class="k" style="letter-spacing:0">#1F4E9C</span></span><span><i style="background:#FFFFFF"></i>Sign white <span class="k" style="letter-spacing:0">#FFFFFF</span></span><span><i style="background:#F2C230"></i>Kerb yellow <span class="k" style="letter-spacing:0">#F2C230</span></span><span><i style="background:#3A3A3A"></i>Asphalt <span class="k" style="letter-spacing:0">#3A3A3A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Kanit · @soi26.bkk</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>คอลเลกชันตั้งชื่อเป็นบ้านเลขที่ บ้านเลขที่ 1 ถึง 5 คือพ่อ แม่ และลูกสามคน แต่ละบ้านเป็นของชิ้นโปรดของแต่ละคน</p></div>
+<div><span class="k">ขายใคร</span><p>นักท่องเที่ยว ของฝาก ร้านในโรงแรม</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ป้ายห้อยของขวัญ</td><td class="n">39</td><td class="n"><b>59</b></td><td class="n">21</td><td class="n">65%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">37</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">ถนนหลายสายมีซอย 26 จริง เช่น สุขุมวิท 26 คนอาจคิดว่าร้านอยู่ที่นั่น ต้องเล่าความหมายให้ชัด และต้องจดเป็นโลโก้ป้ายซอย</p>
+
+</section><section class="opt" id="oct">
+<div class="head"><span class="num">54</span><h2>oct.</h2><span style="color:var(--muted)">อ็อกท์</span></div>
+<div class="boards"><img src="img/oct-board.png" alt="โลโก้ oct. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/oct-tag.png" alt="ป้ายห้อยสินค้า oct. ตัวอย่างกับกระเป๋าเหรียญจิ๋ว" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · ตัวย่อ + เดือนเกิด</span><p>ตัวย่อแบบ dot ที่อ่านเป็นชื่อเดือนตุลาคม เดือนเกิดของภรรยาและเดือนที่แบรนด์เปิด o.c.t. ย่อมาจาก our crafted things</p><p class="k" style="text-transform:none;letter-spacing:.02em">คอลเลกชันตั้งตามวันที่</p><div class="sw"><span class="chipx">oct.26</span><span class="chipx">oct.23 (วันออกบูธ)</span><span class="chipx">oct.05 (ห้าคน)</span><span class="chipx">oct.edition</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>ตุลาคมคือเดือนที่ทุกอย่างเริ่ม ทั้งวันเกิดภรรยาและวันแรกที่ลูก ๆ ขาย ของในร้านเป็นของที่เราทำเอง</p><p><b>our crafted things.</b><br>ของที่เราทำกันเอง</p></div>
+<div><span class="k">ลุค</span><p>ใบไม้เดือนตุลาคม พื้นครีมอุ่น ตัวหนังสือน้ำตาลเข้ม จุดสีส้มอิฐ</p><div class="sw"><span><i style="background:#F3E3CF"></i>Warm cream <span class="k" style="letter-spacing:0">#F3E3CF</span></span><span><i style="background:#3A2318"></i>Chestnut <span class="k" style="letter-spacing:0">#3A2318</span></span><span><i style="background:#D9772B"></i>Brick dot <span class="k" style="letter-spacing:0">#D9772B</span></span><span><i style="background:#8A6A3A"></i>Leaf <span class="k" style="letter-spacing:0">#8A6A3A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @oct.crafted</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ทุกคอลเลกชันตั้งชื่อตามวันในเดือนตุลาคม เริ่มที่ oct.26 วันเกิดภรรยา</p></div>
+<div><span class="k">ขายใคร</span><p>ของใช้ทุกวัน ของขวัญชิ้นเล็ก คนชอบของมินิมอล</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>169</b></td><td class="n">22</td><td class="n">87%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>229</b></td><td class="n">23</td><td class="n">90%</td></tr><tr><td>ที่เก็บสายชาร์จหมี</td><td class="n">59</td><td class="n"><b>129</b></td><td class="n">22</td><td class="n">83%</td></tr></tbody></table></div>
+<p class="risk">มีแบรนด์เครื่องหนังที่ขึ้นต้นด้วย Oct อยู่แล้ว คือ Octovo และ Octogony ชื่อไม่ซ้ำแต่ใกล้ ต้องจดทั้งชุดคู่คำว่า our crafted things</p>
+
+</section><section class="opt" id="xxvi">
+<div class="head"><span class="num">55</span><h2>XXVI·X</h2><span style="color:var(--muted)">ยี่สิบหก · สิบ</span></div>
+<div class="boards"><img src="img/xxvi-board.png" alt="โลโก้ XXVI·X บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/xxvi-tag.png" alt="ป้ายห้อยสินค้า XXVI·X ตัวอย่างกับกล่องแหวนหนังแท้" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · วันเกิดแบบเลขโรมัน</span><p>เขียนวันเกิด 26 ตุลาคมเป็นเลขโรมัน ดูหรูแบบแบรนด์ยุโรป คนทั่วไปอ่านไม่ออก คนในบ้านรู้ความหมาย</p><p class="k" style="text-transform:none;letter-spacing:.02em">ใช้คู่กับ</p><div class="sw"><span class="chipx">XXVI อย่างเดียว</span><span class="chipx">No. XXVI</span><span class="chipx">รุ่น I–V ตามคนในบ้าน</span><span class="chipx">MMXXVI ปีที่เริ่ม</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>XXVI คือ 26 และ X คือ 10 วันเกิดของภรรยาในรูปเลขโรมัน เป็นของขวัญที่ซ่อนอยู่ในชื่อแบรนด์หรู</p><p><b>Twenty-six, ten.</b><br>ยี่สิบหก ตุลาคม</p></div>
+<div><span class="k">ลุค</span><p>หรูแบบยุโรป พื้นดำอมน้ำตาล ตัวอักษรโรมันสีครีม เส้นทอง</p><div class="sw"><span><i style="background:#1C1714"></i>Noir <span class="k" style="letter-spacing:0">#1C1714</span></span><span><i style="background:#EFE6D6"></i>Ivory <span class="k" style="letter-spacing:0">#EFE6D6</span></span><span><i style="background:#C2A160"></i>Gold <span class="k" style="letter-spacing:0">#C2A160</span></span><span><i style="background:#6E2233"></i>Bordeaux <span class="k" style="letter-spacing:0">#6E2233</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cinzel · ภาษาไทย Noto Serif Thai · @xxvi.x</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>รุ่นของลูกใช้เลขโรมัน III IV V ตามลำดับคนในบ้าน แม่คือ II พ่อคือ I</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญพรีเมียม คนชอบแบรนด์ยุโรป</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>790</b></td><td class="n">61</td><td class="n">92%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>390</b></td><td class="n">48</td><td class="n">88%</td></tr><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>590</b></td><td class="n">61</td><td class="n">90%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บเจอแบรนด์เครื่องหนังอังกฤษชื่อ XXIII และแบรนด์เสื้อผ้า CXXVI ในนิวยอร์ก ใช้เลขโรมันแบบเดียวกัน ชื่อไม่ซ้ำแต่ใกล้ ตัวเลขโรมันจดยาก ต้องจดเป็นโลโก้</p>
+
+</section>
+<p class="eyebrow">ชุดที่ 10 · ห้าแนวคิดใหม่</p><p style="font-size:14px;color:var(--muted)">แต่ละแนวคิดเป็นวิธีตั้งชื่อแบบใหม่ ไม่ใช่แค่ชื่อเดียว มีชื่อตัวอย่างที่ทำโลโก้ให้แล้ว และชื่ออื่นในแนวเดียวกันให้เลือกต่อ</p><section class="opt" id="clicker">
+<div class="head"><span class="num">46</span><h2>CLICKER</h2><span style="color:var(--muted)">คลิกเกอร์</span></div>
+<div class="boards"><img src="img/clicker-board.png" alt="โลโก้ CLICKER บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/clicker-tag.png" alt="ป้ายห้อยสินค้า CLICKER ตัวอย่างกับซองใส่ AirTag" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · ศัพท์ช่างหนัง</span><p>ใช้คำที่ช่างหนังใช้กันจริงในโรงงาน คนทั่วไปไม่รู้ แต่คนที่รู้จะรู้สึกว่าแบรนด์นี้เป็นของจริง</p><p class="k" style="text-transform:none;letter-spacing:.02em">ชื่ออื่นในแนวเดียวกัน</p><div class="sw"><span class="chipx">OFFCUT</span><span class="chipx">KEYLINE</span><span class="chipx">BEVEL</span><span class="chipx">SKIVE</span><span class="chipx">GRAIN</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>clicker คือเครื่องกดบล็อกตัดหนัง และในอังกฤษใช้เรียกช่างตัดหนังด้วย ฟังเหมือนเสียงคลิกตอนชิ้นหนังล็อกเข้ากัน</p><p><b>Pressed, clicked, done.</b><br>กด ตัด คลิก จบ</p></div>
+<div><span class="k">ลุค</span><p>อุตสาหกรรมแบบเท่ พื้นเหล็กเทา ตัวหนังสือดำ เส้นตัดสีแดงแบบในไฟล์ drawing</p><div class="sw"><span><i style="background:#C9CCCF"></i>Steel <span class="k" style="letter-spacing:0">#C9CCCF</span></span><span><i style="background:#161616"></i>Black <span class="k" style="letter-spacing:0">#161616</span></span><span><i style="background:#E2231A"></i>Cut red <span class="k" style="letter-spacing:0">#E2231A</span></span><span><i style="background:#F2F2EF"></i>Paper <span class="k" style="letter-spacing:0">#F2F2EF</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Anuphan · @clicker.studio</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>พ่อเป็นคนกดบล็อกตัดเอง ทุกชิ้นมีเลขบล็อกกำกับ ถ่ายคลิปเครื่องกดตัดหนังลง TikTok ซึ่งคนชอบดู</p></div>
+<div><span class="k">ขายใคร</span><p>ผู้ชาย สายดีไซน์ คนชอบดูงานผลิต</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>290</b></td><td class="n">48</td><td class="n">84%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>390</b></td><td class="n">57</td><td class="n">85%</td></tr><tr><td>ลูกเต๋าหนัง</td><td class="n">159</td><td class="n"><b>250</b></td><td class="n">61</td><td class="n">76%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์เครื่องหนังชื่อนี้ เจอแต่เครื่องกดตัดหนังและที่กดฝึกสุนัข เป็นคำทั่วไป ต้องจดคู่โลโก้</p>
+
+</section><section class="opt" id="makedo">
+<div class="head"><span class="num">47</span><h2>MAKE DO</h2><span style="color:var(--muted)">เมคดู</span></div>
+<div class="boards"><img src="img/makedo-board.png" alt="โลโก้ MAKE DO บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/makedo-tag.png" alt="ป้ายห้อยสินค้า MAKE DO ตัวอย่างกับชุดที่รองแก้ว 4 ลาย" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · สำนวนอังกฤษ</span><p>ใช้สำนวนที่ทุกคนรู้ความหมาย แต่ตรงกับเรื่องของเราพอดี ชื่อเล่าเรื่องได้เองโดยไม่ต้องอธิบาย</p><p class="k" style="text-transform:none;letter-spacing:.02em">ชื่ออื่นในแนวเดียวกัน</p><div class="sw"><span class="chipx">ODDS &amp; ENDS</span><span class="chipx">BITS &amp; PIECES</span><span class="chipx">HAND IN HAND</span><span class="chipx">ALL IN ONE PIECE</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>make do แปลว่า ทำให้ได้ด้วยสิ่งที่มี คือการเอาเศษหนังที่มีอยู่มาทำของใช้ เป็นทั้งวิธีคิดของพ่อและบทเรียนให้ลูก ๆ</p><p><b>Make do with what you have.</b><br>ทำให้ดีด้วยสิ่งที่มี</p></div>
+<div><span class="k">ลุค</span><p>งานปะต่อแบบควิลต์ พื้นครีม ตัวหนังสือน้ำตาลเข้ม โลโก้เป็นเศษสี่ชิ้นสี่สีต่อกันเป็นสี่เหลี่ยม</p><div class="sw"><span><i style="background:#F4ECDD"></i>Cream <span class="k" style="letter-spacing:0">#F4ECDD</span></span><span><i style="background:#3B2A1E"></i>Walnut <span class="k" style="letter-spacing:0">#3B2A1E</span></span><span><i style="background:#B5522F"></i>Rust <span class="k" style="letter-spacing:0">#B5522F</span></span><span><i style="background:#6E7F5A"></i>Moss <span class="k" style="letter-spacing:0">#6E7F5A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @makedo.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>สอนลูก ๆ ว่าไม่ต้องมีครบก็เริ่มได้ ใช้เศษที่มีทำเป็นของ เป็นเรื่องเล่าที่บูธที่ลูกพูดเองได้</p></div>
+<div><span class="k">ขายใคร</span><p>สายรักษ์โลก ครอบครัว คนชอบงานทำมือ</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>390</b></td><td class="n">62</td><td class="n">84%</td></tr><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>450</b></td><td class="n">61</td><td class="n">86%</td></tr><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>490</b></td><td class="n">78</td><td class="n">84%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์เครื่องหนังชื่อนี้ มีชื่อใกล้กันคือ Make Smith และ MW Makes เป็นสำนวนทั่วไป ต้องจดคู่โลโก้</p>
+
+</section><section class="opt" id="d2310">
+<div class="head"><span class="num">48</span><h2>23·10</h2><span style="color:var(--muted)">ทเวนตี้ทรี เท็น</span></div>
+<div class="boards"><img src="img/d2310-board.png" alt="โลโก้ 23·10 บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/d2310-tag.png" alt="ป้ายห้อยสินค้า 23·10 ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · วันสำคัญ</span><p>ใช้วันที่ที่มีความหมายกับครอบครัวเป็นชื่อ คนถามว่าแปลว่าอะไร ก็ได้เล่าเรื่องทุกครั้ง</p><p class="k" style="text-transform:none;letter-spacing:.02em">ชื่ออื่นในแนวเดียวกัน</p><div class="sw"><span class="chipx">วันเกิดภรรยา เช่น 0412</span><span class="chipx">2569</span><span class="chipx">ปีเกิดลูกสามคนต่อกัน</span><span class="chipx">05.05</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>23 ตุลาคม 2569 คือวันแรกที่ลูก ๆ ขายของเองที่บูธ วันเกิดของแบรนด์ หรือจะเปลี่ยนเป็นวันเกิดของภรรยาก็ได้ ให้เป็นของขวัญตรง ๆ</p><p><b>Since the first day we sold.</b><br>ตั้งแต่วันแรกที่ลูก ๆ ขายเอง</p></div>
+<div><span class="k">ลุค</span><p>ตัวเลขใหญ่แบบโปสเตอร์ พื้นขาว ตัวเลขดำ จุดกลางสีแดง</p><div class="sw"><span><i style="background:#F6F5F2"></i>White <span class="k" style="letter-spacing:0">#F6F5F2</span></span><span><i style="background:#141414"></i>Black <span class="k" style="letter-spacing:0">#141414</span></span><span><i style="background:#D6453D"></i>Red <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#9B978F"></i>Grey <span class="k" style="letter-spacing:0">#9B978F</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @twentythree.ten</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ทุกปีวันที่ 23 ตุลาคมเป็นวันเกิดร้าน ทำของรุ่นพิเศษจำนวนจำกัด ลูก ๆ เป็นคนเลือกสี</p></div>
+<div><span class="k">ขายใคร</span><p>คนชอบของมีเรื่องเล่า ของสะสม รุ่นจำนวนจำกัด</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>490</b></td><td class="n">78</td><td class="n">84%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>250</b></td><td class="n">62</td><td class="n">75%</td></tr><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>199</b></td><td class="n">68</td><td class="n">66%</td></tr></tbody></table></div>
+<p class="risk">ตัวเลขล้วนจดเครื่องหมายการค้ายากมาก ต้องจดเป็นโลโก้ และตั้งชื่อบัญชีเป็นคำ เช่น twentythree.ten</p>
+
+</section><section class="opt" id="initials">
+<div class="head"><span class="num">49</span><h2>อักษรแรกห้าคน</h2><span style="color:var(--muted)">ตั้งจากชื่อทุกคนในบ้าน</span></div>
+<div class="boards"><img src="img/initials-board.png" alt="โลโก้ อักษรแรกห้าคน บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/initials-tag.png" alt="ป้ายห้อยสินค้า อักษรแรกห้าคน ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · อักษรแรกของห้าคน</span><p>เอาอักษรตัวแรกของชื่อพ่อ แม่ และลูกสามคนมาเรียงเป็นคำ แบบที่วง ABBA ตั้งจากชื่อสมาชิกสี่คน ชื่อนี้มีบ้านเราบ้านเดียวในโลก</p><p class="k" style="text-transform:none;letter-spacing:.02em">ชื่ออื่นในแนวเดียวกัน</p><div class="sw"><span class="chipx">เรียงตามอายุ</span><span class="chipx">เรียงให้อ่านออกเสียงได้</span><span class="chipx">ใส่จุดคั่นแบบ m.a.k.p.t</span><span class="chipx">ใช้อักษรไทยห้าตัว</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>ห้าตัวอักษรคือห้าคน ไม่มีใครลอกได้ และเป็นของขวัญถึงภรรยาที่ชัดที่สุด เพราะมีตัวอักษรของเธออยู่ในชื่อแบรนด์ตลอดไป</p><p><b>Five letters. Five of us.</b><br>ห้าตัวอักษร ห้าคนในบ้าน</p></div>
+<div><span class="k">ลุค</span><p>ห้าช่องห้าสี ใช้สีประจำตัวของแต่ละคนจากห้าหมี ตัวอักษรหนาตรงกลาง</p><div class="sw"><span><i style="background:#4A2C1D"></i>Cocoa <span class="k" style="letter-spacing:0">#4A2C1D</span></span><span><i style="background:#D6453D"></i>Heart <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#F0B43C"></i>Honey <span class="k" style="letter-spacing:0">#F0B43C</span></span><span><i style="background:#F2A7A0"></i>Peach <span class="k" style="letter-spacing:0">#F2A7A0</span></span><span><i style="background:#6F9A8D"></i>Sage <span class="k" style="letter-spacing:0">#6F9A8D</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @(ตามชื่อที่ได้)</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ลองพิมพ์อักษรแรกของทุกคนในเครื่องมือด้านล่าง หน้านี้จะเรียงให้ทุกแบบและเลือกแบบที่อ่านออกเสียงได้ขึ้นก่อน</p></div>
+<div><span class="k">ขายใคร</span><p>ใช้ได้กับทุกกลุ่ม ขึ้นกับตัวอักษรที่ได้</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>390</b></td><td class="n">78</td><td class="n">80%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">62</td><td class="n">67%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">62</td><td class="n">79%</td></tr></tbody></table></div>
+<p class="risk">ต้องค้นชื่อที่ได้ก่อนใช้ทุกครั้ง ชื่อห้าตัวอักษรบางแบบอาจตรงกับคำที่มีความหมายในภาษาอื่น</p>
+<div class="pick" id="tool" style="gap:12px"><span class="k">ลองตั้งชื่อจากอักษรแรกของห้าคน</span>
+<p>พิมพ์อักษรตัวแรกของชื่อแต่ละคน (อังกฤษหรือไทยก็ได้) หน้านี้จะเรียงให้ครบทุกแบบ แบบที่สลับสระกับพยัญชนะ อ่านออกเสียงง่าย จะขึ้นก่อน ตัวอักษรที่ใส่ไว้ตอนนี้เป็นตัวอย่าง</p>
+<div class="ini">
+<label>พ่อ<input id="ini1" maxlength="1" value="P"></label><label>แม่<input id="ini2" maxlength="1" value="A"></label>
+<label>คนโต<input id="ini3" maxlength="1" value="N"></label><label>คนกลาง<input id="ini4" maxlength="1" value="I"></label>
+<label>คนเล็ก<input id="ini5" maxlength="1" value="K"></label></div>
+<p class="k" id="ini-count" style="text-transform:none;letter-spacing:0"></p>
+<div class="sw" id="ini-out"></div>
+<details><summary class="k" style="cursor:pointer;text-transform:none;letter-spacing:0">ดูทุกแบบ</summary><p id="ini-all" style="font-size:14px;line-height:2;word-spacing:.6em"></p></details>
+</div>
+<script>
+(function(){
+const V=new Set("AEIOUY".split(""));
+const isV=c=>V.has(c)||/[ะ-ๅ็-๎]/.test(c);
+function perms(a){if(a.length<2)return[a];const out=[];a.forEach((x,i)=>perms(a.slice(0,i).concat(a.slice(i+1))).forEach(p=>out.push([x].concat(p))));return out}
+function score(w){let s=0,run=1;for(let i=1;i<w.length;i++){const a=isV(w[i-1]),b=isV(w[i]);if(a!==b){s+=2;run=1}else{run++;s-=run>2?3:1}}return s+(isV(w[0])?0:1)}
+function draw(){
+ const L=[1,2,3,4,5].map(n=>(document.getElementById("ini"+n).value||"").trim().toUpperCase()).filter(Boolean);
+ const out=document.getElementById("ini-out"),all=document.getElementById("ini-all"),cnt=document.getElementById("ini-count");
+ if(L.length<2){out.textContent="ใส่อักษรอย่างน้อยสองตัว";all.textContent="";cnt.textContent="";return}
+ const words=[...new Set(perms(L).map(p=>p.join("")))].sort((a,b)=>score(b)-score(a)||a.localeCompare(b));
+ cnt.textContent="ทั้งหมด "+words.length+" แบบ · 12 แบบที่อ่านง่ายที่สุด";
+ out.innerHTML="";words.slice(0,12).forEach(w=>{const s=document.createElement("span");s.className="word";s.textContent=w;out.appendChild(s)});
+ all.textContent=words.join(" ");
+}
+document.querySelectorAll(".ini input").forEach(i=>i.addEventListener("input",draw));draw();
+})();
+</script>
+</section><section class="opt" id="soi5">
+<div class="head"><span class="num">50</span><h2>SOI 5</h2><span style="color:var(--muted)">ซอย ๕</span></div>
+<div class="boards"><img src="img/soi5-board.png" alt="โลโก้ SOI 5 บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/soi5-tag.png" alt="ป้ายห้อยสินค้า SOI 5 ตัวอย่างกับป้ายห้อยของขวัญ" width="560" height="860"></div>
+<div class="pick" style="gap:8px"><span class="k">แนวคิด · สถานที่</span><p>ตั้งชื่อตามสถานที่ เช่น ซอยหรือเลขที่บ้านที่เราทำงานกันจริง ฟังเป็นกรุงเทพ นักท่องเที่ยวจำง่าย และป้ายถนนสีน้ำเงินกลายเป็นโลโก้</p><p class="k" style="text-transform:none;letter-spacing:.02em">ชื่ออื่นในแนวเดียวกัน</p><div class="sw"><span class="chipx">บ้านเลขที่จริง</span><span class="chipx">ชื่อย่านหรือถนนที่บ้านอยู่</span><span class="chipx">BAAN 5</span><span class="chipx">ห้าแยก</span></div></div><div class="spec">
+<div><span class="k">ความหมาย</span><p>ซอย 5 เป็นเลขห้าเท่ากับคนในบ้าน ถ้าบ้านอยู่ซอยอื่น ให้ใช้เลขซอยหรือบ้านเลขที่จริงแทนได้ ยิ่งจริงยิ่งดี</p><p><b>Made in our soi.</b><br>ทำในซอยบ้านเรา</p></div>
+<div><span class="k">ลุค</span><p>ป้ายซอยกรุงเทพ พื้นน้ำเงิน ตัวหนังสือขาว ภาษาไทยอยู่บน อังกฤษอยู่ล่าง</p><div class="sw"><span><i style="background:#1F4E9C"></i>Street blue <span class="k" style="letter-spacing:0">#1F4E9C</span></span><span><i style="background:#FFFFFF"></i>Sign white <span class="k" style="letter-spacing:0">#FFFFFF</span></span><span><i style="background:#F2C230"></i>Kerb yellow <span class="k" style="letter-spacing:0">#F2C230</span></span><span><i style="background:#3A3A3A"></i>Asphalt <span class="k" style="letter-spacing:0">#3A3A3A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Kanit · @soi5.bkk</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ถ่ายรูปสินค้าในซอยบ้านจริง ลูก ๆ ขี่จักรยานส่งของในซอย นักท่องเที่ยวซื้อเป็นของฝากจากกรุงเทพ</p></div>
+<div><span class="k">ขายใคร</span><p>นักท่องเที่ยว ของฝาก ร้านในโรงแรม</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ป้ายห้อยของขวัญ</td><td class="n">39</td><td class="n"><b>59</b></td><td class="n">21</td><td class="n">65%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ที่รองแก้วหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ เจอแต่ที่อยู่ร้านต่าง ๆ ใน Soi 5 เป็นคำทั่วไปที่จดยาก ต้องจดเป็นโลโก้ป้ายซอย</p>
+
+</section>
+
+<p class="eyebrow">ชุดที่ 8 · แบบ one. อ่านเป็นคำไทยได้</p><p style="font-size:14px;color:var(--muted)">คำอังกฤษสั้น ๆ ที่อ่านออกเสียงแล้วเป็นคำไทยที่มีความหมาย เหมือน one. ที่อ่านว่า วัน</p><section class="opt" id="mai">
+<div class="head"><span class="num">36</span><h2>mai.</h2><span style="color:var(--muted)">ใหม่</span></div>
+<div class="boards"><img src="img/mai-board.png" alt="โลโก้ mai. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/mai-tag.png" alt="ป้ายห้อยสินค้า mai. ตัวอย่างกับปลอกแก้วกาแฟ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>อ่านว่า ใหม่ เศษหนังเก่ากลายเป็นของใหม่ และย่อมาจาก made again intact ทำขึ้นใหม่ทั้งชิ้นโดยไม่ต้องเย็บ</p><p><b>made again, intact.</b><br>ใหม่ · เศษเก่า กลายเป็นของใหม่</p></div>
+<div><span class="k">ลุค</span><p>สดแบบใบไม้ใหม่ พื้นเขียวอ่อน ตัวหนังสือเขียวเข้ม จุดเขียวใบไม้</p><div class="sw"><span><i style="background:#E3EBDD"></i>Sprout <span class="k" style="letter-spacing:0">#E3EBDD</span></span><span><i style="background:#23362A"></i>Forest <span class="k" style="letter-spacing:0">#23362A</span></span><span><i style="background:#5E9A5B"></i>Leaf dot <span class="k" style="letter-spacing:0">#5E9A5B</span></span><span><i style="background:#F6F4EE"></i>Paper <span class="k" style="letter-spacing:0">#F6F4EE</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Manrope · ภาษาไทย Anuphan · @mai.again</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ทุกชิ้นคือชีวิตใหม่ของเศษหนัง ป้ายบอกว่าเศษชิ้นนี้มาจากล็อตไหน ลูก ๆ ถ่ายรูปก่อนกับหลังให้ดู</p></div>
+<div><span class="k">ขายใคร</span><p>สายรักษ์โลก คาเฟ่ ของขวัญองค์กรสาย ESG</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>219</b></td><td class="n">28</td><td class="n">87%</td></tr><tr><td>ที่รองแก้วไส้ไม้ก๊อก</td><td class="n">99</td><td class="n"><b>159</b></td><td class="n">33</td><td class="n">80%</td></tr><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>199</b></td><td class="n">43</td><td class="n">79%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์เครื่องหนังชื่อนี้ mai เป็นคำทั่วไปและชื่อคน ต้องจดทั้งชุดคู่คำว่า made again intact</p>
+
+</section><section class="opt" id="dee">
+<div class="head"><span class="num">37</span><h2>dee.</h2><span style="color:var(--muted)">ดี</span></div>
+<div class="boards"><img src="img/dee-board.png" alt="โลโก้ dee. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/dee-tag.png" alt="ป้ายห้อยสินค้า dee. ตัวอย่างกับที่เก็บสายชาร์จหมี" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>อ่านว่า ดี ของดีที่ใช้ได้ทุกวัน ย่อมาจาก durable everyday essentials ของจำเป็นที่ทนและใช้ทุกวัน</p><p><b>durable everyday essentials.</b><br>ดี · ของดี ใช้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>สว่างแบบเช้าวันจันทร์ พื้นครีม ตัวหนังสือดำ จุดมัสตาร์ด</p><div class="sw"><span><i style="background:#FFF8E7"></i>Cream <span class="k" style="letter-spacing:0">#FFF8E7</span></span><span><i style="background:#1F1F1F"></i>Black <span class="k" style="letter-spacing:0">#1F1F1F</span></span><span><i style="background:#E0A526"></i>Mustard dot <span class="k" style="letter-spacing:0">#E0A526</span></span><span><i style="background:#EADBB8"></i>Sand <span class="k" style="letter-spacing:0">#EADBB8</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Anuphan · @dee.essentials</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>คำว่า ดี เป็นคำแรก ๆ ที่เด็กพูดได้ ลูก ๆ ให้คะแนน ดี กับของทุกชิ้นก่อนขาย</p></div>
+<div><span class="k">ขายใคร</span><p>คนทำงาน นักเรียน ของใช้ประจำตัว</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่เก็บสายชาร์จหมี</td><td class="n">59</td><td class="n"><b>129</b></td><td class="n">22</td><td class="n">83%</td></tr><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>169</b></td><td class="n">22</td><td class="n">87%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>229</b></td><td class="n">23</td><td class="n">90%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บเจอร้านวัสดุหนังชื่อ หนังสวยดี (Nang Suay Dee) ย่านเจริญรัถ เป็นร้านขายหนังดิบ คนละแบบกับเรา dee เป็นคำทั่วไป ต้องจดทั้งชุด</p>
+
+</section><section class="opt" id="lek">
+<div class="head"><span class="num">38</span><h2>lek.</h2><span style="color:var(--muted)">เล็ก</span></div>
+<div class="boards"><img src="img/lek-board.png" alt="โลโก้ lek. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/lek-tag.png" alt="ป้ายห้อยสินค้า lek. ตัวอย่างกับป้ายห้อยของขวัญ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>อ่านว่า เล็ก ของชิ้นเล็กที่เก็บไว้ใช้ทุกวัน ย่อมาจาก little everyday keepers และตรงกับเศษหนังชิ้นเล็กที่เป็นวัตถุดิบ</p><p><b>little everyday keepers.</b><br>เล็ก · ของชิ้นเล็ก ใช้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>น่ารักแบบเครื่องเขียน พื้นม่วงอ่อน ตัวหนังสือม่วงเข้ม ฟอนต์โมโน</p><div class="sw"><span><i style="background:#EDE7F2"></i>Lilac <span class="k" style="letter-spacing:0">#EDE7F2</span></span><span><i style="background:#2B2238"></i>Plum <span class="k" style="letter-spacing:0">#2B2238</span></span><span><i style="background:#7B5EA7"></i>Violet dot <span class="k" style="letter-spacing:0">#7B5EA7</span></span><span><i style="background:#FAF8FC"></i>White <span class="k" style="letter-spacing:0">#FAF8FC</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ IBM Plex Mono · ภาษาไทย Anuphan · @lek.keepers</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>เศษชิ้นเล็กทำของชิ้นเล็ก ราคาเริ่มต้นต่ำ เหมาะกับลูก ๆ ขายที่บูธ ป้ายห้อยของขวัญ ซองการ์ด ที่คั่นหนังสือ</p></div>
+<div><span class="k">ขายใคร</span><p>นักเรียน วัยรุ่น ร้านเครื่องเขียน ของแถม</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ป้ายห้อยของขวัญ</td><td class="n">39</td><td class="n"><b>59</b></td><td class="n">21</td><td class="n">65%</td></tr><tr><td>ซองการ์ดติดของขวัญ</td><td class="n">59</td><td class="n"><b>89</b></td><td class="n">20</td><td class="n">78%</td></tr><tr><td>ที่คั่นหนังสือหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บเจอ Lek Gallery และ Lek Massage ในกรุงเทพ คนละหมวด lek เป็นชื่อเล่นที่พบบ่อย ต้องจดทั้งชุด</p>
+
+</section><section class="opt" id="fun">
+<div class="head"><span class="num">39</span><h2>fun.</h2><span style="color:var(--muted)">ฝัน</span></div>
+<div class="boards"><img src="img/fun-board.png" alt="โลโก้ fun. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/fun-tag.png" alt="ป้ายห้อยสินค้า fun. ตัวอย่างกับป้ายชื่อติดกระเป๋านักเรียน" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>อ่านว่า ฝัน และแปลว่า สนุก ย่อมาจาก found useful new เจอเศษ ทำให้ใช้ได้ กลายเป็นของใหม่</p><p><b>found, useful, new.</b><br>ฝัน · เศษหนังที่ฝันอยากเป็นของ</p></div>
+<div><span class="k">ลุค</span><p>ฝันกลางคืน พื้นน้ำเงินเข้ม ตัวหนังสือครีม จุดดาวสีน้ำผึ้ง</p><div class="sw"><span><i style="background:#1D2340"></i>Night <span class="k" style="letter-spacing:0">#1D2340</span></span><span><i style="background:#F3EEE4"></i>Cream <span class="k" style="letter-spacing:0">#F3EEE4</span></span><span><i style="background:#F0B43C"></i>Star dot <span class="k" style="letter-spacing:0">#F0B43C</span></span><span><i style="background:#8DB6C9"></i>Sky <span class="k" style="letter-spacing:0">#8DB6C9</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @fun.found</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ไลน์ของเด็ก ลูก ๆ ออกแบบลายเองแล้วพ่อตัด ของเล่นและของไปโรงเรียน</p></div>
+<div><span class="k">ขายใคร</span><p>เด็ก พ่อแม่ ของขวัญวันเด็ก</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ป้ายชื่อติดกระเป๋านักเรียน</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">29</td><td class="n">85%</td></tr><tr><td>ชุดตัวต่อหนัง 24 ชิ้น</td><td class="n">390</td><td class="n"><b>590</b></td><td class="n">93</td><td class="n">84%</td></tr><tr><td>กังหันลมหนัง</td><td class="n">89</td><td class="n"><b>129</b></td><td class="n">27</td><td class="n">79%</td></tr></tbody></table></div>
+<p class="risk">fun เป็นคำทั่วไปมาก จดเป็นคำเดี่ยวไม่ได้ ต้องจดทั้งชุดคู่คำว่า found useful new</p>
+
+</section><section class="opt" id="jai">
+<div class="head"><span class="num">40</span><h2>jai.</h2><span style="color:var(--muted)">ใจ</span></div>
+<div class="boards"><img src="img/jai-board.png" alt="โลโก้ jai. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/jai-tag.png" alt="ป้ายห้อยสินค้า jai. ตัวอย่างกับที่ห้อยกระเป๋าหมีหัวใจ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>อ่านว่า ใจ ต่อกันด้วยใจ ย่อมาจาก joined and intact ต่อกันแล้วแน่น ไม่ต้องเย็บ</p><p><b>joined and intact.</b><br>ใจ · ต่อกันด้วยใจ</p></div>
+<div><span class="k">ลุค</span><p>อบอุ่นเต็มที่ พื้นแดงหัวใจ ตัวหนังสือขาวอมชมพู จุดน้ำตาลเข้ม</p><div class="sw"><span><i style="background:#C8463D"></i>Heart red <span class="k" style="letter-spacing:0">#C8463D</span></span><span><i style="background:#FFF4EE"></i>Blush white <span class="k" style="letter-spacing:0">#FFF4EE</span></span><span><i style="background:#3A1A17"></i>Cocoa dot <span class="k" style="letter-spacing:0">#3A1A17</span></span><span><i style="background:#F2A7A0"></i>Rose <span class="k" style="letter-spacing:0">#F2A7A0</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @jai.joined</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ใจคือแม่หมีในโลโก้ห้าหมีเดิม ใช้สายหัวใจแบบ 01-S เป็นสินค้าหลัก</p></div>
+<div><span class="k">ขายใคร</span><p>คู่รัก ของขวัญ วาเลนไทน์ วันแม่</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ห่วงผ้าเช็ดปากหมี</td><td class="n">79</td><td class="n"><b>129</b></td><td class="n">29</td><td class="n">78%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">37</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">ข่าวสดเคยลงเรื่องแบรนด์ชื่อ Jai (ใจ) แต่ไม่ชัดว่าขายอะไร และมีร้านเครื่องหนัง Bun Dan Jai บน Pinkoi ต้องค้นละเอียดก่อน</p>
+
+</section>
+<p class="eyebrow">ชุดที่ 9 · แบบ mom. ครบทั้งครอบครัว</p><p style="font-size:14px;color:var(--muted)">ใช้ฟอนต์เดียวกับ mom. ทุกตัว จึงใช้เป็นไลน์สินค้าย่อยของแบรนด์เดียวกันได้ ทั้ง dad. kid. sis. fam. us.</p><section class="opt" id="dad">
+<div class="head"><span class="num">41</span><h2>dad.</h2><span style="color:var(--muted)">แดด</span></div>
+<div class="boards"><img src="img/dad-board.png" alt="โลโก้ dad. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/dad-tag.png" alt="ป้ายห้อยสินค้า dad. ตัวอย่างกับซองใส่ AirTag" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>dad คือพ่อ ย่อมาจาก drawn and die-cut วาดแบบและทำบล็อกตัด ซึ่งเป็นงานของพ่อจริง ๆ คนไทยอ่านว่า แดด ได้ความหมายสดใส</p><p><b>drawn and die-cut.</b><br>วาดแบบ แล้วตัดด้วยบล็อก</p></div>
+<div><span class="k">ลุค</span><p>ฟอนต์เดียวกับ mom. พื้นฟ้าเทา ตัวหนังสือน้ำเงินดำ จุดคาราเมล</p><div class="sw"><span><i style="background:#DDE3E8"></i>Mist <span class="k" style="letter-spacing:0">#DDE3E8</span></span><span><i style="background:#1E2A36"></i>Navy <span class="k" style="letter-spacing:0">#1E2A36</span></span><span><i style="background:#B8743A"></i>Caramel dot <span class="k" style="letter-spacing:0">#B8743A</span></span><span><i style="background:#F7F8F9"></i>White <span class="k" style="letter-spacing:0">#F7F8F9</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @dad.drawn</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ไลน์ของขวัญผู้ชาย ใช้ drawing จริงของพ่อพิมพ์บนกล่อง ขายช่วงวันพ่อ 5 ธันวาคม</p></div>
+<div><span class="k">ขายใคร</span><p>ลูกที่ซื้อของขวัญให้พ่อ ผู้ชายวัยทำงาน</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>229</b></td><td class="n">23</td><td class="n">90%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>290</b></td><td class="n">32</td><td class="n">89%</td></tr><tr><td>ที่เก็บสายชาร์จหมี</td><td class="n">59</td><td class="n"><b>129</b></td><td class="n">22</td><td class="n">83%</td></tr></tbody></table></div>
+<p class="risk">dad เป็นคำทั่วไป ต้องจดทั้งชุด ค้นเว็บไม่เจอแบรนด์เครื่องหนังที่ใช้ชื่อนี้</p>
+
+</section><section class="opt" id="kid">
+<div class="head"><span class="num">42</span><h2>kid.</h2><span style="color:var(--muted)">คิด</span></div>
+<div class="boards"><img src="img/kid-board.png" alt="โลโก้ kid. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/kid-tag.png" alt="ป้ายห้อยสินค้า kid. ตัวอย่างกับชุดตัวต่อหนัง 24 ชิ้น" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>kid คือเด็ก ย่อมาจาก keep inventing daily คิดของใหม่ทุกวัน และคนไทยอ่านว่า คิด</p><p><b>keep inventing daily.</b><br>คิดได้ ทำได้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>ฟอนต์เดียวกับ mom. พื้นเหลืองน้ำผึ้ง ตัวหนังสือน้ำตาลเข้ม จุดเขียวเสจ</p><div class="sw"><span><i style="background:#FFE9A8"></i>Honey <span class="k" style="letter-spacing:0">#FFE9A8</span></span><span><i style="background:#2D2A26"></i>Brown <span class="k" style="letter-spacing:0">#2D2A26</span></span><span><i style="background:#6F9A8D"></i>Sage dot <span class="k" style="letter-spacing:0">#6F9A8D</span></span><span><i style="background:#FFF8E2"></i>Cream <span class="k" style="letter-spacing:0">#FFF8E2</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @kid.inventing</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ไลน์ของลูก ๆ ชุดต่อเองและของไปโรงเรียน ลูกหมีสามตัวเป็นนักออกแบบรุ่นเล็ก ขายช่วงวันเด็กและเปิดเทอม</p></div>
+<div><span class="k">ขายใคร</span><p>เด็ก พ่อแม่ โรงเรียน ของขวัญวันเด็ก</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดตัวต่อหนัง 24 ชิ้น</td><td class="n">390</td><td class="n"><b>590</b></td><td class="n">93</td><td class="n">84%</td></tr><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>199</b></td><td class="n">43</td><td class="n">79%</td></tr><tr><td>ป้ายชื่อติดกระเป๋านักเรียน</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">29</td><td class="n">85%</td></tr></tbody></table></div>
+<p class="risk">kid เป็นคำทั่วไป มีแบรนด์ของเด็กใช้คำนี้เยอะ ต้องจดทั้งชุดคู่คำว่า keep inventing daily</p>
+
+</section><section class="opt" id="sis">
+<div class="head"><span class="num">43</span><h2>sis.</h2><span style="color:var(--muted)">ซิส</span></div>
+<div class="boards"><img src="img/sis-board.png" alt="โลโก้ sis. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/sis-tag.png" alt="ป้ายห้อยสินค้า sis. ตัวอย่างกับที่ห้อยกระเป๋าหมีหัวใจ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>sis คือพี่สาวน้องสาว ย่อมาจาก small items shared ของชิ้นเล็กที่แบ่งกันใช้ เหมือนลูกสาวสองคนในบ้าน</p><p><b>small items, shared.</b><br>ของชิ้นเล็ก แบ่งกันใช้</p></div>
+<div><span class="k">ลุค</span><p>ฟอนต์เดียวกับ mom. พื้นชมพูพีช ตัวหนังสือน้ำตาลแดง จุดน้ำผึ้ง สองสีของลูกสาวสองคน</p><div class="sw"><span><i style="background:#F2C4BE"></i>Peach <span class="k" style="letter-spacing:0">#F2C4BE</span></span><span><i style="background:#3A2423"></i>Rosewood <span class="k" style="letter-spacing:0">#3A2423</span></span><span><i style="background:#F0B43C"></i>Honey dot <span class="k" style="letter-spacing:0">#F0B43C</span></span><span><i style="background:#FBF1EC"></i>Cream <span class="k" style="letter-spacing:0">#FBF1EC</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @sis.shared</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ขายเป็นคู่ ซื้อหนึ่งให้ตัวเองอีกหนึ่งให้เพื่อนหรือพี่น้อง ลูกสาวสองคนเป็นนางแบบ</p></div>
+<div><span class="k">ขายใคร</span><p>วัยรุ่นผู้หญิง เพื่อนสนิท พี่น้อง</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>159</b></td><td class="n">20</td><td class="n">88%</td></tr><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>169</b></td><td class="n">22</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">sis เป็นคำแสลงทั่วไป ต้องจดทั้งชุด และกลุ่มลูกค้าแคบเป็นผู้หญิง</p>
+
+</section><section class="opt" id="fam">
+<div class="head"><span class="num">44</span><h2>fam.</h2><span style="color:var(--muted)">แฟม</span></div>
+<div class="boards"><img src="img/fam-board.png" alt="โลโก้ fam. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/fam-tag.png" alt="ป้ายห้อยสินค้า fam. ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>fam คือครอบครัวในภาษาพูด ย่อมาจาก five around me ห้าคนที่อยู่รอบตัวฉัน</p><p><b>five around me.</b><br>ห้าคนรอบตัวฉัน</p></div>
+<div><span class="k">ลุค</span><p>ฟอนต์เดียวกับ mom. พื้นโกโก้ ตัวหนังสือครีม จุดแดงหัวใจ</p><div class="sw"><span><i style="background:#4A2C1D"></i>Cocoa <span class="k" style="letter-spacing:0">#4A2C1D</span></span><span><i style="background:#F7EEE2"></i>Cream <span class="k" style="letter-spacing:0">#F7EEE2</span></span><span><i style="background:#D6453D"></i>Heart dot <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#B8743A"></i>Caramel <span class="k" style="letter-spacing:0">#B8743A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @fam.five</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ไลน์ของขวัญสำหรับทั้งบ้าน ราวหมีห้าตัว ชุดที่รองแก้ว กล่องของขวัญ ขายช่วงปีใหม่และขึ้นบ้านใหม่</p></div>
+<div><span class="k">ขายใคร</span><p>ครอบครัว ของขวัญขึ้นบ้านใหม่ ปีใหม่</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>390</b></td><td class="n">53</td><td class="n">86%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">37</td><td class="n">87%</td></tr><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>390</b></td><td class="n">36</td><td class="n">91%</td></tr></tbody></table></div>
+<p class="risk">fam เป็นคำแสลงทั่วไป ต้องจดทั้งชุด ค้นเว็บไม่เจอแบรนด์เครื่องหนังที่ใช้ชื่อนี้</p>
+
+</section><section class="opt" id="us">
+<div class="head"><span class="num">45</span><h2>us.</h2><span style="color:var(--muted)">อัส</span></div>
+<div class="boards"><img src="img/us-board.png" alt="โลโก้ us. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/us-tag.png" alt="ป้ายห้อยสินค้า us. ตัวอย่างกับกล่องแหวนหนังแท้" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>us แปลว่า พวกเรา ย่อมาจาก unstitched simple ไม่เย็บ เรียบง่าย สองตัวอักษรสั้นที่สุดในทุกชื่อ</p><p><b>unstitched, simple.</b><br>พวกเรา ไม่เย็บ เรียบง่าย</p></div>
+<div><span class="k">ลุค</span><p>ฟอนต์เดียวกับ mom. พื้นโอ๊ต ตัวหนังสือโกโก้ จุดคาราเมล</p><div class="sw"><span><i style="background:#EFE6D8"></i>Oat <span class="k" style="letter-spacing:0">#EFE6D8</span></span><span><i style="background:#4A2C1D"></i>Cocoa <span class="k" style="letter-spacing:0">#4A2C1D</span></span><span><i style="background:#B8743A"></i>Caramel dot <span class="k" style="letter-spacing:0">#B8743A</span></span><span><i style="background:#C8463D"></i>Heart <span class="k" style="letter-spacing:0">#C8463D</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @us.unstitched</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ไลน์ของคู่ ซื้อเป็นคู่ให้คนที่รัก พ่อกับแม่เป็นคู่แรกที่ใช้</p></div>
+<div><span class="k">ขายใคร</span><p>คู่รัก คู่แต่งงาน ของขวัญครบรอบ</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>390</b></td><td class="n">36</td><td class="n">91%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>159</b></td><td class="n">20</td><td class="n">88%</td></tr><tr><td>ที่รองแก้วไส้ไม้ก๊อก</td><td class="n">99</td><td class="n"><b>159</b></td><td class="n">33</td><td class="n">80%</td></tr></tbody></table></div>
+<p class="risk">us เป็นคำทั่วไปมากและเป็นชื่อประเทศ ค้นชื่อบัญชียาก ต้องจดทั้งชุดคู่คำว่า unstitched simple</p>
+
+</section>
+
+<p class="eyebrow">ชุดที่ 6 · แบบ dot เพิ่มอีก 5</p><section class="opt" id="tab">
+<div class="head"><span class="num">26</span><h2>tab.</h2><span style="color:var(--muted)">แทบ</span></div>
+<div class="boards"><img src="img/tab-board.png" alt="โลโก้ tab. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/tab-tag.png" alt="ป้ายห้อยสินค้า tab. ตัวอย่างกับชุดต่อเองกล่องลูกบาศก์" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>tab คือปีกหนังที่สอดเข้าร่อง หัวใจของทุกชิ้นในร้าน และย่อมาจาก tuck and build สอดแล้วต่อ ไม่ต้องเย็บ</p><p><b>tuck and build.</b><br>สอด แล้วต่อ</p></div>
+<div><span class="k">ลุค</span><p>สะอาดแบบเครื่องมือ พื้นขาวอมฟ้า ตัวหนังสือน้ำเงินดำ จุดสีน้ำเงิน</p><div class="sw"><span><i style="background:#EEF0F2"></i>Paper blue <span class="k" style="letter-spacing:0">#EEF0F2</span></span><span><i style="background:#15202B"></i>Navy ink <span class="k" style="letter-spacing:0">#15202B</span></span><span><i style="background:#2E6BE6"></i>Blue dot <span class="k" style="letter-spacing:0">#2E6BE6</span></span><span><i style="background:#8A94A0"></i>Steel <span class="k" style="letter-spacing:0">#8A94A0</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Anuphan · @tab.objects</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ชื่อคือชิ้นส่วนจริงของสินค้า สอนลูกค้าต่อเองได้ในประโยคเดียว ลูก ๆ สาธิตที่บูธว่า tab เข้า slot</p></div>
+<div><span class="k">ขายใคร</span><p>สาย DIY คนชอบงานออกแบบ ร้านของเล่นดีไซน์</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>199</b></td><td class="n">43</td><td class="n">79%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>290</b></td><td class="n">32</td><td class="n">89%</td></tr><tr><td>ลูกเต๋าหนัง</td><td class="n">159</td><td class="n"><b>199</b></td><td class="n">36</td><td class="n">82%</td></tr></tbody></table></div>
+<p class="risk">tab เป็นคำทั่วไป ต้องจดทั้งชุด ค้นเว็บไม่เจอแบรนด์เครื่องหนังที่ใช้ชื่อนี้</p>
+
+</section><section class="opt" id="fit">
+<div class="head"><span class="num">27</span><h2>fit.</h2><span style="color:var(--muted)">ฟิต</span></div>
+<div class="boards"><img src="img/fit-board.png" alt="โลโก้ fit. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/fit-tag.png" alt="ป้ายห้อยสินค้า fit. ตัวอย่างกับซองอั่งเปาพับกังหัน" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>fit คือพอดี ปีกกับร่องพอดีกันแบบต่างกันครึ่งมิลลิเมตร และย่อมาจาก fold into things พับแล้วกลายเป็นของ</p><p><b>fold into things.</b><br>พับแล้วพอดี</p></div>
+<div><span class="k">ลุค</span><p>สดใส พื้นครีม ตัวหนังสือน้ำตาลเข้ม จุดสีส้ม</p><div class="sw"><span><i style="background:#FFF4E0"></i>Cream <span class="k" style="letter-spacing:0">#FFF4E0</span></span><span><i style="background:#2D2A26"></i>Brown <span class="k" style="letter-spacing:0">#2D2A26</span></span><span><i style="background:#E07A32"></i>Orange dot <span class="k" style="letter-spacing:0">#E07A32</span></span><span><i style="background:#E8D3B0"></i>Sand <span class="k" style="letter-spacing:0">#E8D3B0</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Manrope · ภาษาไทย Anuphan · @fit.fold</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>เหมาะกับซองพับกังหันทั้งตระกูล ซองอั่งเปา ซองแหวน ซองการ์ด ลูก ๆ ทำคลิปพับแข่งเวลา</p></div>
+<div><span class="k">ขายใคร</span><p>ร้านของขวัญ ของชำร่วย ซองอั่งเปาองค์กร</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองอั่งเปาพับกังหัน</td><td class="n">69</td><td class="n"><b>99</b></td><td class="n">20</td><td class="n">80%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>159</b></td><td class="n">20</td><td class="n">88%</td></tr><tr><td>ซองการ์ดติดของขวัญ</td><td class="n">59</td><td class="n"><b>89</b></td><td class="n">20</td><td class="n">78%</td></tr></tbody></table></div>
+<p class="risk">fit เป็นคำทั่วไปและคนนึกถึงฟิตเนส ต้องจดทั้งชุดคู่คำว่า fold into things</p>
+
+</section><section class="opt" id="kin">
+<div class="head"><span class="num">28</span><h2>kin.</h2><span style="color:var(--muted)">คิน</span></div>
+<div class="boards"><img src="img/kin-board.png" alt="โลโก้ kin. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/kin-tag.png" alt="ป้ายห้อยสินค้า kin. ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>kin แปลว่า ครอบครัว ญาติพี่น้อง และย่อมาจาก keep it near ของที่เก็บไว้ใกล้ตัว ได้ทั้งเรื่องบ้านห้าคนและของพกติดตัว</p><p><b>keep it near.</b><br>เก็บไว้ใกล้ ๆ ตัว</p></div>
+<div><span class="k">ลุค</span><p>อบอุ่นแบบกลางคืน พื้นน้ำตาลเข้ม ตัวหนังสือครีม จุดสีแดงหัวใจ</p><div class="sw"><span><i style="background:#2F2A26"></i>Night brown <span class="k" style="letter-spacing:0">#2F2A26</span></span><span><i style="background:#F2EDE4"></i>Cream <span class="k" style="letter-spacing:0">#F2EDE4</span></span><span><i style="background:#D6453D"></i>Heart dot <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#B98C6A"></i>Tan <span class="k" style="letter-spacing:0">#B98C6A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @kin.near</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ชื่อแปลว่าครอบครัวตรง ๆ ราวหมีห้าตัวและที่ห้อยกระเป๋าเป็นตัวเอก ของที่ให้คนในบ้านพกติดตัว</p></div>
+<div><span class="k">ขายใคร</span><p>ครอบครัว คู่รัก ของขวัญที่มีความหมาย</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>390</b></td><td class="n">53</td><td class="n">86%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ป้ายชื่อติดกระเป๋านักเรียน</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">29</td><td class="n">85%</td></tr></tbody></table></div>
+<p class="risk">มีแบรนด์เสื้อผ้าชื่อ &amp;Kin ขายที่ร้าน Kith และ kin เป็นคำทั่วไป ต้องจดทั้งชุดคู่คำว่า keep it near</p>
+
+</section><section class="opt" id="one">
+<div class="head"><span class="num">29</span><h2>one.</h2><span style="color:var(--muted)">วัน</span></div>
+<div class="boards"><img src="img/one-board.png" alt="โลโก้ one. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/one-tag.png" alt="ป้ายห้อยสินค้า one. ตัวอย่างกับที่รองแก้วหมี" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>one คือวัสดุเดียว หนังแท้ล้วน ไม่มีด้าย ไม่มีกาว ย่อมาจาก one natural element และอ่านว่า วัน ซึ่งในภาษาไทยแปลว่า วัน ใช้ได้ทุกวัน</p><p><b>one natural element.</b><br>วัสดุเดียว ใช้ได้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>ดิบและเรียบ พื้นหิน ตัวหนังสือดำ ฟอนต์โมโน จุดสีหนัง</p><div class="sw"><span><i style="background:#D9D4C9"></i>Stone <span class="k" style="letter-spacing:0">#D9D4C9</span></span><span><i style="background:#1C1C1C"></i>Black <span class="k" style="letter-spacing:0">#1C1C1C</span></span><span><i style="background:#9C6436"></i>Leather dot <span class="k" style="letter-spacing:0">#9C6436</span></span><span><i style="background:#F1EEE8"></i>Bone <span class="k" style="letter-spacing:0">#F1EEE8</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ IBM Plex Mono · ภาษาไทย Anuphan · @one.element</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>บอกน้ำหนักหนังบนป้ายทุกชิ้น ลูก ๆ แกะชิ้นให้ดูว่ามีแต่หนัง คนไทยอ่านชื่อแล้วได้ความหมาย วัน ทันที</p></div>
+<div><span class="k">ขายใคร</span><p>สายมินิมอล สายยั่งยืน คาเฟ่ ร้านไลฟ์สไตล์</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่รองแก้วหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr><tr><td>ที่รองแก้ววงกลม</td><td class="n">49</td><td class="n"><b>89</b></td><td class="n">19</td><td class="n">79%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">37</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">one เป็นคำทั่วไปมาก จดเป็นคำเดี่ยวไม่ได้แน่นอน ต้องจดทั้งชุดคู่คำว่า one natural element และโลโก้</p>
+
+</section><section class="opt" id="mom">
+<div class="head"><span class="num">30</span><h2>mom.</h2><span style="color:var(--muted)">มัม</span></div>
+<div class="boards"><img src="img/mom-board.png" alt="โลโก้ mom. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/mom-tag.png" alt="ป้ายห้อยสินค้า mom. ตัวอย่างกับซองใส่เครื่องประดับ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>mom คือแม่ ย่อมาจาก made of memories ทำจากความทรงจำ แบรนด์ที่ตั้งให้แม่หมีตรง ๆ เป็นของขวัญวันเกิดในตัว</p><p><b>made of memories.</b><br>ทำจากความทรงจำ</p></div>
+<div><span class="k">ลุค</span><p>อ่อนโยน พื้นชมพูอ่อน ตัวหนังสือน้ำตาลแดง ฟอนต์กลมหนา จุดสีแดงหัวใจ</p><div class="sw"><span><i style="background:#F6E3E1"></i>Blush <span class="k" style="letter-spacing:0">#F6E3E1</span></span><span><i style="background:#3A2423"></i>Rosewood <span class="k" style="letter-spacing:0">#3A2423</span></span><span><i style="background:#D6453D"></i>Heart dot <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#FBF5F2"></i>Cream <span class="k" style="letter-spacing:0">#FBF5F2</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @mom.memories</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ของขวัญจากลูกถึงแม่ทุกชิ้น มีวันแม่ 12 สิงหาคมเป็นช่วงขายใหญ่ทุกปี ลูก ๆ เขียนการ์ดใส่กล่องเอง</p></div>
+<div><span class="k">ขายใคร</span><p>ลูกที่ซื้อของขวัญให้แม่ คุณแม่ ของขวัญวันแม่และวันเกิด</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>159</b></td><td class="n">20</td><td class="n">88%</td></tr><tr><td>ที่ใส่แปรงแต่งหน้า</td><td class="n">199</td><td class="n"><b>290</b></td><td class="n">32</td><td class="n">89%</td></tr><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>390</b></td><td class="n">36</td><td class="n">91%</td></tr></tbody></table></div>
+<p class="risk">mom เป็นคำทั่วไป ต้องจดทั้งชุด และชื่อนี้ทำให้ลูกค้าคิดถึงของขวัญให้แม่เป็นหลัก สินค้าผู้ชายจะขายยากขึ้น</p>
+
+</section>
+<p class="eyebrow">ชุดที่ 7 · แบบ Maison Keep</p><p style="font-size:14px;color:var(--muted)">Maison ตามด้วยคำเดียวที่เป็นหัวใจของแบรนด์ ราคาและต้นทุนคิดแบบไลน์พรีเมียม กล่อง 40 บาท</p><section class="opt" id="ours">
+<div class="head"><span class="num">31</span><h2>MAISON OURS</h2><span style="color:var(--muted)">เมซง อูร์ส</span></div>
+<div class="boards"><img src="img/ours-board.png" alt="โลโก้ MAISON OURS บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/ours-tag.png" alt="ป้ายห้อยสินค้า MAISON OURS ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>ours ในภาษาฝรั่งเศสแปลว่า หมี และในภาษาอังกฤษแปลว่า ของเรา Maison Ours จึงแปลได้ทั้ง บ้านหมี และ บ้านของเรา ต่อจากห้าหมีได้ตรงที่สุด</p><p><b>The house of bears.</b><br>บ้านของหมี บ้านของเรา</p></div>
+<div><span class="k">ลุค</span><p>หรูแบบปารีส พื้นเอสเปรสโซ ตัวหนังสือครีม ตัวหมีจากบล็อก 01 เป็นตราประทับ</p><div class="sw"><span><i style="background:#2A1F1A"></i>Espresso <span class="k" style="letter-spacing:0">#2A1F1A</span></span><span><i style="background:#EFE4D2"></i>Crème <span class="k" style="letter-spacing:0">#EFE4D2</span></span><span><i style="background:#C08A57"></i>Cognac <span class="k" style="letter-spacing:0">#C08A57</span></span><span><i style="background:#A63A32"></i>Rouge <span class="k" style="letter-spacing:0">#A63A32</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Bodoni Moda · ภาษาไทย Noto Serif Thai · @maisonours</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ใช้หมีตัวเดิมของห้าหมีได้ทั้งหมด เป็นไลน์พรีเมียมของห้าหมี ห้าหมีขายที่บูธ Maison Ours ขายของขวัญราคาสูง</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญพรีเมียม ร้านคอนเซปต์สโตร์ ของขวัญองค์กร</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>590</b></td><td class="n">78</td><td class="n">87%</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>290</b></td><td class="n">62</td><td class="n">79%</td></tr><tr><td>ที่รองแก้วหมี</td><td class="n">59</td><td class="n"><b>190</b></td><td class="n">47</td><td class="n">75%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ แต่มีร้านวาฟเฟิล Maison des Ours ในเมืองออนเฟลอร์ และแบรนด์เสื้อผ้าฝรั่งเศสชื่อ Les Ours คนไทยอาจอ่านว่า เอาส์ ต้องใส่คำอ่านไว้</p>
+
+</section><section class="opt" id="cinq">
+<div class="head"><span class="num">32</span><h2>MAISON CINQ</h2><span style="color:var(--muted)">เมซง แซงก์</span></div>
+<div class="boards"><img src="img/cinq-board.png" alt="โลโก้ MAISON CINQ บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/cinq-tag.png" alt="ป้ายห้อยสินค้า MAISON CINQ ตัวอย่างกับกล่องของขวัญสลับลาย" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>cinq แปลว่า ห้า ในภาษาฝรั่งเศส บ้านของคนห้าคน ฟังหรูแบบแบรนด์ปารีส</p><p><b>A house of five.</b><br>บ้านของคนห้าคน</p></div>
+<div><span class="k">ลุค</span><p>ปารีสคลาสสิก พื้นงาช้าง ตัวหนังสือน้ำเงินเข้ม จุดทองห้าจุด</p><div class="sw"><span><i style="background:#F3EEE6"></i>Ivoire <span class="k" style="letter-spacing:0">#F3EEE6</span></span><span><i style="background:#1F2A44"></i>Bleu nuit <span class="k" style="letter-spacing:0">#1F2A44</span></span><span><i style="background:#B8912F"></i>Or <span class="k" style="letter-spacing:0">#B8912F</span></span><span><i style="background:#9A968E"></i>Gris <span class="k" style="letter-spacing:0">#9A968E</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Marcellus · ภาษาไทย Noto Serif Thai · @maisoncinq</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>จุดห้าจุดคือพ่อ แม่ และลูกสามคน เรียงจากใหญ่ไปเล็ก เป็นเรื่องเดียวกับห้าหมีในลุคผู้ใหญ่</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญงานแต่ง ของขวัญองค์กร คนชอบแบรนด์ฝรั่งเศส</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>590</b></td><td class="n">61</td><td class="n">90%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>490</b></td><td class="n">62</td><td class="n">87%</td></tr><tr><td>กล่องของชำร่วยงานแต่ง</td><td class="n">159</td><td class="n"><b>250</b></td><td class="n">61</td><td class="n">76%</td></tr></tbody></table></div>
+<p class="risk">คนไทยส่วนใหญ่อ่าน cinq ไม่ออก (แซงก์) ค้นเว็บเจอร้าน Sept Cinq ในปารีส และร้านอาหาร Maison Cinquante Cinq ในโตเกียว ชื่อใกล้แต่คนละธุรกิจ</p>
+
+</section><section class="opt" id="tuck">
+<div class="head"><span class="num">33</span><h2>MAISON TUCK</h2><span style="color:var(--muted)">เมซง ทัก</span></div>
+<div class="boards"><img src="img/tuck-board.png" alt="โลโก้ MAISON TUCK บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/tuck-tag.png" alt="ป้ายห้อยสินค้า MAISON TUCK ตัวอย่างกับซองใส่ AirTag" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>tuck แปลว่า สอดเก็บ คือวิธีต่อของทุกชิ้น สอดปีกเข้าร่อง เป็นคำง่ายที่ทุกคนอ่านได้ และคล้ายเสียง ถัก ในภาษาไทย</p><p><b>Tucked, never stitched.</b><br>สอด ไม่เย็บ</p></div>
+<div><span class="k">ลุค</span><p>มินิมอลแบบสตูดิโอ พื้นเทาอุ่น ตัวหนังสือดำ ตัวอักษรบางสูง</p><div class="sw"><span><i style="background:#DCD6CB"></i>Greige <span class="k" style="letter-spacing:0">#DCD6CB</span></span><span><i style="background:#222222"></i>Noir <span class="k" style="letter-spacing:0">#222222</span></span><span><i style="background:#8C4A26"></i>Cognac <span class="k" style="letter-spacing:0">#8C4A26</span></span><span><i style="background:#F5F2EC"></i>Blanc <span class="k" style="letter-spacing:0">#F5F2EC</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Italiana · ภาษาไทย Noto Serif Thai · @maisontuck</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ชื่อเล่าเทคนิคของพ่อในคำเดียว ป้ายทุกใบมีภาพปีกสอดเข้าร่อง ลูก ๆ สาธิตการสอดที่บูธ</p></div>
+<div><span class="k">ขายใคร</span><p>สายดีไซน์ คนทำงาน ของขวัญผู้ชายและผู้หญิง</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>390</b></td><td class="n">48</td><td class="n">88%</td></tr><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>350</b></td><td class="n">47</td><td class="n">87%</td></tr><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>790</b></td><td class="n">61</td><td class="n">92%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ แต่ Tuck เป็นชื่อเล่นของผู้ก่อตั้งร่วมแบรนด์ไทย Busardi และมีแบรนด์แคนาดาชื่อ Tuck อยู่สองเจ้า (หมวก และเฟอร์นิเจอร์)</p>
+
+</section><section class="opt" id="fold">
+<div class="head"><span class="num">34</span><h2>MAISON FOLD</h2><span style="color:var(--muted)">เมซง โฟลด์</span></div>
+<div class="boards"><img src="img/fold-board.png" alt="โลโก้ MAISON FOLD บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/fold-tag.png" alt="ป้ายห้อยสินค้า MAISON FOLD ตัวอย่างกับซองอั่งเปาพับกังหัน" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>fold แปลว่า พับ แบบ 02 พับเป็นซองได้ทั้งตระกูล ฟังสั้นและทันสมัย</p><p><b>Folded leather, no thread.</b><br>พับหนัง ไม่ใช้ด้าย</p></div>
+<div><span class="k">ลุค</span><p>สงบแบบกระดาษพับ พื้นเขียวเทา ตัวหนังสือเขียวเข้ม มุมพับเป็นโลโก้</p><div class="sw"><span><i style="background:#D5DDD3"></i>Sage <span class="k" style="letter-spacing:0">#D5DDD3</span></span><span><i style="background:#26352B"></i>Forest <span class="k" style="letter-spacing:0">#26352B</span></span><span><i style="background:#A9784E"></i>Tan <span class="k" style="letter-spacing:0">#A9784E</span></span><span><i style="background:#F4F2EC"></i>Paper <span class="k" style="letter-spacing:0">#F4F2EC</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @maisonfold</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>สินค้าหลักคือซองพับกังหันที่ใช้หนังชิ้นเดียว ขายเป็นซองอั่งเปา ซองแหวน ซองการ์ด ให้องค์กรสั่งจำนวนมาก</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญองค์กร ตรุษจีน งานแต่ง ร้านเครื่องประดับ</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองอั่งเปาพับกังหัน</td><td class="n">69</td><td class="n"><b>190</b></td><td class="n">45</td><td class="n">76%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>290</b></td><td class="n">45</td><td class="n">85%</td></tr><tr><td>ซองการ์ดติดของขวัญ</td><td class="n">59</td><td class="n"><b>150</b></td><td class="n">45</td><td class="n">70%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ แต่มีแบรนด์เสื้อผ้าผู้หญิงอังกฤษชื่อ The Fold</p>
+
+</section><section class="opt" id="mend">
+<div class="head"><span class="num">35</span><h2>MAISON MEND</h2><span style="color:var(--muted)">เมซง เมนด์</span></div>
+<div class="boards"><img src="img/mend-board.png" alt="โลโก้ MAISON MEND บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/mend-tag.png" alt="ป้ายห้อยสินค้า MAISON MEND ตัวอย่างกับปลอกแก้วกาแฟ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>mend แปลว่า ซ่อม ทุกชิ้นถอดได้ เปลี่ยนชิ้นที่เสียได้โดยไม่ต้องทิ้งทั้งอัน เป็นแบรนด์ยั่งยืนแบบหรู</p><p><b>Made to be mended.</b><br>ทำมาให้ซ่อมได้</p></div>
+<div><span class="k">ลุค</span><p>ยั่งยืนแบบหรู พื้นเขียวหัวเป็ดเข้ม ตัวหนังสือครีม และทอง โลโก้เป็นสองชิ้นที่ต่อกันด้วยปีก</p><div class="sw"><span><i style="background:#1E2B2A"></i>Deep teal <span class="k" style="letter-spacing:0">#1E2B2A</span></span><span><i style="background:#E8E2D6"></i>Ecru <span class="k" style="letter-spacing:0">#E8E2D6</span></span><span><i style="background:#C9A45C"></i>Gold <span class="k" style="letter-spacing:0">#C9A45C</span></span><span><i style="background:#9A5B3F"></i>Clay <span class="k" style="letter-spacing:0">#9A5B3F</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cormorant Garamond · ภาษาไทย Noto Serif Thai · @maisonmend</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ให้บริการเปลี่ยนชิ้นหนังฟรีปีแรก ลูก ๆ เป็นคนเปลี่ยนชิ้นที่บูธ เล่าเรื่องการใช้ของให้นานที่สุด</p></div>
+<div><span class="k">ขายใคร</span><p>สายยั่งยืนที่มีกำลังซื้อ ของขวัญองค์กรสาย ESG</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>350</b></td><td class="n">53</td><td class="n">85%</td></tr><tr><td>ที่รองแก้วไส้ไม้ก๊อก</td><td class="n">99</td><td class="n"><b>290</b></td><td class="n">58</td><td class="n">80%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>490</b></td><td class="n">57</td><td class="n">88%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ เจอเพียงเครื่องหมายการค้าเก่าปี 1982 ชื่อ Maison Mendessolle (เสื้อผ้าผู้หญิง)</p>
+
+</section>
+
+<p class="eyebrow">ชุดที่ 5 · แบบ dot: diary object thing</p><p style="font-size:14px;color:var(--muted)">ชื่อตัวพิมพ์เล็กสั้น ๆ ที่ทุกตัวอักษรย่อมาจากคำหนึ่งคำ และใช้จุดเป็นโลโก้ ทำตามรูปแบบการตั้งชื่อ ไม่ได้ใช้ชื่อเดิม ราคาและต้นทุนคิดแบบชุดของใช้ทุกวัน กล่องคราฟต์ 15 บาท</p><section class="opt" id="bit">
+<div class="head"><span class="num">21</span><h2>bit.</h2><span style="color:var(--muted)">บิท</span></div>
+<div class="boards"><img src="img/bit-board.png" alt="โลโก้ bit. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/bit-tag.png" alt="ป้ายห้อยสินค้า bit. ตัวอย่างกับป้ายห้อยของขวัญ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>bit แปลว่า ชิ้นเล็ก ๆ และย่อมาจาก bits into things คือเศษชิ้นเล็กกลายเป็นของใช้ ตรงกับวิธีผลิตจริง เศษหนังหนึ่งแผ่นตัดได้หนึ่งชิ้น</p><p><b>bits into things.</b><br>เศษชิ้นเล็ก กลายเป็นของใช้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>มินิมอลแบบร้านเครื่องเขียน ตัวพิมพ์เล็ก พื้นกระดาษ ตัวหนังสือดำ จุดสีแดงหัวใจเป็นโลโก้</p><div class="sw"><span><i style="background:#F2F0EB"></i>Paper <span class="k" style="letter-spacing:0">#F2F0EB</span></span><span><i style="background:#1C1C1C"></i>Ink <span class="k" style="letter-spacing:0">#1C1C1C</span></span><span><i style="background:#D6453D"></i>Dot red <span class="k" style="letter-spacing:0">#D6453D</span></span><span><i style="background:#A8A39A"></i>Grey <span class="k" style="letter-spacing:0">#A8A39A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Manrope · ภาษาไทย Anuphan · @bit.objects</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>จุดสีแดงคือแม่หมี และคือเศษหนังหนึ่งชิ้นที่ไม่ถูกทิ้ง ป้ายทุกใบบอกว่าชิ้นนี้มาจากเศษแผ่นไหน ลูก ๆ เป็นคนเขียนเลข</p></div>
+<div><span class="k">ขายใคร</span><p>คนชอบของมินิมอล ร้านเครื่องเขียน นักเรียนมหาวิทยาลัย คนทำงาน</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ป้ายห้อยของขวัญ</td><td class="n">39</td><td class="n"><b>79</b></td><td class="n">21</td><td class="n">74%</td></tr><tr><td>ที่คั่นหนังสือหมี</td><td class="n">59</td><td class="n"><b>129</b></td><td class="n">22</td><td class="n">83%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>249</b></td><td class="n">23</td><td class="n">91%</td></tr></tbody></table></div>
+<p class="risk">bit เป็นคำทั่วไป จดเป็นคำเดี่ยวไม่ได้ ต้องจดทั้งชุดคือ bit. กับจุดสีแดงและคำว่า bits into things ค้นเว็บไม่เจอแบรนด์เครื่องหนังที่ใช้ชื่อนี้</p>
+
+</section><section class="opt" id="kit">
+<div class="head"><span class="num">22</span><h2>kit.</h2><span style="color:var(--muted)">คิท</span></div>
+<div class="boards"><img src="img/kit-board.png" alt="โลโก้ kit. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/kit-tag.png" alt="ป้ายห้อยสินค้า kit. ตัวอย่างกับชุดต่อเองกล่องลูกบาศก์" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>kit แปลว่า ชุดของใช้ประจำตัว และย่อมาจาก keep it together คือชิ้นหนังต่อกันติดโดยไม่ต้องเย็บ และครอบครัวที่อยู่ด้วยกัน</p><p><b>keep it together.</b><br>ต่อกันติด อยู่ด้วยกัน</p></div>
+<div><span class="k">ลุค</span><p>เท่แบบเครื่องมือ พื้นถ่าน ตัวหนังสือขาว ฟอนต์โมโน จุดสีน้ำผึ้ง</p><div class="sw"><span><i style="background:#1E1F21"></i>Charcoal <span class="k" style="letter-spacing:0">#1E1F21</span></span><span><i style="background:#EDEBE6"></i>Chalk <span class="k" style="letter-spacing:0">#EDEBE6</span></span><span><i style="background:#F0B43C"></i>Honey dot <span class="k" style="letter-spacing:0">#F0B43C</span></span><span><i style="background:#6C6F73"></i>Steel <span class="k" style="letter-spacing:0">#6C6F73</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ IBM Plex Mono · ภาษาไทย IBM Plex Sans Thai · @kit.together</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ขายเป็นชุด ทั้งชุดต่อเอง ชุดตัวต่อ ชุดที่รองแก้ว ประโยค keep it together ใช้กับครอบครัวห้าคนได้ทุกโพสต์</p></div>
+<div><span class="k">ขายใคร</span><p>สาย DIY ครอบครัว ร้านของเล่นดีไซน์ เวิร์กช็อป</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>199</b></td><td class="n">43</td><td class="n">79%</td></tr><tr><td>ชุดตัวต่อหนัง 24 ชิ้น</td><td class="n">390</td><td class="n"><b>590</b></td><td class="n">93</td><td class="n">84%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">37</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">kit เป็นคำทั่วไป ต้องจดทั้งชุดกับคำว่า keep it together ค้นเว็บไม่เจอแบรนด์เครื่องหนังที่ใช้ชื่อนี้</p>
+
+</section><section class="opt" id="hold">
+<div class="head"><span class="num">23</span><h2>hold.</h2><span style="color:var(--muted)">โฮลด์</span></div>
+<div class="boards"><img src="img/hold-board.png" alt="โลโก้ hold. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/hold-tag.png" alt="ป้ายห้อยสินค้า hold. ตัวอย่างกับกระเป๋าเหรียญจิ๋ว" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>hold แปลว่า ถือ เก็บ และจับไว้ ย่อมาจาก home object leather daily ของหนังที่ใช้ในบ้านทุกวัน ทั้งเก็บของ ต่อกันอยู่ได้เอง และเหมือนมือที่จับกันไว้</p><p><b>home object, leather, daily.</b><br>ของหนังในบ้าน ใช้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>นิ่งแบบบ้านญี่ปุ่น พื้นโอ๊ต ตัวหนังสือเทาเข้ม จุดสีเขียวเสจ</p><div class="sw"><span><i style="background:#E9E3D8"></i>Oat <span class="k" style="letter-spacing:0">#E9E3D8</span></span><span><i style="background:#2B2B2B"></i>Graphite <span class="k" style="letter-spacing:0">#2B2B2B</span></span><span><i style="background:#6F9A8D"></i>Sage dot <span class="k" style="letter-spacing:0">#6F9A8D</span></span><span><i style="background:#B98C6A"></i>Clay <span class="k" style="letter-spacing:0">#B98C6A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @hold.objects</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ถ่ายรูปของทุกชิ้นในบ้านเราเอง บนโต๊ะทำงานพ่อ โต๊ะเครื่องแป้งแม่ โต๊ะการบ้านลูก ไม่ต้องจัดสตูดิโอ</p></div>
+<div><span class="k">ขายใคร</span><p>คนแต่งบ้าน คนทำงานที่บ้าน ร้านไลฟ์สไตล์</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>199</b></td><td class="n">22</td><td class="n">89%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>290</b></td><td class="n">32</td><td class="n">89%</td></tr><tr><td>ที่ใส่แปรงแต่งหน้า</td><td class="n">199</td><td class="n"><b>290</b></td><td class="n">32</td><td class="n">89%</td></tr></tbody></table></div>
+<p class="risk">hold เป็นคำทั่วไป ต้องจดทั้งชุด ค้นเว็บไม่เจอแบรนด์เครื่องหนังที่ใช้ชื่อนี้</p>
+
+</section><section class="opt" id="left">
+<div class="head"><span class="num">24</span><h2>left.</h2><span style="color:var(--muted)">เลฟท์</span></div>
+<div class="boards"><img src="img/left-board.png" alt="โลโก้ left. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/left-tag.png" alt="ป้ายห้อยสินค้า left. ตัวอย่างกับราวหมีห้าตัว" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>left แปลว่า สิ่งที่เหลือ คือเศษหนังที่เหลือจากการผลิต และย่อมาจาก leather everyday five together หนังที่ใช้ทุกวัน ทำโดยห้าคนด้วยกัน</p><p><b>what&#x27;s left, made to last.</b><br>ของที่เหลือ ทำให้ใช้ได้นาน</p></div>
+<div><span class="k">ลุค</span><p>สีหนังเต็มพื้น คาราเมล ตัวหนังสือครีม จุดสีโกโก้</p><div class="sw"><span><i style="background:#B8743A"></i>Caramel <span class="k" style="letter-spacing:0">#B8743A</span></span><span><i style="background:#FFF7EC"></i>Cream <span class="k" style="letter-spacing:0">#FFF7EC</span></span><span><i style="background:#4A2C1D"></i>Cocoa dot <span class="k" style="letter-spacing:0">#4A2C1D</span></span><span><i style="background:#E3C9A8"></i>Sand <span class="k" style="letter-spacing:0">#E3C9A8</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Anuphan · @left.objects</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ซ่อนเลขห้าไว้ในชื่อ คนถามว่า f แปลว่าอะไร ลูก ๆ ตอบว่า five เพราะบ้านเรามีห้าคน</p></div>
+<div><span class="k">ขายใคร</span><p>สายรักษ์โลก คาเฟ่ ของขวัญที่มีเรื่องเล่า</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>390</b></td><td class="n">53</td><td class="n">86%</td></tr><tr><td>ที่รองแก้วหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>219</b></td><td class="n">28</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">left แปลว่า ซ้าย ได้ด้วย ต้องเล่าความหมายเศษที่เหลือให้ชัด ในต่างประเทศมีแบรนด์ทำจากเศษหนังอยู่แล้วหลายเจ้า เช่น Hyer Goods และ Sieme แต่ไม่มีใครใช้ชื่อนี้</p>
+
+</section><section class="opt" id="pal">
+<div class="head"><span class="num">25</span><h2>pal.</h2><span style="color:var(--muted)">แพล</span></div>
+<div class="boards"><img src="img/pal-board.png" alt="โลโก้ pal. บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/pal-tag.png" alt="ป้ายห้อยสินค้า pal. ตัวอย่างกับที่ห้อยกระเป๋าหมีหัวใจ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>pal แปลว่า เพื่อนสนิท คือ คู่ใจ ในภาษาอังกฤษ และย่อมาจาก pocket accessory leather ของหนังชิ้นเล็กที่พกติดตัว</p><p><b>your pocket pal.</b><br>เพื่อนคู่ใจในกระเป๋า</p></div>
+<div><span class="k">ลุค</span><p>น่ารักแบบเพื่อน พื้นพีช ตัวหนังสือน้ำตาลเข้ม ฟอนต์กลมหนา จุดสีแดง</p><div class="sw"><span><i style="background:#F4D9CF"></i>Peach <span class="k" style="letter-spacing:0">#F4D9CF</span></span><span><i style="background:#3A2C2A"></i>Brown <span class="k" style="letter-spacing:0">#3A2C2A</span></span><span><i style="background:#C8463D"></i>Red dot <span class="k" style="letter-spacing:0">#C8463D</span></span><span><i style="background:#FBF3EC"></i>Cream <span class="k" style="letter-spacing:0">#FBF3EC</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Anuphan · @pal.pocket</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ของทุกชิ้นเป็นเพื่อนคู่ใจของใครสักคนในบ้าน ที่ห้อยกระเป๋าหมีหัวใจเป็นตัวเอก ลูก ๆ ตั้งชื่อให้ของแต่ละชิ้น</p></div>
+<div><span class="k">ขายใคร</span><p>วัยรุ่น นักเรียน คนซื้อของขวัญชิ้นเล็ก</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ที่เก็บสายชาร์จหมี</td><td class="n">59</td><td class="n"><b>129</b></td><td class="n">22</td><td class="n">83%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>159</b></td><td class="n">20</td><td class="n">88%</td></tr></tbody></table></div>
+<p class="risk">pal เป็นคำทั่วไป และแบรนด์กระเป๋าไทย Fill in the Bag มีกระเป๋าไนลอนรุ่นชื่อ Pal อยู่แล้ว ต้องจดทั้งชุดและเลี่ยงทำกระเป๋า</p>
+
+</section>
+
+<p class="eyebrow">ชุดที่ 4 · ของใช้ในชีวิตประจำวัน</p><p style="font-size:14px;color:var(--muted)">ชุดนี้ราคาอยู่ระหว่างห้าหมีกับแบรนด์หรู ต้นทุนใช้กล่องคราฟต์และสติกเกอร์ประมาณ 15 บาท แทนกล่องพรีเมียม 40 บาท</p><section class="opt" id="prajam">
+<div class="head"><span class="num">16</span><h2>PRAJAM</h2><span style="color:var(--muted)">ประจำ</span></div>
+<div class="boards"><img src="img/prajam-board.png" alt="โลโก้ PRAJAM บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/prajam-tag.png" alt="ป้ายห้อยสินค้า PRAJAM ตัวอย่างกับที่เก็บสายชาร์จหมี" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>ประจำ คือของที่ใช้ทุกวันจนเป็นของประจำตัว และยังเป็นชื่อลายประจำยาม ลายดอกสี่กลีบของไทยที่หน้าตาเหมือนแบบ 02 กับ 06 ของเรา</p><p><b>Your everyday, in leather.</b><br>ของประจำตัว ใช้ได้ทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>ผ้าหม้อห้อมร่วมสมัย สีครามเข้ม ครีม และขมิ้น โลโก้เป็นลายประจำยามสี่กลีบ</p><div class="sw"><span><i style="background:#23345C"></i>Indigo <span class="k" style="letter-spacing:0">#23345C</span></span><span><i style="background:#F4EDE0"></i>Cream <span class="k" style="letter-spacing:0">#F4EDE0</span></span><span><i style="background:#D9A441"></i>Turmeric <span class="k" style="letter-spacing:0">#D9A441</span></span><span><i style="background:#A4523A"></i>Brick <span class="k" style="letter-spacing:0">#A4523A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Manrope · ภาษาไทย Kanit · @prajam.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ของที่ครอบครัวเราใช้เองทุกวัน ที่เก็บสายชาร์จของพ่อ ปลอกแก้วกาแฟของแม่ ป้ายชื่อกระเป๋าของลูก ๆ เล่าผ่านวันธรรมดาของบ้านเรา</p></div>
+<div><span class="k">ขายใคร</span><p>คนทำงาน นักเรียน ของขวัญชิ้นเล็กที่ใช้ได้จริง</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่เก็บสายชาร์จหมี</td><td class="n">59</td><td class="n"><b>129</b></td><td class="n">22</td><td class="n">83%</td></tr><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>219</b></td><td class="n">28</td><td class="n">87%</td></tr><tr><td>ที่รองแก้วไส้ไม้ก๊อก</td><td class="n">99</td><td class="n"><b>159</b></td><td class="n">33</td><td class="n">80%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บแล้วไม่เจอแบรนด์ชื่อนี้ ยังต้องค้นในกรมทรัพย์สินทางปัญญา คำว่า ประจำ เป็นคำทั่วไป ควรจดคู่กับโลโก้ลายประจำยาม</p>
+
+</section><section class="opt" id="koojai">
+<div class="head"><span class="num">17</span><h2>KOOJAI</h2><span style="color:var(--muted)">คู่ใจ</span></div>
+<div class="boards"><img src="img/koojai-board.png" alt="โลโก้ KOOJAI บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/koojai-tag.png" alt="ป้ายห้อยสินค้า KOOJAI ตัวอย่างกับที่ห้อยกระเป๋าหมีหัวใจ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>คู่ใจ คือของที่หยิบติดตัวทุกวันจนขาดไม่ได้ เช่น กระเป๋าคู่ใจ พูดถึงความผูกพันกับของใช้ และยังเป็นคำที่ใช้กับคนที่รักได้ด้วย</p><p><b>The one you always carry.</b><br>ของคู่ใจ ติดตัวทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>อบอุ่นแบบบ้าน พื้นโอ๊ต โกโก้ และแดงหัวใจ ตัวอักษรไทยแบบลายมือ โลโก้เป็นหัวใจสองดวงต่อกัน</p><div class="sw"><span><i style="background:#EFE6D8"></i>Oat <span class="k" style="letter-spacing:0">#EFE6D8</span></span><span><i style="background:#4A2C1D"></i>Cocoa <span class="k" style="letter-spacing:0">#4A2C1D</span></span><span><i style="background:#C8463D"></i>Heart <span class="k" style="letter-spacing:0">#C8463D</span></span><span><i style="background:#B8743A"></i>Caramel <span class="k" style="letter-spacing:0">#B8743A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cormorant Garamond · ภาษาไทย Sriracha · @koojai.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>หัวใจสองดวงคือพ่อกับแม่ ของคู่ใจของบ้านนี้คือกันและกัน ยังเป็นของขวัญถึงภรรยาได้ตรง ๆ และเชื่อมกับสายหัวใจแบบ 01-S ที่มีอยู่แล้ว</p></div>
+<div><span class="k">ขายใคร</span><p>คู่รัก วัยรุ่น คนที่ซื้อของขวัญชิ้นเล็กที่มีความหมาย</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">37</td><td class="n">81%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>229</b></td><td class="n">23</td><td class="n">90%</td></tr><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>169</b></td><td class="n">22</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บแล้วไม่เจอแบรนด์ชื่อนี้ สะกดภาษาอังกฤษได้หลายแบบ (KHUJAI, KUJAI) ควรจองชื่อบัญชีไว้ทุกแบบ</p>
+
+</section><section class="opt" id="chaidee">
+<div class="head"><span class="num">18</span><h2>CHAIDEE</h2><span style="color:var(--muted)">ใช้ดี</span></div>
+<div class="boards"><img src="img/chaidee-board.png" alt="โลโก้ CHAIDEE บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/chaidee-tag.png" alt="ป้ายห้อยสินค้า CHAIDEE ตัวอย่างกับที่คั่นหนังสือหมี" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>ใช้ดี คือคำชมของที่ดีที่สุดในชีวิตประจำวัน และอ่านออกเสียงเหมือน ใจดี ได้สองความหมายในคำเดียว</p><p><b>Good to use. Kind at heart.</b><br>ใช้ดี ทำด้วยใจดี</p></div>
+<div><span class="k">ลุค</span><p>สดใส เป็นมิตร พื้นเขียวอ่อน เขียวป่า และมัสตาร์ด โลโก้เป็นเครื่องหมายถูกที่ทำจากแถบหนัง</p><div class="sw"><span><i style="background:#DCE5D3"></i>Leaf <span class="k" style="letter-spacing:0">#DCE5D3</span></span><span><i style="background:#2E4A3A"></i>Forest <span class="k" style="letter-spacing:0">#2E4A3A</span></span><span><i style="background:#E0A526"></i>Mustard <span class="k" style="letter-spacing:0">#E0A526</span></span><span><i style="background:#F8F4EA"></i>Cream <span class="k" style="letter-spacing:0">#F8F4EA</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Mitr · @chaidee.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ลูก ๆ เป็นคนทดลองใช้ก่อนขายทุกชิ้น ชิ้นไหนใช้ดีจริงถึงได้ติดโลโก้ เป็นเรื่องที่เด็กเล่าที่บูธได้เอง</p></div>
+<div><span class="k">ขายใคร</span><p>ครอบครัว นักเรียน คนที่ซื้อของใช้ในบ้าน ราคาจับต้องได้</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่คั่นหนังสือหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr><tr><td>ห่วงผ้าเช็ดปากหมี</td><td class="n">79</td><td class="n"><b>129</b></td><td class="n">29</td><td class="n">78%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>299</b></td><td class="n">37</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บเจอ Chaidee Mansion ซึ่งเป็นอพาร์ตเมนต์ คนละหมวดกับเครื่องหนัง และมีแบรนด์ชาชื่อใกล้กันคือ Chaidim ยังต้องค้นในกรมทรัพย์สินทางปัญญา</p>
+
+</section><section class="opt" id="wanwan">
+<div class="head"><span class="num">19</span><h2>WANWAN</h2><span style="color:var(--muted)">วันวัน</span></div>
+<div class="boards"><img src="img/wanwan-board.png" alt="โลโก้ WANWAN บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/wanwan-tag.png" alt="ป้ายห้อยสินค้า WANWAN ตัวอย่างกับป้ายชื่อติดกระเป๋านักเรียน" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>วันวัน คือวันธรรมดาที่ผ่านไปทีละวัน ของที่อยู่ด้วยกันทุกวัน พูดง่าย จำง่าย เด็กพูดได้ และฟังดูน่ารักในทุกภาษา</p><p><b>For every single day.</b><br>อยู่ด้วยกันทุกวัน</p></div>
+<div><span class="k">ลุค</span><p>สดชื่นยามเช้า สีข้าวสาร น้ำตาลเข้ม และส้ม โลโก้เป็นพระอาทิตย์ขึ้นสองดวงเรียงกัน</p><div class="sw"><span><i style="background:#F6E7C8"></i>Rice <span class="k" style="letter-spacing:0">#F6E7C8</span></span><span><i style="background:#3B2A20"></i>Earth <span class="k" style="letter-spacing:0">#3B2A20</span></span><span><i style="background:#E07A32"></i>Sunrise <span class="k" style="letter-spacing:0">#E07A32</span></span><span><i style="background:#8DB6C9"></i>Sky <span class="k" style="letter-spacing:0">#8DB6C9</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Itim · @wanwan.daily</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>พระอาทิตย์สองดวงคือวันนี้กับพรุ่งนี้ ของที่ลูก ๆ ใช้ไปโรงเรียนทุกเช้า ป้ายชื่อกระเป๋า ที่รองแก้วนม เล่าเรื่องผ่านกิจวัตรของเด็ก</p></div>
+<div><span class="k">ขายใคร</span><p>พ่อแม่ เด็กนักเรียน ของใช้ในบ้าน ของขวัญเปิดเทอม</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ป้ายชื่อติดกระเป๋านักเรียน</td><td class="n">129</td><td class="n"><b>189</b></td><td class="n">29</td><td class="n">85%</td></tr><tr><td>ที่รองแก้วหมี</td><td class="n">59</td><td class="n"><b>99</b></td><td class="n">22</td><td class="n">78%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>259</b></td><td class="n">32</td><td class="n">88%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์เครื่องหนังไทยชื่อนี้ แต่มีแบรนด์เครื่องหนังมาเลเซียชื่อเสียงใกล้กันคือ Wanpi และ Wanwan เป็นชื่อเล่นที่พบได้ในภาษาจีน</p>
+
+</section><section class="opt" id="khunmue">
+<div class="head"><span class="num">20</span><h2>KHUNMUE</h2><span style="color:var(--muted)">คุ้นมือ</span></div>
+<div class="boards"><img src="img/khunmue-board.png" alt="โลโก้ KHUNMUE บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/khunmue-tag.png" alt="ป้ายห้อยสินค้า KHUNMUE ตัวอย่างกับกระเป๋าเหรียญจิ๋ว" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>คุ้นมือ คือของที่ใช้จนจับแล้วรู้สึกคุ้น หนังแท้ยิ่งใช้ยิ่งนุ่มและสีสวยขึ้น ชื่อนี้เล่าเสน่ห์ของหนังแท้ในชีวิตประจำวันได้ตรงที่สุด</p><p><b>Gets better in your hand.</b><br>ยิ่งใช้ ยิ่งคุ้นมือ</p></div>
+<div><span class="k">ลุค</span><p>หนังแท้ที่ผ่านการใช้ สีแทน น้ำตาลเข้ม และครีม โลโก้เป็นฝ่ามือที่ประคองก้อนกลม ซึ่งดูเป็นหน้ายิ้มได้ด้วย</p><div class="sw"><span><i style="background:#C9A07A"></i>Tan <span class="k" style="letter-spacing:0">#C9A07A</span></span><span><i style="background:#3A2618"></i>Dark leather <span class="k" style="letter-spacing:0">#3A2618</span></span><span><i style="background:#F6EEE2"></i>Cream <span class="k" style="letter-spacing:0">#F6EEE2</span></span><span><i style="background:#8A5A34"></i>Patina <span class="k" style="letter-spacing:0">#8A5A34</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Italiana · ภาษาไทย Noto Serif Thai · @khunmue.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ขายเสน่ห์ของหนังที่สีเข้มขึ้นตามการใช้งาน ถ่ายรูปของชิ้นเดียวกันวันแรกกับหลังใช้ไปหนึ่งเดือน ลูก ๆ เป็นคนถือในรูป</p></div>
+<div><span class="k">ขายใคร</span><p>คนชอบของที่ใช้นาน คนทำงาน ผู้ชาย ของขวัญที่ให้แล้วใช้ได้หลายปี</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>199</b></td><td class="n">22</td><td class="n">89%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>159</b></td><td class="n">20</td><td class="n">88%</td></tr><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>229</b></td><td class="n">28</td><td class="n">88%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บไม่เจอแบรนด์ชื่อนี้ แต่มีแบรนด์กระเป๋าไทยชื่อ FEEMUE ที่ลงท้ายด้วย มือ เหมือนกัน และฝรั่งอ่านชื่อยาก ควรใช้ภาษาไทยเป็นหลัก</p>
+
+</section>
+
+<p class="eyebrow">ชุดที่ 3 · แนวเดียวกับ PRANEET</p><section class="opt" id="lamiad">
+<div class="head"><span class="num">11</span><h2>LAMIAD</h2><span style="color:var(--muted)">ละเมียด</span></div>
+<div class="boards"><img src="img/lamiad-board.png" alt="โลโก้ LAMIAD บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/lamiad-tag.png" alt="ป้ายห้อยสินค้า LAMIAD ตัวอย่างกับซองอั่งเปาพับกังหัน" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>ละเมียด คือทำอย่างพิถีพิถัน ไม่รีบ ความหมายใกล้ ประณีต ที่สุด ใช้ระบบภาพเดิมที่ชอบได้ทั้งหมด ดอกห้ากลีบ เขียวหัวเป็ด และทอง</p><p><b>Unhurried. Unstitched.</b><br>ละเมียดทุกชิ้น ไม่ต้องเย็บ</p></div>
+<div><span class="k">ลุค</span><p>Thai heritage luxury ต่อจาก PRANEET เขียวหัวเป็ดเข้ม ทอง งาช้าง และแดงชาด โลโก้ดอกไม้ห้ากลีบเดิม</p><div class="sw"><span><i style="background:#10312F"></i>Peacock <span class="k" style="letter-spacing:0">#10312F</span></span><span><i style="background:#C8A45A"></i>Gold leaf <span class="k" style="letter-spacing:0">#C8A45A</span></span><span><i style="background:#F3ECDD"></i>Ivory <span class="k" style="letter-spacing:0">#F3ECDD</span></span><span><i style="background:#8E2B23"></i>Lacquer <span class="k" style="letter-spacing:0">#8E2B23</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Marcellus · ภาษาไทย Taviraj · @lamiad.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ดอกห้ากลีบคือคนห้าคน คำว่า ละเมียด เล่าการคัดเศษหนังทีละชิ้นและการประกอบด้วยมือของลูก ๆ ได้ตรงที่สุด</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญผู้ใหญ่ งานแต่งงานไทย ของขวัญองค์กรให้แขกต่างชาติ ร้านในโรงแรมและสนามบิน</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองอั่งเปาพับกังหัน</td><td class="n">69</td><td class="n"><b>190</b></td><td class="n">45</td><td class="n">76%</td></tr><tr><td>กล่องของชำร่วยงานแต่ง</td><td class="n">159</td><td class="n"><b>250</b></td><td class="n">61</td><td class="n">76%</td></tr><tr><td>แผ่นรองจานลายข้าวหลามตัด</td><td class="n">390</td><td class="n"><b>890</b></td><td class="n">79</td><td class="n">91%</td></tr></tbody></table></div>
+<p class="risk">ค้นเว็บแล้วไม่เจอแบรนด์ชื่อนี้ แต่ยังต้องค้นในฐานข้อมูลกรมทรัพย์สินทางปัญญา ฝรั่งอ่านว่า ลา-เมียด ได้ไม่ยาก ใส่คำอ่านบนการ์ดไว้</p>
+
+</section><section class="opt" id="benja">
+<div class="head"><span class="num">12</span><h2>BENJA</h2><span style="color:var(--muted)">เบญจ</span></div>
+<div class="boards"><img src="img/benja-board.png" alt="โลโก้ BENJA บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/benja-tag.png" alt="ป้ายห้อยสินค้า BENJA ตัวอย่างกับชุดที่รองแก้ว 4 ลาย" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>เบญจ แปลว่า ห้า เป็นคำเดียวกับ เบญจรงค์ เครื่องถ้วยห้าสีของไทย ได้ทั้งความหรูแบบไทยและเรื่องครอบครัวห้าคนในคำเดียว</p><p><b>Five colours. Five of us.</b><br>ห้าสี ห้าคน หนึ่งงานฝีมือ</p></div>
+<div><span class="k">ลุค</span><p>เบญจรงค์ร่วมสมัย พื้นงาช้าง เขียวเข้ม ทอง และดอกห้ากลีบห้าสี หนึ่งสีต่อหนึ่งคนในบ้าน</p><div class="sw"><span><i style="background:#F5EFE3"></i>Ivory <span class="k" style="letter-spacing:0">#F5EFE3</span></span><span><i style="background:#1E3B33"></i>Jade <span class="k" style="letter-spacing:0">#1E3B33</span></span><span><i style="background:#B8912F"></i>Gold <span class="k" style="letter-spacing:0">#B8912F</span></span><span><i style="background:#B3342C"></i>Cinnabar <span class="k" style="letter-spacing:0">#B3342C</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cormorant Garamond · ภาษาไทย Taviraj · @benja.atelier</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ห้าสีของเบญจรงค์ตรงกับสีประจำตัวห้าคนแบบในห้าหมี ราวหมีห้าตัวกลายเป็นสินค้าหลักของแบรนด์หรูได้เลย</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญผู้ใหญ่ ของที่ระลึกจากไทย ร้านดีไซน์ไทยในห้าง ของขวัญองค์กร</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>490</b></td><td class="n">62</td><td class="n">87%</td></tr><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>590</b></td><td class="n">61</td><td class="n">90%</td></tr><tr><td>ราวหมีห้าตัว</td><td class="n">349</td><td class="n"><b>490</b></td><td class="n">78</td><td class="n">84%</td></tr></tbody></table></div>
+<p class="risk">เป็นคำทั่วไป ค้นเว็บเจอกระเป๋ารุ่น Benja ของแบรนด์สวิส Gusti Leder และร้านเฟอร์นิเจอร์ชื่อ Benja ควรใช้ BENJA ATELIER และจดคู่กับโลโก้</p>
+
+</section><section class="opt" id="banjong">
+<div class="head"><span class="num">13</span><h2>BANJONG</h2><span style="color:var(--muted)">บรรจง</span></div>
+<div class="boards"><img src="img/banjong-board.png" alt="โลโก้ BANJONG บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/banjong-tag.png" alt="ป้ายห้อยสินค้า BANJONG ตัวอย่างกับกล่องแหวนหนังแท้" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>บรรจง คือทำด้วยความตั้งใจทีละขั้น เช่น เขียนอย่างบรรจง เล่าว่าทุกรอยตัดและทุกร่องคิดมาแล้ว</p><p><b>Made with care, by hand.</b><br>บรรจงทุกรอยตัด</p></div>
+<div><span class="k">ลุค</span><p>ลายรดน้ำร่วมสมัย พื้นดำแบบเครื่องเขิน ทอง และแดงชาด ตัวอักษรไทยแบบคัดลายมือ</p><div class="sw"><span><i style="background:#17110E"></i>Lacquer black <span class="k" style="letter-spacing:0">#17110E</span></span><span><i style="background:#C9A24E"></i>Gold <span class="k" style="letter-spacing:0">#C9A24E</span></span><span><i style="background:#B23A2B"></i>Vermilion <span class="k" style="letter-spacing:0">#B23A2B</span></span><span><i style="background:#F1E8D8"></i>Ivory <span class="k" style="letter-spacing:0">#F1E8D8</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Bodoni Moda · ภาษาไทย Charmonman · @banjong.studio</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>พ่อเป็นคนบรรจงออกแบบ ลูก ๆ บรรจงประกอบ เหมาะกับกล่องแหวนและของใส่เครื่องประดับที่ต้องการความหรูเข้ม</p></div>
+<div><span class="k">ขายใคร</span><p>คนซื้อของขวัญราคาสูง เจ้าสาว ร้านเครื่องประดับ ของขวัญผู้บริหาร</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>790</b></td><td class="n">61</td><td class="n">92%</td></tr><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>290</b></td><td class="n">45</td><td class="n">85%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>450</b></td><td class="n">57</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">บรรจงเป็นชื่อคนที่พบบ่อย ค้นเว็บไม่เจอแบรนด์เครื่องหนังชื่อนี้ แต่จดเครื่องหมายเดี่ยว ๆ อาจยาก ต้องจดคู่กับโลโก้</p>
+
+</section><section class="opt" id="kanok">
+<div class="head"><span class="num">14</span><h2>KANOK</h2><span style="color:var(--muted)">กนก</span></div>
+<div class="boards"><img src="img/kanok-board.png" alt="โลโก้ KANOK บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/kanok-tag.png" alt="ป้ายห้อยสินค้า KANOK ตัวอย่างกับซองการ์ดติดของขวัญ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>กนก คือลายเปลวไฟในศิลปะไทย เป็นลายพื้นฐานของช่างไทย บอกความเป็นงานช่างแบบไทยได้ทันที</p><p><b>Thai pattern, cut in leather.</b><br>ลายไทยบนหนังแท้</p></div>
+<div><span class="k">ลุค</span><p>วัดไทยร่วมสมัย สีแดงเลือดหมู ทอง และงาช้าง โลโก้เป็นลายกนกตัวเดียว</p><div class="sw"><span><i style="background:#4E1519"></i>Temple red <span class="k" style="letter-spacing:0">#4E1519</span></span><span><i style="background:#D2AA5C"></i>Gold <span class="k" style="letter-spacing:0">#D2AA5C</span></span><span><i style="background:#F2E7D3"></i>Ivory <span class="k" style="letter-spacing:0">#F2E7D3</span></span><span><i style="background:#6B4226"></i>Teak <span class="k" style="letter-spacing:0">#6B4226</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cinzel · ภาษาไทย Chonburi · @kanok.craft</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ต่อไปตัดลายกนกเป็นบล็อกใหม่ได้ ใช้กับซองการ์ดและกล่องของขวัญ เล่าเรื่องช่างไทยรุ่นใหม่ในครอบครัว</p></div>
+<div><span class="k">ขายใคร</span><p>นักท่องเที่ยว ของที่ระลึกระดับพรีเมียม ของขวัญองค์กรให้แขกต่างชาติ</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองการ์ดติดของขวัญ</td><td class="n">59</td><td class="n"><b>150</b></td><td class="n">45</td><td class="n">70%</td></tr><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>590</b></td><td class="n">61</td><td class="n">90%</td></tr><tr><td>ที่ใส่แปรงแต่งหน้า</td><td class="n">199</td><td class="n"><b>450</b></td><td class="n">57</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">กนกเป็นชื่อคนทั่วไป และมีแบรนด์เครื่องหนังไทยชื่อใกล้กันคือ Kanita ต้องใช้คู่โลโก้ลายกนกให้ต่างชัด</p>
+
+</section><section class="opt" id="hattha">
+<div class="head"><span class="num">15</span><h2>HATTHA</h2><span style="color:var(--muted)">หัตถ์</span></div>
+<div class="boards"><img src="img/hattha-board.png" alt="โลโก้ HATTHA บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/hattha-tag.png" alt="ป้ายห้อยสินค้า HATTHA ตัวอย่างกับชุดต่อเองกล่องลูกบาศก์" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>หัตถ์ แปลว่า มือ เป็นรากของคำว่า หัตถกรรม ห้าคนในบ้านคือห้าคู่มือที่ช่วยกันทำทุกชิ้น</p><p><b>Five pairs of hands.</b><br>ห้าคู่มือ หนึ่งหัตถกรรม</p></div>
+<div><span class="k">ลุค</span><p>ศิลาดลร่วมสมัย สีเขียวศิลาดล ไม้สัก และทอง โลโก้เป็นนิ้วห้านิ้วเรียงเป็นฝ่ามือ</p><div class="sw"><span><i style="background:#B9CBB4"></i>Celadon <span class="k" style="letter-spacing:0">#B9CBB4</span></span><span><i style="background:#3A2618"></i>Teak <span class="k" style="letter-spacing:0">#3A2618</span></span><span><i style="background:#A37A2C"></i>Gold <span class="k" style="letter-spacing:0">#A37A2C</span></span><span><i style="background:#F4EFE4"></i>Ivory <span class="k" style="letter-spacing:0">#F4EFE4</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Italiana · ภาษาไทย Taviraj · @hattha.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ชื่อเล่าตรง ๆ ว่าทำด้วยมือทั้งบ้าน เหมาะกับชุดต่อเองและเวิร์กช็อป ให้ลูกค้าได้ลงมือเอง</p></div>
+<div><span class="k">ขายใคร</span><p>ครอบครัว คนชอบงานทำมือ เวิร์กช็อป โรงแรมและคาเฟ่ที่ทำกิจกรรม</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>290</b></td><td class="n">68</td><td class="n">77%</td></tr><tr><td>ชุดตัวต่อหนัง 24 ชิ้น</td><td class="n">390</td><td class="n"><b>790</b></td><td class="n">118</td><td class="n">85%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>390</b></td><td class="n">48</td><td class="n">88%</td></tr></tbody></table></div>
+<p class="risk">ฝรั่งออกเสียงยาก (หัด-ถะ) ค้นเว็บไม่เจอแบรนด์ชื่อนี้ ยังต้องค้นในกรมทรัพย์สินทางปัญญา</p>
+
+</section>
+
+<p class="eyebrow">ชุดที่ 1</p><section class="opt" id="remnant">
+<div class="head"><span class="num">01</span><h2>REMNANT</h2><span style="color:var(--muted)">เรมแนนท์</span></div>
+<div class="boards"><img src="img/remnant-board.png" alt="โลโก้ REMNANT บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/remnant-tag.png" alt="ป้ายห้อยสินค้า REMNANT ตัวอย่างกับกล่องแหวนหนังแท้" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>Remnant แปลว่า เศษที่เหลือ บอกตรง ๆ ว่าทำจากเศษหนัง แต่พูดแบบแบรนด์แฟชั่น</p><p><b>Nothing wasted. Nothing stitched.</b><br>ไม่ทิ้ง ไม่เย็บ</p></div>
+<div><span class="k">ลุค</span><p>Quiet luxury แบบมินิมอล ขาวงาช้าง ดำ และสีคอนยัค เหมือนร้านเครื่องหนังในแกลเลอรี</p><div class="sw"><span><i style="background:#151311"></i>Ink <span class="k" style="letter-spacing:0">#151311</span></span><span><i style="background:#ECE6DC"></i>Bone <span class="k" style="letter-spacing:0">#ECE6DC</span></span><span><i style="background:#8C4A26"></i>Cognac <span class="k" style="letter-spacing:0">#8C4A26</span></span><span><i style="background:#8F877C"></i>Ash <span class="k" style="letter-spacing:0">#8F877C</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Bodoni Moda · ภาษาไทย Noto Serif Thai · @remnant.bkk</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>เศษหนังเกรดดีจากโรงงาน คัดทีละชิ้น ทุกชิ้นมีหมายเลขกำกับ ครอบครัวเป็นคนคัดและประกอบ เล่าเรื่องลูก ๆ ได้ในโพสต์เบื้องหลัง ไม่ต้องอยู่บนโลโก้</p></div>
+<div><span class="k">ขายใคร</span><p>คนทำงานอายุ 25–40 ที่ซื้อของขวัญราคา 300–900 บาท ร้านคอนเซปต์สโตร์</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>690</b></td><td class="n">61</td><td class="n">91%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>390</b></td><td class="n">48</td><td class="n">88%</td></tr><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>490</b></td><td class="n">62</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">คำว่า Remnant มีคนใช้ตั้งชื่อร้านอยู่บ้างในต่างประเทศ ต้องเติมคำให้เป็นของเรา เช่น REMNANT BKK และค้นเครื่องหมายการค้าก่อน</p>
+
+</section><section class="opt" id="unsewn">
+<div class="head"><span class="num">02</span><h2>UNSEWN</h2><span style="color:var(--muted)">อันโซน</span></div>
+<div class="boards"><img src="img/unsewn-board.png" alt="โลโก้ UNSEWN บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/unsewn-tag.png" alt="ป้ายห้อยสินค้า UNSEWN ตัวอย่างกับกล่องของขวัญสลับลาย" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>Unsewn แปลว่า ไม่ได้เย็บ คือจุดขายที่ไม่มีใครเหมือน ทั้งชิ้นไม่มีด้ายสักเส้น</p><p><b>Leather, held by design.</b><br>หนังแท้ ยึดกันด้วยการออกแบบ</p></div>
+<div><span class="k">ลุค</span><p>Craft luxury สีโอ๊ต เขียวมะกอก และสีแทน ตัวอักษรเซริฟบางแบบสตูดิโอญี่ปุ่นหรือสแกนดิเนเวีย</p><div class="sw"><span><i style="background:#3E4A3D"></i>Olive <span class="k" style="letter-spacing:0">#3E4A3D</span></span><span><i style="background:#E9E2D3"></i>Oat <span class="k" style="letter-spacing:0">#E9E2D3</span></span><span><i style="background:#B9875A"></i>Tan <span class="k" style="letter-spacing:0">#B9875A</span></span><span><i style="background:#9A5B3F"></i>Clay <span class="k" style="letter-spacing:0">#9A5B3F</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cormorant Garamond · ภาษาไทย Noto Serif Thai · @unsewn.studio</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>งานออกแบบล้วน ๆ ปีกกับร่องที่ต่างกันครึ่งมิลลิเมตรคือเทคนิคของพ่อ ทุกชิ้นถอดซ่อมได้ เปลี่ยนชิ้นเดียวไม่ต้องทิ้งทั้งอัน ลูก ๆ เป็นทีมประกอบ</p></div>
+<div><span class="k">ขายใคร</span><p>สายดีไซน์และของแต่งบ้าน ร้านเฟอร์นิเจอร์ คาเฟ่ ของขวัญองค์กรระดับพรีเมียม</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องของขวัญสลับลาย</td><td class="n">249</td><td class="n"><b>590</b></td><td class="n">61</td><td class="n">90%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>490</b></td><td class="n">57</td><td class="n">88%</td></tr><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>350</b></td><td class="n">53</td><td class="n">85%</td></tr></tbody></table></div>
+<p class="risk">อ่านออกเสียงยากสำหรับคนไทยบางคน ต้องใส่คำอ่านภาษาไทยในโลโก้รอง</p>
+
+</section><section class="opt" id="interlock">
+<div class="head"><span class="num">03</span><h2>INTERLOCK</h2><span style="color:var(--muted)">อินเตอร์ล็อก</span></div>
+<div class="boards"><img src="img/interlock-board.png" alt="โลโก้ INTERLOCK บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/interlock-tag.png" alt="ป้ายห้อยสินค้า INTERLOCK ตัวอย่างกับชุดตัวต่อหนัง 24 ชิ้น" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>Interlock แปลว่า ล็อกเข้าหากัน คือกลไกของทุกชิ้นในร้าน ฟังดูเท่และเป็นเทคนิค</p><p><b>Cut. Lock. Done.</b><br>ตัด ล็อก จบ</p></div>
+<div><span class="k">ลุค</span><p>Cool และสตรีท สีดำ เทาคอนกรีต และส้มสัญญาณ ฟอนต์หนาแบบโปสเตอร์ ใช้เส้นตัดของบล็อกเป็นลายกราฟิก</p><div class="sw"><span><i style="background:#141517"></i>Carbon <span class="k" style="letter-spacing:0">#141517</span></span><span><i style="background:#C9C7C2"></i>Concrete <span class="k" style="letter-spacing:0">#C9C7C2</span></span><span><i style="background:#FF5A1F"></i>Signal <span class="k" style="letter-spacing:0">#FF5A1F</span></span><span><i style="background:#F3F2EE"></i>Paper <span class="k" style="letter-spacing:0">#F3F2EE</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Archivo · ภาษาไทย Chakra Petch · @interlock.lab</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>โชว์งานออกแบบแบบวิศวกร เส้นตัดสีดำ ร่องสีแดง ขนาดเป็นมิลลิเมตร ขายชุดต่อเองให้คนชอบ DIY ลูก ๆ ถ่ายคลิปต่อแข่งเวลาลง TikTok</p></div>
+<div><span class="k">ขายใคร</span><p>วัยรุ่นถึงวัยทำงาน สาย DIY ของเล่นดีไซน์ คนชอบงานกราฟิก</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดตัวต่อหนัง 24 ชิ้น</td><td class="n">390</td><td class="n"><b>890</b></td><td class="n">118</td><td class="n">87%</td></tr><tr><td>ลูกเต๋าหนัง</td><td class="n">159</td><td class="n"><b>290</b></td><td class="n">61</td><td class="n">79%</td></tr><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>350</b></td><td class="n">48</td><td class="n">86%</td></tr></tbody></table></div>
+<p class="risk">Interlock เป็นคำทั่วไปที่ใช้ในหลายวงการ จดเครื่องหมายเดี่ยว ๆ ยาก ควรใช้คู่กับโลโก้หรือเป็น INTERLOCK LAB</p>
+
+</section><section class="opt" id="aftercut">
+<div class="head"><span class="num">04</span><h2>AFTERCUT</h2><span style="color:var(--muted)">อาฟเตอร์คัท</span></div>
+<div class="boards"><img src="img/aftercut-board.png" alt="โลโก้ AFTERCUT บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/aftercut-tag.png" alt="ป้ายห้อยสินค้า AFTERCUT ตัวอย่างกับปลอกแก้วกาแฟ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>After cut คือสิ่งที่เหลือหลังการตัด แบรนด์ที่เกิดจากเศษหลังการตัดกระเป๋าและรองเท้า</p><p><b>Made from what&#x27;s left after the cut.</b><br>ทำจากสิ่งที่เหลือหลังการตัด</p></div>
+<div><span class="k">ลุค</span><p>Sustainability ชัดเจน สีเขียวป่า หิน และทองแดง สัญลักษณ์ใบไม้ที่มีร่องตัดเป็นเส้นใบ</p><div class="sw"><span><i style="background:#1F3A2E"></i>Forest <span class="k" style="letter-spacing:0">#1F3A2E</span></span><span><i style="background:#DDD8CC"></i>Stone <span class="k" style="letter-spacing:0">#DDD8CC</span></span><span><i style="background:#B0703C"></i>Copper <span class="k" style="letter-spacing:0">#B0703C</span></span><span><i style="background:#6E7F5A"></i>Moss <span class="k" style="letter-spacing:0">#6E7F5A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Syne · ภาษาไทย Anuphan · @aftercut.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>นับเป็นตัวเลขได้ว่าช่วยเศษหนังไว้กี่กิโลแล้ว บอกบนป้ายทุกชิ้น วัสดุเดียว ไม่มีด้าย ไม่มีกาว ครอบครัวเป็นคนเก็บ คัด และประกอบ</p></div>
+<div><span class="k">ขายใคร</span><p>สายรักษ์โลก คาเฟ่และร้านที่ทำเรื่องยั่งยืน ของขวัญองค์กรสาย ESG</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>290</b></td><td class="n">53</td><td class="n">82%</td></tr><tr><td>ที่รองแก้วไส้ไม้ก๊อก</td><td class="n">99</td><td class="n"><b>220</b></td><td class="n">58</td><td class="n">74%</td></tr><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>290</b></td><td class="n">68</td><td class="n">77%</td></tr></tbody></table></div>
+<p class="risk">เรื่องรักษ์โลกต้องมีตัวเลขจริง เช่น ซื้อเศษมากี่กิโล ใช้ไปกี่กิโล ห้ามเคลมเกินจริง</p>
+
+</section><section class="opt" id="quint">
+<div class="head"><span class="num">05</span><h2>QUINT</h2><span style="color:var(--muted)">ควินท์</span></div>
+<div class="boards"><img src="img/quint-board.png" alt="โลโก้ QUINT บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/quint-tag.png" alt="ป้ายห้อยสินค้า QUINT ตัวอย่างกับกล่องแหวนหนังแท้" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>Quint มาจากภาษาละติน แปลว่า ห้า ยังเป็นเรื่องครอบครัวห้าคน แต่เล่าแบบแบรนด์หรู คนรู้ความหมายเฉพาะคนที่ถาม</p><p><b>Five hands. One craft.</b><br>ห้ามือ หนึ่งงานฝีมือ</p></div>
+<div><span class="k">ลุค</span><p>Heritage luxury สีน้ำเงินเที่ยงคืน แชมเปญ และเบอร์กันดี ตัวอักษรโรมันคลาสสิก โลโก้เป็นร่องห้าเส้นรอบวง</p><div class="sw"><span><i style="background:#1B2233"></i>Midnight <span class="k" style="letter-spacing:0">#1B2233</span></span><span><i style="background:#E8DCC4"></i>Champagne <span class="k" style="letter-spacing:0">#E8DCC4</span></span><span><i style="background:#6E2233"></i>Burgundy <span class="k" style="letter-spacing:0">#6E2233</span></span><span><i style="background:#B89B62"></i>Gold <span class="k" style="letter-spacing:0">#B89B62</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Cinzel · ภาษาไทย Noto Serif Thai · @quint.atelier</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ร่องห้าเส้นในโลโก้คือคนห้าคนในบ้าน ใช้ได้ทั้งของขวัญแต่งงานและองค์กร ยังเป็นของขวัญถึงภรรยาได้เหมือนเดิม แค่พูดเบากว่า</p></div>
+<div><span class="k">ขายใคร</span><p>คู่แต่งงาน งานหมั้น ของขวัญผู้ใหญ่ ของขวัญองค์กรสั่งจำนวนมาก</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>890</b></td><td class="n">61</td><td class="n">93%</td></tr><tr><td>กล่องของชำร่วยงานแต่ง</td><td class="n">159</td><td class="n"><b>290</b></td><td class="n">61</td><td class="n">79%</td></tr><tr><td>แผ่นรองจานลายข้าวหลามตัด</td><td class="n">390</td><td class="n"><b>990</b></td><td class="n">79</td><td class="n">92%</td></tr></tbody></table></div>
+<p class="risk">ชื่อสั้นและหรู แต่คนไทยไม่รู้ความหมาย ต้องเล่าเรื่องห้าคนในทุกจุดขาย ทั้งป้ายและการ์ด</p>
+
+</section><p class="eyebrow">ชุดที่ 2</p><section class="opt" id="khad">
+<div class="head"><span class="num">06</span><h2>KHAD</h2><span style="color:var(--muted)">ขัด</span></div>
+<div class="boards"><img src="img/khad-board.png" alt="โลโก้ KHAD บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/khad-tag.png" alt="ป้ายห้อยสินค้า KHAD ตัวอย่างกับที่ห้อยกระเป๋าหมีหัวใจ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>ขัด คือคำไทยของการเอาชิ้นหนังสอดขัดกัน เป็นคำที่พ่อใช้ตั้งแต่วันแรก สั้น เท่ และเป็นภาษาไทยแท้ที่ฝรั่งออกเสียงได้</p><p><b>Thai-made. Locked, not stitched.</b><br>ขัดกันให้แน่น ไม่ต้องเย็บ</p></div>
+<div><span class="k">ลุค</span><p>Cool แบบไทยร่วมสมัย ดำ ขาวชอล์ก และน้ำเงินโคบอลต์ โลโก้เป็นสองแถบหนังสานขัดกัน</p><div class="sw"><span><i style="background:#0E0E0F"></i>Jet <span class="k" style="letter-spacing:0">#0E0E0F</span></span><span><i style="background:#F5F3EF"></i>Chalk <span class="k" style="letter-spacing:0">#F5F3EF</span></span><span><i style="background:#2E46F0"></i>Cobalt <span class="k" style="letter-spacing:0">#2E46F0</span></span><span><i style="background:#B97A4A"></i>Hide <span class="k" style="letter-spacing:0">#B97A4A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Unbounded · ภาษาไทย Kanit · @khad.studio</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ชื่อมาจากคำพูดในบ้าน ลูก ๆ พูดว่า ขัด ได้ทุกคน เหมาะกับนักท่องเที่ยวที่อยากได้ของดีไซน์ไทย และใช้คำไทยเป็นจุดขาย</p></div>
+<div><span class="k">ขายใคร</span><p>คนรุ่นใหม่ นักท่องเที่ยว ร้านของฝากดีไซน์ไทย ป๊อปอัปสโตร์</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ</td><td class="n">129</td><td class="n"><b>259</b></td><td class="n">62</td><td class="n">76%</td></tr><tr><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="n">129</td><td class="n"><b>259</b></td><td class="n">68</td><td class="n">74%</td></tr><tr><td>ลูกเต๋าหนัง</td><td class="n">159</td><td class="n"><b>290</b></td><td class="n">61</td><td class="n">79%</td></tr></tbody></table></div>
+<p class="risk">ฝรั่งอาจอ่านว่า แคด ต้องมีคำอ่านกำกับ และคำว่า ขัด ในภาษาไทยมีความหมายว่าขัดแย้งด้วย ต้องเล่าให้เป็นความหมายเชิงช่าง</p>
+
+</section><section class="opt" id="sansfil">
+<div class="head"><span class="num">07</span><h2>SANSFIL</h2><span style="color:var(--muted)">ซองฟิล</span></div>
+<div class="boards"><img src="img/sansfil-board.png" alt="โลโก้ SANSFIL บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/sansfil-tag.png" alt="ป้ายห้อยสินค้า SANSFIL ตัวอย่างกับซองใส่เครื่องประดับ" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>Sans fil เป็นภาษาฝรั่งเศส แปลว่า ไม่มีด้าย ฟังดูเหมือนแบรนด์หรูจากปารีส แต่บอกความจริงของสินค้าตรง ๆ</p><p><b>Sans fil. Sans colle. Avec amour.</b><br>ไม่มีด้าย ไม่มีกาว มีแต่ความรัก</p></div>
+<div><span class="k">ลุค</span><p>Feminine luxury สีงาช้างอมชมพู เอสเปรสโซ และโรสเคลย์ ตัวอักษรบางแบบนิตยสารแฟชั่น โลโก้เป็นเข็มที่ไม่มีด้าย</p><div class="sw"><span><i style="background:#F4EDE6"></i>Ivory <span class="k" style="letter-spacing:0">#F4EDE6</span></span><span><i style="background:#2A1D17"></i>Espresso <span class="k" style="letter-spacing:0">#2A1D17</span></span><span><i style="background:#B5715F"></i>Rose clay <span class="k" style="letter-spacing:0">#B5715F</span></span><span><i style="background:#BFA06A"></i>Gold <span class="k" style="letter-spacing:0">#BFA06A</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Italiana · ภาษาไทย Noto Serif Thai · @sansfil.bkk</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>แบรนด์ที่ตั้งให้แม่หมีโดยตรง หรูแบบผู้หญิง ใช้กับของใส่เครื่องประดับ ของขวัญแต่งงาน คำว่า ด้วยความรัก อยู่ในสโลแกนแล้ว</p></div>
+<div><span class="k">ขายใคร</span><p>ผู้หญิงวัยทำงาน ร้านเครื่องประดับ เจ้าสาว ของขวัญวันแม่และวันเกิด</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองใส่เครื่องประดับ</td><td class="n">69</td><td class="n"><b>290</b></td><td class="n">45</td><td class="n">85%</td></tr><tr><td>กล่องแหวนหนังแท้</td><td class="n">290</td><td class="n"><b>790</b></td><td class="n">61</td><td class="n">92%</td></tr><tr><td>ที่ใส่แปรงแต่งหน้า</td><td class="n">199</td><td class="n"><b>450</b></td><td class="n">57</td><td class="n">87%</td></tr></tbody></table></div>
+<p class="risk">sans fil ในภาษาฝรั่งเศสยังแปลว่า ไร้สาย (wireless) ด้วย คนฝรั่งเศสจะยิ้ม ซึ่งเป็นข้อดีถ้าเล่นมุกได้ และต้องเช็กว่าไม่ชนแบรนด์อุปกรณ์ไร้สาย</p>
+
+</section><section class="opt" id="pointfive">
+<div class="head"><span class="num">08</span><h2>POINT FIVE</h2><span style="color:var(--muted)">พอยท์ไฟว์</span></div>
+<div class="boards"><img src="img/pointfive-board.png" alt="โลโก้ POINT FIVE บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/pointfive-tag.png" alt="ป้ายห้อยสินค้า POINT FIVE ตัวอย่างกับซองใส่ AirTag" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>0.5 มม. คือระยะที่ปีกเล็กกว่าร่อง ความลับที่ทำให้ทุกชิ้นล็อกแน่นโดยไม่ต้องเย็บ และคำว่า ไฟว์ ยังแปลว่าห้า เท่ากับคนในบ้าน</p><p><b>Engineered to half a millimetre.</b><br>แม่นยำถึงครึ่งมิลลิเมตร</p></div>
+<div><span class="k">ลุค</span><p>Cool แบบวิศวกร พื้นน้ำเงินแบบพิมพ์เขียว เส้นขาว และฟ้า ใช้ตัวเลขและเส้นบอกขนาดจาก drawing จริงเป็นกราฟิก</p><div class="sw"><span><i style="background:#0F2A4A"></i>Blueprint <span class="k" style="letter-spacing:0">#0F2A4A</span></span><span><i style="background:#F2F4F6"></i>Line white <span class="k" style="letter-spacing:0">#F2F4F6</span></span><span><i style="background:#7FD3F7"></i>Cyan <span class="k" style="letter-spacing:0">#7FD3F7</span></span><span><i style="background:#C08A57"></i>Leather <span class="k" style="letter-spacing:0">#C08A57</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ IBM Plex Mono · ภาษาไทย IBM Plex Sans Thai · @pointfive.mm</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>เล่างานออกแบบของพ่อแบบภูมิใจ drawing ทุกแผ่นกลายเป็นลายบนกล่อง ความหมายที่สองคือครอบครัวห้าคน เล่าให้คนที่ถามฟัง</p></div>
+<div><span class="k">ขายใคร</span><p>ผู้ชายวัยทำงาน สายดีไซน์และเทคโนโลยี สถาปนิก วิศวกร ของขวัญองค์กรสายเทค</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองใส่ AirTag</td><td class="n">129</td><td class="n"><b>390</b></td><td class="n">48</td><td class="n">88%</td></tr><tr><td>ที่ใส่ปากกามงกุฎ</td><td class="n">199</td><td class="n"><b>450</b></td><td class="n">57</td><td class="n">87%</td></tr><tr><td>ชุดตัวต่อหนัง 24 ชิ้น</td><td class="n">390</td><td class="n"><b>790</b></td><td class="n">118</td><td class="n">85%</td></tr></tbody></table></div>
+<p class="risk">Point Five มีคนใช้เป็นชื่อสินค้าบางประเภทในต่างประเทศ ต้องค้นในหมวดเครื่องหนังก่อน ถ้าชนให้ใช้ POINT FIVE MM</p>
+
+</section><section class="opt" id="praneet">
+<div class="head"><span class="num">09</span><h2>PRANEET</h2><span style="color:var(--muted)">ประณีต</span><span class="taken">มีคนใช้แล้ว</span></div>
+<div class="boards"><img src="img/praneet-board.png" alt="โลโก้ PRANEET บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/praneet-tag.png" alt="ป้ายห้อยสินค้า PRANEET ตัวอย่างกับซองอั่งเปาพับกังหัน" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>ประณีต คือคำไทยที่บอกความละเอียดของงานฝีมือ แบรนด์หรูที่ใช้คำไทยเป็นชื่อ ภูมิใจในความเป็นไทย</p><p><b>Thai precision, in leather.</b><br>ความประณีตแบบไทย บนหนังแท้</p></div>
+<div><span class="k">ลุค</span><p>Thai heritage luxury เขียวหัวเป็ดเข้ม ทอง งาช้าง และแดงชาด โลโก้เป็นดอกไม้ห้ากลีบที่เกิดจากปีกหนังห้าชิ้น</p><div class="sw"><span><i style="background:#10312F"></i>Peacock <span class="k" style="letter-spacing:0">#10312F</span></span><span><i style="background:#C8A45A"></i>Gold leaf <span class="k" style="letter-spacing:0">#C8A45A</span></span><span><i style="background:#F3ECDD"></i>Ivory <span class="k" style="letter-spacing:0">#F3ECDD</span></span><span><i style="background:#8E2B23"></i>Lacquer <span class="k" style="letter-spacing:0">#8E2B23</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Marcellus · ภาษาไทย Taviraj · @praneet.th</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>ดอกห้ากลีบคือคนห้าคน ขายเป็นของขวัญผู้ใหญ่ ของที่ระลึกจากไทย ซองอั่งเปาและของชำร่วยงานแต่งแบบไทย</p></div>
+<div><span class="k">ขายใคร</span><p>ของขวัญผู้ใหญ่ งานแต่งงานไทย ของขวัญองค์กรให้แขกต่างชาติ ร้านในโรงแรมและสนามบิน</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ซองอั่งเปาพับกังหัน</td><td class="n">69</td><td class="n"><b>190</b></td><td class="n">45</td><td class="n">76%</td></tr><tr><td>กล่องของชำร่วยงานแต่ง</td><td class="n">159</td><td class="n"><b>250</b></td><td class="n">61</td><td class="n">76%</td></tr><tr><td>แผ่นรองจานลายข้าวหลามตัด</td><td class="n">390</td><td class="n"><b>890</b></td><td class="n">79</td><td class="n">91%</td></tr></tbody></table></div>
+<p class="risk">คำว่า ประณีต เป็นคำทั่วไป จดเครื่องหมายเดี่ยว ๆ ยาก ต้องจดคู่กับโลโก้ดอกห้ากลีบ</p>
+
+</section><section class="opt" id="monohide">
+<div class="head"><span class="num">10</span><h2>MONO/HIDE</h2><span style="color:var(--muted)">โมโนไฮด์</span></div>
+<div class="boards"><img src="img/monohide-board.png" alt="โลโก้ MONO/HIDE บนสีหลักของแบรนด์" width="1200" height="720">
+<img src="img/monohide-tag.png" alt="ป้ายห้อยสินค้า MONO/HIDE ตัวอย่างกับชุดที่รองแก้ว 4 ลาย" width="560" height="860"></div>
+<div class="spec">
+<div><span class="k">ความหมาย</span><p>Mono-material คือของที่ทำจากวัสดุเดียว ไม่มีด้าย ไม่มีกาว ไม่มีโลหะ ซ่อมและแยกวัสดุง่าย เป็นคำที่สายยั่งยืนรู้จักดี</p><p><b>One material. Nothing else.</b><br>วัสดุเดียว ไม่มีอย่างอื่น</p></div>
+<div><span class="k">ลุค</span><p>Sustainability แบบดิบและเท่ สีทรายจากหนังไม่ย้อม ถ่าน และแทน โลโก้เป็นเส้นตัดวงกลมแบบ 05 กับร่องเดียว</p><div class="sw"><span><i style="background:#D8CBB6"></i>Sand <span class="k" style="letter-spacing:0">#D8CBB6</span></span><span><i style="background:#2B2A28"></i>Charcoal <span class="k" style="letter-spacing:0">#2B2A28</span></span><span><i style="background:#C08A57"></i>Natural tan <span class="k" style="letter-spacing:0">#C08A57</span></span><span><i style="background:#F2EEE6"></i>Bone <span class="k" style="letter-spacing:0">#F2EEE6</span></span></div>
+<p class="k" style="letter-spacing:.04em;text-transform:none">ฟอนต์ Manrope · ภาษาไทย Anuphan · @monohide.studio</p></div>
+<div><span class="k">เรื่องครอบครัวอยู่ตรงไหน</span><p>จุดขายคือความจริงของวัสดุ ทุกชิ้นบอกน้ำหนักหนังที่ใช้ ลูก ๆ ทำคลิป แกะชิ้นออกมาให้ดูว่ามีแต่หนัง</p></div>
+<div><span class="k">ขายใคร</span><p>สายยั่งยืนและมินิมอล คาเฟ่ ร้านไลฟ์สไตล์ ของขวัญองค์กรสาย ESG</p></div>
+</div>
+<div class="tbl"><table><thead><tr><th>สินค้าหลัก</th><th>ราคาห้าหมี</th><th>ราคาแบรนด์นี้</th><th>ต้นทุน</th><th>กำไร</th></tr></thead><tbody><tr><td>ชุดที่รองแก้ว 4 ลาย</td><td class="n">179</td><td class="n"><b>450</b></td><td class="n">62</td><td class="n">86%</td></tr><tr><td>ปลอกแก้วกาแฟ</td><td class="n">149</td><td class="n"><b>290</b></td><td class="n">53</td><td class="n">82%</td></tr><tr><td>กระเป๋าเหรียญจิ๋ว</td><td class="n">99</td><td class="n"><b>250</b></td><td class="n">47</td><td class="n">81%</td></tr></tbody></table></div>
+<p class="risk">ต้องทำตามที่พูดจริง สินค้าที่มีไม้ก๊อก ห่วงโลหะ หรือริบบิ้นอยู่ในไลน์นี้ไม่ได้ และคำว่า Mono ใช้กันทั่วไป ต้องจดคู่กับ HIDE</p>
+
+</section>
+<section class="opt"><h2>เทียบกันทั้งห้าสิบห้า</h2>
+<div class="tbl"><table><thead><tr><th>แบรนด์</th><th>โทน</th><th>เรื่องครอบครัว</th><th>จดชื่อ</th><th>ราคาสินค้าหลัก (บาท)</th></tr></thead><tbody><tr><td><b>REMNANT</b></td><td>มินิมอล หรูเงียบ</td><td>เล่าในโพสต์เบื้องหลัง</td><td>กลาง</td><td class='n'>300–700</td></tr><tr><td><b>UNSEWN</b></td><td>งานฝีมือ ดีไซน์</td><td>ลูก ๆ เป็นทีมประกอบ</td><td>กลาง</td><td class='n'>350–600</td></tr><tr><td><b>INTERLOCK</b></td><td>เท่ สตรีท DIY</td><td>คลิปลูกต่อแข่งเวลา</td><td>ยาก ต้องใช้คู่โลโก้</td><td class='n'>290–890</td></tr><tr><td><b>AFTERCUT</b></td><td>รักษ์โลกชัดที่สุด</td><td>ครอบครัวเก็บและคัดเศษ</td><td>กลาง</td><td class='n'>220–290</td></tr><tr><td><b>QUINT</b></td><td>หรูคลาสสิก</td><td>ห้าร่อง = ห้าคนในบ้าน</td><td>น่าจะง่ายกว่า ไม่ใช่คำทั่วไป</td><td class='n'>290–990</td></tr><tr><td><b>KHAD</b></td><td>เท่แบบไทยร่วมสมัย</td><td>คำที่พูดกันในบ้าน</td><td>กลาง ต้องจดคู่โลโก้</td><td class='n'>259–290</td></tr><tr><td><b>SANSFIL</b></td><td>หรูแบบผู้หญิง</td><td>แบรนด์ที่ตั้งให้แม่หมี</td><td>กลาง</td><td class='n'>290–790</td></tr><tr><td><b>POINT FIVE</b></td><td>เท่แบบวิศวกร</td><td>ห้า = ห้าคน, 0.5 = งานของพ่อ</td><td>กลาง ต้องค้นหมวดเครื่องหนัง</td><td class='n'>390–790</td></tr><tr><td><b>PRANEET</b></td><td>หรูแบบไทย</td><td>ดอกห้ากลีบ = ห้าคน</td><td>มีคนใช้แล้ว</td><td class='n'>190–890</td></tr><tr><td><b>MONO/HIDE</b></td><td>ยั่งยืนแบบดิบ</td><td>ลูก ๆ แกะชิ้นให้ดูว่ามีแต่หนัง</td><td>กลาง ต้องจดคู่ HIDE</td><td class='n'>250–450</td></tr><tr><td><b>ละเมียด LAMIAD</b></td><td>หรูแบบไทย ต่อจาก PRANEET</td><td>ดอกห้ากลีบ = ห้าคน</td><td>ค้นเว็บไม่เจอแบรนด์ชื่อนี้</td><td class='n'>190–890</td></tr><tr><td><b>เบญจ BENJA</b></td><td>เบญจรงค์ร่วมสมัย</td><td>เบญจ = ห้า ห้าสีห้าคน</td><td>คำทั่วไป เจอชื่อซ้ำในกระเป๋าและเฟอร์นิเจอร์</td><td class='n'>490–590</td></tr><tr><td><b>บรรจง BANJONG</b></td><td>ลายรดน้ำ ดำทอง</td><td>พ่อออกแบบ ลูกประกอบ</td><td>ชื่อคนทั่วไป ต้องจดคู่โลโก้</td><td class='n'>290–790</td></tr><tr><td><b>กนก KANOK</b></td><td>ลายไทย แดงทอง</td><td>ช่างไทยรุ่นใหม่ในบ้าน</td><td>ชื่อคนทั่วไป ใกล้ Kanita</td><td class='n'>150–590</td></tr><tr><td><b>หัตถ์ HATTHA</b></td><td>ศิลาดล</td><td>ห้าคู่มือ</td><td>ค้นเว็บไม่เจอแบรนด์ชื่อนี้</td><td class='n'>290–790</td></tr><tr><td><b>ประจำ PRAJAM</b></td><td>หม้อห้อมร่วมสมัย</td><td>ของประจำตัวของทุกคนในบ้าน</td><td>ค้นเว็บไม่เจอ คำทั่วไป จดคู่โลโก้</td><td class='n'>129–219</td></tr><tr><td><b>คู่ใจ KOOJAI</b></td><td>อบอุ่นแบบบ้าน</td><td>หัวใจสองดวง = พ่อกับแม่</td><td>ค้นเว็บไม่เจอแบรนด์ชื่อนี้</td><td class='n'>169–229</td></tr><tr><td><b>ใช้ดี CHAIDEE</b></td><td>สดใส เป็นมิตร</td><td>ลูก ๆ ทดลองใช้ทุกชิ้น</td><td>เจอ Chaidee Mansion คนละหมวด</td><td class='n'>99–299</td></tr><tr><td><b>วันวัน WANWAN</b></td><td>สดชื่นยามเช้า</td><td>กิจวัตรของลูก ๆ</td><td>ใกล้ Wanpi แบรนด์หนังมาเลเซีย</td><td class='n'>99–259</td></tr><tr><td><b>คุ้นมือ KHUNMUE</b></td><td>หนังที่ผ่านการใช้</td><td>ลูก ๆ ถือในรูปก่อนหลัง</td><td>ค้นเว็บไม่เจอ ใกล้ FEEMUE</td><td class='n'>159–229</td></tr><tr><td><b>bit.</b></td><td>มินิมอลเครื่องเขียน</td><td>จุดแดง = แม่หมี</td><td>คำทั่วไป จดทั้งชุด</td><td class='n'>79–249</td></tr><tr><td><b>kit.</b></td><td>เท่แบบเครื่องมือ</td><td>keep it together</td><td>คำทั่วไป จดทั้งชุด</td><td class='n'>199–590</td></tr><tr><td><b>hold.</b></td><td>บ้านแบบญี่ปุ่น</td><td>ถ่ายของในบ้านเราเอง</td><td>คำทั่วไป จดทั้งชุด</td><td class='n'>199–290</td></tr><tr><td><b>left.</b></td><td>สีหนังเต็มพื้น</td><td>f = five ห้าคน</td><td>คำทั่วไป แปลว่าซ้ายได้</td><td class='n'>99–390</td></tr><tr><td><b>pal.</b></td><td>น่ารักแบบเพื่อน</td><td>ลูก ๆ ตั้งชื่อให้ของ</td><td>มีกระเป๋ารุ่น Pal ของ Fill in the Bag</td><td class='n'>129–189</td></tr><tr><td><b>tab.</b></td><td>สะอาดแบบเครื่องมือ</td><td>ลูก ๆ สาธิต tab เข้า slot</td><td>ค้นเว็บไม่เจอ คำทั่วไป จดทั้งชุด</td><td class='n'>199–290</td></tr><tr><td><b>fit.</b></td><td>สดใส ซองพับ</td><td>พับแข่งเวลา</td><td>คำทั่วไป คนนึกถึงฟิตเนส</td><td class='n'>89–159</td></tr><tr><td><b>kin.</b></td><td>อบอุ่นกลางคืน</td><td>kin = ครอบครัว</td><td>ใกล้ &Kin แบรนด์เสื้อผ้า</td><td class='n'>189–390</td></tr><tr><td><b>one.</b></td><td>ดิบและเรียบ</td><td>อ่านว่า วัน</td><td>คำทั่วไปมาก จดทั้งชุด</td><td class='n'>89–299</td></tr><tr><td><b>mom.</b></td><td>อ่อนโยน</td><td>แบรนด์ของแม่หมี</td><td>คำทั่วไป ขายผู้ชายยาก</td><td class='n'>159–390</td></tr><tr><td><b>MAISON OURS</b></td><td>ปารีส หมีเดิม</td><td>ours = หมี และ ของเรา</td><td>ใกล้ Les Ours และ Maison des Ours</td><td class='n'>190–590</td></tr><tr><td><b>MAISON CINQ</b></td><td>ปารีสคลาสสิก</td><td>cinq = ห้า</td><td>คนไทยอ่านยาก ใกล้ Sept Cinq</td><td class='n'>250–590</td></tr><tr><td><b>MAISON TUCK</b></td><td>สตูดิโอมินิมอล</td><td>เทคนิคของพ่อ</td><td>ค้นเว็บไม่เจอแบรนด์ชื่อนี้</td><td class='n'>350–790</td></tr><tr><td><b>MAISON FOLD</b></td><td>กระดาษพับ</td><td>ซองพับทั้งตระกูล</td><td>ใกล้ The Fold (อังกฤษ)</td><td class='n'>150–290</td></tr><tr><td><b>MAISON MEND</b></td><td>ยั่งยืนแบบหรู</td><td>ลูก ๆ เปลี่ยนชิ้นให้ลูกค้า</td><td>ค้นเว็บไม่เจอ (มีเครื่องหมายเก่า Mendessolle)</td><td class='n'>290–490</td></tr><tr><td><b>mai. ใหม่</b></td><td>ใบไม้ใหม่</td><td>เศษเก่า กลายเป็นของใหม่</td><td>ค้นเว็บไม่เจอแบรนด์เครื่องหนัง</td><td class='n'>159–219</td></tr><tr><td><b>dee. ดี</b></td><td>เช้าวันจันทร์</td><td>ลูก ๆ ให้คะแนน ดี</td><td>ใกล้ร้านหนัง หนังสวยดี</td><td class='n'>129–229</td></tr><tr><td><b>lek. เล็ก</b></td><td>เครื่องเขียน</td><td>ของชิ้นเล็กให้ลูก ๆ ขาย</td><td>Lek Gallery, Lek Massage คนละหมวด</td><td class='n'>59–99</td></tr><tr><td><b>fun. ฝัน</b></td><td>ฝันกลางคืน</td><td>ไลน์ของเด็ก</td><td>คำทั่วไปมาก</td><td class='n'>129–590</td></tr><tr><td><b>jai. ใจ</b></td><td>แดงเต็มพื้น</td><td>ใจ = แม่หมี</td><td>เคยมีข่าวแบรนด์ชื่อ Jai ต้องค้นละเอียด</td><td class='n'>129–299</td></tr><tr><td><b>dad. แดด</b></td><td>ตระกูล mom.</td><td>drawing ของพ่อ</td><td>คำทั่วไป จดทั้งชุด</td><td class='n'>129–290</td></tr><tr><td><b>kid. คิด</b></td><td>ตระกูล mom.</td><td>ลูก ๆ เป็นนักออกแบบ</td><td>คำทั่วไป แบรนด์เด็กใช้เยอะ</td><td class='n'>189–590</td></tr><tr><td><b>sis.</b></td><td>ตระกูล mom.</td><td>ลูกสาวสองคน</td><td>คำแสลงทั่วไป</td><td class='n'>159–189</td></tr><tr><td><b>fam.</b></td><td>ตระกูล mom.</td><td>ห้าคนรอบตัวฉัน</td><td>คำแสลงทั่วไป</td><td class='n'>299–390</td></tr><tr><td><b>us.</b></td><td>ตระกูล mom.</td><td>พ่อกับแม่เป็นคู่แรก</td><td>คำทั่วไปมาก ชื่อบัญชีหายาก</td><td class='n'>159–390</td></tr><tr><td><b>CLICKER</b></td><td>ศัพท์ช่างหนัง</td><td>พ่อกดบล็อกตัดเอง</td><td>ค้นเว็บไม่เจอแบรนด์ชื่อนี้</td><td class='n'>250–390</td></tr><tr><td><b>MAKE DO</b></td><td>สำนวนอังกฤษ</td><td>สอนลูกให้ใช้สิ่งที่มี</td><td>ใกล้ Make Smith, MW Makes</td><td class='n'>390–490</td></tr><tr><td><b>23·10</b></td><td>วันสำคัญ</td><td>วันแรกที่ลูกขายเอง</td><td>ตัวเลขจดยาก ต้องจดเป็นโลโก้</td><td class='n'>199–490</td></tr><tr><td><b>อักษรแรกห้าคน</b></td><td>ชื่อทุกคนในบ้าน</td><td>มีตัวอักษรของทุกคน</td><td>น่าจะจดง่ายที่สุด เพราะเป็นคำที่ตั้งขึ้นใหม่</td><td class='n'>189–390</td></tr><tr><td><b>SOI 5</b></td><td>สถานที่</td><td>ซอยบ้านเรา</td><td>คำทั่วไป ต้องจดเป็นโลโก้ป้ายซอย</td><td class='n'>59–189</td></tr><tr><td><b>26·10</b></td><td>วันเกิดภรรยา</td><td>แบรนด์เกิดวันเกิดแม่</td><td>ค้นเว็บไม่เจอ ตัวเลขจดยาก ต้องจดเป็นโลโก้</td><td class='n'>190–490</td></tr><tr><td><b>soi.</b></td><td>ตัวย่อ + ซอย</td><td>ซอย 26 คือคอลเลกชันแรก</td><td>ใกล้ร้านอาหาร SOI Bangkok คนละหมวด</td><td class='n'>59–189</td></tr><tr><td><b>SOI 26</b></td><td>ป้ายซอย + วันเกิด</td><td>บ้านเลขที่ 1–5 คือห้าคน</td><td>คนอาจนึกถึงสุขุมวิท 26</td><td class='n'>59–299</td></tr><tr><td><b>oct.</b></td><td>ตัวย่อ + เดือนเกิด</td><td>เริ่มที่ oct.26</td><td>ใกล้ Octovo, Octogony</td><td class='n'>129–229</td></tr><tr><td><b>XXVI·X</b></td><td>เลขโรมัน</td><td>รุ่น I–V ตามคนในบ้าน</td><td>ใกล้ XXIII, CXXVI</td><td class='n'>390–790</td></tr></tbody></table></div></section>
+
+</div>

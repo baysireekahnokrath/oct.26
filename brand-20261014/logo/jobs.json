@@ -1,0 +1,162 @@
+[
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-wordmark.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-wordmark.png",
+  "w": 576,
+  "h": 176,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-wordmark-reverse.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-wordmark-reverse.png",
+  "w": 576,
+  "h": 176,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-wordmark-mono.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-wordmark-mono.png",
+  "w": 576,
+  "h": 176,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-mark.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-mark.png",
+  "w": 400,
+  "h": 400,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-mark-reverse.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-mark-reverse.png",
+  "w": 400,
+  "h": 400,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-mark-mono.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-mark-mono.png",
+  "w": 400,
+  "h": 400,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/fivebears.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/fivebears.png",
+  "w": 600,
+  "h": 833,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/fivebears-reverse.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/fivebears-reverse.png",
+  "w": 600,
+  "h": 833,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/fivebears-mono.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/fivebears-mono.png",
+  "w": 600,
+  "h": 833,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/bear.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/bear.png",
+  "w": 400,
+  "h": 400,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/bear-mono.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/bear-mono.png",
+  "w": 400,
+  "h": 400,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/avatar-1080.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/avatar-1080.png",
+  "w": 1080,
+  "h": 1080,
+  "scale": 1,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/oct-sticker-34mm.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/oct-sticker-34mm.png",
+  "w": 340,
+  "h": 340,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/fivebears-sticker-34mm.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/fivebears-sticker-34mm.png",
+  "w": 340,
+  "h": 340,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/cover-facebook-1640x624.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/cover-facebook-1640x624.png",
+  "w": 1640,
+  "h": 624,
+  "scale": 1,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/cover-youtube-2560x1440.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/cover-youtube-2560x1440.png",
+  "w": 2560,
+  "h": 1440,
+  "scale": 1,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/cover-shopee-1200x600.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/cover-shopee-1200x600.png",
+  "w": 1200,
+  "h": 600,
+  "scale": 1,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/family.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/family.png",
+  "w": 1000,
+  "h": 370,
+  "scale": 1,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/soi2-sign.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/soi2-sign.png",
+  "w": 582,
+  "h": 360,
+  "scale": 2,
+  "transparent": true
+ },
+ {
+  "src": "/home/user/oct.26/brand-20261014/logo/svg/love-badge.svg",
+  "out": "/home/user/oct.26/brand-20261014/logo/png/love-badge.png",
+  "w": 942,
+  "h": 360,
+  "scale": 2,
+  "transparent": true
+ }
+]
