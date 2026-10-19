@@ -96,6 +96,7 @@ code{{font-size:14px}}
   <li>แบบ 1:1 สำหรับร้านทำบล็อก: <code>diecut-leather-20261019/diecut-drawings-1to1-07-rev20261019.pdf</code> พิมพ์ A4 ขนาดจริง 100%</li>
   <li>DXF แยกเลเยอร์ CUT / SLIT (ส่วนโค้งเป็นโค้งจริง): <code>dxf/07-round-joint-cross.dxf</code></li>
   <li>SVG: <code>svg/07-round-joint-cross.svg</code> · ไฟล์ต้นฉบับจากผู้ออกแบบ: <code>source-20261019.pdf</code></li>
+  <li>ชุดเต็ม 01–07 รูปแบบเดียวกับชุด 14 ต.ค.: แบบ 1:1 รวม 7 แผ่น <code>diecut-drawings-1to1-rev20261019.pdf</code> และ DXF รวมทุกแบบ <code>dxf/all-patterns-rev20261019.dxf</code> (01–06 เส้นเดิมทุกเส้น หัวกระดาษระบุหนัง 1.0–1.2 มม.)</li>
   <li>สร้างใหม่ได้ด้วย <code>python3 diecut-leather-20261019/generate07.py</code> ชุดแบบ 01–06 เดิมไม่ถูกแก้</li></ul></section>
 <section class="col"><h2>ก่อนสั่งบล็อก</h2><ol>
   <li>พิมพ์แบบ 1:1 วัดไม้บรรทัด 100 มม. ในแผ่นให้ตรง แล้ววางเทียบกับเศษหนังจริง</li>

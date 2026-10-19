@@ -6,5 +6,6 @@ Slit 17.1 (designer drew 16.6; agreed 19 Oct so the 16.6 neck is 0.5 smaller). L
 
     pip install pymupdf ezdxf reportlab shapely
     python3 diecut-leather-20261019/generate07.py   # 1:1 PDF, dxf/, svg/ from source-20261019.pdf
+    python3 diecut-leather-20261019/generate_set.py # full set 01-07: 1:1 PDF (7 sheets) + dxf/all-patterns-rev20261019.dxf
     python3 diecut-leather-20261019/site/build.py   # Thai summary page
 Summary page: https://claude.ai/artifact/VUttrqiHvsnsHg91S7xhiX
