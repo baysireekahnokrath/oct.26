@@ -347,7 +347,7 @@ def event_totals():
 # ---------------------------------------------------------------- channel copy
 TAGS = "#OCT26 #ourcraftedthings #หนังแท้ #ไม่ต้องเย็บ #ของขวัญ #งานแฮนด์เมด"
 TAGS_COLL = {"soi2": "#SOI02", "love": "#ห้าหมี #FiveBears #LoveCollection"}
-EVENT = "บูธ OCT. 26 งาน [ชื่องาน] 23–25 ต.ค. 2569"
+EVENT = "บูธ OCT. 26 งานบ้านและสวน 23–25 ต.ค. 2569"
 SHOP = "Shopee ร้าน OCT. 26"
 
 def tags(p):

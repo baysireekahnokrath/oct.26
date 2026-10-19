@@ -5,7 +5,7 @@ State as of 16 Oct 2026. Moved from repo exact-8-bingo (branch `claude/brave-far
 
 ## The project
 A family leather brand, a birthday gift from the owner (พ่อเบ, CEO/designer) to his wife คุณบิ๊ง (born 26 Oct).
-Booth 23–25 Oct 2569, brand launch on 26.10, the three kids (Beiya, Beana, Bene) sell at the booth.
+Booth 23–25 Oct 2569 at งานบ้านและสวน (2 × 2 m, confirmed 19 Oct), brand launch on 26.10, the three kids (Beiya, Beana, Bene) sell at the booth.
 Reply to the owner in Thai, short and plain. He decides fast; on logo questions he wants to talk before changes.
 
 ## Decisions already made (do not reopen)
@@ -32,6 +32,7 @@ Reply to the owner in Thai, short and plain. He decides fast; on logo questions 
 - Brand Book https://claude.ai/artifact/3asVqkM4vs6fGM3rihHSYp
 - Brand Bible https://claude.ai/artifact/4FtQN6WRW3cUF1rATo3jvi
 - Launch Kit https://claude.ai/artifact/AyvcJTzj5BY6spbPkZYQXS
+- Booth plan (งานบ้านและสวน, 2 × 2 m) https://claude.ai/artifact/4DVjZ32YPCF9b9Ck8k7gz4 — source `../booth-20261019/build.py`
 - Tech Pack https://claude.ai/artifact/XR5yqf6HFfA4JoJ9eQvapd (+ `techpack/oct26-techpack-a4.pdf`)
 - Birthday deck (Slides type) https://claude.ai/artifact/D61pf56uCqYrktNuuFG2c6 — slides from `deck/build.py`, images are `/_blob/` assets
 - Logo Lab, Color Lab, Product Lab, palettes, alternatives: see `site/urls.json`
