@@ -1,0 +1,179 @@
+<title>OCT. 26 บัญชีและสต็อก</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap">
+<style>
+/* Layout: one narrow reading column like a shop ledger; money figures in tabular numerals, one cobalt accent */
+:root{
+  --paper:#FFF6EC; --card:#FFFFFF; --ink:#1C1B22; --muted:#6E6660; --line:#EADFD2;
+  --cobalt:#2449D8; --tomato:#E5492A; --sun:#E8A915; --mint:#1FA586; --due:#B4471F;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#17161C; --card:#211F27; --ink:#F3EDE6; --muted:#A79E96; --line:#34303B;
+  --cobalt:#7D96FF; --tomato:#FF7A5C; --sun:#FFC948; --mint:#45D3B0; --due:#FF9A72; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#17161C; --card:#211F27; --ink:#F3EDE6; --muted:#A79E96; --line:#34303B;
+  --cobalt:#7D96FF; --tomato:#FF7A5C; --sun:#FFC948; --mint:#45D3B0; --due:#FF9A72; color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font:16px/1.65 var(--body)}
+.wrap{max-width:720px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:36px}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:1.9rem} h2{font-size:1.3rem}
+.eyebrow{font-size:.8rem;letter-spacing:.06em;color:var(--muted)}
+p{margin:0} section{display:grid;gap:14px}
+.num{font-variant-numeric:tabular-nums}
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.money div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:2px}
+.money b{font-family:var(--display);font-size:1.45rem;font-weight:600}
+.money span{font-size:.85rem;color:var(--muted)}
+.money .paid b{color:var(--cobalt)} .money .due b{color:var(--due)}
+@media (max-width:460px){.money{grid-template-columns:1fr 1fr}.money .all{grid-column:1/-1}}
+.bar svg{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.9rem}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:600;font-size:.8rem;color:var(--muted)}
+td.r,th.r{text-align:right} tr:last-child td{border-bottom:0}
+tfoot td{font-weight:600}
+.pill{font-size:.75rem;padding:1px 8px;border-radius:99px;border:1px solid currentColor}
+.pill.ok{color:var(--mint)} .pill.wait{color:var(--due)}
+.tabs{display:grid;gap:10px}
+.tab{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:baseline;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.tab:last-child{border-bottom:0}
+.tab b{font-family:var(--display);font-weight:600}
+ol,ul{margin:0;padding-left:1.3em;display:grid;gap:6px}
+.note{color:var(--muted);font-size:.9rem}
+a{color:var(--cobalt)}
+.link{display:inline-block;background:var(--cobalt);color:var(--paper);text-decoration:none;font-weight:600;padding:10px 16px;border-radius:8px}
+.link:focus-visible,a:focus-visible{outline:2px solid var(--sun);outline-offset:2px}
+code{font-size:.85rem;word-break:break-all}
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:10px">
+    <p class="eyebrow">OCT. 26 · บูธ 23–25 ต.ค. 2569 · อัปเดต 20 ต.ค.</p>
+    <h1>บัญชี SKU สต็อก และบันทึกการขาย</h1>
+    <p>Google Sheet ไฟล์เดียว ใช้ได้ทั้งก่อนงานและหน้างาน มีรายจ่าย ต้นทุนต่อชิ้น รายการสินค้า สต็อก บันทึกการขาย บิลให้ลูกค้า และสรุปกำไรขาดทุน ทุกตัวเลขเป็นสูตรที่คำนวณต่อกันเอง</p>
+    <p><a class="link" href="https://docs.google.com/spreadsheets/d/1xYmJ75Lbq4HhlR3ubhO6C2Uu82prpjb2HFFlB9U5nQg/edit">เปิด Google Sheet</a></p>
+  </header>
+
+  <section>
+    <h2>ตอนนี้ใช้เงินไปเท่าไหร่</h2>
+    <div class="money num">
+      <div class="paid"><span>จ่ายไปแล้ว</span><b>6,163</b><span>บาท</span></div>
+      <div class="due"><span>ค้างจ่าย</span><b>2,500</b><span>บาท</span></div>
+      <div class="all"><span>รวมที่ใช้ไป</span><b>8,663</b><span>บาท</span></div>
+    </div>
+    <div class="bar" role="img" aria-label="แยกตามหมวด: หนัง 1,975 บาท บล็อก 4,050 บาท ค่าตัด 2,638 บาท">
+      <svg viewBox="0 0 866 30" preserveAspectRatio="none">
+        <rect x="0" y="0" width="197.5" height="30" fill="var(--sun)"/>
+        <rect x="197.5" y="0" width="405" height="30" fill="var(--cobalt)"/>
+        <rect x="602.5" y="0" width="263.8" height="30" fill="var(--tomato)"/>
+      </svg>
+    </div>
+    <div class="legend num">
+      <span><i style="background:var(--sun)"></i>หนัง 1,975</span>
+      <span><i style="background:var(--cobalt)"></i>บล็อก 01–07 4,050</span>
+      <span><i style="background:var(--tomato)"></i>ค่าตัด 2,638</span>
+    </div>
+    <div class="tbl"><table class="num">
+      <thead><tr><th>รายการ</th><th class="r">จำนวน</th><th class="r">บาท</th><th>สถานะ</th></tr></thead>
+      <tbody>
+        <tr><td>เศษหนังล็อตใหญ่ 95 บาท/กก.</td><td class="r">20 กก.</td><td class="r">1,900</td><td><span class="pill ok">จ่ายแล้ว</span></td></tr>
+        <tr><td>เศษหนังล็อตเล็ก 15 บาท/กก.</td><td class="r">5 กก.</td><td class="r">75</td><td><span class="pill ok">จ่ายแล้ว</span></td></tr>
+        <tr><td>บล็อก 01–06</td><td class="r">6 อัน</td><td class="r">3,450</td><td><span class="pill ok">จ่ายแล้ว</span></td></tr>
+        <tr><td>บล็อก 07 (ราคาประมาณ)</td><td class="r">1 อัน</td><td class="r">600</td><td><span class="pill wait">ค้างจ่าย</span></td></tr>
+        <tr><td>ค่าตัดหมี 01 · 2 บาท/ชิ้น</td><td class="r">369 ชิ้น</td><td class="r">738</td><td><span class="pill ok">จ่ายแล้ว</span></td></tr>
+        <tr><td>ค่าตัด 02–07 · 2 บาท/ชิ้น</td><td class="r">950 ชิ้น</td><td class="r">1,900</td><td><span class="pill wait">ค้างจ่าย</span></td></tr>
+      </tbody>
+      <tfoot><tr><td>รวม</td><td></td><td class="r">8,663</td><td></td></tr></tfoot>
+    </table></div>
+    <p class="note">สถานะ "จ่ายแล้ว" ผมใส่ตามที่เข้าใจจากที่คุยกัน ให้แก้ติ๊กในแท็บรายจ่ายให้ตรงของจริง ยังไม่มีค่าบูธ ค่าพิมพ์ ถุง และห่วงกุญแจ มีแถวสีเหลืองรอให้กรอกแล้ว</p>
+  </section>
+
+  <section>
+    <h2>ต้นทุนต่อชิ้นหนังและสต็อก</h2>
+    <p>คิดจากหนังที่ใช้ได้จริง 36.9% (ถุง 5 กก. ตัดหมีได้ 369 ตัว) บวกค่าตัด 2 บาท และค่าบล็อกเฉลี่ยตลอดอายุบล็อก 1,000 ชิ้น</p>
+    <div class="tbl"><table class="num">
+      <thead><tr><th>แบบ</th><th class="r">ต้นทุน/ชิ้น</th><th class="r">ตัดแล้ว</th><th>ได้ของ</th></tr></thead>
+      <tbody>
+        <tr><td>01 หัวหมี</td><td class="r">3.89</td><td class="r">369</td><td>20 ต.ค.</td></tr>
+        <tr><td>02 กังหัน</td><td class="r">3.71</td><td class="r">150</td><td>พฤหัส 22 ต.ค.</td></tr>
+        <tr><td>03 กากบาทแคปซูล</td><td class="r">3.61</td><td class="r">150</td><td>พฤหัส 22 ต.ค.</td></tr>
+        <tr><td>04 สี่เหลี่ยมมน</td><td class="r">4.22</td><td class="r">150</td><td>พฤหัส 22 ต.ค.</td></tr>
+        <tr><td>05 วงกลม</td><td class="r">3.84</td><td class="r">150</td><td>พฤหัส 22 ต.ค.</td></tr>
+        <tr><td>06 กากบาทนุ่ม</td><td class="r">3.58</td><td class="r">150</td><td>พฤหัส 22 ต.ค.</td></tr>
+        <tr><td>07 กากบาทข้อต่อวงกลม</td><td class="r">3.50</td><td class="r">200</td><td>พฤหัส 22 ต.ค.</td></tr>
+      </tbody>
+      <tfoot><tr><td>รวม</td><td></td><td class="r">1,319</td><td></td></tr></tfoot>
+    </table></div>
+    <p class="note">มูลค่าชิ้นหนังทั้งหมด (คิดตามต้นทุน) 4,977 บาท น้ำหนัก 02–07 ยังเป็นค่าประมาณ ชั่งจริงแล้วแก้ในแท็บชิ้นหนัง ต้นทุนจะคำนวณใหม่ทั้งไฟล์</p>
+  </section>
+
+  <section>
+    <h2>SKU ที่ติ๊กขายในงานนี้</h2>
+    <p>ใส่ไว้ 31 SKU ติ๊ก "ขายงานนี้" ไว้ 8 ตัวที่ผลิตได้เลยและไม่ต้องลองต้นแบบ ต้นทุนรวมหนัง บรรจุภัณฑ์ ส่วนเสริม และค่าแรงแพ็ค</p>
+    <div class="tbl"><table class="num">
+      <thead><tr><th>SKU</th><th>สินค้า</th><th class="r">ราคาร่าง</th><th class="r">ต้นทุน</th><th class="r">กำไร</th></tr></thead>
+      <tbody>
+        <tr><td>OC-01-01</td><td>ที่เก็บสายชาร์จหมี</td><td class="r">59</td><td class="r">10.22</td><td class="r">48.78</td></tr>
+        <tr><td>OC-01-22</td><td>ที่รองแก้วหมี</td><td class="r">59</td><td class="r">10.22</td><td class="r">48.78</td></tr>
+        <tr><td>OC-02-24</td><td>ที่รองแก้วกังหัน</td><td class="r">49</td><td class="r">10.04</td><td class="r">38.96</td></tr>
+        <tr><td>OC-03-26</td><td>ป้ายห้อยของขวัญ</td><td class="r">39</td><td class="r">11.94</td><td class="r">27.06</td></tr>
+        <tr><td>OC-04-27</td><td>ที่รองแก้วสี่เหลี่ยม</td><td class="r">49</td><td class="r">10.56</td><td class="r">38.44</td></tr>
+        <tr><td>OC-05-28</td><td>ที่รองแก้ววงกลม</td><td class="r">49</td><td class="r">10.17</td><td class="r">38.83</td></tr>
+        <tr><td>OC-MX-29</td><td>ชุดที่รองแก้ว 4 ลาย</td><td class="r">179</td><td class="r">47.99</td><td class="r">131.01</td></tr>
+        <tr><td>OC-06-30</td><td>ชุดต่อเองกล่องลูกบาศก์</td><td class="r">129</td><td class="r">52.80</td><td class="r">76.20</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">รหัส SKU อ่านว่า OC-แม่พิมพ์หลัก-เลขสินค้า (MX = ใช้หลายแม่พิมพ์) · ราคาทั้งหมดเป็นราคาร่างจากแผนเดิม ยังรอพ่อเบยืนยัน · 07 ยังไม่มีสินค้า ตั้งไว้เป็น OC-07-31 รอตั้งชื่อและราคา</p>
+  </section>
+
+  <section>
+    <h2>ใน Sheet มี 6 แท็บ</h2>
+    <div class="tabs">
+      <div class="tab"><b>สรุป</b><p>เงินที่ใช้ไป แยกหมวด ยอดขาย กำไรขั้นต้น ยอดรายวัน 23–25 ต.ค. และมูลค่าของที่เหลือ</p></div>
+      <div class="tab"><b>รายจ่าย</b><p>ทุกรายการที่จ่าย ติ๊กเมื่อจ่ายจริง เพิ่มแถวใหม่ได้เลย หมวดเลือกจากรายการ</p></div>
+      <div class="tab"><b>ชิ้นหนัง</b><p>ค่าที่ใช้คำนวณ ต้นทุนต่อชิ้น 01–07 และสต็อกชิ้นหนังที่หักอัตโนมัติเมื่อประกอบสินค้า</p></div>
+      <div class="tab"><b>SKU</b><p>สินค้า 31 ตัว ชิ้นที่ใช้ ต้นทุน ราคา กำไร และสต็อก (ทำเสร็จ − ขายแล้ว)</p></div>
+      <div class="tab"><b>ขาย</b><p>บันทึกหน้างาน 1 แถวต่อ 1 สินค้า เลือก SKU จากรายการ ชื่อ ราคา ต้นทุน และกำไรขึ้นเอง</p></div>
+      <div class="tab"><b>บิล</b><p>พิมพ์เลขบิล แล้วจะเห็นรายการ ยอดรวม และวันที่ หันจอให้ลูกค้าดูหรือแคปส่งได้</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ใช้หน้างานยังไง</h2>
+    <ol>
+      <li>ประกอบสินค้าเสร็จ ให้ใส่จำนวนในช่อง "ทำเสร็จแล้ว" ของแท็บ SKU สต็อกชิ้นหนังจะหักให้เอง</li>
+      <li>ขายได้ ให้เพิ่มแถวในแท็บขาย: วันที่ (23/10/2026) เลขบิล (B001, B002, …) SKU จำนวน และวิธีจ่าย</li>
+      <li>ลดราคาให้ใส่ "ราคาพิเศษ/ชิ้น" หรือ "ส่วนลด" ถ้าไม่ลดให้เว้นว่างไว้</li>
+      <li>ลูกค้าขอบิล ให้เปิดแท็บบิลแล้วพิมพ์เลขบิลในช่องสีเหลือง</li>
+      <li>ปิดร้านแต่ละวัน ดูยอดขายกับกำไรของวันได้ที่แท็บสรุป</li>
+    </ol>
+    <p class="note">ผมลองขายสมมติ 3 รายการ 2 บิลแล้ว ยอดขาย ต้นทุน กำไร บิล สต็อก และยอดรายวันคำนวณถูกทุกจุด ลบรายการทดสอบออกแล้ว ไฟล์ว่างพร้อมใช้</p>
+  </section>
+
+  <section>
+    <h2>ที่ต้องเช็ก</h2>
+    <ul>
+      <li>ช่อง "จ่ายแล้ว" ในแท็บรายจ่าย ติ๊กให้ตรงกับที่จ่ายจริง</li>
+      <li>ราคาบล็อก 07 ตอนนี้ใส่ 600 บาทไว้ก่อน ได้ราคาจริงแล้วแก้ช่องเดียว</li>
+      <li>ราคาขายทั้งหมดเป็นราคาร่าง ยืนยันหรือแก้ในแท็บ SKU (ช่องพื้นเหลือง)</li>
+      <li>เลือกว่าจะขายตัวไหนบ้าง ติ๊กช่อง "ขายงานนี้" ใหม่ได้</li>
+      <li>สินค้าที่ใช้สายหัวใจ (OC-01-03, 01-04, 01-23) ยังไม่มีบล็อกสาย จึงไม่ได้ติ๊กขาย</li>
+      <li>ค่าบรรจุภัณฑ์ต่อชิ้นยังเป็นราคาประมาณ ยังไม่มีใบเสนอราคาโรงพิมพ์</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>ไฟล์อยู่ที่ไหน</h2>
+    <ul>
+      <li>Google Drive โฟลเดอร์ "OCT. 26 ไฟล์งาน" ชื่อไฟล์ "OCT. 26 บัญชี SKU สต็อก และบันทึกการขาย"</li>
+      <li>ลิงก์หน้านี้บันทึกไว้ในเอกสาร "OCT. 26 สารบัญไฟล์และลิงก์" แล้ว</li>
+      <li>ต้นฉบับหน้านี้อยู่ใน repo ที่ <code>accounting-20261020/site/index.html</code></li>
+    </ul>
+  </section>
+</div>
