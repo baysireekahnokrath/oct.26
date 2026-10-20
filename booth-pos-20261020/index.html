@@ -1,0 +1,480 @@
+<title>OCT. 26 ร้านหน้างาน</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* Layout: a till for small hands — big product tiles on top, one sticky "คิดเงิน" bar, then full-screen steps for paying */
+:root{
+  --paper:#FFF6EC; --card:#FFFFFF; --ink:#1C1B22; --muted:#6E6660; --line:#EADFD2;
+  --cobalt:#2449D8; --tomato:#E5492A; --sun:#FFC23C; --mint:#1FA586; --pink:#FF8AC4;
+  --ok:#14805F; --okbg:#DDF5EC; --warnbg:#FFF0D1; --chip:#F3E9DD;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#17161C; --card:#221F28; --ink:#F4EEE7; --muted:#ABA198; --line:#36313D;
+  --cobalt:#7D96FF; --tomato:#FF7A5C; --sun:#FFC948; --mint:#45D3B0; --pink:#FF9FCF;
+  --ok:#5FE0B4; --okbg:#173A30; --warnbg:#3A2F17; --chip:#2E2A34; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#17161C; --card:#221F28; --ink:#F4EEE7; --muted:#ABA198; --line:#36313D;
+  --cobalt:#7D96FF; --tomato:#FF7A5C; --sun:#FFC948; --mint:#45D3B0; --pink:#FF9FCF;
+  --ok:#5FE0B4; --okbg:#173A30; --warnbg:#3A2F17; --chip:#2E2A34; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--body);-webkit-tap-highlight-color:transparent}
+.app{max-width:640px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 0}
+h1,h2,.big{font-family:var(--display);font-weight:700;margin:0;line-height:1.2}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+button:disabled{opacity:.45;cursor:default}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px}
+.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:.02em}
+.tabs{display:flex;background:var(--chip);border-radius:99px;padding:4px}
+.tabs button{padding:8px 18px;border-radius:99px;font-weight:600}
+.tabs button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.banner{border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:.95rem;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--warnbg)}
+.banner button{font-weight:600;text-decoration:underline}
+/* products */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-bottom:110px}
+@media (min-width:560px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile{position:relative;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px 10px 12px;display:grid;justify-items:center;gap:4px;text-align:center;min-height:170px;transition:transform .08s}
+.tile:active{transform:scale(.97)}
+.tile.on{border-color:var(--cobalt)}
+.tile svg{width:76px;height:76px}
+.tile .nick{font-family:var(--display);font-weight:700;font-size:1.15rem;line-height:1.2}
+.tile .full{font-size:.78rem;color:var(--muted);line-height:1.3}
+.tile .price{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--cobalt)}
+.badge{position:absolute;top:8px;right:8px;min-width:36px;height:36px;border-radius:99px;background:var(--cobalt);color:var(--paper);font-family:var(--display);font-weight:700;font-size:1.2rem;display:grid;place-items:center;padding:0 8px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));z-index:5}
+.bar .in{max-width:640px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.bar .sum{flex:1;min-width:0}
+.bar .sum b{font-family:var(--display);font-size:1.6rem}
+.go{background:var(--cobalt);color:var(--paper);font-family:var(--display);font-weight:700;font-size:1.25rem;border-radius:14px;padding:14px 22px}
+.ghost{border:2px solid var(--line);border-radius:14px;padding:12px 16px;font-weight:600}
+/* pay screen */
+.sheet{display:grid;gap:16px;padding-bottom:40px}
+.back{justify-self:start;font-weight:600;padding:6px 0;color:var(--cobalt)}
+.line{display:grid;grid-template-columns:1fr auto;gap:8px 12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;align-items:center}
+.line .name{font-family:var(--display);font-weight:700;font-size:1.1rem}
+.line .sub{grid-column:1/-1;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:48px;height:48px;border-radius:12px;background:var(--chip);font-family:var(--display);font-size:1.6rem;font-weight:700}
+.step span{min-width:36px;text-align:center;font-family:var(--display);font-weight:700;font-size:1.4rem}
+label.px{display:flex;align-items:center;gap:6px;font-size:.9rem;color:var(--muted)}
+input.n{width:84px;font:600 1.15rem var(--display);padding:8px 10px;border-radius:10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);text-align:right}
+.lt{font-family:var(--display);font-weight:700;font-size:1.2rem;text-align:right}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px}
+.lbl{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{min-width:64px;height:48px;padding:0 14px;border-radius:12px;background:var(--chip);font-family:var(--display);font-weight:700;font-size:1.1rem}
+.chips button[aria-pressed="true"]{background:var(--sun);color:#1C1B22}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.total .big{font-size:3rem;color:var(--cobalt)}
+.paybtns{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.paybtns button{border-radius:18px;padding:18px 10px;font-family:var(--display);font-weight:700;font-size:1.35rem;display:grid;justify-items:center;gap:6px;border:3px solid transparent}
+.paybtns .cash{background:var(--okbg);color:var(--ok)}
+.paybtns .xfer{background:var(--chip);color:var(--cobalt)}
+.paybtns button[aria-pressed="true"]{border-color:currentColor}
+.paybtns svg{width:40px;height:40px}
+.qrbox{display:grid;justify-items:center;gap:8px;text-align:center}
+.qr{background:#fff;padding:14px;border-radius:14px;line-height:0}
+.qr img,.qr canvas{width:240px!important;height:240px!important}
+.amt{font-family:var(--display);font-weight:700;font-size:3.2rem;color:var(--cobalt)}
+.change{font-family:var(--display);font-weight:700;font-size:2.4rem;color:var(--ok)}
+.save{background:var(--ok);color:var(--paper);font-family:var(--display);font-weight:700;font-size:1.4rem;border-radius:16px;padding:18px;width:100%}
+.done{display:grid;justify-items:center;text-align:center;gap:14px;padding-block:40px}
+.done svg{width:120px;height:120px}
+/* today */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:2px}
+.stats b{font-family:var(--display);font-size:1.5rem}
+.stats span{font-size:.82rem;color:var(--muted)}
+.list{display:grid;gap:8px}
+.bill{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;display:grid;gap:4px}
+.bill .h{display:flex;justify-content:space-between;gap:8px;font-weight:600;flex-wrap:wrap}
+.bill .it{font-size:.9rem;color:var(--muted)}
+.bill .f{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:.85rem;flex-wrap:wrap}
+.pill{font-size:.75rem;padding:1px 8px;border-radius:99px;border:1px solid currentColor}
+.pill.c{color:var(--ok)} .pill.t{color:var(--cobalt)} .pill.s{color:var(--muted)} .pill.p{color:var(--tomato)}
+.del{color:var(--tomato);font-weight:600;padding:4px 0}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+td{padding:6px 0;border-bottom:1px solid var(--line)} td.r{text-align:right}
+.adult{border-top:2px dashed var(--line);padding-top:16px;display:grid;gap:12px}
+.adult input.t{font:600 1.1rem var(--body);padding:10px 12px;border-radius:10px;border:2px solid var(--line);background:var(--paper);color:var(--ink);width:100%;max-width:260px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.note{font-size:.88rem;color:var(--muted)}
+.btn2{background:var(--cobalt);color:var(--paper);font-weight:600;border-radius:12px;padding:10px 16px}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}}
+</style>
+
+<div class="app" id="app"></div>
+
+<script>
+const SHEET_ID = "1xYmJ75Lbq4HhlR3ubhO6C2Uu82prpjb2HFFlB9U5nQg";
+// Booth catalogue: the SKUs ticked "ขายงานนี้" in the Google Sheet, with their draft prices.
+const PRODUCTS = [
+  {sku:"OC-01-22", nick:"หมีรองแก้ว",   name:"ที่รองแก้วหมี",          price:59,  icon:"bear",   color:"--tomato"},
+  {sku:"OC-01-01", nick:"หมีเก็บสาย",   name:"ที่เก็บสายชาร์จหมี",      price:59,  icon:"bearcord",color:"--pink"},
+  {sku:"OC-02-24", nick:"กังหัน",       name:"ที่รองแก้วกังหัน",        price:49,  icon:"wheel",  color:"--sun"},
+  {sku:"OC-04-27", nick:"สี่เหลี่ยม",   name:"ที่รองแก้วสี่เหลี่ยม",     price:49,  icon:"square", color:"--cobalt"},
+  {sku:"OC-05-28", nick:"วงกลม",       name:"ที่รองแก้ววงกลม",         price:49,  icon:"circle", color:"--mint"},
+  {sku:"OC-03-26", nick:"ป้ายของขวัญ",  name:"ป้ายห้อยของขวัญ",         price:39,  icon:"tag",    color:"--pink"},
+  {sku:"OC-MX-29", nick:"ชุด 4 ลาย",    name:"ชุดที่รองแก้ว 4 ลาย",     price:179, icon:"set",    color:"--tomato"},
+  {sku:"OC-06-30", nick:"กล่องต่อเอง",  name:"ชุดต่อเองกล่องลูกบาศก์",  price:129, icon:"cube",   color:"--mint"},
+];
+const BY_SKU = Object.fromEntries(PRODUCTS.map(p => [p.sku, p]));
+const PAY_LABEL = {cash:"เงินสด", transfer:"โอน / พร้อมเพย์"};
+
+function icon(kind, color){
+  const c = `var(${color})`, k = "var(--ink)";
+  const shapes = {
+    bear: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/><circle cx="31" cy="40" r="3.5" fill="${k}"/><circle cx="49" cy="40" r="3.5" fill="${k}"/><ellipse cx="40" cy="52" rx="7" ry="5" fill="${k}"/>`,
+    bearcord: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/><circle cx="31" cy="40" r="3.5" fill="${k}"/><circle cx="49" cy="40" r="3.5" fill="${k}"/><path d="M6 66 C24 54 56 78 74 62" stroke="${k}" stroke-width="4" fill="none" stroke-linecap="round"/>`,
+    wheel: [0,90,180,270].map(a => `<path transform="rotate(${a} 40 40)" d="M40 40 L40 8 Q62 14 40 40Z" fill="${c}" stroke="${k}" stroke-width="2"/>`).join("") + `<circle cx="40" cy="40" r="5" fill="${k}"/>`,
+    square: `<rect x="10" y="10" width="60" height="60" rx="16" fill="${c}"/><rect x="22" y="22" width="36" height="36" rx="8" fill="none" stroke="var(--card)" stroke-width="3" stroke-dasharray="5 5"/>`,
+    circle: `<circle cx="40" cy="40" r="31" fill="${c}"/><circle cx="40" cy="40" r="19" fill="none" stroke="var(--card)" stroke-width="3" stroke-dasharray="5 5"/>`,
+    tag: `<path d="M14 26 L34 8 H66 V72 H34 L14 54Z" fill="${c}"/><circle cx="28" cy="40" r="5" fill="var(--card)"/><path d="M28 40 C10 40 6 60 18 70" stroke="${k}" stroke-width="3" fill="none"/>`,
+    set: `<circle cx="24" cy="24" r="15" fill="var(--tomato)"/><rect x="42" y="9" width="30" height="30" rx="9" fill="var(--cobalt)"/><circle cx="24" cy="56" r="15" fill="var(--mint)"/><circle cx="57" cy="56" r="15" fill="var(--sun)"/>`,
+    cube: `<path d="M40 8 L70 24 L40 40 L10 24Z" fill="${c}"/><path d="M10 24 L40 40 V72 L10 56Z" fill="var(--sun)"/><path d="M70 24 L40 40 V72 L70 56Z" fill="var(--cobalt)"/>`,
+  };
+  return `<svg viewBox="0 0 80 80" aria-hidden="true">${shapes[kind]}</svg>`;
+}
+const ICON_CASH = `<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="10" width="34" height="20" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="20" cy="20" r="5" fill="none" stroke="currentColor" stroke-width="3"/></svg>`;
+const ICON_PHONE = `<svg viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="3" width="18" height="34" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><rect x="15" y="10" width="10" height="10" fill="currentColor"/><path d="M15 25h3v3h-3zM22 25h3v3h-3z" fill="currentColor"/></svg>`;
+const ICON_OK = `<svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="56" fill="var(--okbg)"/><path d="M34 62 L52 80 L88 42" stroke="var(--ok)" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+// ---- helpers
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const baht = n => Number(n || 0).toLocaleString("th-TH", {maximumFractionDigits: 2});
+function dayKey(t = Date.now()){ const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+const sheetDate = k => { const [y,m,d] = k.split("-"); return `${d}/${m}/${y}`; };
+const hhmm = t => new Date(t).toLocaleTimeString("th-TH", {hour:"2-digit", minute:"2-digit"});
+function store(key, val){ try{ if(val === undefined) return JSON.parse(localStorage.getItem(key) || "null"); localStorage.setItem(key, JSON.stringify(val)); }catch(e){ return null; } }
+
+// PromptPay QR payload (EMVCo, CRC16-CCITT)
+function crc16(s){ let c = 0xFFFF; for(const ch of s){ c ^= ch.charCodeAt(0) << 8; for(let i=0;i<8;i++) c = (c & 0x8000) ? ((c << 1) ^ 0x1021) & 0xFFFF : (c << 1) & 0xFFFF; } return c.toString(16).toUpperCase().padStart(4,"0"); }
+const tlv = (id, v) => id + String(v.length).padStart(2,"0") + v;
+function promptpay(id, amount){
+  const d = String(id || "").replace(/\D/g, "");
+  let tag, acct;
+  if(d.length === 10 && d[0] === "0"){ tag = "01"; acct = "0066" + d.slice(1); }
+  else if(d.length === 13){ tag = "02"; acct = d; }
+  else if(d.length === 15){ tag = "03"; acct = d; }
+  else return null;
+  const s = tlv("00","01") + tlv("01", amount ? "12" : "11") + tlv("29", tlv("00","A000000677010111") + tlv(tag, acct))
+          + tlv("58","TH") + tlv("53","764") + (amount ? tlv("54", amount.toFixed(2)) : "") + "6304";
+  return s + crc16(s);
+}
+
+// ---- state
+const S = {
+  view: "sell",            // sell | pay | done | today
+  cart: {},                // sku -> {qty, price}
+  discount: 0, discOther: false,
+  pay: null, given: null,
+  saving: false, lastSaved: null,
+  sales: [],               // from db
+  pending: store("oct26.pending") || [],   // [{id, doc}] not yet in db
+  config: {}, configLoaded: false,
+  db: null, user: null, mcp: null, dbState: "loading", canEdit: null,
+  delAsk: null, syncMsg: "", syncing: false,
+};
+
+function cartLines(){ return PRODUCTS.filter(p => S.cart[p.sku]?.qty > 0).map(p => ({p, ...S.cart[p.sku]})); }
+function subtotal(){ return cartLines().reduce((a, l) => a + l.qty * l.price, 0); }
+function total(){ return Math.max(0, subtotal() - (Number(S.discount) || 0)); }
+function count(){ return cartLines().reduce((a, l) => a + l.qty, 0); }
+function allSales(){
+  const ids = new Set(S.sales.map(s => s.id));
+  return S.sales.concat(S.pending.filter(p => !ids.has(p.id)).map(p => ({id:p.id, ...p.doc, _pending:true})));
+}
+function nextBill(){
+  const max = allSales().reduce((m, s) => Math.max(m, parseInt(String(s.bill || "").replace(/\D/g, "")) || 0), 0);
+  return "B" + String(max + 1).padStart(3, "0");
+}
+
+function addOne(sku){
+  const p = BY_SKU[sku];
+  const cur = S.cart[sku] || {qty:0, price:p.price};
+  S.cart[sku] = {...cur, qty: cur.qty + 1};
+  render();
+}
+function setQty(sku, d){
+  const cur = S.cart[sku]; if(!cur) return;
+  cur.qty = Math.max(0, cur.qty + d);
+  if(cur.qty === 0) delete S.cart[sku];
+  if(!count()) { S.view = "sell"; }
+  render();
+}
+function resetSale(){ S.cart = {}; S.discount = 0; S.discOther = false; S.pay = null; S.given = null; }
+
+// ---- saving
+async function pushPending(){
+  if(!S.db || !S.pending.length) return;
+  const left = [];
+  for(const p of S.pending){
+    try{ await S.db.collection("sales").doc(p.id).set(p.doc); }
+    catch(e){ left.push(p); if(e && (e.code === "invalid_argument" || e.code === "quota_exceeded")) S.dbState = "readonly"; }
+  }
+  S.pending = left; store("oct26.pending", left); render();
+}
+async function saveSale(){
+  if(S.saving || !count() || !S.pay) return;
+  S.saving = true; render();
+  const id = "s" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const doc = {
+    bill: nextBill(), day: dayKey(), at: Date.now(),
+    items: cartLines().map(l => ({sku:l.p.sku, name:l.p.name, qty:l.qty, price:Number(l.price)||0, list:l.p.price})),
+    discount: Number(S.discount) || 0, subtotal: subtotal(), total: total(),
+    pay: S.pay, synced: false,
+  };
+  S.pending.push({id, doc}); store("oct26.pending", S.pending);
+  S.lastSaved = {bill: doc.bill, total: doc.total, change: S.pay === "cash" && S.given ? S.given - doc.total : null};
+  resetSale(); S.view = "done"; S.saving = false; render();
+  await pushPending();
+}
+async function deleteSale(id){
+  S.delAsk = null;
+  const p = S.pending.findIndex(x => x.id === id);
+  if(p >= 0){ S.pending.splice(p, 1); store("oct26.pending", S.pending); }
+  if(S.db){ try{ await S.db.collection("sales").doc(id).delete(); }catch(e){ S.syncMsg = "ลบไม่สำเร็จ ลองใหม่อีกครั้ง"; } }
+  render();
+}
+
+// ---- Google Sheet sync (grown-ups)
+async function syncSheet(){
+  if(!S.mcp || S.syncing) return;
+  const todo = S.sales.filter(s => !s.synced).sort((a, b) => a.at - b.at);
+  if(!todo.length){ S.syncMsg = "ทุกบิลอยู่ใน Google Sheet แล้ว"; render(); return; }
+  S.syncing = true; S.syncMsg = "กำลังส่ง…"; render();
+  try{
+    const got = await S.mcp.callTool("Google Sheets", "get_values", {spreadsheetId: SHEET_ID, range: "ขาย!C5:C"}, {cache:false});
+    const used = (got.payload && Array.isArray(got.payload.values)) ? got.payload.values.length : 0;
+    const start = 5 + used;
+    const rows = [];
+    for(const s of todo){
+      (s.items || []).forEach((it, i) => rows.push([
+        sheetDate(s.day), s.bill, it.sku, it.qty,
+        Number(it.price) !== Number(it.list) ? it.price : "",
+        i === 0 && s.discount ? s.discount : "",
+        PAY_LABEL[s.pay] || "",
+      ]));
+    }
+    await S.mcp.callTool("Google Sheets", "update_values",
+      {spreadsheetId: SHEET_ID, range: `ขาย!A${start}:G${start + rows.length - 1}`, values: rows}, {cache:false});
+    for(const s of todo){ try{ await S.db.collection("sales").doc(s.id).update({synced: true}); }catch(e){} }
+    S.syncMsg = `ส่งแล้ว ${todo.length} บิล (${rows.length} แถว) เข้าแท็บขาย`;
+  }catch(e){
+    const why = {server_not_connected:"ยังไม่ได้เชื่อม Google Sheets ใน claude.ai (Settings → Connectors)",
+                 needs_reauth:"ต้องเชื่อม Google Sheets ใหม่ใน claude.ai (Settings → Connectors)",
+                 not_in_manifest:"ยังไม่ได้อนุญาตให้หน้านี้ใช้ Google Sheets",
+                 approval_required:"ยังไม่ได้กดอนุญาต ลองกดส่งอีกครั้ง"}[e && e.code];
+    S.syncMsg = "ส่งไม่สำเร็จ: " + (why || (e && e.message) || "ลองใหม่อีกครั้ง");
+  }
+  S.syncing = false; render();
+}
+async function savePromptPay(){
+  const v = document.getElementById("pp").value.replace(/\D/g, "");
+  if(!promptpay(v, 1)){ S.syncMsg = "เลขพร้อมเพย์ต้องเป็นเบอร์มือถือ 10 หลัก หรือเลขบัตร 13 หลัก"; render(); return; }
+  try{ await S.db.doc("shop/config").set({...S.config, promptpay: v}); S.syncMsg = "บันทึกเลขพร้อมเพย์แล้ว"; }
+  catch(e){ S.syncMsg = "บันทึกไม่ได้ ต้องเป็นเจ้าของหรือผู้แก้ไขหน้านี้"; }
+  render();
+}
+
+// ---- render
+function render(){
+  const app = document.getElementById("app");
+  const focusId = document.activeElement && document.activeElement.id;
+  const head = `<div class="top"><span class="brand">OCT. 26</span>
+    <div class="tabs" role="group" aria-label="หน้า">
+      <button id="t-sell" aria-pressed="${S.view !== "today"}" data-act="tab" data-v="sell">ขาย</button>
+      <button id="t-today" aria-pressed="${S.view === "today"}" data-act="tab" data-v="today">วันนี้</button>
+    </div></div>`;
+  let banner = "";
+  if(S.pending.length) banner = `<div class="banner" role="status"><span>มี ${S.pending.length} บิลรอส่งขึ้นระบบ (เก็บไว้ในเครื่องนี้แล้ว)</span><button id="retry" data-act="retry">ส่งอีกครั้ง</button></div>`;
+  else if(S.dbState === "off") banner = `<div class="banner" role="status"><span>เปิดนอกแอป Claude: บิลจะเก็บไว้ในเครื่องนี้เท่านั้น</span></div>`;
+  let body = "";
+  if(S.view === "sell") body = viewSell();
+  else if(S.view === "pay") body = viewPay();
+  else if(S.view === "done") body = viewDone();
+  else body = viewToday();
+  app.innerHTML = head + banner + body;
+  if(S.view === "pay" && S.pay === "transfer") drawQR();
+  if(focusId){ const el = document.getElementById(focusId); if(el && el.tagName === "INPUT"){ el.focus(); const v = el.value; el.value = ""; el.value = v; } }
+}
+function viewSell(){
+  const tiles = PRODUCTS.map(p => {
+    const q = S.cart[p.sku]?.qty || 0;
+    return `<button class="tile${q ? " on" : ""}" id="p-${p.sku}" data-act="add" data-sku="${p.sku}" aria-label="${esc(p.name)} ${p.price} บาท${q ? `, เลือกแล้ว ${q}` : ""}">
+      ${q ? `<span class="badge num">${q}</span>` : ""}${icon(p.icon, p.color)}
+      <span class="nick">${esc(p.nick)}</span><span class="full">${esc(p.name)}</span><span class="price num">${p.price} บาท</span></button>`;
+  }).join("");
+  const n = count();
+  return `<div class="grid">${tiles}</div>
+    <div class="bar"><div class="in">
+      <div class="sum num">${n ? `${n} ชิ้น<br><b>${baht(subtotal())} บาท</b>` : `<span class="note">แตะรูปสินค้าเพื่อเลือก</span>`}</div>
+      ${n ? `<button class="ghost" id="clear" data-act="clear">ล้าง</button>` : ""}
+      <button class="go" id="checkout" data-act="checkout" ${n ? "" : "disabled"}>คิดเงิน</button>
+    </div></div>`;
+}
+function viewPay(){
+  const lines = cartLines().map(l => `<div class="line">
+      <span class="name">${esc(l.p.nick)}</span><span class="lt num">${baht(l.qty * l.price)}</span>
+      <div class="sub">
+        <div class="step"><button id="m-${l.p.sku}" data-act="minus" data-sku="${l.p.sku}" aria-label="ลดจำนวน">−</button><span class="num">${l.qty}</span><button id="pl-${l.p.sku}" data-act="plus" data-sku="${l.p.sku}" aria-label="เพิ่มจำนวน">+</button></div>
+        <label class="px" for="pr-${l.p.sku}">ราคาชิ้นละ <input class="n num" id="pr-${l.p.sku}" data-act="price" data-sku="${l.p.sku}" type="number" inputmode="numeric" min="0" value="${l.price}"> บาท</label>
+      </div></div>`).join("");
+  const disc = [0, 5, 10, 20];
+  const chips = disc.map(d => `<button id="d-${d}" data-act="disc" data-v="${d}" aria-pressed="${!S.discOther && Number(S.discount) === d}">${d ? d : "ไม่ลด"}</button>`).join("")
+    + `<button id="d-other" data-act="discother" aria-pressed="${S.discOther}">อื่น ๆ</button>`;
+  const t = total();
+  let payPart = "";
+  if(S.pay === "cash"){
+    const notes = [20, 50, 100, 500, 1000].filter(v => v >= t || v === 1000);
+    const given = S.given;
+    payPart = `<div class="card"><span class="lbl">ลูกค้าให้เงินมาเท่าไหร่</span>
+      <div class="chips">${`<button id="g-exact" data-act="given" data-v="${t}" aria-pressed="${given === t}">พอดี</button>` + notes.map(v => `<button id="g-${v}" data-act="given" data-v="${v}" aria-pressed="${given === v}">${v}</button>`).join("")}</div>
+      ${given != null ? (given >= t ? `<div>ทอนเงิน <span class="change num">${baht(given - t)}</span> บาท</div>` : `<div class="note">เงินยังไม่พอ</div>`) : ""}
+    </div>`;
+  } else if(S.pay === "transfer"){
+    const pp = S.config.promptpay;
+    payPart = `<div class="card qrbox">
+      <span class="lbl">ให้ลูกค้าสแกนจ่าย</span>
+      ${pp && t > 0 ? `<div class="qr" id="qr" aria-label="QR พร้อมเพย์ ${baht(t)} บาท"></div><span class="note">พร้อมเพย์ ${esc(pp.replace(/(\d{3})(\d{3})(\d+)/, "$1-$2-$3"))}</span>` :
+        `<span class="note">${pp ? "" : "ยังไม่ได้ตั้งเลขพร้อมเพย์ ให้ผู้ใหญ่ตั้งที่หน้า วันนี้"}</span>`}
+      <span class="amt num">${baht(t)} บาท</span>
+      <span class="note">รอให้ลูกค้าโชว์สลิปก่อน แล้วค่อยกดบันทึก</span>
+    </div>`;
+  }
+  const canSave = S.pay && !S.saving && count() && (S.pay !== "cash" || S.given == null || S.given >= t);
+  return `<div class="sheet">
+    <button class="back" id="back" data-act="back">‹ กลับไปเลือกของ</button>
+    <h2>ลูกค้าซื้อ</h2>
+    ${lines}
+    <div class="card"><span class="lbl">ส่วนลด (บาท)</span><div class="chips">${chips}</div>
+      ${S.discOther ? `<label class="px" for="disc-in">ลด <input class="n num" id="disc-in" data-act="discin" type="number" inputmode="numeric" min="0" value="${S.discount || ""}"> บาท</label>` : ""}</div>
+    <div class="total"><span class="lbl">ยอดที่ต้องจ่าย${S.discount ? ` (ลด ${baht(S.discount)})` : ""}</span><span class="big num">${baht(t)} บาท</span></div>
+    <div class="paybtns">
+      <button class="cash" id="pay-cash" data-act="pay" data-v="cash" aria-pressed="${S.pay === "cash"}">${ICON_CASH}เงินสด</button>
+      <button class="xfer" id="pay-xfer" data-act="pay" data-v="transfer" aria-pressed="${S.pay === "transfer"}">${ICON_PHONE}โอนเงิน</button>
+    </div>
+    ${payPart}
+    ${S.pay ? `<button class="save" id="save" data-act="save" ${canSave ? "" : "disabled"}>ได้เงินแล้ว บันทึกบิล</button>` : ""}
+  </div>`;
+}
+function viewDone(){
+  const s = S.lastSaved || {};
+  return `<div class="done">${ICON_OK}
+    <h1>บันทึกแล้ว</h1>
+    <p class="big num" style="font-size:1.6rem">บิล ${esc(s.bill)} · ${baht(s.total)} บาท</p>
+    ${s.change ? `<p>อย่าลืมทอนเงิน <span class="change num">${baht(s.change)}</span> บาท</p>` : ""}
+    <button class="go" id="next" data-act="next">ลูกค้าคนต่อไป</button></div>`;
+}
+function viewToday(){
+  const today = dayKey();
+  const all = allSales();
+  const mine = all.filter(s => s.day === today).sort((a, b) => b.at - a.at);
+  const sum = mine.reduce((a, s) => a + (s.total || 0), 0);
+  const cash = mine.filter(s => s.pay === "cash").reduce((a, s) => a + (s.total || 0), 0);
+  const pieces = {};
+  mine.forEach(s => (s.items || []).forEach(it => pieces[it.sku] = (pieces[it.sku] || 0) + (it.qty || 0)));
+  const prodRows = PRODUCTS.filter(p => pieces[p.sku]).map(p => `<tr><td>${esc(p.nick)}</td><td class="r num">${pieces[p.sku]} ชิ้น</td></tr>`).join("");
+  const bills = mine.map(s => `<div class="bill">
+      <div class="h num"><span>${esc(s.bill)} · ${hhmm(s.at)}</span><span>${baht(s.total)} บาท</span></div>
+      <div class="it">${(s.items || []).map(it => `${esc((BY_SKU[it.sku] || {}).nick || it.name)} × ${Number(it.qty) || 0}${Number(it.price) !== Number(it.list) ? ` (ชิ้นละ ${baht(it.price)})` : ""}`).join(" · ")}${s.discount ? ` · ลด ${baht(s.discount)}` : ""}</div>
+      <div class="f"><span><span class="pill ${s.pay === "cash" ? "c" : "t"}">${esc(PAY_LABEL[s.pay] || "")}</span>
+        ${s._pending ? `<span class="pill p">รอส่ง</span>` : s.synced ? `<span class="pill s">อยู่ในชีตแล้ว</span>` : ""}</span>
+        ${S.delAsk === s.id ? `<span class="row"><span>ลบบิลนี้?${s.synced ? " (ต้องลบในชีตเองด้วย)" : ""}</span><button class="del" id="dy-${esc(s.id)}" data-act="delyes" data-id="${esc(s.id)}">ลบ</button><button id="dn-${esc(s.id)}" data-act="delno">ไม่ลบ</button></span>`
+          : `<button class="del" id="dl-${esc(s.id)}" data-act="delask" data-id="${esc(s.id)}">ลบบิล</button>`}</div></div>`).join("");
+  const days = {};
+  all.forEach(s => { days[s.day] = (days[s.day] || 0) + (s.total || 0); });
+  const dayRows = Object.keys(days).sort().map(d => `<tr><td>${sheetDate(d)}</td><td class="r num">${baht(days[d])} บาท</td></tr>`).join("");
+  const unsynced = S.sales.filter(s => !s.synced).length;
+  const canCfg = S.db && S.canEdit !== false;
+  return `<div class="sheet">
+    <h2>ขายวันนี้</h2>
+    <div class="stats num"><div><span>ยอดขาย</span><b>${baht(sum)}</b><span>บาท</span></div>
+      <div><span>เงินสดในกล่อง</span><b>${baht(cash)}</b><span>บาท</span></div>
+      <div><span>บิล</span><b>${mine.length}</b><span>บิล</span></div></div>
+    ${prodRows ? `<div class="card"><span class="lbl">ขายไปแล้ว</span><table>${prodRows}</table></div>` : ""}
+    <div class="list">${bills || `<p class="note">วันนี้ยังไม่มีบิล</p>`}</div>
+    <div class="adult">
+      <h2>สำหรับผู้ใหญ่</h2>
+      ${dayRows ? `<div class="card"><span class="lbl">ยอดขายแต่ละวัน</span><table>${dayRows}</table></div>` : ""}
+      <div class="card"><span class="lbl">ส่งบิลเข้า Google Sheet (แท็บขาย)</span>
+        <span class="note">${unsynced ? `มี ${unsynced} บิลที่ยังไม่ได้ส่ง` : "ส่งครบแล้ว"} · กดส่งตอนปิดร้านแต่ละวันก็ได้</span>
+        <div class="row"><button class="btn2" id="sync" data-act="sync" ${S.mcp && S.db && unsynced && !S.syncing ? "" : "disabled"}>ส่งเข้า Google Sheet</button></div>
+        ${S.mcp ? "" : `<span class="note">ส่งได้เมื่อเปิดหน้านี้ในแอป Claude ที่เชื่อม Google Sheets ไว้</span>`}</div>
+      <div class="card"><span class="lbl">เลขพร้อมเพย์ของร้าน</span>
+        <span class="note">ใช้สร้าง QR ให้ลูกค้าสแกนโอนพร้อมยอดเงิน</span>
+        <div class="row"><input class="t num" id="pp" inputmode="numeric" placeholder="เบอร์มือถือ หรือเลขบัตร" value="${esc(S.config.promptpay || "")}" ${canCfg ? "" : "disabled"}>
+        <button class="btn2" id="pp-save" data-act="ppsave" ${canCfg ? "" : "disabled"}>บันทึก</button></div></div>
+      ${S.syncMsg ? `<p class="note" role="status">${esc(S.syncMsg)}</p>` : ""}
+    </div></div>`;
+}
+function drawQR(){
+  const el = document.getElementById("qr");
+  const payload = promptpay(S.config.promptpay, total());
+  if(!el || !payload || typeof QRCode === "undefined") return;
+  el.innerHTML = "";
+  new QRCode(el, {text: payload, width: 240, height: 240, correctLevel: QRCode.CorrectLevel.M});
+}
+
+// ---- events
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-act]"); if(!b || b.tagName === "INPUT") return;
+  const a = b.dataset.act, sku = b.dataset.sku, v = b.dataset.v;
+  if(a === "add") addOne(sku);
+  else if(a === "clear"){ resetSale(); render(); }
+  else if(a === "checkout"){ S.view = "pay"; render(); window.scrollTo(0, 0); }
+  else if(a === "back"){ S.view = "sell"; render(); }
+  else if(a === "plus") setQty(sku, 1);
+  else if(a === "minus") setQty(sku, -1);
+  else if(a === "disc"){ S.discount = Number(v); S.discOther = false; S.given = null; render(); }
+  else if(a === "discother"){ S.discOther = true; render(); const i = document.getElementById("disc-in"); i && i.focus(); }
+  else if(a === "pay"){ S.pay = v; S.given = null; render(); }
+  else if(a === "given"){ S.given = Number(v); render(); }
+  else if(a === "save") saveSale();
+  else if(a === "next"){ S.view = "sell"; render(); window.scrollTo(0, 0); }
+  else if(a === "tab"){ S.view = v; S.delAsk = null; render(); window.scrollTo(0, 0); }
+  else if(a === "retry") pushPending();
+  else if(a === "delask"){ S.delAsk = b.dataset.id; render(); }
+  else if(a === "delno"){ S.delAsk = null; render(); }
+  else if(a === "delyes") deleteSale(b.dataset.id);
+  else if(a === "sync") syncSheet();
+  else if(a === "ppsave") savePromptPay();
+});
+document.addEventListener("input", e => {
+  const t = e.target;
+  if(t.dataset.act === "price"){ const c = S.cart[t.dataset.sku]; if(c){ c.price = Math.max(0, Number(t.value) || 0); S.given = null; } }
+  else if(t.dataset.act === "discin"){ S.discount = Math.max(0, Number(t.value) || 0); S.given = null; }
+  else return;
+  clearTimeout(t._r); t._r = setTimeout(render, 500);
+});
+document.addEventListener("change", e => { if(["price", "discin"].includes(e.target.dataset.act)) render(); });
+window.addEventListener("online", () => pushPending());
+
+// ---- boot
+render();
+(async () => {
+  const use = n => (window.claude && window.claude.use) ? window.claude.use(n) : Promise.resolve(null);
+  const [db, user] = await Promise.all([use("db"), use("user")]);
+  S.db = db; S.user = user;
+  if(!db){ S.dbState = "off"; render(); return; }
+  S.dbState = "on";
+  try{ S.canEdit = user ? await user.canEdit() : null; }catch(e){ S.canEdit = null; }
+  db.collection("sales").onSnapshot(snap => {
+    S.sales = snap.docs.filter(d => d.exists).map(d => ({id: d.id, ...d.data()}));
+    const ids = new Set(S.sales.map(s => s.id));
+    const before = S.pending.length;
+    S.pending = S.pending.filter(p => !ids.has(p.id));
+    if(S.pending.length !== before) store("oct26.pending", S.pending);
+    render();
+  }, err => { S.dbState = "off"; render(); });
+  db.doc("shop/config").onSnapshot(d => { S.config = d.exists ? {...d.data()} : {}; S.configLoaded = true; render(); }, () => {});
+  pushPending();
+  S.mcp = await use("mcp");
+  render();
+})();
+</script>
