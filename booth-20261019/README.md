@@ -7,4 +7,4 @@ Products, prices and stock come from `../brand-20261014/brand.py`; the page styl
     python3 booth-20261019/build.py      # writes site/index.html
 
 Page (private, owner shares it): https://claude.ai/artifact/4DVjZ32YPCF9b9Ck8k7gz4
-Gear prices are estimates, not shop quotes. Organiser confirmed 20 Oct: one table and two chairs per booth, 5A power, wide slat gaps (plywood top added). Booth number and hall are still open.
+Gear prices are estimates, not shop quotes. Organiser confirmed 20 Oct: one table and two chairs per booth, 5A power, table can be moved, wide slat gaps (folding 5 mm future-board top). Booth number and hall are still open.
