@@ -5,7 +5,7 @@ The organiser gives each booth a pallet coffee table (117 x 80 cm, 50 cm high) a
 ../brand-20261014/brand.py and the page style from its site/build.py, writes site/index.html.
 Run: python3 booth-20261019/build.py
 """
-import html, importlib.util, os, sys
+import html, importlib.util, os, shutil, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 BRAND_DIR = os.path.join(os.path.dirname(HERE), "brand-20261014")
 sys.path.insert(0, BRAND_DIR)
@@ -21,6 +21,7 @@ DATES = "23–25 ต.ค. 2569"
 W = D = 200            # booth, cm
 TABLE = (117, 80, 50)  # organiser's pallet table w, d, h (cm), steel frame, slatted top
 TX, TY = 3, D - 80 - 3 # table pushed into the front-left corner; the front-right corner is the way in
+XS = (138, 10)         # X-stand: left edge (cm from the booth's left side), banner bottom off the floor (cm)
 CHAIRS = 2             # organiser's folding chairs per booth (their drawing: 30 chairs for 15 tables)
 
 # ---------------------------------------------------------------- what sells at a home fair
@@ -42,9 +43,9 @@ GEAR = [
     ("ผ้าลินินหรือผ้าดิบ สีครีม", "2 ม.", "ร้านผ้า, Shopee", 150, 300, "buy",
      "ปูทับฟิวเจอร์บอร์ด พับขอบให้ยังเห็นไม้พาเลท เศษที่เหลือห่อกล่องยกของและคลุมกล่องสต็อก"),
     ("ป้าย X-stand 60 × 160 ซม. พร้อมขาตั้ง", "1 ชุด", "ร้านพิมพ์ไวนิลใกล้บ้าน ส่วนใหญ่เสร็จวันเดียว", 300, 500, "buy",
-     "บูธไม่มีผนังให้แขวนป้าย X-stand ตั้งได้เอง พับเก็บใส่ถุงได้ ตั้งกลางด้านหลัง โลโก้ OCT. 26 อยู่ช่วงบน 140–180 ซม. มองเห็นจากทางเดิน"),
+     "ไฟล์พิมพ์พร้อมส่ง: xstand/oct26-xstand-60x160.pdf · ตั้งมุมหน้าขวาติดทางเดิน ลูกค้าเห็นทั้งแผ่นและสแกน QR ได้ ตั้งได้เอง พับเก็บใส่ถุงได้"),
     ("ตะแกรงลวดแขวนของ 60 × 150 ซม. พร้อมขาตั้ง", "1 ชุด", "Shopee, HomePro", 350, 600, "buy",
-     "ตั้งด้วยขาของตัวเอง หลังขวา ข้างทางเข้า ตะแกรงโปร่ง ลูกค้าเห็นของแขวนได้ทั้งสองฝั่ง ห้าหมีอยู่บน SOI. 02 อยู่ล่าง"),
+     "ตั้งด้วยขาของตัวเอง กลางด้านหลัง ตะแกรงโปร่ง ลูกค้าเห็นของแขวนได้ทั้งสองฝั่ง ห้าหมีอยู่บน SOI. 02 อยู่ล่าง"),
     ("ตะขอแขวนตะแกรงและตะขอตัว S", "20 อัน", "Shopee, ร้าน 20 บาท", 50, 100, "buy", "แขวนราวหมี ที่ห้อยกระเป๋า ป้ายชื่อ"),
     ("ตะกร้าหวายหรือถาดไม้ใบเล็ก", "4 ใบ", "ร้าน 20 บาท, Daiso, จตุจักร", 200, 300, "buy",
      "แยกที่รองแก้วตามลาย ลูกค้าหยิบเลือกเองได้"),
@@ -54,8 +55,8 @@ GEAR = [
      "หนีบที่กล่องโซน C ส่องโต๊ะกาแฟ หนังดูสวยใต้แสงอุ่น ไม่เกิน 10 วัตต์ ปลั๊กบูธ 5A รับได้สบาย"),
     ("ของจิปาถะ: เคเบิลไทร์ เทปสองหน้า เทปใส กรรไกร คัตเตอร์ ปากกาเมจิก ถุงขยะ ทิชชู่", "1 ถุง", "ร้าน 20 บาท, 7-Eleven",
      150, 200, "buy", ""),
-    ("ป้ายชวนเข้าบูธ", "1 แผ่น", "เศษฟิวเจอร์บอร์ดที่ตัดเหลือ", 0, 0, "free",
-     "เขียนด้วยปากกาเมจิก: เข้ามาลองต่อหนังได้ พิงตะแกรงมุมหน้าขวา · เศษอีกแผ่นทำป้าย SOI. 02 และห้าหมี Love"),
+    ("ป้ายคอลเลกชัน SOI. 02 และห้าหมี Love", "2 แผ่น", "เศษฟิวเจอร์บอร์ดที่ตัดเหลือ", 0, 0, "free",
+     "พิมพ์ชื่อคอลเลกชันติดบนเศษบอร์ด วางที่โต๊ะ ข้อความชวนเข้าบูธอยู่บน X-stand แล้ว"),
     ("กล่องรองเท้าหรือกล่องกระดาษแข็ง ห่อผ้า", "2 ใบ", "จากบ้าน", 0, 0, "home",
      "แทนลังไม้ โต๊ะสูงแค่ 50 ซม. ซ้อนกล่องยกของขึ้นมาระดับมือผู้ใหญ่ 75–100 ซม."),
     ("ปลั๊กพ่วง มอก. ยาว 5 ม.", "1 อัน", "จากบ้าน", 0, 0, "home", ""),
@@ -75,9 +76,9 @@ BUDGET = 3000          # owner's cap for dressing the booth, 20 Oct
 assert sum(g[4] for g in GEAR if g[5] == "buy") <= BUDGET, "must-buy gear is over the booth budget"
 CUTS = [   # what changed to fit the budget, 20 Oct
     ("ป้ายโรลอัพ 80 × 200", "ป้าย X-stand 60 × 160 ตั้งได้เอง เพราะบูธไม่มีผนัง"),
-    ("ตะแกรง 2 ชุด", "ตะแกรง 1 ชุดฝั่งทางเข้า"),
+    ("ตะแกรง 2 ชุด", "ตะแกรง 1 ชุดกลางด้านหลัง"),
     ("ลังไม้ 3 ใบ", "กล่องจากบ้านห่อผ้า"),
-    ("ป้ายตั้งพื้นขาตั้ง A", "ป้ายจากเศษฟิวเจอร์บอร์ด"),
+    ("ป้ายตั้งพื้นขาตั้ง A", "X-stand ทำหน้าที่ชวนเข้าบูธแทน"),
     ("กรอบอะคริลิก 12 อัน", "กรอบ A5 2 อันสำหรับ QR กับไม้หนีบ"),
     ("ไฟหนีบ 3 ดวง", "1 ดวง ดวงที่ 2 ซื้อเมื่อแสงในฮอลล์มืด"),
 ]
@@ -103,7 +104,7 @@ ANSWERED = [   # organiser's answers, 20 Oct
 
 PLAN = [
     ("อ. 20 ต.ค.", "วันนี้", f"ถามผู้จัด {len(ASK)} ข้อด้านล่าง · สั่งของ Shopee แบบส่งด่วน (ตะแกรง ตะขอ ไฟหนีบ) · "
-                         "ส่งไฟล์ X-stand 60 × 160 ซม. เข้าร้านพิมพ์ · ซื้อฟิวเจอร์บอร์ด ผ้า ตะกร้า ไม้หนีบ กรอบ A5 ที่ร้านเครื่องเขียน ร้านผ้า ร้าน 20 บาท"),
+                         "ส่งไฟล์ X-stand (xstand/oct26-xstand-60x160.pdf) เข้าร้านพิมพ์ · ซื้อฟิวเจอร์บอร์ด ผ้า ตะกร้า ไม้หนีบ กรอบ A5 ที่ร้านเครื่องเขียน ร้านผ้า ร้าน 20 บาท"),
     ("พ. 21 ต.ค.", "", "รับ X-stand และงานพิมพ์ · ตัดฟิวเจอร์บอร์ดติดเทปบานพับ ทำป้ายจากเศษ · ติดป้ายห้อยสินค้า · ของ Shopee ไม่มาภายในวันนี้ ซื้อหน้าร้านแทน"),
     ("พฤ. 22 ต.ค.", "ซ้อมใหญ่", "ตีเทปกรอบ 2 × 2 ม. บนพื้นบ้าน ใช้โต๊ะกาแฟที่บ้านแทนโต๊ะพาเลท จัดตามผัง ถ่ายรูปเก็บไว้เป็นแบบ ซ้อมขาย แล้วแพ็คกล่อง A B C D"),
     ("ศ. 23 ต.ค.", "วันแรก", "ถึงก่อนเปิดอย่างน้อย 90 นาที จัดตามลำดับด้านล่าง โพสต์รูปบูธพร้อมเลขบูธก่อนงานเปิด"),
@@ -113,13 +114,13 @@ PLAN = [
 
 SETUP = [
     ("ขยับโต๊ะพาเลทไปมุมหน้าซ้าย กางฟิวเจอร์บอร์ด แล้วปูผ้า", "เว้นมุมหน้าขวาไว้เป็นทางเข้า · ใส่กล่อง A B C ใต้โต๊ะ"),
-    ("ตั้งตะแกรงหลังขวา และ X-stand กลางด้านหลัง", "หันหน้า X-stand ไปทางเดินหลัก ถ้ามีลมแอร์แรง ถ่วงขาด้วยถุงทรายหรือขวดน้ำ"),
+    ("ตั้งตะแกรงกลางด้านหลัง และ X-stand มุมหน้าขวา", "หันหน้า X-stand ไปทางเดินหลัก ถ้ามีลมแอร์แรง ถ่วงขาด้วยถุงทรายหรือขวดน้ำ"),
     ("วางเก้าอี้สองตัวหลังโต๊ะ", "ตัวซ้ายนักสาธิต ตัวขวาหัวหน้าร้าน"),
     ("ซ้อนกล่องห่อผ้าที่ขอบหลังของโต๊ะ", "โซน C สูงขึ้นมาราว 75 ซม. วางห้าหมีชิ้นเล็ก และ QR"),
     ("จัดโต๊ะกาแฟที่ขอบหน้าโซน A", "แผ่นรองจาน แก้วบนที่รองแก้ว ผ้าเช็ดปากใส่ห่วงหมี ต้นไม้บนที่รองแก้วไส้ไม้ก๊อก ตะกร้าที่รองแก้วลายอื่นวางข้าง ๆ"),
     ("แขวนของบนตะแกรง", "ราวหมีห้าตัวพาดบนสุด ที่ห้อยกระเป๋า ป้ายชื่อ · แถวล่าง SOI. 02 (กังหัน ของแขวน ปลอกแก้ว ซอง AirTag)"),
     ("หนีบไฟ", "ที่กล่องโซน C ส่องโต๊ะกาแฟ"),
-    ("ป้ายราคา QR และป้ายชวนเข้าบูธ", "QR ในกรอบ A5 ตรงจุดจ่ายเงินและโต๊ะกาแฟ · ป้ายราคาหนีบไม้หนีบ · ป้ายเศษฟิวเจอร์บอร์ดพิงตะแกรงมุมหน้าขวา"),
+    ("ป้ายราคา QR และป้ายคอลเลกชัน", "QR พร้อมเพย์ในกรอบ A5 ตรงจุดจ่ายเงินและโต๊ะกาแฟ · ป้ายราคาหนีบไม้หนีบ · ป้ายคอลเลกชันบนโต๊ะ"),
     ("ถ่ายรูปบูธจากทางเดิน", "โพสต์สตอรี่ เจอกันที่บูธ พร้อมเลขบูธ"),
 ]
 
@@ -149,11 +150,12 @@ def plan_svg():
             text(TX + tw + (W - TX - tw) / 2 + 2, 140, "ทางเข้า", "tz"),
             text(TX + tw + (W - TX - tw) / 2 + 2, 152, "ลูกค้าเดินเข้ามา", "ts"),
             text(TX + tw + (W - TX - tw) / 2 + 2, 162, "ดูราวหมีได้", "ts")]
-    # no walls: X-stand at the back in the middle, one free-standing grid on the right
-    out += [rect(50, 2, 60, 4, "roll", 1), rect(140, 0, 60, 7, "grid")]
-    out += [f'<line x1="{X(56):.1f}" y1="{Y(14):.1f}" x2="{X(104):.1f}" y2="{Y(6):.1f}" class="leg"/>',
-            f'<line x1="{X(104):.1f}" y1="{Y(14):.1f}" x2="{X(56):.1f}" y2="{Y(6):.1f}" class="leg"/>']
-    out += [text(80, 26, "X-stand OCT. 26", "ts"), text(170, 20, "ตะแกรง", "ts")]
+    # no walls: one free-standing grid at the back in the middle, X-stand at the front-right corner facing the aisle
+    out += [rect(70, 0, 60, 7, "grid"), text(100, 20, "ตะแกรง ห้าหมี · SOI. 02", "ts")]
+    out += [rect(XS[0], 190, 60, 4, "roll", 1),
+            f'<line x1="{X(XS[0]+6):.1f}" y1="{Y(176):.1f}" x2="{X(XS[0]+54):.1f}" y2="{Y(188):.1f}" class="leg"/>',
+            f'<line x1="{X(XS[0]+54):.1f}" y1="{Y(176):.1f}" x2="{X(XS[0]+6):.1f}" y2="{Y(188):.1f}" class="leg"/>',
+            text(XS[0] + 30, 172, "X-stand", "tz")]
     # spare stock behind the table, left
     out += [rect(3, 66, 28, 34, "box"), text(17, 87, "D", "tz")]
     # chairs behind zones B and C
@@ -170,9 +172,7 @@ def plan_svg():
             text(TX + tw / 2, TY + 70, f"โต๊ะพาเลท {tw} × {td} ซม. สูง {TABLE[2]}", "ts")]
     # people
     out += [badge(TX + zw * 1.5, 83, "2", "bm"), badge(TX + zw * 2.5 + 14, 83, "1", "bs"),
-            badge(176, 182, "3", "bp"), badge(50, 40, "พ", "bk")]
-    # future-board sign leaning on the grid at the open corner
-    out += [rect(182, 186, 16, 4, "sign", 1)]
+            badge(XS[0] - 8, 176, "3", "bp"), badge(50, 40, "พ", "bk")]
     # lamps
     for lx, ly in ((TX + zw * 2 + 6, TY + 6),):
         out.append(f'<circle cx="{X(lx):.1f}" cy="{Y(ly):.1f}" r="5" class="lamp"/>')
@@ -208,23 +208,16 @@ def front_svg():
     tw, _, th = TABLE
     zw = tw / 3
     out = []
-    # no walls: one free-standing grid on the right, X-stand in the middle
-    for gx, label in ((140, "ห้าหมี · SOI. 02"),):
+    # no walls: one free-standing grid at the back in the middle, X-stand at the front-right corner
+    for gx, label in ((70, "ห้าหมี · SOI. 02"),):
         out.append(rect(gx + 3, 30, 54, 150, "grid"))
         out += [f'<line x1="{X(gx+3+i*9):.1f}" y1="{Y(180):.1f}" x2="{X(gx+3+i*9):.1f}" y2="{Y(30):.1f}" class="mesh"/>' for i in range(1, 6)]
         out += [f'<line x1="{X(gx+3):.1f}" y1="{Y(30+i*15):.1f}" x2="{X(gx+57):.1f}" y2="{Y(30+i*15):.1f}" class="mesh"/>' for i in range(1, 10)]
         out.append(text(gx + 30, 186, f"ตะแกรง {label}", "ts"))
-    out += [f'<line x1="{X(52):.1f}" y1="{Y(0):.1f}" x2="{X(80):.1f}" y2="{Y(30):.1f}" class="leg"/>',
-            f'<line x1="{X(108):.1f}" y1="{Y(0):.1f}" x2="{X(80):.1f}" y2="{Y(30):.1f}" class="leg"/>']
-    out.append(rect(50, 20, 60, 160, "roll"))
-    out += [f'<text x="{X(80):.1f}" y="{Y(160):.1f}" class="logo" text-anchor="middle">OCT. 26</text>',
-            f'<text x="{X(80):.1f}" y="{Y(148):.1f}" class="logo-s" text-anchor="middle">our crafted things.</text>',
-            f'<text x="{X(80):.1f}" y="{Y(124):.1f}" class="logo-s" text-anchor="middle">SOI. 02 · ห้าหมี</text>',
-            text(80, 186, "X-stand 60 × 160", "ts")]
     # bear garland and hanging items
-    out.append(f'<path d="M{X(144):.1f} {Y(170):.1f} Q{X(170):.1f} {Y(158):.1f} {X(196):.1f} {Y(170):.1f}" class="garland"/>')
-    out += [f'<circle cx="{X(150+i*10):.1f}" cy="{Y(166 - (2 if i in (1, 2, 3) else 0)):.1f}" r="5" class="bear"/>' for i in range(5)]
-    for gx in (140,):
+    out.append(f'<path d="M{X(74):.1f} {Y(170):.1f} Q{X(100):.1f} {Y(158):.1f} {X(126):.1f} {Y(170):.1f}" class="garland"/>')
+    out += [f'<circle cx="{X(80+i*10):.1f}" cy="{Y(166 - (2 if i in (1, 2, 3) else 0)):.1f}" r="5" class="bear"/>' for i in range(5)]
+    for gx in (70,):
         for i in range(3):
             for j in range(3):
                 out.append(f'<rect x="{X(gx+12+i*16):.1f}" y="{Y(140-j*35):.1f}" width="{8*k:.1f}" height="{10*k:.1f}" rx="3" class="item"/>')
@@ -241,8 +234,13 @@ def front_svg():
     out += [rect(TX + 4, th, 32, 1.5, "item"), rect(TX + 10, th + 1.5, 9, 11, "cup"), rect(TX + 26, th, 7, 13, "plant"),
             f'<circle cx="{X(TX+29.5):.1f}" cy="{Y(th+18):.1f}" r="9" class="leaf"/>']
     out += [rect(TX + zw + 6, th, zw - 12, 1.5, "mat")]
-    # future-board sign leaning on the grid in the open corner
-    out += [rect(172, 0, 26, 50, "fb", 2), text(185, 30, "ลอง", "fb-t"), text(185, 20, "ต่อ", "fb-t")]
+    # the X-stand itself, drawn from its print preview, standing at the front-right corner
+    x0, h0 = XS
+    out += [f'<line x1="{X(x0+4):.1f}" y1="{Y(0):.1f}" x2="{X(x0+30):.1f}" y2="{Y(h0+10):.1f}" class="leg"/>',
+            f'<line x1="{X(x0+56):.1f}" y1="{Y(0):.1f}" x2="{X(x0+30):.1f}" y2="{Y(h0+10):.1f}" class="leg"/>',
+            f'<image href="xstand-preview.png" x="{X(x0):.1f}" y="{Y(h0+160):.1f}" width="{60*k:.1f}" height="{160*k:.1f}" preserveAspectRatio="none"/>',
+            f'<rect x="{X(x0):.1f}" y="{Y(h0+160):.1f}" width="{60*k:.1f}" height="{160*k:.1f}" class="xs-edge"/>',
+            text(x0 + 30, h0 + 166, "X-stand 60 × 160", "ts")]
     # dimension marks
     for h in (0, 50, 100, 150, 200, 250):
         out.append(f'<text x="{ox-8}" y="{Y(h)+4:.1f}" class="td" text-anchor="end">{h}</text>')
@@ -274,7 +272,7 @@ SVG_CSS = """
 .draw .dim{stroke:var(--muted);stroke-width:1}
 .draw .aisle{fill:var(--line);opacity:.6}
 .draw .arw{stroke:var(--tomato);stroke-width:2.5}.draw .arh{fill:var(--tomato)}
-.draw .leg{stroke:var(--ink);stroke-width:1.5}
+.draw .leg{stroke:var(--ink);stroke-width:1.5}.draw .xs-edge{fill:none;stroke:var(--ink);stroke-width:1}
 .draw .mesh{stroke:var(--muted);stroke-width:.6;opacity:.6}
 .draw .logo{font-family:"Jost","Anuphan",sans-serif;font-weight:500;font-size:22px;fill:#FFFFFF}
 .draw .logo-s{font-size:10px;fill:#FFFFFF}
@@ -328,15 +326,16 @@ def page():
         for num, c, t, w in [
             ("1", "#FFC23C", f"{B.KIDS_ROLES[0][0]} · {B.KIDS_ROLES[0][1]}", "นั่งเก้าอี้ขวาหลังโซน C ข้าง QR ลูกค้าที่เดินเข้ามุมขวาจ่ายเงินตรงนี้ จดยอด ส่งถุง"),
             ("2", "#2EC4A0", f"{B.KIDS_ROLES[1][0]} · {B.KIDS_ROLES[1][1]}", f"นั่งเก้าอี้ซ้ายหลังโซน B โต๊ะสูง {th} ซม. พอดีมือเด็ก ลูกค้าตัวเล็กยืนลองต่อฝั่งตรงข้ามได้"),
-            ("3", "#FF8AC4", f"{B.KIDS_ROLES[2][0]} · {B.KIDS_ROLES[2][1]}", "ยืนมุมหน้าขวาข้างป้ายชวนเข้าบูธ ยิ้ม ยื่นการ์ด ชวนลูกค้าเดินเข้ามาดูราวหมี"),
+            ("3", "#FF8AC4", f"{B.KIDS_ROLES[2][0]} · {B.KIDS_ROLES[2][1]}", "ยืนมุมหน้าขวาข้าง X-stand ยิ้ม ยื่นการ์ด ชวนลูกค้าเดินเข้ามาดูราวหมี"),
             ("พ", "var(--line)", "พ่อหรือแม่", "ยืนหลังโต๊ะฝั่งซ้าย ดูด้านหลังกับกล่อง D เพราะบูธเปิดทุกด้าน เก็บกล่องเงิน ตอบเรื่องสั่งทำ อีกคนพาลูกที่ไม่เข้ากะไปพัก")])
 
+    LOW, HANDLE = min(p["price"] for p in B.PRODUCTS), B.BRAND["handle"]
     return f"""{S.head("บูธ OCT. 26 บ้านและสวน")}<style>{SVG_CSS}</style>
 <div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
 <span class="eyebrow">แผนบูธ · ฝ่ายการตลาดและการขาย · อัปเดต 20 ต.ค. 2569</span>
 <h1>บูธ OCT. 26 ที่{FAIR}</h1>
 <p class="lead">{DATES} · บูธ 2 × 2 เมตร ผู้จัดให้โต๊ะพาเลท {tw} × {td} ซม. สูง {th} ซม. กับเก้าอี้ {CHAIRS} ตัว
-โต๊ะสูงเท่าโต๊ะกาแฟในบ้าน หน้าโต๊ะจึงจัดเป็นโต๊ะกาแฟจริงที่ใช้ของ SOI. 02 ส่วนห้าหมีแขวนบนตะแกรงขวา ข้างมุมที่เปิดให้ลูกค้าเดินเข้ามา</p>
+โต๊ะสูงเท่าโต๊ะกาแฟในบ้าน หน้าโต๊ะจึงจัดเป็นโต๊ะกาแฟจริงที่ใช้ของ SOI. 02 ส่วนห้าหมีแขวนบนตะแกรงกลางด้านหลัง และ X-stand มุมหน้าขวาขายของแทนเราตลอดเวลา</p>
 <div class="grid s">
 <div class="card kpi"><p class="cap">พื้นที่</p><b class="mono">4 ตร.ม.</b></div>
 <div class="card kpi"><p class="cap">ของไปงาน</p><b class="mono">{tot['units']} ชิ้น</b></div>
@@ -370,10 +369,22 @@ def page():
 <div class="two"><div class="card">{front_svg()}</div>
 <div style="display:flex;flex-direction:column;gap:var(--s3)">
 <p>บูธมีสามระดับให้คนเห็นจากระยะต่างกัน</p>
-<ul><li><b>140–180 ซม.</b> โลโก้ OCT. 26 บน X-stand และราวหมีห้าตัวบนตะแกรงขวา มองเห็นจากไกล</li>
+<ul><li><b>140–180 ซม.</b> โลโก้ OCT. 26 บน X-stand และราวหมีห้าตัวบนตะแกรงกลางด้านหลัง มองเห็นจากไกล</li>
 <li><b>75–140 ซม.</b> ของแขวนบนตะแกรงและกล่องบนโต๊ะ ระดับมือผู้ใหญ่</li>
 <li><b>{th} ซม.</b> หน้าโต๊ะพาเลท โต๊ะกาแฟจริงกับจุดสาธิต ระดับเดียวกับเด็ก</li></ul>
-<p class="cap">บูธไม่มีผนัง ทุกอย่างตั้งได้ด้วยขาของตัวเอง ตะแกรงโปร่ง คนที่เดินผ่านด้านหลังหรือด้านข้างก็เห็นของแขวน ป้ายเศษฟิวเจอร์บอร์ดมุมขวาเขียนชวนให้เข้ามาลองต่อหนัง</p></div></div></section>
+<p class="cap">บูธไม่มีผนัง ทุกอย่างตั้งได้ด้วยขาของตัวเอง ตะแกรงโปร่ง คนที่เดินผ่านด้านหลังหรือด้านข้างก็เห็นของแขวน X-stand มุมหน้าขวาชวนให้เข้ามาลองต่อ</p></div></div></section>
+
+<section id="xstand"><span class="eyebrow">ป้ายที่ขายของได้เอง</span><h2>X-stand 60 × 160 ซม.</h2>
+<div class="two"><figure class="card" style="margin:0;display:flex;justify-content:center">
+<img src="xstand-preview.png" alt="แบบ X-stand OCT. 26: โลโก้บนพื้นโคบอลต์ ข้อความ ของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน ราคาเริ่ม {LOW} บาท QR ไอจี สินค้าหกอย่างพร้อมราคา" style="max-height:640px;width:auto"></figure>
+<div style="display:flex;flex-direction:column;gap:var(--s3)">
+<p>ตั้งแล้วขายได้เลย เรียงจากบนลงล่างตามระดับที่คนมอง ขอบบนป้ายสูงจากพื้นราว 170 ซม.</p>
+<ol><li><b>แบรนด์ (170–130 ซม.)</b> โลโก้ OCT. 26 บนพื้นโคบอลต์ our crafted things. ของที่เราทำกันเอง และเรื่อง 26 ตุลาคม ให้จำได้</li>
+<li><b>ขายตั้งแต่ไกล</b> ของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน วงกลมสีมะเขือเทศ เริ่ม {LOW} บาท และ เข้ามาลองต่อเองได้</li>
+<li><b>ติดต่อ (ราว 100 ซม.)</b> QR ขนาด 20 ซม. สแกนได้จากราว 2 เมตร ไปไอจี @{HANDLE} พร้อมทุกช่องทาง Shopee และรับสั่งทำของชำร่วย</li>
+<li><b>สินค้าที่ขาย</b> หกอย่างพร้อมราคา วาดจากรูปทรงชิ้นหนังจริง</li>
+<li><b>คอลเลกชัน</b> SOI. 02 · ห้าหมี FIVE BEARS</li></ol>
+<p class="cap">ไม่มีชื่องานหรือวันที่ ใช้ซ้ำได้ทุกงาน · ส่งร้าน: ไฟล์ PDF แบบเวกเตอร์ ฝังฟอนต์แล้ว หรือ JPG 100 dpi ขนาด 2363 × 6299 พิกเซล · ขอบมุมทั้งสี่เว้นไว้ให้ตาไก่ของขาตั้ง</p></div></div></section>
 
 <section id="sell"><span class="eyebrow">ขายอะไรหน้าบูธ</span><h2>คนงานบ้านและสวนมาหาของแต่งบ้าน</h2>
 <p class="lead">งานนี้ให้ของแต่งโต๊ะเป็นตัวหลัก ส่วนห้าหมีเป็นของขวัญ ประโยคแรกที่ใช้ทัก: “ลองวางแก้วดูได้เลยค่ะ/ครับ หนังแท้จากเศษหนัง ทำกันเองทั้งบ้าน”</p>
@@ -414,6 +425,7 @@ def page():
 <div class="tbl"><table><tbody>
 <tr><td class="mono" style="white-space:nowrap">booth-20261019/build.py</td><td>ข้อมูลแผนบูธ: ขนาดโต๊ะ ผัง อุปกรณ์ ราคา ไทม์ไลน์ แก้ที่นี่แล้วรันใหม่</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-20261019/site/index.html</td><td>หน้านี้ (สร้างจาก build.py)</td></tr>
+<tr><td class="mono" style="white-space:nowrap">booth-20261019/xstand/oct26-xstand-60x160.pdf</td><td>ไฟล์ X-stand ส่งร้านพิมพ์ (มี .jpg ด้วย) สร้างจาก xstand/build.py</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-20261019/site/organizer-table.jpg</td><td>แบบโต๊ะพาเลทและเก้าอี้จากผู้จัด</td></tr>
 <tr><td class="mono" style="white-space:nowrap">brand-20261014/brand.py</td><td>ราคาและสต็อกสินค้าอ่านจากไฟล์นี้</td></tr>
 </tbody></table></div></section>
@@ -422,7 +434,8 @@ def page():
 <div class="card"><ol>
 <li>ฟิวเจอร์บอร์ดวางบนโต๊ะที่บ้านแล้วกดดู ถ้ายวบตรงร่อง เพิ่มอีกชั้นหรือใช้ 5 มม. สองชั้น</li>
 <li>เลขบูธ เอามาใส่โพสต์ เจอกันที่บูธ</li>
-<li>ไฟล์ X-stand 60 × 160 ซม. ส่งร้านพิมพ์วันนี้ ให้ได้รับทันวันพุธ</li>
+<li>สแกน QR บนป้ายด้วยมือถือก่อนส่งพิมพ์ ต้องเปิดไอจี @{HANDLE} ได้จริง</li>
+<li>ไฟล์ X-stand ส่งร้านพิมพ์วันนี้ ให้ได้รับทันวันพุธ</li>
 <li>บูธติดทางเดินด้านไหน ถ้าหน้าหลักไม่ใช่ด้านที่วาดไว้ หมุนผังทั้งชุดให้โต๊ะหันหาทางเดินหลัก</li>
 <li>ของจาก Shopee ถ้าร้านส่งไม่ทันวันพุธ ซื้อหน้าร้านแทน</li></ol></div></section>
 </div>"""
@@ -430,5 +443,6 @@ def page():
 
 if __name__ == "__main__":
     os.makedirs(os.path.join(HERE, "site"), exist_ok=True)
+    shutil.copyfile(os.path.join(HERE, "xstand", "preview.png"), os.path.join(HERE, "site", "xstand-preview.png"))
     open(os.path.join(HERE, "site", "index.html"), "w").write(page())
     print("wrote site/index.html")
