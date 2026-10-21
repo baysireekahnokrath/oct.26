@@ -347,6 +347,9 @@ def event_totals():
 # ---------------------------------------------------------------- channel copy
 TAGS = "#OCT26 #ourcraftedthings #หนังแท้ #ไม่ต้องเย็บ #ของขวัญ #งานแฮนด์เมด"
 TAGS_COLL = {"soi2": "#SOI02", "love": "#ห้าหมี #FiveBears #LoveCollection"}
+BOOTH = dict(zone="หนูทดลอง KIDS MARKET", fair="บ้านและสวนแฟร์ Living Festival 2026",
+             place="อิมแพ็ค เมืองทองธานี", hall="ชาเลนเจอร์ 2–3", hours="ศุกร์–อาทิตย์ 10:00–17:00",
+             weekends=("23–25 ต.ค. 2569", "30 ต.ค.–1 พ.ย. 2569"), until="2026-11-01")   # organiser's post, 21 Oct
 EVENT = ("บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET บ้านและสวนแฟร์ Living Festival 2026 "
          "อิมแพ็ค เมืองทองธานี 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569")   # two weekends, confirmed 21 Oct
 SHOP = "Shopee ร้าน OCT. 26"
