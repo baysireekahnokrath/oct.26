@@ -409,7 +409,8 @@ H = BRAND["handle"]
 # accounts that exist (owner, 21 Oct). TikTok and Shopee are not open yet: print and posts name only these three.
 SOCIAL = {"instagram": "https://www.instagram.com/oct.26_brand/",
           "youtube": "https://www.youtube.com/@OCT.26_brand",
-          "facebook": "https://www.facebook.com/profile.php?id=61595850110023"}
+          "facebook": "https://www.facebook.com/profile.php?id=61595850110023",
+          "web": "oct26brand.com"}          # registered 21 Oct, the customer website
 CHANNELS = [
     ("Facebook Page", "OCT. 26", SOCIAL["facebook"],
      "ชื่อเพจ OCT. 26 (ยังไม่ได้ตั้งชื่อผู้ใช้ ลิงก์เป็น profile.php?id=…) หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
