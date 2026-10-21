@@ -31,6 +31,7 @@ SITE_URL = "https://" + B.SOCIAL["web"]   # the brand domain, attached to the Wo
 H = B.BRAND["handle"]
 ORDER = f"https://ig.me/m/{H}"            # opens an Instagram chat with the shop
 HIDE = set()                              # product numbers to keep off the site (a prototype that failed its test)
+SOLD = set()                              # product numbers shown as sold out (the Web Builder sets HIDE and SOLD)
 PRODUCTS = [p for p in B.PRODUCTS if p["n"] not in HIDE]
 COLL = {"soi2": "SOI. 02", "love": "ห้าหมี Love"}
 
@@ -73,6 +74,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--tomato);outline-off
 .shop img{border-radius:var(--s3);border:1px solid var(--line);aspect-ratio:4/5;object-fit:cover;width:100%}
 .shop .n{font-family:var(--display);font-size:15px;line-height:1.3}
 .price{font-family:var(--logo);font-weight:500;color:var(--heart)}
+.sold{font-family:var(--display);font-size:14px;color:var(--muted)}
 .fb{font-family:"Mitr",var(--display)}
 .coll{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(233px,1fr))}
 .coll .paper{aspect-ratio:5/3}
@@ -133,7 +135,8 @@ def card(p, base):
     return (f'<a href="{base}p/{p["n"]:02d}.html" data-coll="{p["coll"]}">'
             f'<img src="{base}assets/thumbs/{p["n"]:02d}.jpg" alt="{E(p["name"])}" loading="lazy" width="360" height="450">'
             f'<span class="cap">{coll_label(p)}</span><span class="n">{E(p["name"])}</span>'
-            f'<span class="price">{p["price"]} บาท</span></a>')
+            f'<span class="price">{p["price"]} บาท</span>'
+            + ('<span class="sold">หมดชั่วคราว</span>' if p["n"] in SOLD else "") + '</a>')
 
 
 FILTER_JS = """<script>
@@ -188,18 +191,19 @@ def home(base=""):
 def product(p, prev, nxt, base="../"):
     pieces = E(p["pieces_txt"]) + (" + " + E(p["extra"][0]) if p["extra"] else "")
     steps = "".join(f"<li>{E(s)}</li>" for s in p["steps"])
-    ask = f"สนใจ #{p['n']:02d} {p['name']} {p['price']} บาท"
+    ask = f"สนใจ #{p['n']:02d} {p['name']} {p['price']} บาท" + (" สั่งจองรอบหน้าได้ไหม" if p["n"] in SOLD else "")
+    sold = '<p class="sold">หมดชั่วคราว ทักไอจีสั่งจองรอบหน้าได้</p>' if p["n"] in SOLD else ""
     title = f"{p['name']} · OCT. 26"
     desc = f"{p['hook']} · {p['name']} {p['price']} บาท · {p['line']} · หนังแท้จากเศษหนัง"
     img = f"assets/posters/{p['n']:02d}.png"
     ld = {"@context": "https://schema.org", "@type": "Product", "name": p["name"], "image": f"{SITE_URL}/{img}",
           "description": p["hook"], "brand": {"@type": "Brand", "name": "OCT. 26"}, "sku": f"OCT26-{p['n']:02d}",
-          "offers": {"@type": "Offer", "price": p["price"], "priceCurrency": "THB", "availability": "https://schema.org/InStock",
+          "offers": {"@type": "Offer", "price": p["price"], "priceCurrency": "THB", "availability": "https://schema.org/" + ("OutOfStock" if p["n"] in SOLD else "InStock"),
                      "url": f"{SITE_URL}/p/{p['n']:02d}.html"}}
     body = f"""{header(base)}<div class="wrap"><main>
 <div class="prod"><img src="{base}{img}" alt="วิธีต่อ{E(p['name'])}" width="1080" height="1350">
 <div class="stack"><span class="eyebrow">{coll_label(p)}</span><h1>{E(p['name'])}</h1>
-<p class="lead">{E(p['hook'])}</p><p class="price big">{p['price']} บาท</p>
+<p class="lead">{E(p['hook'])}</p><p class="price big">{p['price']} บาท</p>{sold}
 <div class="row"><a class="btn order" href="{ORDER}" target="_blank" rel="noopener">สั่งทางไอจี</a>
 <a class="btn" href="{base}play.html">ลองต่อลาย</a></div>
 {S.copybox("ask", ask, "ส่งข้อความนี้ในแชท")}

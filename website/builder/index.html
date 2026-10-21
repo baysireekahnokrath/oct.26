@@ -1,0 +1,451 @@
+<title>OCT.26 Web Builder</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+
+:root{--mat:#EFE4D6;--matline:#E2D3C1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--mat:#2A2833;--matline:#3A3846}}
+:root[data-theme="dark"]{--mat:#2A2833;--matline:#3A3846}
+.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px))}
+.site .in{max-width:987px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3)}
+.site .mark{display:block;width:144px}.site .mark svg{width:100%;height:auto;display:block}
+.site nav{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none;max-width:100%}
+.site nav a{flex:none;font-family:var(--display);font-size:15px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+.site .mark svg.mark-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .site .mark svg.mark-light{display:none}:root:not([data-theme="light"]) .site .mark svg.mark-dark{display:block}}
+:root[data-theme="dark"] .site .mark svg.mark-light{display:none}:root[data-theme="dark"] .site .mark svg.mark-dark{display:block}
+main{padding-top:var(--s5)}
+.intro{display:flex;flex-direction:column;gap:var(--s3)}
+.row{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.stack{display:flex;flex-direction:column;gap:var(--s3)}
+.label{font-family:var(--display);font-size:14px;color:var(--muted)}
+button,.btn{font-family:var(--display);font-size:15px;border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s2) var(--s4);cursor:pointer;min-height:44px;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s2)}
+button:hover,.btn:hover{border-color:var(--cobalt)}
+button:disabled{opacity:.4;cursor:default;border-color:var(--line)}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.primary{background:var(--cobalt);color:var(--on-accent);border-color:var(--cobalt)}
+.order{background:var(--tomato);color:#FFFFFF;border-color:var(--tomato)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+.hero{display:grid;gap:var(--s5);grid-template-columns:minmax(0,1fr);align-items:center}
+@media (min-width:760px){.hero{grid-template-columns:minmax(0,1.618fr) minmax(0,1fr)}}
+.hero h1{font-size:clamp(var(--t3),8vw,53.3px)}
+.hero .pic{border-radius:var(--s4);overflow:hidden;border:1px solid var(--line)}
+.booth{background:var(--cobalt);color:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+.booth .eyebrow{color:#FFC23C}.booth a{color:#FFFFFF}
+.shop{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.shop>a{min-width:0;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:var(--s1)}
+.shop img{border-radius:var(--s3);border:1px solid var(--line);aspect-ratio:4/5;object-fit:cover;width:100%}
+.shop .n{font-family:var(--display);font-size:15px;line-height:1.3}
+.price{font-family:var(--logo);font-weight:500;color:var(--heart)}
+.sold{font-family:var(--display);font-size:14px;color:var(--muted)}
+.fb{font-family:"Mitr",var(--display)}
+.coll{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(233px,1fr))}
+.coll .paper{aspect-ratio:5/3}
+.prod{display:grid;gap:var(--s5);grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.prod{grid-template-columns:minmax(0,1fr) minmax(0,1.618fr);align-items:start}}
+.prod img{border-radius:var(--s4);border:1px solid var(--line)}
+.prod .big{font-size:var(--t3)}
+.pager{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+footer.site-foot{margin-top:var(--s7);border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-direction:column;gap:var(--s3)}
+footer.site-foot .tag{width:34px}
+
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.top .in{max-width:987px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:var(--s3)}
+.top .btn{min-height:40px;padding:var(--s1) var(--s3);font-size:14px;flex:none}
+.top .mark svg.mark-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .top .mark svg.mark-light{display:none}:root:not([data-theme="light"]) .top .mark svg.mark-dark{display:block}}
+:root[data-theme="dark"] .top .mark svg.mark-light{display:none}:root[data-theme="dark"] .top .mark svg.mark-dark{display:block}
+.top .mark{display:flex;align-items:center;gap:var(--s2);text-decoration:none;color:var(--ink);min-width:0;flex-wrap:wrap}
+.top .mark svg{width:96px;height:auto}
+.top .tool{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.sum{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(144px,1fr))}
+.sum div{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3) var(--s4)}
+.sum b{display:block;font-family:var(--logo);font-weight:500;font-size:var(--t3);line-height:1.2;font-variant-numeric:tabular-nums}
+.sum span{font-size:14px;color:var(--muted)}
+.sum .hot b{color:var(--tomato)}
+.note{border-radius:var(--s3);padding:var(--s3) var(--s4);background:var(--chip);font-size:15px}
+.note.warn{background:var(--paper);border:1px solid var(--tomato)}
+.chips{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips button{flex:none;min-height:36px;padding:var(--s1) var(--s3);font-size:14px}
+.list{display:flex;flex-direction:column;gap:var(--s2)}
+.item{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3)}
+.item[open]{border-color:var(--cobalt)}
+.item summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:var(--s3);align-items:center;padding:var(--s2)}
+.item summary::-webkit-details-marker{display:none}
+.item summary img{width:56px;height:70px;object-fit:cover;border-radius:var(--s2);background:var(--chip)}
+.item .t{min-width:0;display:flex;flex-direction:column;gap:2px}
+.item .t b{font-family:var(--display);font-weight:600;font-size:16px;line-height:1.3;overflow-wrap:anywhere}
+.item .t small{font-size:13px;color:var(--muted)}
+.item .p{font-family:var(--logo);font-weight:500;color:var(--heart);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font-family:var(--display);font-size:12px;line-height:1;padding:4px 8px;border-radius:99px;background:var(--chip);color:var(--ink)}
+.tag.ed{background:var(--sun);color:#1C1B22}.tag.off{background:var(--ink);color:var(--bg)}.tag.so{background:var(--tomato);color:#FFFFFF}
+.form{display:flex;flex-direction:column;gap:var(--s3);padding:0 var(--s3) var(--s3);border-top:1px solid var(--line);padding-top:var(--s3)}
+.f{display:flex;flex-direction:column;gap:4px;min-width:0}
+.f label{font-family:var(--display);font-size:14px;color:var(--muted)}
+.f input,.f textarea{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:var(--s2);
+  padding:var(--s2) var(--s3);width:100%;min-height:44px}
+.f textarea{min-height:76px;resize:vertical}
+.f input:focus-visible,.f textarea:focus-visible{outline:3px solid var(--cobalt);outline-offset:1px}
+.f .was{font-size:13px;color:var(--tomato)}
+.f.ch input,.f.ch textarea{border-color:var(--sun);border-width:2px}
+.price-row{display:flex;gap:var(--s2);align-items:stretch}
+.price-row input{text-align:center;font-family:var(--logo);font-weight:500;font-size:20px;font-variant-numeric:tabular-nums}
+.price-row button{flex:none;min-width:56px;padding:0 var(--s3)}
+.sw{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);min-height:44px;font-family:var(--display);font-size:15px}
+.sw input{appearance:none;-webkit-appearance:none;width:52px;height:30px;border-radius:99px;background:var(--line);position:relative;cursor:pointer;flex:none;margin:0;transition:background .15s}
+.sw input::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#FFFFFF;transition:transform .15s}
+.sw input:checked{background:var(--mint)}.sw input:checked::after{transform:translateX(22px)}
+.sw input.inv:checked{background:var(--tomato)}
+.sw input:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.sw.ch span::after{content:" · แก้แล้ว";color:var(--tomato);font-size:13px}
+.links{display:flex;gap:var(--s3);flex-wrap:wrap;font-size:14px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--ink);color:var(--bg);
+  padding:var(--s3) max(16px,env(safe-area-inset-right,0px)) calc(var(--s3) + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.bar .in{max-width:987px;margin:0 auto;display:flex;gap:var(--s3);align-items:center;justify-content:space-between}
+.bar b{font-family:var(--display);font-size:16px}.bar small{display:block;font-size:13px;opacity:.75}
+.bar .primary{background:var(--tomato);border-color:var(--tomato);color:#FFFFFF}
+.review{display:flex;flex-direction:column;gap:var(--s3)}
+.review ol{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:4px}
+.review li{overflow-wrap:anywhere}
+.review del{color:var(--muted)}.review ins{text-decoration:none;font-weight:600}
+.reqs{display:flex;flex-direction:column;gap:var(--s2)}
+.req{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3);display:flex;flex-direction:column;gap:4px}
+.req .h{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.pill{font-family:var(--display);font-size:13px;padding:2px 10px;border-radius:99px;background:var(--chip)}
+.pill.waiting{background:var(--sun);color:#1C1B22}.pill.working{background:var(--cobalt);color:#FFFFFF}
+.pill.live{background:var(--mint);color:#1C1B22}.pill.failed{background:var(--tomato);color:#FFFFFF}
+.req small{color:var(--muted);font-size:13px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--cobalt);color:#FFFFFF;
+  font-family:var(--display);font-size:14px;padding:var(--s2) var(--s4);border-radius:99px;max-width:calc(100% - 32px)}
+.empty{color:var(--muted);font-size:15px}
+pre.msg{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);border:1px solid var(--line);border-radius:var(--s2);padding:var(--s3);margin:0;font:inherit;font-size:15px}
+@media (prefers-reduced-motion:reduce){.sw input,.sw input::after{transition:none}}
+</style>
+<header class="top"><div class="in"><a class="mark" href="https://oct26brand.com" target="_blank" rel="noopener" aria-label="เปิดเว็บ OCT. 26">
+<svg class="mark-light" role="img" aria-label="OCT. 26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 176"><g transform="translate(38.20,138.20)"><g transform="scale(1.00000)"><circle cx="52.13" cy="-50.00" r="44.83" fill="none" stroke="#1C1B22" stroke-width="14.59"/><path d="M204.03,-19.72 A44.83,44.83 0 1 1 204.03,-80.28" fill="none" stroke="#1C1B22" stroke-width="14.59"/><rect x="224.00" y="-100.00" width="80.90" height="14.59" fill="#1C1B22"/><rect x="257.16" y="-100.00" width="14.59" height="100.00" fill="#1C1B22"/><circle cx="325.73" cy="-11.80" r="11.80" fill="#FF5A36"/><clipPath id="ow15"><rect x="361.80" y="-102.13" width="61.80" height="102.13"/></clipPath><g clip-path="url(#ow15)"><path d="M371.31,-61.25 A23.61,23.61 0 1 1 411.31,-56.69 L366.18,-10.21" fill="none" stroke="#1C1B22" stroke-width="14.59"/><rect x="361.80" y="-14.59" width="61.80" height="14.59" fill="#1C1B22"/></g><clipPath id="ow16"><rect x="423.61" y="-100.00" width="90.98" height="114.59"/></clipPath><g clip-path="url(#ow16)"><circle cx="469.10" cy="-28.77" r="23.61" fill="none" stroke="#1C1B22" stroke-width="14.59"/><line x1="477.75" y1="-114.59" x2="447.16" y2="-37.48" stroke="#1C1B22" stroke-width="14.59"/></g></g></g></svg><svg class="mark-dark" role="img" aria-label="OCT. 26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 176"><g transform="translate(38.20,138.20)"><g transform="scale(1.00000)"><circle cx="52.13" cy="-50.00" r="44.83" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><path d="M204.03,-19.72 A44.83,44.83 0 1 1 204.03,-80.28" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><rect x="224.00" y="-100.00" width="80.90" height="14.59" fill="#FFF6EC"/><rect x="257.16" y="-100.00" width="14.59" height="100.00" fill="#FFF6EC"/><circle cx="325.73" cy="-11.80" r="11.80" fill="#FF5A36"/><clipPath id="ow25"><rect x="361.80" y="-102.13" width="61.80" height="102.13"/></clipPath><g clip-path="url(#ow25)"><path d="M371.31,-61.25 A23.61,23.61 0 1 1 411.31,-56.69 L366.18,-10.21" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><rect x="361.80" y="-14.59" width="61.80" height="14.59" fill="#FFF6EC"/></g><clipPath id="ow26"><rect x="423.61" y="-100.00" width="90.98" height="114.59"/></clipPath><g clip-path="url(#ow26)"><circle cx="469.10" cy="-28.77" r="23.61" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><line x1="477.75" y1="-114.59" x2="447.16" y2="-37.48" stroke="#FFF6EC" stroke-width="14.59"/></g></g></g></svg><span class="tool">Web Builder</span></a>
+<a class="btn" href="https://oct26brand.com" target="_blank" rel="noopener">เปิดเว็บจริง</a></div></header>
+<div class="wrap"><main>
+<section style="padding-top:var(--s5)"><span class="eyebrow">แก้เว็บเองได้ ไม่ต้องเขียนโค้ด</span>
+<h1>แก้ราคา ชื่อ และของหมด แล้วกดขึ้นเว็บ</h1>
+<p class="lead">แตะสินค้าเพื่อแก้ ทุกอย่างบันทึกเป็นร่างทันที เว็บจริงยังไม่เปลี่ยนจนกว่าจะกด “ขึ้นเว็บ” แล้ว Claude ทำโปสเตอร์ใหม่และอัปเดตเว็บให้</p>
+<p class="note warn" id="ro" hidden>เปิดหน้านี้ในบัญชี claude.ai ของเจ้าของร้านเพื่อแก้ไข ตอนนี้ดูได้อย่างเดียว</p>
+<div class="sum"><div><b id="nShow">30</b><span>สินค้าที่โชว์บนเว็บ</span></div><div><b id="nOff">0</b><span>ซ่อนอยู่</span></div>
+<div><b id="nSold">0</b><span>หมดชั่วคราว</span></div><div class="hot"><b id="nEd">0</b><span>แก้ไว้ ยังไม่ขึ้นเว็บ</span></div></div></section>
+
+<section id="booth"><span class="eyebrow">หน้าแรก</span><h2>ประกาศออกบูธ</h2>
+<div class="card stack"><p id="boothState" class="cap"></p>
+<div class="f"><label for="until">แสดงประกาศถึงวันที่ (หายเองหลังเที่ยงคืนวันนั้น)</label><input type="date" id="until"><span class="was" id="boothWas" hidden></span></div>
+<div class="row"><button type="button" id="hideNow">ซ่อนประกาศตั้งแต่วันนี้</button></div></div></section>
+
+<section id="shop"><span class="eyebrow">สินค้า 30 แบบ</span><h2>สินค้าบนเว็บ</h2>
+<div class="chips" role="group" aria-label="กรองสินค้า">
+<button type="button" data-filter="all" aria-pressed="true">ทั้งหมด</button><button type="button" data-filter="soi2" aria-pressed="false">SOI. 02</button>
+<button type="button" data-filter="love" aria-pressed="false"><span class="fb">ห้าหมี</span>&nbsp;Love</button>
+<button type="button" data-filter="ed" aria-pressed="false">แก้แล้ว</button><button type="button" data-filter="off" aria-pressed="false">ซ่อน</button>
+<button type="button" data-filter="so" aria-pressed="false">หมด</button></div>
+<div class="list" id="list"></div></section>
+
+<section id="review" hidden><span class="eyebrow">ตรวจก่อนขึ้นเว็บ</span><h2>สิ่งที่จะเปลี่ยน</h2>
+<div class="card review"><ol id="chList"></ol><p class="empty" id="noCh" hidden>ยังไม่มีอะไรแก้</p>
+<p class="cap">เปลี่ยนชื่อ ราคา หรือประโยคขาย Claude จะทำโปสเตอร์สินค้านั้นใหม่ด้วย ราคาในแผนบูธจะเปลี่ยนตามเพราะใช้ข้อมูลชุดเดียวกัน</p>
+<div class="f"><label for="memo">ฝากบอก Claude (ไม่ใส่ก็ได้)</label><textarea id="memo" maxlength="300"></textarea></div>
+<div class="row"><button type="button" class="primary order" id="go">ขึ้นเว็บ</button><button type="button" id="clear">ล้างร่างทั้งหมด</button></div>
+<div class="note warn" id="clearAsk" hidden><p>ล้างร่างทั้งหมด แล้วกลับไปเหมือนเว็บตอนนี้?</p>
+<div class="row" style="margin-top:var(--s2)"><button type="button" id="clearYes">ล้างเลย</button><button type="button" id="clearNo">ไม่ล้าง</button></div></div>
+<p class="note" id="sending" hidden>กำลังส่งให้ Claude … หน้าต่างขออนุญาตอาจขึ้นมาครั้งแรก</p>
+<div class="note warn stack" id="fallback" hidden><p>บันทึกคำขอ <b id="sentId"></b> แล้ว <span id="why"></span></p>
+<pre class="msg" id="msg"></pre><div class="row"><button type="button" id="copy">คัดลอกข้อความ</button></div></div></div></section>
+
+<section id="history"><span class="eyebrow">ประวัติ</span><h2>การขึ้นเว็บ</h2>
+<p class="cap">Claude ใช้เวลาราว 5–10 นาที ทำโปสเตอร์ใหม่ สร้างเว็บ แล้วส่งขึ้น Cloudflare จากนั้นเว็บเปลี่ยนในไม่กี่นาที</p>
+<p class="empty" id="noReq">ยังไม่เคยขึ้นเว็บจากหน้านี้ คำขอแรกจะขึ้นที่นี่พร้อมสถานะ</p>
+<div class="reqs" id="reqs"></div></section>
+</main></div>
+<div class="bar" id="bar" hidden><div class="in"><div><b id="barN"></b><small>ร่างบันทึกแล้ว เว็บจริงยังไม่เปลี่ยน</small></div>
+<button type="button" class="primary" id="openReview">ตรวจแล้วขึ้นเว็บ</button></div></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script>
+const LIVE = {"products": {"01": {"name": "ที่เก็บสายชาร์จหมี", "size": "10.4 × 10.4 ซม.", "hook": "สายชาร์จพันกันในกระเป๋าทุกวัน หมีตัวนี้ช่วยได้", "price": 59, "hide": false, "sold": false, "coll": "love"}, "02": {"name": "ที่คั่นหนังสือหมี", "size": "10.4 × 10.4 ซม.", "hook": "หมีเฝ้าหน้าที่อ่านค้างไว้ให้", "price": 59, "hide": false, "sold": false, "coll": "love"}, "03": {"name": "ป้ายชื่อติดกระเป๋านักเรียน", "size": "หมี 10.4 ซม. สาย 25 ซม.", "hook": "เปิดเทอมนี้ กระเป๋าลูกจะไม่หายไปกับของเพื่อน", "price": 129, "hide": false, "sold": false, "coll": "love"}, "04": {"name": "ห่วงผ้าเช็ดปากหมี", "size": "หมี 10.4 ซม.", "hook": "โต๊ะวันเกิดเด็กที่หมีนั่งเฝ้าทุกจาน", "price": 79, "hide": false, "sold": false, "coll": "love"}, "05": {"name": "ซองอั่งเปาพับกังหัน", "size": "5.4 × 5.4 ซม. เมื่อพับ", "hook": "อั่งเปาที่ผู้รับเก็บไว้ใช้ต่อ ไม่ทิ้ง", "price": 69, "hide": false, "sold": false, "coll": "soi2"}, "06": {"name": "ซองใส่เครื่องประดับ", "size": "5.4 × 5.4 ซม.", "hook": "ห่อแหวนด้วยหนังแท้แทนกล่องกระดาษ", "price": 69, "hide": false, "sold": false, "coll": "soi2"}, "07": {"name": "ซองการ์ดติดของขวัญ", "size": "5.4 × 5.4 ซม.", "hook": "การ์ดอวยพรที่ห่อมาอย่างตั้งใจ", "price": 59, "hide": false, "sold": false, "coll": "soi2"}, "08": {"name": "กล่องแหวนหนังแท้", "size": "4.5 × 4.5 × 4.5 ซม.", "hook": "กล่องแหวนที่เปิดทีละด้านได้ เซอร์ไพรส์นานขึ้นอีกนิด", "price": 290, "hide": false, "sold": false, "coll": "soi2"}, "09": {"name": "ลูกเต๋าหนัง", "size": "4.5 ซม.", "hook": "ลูกเต๋าที่ทอยแล้วไม่ดัง เล่นตอนดึกได้", "price": 159, "hide": false, "sold": false, "coll": "soi2"}, "10": {"name": "ซองใส่ AirTag", "size": "4.5 × 4.5 ซม.", "hook": "AirTag ห้อยกระเป๋าแบบไม่ต้องใช้ไขควง", "price": 129, "hide": false, "sold": false, "coll": "soi2"}, "11": {"name": "ชุดตัวต่อหนัง 24 ชิ้น", "size": "ชุด 24 ชิ้น", "hook": "ของเล่นที่ไม่มีพลาสติกสักชิ้น", "price": 390, "hide": false, "sold": false, "coll": "soi2"}, "12": {"name": "ที่ใส่ปากกามงกุฎ", "size": "6.4 ซม. + ยอดมงกุฎ", "hook": "ปากกาบนโต๊ะทำงานได้มงกุฎของตัวเอง", "price": 199, "hide": false, "sold": false, "coll": "soi2"}, "13": {"name": "แผ่นรองจานลายข้าวหลามตัด", "size": "ประมาณ 27 × 36 ซม.", "hook": "จานธรรมดาดูแพงขึ้นทันที", "price": 390, "hide": false, "sold": false, "coll": "soi2"}, "14": {"name": "ปลอกแก้วกาแฟ", "size": "รอบวง 25.5 ซม. แก้ว 12 oz", "hook": "กาแฟร้อนแค่ไหนก็ถือได้", "price": 149, "hide": false, "sold": false, "coll": "soi2"}, "15": {"name": "ที่รองแก้วไส้ไม้ก๊อก", "size": "6.4 ซม.", "hook": "แก้วเย็นแค่ไหนโต๊ะก็ไม่เปียก", "price": 99, "hide": false, "sold": false, "coll": "soi2"}, "16": {"name": "กระเป๋าเหรียญจิ๋ว", "size": "6.4 ซม.", "hook": "เหรียญสิบไม่หล่นหายในกระเป๋าอีก", "price": 99, "hide": false, "sold": false, "coll": "soi2"}, "17": {"name": "กล่องของขวัญสลับลาย", "size": "6.4 ซม.", "hook": "กล่องของขวัญที่สวยกว่าของข้างใน", "price": 249, "hide": false, "sold": false, "coll": "soi2"}, "18": {"name": "กล่องของชำร่วยงานแต่ง", "size": "6 × 6 × 6 ซม.", "hook": "ของชำร่วยที่แขกเก็บไว้ ไม่ทิ้งไว้บนโต๊ะ", "price": 159, "hide": false, "sold": false, "coll": "soi2"}, "19": {"name": "ที่ใส่แปรงแต่งหน้า", "size": "6 ซม.", "hook": "โต๊ะเครื่องแป้งเป็นระเบียบในหนึ่งนาที", "price": 199, "hide": false, "sold": false, "coll": "soi2"}, "20": {"name": "ของแขวนต้นคริสต์มาส", "size": "6 ซม.", "hook": "ต้นคริสต์มาสปีนี้มีของแขวนหนังแท้", "price": 159, "hide": false, "sold": false, "coll": "soi2"}, "21": {"name": "ราวหมีห้าตัว", "size": "ยาวประมาณ 45 ซม.", "hook": "พ่อ แม่ และลูกสามคน แขวนไว้หน้าห้องให้รู้ว่าบ้านนี้มีกันกี่คน", "price": 349, "hide": false, "sold": false, "coll": "love"}, "22": {"name": "ที่รองแก้วหมี", "size": "10.4 ซม.", "hook": "แก้วนมตอนเช้ามีหมีรองอยู่", "price": 59, "hide": false, "sold": false, "coll": "love"}, "23": {"name": "ที่ห้อยกระเป๋าหมีหัวใจ", "size": "หมี 10.4 ซม.", "hook": "หมีห้อยกระเป๋าที่บอกว่าใครรักคุณอยู่", "price": 129, "hide": false, "sold": false, "coll": "love"}, "24": {"name": "ที่รองแก้วกังหัน", "size": "9 ซม.", "hook": "ที่รองแก้วลายกังหัน หนังแท้ทั้งแผ่น", "price": 49, "hide": false, "sold": false, "coll": "soi2"}, "25": {"name": "กังหันลมหนัง", "size": "9 ซม.", "hook": "ของเล่นที่ลูกเป่าเล่นได้ทั้งวัน", "price": 89, "hide": false, "sold": false, "coll": "soi2"}, "26": {"name": "ป้ายห้อยของขวัญ", "size": "9 ซม.", "hook": "ป้ายชื่อที่ผู้รับเก็บไว้ห้อยกุญแจต่อได้", "price": 39, "hide": false, "sold": false, "coll": "soi2"}, "27": {"name": "ที่รองแก้วสี่เหลี่ยม", "size": "9 ซม.", "hook": "ที่รองแก้วทรงเหลี่ยมมน หนังแท้", "price": 49, "hide": false, "sold": false, "coll": "soi2"}, "28": {"name": "ที่รองแก้ววงกลม", "size": "9 ซม.", "hook": "ที่รองแก้วทรงกลม หนังแท้", "price": 49, "hide": false, "sold": false, "coll": "soi2"}, "29": {"name": "ชุดที่รองแก้ว 4 ลาย", "size": "9–10.4 ซม.", "hook": "สี่แก้ว สี่ลาย ไม่ต้องจำว่าแก้วไหนของใคร", "price": 179, "hide": false, "sold": false, "coll": "soi2"}, "30": {"name": "ชุดต่อเองกล่องลูกบาศก์", "size": "6 ซม. เมื่อต่อเสร็จ", "hook": "ต่อเองได้ในห้านาที ไม่ต้องใช้กาว ไม่ต้องใช้เข็ม", "price": 129, "hide": false, "sold": false, "coll": "soi2"}}, "booth": {"until": "2026-11-01"}};
+const CFG = {"url": "https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG", "env": "env_01WKXaiUwedx7f5o3VCkUxPz", "repo": "https://github.com/baysireekahnokrath/oct.26", "branch": "main", "site": "https://oct26brand.com", "base": "2026-11-01"};
+const FIELDS = ["name","price","hook","size","hide","sold"];
+const NS = Object.keys(LIVE.products).sort();   // "10" sorts before "01" as an object key, so keep our own order
+const LABEL = {name:"ชื่อ",price:"ราคา",hook:"ประโยคขาย",size:"ขนาด",hide:"แสดงบนเว็บ",sold:"หมดชั่วคราว"};
+const $ = (s, el=document) => el.querySelector(s);
+const drafts = {};                  // "p01" -> body, "booth" -> {until}
+let db = null, canWrite = false, me = null, filter = "all", reqs = [];
+const use = name => (window.claude && window.claude.use) ? window.claude.use(name).catch(()=>null) : Promise.resolve(null);
+
+function eff(n){ return Object.assign({}, LIVE.products[n], pick(drafts["p"+n])); }
+function pick(d){ if(!d) return {}; const o={}; for(const f of FIELDS) if(f in d) o[f]=d[f]; return o; }
+function diff(n){ const l=LIVE.products[n], e=eff(n); return FIELDS.filter(f=>e[f]!==l[f]); }
+function boothUntil(){ return (drafts.booth && drafts.booth.until) || LIVE.booth.until; }
+function show(v,f){ if(f==="hide") return v?"ซ่อน":"แสดง"; if(f==="sold") return v?"หมด":"มีของ"; if(f==="price") return v+" บาท"; return v; }
+function changes(){
+  const out=[];
+  for(const n of NS) for(const f of diff(n)){
+    const l=LIVE.products[n][f], e=eff(n)[f];
+    out.push({n, f, from:show(l,f), to:show(e,f), name:eff(n).name});
+  }
+  if(boothUntil()!==LIVE.booth.until) out.push({n:"บูธ", f:"until", from:thaiDate(LIVE.booth.until), to:thaiDate(boothUntil()), name:"ประกาศออกบูธ"});
+  return out;
+}
+function thaiDate(s){ try{ return new Date(s+"T12:00:00+07:00").toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"numeric"}); }catch(_){ return s; } }
+function changeText(c){ return c.n==="บูธ" ? `ประกาศออกบูธ แสดงถึง ${c.from} → ${c.to}` : `#${c.n} ${c.name}: ${LABEL[c.f]} ${c.from} → ${c.to}`; }
+
+let toastT;
+function toast(t){ const el=$("#toast"); el.textContent=t; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,1800); }
+
+/* ---------- product list, built once; values refreshed in place so typing keeps focus ---------- */
+function build(){
+  const list=$("#list");
+  for(const n of NS){
+    const p=LIVE.products[n];
+    const d=document.createElement("details"); d.className="item"; d.id="it"+n; d.dataset.n=n; d.dataset.coll=p.coll;
+    d.innerHTML=`<summary><img src="thumbs/${n}.jpg" alt="" width="56" height="70" loading="lazy">
+      <span class="t"><b></b><small>#${n} · ${p.coll==="love"?"ห้าหมี Love":"SOI. 02"}</small><span class="tags"></span></span><span class="p"></span></summary>
+      <div class="form">
+        <div class="f" data-f="name"><label for="name${n}">ชื่อสินค้า</label><input id="name${n}" maxlength="60" autocomplete="off"><span class="was" hidden></span></div>
+        <div class="f" data-f="price"><label for="price${n}">ราคา (บาท)</label>
+          <div class="price-row"><button type="button" data-step="-10" aria-label="ลด 10 บาท">−10</button>
+          <input id="price${n}" inputmode="numeric" pattern="[0-9]*" maxlength="5" autocomplete="off">
+          <button type="button" data-step="10" aria-label="เพิ่ม 10 บาท">+10</button></div><span class="was" hidden></span></div>
+        <div class="f" data-f="hook"><label for="hook${n}">ประโยคขาย (โชว์ใต้ชื่อและบนโปสเตอร์)</label><textarea id="hook${n}" maxlength="160"></textarea><span class="was" hidden></span></div>
+        <div class="f" data-f="size"><label for="size${n}">ขนาด</label><input id="size${n}" maxlength="60" autocomplete="off"><span class="was" hidden></span></div>
+        <label class="sw" data-f="hide" for="show${n}"><span>แสดงบนเว็บ</span><input type="checkbox" id="show${n}" role="switch"></label>
+        <label class="sw" data-f="sold" for="sold${n}"><span>หมดชั่วคราว (ยังโชว์ แต่บอกลูกค้าว่าหมด)</span><input type="checkbox" class="inv" id="sold${n}" role="switch"></label>
+        <div class="links"><a href="${CFG.site}/p/${n}.html" target="_blank" rel="noopener">ดูหน้านี้บนเว็บ</a>
+          <button type="button" class="reset" hidden>คืนค่าเดิมของสินค้านี้</button></div>
+      </div>`;
+    list.appendChild(d);
+    for(const f of ["name","hook","size"]) $("#"+f+n,d).addEventListener("input",e=>edit(n,f,e.target.value));
+    $("#price"+n,d).addEventListener("input",e=>{ const v=e.target.value.replace(/\D/g,""); if(v!==e.target.value) e.target.value=v; if(v) edit(n,"price",+v); });
+    d.querySelectorAll("[data-step]").forEach(b=>b.addEventListener("click",()=>{ const v=Math.max(1,Math.min(99999,eff(n).price+ +b.dataset.step)); edit(n,"price",v,true); }));
+    $("#show"+n,d).addEventListener("change",e=>edit(n,"hide",!e.target.checked,true));
+    $("#sold"+n,d).addEventListener("change",e=>edit(n,"sold",e.target.checked,true));
+    $(".reset",d).addEventListener("click",()=>{ for(const f of FIELDS) pending[n]=Object.assign(pending[n]||{}, {[f]:LIVE.products[n][f]}); flush(n); paint(); });
+  }
+}
+
+function paint(){
+  for(const n of NS){
+    const d=$("#it"+n), e=eff(n), l=LIVE.products[n], ch=diff(n);
+    $("summary b",d).textContent=e.name; $(".p",d).textContent=e.price+" ฿";
+    const tags=[]; if(ch.length) tags.push('<span class="tag ed">แก้แล้ว</span>'); if(e.hide) tags.push('<span class="tag off">ซ่อน</span>'); if(e.sold) tags.push('<span class="tag so">หมด</span>');
+    $(".tags",d).innerHTML=tags.join("");
+    for(const f of ["name","price","hook","size"]){
+      const inp=$("#"+f+n,d), box=inp.closest(".f"), was=$(".was",box);
+      if(document.activeElement!==inp) inp.value=String(e[f]);
+      box.classList.toggle("ch", e[f]!==l[f]); was.hidden = e[f]===l[f]; was.textContent="เดิม: "+show(l[f],f);
+    }
+    $("#show"+n,d).checked=!e.hide; $("#sold"+n,d).checked=e.sold;
+    d.querySelector('.sw[data-f="hide"]').classList.toggle("ch",e.hide!==l.hide);
+    d.querySelector('.sw[data-f="sold"]').classList.toggle("ch",e.sold!==l.sold);
+    $(".reset",d).hidden=!ch.length||!canWrite;
+    d.hidden = !(filter==="all" || filter===d.dataset.coll || (filter==="ed"&&ch.length) || (filter==="off"&&e.hide) || (filter==="so"&&e.sold));
+    d.querySelectorAll("input,textarea,.form button").forEach(x=>x.disabled=!canWrite);
+  }
+  const bu=$("#until"); if(document.activeElement!==bu) bu.value=boothUntil();
+  bu.disabled=!canWrite; $("#boothWas").hidden=boothUntil()===LIVE.booth.until; $("#boothWas").textContent="เดิม: "+thaiDate(LIVE.booth.until);
+  $("#boothState").textContent = Date.parse(boothUntil()+"T23:59:59+07:00")<Date.now() ? "ตอนนี้ประกาศซ่อนอยู่" : "ประกาศโชว์บนหน้าแรกถึง "+thaiDate(boothUntil());
+  const all=NS.map(eff);
+  $("#nShow").textContent=all.filter(p=>!p.hide).length; $("#nOff").textContent=all.filter(p=>p.hide).length; $("#nSold").textContent=all.filter(p=>p.sold).length;
+  const cs=changes(); $("#nEd").textContent=cs.length;
+  $("#bar").hidden=!cs.length||!canWrite;
+  $("#barN").textContent=`แก้ไว้ ${cs.length} อย่าง`;
+  const ol=$("#chList"); ol.innerHTML="";
+  for(const c of cs){ const li=document.createElement("li"); li.textContent=changeText(c); ol.appendChild(li); }
+  $("#review").hidden = $("#review").hidden || !cs.length;
+  $("#noCh").hidden=!!cs.length;
+}
+
+/* ---------- drafts: one write at a time per document, coalesced per pause ---------- */
+const pending={}, timers={}, busy={};
+function edit(n,f,v,now){
+  if(!canWrite) return;
+  if(f!=="price"||(Number.isInteger(v)&&v>=1&&v<=99999)) pending[n]=Object.assign(pending[n]||{},{[f]:v});
+  paintSoon(n,f,v);
+  clearTimeout(timers[n]); timers[n]=setTimeout(()=>flush(n), now?0:700);
+}
+function paintSoon(n,f,v){ const d=drafts["p"+n]||{}; drafts["p"+n]=Object.assign({},LIVE.products[n],pick(d),{[f]:v}); paint(); }
+async function flush(n){
+  if(busy[n]){ timers[n]=setTimeout(()=>flush(n),300); return; }
+  const p=pending[n]; if(!p) return; delete pending[n];
+  const body=Object.assign({},LIVE.products[n],pick(drafts["p"+n]),p);
+  for(const f of ["name","hook","size"]) if(!String(body[f]).trim()){ toast(LABEL[f]+"ว่างไม่ได้ ใช้ค่าเดิมไว้ก่อน"); body[f]=LIVE.products[n][f]; }
+  delete body.coll; drafts["p"+n]=body; paint();
+  const same=FIELDS.every(f=>body[f]===LIVE.products[n][f]);
+  busy[n]=true;
+  try{
+    if(same) await db.doc("drafts/p"+n).delete();
+    else await db.doc("drafts/p"+n).set(Object.assign({},pick(body),{at:Date.now(),by:me||""}));
+    toast("บันทึกร่างแล้ว");
+  }catch(e){ failWrite(e); }
+  busy[n]=false;
+}
+function failWrite(e){
+  if(e&&e.code==="invalid_argument"){ canWrite=false; paint(); $("#ro").hidden=false; }
+  else toast("บันทึกไม่ได้ตอนนี้ ลองอีกครั้ง");
+}
+let boothBusy=false;
+async function saveBooth(v){
+  if(!canWrite||!/^20\d\d-\d\d-\d\d$/.test(v)||boothBusy) return;
+  drafts.booth={until:v}; paint(); boothBusy=true;
+  try{ if(v===LIVE.booth.until) await db.doc("drafts/booth").delete(); else await db.doc("drafts/booth").set({until:v,at:Date.now(),by:me||""}); toast("บันทึกร่างแล้ว"); }
+  catch(e){ failWrite(e); }
+  boothBusy=false;
+}
+
+/* ---------- send: a request with the reviewed drafts, then a Claude Code session that applies it ---------- */
+function snapshotDrafts(){
+  const products={};
+  for(const n of NS){ const ch=diff(n); if(ch.length){ const e=eff(n); products[n]={}; for(const f of ch) products[n][f]=e[f]; } }
+  const out={products}; if(boothUntil()!==LIVE.booth.until) out.booth={until:boothUntil()};
+  return out;
+}
+async function send(){
+  const btn=$("#go"); btn.disabled=true; $("#fallback").hidden=true;
+  for(const n of Object.keys(pending)) await flush(n);
+  const cs=changes(); if(!cs.length){ btn.disabled=false; return; }
+  const ref=db.collection("requests").doc();
+  const req={at:Date.now(),by:me||"",status:"waiting",changes:cs.map(changeText),drafts:snapshotDrafts(),note:$("#memo").value.trim().slice(0,300),base:CFG.base};
+  try{ await ref.set(req); }catch(e){ failWrite(e); btn.disabled=false; return; }
+  $("#sentId").textContent=ref.id;
+  const msg=`ขึ้นเว็บตาม OCT.26 Web Builder คำขอ ${ref.id}\nทำตาม website/builder/APPLY.md · หน้า Web Builder: ${CFG.url}`;
+  $("#msg").textContent=msg;
+  const mcp=await use("mcp");
+  if(!mcp){ $("#fallback").hidden=false; $("#why").textContent="หน้านี้สั่ง Claude เองไม่ได้ในมุมมองนี้"; btn.disabled=false; return; }
+  $("#sending").hidden=false;
+  try{
+    const r=await mcp.callTool("Claude Code Remote","create_session",{environment_id:CFG.env,source_url:CFG.repo,source_revision:CFG.branch,outcome_branch:CFG.branch,
+      title:"OCT.26 Web Builder · "+ref.id,prompt:msg});
+    const sid=(JSON.stringify(r.payload??r).match(/session_[A-Za-z0-9]+/)||[])[0]||"";
+    try{ await ref.update({status:"working",session:sid,startedAt:Date.now()}); }catch(_){}
+    toast("ส่งให้ Claude แล้ว");
+    $("#review").hidden=true;
+  }catch(e){
+    const why={server_not_connected:"ยังไม่ได้เพิ่ม Claude Code Remote ใน claude.ai Settings → Connectors",needs_reauth:"ต้องเชื่อม Claude Code Remote ใหม่ใน claude.ai Settings → Connectors",
+      approval_required:"ต้องกดอนุญาตให้หน้านี้สั่ง Claude Code ก่อน กดขึ้นเว็บอีกครั้งแล้วเลือกอนุญาต",not_in_manifest:"หน้านี้ยังไม่ได้รับอนุญาตให้สั่ง Claude Code",
+      server_unavailable:"Claude Code ไม่ตอบตอนนี้ อาจเริ่มไปแล้ว ดูสถานะด้านล่างก่อนกดใหม่",upstream_error:"Claude Code ไม่ตอบตอนนี้ อาจเริ่มไปแล้ว ดูสถานะด้านล่างก่อนกดใหม่"}[e&&e.code];
+    $("#why").textContent=(why||"สั่ง Claude Code ไม่สำเร็จ")+" หรือวางข้อความนี้ใน Claude Code (สภาพแวดล้อม OCT.26) เอง";
+    $("#fallback").hidden=false;
+  }
+  $("#sending").hidden=true; btn.disabled=false;
+}
+
+function paintReqs(){
+  const box=$("#reqs"); box.innerHTML="";
+  $("#noReq").hidden=!!reqs.length;
+  const word={waiting:"รอ Claude",working:"Claude กำลังทำ",live:"ขึ้นเว็บแล้ว",failed:"ไม่ผ่าน"};
+  for(const r of reqs){
+    const d=r.data(), el=document.createElement("div"); el.className="req";
+    const h=document.createElement("div"); h.className="h";
+    const t=document.createElement("b"); t.textContent=new Date(d.at||0).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"});
+    const pl=document.createElement("span"); const st=word[d.status]?d.status:"waiting"; pl.className="pill "+st; pl.textContent=word[st];
+    h.append(t,pl); el.appendChild(h);
+    const s=document.createElement("small"); s.textContent=`คำขอ ${r.id} · ${(d.changes||[]).length} อย่าง`+(d.commit?` · commit ${String(d.commit).slice(0,7)}`:""); el.appendChild(s);
+    for(const c of (d.changes||[]).slice(0,6)){ const li=document.createElement("small"); li.textContent="• "+c; el.appendChild(li); }
+    if(d.result){ const p=document.createElement("p"); p.style.fontSize="14px"; p.textContent=d.result; el.appendChild(p); }
+    if(d.session){ const a=document.createElement("a"); a.href="https://claude.ai/code/"+encodeURIComponent(d.session); a.target="_blank"; a.rel="noopener"; a.textContent="ดูที่ Claude ทำ"; a.style.fontSize="14px"; el.appendChild(a); }
+    box.appendChild(el);
+  }
+}
+
+async function start(){
+  build(); paint();
+  document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{ filter=b.dataset.filter;
+    document.querySelectorAll("[data-filter]").forEach(x=>x.setAttribute("aria-pressed",String(x===b))); paint(); }));
+  $("#until").addEventListener("change",e=>saveBooth(e.target.value));
+  $("#hideNow").addEventListener("click",()=>{ const d=new Date(Date.now()+7*3600e3-864e5).toISOString().slice(0,10); saveBooth(d); });
+  $("#openReview").addEventListener("click",()=>{ $("#review").hidden=false; paint(); $("#review").scrollIntoView({behavior:"smooth",block:"start"}); });
+  $("#go").addEventListener("click",send);
+  $("#clear").addEventListener("click",()=>{ $("#clearAsk").hidden=false; });
+  $("#clearNo").addEventListener("click",()=>{ $("#clearAsk").hidden=true; });
+  $("#clearYes").addEventListener("click",async()=>{ $("#clearAsk").hidden=true;
+    for(const k of Object.keys(drafts)){ try{ await db.doc("drafts/"+k).delete(); }catch(e){ failWrite(e); break; } delete drafts[k]; }
+    paint(); toast("ล้างร่างแล้ว"); });
+  $("#copy").addEventListener("click",()=>{ const t=$("#msg").textContent, b=$("#copy");
+    const sel=()=>{ const r=document.createRange(); r.selectNodeContents($("#msg")); const w=getSelection(); w.removeAllRanges(); w.addRange(r); b.textContent="เลือกข้อความแล้ว กดคัดลอก"; };
+    try{ navigator.clipboard.writeText(t).then(()=>{ b.textContent="คัดลอกแล้ว"; },sel); }catch(_){ sel(); } });
+
+  db = await use("db");
+  const user = await use("user");
+  if(!db){ $("#ro").hidden=false; return; }
+  me = user ? await user.id().catch(()=>null) : null;
+  const w = user ? await Promise.resolve(user.can("data.write")).catch(()=>null) : null;
+  canWrite = w!==false; $("#ro").hidden=canWrite;
+  db.collection("drafts").onSnapshot(s=>{
+    for(const k of Object.keys(drafts)) if(!s.docs.some(d=>d.id===k) && !pending[k.slice(1)] && !busy[k.slice(1)]) delete drafts[k];
+    for(const d of s.docs){ const n=d.id.slice(1); if(pending[n]||busy[n]) continue; drafts[d.id]=d.data(); }
+    paint();
+  },()=>{});
+  db.collection("requests").orderBy("at","desc").limit(8).onSnapshot(s=>{ reqs=s.docs; paintReqs(); },()=>{});
+  paint();
+}
+start();
+</script>

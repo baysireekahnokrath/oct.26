@@ -20,5 +20,6 @@ Cloudflare's "Create an app" now makes a Worker with static assets, set up by `w
    The Worker also answers at https://oct-26.arthitbay.workers.dev.
 
 Preview before it goes live: https://claude.ai/artifact/6CL8DCjTaKR6TRtnJCRTmD (`preview/index.html` + `public/` files).
-Hide a product whose prototype fails: add its number to `HIDE` in `build.py`.
+Hide a product whose prototype fails: add its number to `HIDE` in `build.py`; mark one sold out with `SOLD`.
+The owner does all of this without code on the Web Builder page: see `builder/README.md`.
 The booth notice hides itself after `BOOTH["until"]` in brand.py.

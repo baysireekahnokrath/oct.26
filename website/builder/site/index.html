@@ -1,0 +1,89 @@
+<title>OCT.26 Web Builder สรุปงาน</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column, OCT. 26 Soi Candy palette and Fibonacci spacing, the same tokens as the brand pages. */
+:root{--bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;--cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--chip:#FBE9DA;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;--display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:var(--s5) var(--s6)}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:var(--s5)}
+h1,h2{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,7vw,42px)}h2{font-size:24px}
+p{margin:0}a{color:var(--cobalt)}
+section{display:flex;flex-direction:column;gap:var(--s3)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:12.6px;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:19px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:var(--s2) var(--s4);border-radius:var(--s4);
+  background:var(--tomato);color:#FFFFFF;font-family:var(--display);font-size:16px;text-decoration:none;align-self:flex-start}
+.btn:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s3)}
+.shots figure{margin:0;display:flex;flex-direction:column;gap:var(--s1)}
+.shots img{width:100%;height:auto;display:block;border-radius:var(--s3);border:1px solid var(--line)}
+figcaption,.cap{font-size:14px;color:var(--muted)}
+.flow{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3);overflow-x:auto}
+.flow svg{display:block;width:100%;min-width:300px;height:auto}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--s3)}
+.nums div{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3) var(--s4)}
+.nums b{display:block;font-family:var(--logo);font-weight:500;font-size:30px;line-height:1.2;font-variant-numeric:tabular-nums}
+.nums span{font-size:14px;color:var(--muted)}
+ul,ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:var(--s1)}
+code{font-size:14px;background:var(--chip);padding:1px 6px;border-radius:4px;overflow-wrap:anywhere}
+.todo{background:var(--paper);border:2px solid var(--tomato);border-radius:var(--s3);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:var(--s3)">
+<span class="eyebrow">OCT. 26 · 21 ต.ค. 2569</span>
+<h1>OCT.26 Web Builder</h1>
+<p class="lead">หน้าแก้เว็บสำหรับเจ้าของร้าน แก้ราคา ชื่อ ประโยคขาย ซ่อนสินค้า บอกว่าของหมด และวันปิดประกาศออกบูธ จากมือถือ โดยไม่ต้องเขียนโค้ด</p>
+<a class="btn" href="https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG" target="_blank" rel="noopener">เปิด Web Builder</a>
+</header>
+
+<section><span class="eyebrow">หน้าตา</span><h2>แตะสินค้า แก้ แล้วกดขึ้นเว็บ</h2>
+<div class="shots"><figure><img src="top.jpg" alt="ส่วนบนของ Web Builder: จำนวนสินค้าที่โชว์ ซ่อน หมด และที่แก้ไว้" width="400" height="760"><figcaption>ภาพรวม: โชว์กี่ชิ้น ซ่อน หมด แก้ไว้กี่อย่าง</figcaption></figure>
+<figure><img src="editor.jpg" alt="แผงแก้สินค้า: ชื่อ ราคาพร้อมปุ่มบวกลบ 10 บาท ประโยคขาย" width="400" height="700"><figcaption>แผงแก้สินค้า ราคามีปุ่ม −10 / +10 แถบล่างบอกว่าแก้ไว้กี่อย่าง</figcaption></figure></div></section>
+
+<section><span class="eyebrow">ทำงานยังไง</span><h2>จากมือถือถึง oct26brand.com</h2>
+<div class="flow"><svg viewBox="0 0 640 150" role="img" aria-label="แก้ในหน้า Web Builder บันทึกเป็นร่าง กดขึ้นเว็บ Claude ทำโปสเตอร์และเว็บใหม่ แล้ว Cloudflare อัปเดตเว็บ">
+<g font-family="Anuphan, IBM Plex Sans Thai, sans-serif" font-size="15" text-anchor="middle">
+<rect x="4" y="30" width="136" height="64" rx="12" fill="var(--chip)"/><text x="72" y="58" fill="var(--ink)">แก้บนมือถือ</text><text x="72" y="80" fill="var(--muted)" font-size="12.5">บันทึกเป็นร่างทันที</text>
+<rect x="168" y="30" width="136" height="64" rx="12" fill="var(--tomato)"/><text x="236" y="58" fill="#FFFFFF">กด “ขึ้นเว็บ”</text><text x="236" y="80" fill="#FFFFFF" font-size="12.5">ตรวจรายการก่อน</text>
+<rect x="332" y="30" width="136" height="64" rx="12" fill="var(--cobalt)"/><text x="400" y="58" fill="#FFFFFF">Claude ทำให้</text><text x="400" y="80" fill="#FFFFFF" font-size="12.5">โปสเตอร์ + เว็บใหม่</text>
+<rect x="496" y="30" width="140" height="64" rx="12" fill="var(--mint)"/><text x="566" y="58" fill="#1C1B22">เว็บเปลี่ยน</text><text x="566" y="80" fill="#1C1B22" font-size="12.5">Cloudflare ไม่กี่นาที</text>
+<g stroke="var(--muted)" stroke-width="2" fill="none"><path d="M142 62h22M306 62h22M470 62h22"/></g>
+<g fill="var(--muted)"><path d="M164 57l6 5-6 5zM328 57l6 5-6 5zM492 57l6 5-6 5z"/></g>
+<text x="320" y="130" fill="var(--muted)" font-size="13">สถานะขึ้นที่หน้า Web Builder: รอ Claude → กำลังทำ → ขึ้นเว็บแล้ว</text></g></svg></div></section>
+
+<section><span class="eyebrow">ตัวเลข</span><h2>สิ่งที่แก้ได้</h2>
+<div class="nums"><div><b>30</b><span>สินค้าทุกชิ้นบนเว็บ</span></div><div><b>6</b><span>ชื่อ ราคา ประโยคขาย ขนาด ซ่อน หมด</span></div>
+<div><b>1</b><span>ประกาศออกบูธ ตั้งวันปิดเองได้</span></div><div><b>5–10</b><span>นาที กดแล้วเว็บเปลี่ยน</span></div></div>
+<ul><li>เปลี่ยนชื่อ ราคา หรือประโยคขาย Claude ทำโปสเตอร์ของสินค้านั้นใหม่ให้ด้วย (ทดสอบแล้ว ภาพเหมือนเดิมทุกพิกเซลยกเว้นตรงที่แก้)</li>
+<li>“หมดชั่วคราว” ยังโชว์สินค้าบนเว็บ แต่ขึ้นป้ายหมด และข้อความสั่งซื้อเปลี่ยนเป็นขอสั่งจองรอบหน้า</li>
+<li>ราคาเก็บที่เดียวใน brand.py แผนบูธและโปสเตอร์จึงใช้ราคาเดียวกับเว็บ</li>
+<li>ร่างแก้ได้เฉพาะเจ้าของร้านและคนที่แชร์ให้เป็น Editor คนอื่นดูได้อย่างเดียว</li></ul></section>
+
+<section><div class="todo"><span class="eyebrow" style="color:var(--tomato)">ต้องทำก่อนใช้ปุ่มขึ้นเว็บ</span>
+<p><b>รวมงานนี้เข้า main หนึ่งครั้ง</b> ตอนนี้งานอยู่ในกิ่ง <code>claude/funny-tesla-4dkwm7</code> ปุ่มขึ้นเว็บเปิด Claude บน main จึงต้องมีไฟล์ชุดนี้ก่อน บอก Claude ว่า “รวมเข้า main” หรือเปิด PR แล้วกด Merge</p>
+<p class="cap">ครั้งแรกที่กดขึ้นเว็บ claude.ai จะขอให้อนุญาตหน้านี้ใช้ Claude Code Remote กดอนุญาตครั้งเดียว</p></div></section>
+
+<section><span class="eyebrow">ไฟล์</span><h2>อยู่ที่ไหน</h2>
+<ul><li><code>website/builder/index.html</code> หน้า Web Builder (สร้างจาก <code>build.py</code>)</li>
+<li><code>website/builder/apply.py</code> ตรวจค่าที่แก้ แล้วแก้ brand.py กับ website/build.py ทำโปสเตอร์และเว็บใหม่</li>
+<li><code>website/builder/APPLY.md</code> ขั้นตอนที่ Claude ทำเมื่อกดขึ้นเว็บ</li>
+<li><code>website/builder/live.json</code> ค่าที่เว็บโชว์ตอนนี้</li>
+<li><code>website/build.py</code> เพิ่มป้าย “หมดชั่วคราว” (ชุด SOLD) บนหน้าแรกและหน้าสินค้า</li>
+<li><code>website/builder/site/</code> หน้าสรุปนี้</li></ul></section>
+
+<section><span class="eyebrow">ลองดู</span><h2>สิ่งที่ควรเช็ก</h2>
+<ol><li>เปิด Web Builder บนมือถือ แตะสินค้าสักชิ้น ลองเปลี่ยนราคา แล้วดูว่าแถบล่างขึ้น “แก้ไว้ 1 อย่าง”</li>
+<li>กด “ตรวจแล้วขึ้นเว็บ” ดูรายการ ถ้ายังไม่อยากขึ้นจริง กด “ล้างร่างทั้งหมด”</li>
+<li>หลังรวมเข้า main แล้ว ลองขึ้นเว็บจริงหนึ่งครั้ง เช่น ตั้ง “หมดชั่วคราว” ให้สินค้าที่หมดจริงที่บูธ</li></ol></section>
+
+<section><span class="eyebrow">ต่อไป</span><h2>เพิ่มได้อีก</h2>
+<ul><li>เพิ่มสินค้าใหม่หรือเปลี่ยนรูปสินค้าจากหน้านี้</li><li>แก้วิธีต่อ (steps) และ “เหมาะกับ”</li><li>สลับลำดับสินค้าบนหน้าแรก</li></ul></section>
+</div>
