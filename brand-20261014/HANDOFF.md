@@ -1,7 +1,7 @@
 # OCT. 26 — handoff for the next session
 
 Read this first, then `README.md` (build order) and `/CLAUDE.md` (always publish a Thai summary page for deliverables).
-State as of 16 Oct 2026. Moved from repo exact-8-bingo (branch `claude/brave-faraday-2x1ygq`, commit f07c22a) into this repo, folders unchanged.
+State as of 21 Oct 2026. Moved from repo exact-8-bingo (branch `claude/brave-faraday-2x1ygq`, commit f07c22a) into this repo, folders unchanged.
 
 ## The project
 A family leather brand, a birthday gift from the owner (พ่อเบ, CEO/designer) to his wife คุณบิ๊ง (born 26 Oct).
@@ -30,15 +30,16 @@ Reply to the owner in Thai, short and plain. He decides fast; on logo questions 
 
 ## Social accounts (opened, given 21 Oct)
 Instagram https://www.instagram.com/oct.26_brand/ · YouTube https://www.youtube.com/@OCT.26_brand · Facebook https://www.facebook.com/profile.php?id=61595850110023
-Handle everywhere: oct.26_brand (`BRAND["handle"]`, `SOCIAL` in brand.py). TikTok and Shopee not open yet: print and posts name only the three above.
+Handle everywhere: oct.26_brand (`BRAND["handle"]`, `SOCIAL` in brand.py). Shopee shop registered as "OCT.26 - Our crafted things." (`SHOP_NAME`, 21 Oct, no link yet). TikTok not open yet: print and posts name only the three above.
 
 ## Published pages (private, owner shares them)
 - Summary https://claude.ai/artifact/1bBApc1D6ewCk8bpq3AydB
 - Brand Book https://claude.ai/artifact/3asVqkM4vs6fGM3rihHSYp
 - Brand Bible https://claude.ai/artifact/4FtQN6WRW3cUF1rATo3jvi
 - Launch Kit https://claude.ai/artifact/AyvcJTzj5BY6spbPkZYQXS
-- Customer website preview https://claude.ai/artifact/6CL8DCjTaKR6TRtnJCRTmD — source `../website/` (Cloudflare Pages, output `website/public`, waiting for the owner to connect)
-- Pattern play mock-up https://claude.ai/artifact/AHD7ehgUYFz2AzfGhwKyQq — source `../play-20261021/` (website to go on Cloudflare Pages after sign-off)
+- Customer website live at https://oct26brand.com (Cloudflare Worker, deploys `main`, source `../website/`, output `website/public`); preview https://claude.ai/artifact/6CL8DCjTaKR6TRtnJCRTmD
+- Web Builder (owner edits names, prices, hooks, sizes, hide, sold out, booth date; "ขึ้นเว็บ" starts a Claude session) https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG — source `../website/builder/`; a session started by it follows `../website/builder/APPLY.md`. Summary https://claude.ai/artifact/Ri5KftRrBj95dX1cjRMWvP
+- Pattern play mock-up https://claude.ai/artifact/AHD7ehgUYFz2AzfGhwKyQq — source `../play-20261021/` (also on the site as play.html)
 - Launch posts (banners + copy) https://claude.ai/artifact/BFoXWUu2bicNUJ2NRuSHo7 — source `../social-20261021/build.py`
 - Booth plan (บ้านและสวนแฟร์, 2 × 2 m) https://claude.ai/artifact/4DVjZ32YPCF9b9Ck8k7gz4 — source `../booth-20261019/build.py`
 - Tech Pack https://claude.ai/artifact/XR5yqf6HFfA4JoJ9eQvapd (+ `techpack/oct26-techpack-a4.pdf`)
@@ -57,3 +58,4 @@ To update a page from a new session, publish with its URL as `url` (read it firs
 3. Heart-strap die price. AirTag pouch (S2-10) has no hanging loop in its parts list. Windmill (S2-25) may not spin.
 4. Real leather thickness and real assembly times from prototypes → update brand.py.
 5. Test-print OCT. 26 at 34 mm wide and the tag 26 at 8 mm tall before ordering print.
+6. Web Builder: merge `claude/funny-tesla-4dkwm7` into `main` so its "ขึ้นเว็บ" button works, then run one real publish. Owner to choose: push straight to `main` (now) or open a PR per change.
