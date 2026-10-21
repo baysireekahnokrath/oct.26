@@ -1,0 +1,75 @@
+<title>OCT. 26 Shopee Upload</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;700&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@500;700&display=swap">
+<style>
+/* one column, phone first: what was made, the 13 products, what to check, then the 17 on hold */
+:root{--paper:#FFF6EC;--ink:#1C1B22;--soft:#5B5866;--line:#E9DCCB;--card:#FFFFFF;--cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC83D;--mint:#3CC8A0;
+--th:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--lat:"Jost","IBM Plex Sans Thai",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#16151B;--ink:#FFF6EC;--soft:#B9B3C2;--line:#2E2C36;--card:#201F27;--cobalt:#7F9BFF;--tomato:#FF7A5C;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#16151B;--ink:#FFF6EC;--soft:#B9B3C2;--line:#2E2C36;--card:#201F27;--cobalt:#7F9BFF;--tomato:#FF7A5C;color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.7 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:760px;margin:0 auto;padding-block:34px 55px;display:grid;gap:34px}
+h1,h2{font-family:var(--th);text-wrap:balance;margin:0;line-height:1.25}
+h1{font-size:clamp(28px,7vw,42px)} h2{font-size:22px}
+.eyebrow{font:700 13px/1 var(--lat);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+p{margin:0;max-width:62ch} section{display:grid;gap:13px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.nums div{border:1.5px solid var(--ink);border-radius:13px;padding:13px;display:grid;gap:2px}
+.nums b{font:700 30px/1.1 var(--lat);font-variant-numeric:tabular-nums} .nums span{color:var(--soft);font-size:14px}
+.files{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.files li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px;display:grid;gap:3px;min-width:0}
+code{font:500 14px/1.4 var(--lat);overflow-wrap:anywhere} .files .ok{color:var(--mint);font-weight:600} .files .hold{color:var(--tomato);font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:13px;margin:0;padding:0;list-style:none}
+.grid li{display:grid;gap:3px;min-width:0} .grid img{width:100%;height:auto;border-radius:8px;background:var(--line)}
+.grid b{font-family:var(--th);font-size:15px;line-height:1.35} .meta{font:500 12px/1.3 var(--lat);color:var(--soft)}
+.row{display:flex;justify-content:space-between;gap:8px;font-size:13px;color:var(--soft)} .price{color:var(--tomato);font:700 16px/1.2 var(--lat)}
+.cols{overflow-x:auto} table{border-collapse:collapse;font-size:14px;min-width:420px;width:100%}
+td,th{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top} th{font:600 13px/1.3 var(--lat);color:var(--soft)}
+ol.check{margin:0;padding-left:1.3em;display:grid;gap:8px}
+.later{columns:2 220px;margin:0;padding:0;list-style:none;font-size:14px} .later li{break-inside:avoid;padding:3px 0}
+.later span{font:600 12px var(--lat);color:var(--soft)} .later em{font-style:normal;color:var(--tomato);font-family:var(--lat)}
+</style>
+<main>
+<header style="display:grid;gap:8px">
+<span class="eyebrow">Shopee · OCT.26 - Our crafted things.</span>
+<h1>ไฟล์ลงสินค้า Shopee พร้อมอัป</h1>
+<p>กรอกในฟอร์มของ Shopee ที่พ่อเบส่งมา (แบบพื้นฐาน 21 ต.ค.) ชื่อ คำอธิบาย ราคา และ SKU ดึงจากข้อมูลสินค้าชุดเดียวกับเว็บและโปสเตอร์ ภาพปกเป็นโปสเตอร์ How-to บน oct26brand.com</p>
+</header>
+<div class="nums">
+<div><b>13</b><span>ชิ้น พร้อมอัปตอนนี้</span></div>
+<div><b>17</b><span>ชิ้น รอลองต้นแบบก่อน</span></div>
+<div><b>5</b><span>คลังต่อชิ้น (แบ่งจากบูธ)</span></div>
+</div>
+<section><h2>ไฟล์</h2>
+<ul class="files">
+<li><code>shopee-20261021/oct26-shopee-ready.xlsx</code><span class="ok">อัปไฟล์นี้ก่อน · 13 ชิ้น</span></li>
+<li><code>shopee-20261021/oct26-shopee-prototype.xlsx</code><span class="hold">อย่าเพิ่งอัป · 17 ชิ้นที่ยังไม่ได้ลองทำจริง</span></li>
+<li><code>shopee-20261021/build.py</code><span>แก้ราคาหรือชื่อใน brand.py แล้วรันใหม่ ได้ไฟล์ใหม่ทันที</span></li>
+</ul></section>
+<section><h2>13 ชิ้นในไฟล์ ready</h2>
+<ul class="grid"><li><img src="t/01.jpg" alt="ที่เก็บสายชาร์จหมี" width="360" height="450" loading="lazy"><b>ที่เก็บสายชาร์จหมี</b><span class="meta">OCT26-01 · พร้อมผลิต</span><span class="row"><span class="price">฿59</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/03.jpg" alt="ป้ายชื่อติดกระเป๋านักเรียน" width="360" height="450" loading="lazy"><b>ป้ายชื่อติดกระเป๋านักเรียน</b><span class="meta">OCT26-03 · มีชิ้นเสริม</span><span class="row"><span class="price">฿129</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/04.jpg" alt="ห่วงผ้าเช็ดปากหมี" width="360" height="450" loading="lazy"><b>ห่วงผ้าเช็ดปากหมี</b><span class="meta">OCT26-04 · มีชิ้นเสริม</span><span class="row"><span class="price">฿79</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/15.jpg" alt="ที่รองแก้วไส้ไม้ก๊อก" width="360" height="450" loading="lazy"><b>ที่รองแก้วไส้ไม้ก๊อก</b><span class="meta">OCT26-15 · มีชิ้นเสริม</span><span class="row"><span class="price">฿99</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/20.jpg" alt="ของแขวนต้นคริสต์มาส" width="360" height="450" loading="lazy"><b>ของแขวนต้นคริสต์มาส</b><span class="meta">OCT26-20 · มีชิ้นเสริม</span><span class="row"><span class="price">฿159</span><span>คลัง 3 · 0.1 กก.</span></span></li><li><img src="t/22.jpg" alt="ที่รองแก้วหมี" width="360" height="450" loading="lazy"><b>ที่รองแก้วหมี</b><span class="meta">OCT26-22 · พร้อมผลิต</span><span class="row"><span class="price">฿59</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/23.jpg" alt="ที่ห้อยกระเป๋าหมีหัวใจ" width="360" height="450" loading="lazy"><b>ที่ห้อยกระเป๋าหมีหัวใจ</b><span class="meta">OCT26-23 · มีชิ้นเสริม</span><span class="row"><span class="price">฿129</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/24.jpg" alt="ที่รองแก้วกังหัน" width="360" height="450" loading="lazy"><b>ที่รองแก้วกังหัน</b><span class="meta">OCT26-24 · พร้อมผลิต</span><span class="row"><span class="price">฿49</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/26.jpg" alt="ป้ายห้อยของขวัญ" width="360" height="450" loading="lazy"><b>ป้ายห้อยของขวัญ</b><span class="meta">OCT26-26 · พร้อมผลิต</span><span class="row"><span class="price">฿39</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/27.jpg" alt="ที่รองแก้วสี่เหลี่ยม" width="360" height="450" loading="lazy"><b>ที่รองแก้วสี่เหลี่ยม</b><span class="meta">OCT26-27 · พร้อมผลิต</span><span class="row"><span class="price">฿49</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/28.jpg" alt="ที่รองแก้ววงกลม" width="360" height="450" loading="lazy"><b>ที่รองแก้ววงกลม</b><span class="meta">OCT26-28 · พร้อมผลิต</span><span class="row"><span class="price">฿49</span><span>คลัง 5 · 0.1 กก.</span></span></li><li><img src="t/29.jpg" alt="ชุดที่รองแก้ว 4 ลาย" width="360" height="450" loading="lazy"><b>ชุดที่รองแก้ว 4 ลาย</b><span class="meta">OCT26-29 · พร้อมผลิต</span><span class="row"><span class="price">฿179</span><span>คลัง 5 · 0.2 กก.</span></span></li><li><img src="t/30.jpg" alt="ชุดต่อเองกล่องลูกบาศก์" width="360" height="450" loading="lazy"><b>ชุดต่อเองกล่องลูกบาศก์</b><span class="meta">OCT26-30 · พร้อมผลิต</span><span class="row"><span class="price">฿129</span><span>คลัง 5 · 0.2 กก.</span></span></li></ul></section>
+<section><h2>กรอกอะไรไว้บ้าง</h2>
+<div class="cols"><table>
+<tr><th>ช่อง</th><th>ใส่อะไร</th></tr>
+<tr><td>ชื่อสินค้า</td><td>ชื่อ + หนังแท้ ไม่ต้องเย็บ งานแฮนด์เมด OCT. 26 + คอลเลกชัน (67–97 ตัวอักษร)</td></tr>
+<tr><td>รายละเอียด</td><td>ประโยคเปิด วัสดุ ชิ้นที่ใช้ ขนาด เหมาะกับใคร วิธีประกอบ การดูแล ไม่มีลิงก์ภายนอก</td></tr>
+<tr><td>ราคา · SKU</td><td>ราคาตามเว็บ · OCT26-01 ถึง OCT26-30</td></tr>
+<tr><td>ภาพปก</td><td><code>https://oct26brand.com/assets/posters/01.png</code> ฯลฯ</td></tr>
+<tr><td>น้ำหนัก</td><td>0.1 กก. ชุดใหญ่ 0.2 กก. (เบอร์ 11, 13, 21, 29, 30)</td></tr>
+<tr><td>ส่งธรรมดา</td><td>เปิด</td></tr>
+<tr><td>เว้นว่าง</td><td>หมวดหมู่ (ให้ Shopee แนะนำตอนตรวจ) ขนาดกล่อง ตัวเลือกสินค้า พรีออเดอร์</td></tr>
+</table></div></section>
+<section><h2>ต้องเช็กก่อนกดอัป</h2>
+<ol class="check">
+<li>เปิด <code>https://oct26brand.com/assets/posters/01.png</code> บนมือถือให้ขึ้นรูปก่อน Shopee ดึงภาพจากลิงก์นี้ ถ้าไม่ขึ้นภาพจะว่าง</li>
+<li>Seller Centre → สินค้าของฉัน → เพิ่มสินค้าหลายรายการ → อัปโหลดไฟล์ ready แล้วดูหน้าตรวจ ถ้า Shopee ขอหมวดหมู่ ให้เลือก ของใช้ในบ้าน หรือ เครื่องเขียน ตามสินค้า</li>
+<li>คลังตั้งไว้ 5 ชิ้นต่อแบบ เพราะใช้ของชุดเดียวกับบูธ 23 ต.ค.–1 พ.ย. หลังงานค่อยเพิ่ม</li>
+<li>น้ำหนักเป็นค่าประมาณ ชั่งของจริงพร้อมซองแล้วแก้ใน Seller Centre ค่าส่งจะตรง</li>
+<li>ภาพปกเป็นแนวตั้ง 4:5 Shopee จะครอปเป็นจัตุรัส ภายหลังถ่ายรูปสินค้าจริงเพิ่มได้ในช่องรูปภาพ 1–8</li>
+<li>ชื่อสินค้ามีคำว่า ไม่ต้องเย็บ เพราะสินค้าทุกชิ้นต่อด้วยปีกและร่องจริง</li>
+</ol></section>
+<section><h2>17 ชิ้นที่รอไว้ก่อน</h2>
+<p>อยู่ในไฟล์ prototype แล้ว ลองทำชิ้นไหนผ่าน ค่อยลบแถวที่ยังไม่ผ่านออกแล้วอัป หรือบอกเลขมา จะทำไฟล์ใหม่ให้</p>
+<ul class="later"><li><span>02</span> ที่คั่นหนังสือหมี <em>฿59</em></li><li><span>05</span> ซองอั่งเปาพับกังหัน <em>฿69</em></li><li><span>06</span> ซองใส่เครื่องประดับ <em>฿69</em></li><li><span>07</span> ซองการ์ดติดของขวัญ <em>฿59</em></li><li><span>08</span> กล่องแหวนหนังแท้ <em>฿290</em></li><li><span>09</span> ลูกเต๋าหนัง <em>฿159</em></li><li><span>10</span> ซองใส่ AirTag <em>฿129</em></li><li><span>11</span> ชุดตัวต่อหนัง 24 ชิ้น <em>฿390</em></li><li><span>12</span> ที่ใส่ปากกามงกุฎ <em>฿199</em></li><li><span>13</span> แผ่นรองจานลายข้าวหลามตัด <em>฿390</em></li><li><span>14</span> ปลอกแก้วกาแฟ <em>฿149</em></li><li><span>16</span> กระเป๋าเหรียญจิ๋ว <em>฿99</em></li><li><span>17</span> กล่องของขวัญสลับลาย <em>฿249</em></li><li><span>18</span> กล่องของชำร่วยงานแต่ง <em>฿159</em></li><li><span>19</span> ที่ใส่แปรงแต่งหน้า <em>฿199</em></li><li><span>21</span> ราวหมีห้าตัว <em>฿349</em></li><li><span>25</span> กังหันลมหนัง <em>฿89</em></li></ul></section>
+</main>
