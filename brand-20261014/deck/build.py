@@ -141,16 +141,16 @@ S["kids"] = section("kids", P, I,
     + p("พ่อหรือแม่อยู่ที่บูธตลอด · ทำกะละ 45 นาที · ปิดยอดทุกเย็น ลูก ๆ ได้ 10% เข้ากระปุก", 33, MU),
     "หน้าที่ปรับตามวัยของลูกได้ ประโยคที่ใช้ทักทายและปิดการขายอยู่ใน Launch Kit")
 
-CH = [("Facebook Page", "OCT. 26"), ("Instagram", "@oct26.crafted"), ("TikTok", "@oct26.crafted"),
-      ("YouTube", "@oct26.crafted"), ("Shopee", "ร้าน OCT. 26")]
+CH = [("Facebook Page", "OCT. 26"), ("Instagram", "@oct.26_brand"), ("YouTube", "@OCT.26_brand"),
+      ("TikTok", "เปิดเร็ว ๆ นี้"), ("Shopee", "เปิดเร็ว ๆ นี้")]
 S["channels"] = section("channels", W, I,
     f'<div style="display:grid;grid-template-columns:1fr 1.618fr;gap:89px;align-items:center;width:100%">'
     + img("avatar", "รูปโปรไฟล์ OCT. 26", "width:100%;height:550px;object-fit:contain")
-    + '<div style="display:flex;flex-direction:column;gap:34px">' + h("ห้าช่องทาง ชื่อเดียวกัน")
+    + '<div style="display:flex;flex-direction:column;gap:34px">' + h("เปิดแล้วสามช่องทาง")
     + f'<table style="font-size:33px;color:{I}"><tr><th style="width:45%">ช่องทาง</th><th style="width:55%">ชื่อ</th></tr>'
     + "".join(f"<tr><td>{a}</td><td>{b}</td></tr>" for a, b in CH) + "</table>"
-    + p("รูปโปรไฟล์ ปก และข้อความแนะนำร้านทำไว้ครบแล้ว รอเปิดบัญชีในชื่อพ่อหรือแม่", 26, MU) + "</div></div>",
-    "ต้องเช็กก่อนว่าชื่อ oct26.crafted ยังว่างทุกช่องทาง ห้าหมีไม่ต้องเปิดบัญชีแยก ใช้หมวดในร้าน",
+    + p("Facebook, Instagram และ YouTube เปิดแล้ว TikTok และ Shopee ใช้ชื่อ oct.26_brand เดียวกันเมื่อเปิด", 26, MU) + "</div></div>",
+    "บัญชีเปิดแล้ว 21 ต.ค. ห้าหมีไม่ต้องเปิดบัญชีแยก ใช้หมวดในร้าน",
     "flex-direction:row;align-items:center")
 
 import sys; sys.path.insert(0, os.path.dirname(HERE)); import brand as B

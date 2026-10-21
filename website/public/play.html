@@ -1,0 +1,332 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>ต่อลาย · OCT. 26</title><meta name="description" content="ลากชิ้นหนังจริง 6 แบบมาต่อเป็นลายใหม่ หมุน เปลี่ยนสี แล้วดูลายที่ต่อซ้ำ"><link rel="icon" href="assets/oct-mark.svg" type="image/svg+xml"><link rel="canonical" href="https://oct26.pages.dev/play.html"><meta property="og:type" content="website"><meta property="og:locale" content="th_TH"><meta property="og:site_name" content="OCT. 26"><meta property="og:title" content="ต่อลาย · OCT. 26"><meta property="og:description" content="ลากชิ้นหนังจริง 6 แบบมาต่อเป็นลายใหม่ หมุน เปลี่ยนสี แล้วดูลายที่ต่อซ้ำ"><meta property="og:url" content="https://oct26.pages.dev/play.html"><meta property="og:image" content="https://oct26.pages.dev/assets/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+
+:root{--mat:#EFE4D6;--matline:#E2D3C1}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--mat:#2A2833;--matline:#3A3846}}
+:root[data-theme="dark"]{--mat:#2A2833;--matline:#3A3846}
+.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px))}
+.site .in{max-width:987px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--s3)}
+.site .mark{display:block;width:144px}.site .mark svg{width:100%;height:auto;display:block}
+.site nav{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none;max-width:100%}
+.site nav a{flex:none;font-family:var(--display);font-size:15px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+.site .mark svg.mark-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .site .mark svg.mark-light{display:none}:root:not([data-theme="light"]) .site .mark svg.mark-dark{display:block}}
+:root[data-theme="dark"] .site .mark svg.mark-light{display:none}:root[data-theme="dark"] .site .mark svg.mark-dark{display:block}
+main{padding-top:var(--s5)}
+.intro{display:flex;flex-direction:column;gap:var(--s3)}
+.row{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.stack{display:flex;flex-direction:column;gap:var(--s3)}
+.label{font-family:var(--display);font-size:14px;color:var(--muted)}
+button,.btn{font-family:var(--display);font-size:15px;border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s2) var(--s4);cursor:pointer;min-height:44px;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:var(--s2)}
+button:hover,.btn:hover{border-color:var(--cobalt)}
+button:disabled{opacity:.4;cursor:default;border-color:var(--line)}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.primary{background:var(--cobalt);color:var(--on-accent);border-color:var(--cobalt)}
+.order{background:var(--tomato);color:#FFFFFF;border-color:var(--tomato)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+.hero{display:grid;gap:var(--s5);grid-template-columns:minmax(0,1fr);align-items:center}
+@media (min-width:760px){.hero{grid-template-columns:minmax(0,1.618fr) minmax(0,1fr)}}
+.hero h1{font-size:clamp(var(--t3),8vw,53.3px)}
+.hero .pic{border-radius:var(--s4);overflow:hidden;border:1px solid var(--line)}
+.booth{background:var(--cobalt);color:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+.booth .eyebrow{color:#FFC23C}.booth a{color:#FFFFFF}
+.shop{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.shop>a{min-width:0;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:var(--s1)}
+.shop img{border-radius:var(--s3);border:1px solid var(--line);aspect-ratio:4/5;object-fit:cover;width:100%}
+.shop .n{font-family:var(--display);font-size:15px;line-height:1.3}
+.price{font-family:var(--logo);font-weight:500;color:var(--heart)}
+.fb{font-family:"Mitr",var(--display)}
+.coll{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(233px,1fr))}
+.coll .paper{aspect-ratio:5/3}
+.prod{display:grid;gap:var(--s5);grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){.prod{grid-template-columns:minmax(0,1fr) minmax(0,1.618fr);align-items:start}}
+.prod img{border-radius:var(--s4);border:1px solid var(--line)}
+.prod .big{font-size:var(--t3)}
+.pager{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap}
+footer.site-foot{margin-top:var(--s7);border-top:1px solid var(--line);padding-top:var(--s5);display:flex;flex-direction:column;gap:var(--s3)}
+footer.site-foot .tag{width:34px}
+</style></head><body><header class="site"><div class="in"><a class="mark" href="index.html" aria-label="OCT. 26 หน้าแรก"><svg class="mark-light" role="img" aria-label="OCT. 26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 176"><g transform="translate(38.20,138.20)"><g transform="scale(1.00000)"><circle cx="52.13" cy="-50.00" r="44.83" fill="none" stroke="#1C1B22" stroke-width="14.59"/><path d="M204.03,-19.72 A44.83,44.83 0 1 1 204.03,-80.28" fill="none" stroke="#1C1B22" stroke-width="14.59"/><rect x="224.00" y="-100.00" width="80.90" height="14.59" fill="#1C1B22"/><rect x="257.16" y="-100.00" width="14.59" height="100.00" fill="#1C1B22"/><circle cx="325.73" cy="-11.80" r="11.80" fill="#FF5A36"/><clipPath id="ow15"><rect x="361.80" y="-102.13" width="61.80" height="102.13"/></clipPath><g clip-path="url(#ow15)"><path d="M371.31,-61.25 A23.61,23.61 0 1 1 411.31,-56.69 L366.18,-10.21" fill="none" stroke="#1C1B22" stroke-width="14.59"/><rect x="361.80" y="-14.59" width="61.80" height="14.59" fill="#1C1B22"/></g><clipPath id="ow16"><rect x="423.61" y="-100.00" width="90.98" height="114.59"/></clipPath><g clip-path="url(#ow16)"><circle cx="469.10" cy="-28.77" r="23.61" fill="none" stroke="#1C1B22" stroke-width="14.59"/><line x1="477.75" y1="-114.59" x2="447.16" y2="-37.48" stroke="#1C1B22" stroke-width="14.59"/></g></g></g></svg><svg class="mark-dark" role="img" aria-label="OCT. 26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 176"><g transform="translate(38.20,138.20)"><g transform="scale(1.00000)"><circle cx="52.13" cy="-50.00" r="44.83" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><path d="M204.03,-19.72 A44.83,44.83 0 1 1 204.03,-80.28" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><rect x="224.00" y="-100.00" width="80.90" height="14.59" fill="#FFF6EC"/><rect x="257.16" y="-100.00" width="14.59" height="100.00" fill="#FFF6EC"/><circle cx="325.73" cy="-11.80" r="11.80" fill="#FF5A36"/><clipPath id="ow25"><rect x="361.80" y="-102.13" width="61.80" height="102.13"/></clipPath><g clip-path="url(#ow25)"><path d="M371.31,-61.25 A23.61,23.61 0 1 1 411.31,-56.69 L366.18,-10.21" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><rect x="361.80" y="-14.59" width="61.80" height="14.59" fill="#FFF6EC"/></g><clipPath id="ow26"><rect x="423.61" y="-100.00" width="90.98" height="114.59"/></clipPath><g clip-path="url(#ow26)"><circle cx="469.10" cy="-28.77" r="23.61" fill="none" stroke="#FFF6EC" stroke-width="14.59"/><line x1="477.75" y1="-114.59" x2="447.16" y2="-37.48" stroke="#FFF6EC" stroke-width="14.59"/></g></g></g></svg></a><nav aria-label="เมนู"><a href="index.html#shop">สินค้า</a><a href="play.html">ต่อลาย</a><a href="index.html#booth">ออกบูธ</a><a href="index.html#follow">ติดตาม</a></nav></div></header><div class="wrap"><main><style>
+/* Pattern play. Layout: the work tile (a cutting mat, 18 x 18 cm, dies at 1:1) beside the repeated pattern,
+   split 61.8 / 38.2 on wide screens, one column on phones. Sizes from the brand's Fibonacci steps. */
+.play{display:grid;gap:var(--s4);grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.play{grid-template-columns:minmax(0,1.618fr) minmax(0,1fr);align-items:start}}
+.play .col{display:flex;flex-direction:column;gap:var(--s3);min-width:0}
+svg.board,svg.pattern{width:100%;height:auto;display:block;border-radius:var(--s3)}
+svg.board{touch-action:none;cursor:grab;background:var(--mat)}
+svg.board.dragging{cursor:grabbing}
+.tray{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+@media (min-width:520px){.tray{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.tray button{border-radius:var(--s3);display:flex;flex-direction:column;align-items:center;gap:var(--s1);padding:var(--s2) var(--s1);font-size:var(--t-1)}
+.tray svg{width:55px;height:55px}
+.sw{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.sw button{width:34px;height:34px;padding:0;border-radius:50%;border:2px solid var(--line)}
+.sw button[aria-pressed="true"]{outline:3px solid var(--cobalt);outline-offset:2px}
+.shot{display:flex;flex-direction:column;gap:var(--s2);align-items:flex-start}
+.shot img{width:min(100%,377px);border-radius:var(--s3);border:1px solid var(--line)}
+</style>
+
+<header class="intro"><span class="eyebrow">ต่อลาย</span>
+<h1>ต่อลายจากชิ้นหนังจริง</h1>
+<p class="lead">เลือกชิ้นหนังมาวางบนแผ่น 18 × 18 ซม. ลากย้าย หมุน เปลี่ยนสี แล้วดูลายเมื่อต่อแผ่นซ้ำกัน ชิ้นที่ล้นขอบจะโผล่อีกฝั่งเหมือนลายผ้า ทุกชิ้นวาดจากแบบตัดจริง ขนาดราว 9 ซม.</p></header>
+
+<div class="play">
+<div class="col">
+  <div class="card"><svg class="board" id="board" viewBox="0 0 180 180" role="img" aria-label="แผ่นต่อลาย 18 × 18 ซม."></svg></div>
+  <div class="row" role="toolbar" aria-label="จัดการชิ้นที่เลือก">
+    <button id="rot" type="button" disabled>หมุน 45°</button>
+    <button id="dup" type="button" disabled>ทำซ้ำ</button>
+    <button id="del" type="button" disabled>เอาออก</button>
+    <span class="cap" id="hint">แตะชิ้นหนังเพื่อเลือก</span>
+  </div>
+  <div class="card stack"><span class="label">สีหนัง</span><div class="sw" id="swatches"></div></div>
+  <div class="card stack"><span class="label">ชิ้นหนัง แตะเพื่อวางกลางแผ่น</span><div class="tray" id="tray"></div></div>
+</div>
+
+<div class="col">
+  <div class="card"><svg class="pattern" id="pattern" viewBox="0 0 540 540" role="img" aria-label="ลายที่ได้เมื่อต่อแผ่นซ้ำ"></svg></div>
+  <div class="row" role="group" aria-label="จำนวนแผ่นที่ต่อ">
+    <span class="label">ต่อซ้ำ</span>
+    <button type="button" data-rep="2">2 × 2</button><button type="button" data-rep="3" aria-pressed="true">3 × 3</button><button type="button" data-rep="5">5 × 5</button>
+  </div>
+  <p class="cap mono" id="stat"></p>
+  <div class="card stack"><span class="label">ลายตัวอย่าง</span><div class="row" id="presets"></div>
+    <div class="row"><button type="button" id="rand">สุ่มลาย</button><button type="button" id="clear">ล้างแผ่น</button></div></div>
+  <div class="row"><button type="button" class="primary" id="save">ทำเป็นรูป</button>
+    <a class="btn order" href="https://ig.me/m/oct.26_brand" target="_blank" rel="noopener">สั่งทำลายนี้ทางไอจี</a></div>
+  <div class="shot" id="shot" hidden><img id="shotImg" alt="รูปลายที่ต่อ"><p class="cap">กดค้างที่รูปเพื่อบันทึก แล้วแชร์ลงไอจีพร้อมแท็ก @oct.26_brand ถ้าจะสั่งทำ ส่งรูปนี้มาในไอจีได้เลย</p></div>
+</div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="shapeDefs"></defs></svg>
+<script>
+const SHAPES = [{"code": "01", "name": "หัวหมี", "w": 104.36, "h": 104.36, "d": "M100.650,53.709 C95.699,48.758 87.670,48.758 82.719,53.709 C82.629,53.799 82.544,53.893 82.457,53.985 C80.841,46.368 77.077,39.115 71.161,33.199 C65.245,27.283 57.992,23.519 50.375,21.903 C50.468,21.816 50.561,21.731 50.651,21.641 C55.602,16.689 55.602,8.661 50.651,3.710 C45.699,-1.242 37.671,-1.242 32.720,3.710 C27.768,8.661 27.768,16.689 32.720,21.641 C32.810,21.731 32.903,21.816 32.995,21.903 C25.378,23.519 18.126,27.283 12.210,33.199 C-4.070,49.478 -4.070,75.872 12.209,92.151 C28.488,108.430 54.882,108.430 71.161,92.151 C77.077,86.234 80.841,78.982 82.457,71.365 C82.544,71.457 82.629,71.550 82.719,71.641 C87.670,76.592 95.699,76.592 100.650,71.641 C105.602,66.689 105.602,58.661 100.650,53.709 Z", "slits": [[11.2, 71.615, 11.2, 53.705], [32.745, 93.16, 50.655, 93.16]]}, {"code": "02", "name": "กังหัน", "w": 90.0, "h": 90.0, "d": "M90.000,45.000 C90.000,32.834 82.599,22.398 72.053,17.946 C67.602,7.401 57.166,0.000 45.000,0.000 C32.834,0.000 22.398,7.401 17.947,17.946 C7.401,22.398 0.000,32.834 0.000,45.000 C0.000,57.166 7.401,67.602 17.947,72.053 C22.398,82.599 32.834,90.000 45.000,90.000 C57.166,90.000 67.602,82.599 72.053,72.053 C82.599,67.602 90.000,57.166 90.000,45.000 Z", "slits": [[73.054, 72.054, 45.0, 72.054], [17.946, 73.054, 17.946, 45.0], [72.054, 16.946, 72.054, 45.0], [16.946, 17.946, 45.0, 17.946]]}, {"code": "03", "name": "กากบาทแคปซูล", "w": 90.01, "h": 90.0, "d": "M67.508,22.500 C67.505,22.500 67.503,22.501 67.499,22.501 C67.499,22.499 67.500,22.497 67.500,22.496 C67.500,10.070 57.426,-0.004 45.000,-0.004 C32.573,-0.004 22.499,10.070 22.499,22.496 C22.499,22.497 22.500,22.499 22.500,22.500 C10.073,22.500 0.000,32.574 0.000,45.000 C0.000,57.427 10.073,67.500 22.500,67.500 C22.501,67.500 22.503,67.500 22.504,67.500 C22.504,79.926 32.578,90.000 45.004,90.000 C57.430,90.000 67.504,79.926 67.504,67.500 C67.505,67.500 67.507,67.500 67.508,67.500 C79.934,67.500 90.008,57.427 90.008,45.000 C90.008,32.574 79.934,22.500 67.508,22.500 Z", "slits": [[22.5, 56.25, 22.5, 33.75], [67.5, 56.25, 67.5, 33.75], [68.5, 22.5, 56.0, 22.5], [21.5, 22.5, 34.0, 22.5], [68.5, 67.5, 56.0, 67.5], [21.5, 67.5, 34.0, 67.5]]}, {"code": "04", "name": "สี่เหลี่ยมมน", "w": 90.0, "h": 90.0, "d": "M90.000,5.000 L90.000,85.000 C90.000,87.761 87.761,90.000 85.000,90.000 L5.000,90.000 C2.238,90.000 0.000,87.761 0.000,85.000 L0.000,5.000 C0.000,2.238 2.238,0.000 5.000,0.000 L85.000,0.000 C87.761,0.000 90.000,2.238 90.000,5.000 Z", "slits": [[56.893, 78.107, 78.107, 56.893], [11.893, 33.107, 33.107, 11.893], [90.707, 45.707, 77.93, 32.93], [44.293, -0.707, 57.07, 12.07], [45.707, 90.707, 32.93, 77.93], [-0.707, 44.293, 12.07, 57.07]]}, {"code": "05", "name": "วงกลม", "w": 90.0, "h": 90.0, "d": "M90.000,45.000 C90.000,69.852 69.853,90.000 45.000,90.000 C20.147,90.000 0.000,69.852 0.000,45.000 C0.000,20.147 20.147,-0.001 45.000,-0.001 C69.853,-0.001 90.000,20.147 90.000,45.000 Z", "slits": [[30.0, 13.18, 60.0, 13.18], [30.0, 76.82, 60.0, 76.82], [76.82, 12.18, 76.82, 30.25], [76.82, 77.82, 76.82, 59.75], [13.18, 12.18, 13.18, 30.25], [13.18, 77.82, 13.18, 59.75]]}, {"code": "06", "name": "กากบาทนุ่ม", "w": 90.0, "h": 90.0, "d": "M75.308,27.319 L75.299,27.311 C68.332,27.307 62.685,21.657 62.685,14.687 L62.686,14.687 C62.681,6.575 54.765,0.000 45.000,0.000 C35.233,0.000 27.314,6.579 27.314,14.695 C27.314,14.695 27.313,14.696 27.313,14.697 C27.308,21.661 21.664,27.306 14.701,27.311 C14.700,27.312 14.693,27.319 14.693,27.319 C6.578,27.319 0.000,35.238 0.000,45.008 C0.000,54.777 6.578,62.697 14.693,62.697 C14.834,62.697 14.974,62.689 15.114,62.684 C21.889,62.907 27.314,68.467 27.314,75.297 L27.314,75.298 C27.314,75.300 27.314,75.303 27.314,75.305 C27.314,83.421 35.233,90.000 45.000,90.000 C54.768,90.000 62.686,83.421 62.686,75.305 L62.694,75.297 L62.685,75.297 C62.685,68.467 68.110,62.907 74.885,62.684 C75.026,62.689 75.166,62.697 75.308,62.697 C83.422,62.697 90.000,54.777 90.000,45.008 C90.000,35.238 83.422,27.319 75.308,27.319 Z", "slits": [[36.25, 14.99, 53.75, 14.99], [36.25, 74.99, 53.75, 74.99], [75.0, 26.307, 75.0, 36.49], [75.0, 63.688, 75.0, 53.49], [15.0, 26.307, 15.0, 36.49], [15.0, 63.688, 15.0, 53.49]]}];
+const WORDMARK = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NzYgMTc2IiB3aWR0aD0iNTc2IiBoZWlnaHQ9IjE3NiI+PHRpdGxlPk9DVC4gMjY8L3RpdGxlPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM4LjIwLDEzOC4yMCkiPjxnIHRyYW5zZm9ybT0ic2NhbGUoMS4wMDAwMCkiPjxjaXJjbGUgY3g9IjUyLjEzIiBjeT0iLTUwLjAwIiByPSI0NC44MyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjRkZGNkVDIiBzdHJva2Utd2lkdGg9IjE0LjU5Ii8+PHBhdGggZD0iTTIwNC4wMywtMTkuNzIgQTQ0LjgzLDQ0LjgzIDAgMSAxIDIwNC4wMywtODAuMjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRjZFQyIgc3Ryb2tlLXdpZHRoPSIxNC41OSIvPjxyZWN0IHg9IjIyNC4wMCIgeT0iLTEwMC4wMCIgd2lkdGg9IjgwLjkwIiBoZWlnaHQ9IjE0LjU5IiBmaWxsPSIjRkZGNkVDIi8+PHJlY3QgeD0iMjU3LjE2IiB5PSItMTAwLjAwIiB3aWR0aD0iMTQuNTkiIGhlaWdodD0iMTAwLjAwIiBmaWxsPSIjRkZGNkVDIi8+PGNpcmNsZSBjeD0iMzI1LjczIiBjeT0iLTExLjgwIiByPSIxMS44MCIgZmlsbD0iI0ZGNUEzNiIvPjxjbGlwUGF0aCBpZD0ib3cyNSI+PHJlY3QgeD0iMzYxLjgwIiB5PSItMTAyLjEzIiB3aWR0aD0iNjEuODAiIGhlaWdodD0iMTAyLjEzIi8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjb3cyNSkiPjxwYXRoIGQ9Ik0zNzEuMzEsLTYxLjI1IEEyMy42MSwyMy42MSAwIDEgMSA0MTEuMzEsLTU2LjY5IEwzNjYuMTgsLTEwLjIxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGRkY2RUMiIHN0cm9rZS13aWR0aD0iMTQuNTkiLz48cmVjdCB4PSIzNjEuODAiIHk9Ii0xNC41OSIgd2lkdGg9IjYxLjgwIiBoZWlnaHQ9IjE0LjU5IiBmaWxsPSIjRkZGNkVDIi8+PC9nPjxjbGlwUGF0aCBpZD0ib3cyNiI+PHJlY3QgeD0iNDIzLjYxIiB5PSItMTAwLjAwIiB3aWR0aD0iOTAuOTgiIGhlaWdodD0iMTE0LjU5Ii8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjb3cyNikiPjxjaXJjbGUgY3g9IjQ2OS4xMCIgY3k9Ii0yOC43NyIgcj0iMjMuNjEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGRjZFQyIgc3Ryb2tlLXdpZHRoPSIxNC41OSIvPjxsaW5lIHgxPSI0NzcuNzUiIHkxPSItMTE0LjU5IiB4Mj0iNDQ3LjE2IiB5Mj0iLTM3LjQ4IiBzdHJva2U9IiNGRkY2RUMiIHN0cm9rZS13aWR0aD0iMTQuNTkiLz48L2c+PC9nPjwvZz48L3N2Zz4=";          // the drawn OCT. 26 wordmark (reverse), for the picture's footer band
+const HANDLE = "@oct.26_brand";
+const S = Object.fromEntries(SHAPES.map(s => [s.code, s]));
+const T = 180, GRID = 7.5, NS = "http://www.w3.org/2000/svg";
+const PAPER = "#FFF6EC", INK = "#1C1B22";
+// leather is a material colour: these are scrap tones, not brand colours
+const COLORS = [
+  {id:"tan", name:"แทน", hex:"#B8743A"}, {id:"cognac", name:"คอนญัก", hex:"#8E4A22"},
+  {id:"choc", name:"ช็อกโกแลต", hex:"#4E2C1C"}, {id:"black", name:"ดำ", hex:"#24201E"},
+  {id:"bone", name:"ครีม", hex:"#E6D3B5"}, {id:"wine", name:"แดงไวน์", hex:"#7A2630"}, {id:"navy", name:"กรม", hex:"#24324F"}];
+const HEX = Object.fromEntries(COLORS.map(c => [c.id, c.hex]));
+const PRESETS = [
+  {name:"กังหันสลับสี", p:[["02",45,45,0,"tan"],["02",135,45,45,"choc"],["02",45,135,45,"choc"],["02",135,135,0,"tan"]]},
+  {name:"วงกลมกับกากบาท", p:[["05",45,45,0,"bone"],["06",135,45,0,"cognac"],["06",45,135,0,"cognac"],["05",135,135,0,"bone"]]},
+  {name:"เพชรกับแคปซูล", p:[["04",45,45,45,"navy"],["03",135,45,0,"tan"],["03",45,135,0,"tan"],["04",135,135,45,"navy"]]},
+  {name:"หมีเดินแถว", p:[["01",52.5,52.5,0,"tan"],["01",142.5,142.5,180,"wine"]]}];
+
+let pieces = [], sel = null, nextId = 1, color = "tan", rep = 3, drag = null, raf = 0;
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+const wrap = v => ((v % T) + T) % T;
+const snap = v => Math.round(v / GRID) * GRID;
+
+// one <g> per piece: outline filled by the <use>, slits drawn in paper colour like the posters
+function shapeGroup(s, id) {
+  const g = el("g", {id});
+  g.append(el("path", {d: s.d, stroke: "rgba(0,0,0,.28)", "stroke-width": ".5", "fill-rule": "evenodd"}));
+  for (const [x1, y1, x2, y2] of s.slits)
+    g.append(el("line", {x1, y1, x2, y2, stroke: PAPER, "stroke-width": "1.1", "stroke-linecap": "round"}));
+  return g;
+}
+SHAPES.forEach(s => $("shapeDefs").append(shapeGroup(s, "sh-" + s.code)));
+
+function tf(p, ox = 0, oy = 0) { const s = S[p.k]; return `translate(${p.x + ox} ${p.y + oy}) rotate(${p.r}) translate(${-s.w / 2} ${-s.h / 2})`; }
+// a piece and its copies one tile away, so whatever crosses an edge shows on the other side
+function copies(p, prefix, withId) {
+  const out = [], R = Math.hypot(S[p.k].w, S[p.k].h) / 2;
+  for (const ox of [-T, 0, T]) for (const oy of [-T, 0, T]) {
+    if (p.x + ox + R < 0 || p.x + ox - R > T || p.y + oy + R < 0 || p.y + oy - R > T) continue;
+    const u = el("use", {href: "#" + prefix + p.k, fill: HEX[p.c], transform: tf(p, ox, oy)});
+    if (withId) u.dataset.id = p.id;
+    out.push(u);
+  }
+  return out;
+}
+
+function renderBoard() {
+  const b = $("board"); b.replaceChildren();
+  const defs = el("defs"), clip = el("clipPath", {id: "tileClip"}); clip.append(el("rect", {width: T, height: T})); defs.append(clip);
+  const grid = el("pattern", {id: "gridPat", width: GRID * 2, height: GRID * 2, patternUnits: "userSpaceOnUse"});
+  grid.append(el("path", {d: `M ${GRID * 2} 0 L 0 0 0 ${GRID * 2}`, fill: "none", stroke: "var(--matline)", "stroke-width": ".4"}));
+  defs.append(grid); b.append(defs);
+  b.append(el("rect", {width: T, height: T, fill: "url(#gridPat)"}));
+  const g = el("g", {"clip-path": "url(#tileClip)"});
+  pieces.forEach(p => g.append(...copies(p, "sh-", true)));
+  b.append(g);
+  const p = pieces.find(q => q.id === sel);
+  if (p) b.append(el("circle", {cx: p.x, cy: p.y, r: Math.max(S[p.k].w, S[p.k].h) / 2 + 3, fill: "none",
+    stroke: "var(--cobalt)", "stroke-width": "1.2", "stroke-dasharray": "3 2", "pointer-events": "none"}));
+}
+
+// the pattern view is self-contained (its own shape defs and colours) so it can be turned into a picture
+function renderPattern() {
+  const v = $("pattern"); v.replaceChildren();
+  const size = 540, defs = el("defs");
+  SHAPES.forEach(s => defs.append(shapeGroup(s, "ps-" + s.code)));
+  const pat = el("pattern", {id: "tilePat", width: T, height: T, patternUnits: "userSpaceOnUse",
+    patternTransform: `scale(${size / (T * rep)})`});
+  pat.append(el("rect", {width: T, height: T, fill: PAPER}));
+  pieces.forEach(p => pat.append(...copies(p, "ps-", false)));
+  defs.append(pat); v.append(defs);
+  v.append(el("rect", {width: size, height: size, fill: "url(#tilePat)"}));
+}
+
+function renderUI() {
+  const has = pieces.some(p => p.id === sel);
+  for (const id of ["rot", "dup", "del"]) $(id).disabled = !has;
+  $("hint").textContent = has ? "ลากเพื่อย้าย · แตะสีเพื่อเปลี่ยนสีชิ้นนี้" : "แตะชิ้นหนังเพื่อเลือก";
+  document.querySelectorAll("#swatches button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.c === color)));
+  document.querySelectorAll("[data-rep]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.rep === rep)));
+  const count = {}; pieces.forEach(p => count[p.k] = (count[p.k] || 0) + 1);
+  const parts = Object.entries(count).map(([k, n]) => `${S[k].name} ${n}`).join(" · ");
+  $("stat").textContent = pieces.length
+    ? `แผ่นละ ${pieces.length} ชิ้น (${parts}) · ลายนี้ ${rep} × ${rep} แผ่น ใช้ ${pieces.length * rep * rep} ชิ้น กว้าง ${18 * rep} ซม.`
+    : "แผ่นยังว่าง เลือกชิ้นหนังด้านล่าง หรือกดลายตัวอย่าง";
+}
+
+function render() { renderBoard(); renderPattern(); renderUI(); save(); }
+function later() { if (!raf) raf = requestAnimationFrame(() => { raf = 0; renderBoard(); renderPattern(); }); }
+function add(k, x = 90, y = 90, r = 0, c = color) { const p = {id: nextId++, k, x: snap(x), y: snap(y), r, c}; pieces.push(p); return p; }
+function load(list) { pieces = []; sel = null; list.forEach(([k, x, y, r, c]) => add(k, x, y, r, c)); render(); }
+function save() { try { localStorage.setItem("oct26-play-v1", JSON.stringify({pieces, color, rep})); } catch (_) {} }
+function restore() {
+  try { const d = JSON.parse(localStorage.getItem("oct26-play-v1") || "null");
+    if (d && Array.isArray(d.pieces) && d.pieces.length) {
+      pieces = d.pieces.filter(p => S[p.k] && HEX[p.c]); nextId = Math.max(0, ...pieces.map(p => p.id)) + 1;
+      color = HEX[d.color] ? d.color : color; rep = [2, 3, 5].includes(d.rep) ? d.rep : rep; return pieces.length > 0; } } catch (_) {}
+  return false;
+}
+
+COLORS.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.dataset.c = c.id;
+  b.style.background = c.hex; b.title = c.name; b.setAttribute("aria-label", "หนังสี" + c.name);
+  b.onclick = () => { color = c.id; const p = pieces.find(q => q.id === sel); if (p) p.c = c.id; render(); };
+  $("swatches").append(b); });
+SHAPES.forEach(s => { const b = document.createElement("button"); b.type = "button";
+  const t = el("svg", {viewBox: `-4 -4 ${s.w + 8} ${s.h + 8}`, "aria-hidden": "true"});
+  t.append(el("use", {href: "#sh-" + s.code, fill: "#B8743A"})); b.append(t, document.createTextNode(s.name));
+  b.onclick = () => { const p = add(s.code); sel = p.id; render(); }; $("tray").append(b); });
+PRESETS.forEach(pr => { const b = document.createElement("button"); b.type = "button"; b.textContent = pr.name;
+  b.onclick = () => load(pr.p); $("presets").append(b); });
+document.querySelectorAll("[data-rep]").forEach(b => b.onclick = () => { rep = +b.dataset.rep; render(); });
+$("rot").onclick = () => { const p = pieces.find(q => q.id === sel); if (p) { p.r = (p.r + 45) % 360; render(); } };
+$("dup").onclick = () => { const p = pieces.find(q => q.id === sel); if (p) { const n = add(p.k, wrap(p.x + 45), wrap(p.y + 45), p.r, p.c); sel = n.id; render(); } };
+$("del").onclick = () => { pieces = pieces.filter(q => q.id !== sel); sel = null; render(); };
+$("clear").onclick = () => { pieces = []; sel = null; render(); };
+$("rand").onclick = () => {
+  const ks = Object.keys(S), a = ks[Math.random() * ks.length | 0], b = ks[Math.random() * ks.length | 0];
+  const cs = COLORS.map(c => c.id).sort(() => Math.random() - .5), r = () => 45 * (Math.random() * 2 | 0);
+  load([[a, 45, 45, r(), cs[0]], [b, 135, 45, r(), cs[1]], [b, 45, 135, r(), cs[1]], [a, 135, 135, r(), cs[0]]]);
+};
+
+// drag on the tile; positions wrap around the edges and snap to a 7.5 mm grid
+const board = $("board");
+const mm = e => new DOMPoint(e.clientX, e.clientY).matrixTransform(board.getScreenCTM().inverse());
+board.addEventListener("pointerdown", e => {
+  const u = e.target.closest("[data-id]");
+  if (!u) { sel = null; render(); return; }
+  const p = pieces.find(q => q.id === +u.dataset.id); sel = p.id;
+  pieces = pieces.filter(q => q !== p).concat(p);          // bring to front
+  const m = mm(e); drag = {p, x0: p.x, y0: p.y, mx: m.x, my: m.y};
+  board.setPointerCapture(e.pointerId); board.classList.add("dragging"); renderUI(); later();
+});
+board.addEventListener("pointermove", e => {
+  if (!drag) return; const m = mm(e);
+  drag.p.x = wrap(snap(drag.x0 + m.x - drag.mx)); drag.p.y = wrap(snap(drag.y0 + m.y - drag.my)); later();
+});
+const end = () => { if (drag) { drag = null; board.classList.remove("dragging"); render(); } };
+board.addEventListener("pointerup", end); board.addEventListener("pointercancel", end);
+document.addEventListener("keydown", e => {
+  const p = pieces.find(q => q.id === sel); if (!p || e.target.closest("input,textarea")) return;
+  const mv = {ArrowLeft: [-GRID, 0], ArrowRight: [GRID, 0], ArrowUp: [0, -GRID], ArrowDown: [0, GRID]}[e.key];
+  if (mv) { p.x = wrap(p.x + mv[0]); p.y = wrap(p.y + mv[1]); e.preventDefault(); render(); }
+  else if (e.key === "r" || e.key === "R") $("rot").click();
+  else if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); $("del").click(); }
+});
+
+// picture of the pattern, 1080 px, with an ink band carrying the drawn wordmark and the handle
+function loadImg(src) { return new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; }); }
+$("save").onclick = async () => {
+  const xml = new XMLSerializer().serializeToString($("pattern"));
+  const url = URL.createObjectURL(new Blob([xml], {type: "image/svg+xml"}));
+  try {
+    const [pat, word] = await Promise.all([loadImg(url), loadImg(WORDMARK)]);
+    const c = document.createElement("canvas"); c.width = c.height = 1080;
+    const g = c.getContext("2d"); g.drawImage(pat, 0, 0, 1080, 1080);
+    g.fillStyle = INK; g.fillRect(0, 991, 1080, 89);                 // band 89 px, a Fibonacci step
+    const h = 55, w = h * word.width / word.height;                   // wordmark keeps its own proportions
+    g.drawImage(word, 34, 991 + (89 - h) / 2, w, h);
+    g.fillStyle = PAPER; g.font = "500 34px Jost, sans-serif"; g.textBaseline = "middle"; g.textAlign = "right";
+    g.fillText(HANDLE, 1080 - 34, 991 + 89 / 2);
+    $("shotImg").src = c.toDataURL("image/png"); $("shot").hidden = false;
+  } finally { URL.revokeObjectURL(url); }
+};
+
+if (!restore()) load(PRESETS[0].p); else render();
+</script>
+</main><footer class="site-foot"><img class="tag" src="assets/oct-mark.svg" alt="ป้ายห้อย 26"><p><b>OCT. 26</b> · our crafted things. ของที่เราทำกันเอง</p><p class="cap">ทำกันเองทั้งบ้าน พ่อ แม่ และลูกสามคน · สั่งซื้อและสอบถามทางไอจี @oct.26_brand</p><p class="row"><a href="https://www.instagram.com/oct.26_brand/" target="_blank" rel="noopener">Instagram</a><a href="https://www.facebook.com/profile.php?id=61595850110023" target="_blank" rel="noopener">Facebook</a><a href="https://www.youtube.com/@OCT.26_brand" target="_blank" rel="noopener">YouTube</a></p><p class="cap">© 2569 OCT. 26</p></footer></div></body></html>

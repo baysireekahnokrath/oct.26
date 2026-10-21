@@ -1,0 +1,258 @@
+<title>ต่อลาย OCT. 26</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@500&display=swap">
+<style>
+/* Layout: the work tile (a cutting mat, 18 x 18 cm at 1:1 scale of the dies) beside the repeated pattern;
+   tools sit under the tile, the piece tray under the tools. One column on phones. Palette #2 Soi Candy. */
+:root{
+  --bg:#FFF6EC;--card:#FFFFFF;--ink:#1C1B22;--muted:#5A5864;--line:#F1DCCB;--chip:#FBE9DA;
+  --cobalt:#2449D8;--tomato:#FF5A36;--mat:#EFE4D6;--matline:#E2D3C1;--on-accent:#FFFFFF;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+  --latin:"Jost","Anuphan",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--card:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--chip:#2A2833;
+  --cobalt:#7C97FF;--mat:#2A2833;--matline:#3A3846;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--card:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--chip:#2A2833;
+  --cobalt:#7C97FF;--mat:#2A2833;--matline:#3A3846;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:21px 55px}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:21px}
+header{display:flex;flex-direction:column;gap:6px}
+.eyebrow{font-family:var(--latin);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(28px,6vw,40px);line-height:1.2;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:20px;margin:0}
+p{margin:0}.muted{color:var(--muted);font-size:14px}
+.app{display:grid;gap:21px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:860px){.app{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+.col{display:flex;flex-direction:column;gap:13px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:13px}
+svg.board,svg.pattern{width:100%;height:auto;display:block;border-radius:13px}
+svg.board{touch-action:none;cursor:grab;background:var(--mat)}
+svg.board.dragging{cursor:grabbing}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-family:var(--display);font-size:15px;border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:99px;padding:8px 16px;cursor:pointer;min-height:40px}
+button:hover{border-color:var(--cobalt)}
+button:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+button:disabled{opacity:.4;cursor:default;border-color:var(--line)}
+button.primary{background:var(--cobalt);color:var(--on-accent);border-color:var(--cobalt)}
+button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tray{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (min-width:520px){.tray{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.tray button{border-radius:13px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;font-size:13px;min-height:0}
+.tray svg{width:56px;height:56px}
+.sw{display:flex;flex-wrap:wrap;gap:8px}
+.sw button{width:40px;height:40px;padding:0;border-radius:50%;border:2px solid var(--line);min-height:0}
+.sw button[aria-pressed="true"]{outline:3px solid var(--cobalt);outline-offset:2px;background:inherit}
+.label{font-family:var(--display);font-size:14px;color:var(--muted)}
+.stat{font-variant-numeric:tabular-nums}
+.shot{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.shot img{width:min(100%,360px);border-radius:13px;border:1px solid var(--line)}
+@media (prefers-reduced-motion:no-preference){svg.pattern{transition:opacity .2s}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="shapeDefs"></defs></svg>
+
+<div class="wrap">
+<header><span class="eyebrow">OCT. 26 · our crafted things. · ต้นแบบ</span>
+<h1>ต่อลายจากชิ้นหนังจริง</h1>
+<p class="muted">เลือกชิ้นหนังด้านล่างมาวางบนแผ่น 18 × 18 ซม. ลากย้าย หมุน เปลี่ยนสี แล้วดูลายที่ได้เมื่อต่อแผ่นซ้ำกัน ชิ้นที่ล้นขอบจะโผล่อีกฝั่งเหมือนลายผ้า ทุกชิ้นวาดจากแบบตัดจริงขนาด 9 ซม.</p></header>
+
+<div class="app">
+<div class="col">
+  <div class="card"><svg class="board" id="board" viewBox="0 0 180 180" role="img" aria-label="แผ่นต่อลาย 18 × 18 ซม."></svg></div>
+  <div class="row" role="toolbar" aria-label="จัดการชิ้นที่เลือก">
+    <button id="rot" type="button" disabled>หมุน 45°</button>
+    <button id="dup" type="button" disabled>ทำซ้ำ</button>
+    <button id="del" type="button" disabled>เอาออก</button>
+    <span class="muted" id="hint">แตะชิ้นหนังเพื่อเลือก</span>
+  </div>
+  <div class="card col"><span class="label">สีหนัง</span><div class="sw" id="swatches"></div></div>
+  <div class="card col"><span class="label">ชิ้นหนัง แตะเพื่อวางกลางแผ่น</span><div class="tray" id="tray"></div></div>
+</div>
+
+<div class="col">
+  <div class="card"><svg class="pattern" id="pattern" viewBox="0 0 540 540" role="img" aria-label="ลายที่ได้เมื่อต่อแผ่นซ้ำ"></svg></div>
+  <div class="row" role="group" aria-label="จำนวนแผ่นที่ต่อ">
+    <span class="label">ต่อซ้ำ</span>
+    <button type="button" data-rep="2">2 × 2</button><button type="button" data-rep="3" aria-pressed="true">3 × 3</button><button type="button" data-rep="5">5 × 5</button>
+  </div>
+  <p class="muted stat" id="stat"></p>
+  <div class="card col"><span class="label">ลายตัวอย่าง</span><div class="row" id="presets"></div>
+    <div class="row"><button type="button" id="rand">สุ่มลาย</button><button type="button" id="clear">ล้างแผ่น</button></div></div>
+  <div class="row"><button type="button" class="primary" id="save">ทำเป็นรูป</button></div>
+  <div class="shot" id="shot" hidden><img id="shotImg" alt="รูปลายที่ต่อ"><p class="muted">กดค้างที่รูปเพื่อบันทึก แล้วแชร์ลงไอจีพร้อมแท็ก @oct.26_brand</p></div>
+</div>
+</div>
+</div>
+
+<script>
+const SHAPES = /*SHAPES*/[];
+const S = Object.fromEntries(SHAPES.map(s => [s.code, s]));
+const T = 180, GRID = 7.5, NS = "http://www.w3.org/2000/svg";
+const PAPER = "#FFF6EC";
+const COLORS = [
+  {id:"tan", name:"แทน", hex:"#B8743A"}, {id:"cognac", name:"คอนญัก", hex:"#8E4A22"},
+  {id:"choc", name:"ช็อกโกแลต", hex:"#4E2C1C"}, {id:"black", name:"ดำ", hex:"#24201E"},
+  {id:"bone", name:"ครีม", hex:"#E6D3B5"}, {id:"wine", name:"แดงไวน์", hex:"#7A2630"}, {id:"navy", name:"กรม", hex:"#24324F"}];
+const HEX = Object.fromEntries(COLORS.map(c => [c.id, c.hex]));
+const PRESETS = [
+  {name:"กังหันสลับสี", p:[["02",45,45,0,"tan"],["02",135,45,45,"choc"],["02",45,135,45,"choc"],["02",135,135,0,"tan"]]},
+  {name:"วงกลมกับกากบาท", p:[["05",45,45,0,"bone"],["06",135,45,0,"cognac"],["06",45,135,0,"cognac"],["05",135,135,0,"bone"]]},
+  {name:"เพชรกับแคปซูล", p:[["04",45,45,45,"navy"],["03",135,45,0,"tan"],["03",45,135,0,"tan"],["04",135,135,45,"navy"]]},
+  {name:"หมีเดินแถว", p:[["01",52.5,52.5,0,"tan"],["01",142.5,142.5,180,"wine"]]}];
+
+let pieces = [], sel = null, nextId = 1, color = "tan", rep = 3, drag = null, raf = 0;
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+const wrap = v => ((v % T) + T) % T;
+const snap = v => Math.round(v / GRID) * GRID;
+
+// one <g> per piece shape: outline filled by the <use>, slits drawn in paper colour like the posters
+function shapeGroup(s, id) {
+  const g = el("g", {id});
+  g.append(el("path", {d: s.d, stroke: "rgba(0,0,0,.28)", "stroke-width": ".5", "fill-rule": "evenodd"}));
+  for (const [x1, y1, x2, y2] of s.slits)
+    g.append(el("line", {x1, y1, x2, y2, stroke: PAPER, "stroke-width": "1.1", "stroke-linecap": "round"}));
+  return g;
+}
+SHAPES.forEach(s => $("shapeDefs").append(shapeGroup(s, "sh-" + s.code)));
+
+function tf(p, ox = 0, oy = 0) { const s = S[p.k]; return `translate(${p.x + ox} ${p.y + oy}) rotate(${p.r}) translate(${-s.w / 2} ${-s.h / 2})`; }
+// a piece and its copies one tile away, so whatever crosses an edge shows on the other side
+function copies(p, prefix, withId) {
+  const out = [], R = Math.hypot(S[p.k].w, S[p.k].h) / 2;
+  for (const ox of [-T, 0, T]) for (const oy of [-T, 0, T]) {
+    if (p.x + ox + R < 0 || p.x + ox - R > T || p.y + oy + R < 0 || p.y + oy - R > T) continue;
+    const u = el("use", {href: "#" + prefix + p.k, fill: HEX[p.c], transform: tf(p, ox, oy)});
+    if (withId) u.dataset.id = p.id;
+    out.push(u);
+  }
+  return out;
+}
+
+function renderBoard() {
+  const b = $("board"); b.replaceChildren();
+  const defs = el("defs"), clip = el("clipPath", {id: "tileClip"}); clip.append(el("rect", {width: T, height: T})); defs.append(clip);
+  const grid = el("pattern", {id: "gridPat", width: GRID * 2, height: GRID * 2, patternUnits: "userSpaceOnUse"});
+  grid.append(el("path", {d: `M ${GRID * 2} 0 L 0 0 0 ${GRID * 2}`, fill: "none", stroke: "var(--matline)", "stroke-width": ".4"}));
+  defs.append(grid); b.append(defs);
+  b.append(el("rect", {width: T, height: T, fill: "url(#gridPat)"}));
+  const g = el("g", {"clip-path": "url(#tileClip)"});
+  pieces.forEach(p => g.append(...copies(p, "sh-", true)));
+  b.append(g);
+  const p = pieces.find(q => q.id === sel);
+  if (p) b.append(el("circle", {cx: p.x, cy: p.y, r: Math.max(S[p.k].w, S[p.k].h) / 2 + 3, fill: "none",
+    stroke: "var(--cobalt)", "stroke-width": "1.2", "stroke-dasharray": "3 2", "pointer-events": "none"}));
+}
+
+// the pattern view is self-contained (its own shape defs and colours) so it can be turned into a picture
+function renderPattern() {
+  const v = $("pattern"); v.replaceChildren();
+  const size = 540, defs = el("defs");
+  SHAPES.forEach(s => defs.append(shapeGroup(s, "ps-" + s.code)));
+  const pat = el("pattern", {id: "tilePat", width: T, height: T, patternUnits: "userSpaceOnUse",
+    patternTransform: `scale(${size / (T * rep)})`});
+  pat.append(el("rect", {width: T, height: T, fill: PAPER}));
+  pieces.forEach(p => pat.append(...copies(p, "ps-", false)));
+  defs.append(pat); v.append(defs);
+  v.append(el("rect", {width: size, height: size, fill: "url(#tilePat)"}));
+}
+
+function renderUI() {
+  const has = pieces.some(p => p.id === sel);
+  for (const id of ["rot", "dup", "del"]) $(id).disabled = !has;
+  $("hint").textContent = has ? "ลากเพื่อย้าย · แตะสีเพื่อเปลี่ยนสีชิ้นนี้" : "แตะชิ้นหนังเพื่อเลือก";
+  document.querySelectorAll("#swatches button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.c === color)));
+  document.querySelectorAll("[data-rep]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.rep === rep)));
+  const count = {}; pieces.forEach(p => count[p.k] = (count[p.k] || 0) + 1);
+  const parts = Object.entries(count).map(([k, n]) => `${S[k].name} ${n}`).join(" · ");
+  $("stat").textContent = pieces.length
+    ? `แผ่นละ ${pieces.length} ชิ้น (${parts}) · ลายนี้ ${rep} × ${rep} แผ่น ใช้ ${pieces.length * rep * rep} ชิ้น กว้าง ${18 * rep} ซม.`
+    : "แผ่นยังว่าง เลือกชิ้นหนังด้านล่าง หรือกดลายตัวอย่าง";
+}
+
+function render() { renderBoard(); renderPattern(); renderUI(); save(); }
+function later() { if (!raf) raf = requestAnimationFrame(() => { raf = 0; renderBoard(); renderPattern(); }); }
+
+function add(k, x = 90, y = 90, r = 0, c = color) { const p = {id: nextId++, k, x: snap(x), y: snap(y), r, c}; pieces.push(p); return p; }
+function load(list) { pieces = []; sel = null; list.forEach(([k, x, y, r, c]) => add(k, x, y, r, c)); render(); }
+
+function save() { try { localStorage.setItem("oct26-play-v1", JSON.stringify({pieces, color, rep})); } catch (_) {} }
+function restore() {
+  try { const d = JSON.parse(localStorage.getItem("oct26-play-v1") || "null");
+    if (d && Array.isArray(d.pieces) && d.pieces.length) {
+      pieces = d.pieces.filter(p => S[p.k] && HEX[p.c]); nextId = Math.max(0, ...pieces.map(p => p.id)) + 1;
+      color = HEX[d.color] ? d.color : color; rep = [2, 3, 5].includes(d.rep) ? d.rep : rep; return true; } } catch (_) {}
+  return false;
+}
+
+// controls
+COLORS.forEach(c => { const b = document.createElement("button"); b.type = "button"; b.dataset.c = c.id;
+  b.style.background = c.hex; b.title = c.name; b.setAttribute("aria-label", "หนังสี" + c.name);
+  b.onclick = () => { color = c.id; const p = pieces.find(q => q.id === sel); if (p) p.c = c.id; render(); };
+  $("swatches").append(b); });
+SHAPES.forEach(s => { const b = document.createElement("button"); b.type = "button";
+  const t = el("svg", {viewBox: `-4 -4 ${s.w + 8} ${s.h + 8}`, "aria-hidden": "true"});
+  t.append(el("use", {href: "#sh-" + s.code, fill: "#B8743A"})); b.append(t, document.createTextNode(s.name));
+  b.onclick = () => { const p = add(s.code); sel = p.id; render(); }; $("tray").append(b); });
+PRESETS.forEach(pr => { const b = document.createElement("button"); b.type = "button"; b.textContent = pr.name;
+  b.onclick = () => load(pr.p); $("presets").append(b); });
+document.querySelectorAll("[data-rep]").forEach(b => b.onclick = () => { rep = +b.dataset.rep; render(); });
+$("rot").onclick = () => { const p = pieces.find(q => q.id === sel); if (p) { p.r = (p.r + 45) % 360; render(); } };
+$("dup").onclick = () => { const p = pieces.find(q => q.id === sel); if (p) { const n = add(p.k, wrap(p.x + 45), wrap(p.y + 45), p.r, p.c); sel = n.id; render(); } };
+$("del").onclick = () => { pieces = pieces.filter(q => q.id !== sel); sel = null; render(); };
+$("clear").onclick = () => { pieces = []; sel = null; render(); };
+$("rand").onclick = () => {
+  const ks = Object.keys(S), a = ks[Math.random() * ks.length | 0], b = ks[Math.random() * ks.length | 0];
+  const cs = COLORS.map(c => c.id).sort(() => Math.random() - .5);
+  load([[a, 45, 45, 45 * (Math.random() * 2 | 0), cs[0]], [b, 135, 45, 45 * (Math.random() * 2 | 0), cs[1]],
+        [b, 45, 135, 45 * (Math.random() * 2 | 0), cs[1]], [a, 135, 135, 45 * (Math.random() * 2 | 0), cs[0]]]);
+};
+
+// drag on the tile; positions wrap around the edges and snap to a 7.5 mm grid
+const board = $("board");
+const mm = e => new DOMPoint(e.clientX, e.clientY).matrixTransform(board.getScreenCTM().inverse());
+board.addEventListener("pointerdown", e => {
+  const u = e.target.closest("[data-id]");
+  if (!u) { sel = null; render(); return; }
+  const p = pieces.find(q => q.id === +u.dataset.id); sel = p.id;
+  pieces = pieces.filter(q => q !== p).concat(p);          // bring to front
+  const m = mm(e); drag = {p, x0: p.x, y0: p.y, mx: m.x, my: m.y};
+  board.setPointerCapture(e.pointerId); board.classList.add("dragging"); renderUI(); later();
+});
+board.addEventListener("pointermove", e => {
+  if (!drag) return; const m = mm(e);
+  drag.p.x = wrap(snap(drag.x0 + m.x - drag.mx)); drag.p.y = wrap(snap(drag.y0 + m.y - drag.my)); later();
+});
+const end = () => { if (drag) { drag = null; board.classList.remove("dragging"); render(); } };
+board.addEventListener("pointerup", end); board.addEventListener("pointercancel", end);
+document.addEventListener("keydown", e => {
+  const p = pieces.find(q => q.id === sel); if (!p || e.target.closest("input,textarea")) return;
+  const mv = {ArrowLeft: [-GRID, 0], ArrowRight: [GRID, 0], ArrowUp: [0, -GRID], ArrowDown: [0, GRID]}[e.key];
+  if (mv) { p.x = wrap(p.x + mv[0]); p.y = wrap(p.y + mv[1]); e.preventDefault(); render(); }
+  else if (e.key === "r" || e.key === "R") $("rot").click();
+  else if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); $("del").click(); }
+});
+
+// picture of the pattern: draw the pattern view on a 1080 px canvas and show it to long-press save
+$("save").onclick = () => {
+  const xml = new XMLSerializer().serializeToString($("pattern"));
+  const img = new Image(), url = URL.createObjectURL(new Blob([xml], {type: "image/svg+xml"}));
+  img.onload = () => {
+    const c = document.createElement("canvas"); c.width = c.height = 1080;
+    const g = c.getContext("2d"); g.drawImage(img, 0, 0, 1080, 1080);
+    g.fillStyle = "rgba(28,27,34,.78)"; g.fillRect(0, 1000, 1080, 80);
+    g.fillStyle = PAPER; g.font = "500 34px Jost, sans-serif"; g.textBaseline = "middle";
+    g.fillText("OCT. 26 · our crafted things.", 40, 1040); g.textAlign = "right"; g.fillText("@oct.26_brand", 1040, 1040);
+    URL.revokeObjectURL(url); $("shotImg").src = c.toDataURL("image/png"); $("shot").hidden = false;
+  };
+  img.src = url;
+};
+
+if (!restore()) load(PRESETS[0].p); else render();
+</script>

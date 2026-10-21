@@ -202,7 +202,7 @@ def brandbook():
 
 <section id="name"><span class="eyebrow">ชื่อแบรนด์</span><h2>OCT. 26 ชื่อที่ซ่อนวันเกิดของเธอ</h2>
 <div class="grid">{mean}</div>
-<p class="cap">ค้นเว็บเมื่อ 14 ต.ค. 2569 ไม่เจอแบรนด์เครื่องหนังหรือบัญชีไทยชื่อ OCT. 26 แต่มีแบรนด์เครื่องหนังที่ขึ้นต้นด้วย Oct อยู่แล้ว (Octovo, Octogony) การค้นเว็บไม่ใช่การค้นเครื่องหมายการค้า ก่อนพิมพ์จำนวนมาก ค้นในฐานข้อมูลกรมทรัพย์สินทางปัญญา และเช็กว่า @{b['handle']} ยังว่างทุกช่องทาง ชื่ออื่นที่คิดไว้ทั้งหมดอยู่ใน {link("alternatives", "หน้าทางเลือกแบรนด์")}</p></section>
+<p class="cap">ค้นเว็บเมื่อ 14 ต.ค. 2569 ไม่เจอแบรนด์เครื่องหนังหรือบัญชีไทยชื่อ OCT. 26 แต่มีแบรนด์เครื่องหนังที่ขึ้นต้นด้วย Oct อยู่แล้ว (Octovo, Octogony) การค้นเว็บไม่ใช่การค้นเครื่องหมายการค้า ก่อนพิมพ์จำนวนมาก ค้นในฐานข้อมูลกรมทรัพย์สินทางปัญญา บัญชี Instagram, YouTube และ Facebook เปิดแล้วในชื่อ @{b['handle']} (21 ต.ค.) TikTok และ Shopee ใช้ชื่อเดียวกันเมื่อเปิด ชื่ออื่นที่คิดไว้ทั้งหมดอยู่ใน {link("alternatives", "หน้าทางเลือกแบรนด์")}</p></section>
 
 <section id="arch"><span class="eyebrow">โครงสร้างแบรนด์</span><h2>แบรนด์หลัก คอลเลกชัน และซับแบรนด์</h2>
 <p class="lead">หมีห้าตัวเป็นซับแบรนด์ได้ ใช้ชื่อเต็มว่า ห้าหมี FIVE BEARS by OCT. 26</p>
@@ -315,7 +315,7 @@ def launch():
 <div class="wrap">
 <nav class="top" aria-label="หัวข้อ"><a href="#plan">แผนถึงวันงาน</a><a href="#social">โซเชียลและ Shopee</a><a href="#products">สินค้า 30 ตัว</a>
 <a href="#stock">สต็อกไปงาน</a><a href="#kids">ลูก ๆ ขายของ</a><a href="#print">ของต้องพิมพ์</a><a href="#more">แนะนำเพิ่ม</a></nav>
-<header style="padding-top:28px;display:flex;flex-direction:column;gap:12px"><span class="eyebrow">LAUNCH KIT · บูธ 23–25 ต.ค. 2569</span>
+<header style="padding-top:28px;display:flex;flex-direction:column;gap:12px"><span class="eyebrow">LAUNCH KIT · บูธ 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569</span>
 <h1>OCT. 26 พร้อมออกบูธ</h1>
 <p class="lead">ทุกอย่างที่ต้องทำก่อนวันงาน ข้อความโพสต์ของสินค้า 30 ตัวสำหรับ 5 ช่องทาง และคู่มือให้ลูก ๆ ขายของเอง สินค้าแบ่งเป็นคอลเลกชัน SOI. 02 และห้าหมี Love กดปุ่มคัดลอกแล้ววางในแอปได้เลย</p>
 <div class="grid s">
@@ -337,7 +337,7 @@ def launch():
 <div class="card"><h3>9 โพสต์แรก</h3><ol style="margin-top:6px">
 <li>ทำไมชื่อ OCT. 26 (ใช้ข้อความใน Brand Book + โลโก้ OCT. 26)</li><li>เปิดตัวคอลเลกชัน SOI. 02 และห้าหมี Love (ป้าย SOI. 02 กับป้าย Love)</li><li>แนะนำลูกสามคน และหน้าที่ที่บูธ</li>
 {"".join(f"<li>How-to {E(next(p['name'] for p in B.PRODUCTS if p['n']==h))}</li>" for h in B.HEROES[:6])}
-<li>เจอกันที่บูธ 23–25 ต.ค. พร้อมแผนที่และเลขบูธ</li></ol></div></section>
+<li>เจอกันที่บูธ โซนหนูทดลอง KIDS MARKET บ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย.</li></ol></div></section>
 
 <section id="products"><span class="eyebrow">สินค้า 30 ตัว</span><h2>โปสเตอร์และโพสต์ทุกช่องทาง</h2>
 <p class="lead">แตะรูปเพื่อเปิดโปสเตอร์ขนาดเต็ม แต่ละตัวมีภาพ story 1080 × 1920 สำหรับ TikTok, Reels และ Shorts อยู่ในโฟลเดอร์ posters/png</p>
@@ -674,7 +674,9 @@ AUDIT = [
 
 def summary():
     tot = B.event_totals()
-    rows = [("Tech Pack สินค้า 30 แบบ", "techpack", "หนึ่งหน้าต่อสินค้า: ชิ้นส่วน แผนภาพประกอบตามเลขรอยต่อ เวลา ใครทำ ต้นทุน และรายการตรวจก่อนแพ็ค พิมพ์ A4 ได้"),
+    rows = [("แผนบูธ บ้านและสวนแฟร์", "booth", "บูธ 2 × 2 ม. สองสัปดาห์ 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย.: ผัง X-stand อุปกรณ์ในงบ 3,000 ไทม์ไลน์ สต็อก ใครยืนตรงไหน"),
+            ("โพสต์เปิดตัว", "social", "แบนเนอร์เปิดตัวสามขนาด คำเชิญชวน Facebook IG YouTube และแคปชันคลิปสาธิตของลูก ๆ"),
+            ("Tech Pack สินค้า 30 แบบ", "techpack", "หนึ่งหน้าต่อสินค้า: ชิ้นส่วน แผนภาพประกอบตามเลขรอยต่อ เวลา ใครทำ ต้นทุน และรายการตรวจก่อนแพ็ค พิมพ์ A4 ได้"),
             ("Logo Lab", "logolab", "สรุปแล้ว เหลือสี่โลโก้ ใช้ทีละตัว: OCT. 26 ป้ายห้อย 26 ห้าหมี และหมีหัวใจ"),
             ("Color Lab", "colorlab", "เลือกแล้ว ชุดที่ 2 Soi Candy ทางเลือกอื่นเก็บไว้เทียบ"),
             ("สุ่มสีแบบไม่มีชื่อแบรนด์", "palettes", "สุ่มสีสามแนวบนตัวอย่างที่ไม่มีโลโก้ ล็อกสี เก็บชุดที่ชอบ คัดลอกรหัสสี"),
@@ -699,7 +701,7 @@ def summary():
     ftable = "".join(f'<tr><td class="mono" style="white-space:nowrap">{E(f)}</td><td>{E(d)}</td></tr>' for f, d in files)
     return f"""{head("OCT. 26 สรุปโปรเจกต์")}
 <div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
-<span class="eyebrow">สรุปโปรเจกต์ · อัปเดต 15 ต.ค. 2569</span><h1>OCT. 26 ก่อนออกบูธ 23–25 ต.ค.</h1>
+<span class="eyebrow">สรุปโปรเจกต์ · อัปเดต 21 ต.ค. 2569</span><h1>OCT. 26 ก่อนออกบูธ 23 ต.ค.–1 พ.ย.</h1>
 <div class="paper" style="aspect-ratio:16/7"><img src="logo/oct-wordmark.svg" alt="โลโก้ OCT. 26" style="max-height:100%"></div>
 <p class="lead">ชื่อแบรนด์ เรื่องเล่า โลโก้และ brand book ช่องทางโซเชียลกับ Shopee สินค้า 30 ตัวพร้อมโปสเตอร์และโพสต์ทุกช่องทาง คู่มือให้ลูก ๆ ขายเอง และสไลด์สำหรับวันเกิดเธอ</p></header>
 <section><span class="eyebrow">คำตอบ</span><h2>หมี 5 ตัวเป็นซับแบรนด์ได้</h2>
@@ -720,11 +722,11 @@ def summary():
 <div class="card"><p class="cap">ต้นทุนของ</p><b style="font-family:var(--display);font-size:26px" class="mono">{tot['cost']:,.0f} ฿</b></div></div></section>
 <section><h2>ไฟล์</h2><div class="tbl"><table><tbody>{ftable}</tbody></table></div></section>
 <section><h2>ต้องเช็กก่อน</h2><div class="card"><ol>
-<li>ชื่อ @{B.BRAND['handle']} ยังว่างทุกช่องทาง ถ้าไม่ว่าง เลือกชื่อใหม่แล้วแก้ใน brand.py ที่เดียว</li>
+<li>เปิด TikTok และ Shopee ในชื่อ @{B.BRAND['handle']} ให้ตรงกับ IG และ YouTube</li>
 <li>ค้นชื่อ OCT. 26 และห้าหมีในฐานข้อมูลเครื่องหมายการค้า ก่อนพิมพ์ของจำนวนมาก</li>
 <li>ได้ราคาบล็อกครบ 6 แบบแล้ว รวม {sum(B.DIE_PRICE.values()):,} บาท ยังขาดราคาบล็อกสายหัวใจ ถ้าจะตัดด้วยบล็อก ให้ขอราคาเพิ่ม</li>
 <li>สินค้าที่ติดป้าย “ลองต้นแบบก่อน” ต่อตัวอย่างหนึ่งชิ้นทุกตัว ทดสอบตามกล่องสีเหลืองใน {link("techpack", "Tech Pack")} ตัวไหนไม่ผ่าน ไม่ต้องเอาไปบูธ</li>
-<li>ใส่ชื่องานและเลขบูธแทน [ชื่องาน] ในข้อความโพสต์</li>
+<li>ได้บูธงานบ้านและสวนแล้ว ข้อความโพสต์ใส่ชื่องานแล้ว เหลือเลขบูธ ใส่ในโพสต์ เจอกันที่บูธ</li>
 <li>สายหัวใจ 250 มม. ต้องใช้เศษยาว 25.5 ซม. ขึ้นไป ถ้าเศษสั้นกว่า ป้ายชื่อกระเป๋าใช้สาย 200 แทน</li>
 <li>ราคาขายเป็นราคาแนะนำ แก้ได้ในคอลัมน์ราคาขายของ Google Sheet</li>
 <li>พิมพ์ป้ายห้อยตัวอย่าง 55 × 89 มม. หนึ่งแผ่น ดูสีโคบอลต์และมะเขือเทศบนกระดาษจริงก่อนสั่งพิมพ์จำนวนมาก</li>
