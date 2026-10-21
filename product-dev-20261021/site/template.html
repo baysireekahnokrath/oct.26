@@ -1,0 +1,632 @@
+<title>ฝ่ายพัฒนาสินค้า OCT. 26</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  /* Layout: one 987px column (Fibonacci), sticky tab bar, sections swap in place; sizes from phi like the brand book.
+     Palette #2 Soi Candy from brand.py; leather is only for drawing pieces. */
+  --bg:#FFF6EC;--card:#FFFFFF;--ink:#1C1B22;--muted:#5A5664;--line:#F1DCCB;--chip:#FBE9DA;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --good:#138A6C;--bad:#D63A17;--on-accent:#FFFFFF;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+  --latin:"Jost","IBM Plex Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--card:#1F1E27;--ink:#FFF6EC;--muted:#C2BDCF;--line:#34323F;--chip:#2A2833;
+  --cobalt:#7C97FF;--leather:#D9965A;--good:#4FD6B2;--bad:#FF7A5C;--on-accent:#14131A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14131A;--card:#1F1E27;--ink:#FFF6EC;--muted:#C2BDCF;--line:#34323F;--chip:#2A2833;
+  --cobalt:#7C97FF;--leather:#D9965A;--good:#4FD6B2;--bad:#FF7A5C;--on-accent:#14131A;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s6)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:var(--t2)}h3{font-size:var(--t1)}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:var(--t-1)}
+.num{font-variant-numeric:tabular-nums}
+code{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--chip);padding:1px 6px;border-radius:4px;word-break:break-all}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+
+header.top{padding-block:var(--s5) var(--s4);display:grid;gap:var(--s3)}
+.wordmark{width:144px;height:auto;color:var(--ink);display:block}
+.eyebrow{font-family:var(--latin);font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:var(--t1);max-width:40ch;color:var(--muted)}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;gap:var(--s1);overflow-x:auto;padding-block:var(--s2);margin-bottom:var(--s5)}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-family:var(--display);font-weight:500;padding:6px 14px;border-radius:999px}
+nav.tabs a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+section.view{display:grid;gap:var(--s5)}
+.block{display:grid;gap:var(--s3)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s3)}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s3) var(--s4);display:grid;gap:2px;min-width:0}
+.stat b{font-family:var(--latin);font-weight:500;font-size:var(--t3);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat.alert b{color:var(--bad)}
+
+.pipe{display:flex;height:34px;border-radius:8px;overflow:hidden;background:var(--chip)}
+.pipe span{display:flex;align-items:center;justify-content:center;font-size:var(--t-1);font-weight:600;color:#1C1B22;min-width:0;overflow:hidden;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);font-size:var(--t-1);color:var(--muted)}
+.legend i,.pill i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+.risk{display:grid;gap:var(--s2);list-style:none;margin:0;padding:0}
+.risk li{display:grid;grid-template-columns:48px 1fr auto;gap:var(--s3);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s2) var(--s3)}
+.risk li > div{min-width:0}
+.risk .why{font-size:var(--t-1);color:var(--muted)}
+.risk .why.block-txt{color:var(--bad)}
+
+.btn{border:1px solid var(--ink);background:transparent;border-radius:999px;padding:6px 14px;font-family:var(--display);font-weight:500}
+.btn.primary{background:var(--cobalt);border-color:var(--cobalt);color:var(--on-accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.notice{background:var(--chip);border-radius:13px;padding:var(--s3) var(--s4);font-size:var(--t-1)}
+
+.chips{display:flex;gap:var(--s2);overflow-x:auto;padding-bottom:4px}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:var(--t-1)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:var(--s3)}
+.card{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s3);display:grid;grid-template-columns:56px 1fr;gap:var(--s3);align-items:start}
+.card:hover{border-color:var(--ink)}
+.card > div{min-width:0;display:grid;gap:4px}
+.card .name{font-family:var(--display);font-weight:600;line-height:1.3}
+.card .meta{font-size:var(--t-1);color:var(--muted)}
+.card .blk{font-size:var(--t-1);color:var(--bad)}
+.pill{display:inline-flex;align-items:center;font-size:var(--t-1);font-weight:600;border-radius:999px;padding:1px 10px 1px 8px;background:var(--chip);width:max-content}
+.star{color:var(--tomato);font-size:var(--t-1);font-weight:600}
+.thumb{width:56px;height:56px}
+.thumb path{fill:none;stroke:var(--leather);stroke-width:2.2}
+.thumb line{stroke:var(--tomato);stroke-width:2.2}
+.thumb.big{width:96px;height:96px}
+.marks{display:flex;gap:4px;flex-wrap:wrap}
+.mark{font-size:11px;font-weight:600;border-radius:4px;padding:0 5px;background:var(--chip);color:var(--muted)}
+.mark.pass{color:var(--good)}.mark.fail{color:var(--bad)}
+
+dialog{border:none;border-radius:21px;background:var(--card);color:var(--ink);padding:0;width:min(610px,calc(100vw - 32px));max-height:calc(100dvh - 48px)}
+dialog::backdrop{background:rgba(20,19,26,.55)}
+.dlg{padding:var(--s4);display:grid;gap:var(--s4)}
+.dlg-head{display:grid;grid-template-columns:96px 1fr auto;gap:var(--s3);align-items:start}
+.dlg-head > div{min-width:0}
+.x{border:none;background:var(--chip);border-radius:50%;width:34px;height:34px;font-size:18px;line-height:1}
+.stagepick{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.stagepick button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 12px;font-size:var(--t-1)}
+.stagepick button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+label{display:grid;gap:4px;font-size:var(--t-1);color:var(--muted)}
+input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;font-size:var(--t0)}
+textarea{min-height:68px;resize:vertical}
+dl.spec{display:grid;grid-template-columns:auto 1fr;gap:4px var(--s3);margin:0;font-size:var(--t-1)}
+dl.spec dt{color:var(--muted)}dl.spec dd{margin:0;min-width:0}
+ol.steps{margin:0;padding-left:1.3em;font-size:var(--t-1)}
+.row{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.saved{font-size:var(--t-1);color:var(--good)}
+.err{font-size:var(--t-1);color:var(--bad)}
+
+.form{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:var(--s4);display:grid;gap:var(--s3)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s3)}
+.tri{display:grid;gap:var(--s2)}
+.tri > div{display:grid;grid-template-columns:1fr auto;gap:var(--s2);align-items:center;border-top:1px solid var(--line);padding-top:var(--s2)}
+.tri > div > div{min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:none;background:transparent;padding:5px 12px;font-size:var(--t-1)}
+.seg button[aria-pressed="true"][data-v="pass"]{background:var(--good);color:var(--on-accent)}
+.seg button[aria-pressed="true"][data-v="fail"]{background:var(--bad);color:var(--on-accent)}
+.seg button[aria-pressed="true"][data-v=""]{background:var(--chip)}
+.pieces{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:var(--s2)}
+.piece{display:grid;grid-template-columns:40px 1fr;gap:var(--s2);align-items:center;font-size:var(--t-1)}
+.piece .thumb{width:40px;height:40px}
+.piece input{padding:4px 8px}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--s2);background:var(--chip);border-radius:13px;padding:var(--s3)}
+.calc b{display:block;font-family:var(--latin);font-weight:500;font-size:var(--t1);font-variant-numeric:tabular-nums}
+.calc .bad b{color:var(--bad)}.calc .ok b{color:var(--good)}
+
+.log{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
+.log li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s2) var(--s3);display:grid;gap:4px}
+
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.flow > li{display:grid;grid-template-columns:34px 1fr;gap:var(--s3)}
+.flow .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--latin);font-weight:500;color:#1C1B22}
+.flow .rail{display:grid;justify-items:center;grid-template-rows:34px 1fr}
+.flow .rail::after{content:"";width:2px;background:var(--line);min-height:21px}
+.flow > li:last-child .rail::after{display:none}
+.flow .body{padding-bottom:var(--s4);display:grid;gap:var(--s2);min-width:0}
+.gate{border:1px dashed var(--ink);border-radius:13px;padding:var(--s3);display:grid;gap:4px;font-size:var(--t-1)}
+.gate ul{margin:0;padding-left:1.2em}
+.gate b{font-family:var(--display)}
+table{border-collapse:collapse;width:100%;font-size:var(--t-1)}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600}
+.scroll{overflow-x:auto}
+ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.role{display:grid;grid-template-columns:14px 1fr;gap:var(--s3);align-items:start}
+.role > div{min-width:0}
+.dot{width:14px;height:14px;border-radius:50%;margin-top:6px}
+.tag{font-size:var(--t-1);background:var(--chip);border-radius:999px;padding:1px 8px}
+.rules li p,.role p{font-size:var(--t-1);color:var(--muted)}
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.timeline li{display:grid;grid-template-columns:150px 1fr;gap:var(--s3);border-top:1px solid var(--line);padding-top:var(--s3)}
+.timeline li > div{min-width:0}
+.timeline time{font-family:var(--display);font-weight:600;color:var(--cobalt)}
+.timeline p{font-size:var(--t-1);color:var(--muted)}
+.files li{display:grid;gap:2px}
+.files span{font-size:var(--t-1);color:var(--muted)}
+@media (max-width:560px){
+  .timeline li{grid-template-columns:1fr;gap:2px}
+  .dlg-head{grid-template-columns:64px 1fr auto}
+  .thumb.big{width:64px;height:64px}
+}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  __WORDMARK__
+  <p class="eyebrow">Product Development · ฝ่ายพัฒนาสินค้า</p>
+  <h1>ทุกสินค้าเดินผ่าน 5 ขั้น และ 4 ประตู ก่อนขึ้นโต๊ะบูธ</h1>
+  <p class="lede">ที่นี่คือที่ทำงานของฝ่าย เปลี่ยนขั้นของสินค้า บันทึกผลทดสอบ และคิดไอเดียใหม่ ทุกคนในบ้านเห็นบอร์ดเดียวกัน</p>
+</header>
+
+<nav class="tabs" aria-label="ส่วนของหน้า">
+  <a href="#overview" data-tab="overview">ภาพรวม</a>
+  <a href="#board" data-tab="board">บอร์ดสินค้า</a>
+  <a href="#tests" data-tab="tests">ทดสอบ</a>
+  <a href="#process" data-tab="process">ขั้นตอน</a>
+  <a href="#plan" data-tab="plan">แผน 12 เดือน</a>
+</nav>
+
+<p class="notice" id="dbnote" hidden></p>
+
+<section class="view" id="v-overview">
+  <div class="stats" id="stats"></div>
+  <div class="block">
+    <h2>สินค้าทั้ง 30 แบบอยู่ขั้นไหน</h2>
+    <div class="pipe" id="pipe" role="img"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="block">
+    <h2>ต้องจบก่อนบูธ 23 ต.ค.</h2>
+    <p class="muted">สินค้าหลักหน้าบูธที่ยังไม่ถึงขั้นพร้อมผลิต ทดสอบให้ผ่าน หรือย้ายไปพักไว้แล้วใช้ตัวที่พร้อมแทน</p>
+    <ul class="risk" id="risk-hero"></ul>
+  </div>
+  <div class="block">
+    <h3>สต็อกบูธตัวอื่นที่ยังไม่พร้อม เรียงตามยอดขายที่จะหายไป</h3>
+    <ul class="risk" id="risk-rest"></ul>
+  </div>
+  <div class="block">
+    <h2>ทีม</h2>
+    <p class="muted small">ข้อเสนอ ปรับได้ตามที่บ้านตกลงกัน</p>
+    <ul class="plain">__ROLES__</ul>
+  </div>
+  <div class="block">
+    <h2>ไฟล์ของฝ่าย</h2>
+    <ul class="plain files">__FILES__</ul>
+  </div>
+</section>
+
+<section class="view" id="v-board" hidden>
+  <div class="row" style="justify-content:space-between">
+    <h2>บอร์ดสินค้า</h2>
+    <button class="btn primary" id="new-idea">เพิ่มไอเดีย</button>
+  </div>
+  <div class="chips" id="filters" role="group" aria-label="กรองตามขั้น"></div>
+  <div class="grid" id="cards"></div>
+
+  <form class="form" id="idea-form" hidden>
+    <h3>ไอเดียใหม่</h3>
+    <div class="two">
+      <label for="i-name">ชื่อสินค้า<input id="i-name" required maxlength="60" placeholder="เช่น ที่ห้อยกุญแจกังหัน"></label>
+      <label for="i-who">ใครซื้อ ซื้อไปทำอะไร<input id="i-who" maxlength="80" placeholder="เช่น นักเรียน ห้อยกระเป๋า"></label>
+    </div>
+    <p class="small muted">ใช้ชิ้นไหนบ้าง กี่ชิ้น (รูปคือแพตเทิร์นบล็อกจริง)</p>
+    <div class="pieces" id="i-pieces"></div>
+    <div class="two">
+      <label for="i-joints">จุดต่อ (สอดปีกเข้าร่อง)<input id="i-joints" type="number" min="0" max="99" value="0" inputmode="numeric"></label>
+      <label for="i-extra">ชิ้นเสริม บาท (ห่วง เชือก ไม้ก๊อก)<input id="i-extra" type="number" min="0" step="0.5" value="0" inputmode="decimal"></label>
+      <label for="i-pack">แพ็กเกจ<select id="i-pack"></select></label>
+      <label for="i-price">ราคาตั้ง บาท<input id="i-price" type="number" min="1" value="99" inputmode="numeric"></label>
+    </div>
+    <div class="calc" id="i-calc"></div>
+    <div class="row"><button class="btn primary" type="submit" id="i-save">เพิ่มลงบอร์ด</button><button class="btn" type="button" id="i-cancel">ยกเลิก</button><span id="i-msg"></span></div>
+  </form>
+</section>
+
+<section class="view" id="v-tests" hidden>
+  <div class="block">
+    <h2>บันทึกการทดสอบ</h2>
+    <p class="muted">ทดสอบบนหนังจริง ข้อที่ยังไม่ได้ลองให้เว้นไว้ ผ่านครบ 5 ข้อจากคนทดสอบ 2 คนขึ้นไป จึงย้ายไปขั้นทดสอบผ่าน</p>
+  </div>
+  <form class="form" id="test-form">
+    <div class="two">
+      <label for="t-item">สินค้า<select id="t-item"></select></label>
+      <label for="t-tester">คนทดสอบ<select id="t-tester"></select></label>
+    </div>
+    <p class="small" id="t-check"></p>
+    <div class="tri" id="t-tri"></div>
+    <div class="two">
+      <label for="t-sec">เวลาต่อเสร็จ (วินาที)<input id="t-sec" type="number" min="0" inputmode="numeric" placeholder="เช่น 95"></label>
+      <label for="t-note">เจออะไร<input id="t-note" maxlength="200" placeholder="เช่น ร่องล่างฉีกรอบที่ 8"></label>
+    </div>
+    <div class="row"><button class="btn primary" type="submit" id="t-save">บันทึกผล</button><span id="t-msg"></span></div>
+  </form>
+  <div class="block">
+    <h3>ผลล่าสุด</h3>
+    <ul class="log" id="log"></ul>
+  </div>
+</section>
+
+<section class="view" id="v-process" hidden>
+  <div class="block">
+    <h2>5 ขั้น 4 ประตู</h2>
+    <p class="muted">ผ่านประตูได้เมื่อทุกข้อเป็นจริง คนที่อนุมัติแต่ละประตูเขียนไว้ในกรอบ</p>
+    <ol class="flow" id="flow"></ol>
+  </div>
+  <div class="block">
+    <h2>ทดสอบ 5 ข้อ</h2>
+    <div class="scroll"><table><thead><tr><th>ข้อ</th><th>วิธีทดสอบ</th></tr></thead><tbody id="protocol"></tbody></table></div>
+  </div>
+  <div class="block">
+    <h2>หลักของฝ่าย</h2>
+    <ul class="plain rules">__RULES__</ul>
+  </div>
+</section>
+
+<section class="view" id="v-plan" hidden>
+  <div class="block">
+    <h2>แผน 12 เดือน</h2>
+    <p class="muted">ข้อเสนอสำหรับคุยกันหลังบูธ วันที่ยึดตามเทศกาลและวันเกิดของแบรนด์</p>
+    <ol class="timeline">__PLAN__</ol>
+  </div>
+</section>
+</div>
+
+<dialog id="dlg" aria-labelledby="d-name"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script>
+const D = __DATA__;
+const $ = s => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k === "text") n.textContent = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else if (v !== false && v != null) n.setAttribute(k, v);
+  }
+  for (const k of kids) if (k != null) n.append(k);
+  return n;
+};
+const SVGNS = "http://www.w3.org/2000/svg";
+const STAGE = Object.fromEntries(D.stages.map(s => [s.key, s]));
+const stageColor = k => `var(--${STAGE[k]?.color || "muted"})`;
+const stageText = k => STAGE[k]?.color === "cobalt" ? "var(--on-accent)" : "#1C1B22";
+const baht = v => v.toLocaleString("th-TH", {maximumFractionDigits: 0});
+const READYISH = new Set(["ready", "selling"]);
+
+function thumb(code, cls = "thumb") {
+  const t = D.thumbs[code] || D.thumbs["05"];
+  const [x, y, w, h] = t.vb.split(" ").map(Number), m = Math.max(w, h), pad = 4;
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("viewBox", `${x - pad + (w - m) / 2} ${y - pad + (h - m) / 2} ${m + 2 * pad} ${m + 2 * pad}`);
+  svg.setAttribute("class", cls); svg.setAttribute("aria-hidden", "true");
+  const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", t.d); svg.append(p);
+  for (const [x1, y1, x2, y2] of t.slits) {
+    const l = document.createElementNS(SVGNS, "line");
+    Object.entries({x1, y1, x2, y2}).forEach(([k, v]) => l.setAttribute(k, v)); svg.append(l);
+  }
+  return svg;
+}
+function pill(stage) {
+  const s = STAGE[stage] || STAGE.proto;
+  return el("span", {class: "pill"}, el("i", {style: `background:${stageColor(s.key)}`}), s.name);
+}
+
+// ------------------------------------------------------------ state
+let db = null, canWrite = false;
+const over = {};          // items/<id> docs from the shared database
+let tests = [];           // tests docs, newest first
+let filter = "all";
+
+function costOf(parts, joints, extra, pack) {
+  const pieces = parts.reduce((a, [c, q]) => a + (D.pieceCost[c] || 0) * q, 0);
+  return pieces + joints * D.jointCost + D.packCost + (D.packs[pack]?.cost || 0) + extra;
+}
+function items() {
+  const list = D.products.map(p => {
+    const o = over[p.id] || {};
+    return {...p, kind: "product", stage: o.stage || p.stage, blocker: o.blocker ?? p.blocker, note: o.note || "", updated: o.updated || ""};
+  });
+  for (const [id, o] of Object.entries(over)) {
+    if (o.kind !== "idea") continue;
+    const parts = Array.isArray(o.parts) ? o.parts.filter(x => Array.isArray(x) && D.pieceCost[x[0]] && x[1] > 0) : [];
+    const joints = +o.joints || 0, extra = +o.extra || 0, price = +o.price || 0;
+    list.push({id, kind: "idea", n: null, name: String(o.name || "ไอเดีย"), who: String(o.who || ""), price, stock: 0,
+      parts, joints, extra: extra ? ["ชิ้นเสริม", extra] : null, pack: o.pack, cost: costOf(parts, joints, extra, o.pack),
+      stage: STAGE[o.stage] ? o.stage : "idea", blocker: String(o.blocker || ""), note: String(o.note || ""), hero: false,
+      pieces: parts.map(([c, q]) => `${D.pieceName[c]} × ${q}`).join(" + "), check: "", steps: [], updated: o.updated || ""});
+  }
+  return list;
+}
+const testsFor = id => tests.filter(t => t.item === id);
+function bestMarks(id) {
+  const res = {};
+  for (const t of D.tests) {
+    const vals = testsFor(id).map(x => x[t.key]).filter(Boolean);
+    res[t.key] = vals[0] || "";               // newest result wins
+  }
+  return res;
+}
+
+// ------------------------------------------------------------ overview
+function renderOverview() {
+  const all = items(), prods = all.filter(i => i.kind === "product");
+  const count = k => all.filter(i => i.stage === k).length;
+  const notReady = prods.filter(p => !READYISH.has(p.stage) && p.stage !== "hold");
+  const heroes = D.heroes.map(n => prods.find(p => p.n === n));
+  const heroOpen = heroes.filter(p => !READYISH.has(p.stage));
+  const stockAll = prods.reduce((a, p) => a + p.stock, 0);
+  const salesAll = prods.reduce((a, p) => a + p.stock * p.price, 0);
+  const riskStock = notReady.reduce((a, p) => a + p.stock, 0);
+  const riskSales = notReady.reduce((a, p) => a + p.stock * p.price, 0);
+  const ideas = all.filter(i => i.kind === "idea").length;
+  $("#stats").replaceChildren(
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "สินค้าบนบอร์ด"}), el("b", {text: all.length}), el("span", {class: "small muted", text: `30 แบบเดิม${ideas ? ` + ไอเดียใหม่ ${ideas}` : ""}`})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "พร้อมผลิตหรือขายแล้ว"}), el("b", {text: count("ready") + count("selling")}), el("span", {class: "small muted", text: "จาก 30 แบบเดิม"})),
+    el("div", {class: "stat" + (heroOpen.length ? " alert" : "")}, el("span", {class: "small muted", text: "สินค้าหลักหน้าบูธที่ยังไม่พร้อม"}), el("b", {text: `${heroOpen.length}/${heroes.length}`}), el("span", {class: "small muted", text: "ต้องจบภายใน 22 ต.ค."})),
+    el("div", {class: "stat" + (riskStock ? " alert" : "")}, el("span", {class: "small muted", text: "ชิ้นในสต็อกบูธที่ยังไม่พร้อม"}), el("b", {class: "num", text: `${riskStock}/${stockAll}`}), el("span", {class: "small muted num", text: `ยอดขาย ${baht(riskSales)} จาก ${baht(salesAll)} บาท`})),
+  );
+  const pipe = $("#pipe"); pipe.replaceChildren();
+  pipe.setAttribute("aria-label", D.stages.map(s => `${s.name} ${count(s.key)}`).join(", "));
+  for (const s of D.stages) {
+    const c = count(s.key); if (!c) continue;
+    pipe.append(el("span", {style: `flex:${c};background:${stageColor(s.key)};color:${stageText(s.key)}`, title: `${s.name} ${c}`, text: c}));
+  }
+  $("#legend").replaceChildren(...D.stages.map(s => el("span", {}, el("i", {style: `background:${stageColor(s.key)}`}), `${s.name} ${count(s.key)}`)));
+
+  const row = p => el("li", {},
+    thumb(p.parts[0]?.[0] || "05"),
+    el("div", {}, el("b", {text: `${p.n}. ${p.name}`}), " ", pill(p.stage),
+      el("p", {class: "why" + (p.blocker ? " block-txt" : ""), text: p.blocker || `ต้องลองกับ: ${p.check}`}),
+      el("p", {class: "why num", text: `สต็อกบูธ ${p.stock} ชิ้น · ${p.price} บาท`})),
+    el("button", {class: "btn", type: "button", onclick: () => openItem(p.id), text: "เปิด"}));
+  $("#risk-hero").replaceChildren(...(heroOpen.length ? heroOpen.map(row) : [el("li", {}, el("span"), el("p", {text: "สินค้าหลักหน้าบูธพร้อมครบทั้ง 8 ตัว"}), el("span"))]));
+  const rest = notReady.filter(p => !p.hero && p.stock > 0).sort((a, b) => b.stock * b.price - a.stock * a.price);
+  $("#risk-rest").replaceChildren(...rest.map(row));
+}
+
+// ------------------------------------------------------------ board
+function renderBoard() {
+  const all = items();
+  const chip = (key, label, n) => el("button", {class: "chip", type: "button", "aria-pressed": String(filter === key), onclick: () => { filter = key; renderBoard(); }}, label + ` ${n}`);
+  $("#filters").replaceChildren(chip("all", "ทั้งหมด", all.length), ...D.stages.map(s => chip(s.key, s.name, all.filter(i => i.stage === s.key).length)));
+  const shown = all.filter(i => filter === "all" || i.stage === filter);
+  $("#cards").replaceChildren(...shown.map(i => {
+    const marks = bestMarks(i.id);
+    const margin = i.price ? Math.round((i.price - i.cost) / i.price * 100) : 0;
+    return el("button", {class: "card", type: "button", onclick: () => openItem(i.id)},
+      thumb(i.parts[0]?.[0] || "05"),
+      el("div", {},
+        el("span", {class: "name", text: (i.n ? `${i.n}. ` : "") + i.name}),
+        el("span", {class: "row"}, pill(i.stage), i.hero ? el("span", {class: "star", text: "★ หน้าบูธ"}) : null, i.kind === "idea" ? el("span", {class: "tag", text: "ไอเดียใหม่"}) : null),
+        el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${margin}%` + (i.stock ? ` · บูธ ${i.stock} ชิ้น` : "")}),
+        el("span", {class: "marks"}, ...D.tests.map(t => el("span", {class: "mark " + marks[t.key], title: t.name, text: (marks[t.key] === "pass" ? "✓ " : marks[t.key] === "fail" ? "✗ " : "") + t.name}))),
+        i.blocker ? el("span", {class: "blk", text: i.blocker}) : null));
+  }));
+  if (!shown.length) $("#cards").append(el("p", {class: "muted", text: "ยังไม่มีสินค้าในขั้นนี้"}));
+}
+
+// ------------------------------------------------------------ item dialog
+function openItem(id) {
+  const i = items().find(x => x.id === id); if (!i) return;
+  let stage = i.stage;
+  const body = $("#dlg-body");
+  const msg = el("span");
+  const blocker = el("textarea", {id: "d-blocker", maxlength: "200", placeholder: "เช่น รอบล็อกสายหัวใจ"}); blocker.value = i.blocker;
+  const note = el("textarea", {id: "d-note", maxlength: "500", placeholder: "แก้แบบอะไร ลองอะไรไปแล้ว"}); note.value = i.note;
+  const picks = el("div", {class: "stagepick", role: "group", "aria-label": "ขั้น"});
+  const drawPicks = () => picks.replaceChildren(...D.stages.map(s => el("button", {type: "button", "aria-pressed": String(stage === s.key),
+    onclick: () => { stage = s.key; drawPicks(); }}, el("i", {style: `display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:${stageColor(s.key)}`}), s.name)));
+  drawPicks();
+  const margin = i.price ? Math.round((i.price - i.cost) / i.price * 100) : 0;
+  const hist = testsFor(id);
+  const save = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "บันทึก"});
+  save.addEventListener("click", async () => {
+    save.disabled = true; msg.className = ""; msg.textContent = "กำลังบันทึก…";
+    const base = i.kind === "idea" ? {...over[id]} : {};
+    try {
+      await db.collection("items").doc(id).set({...base, stage, blocker: blocker.value.trim(), note: note.value.trim(), updated: new Date().toISOString()});
+      msg.className = "saved"; msg.textContent = "บันทึกแล้ว";
+    } catch (e) { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
+    save.disabled = !canWrite;
+  });
+  body.replaceChildren(
+    el("div", {class: "dlg-head"}, thumb(i.parts[0]?.[0] || "05", "thumb big"),
+      el("div", {}, el("p", {class: "eyebrow", text: i.kind === "idea" ? "ไอเดียใหม่" : (i.line || "")}), el("h3", {id: "d-name", text: (i.n ? `${i.n}. ` : "") + i.name}), i.hook ? el("p", {class: "small muted", text: i.hook}) : null),
+      el("button", {class: "x", type: "button", "aria-label": "ปิด", onclick: () => $("#dlg").close(), text: "×"})),
+    el("dl", {class: "spec num"},
+      el("dt", {text: "ชิ้นส่วน"}), el("dd", {text: i.pieces || "-"}),
+      el("dt", {text: "จุดต่อ"}), el("dd", {text: `${i.joints} จุด` + (i.extra ? ` · ${i.extra[0]} ${i.extra[1]} บาท` : "")}),
+      i.size ? el("dt", {text: "ขนาด"}) : null, i.size ? el("dd", {text: i.size}) : null,
+      el("dt", {text: "ราคา / ต้นทุน"}), el("dd", {text: `${i.price} / ${i.cost.toFixed(2)} บาท · กำไรขั้นต้น ${margin}%`}),
+      i.who ? el("dt", {text: "คนซื้อ"}) : null, i.who ? el("dd", {text: i.who}) : null,
+      i.stock ? el("dt", {text: "สต็อกบูธ"}) : null, i.stock ? el("dd", {text: `${i.stock} ชิ้น`}) : null,
+      i.check ? el("dt", {text: "ต้องลองกับ"}) : null, i.check ? el("dd", {text: i.check}) : null),
+    i.steps.length ? el("div", {}, el("p", {class: "small muted", text: "ขั้นตอนบนการ์ดวิธีต่อ"}), el("ol", {class: "steps"}, ...i.steps.map(s => el("li", {text: s})))) : null,
+    el("div", {class: "block"}, el("p", {class: "small muted", text: "ขั้น"}), picks),
+    el("label", {for: "d-blocker"}, "ติดอะไรอยู่", blocker),
+    el("label", {for: "d-note"}, "บันทึก", note),
+    el("div", {class: "row"}, save,
+      el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = id; drawTestForm(); }, text: "บันทึกการทดสอบ"}), msg),
+    el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
+  );
+  $("#dlg").showModal();
+}
+
+// ------------------------------------------------------------ tests
+const triState = {};
+function drawTestForm() {
+  const id = $("#t-item").value, i = items().find(x => x.id === id);
+  $("#t-check").textContent = i?.check ? `ต้องลองกับ: ${i.check}` : "";
+}
+function initTestForm() {
+  const sel = $("#t-item");
+  const cur = sel.value;
+  sel.replaceChildren(...items().map(i => el("option", {value: i.id, text: (i.n ? `${i.n}. ` : "ใหม่ · ") + i.name})));
+  if (cur) sel.value = cur;
+  if (!$("#t-tester").options.length) $("#t-tester").replaceChildren(...D.testers.map(t => el("option", {value: t, text: t})));
+  if (!$("#t-tri").children.length) {
+    $("#t-tri").replaceChildren(...D.tests.map(t => {
+      triState[t.key] = "";
+      const seg = el("div", {class: "seg", role: "group", "aria-label": t.name});
+      const draw = () => seg.replaceChildren(...[["pass", "ผ่าน"], ["fail", "ไม่ผ่าน"], ["", "ยังไม่ลอง"]].map(([v, label]) =>
+        el("button", {type: "button", "data-v": v, "aria-pressed": String(triState[t.key] === v), onclick: () => { triState[t.key] = v; draw(); }, text: label})));
+      draw(); seg._draw = draw;
+      return el("div", {}, el("div", {}, el("b", {text: t.name}), el("p", {class: "small muted", text: t.how})), seg);
+    }));
+  }
+  drawTestForm();
+}
+function logRow(t) {
+  const i = items().find(x => x.id === t.item);
+  const when = t.at ? new Date(t.at).toLocaleString("th-TH", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "";
+  return el("li", {},
+    el("div", {class: "row"}, el("b", {text: i ? (i.n ? `${i.n}. ` : "") + i.name : t.item}), el("span", {class: "small muted", text: `${t.tester || ""} · ${when}` + (t.seconds ? ` · ${t.seconds} วินาที` : "")})),
+    el("span", {class: "marks"}, ...D.tests.map(x => el("span", {class: "mark " + (t[x.key] || ""), text: (t[x.key] === "pass" ? "✓ " : t[x.key] === "fail" ? "✗ " : "– ") + x.name}))),
+    t.note ? el("p", {class: "small", text: t.note}) : null);
+}
+function renderLog() {
+  const list = $("#log");
+  list.replaceChildren(...(tests.length ? tests.slice(0, 40).map(logRow) : [el("li", {}, el("p", {class: "muted small", text: "ยังไม่มีผลทดสอบ เลือกสินค้า กดผ่านหรือไม่ผ่านทีละข้อ แล้วกดบันทึกผล ผลจะขึ้นที่นี่และบนการ์ดในบอร์ด"}))]));
+}
+$("#t-item").addEventListener("change", drawTestForm);
+$("#test-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#t-msg"), id = $("#t-item").value;
+  if (!D.tests.some(t => triState[t.key])) { msg.className = "err"; msg.textContent = "เลือกผลอย่างน้อย 1 ข้อ"; return; }
+  const rec = {item: id, tester: $("#t-tester").value, seconds: Math.max(0, parseInt($("#t-sec").value, 10) || 0),
+    note: $("#t-note").value.trim().slice(0, 200), at: new Date().toISOString()};
+  for (const t of D.tests) rec[t.key] = triState[t.key];
+  $("#t-save").disabled = true; msg.className = ""; msg.textContent = "กำลังบันทึก…";
+  try {
+    await db.collection("tests").add(rec);
+    msg.className = "saved"; msg.textContent = "บันทึกแล้ว";
+    for (const t of D.tests) triState[t.key] = "";
+    document.querySelectorAll("#t-tri .seg").forEach(s => s._draw());
+    $("#t-sec").value = ""; $("#t-note").value = "";
+    const i = items().find(x => x.id === id);
+    const passAll = D.tests.every(t => bestMarks(id)[t.key] === "pass" || rec[t.key] === "pass");
+    const testers = new Set([...testsFor(id).map(x => x.tester), rec.tester]);
+    if (i && i.stage === "proto" && passAll && testers.size >= 2) {
+      msg.replaceChildren("บันทึกแล้ว ผ่านครบ 5 ข้อจาก 2 คนขึ้นไป ",
+        el("button", {class: "btn", type: "button", text: "ย้ายไป ทดสอบผ่าน", onclick: async ev => {
+          ev.target.disabled = true;
+          const base = i.kind === "idea" ? {...over[id]} : {};
+          try { await db.collection("items").doc(id).set({...base, stage: "tested", blocker: i.blocker, note: i.note, updated: new Date().toISOString()}); msg.textContent = "ย้ายแล้ว"; }
+          catch { msg.className = "err"; msg.textContent = "ย้ายไม่ได้ ลองใหม่จากบอร์ด"; }
+        }}));
+    }
+  } catch { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
+  $("#t-save").disabled = !canWrite;
+});
+
+// ------------------------------------------------------------ ideas
+const CODES = ["01", "01-S200", "01-S250", "02", "03", "04", "05", "06"];
+function initIdea() {
+  $("#i-pieces").replaceChildren(...CODES.map(c => el("label", {class: "piece", for: "i-q-" + c}, thumb(c),
+    el("span", {}, D.pieceName[c], el("input", {id: "i-q-" + c, type: "number", min: "0", max: "48", value: "0", inputmode: "numeric"})))));
+  $("#i-pack").replaceChildren(...Object.entries(D.packs).map(([k, v]) => el("option", {value: k, text: `${v.name} (${v.cost} บาท)`})));
+  $("#idea-form").addEventListener("input", calcIdea);
+  calcIdea();
+}
+function ideaParts() { return CODES.map(c => [c, Math.max(0, parseInt($("#i-q-" + c).value, 10) || 0)]).filter(([, q]) => q > 0); }
+function calcIdea() {
+  const parts = ideaParts(), joints = Math.max(0, +$("#i-joints").value || 0), extra = Math.max(0, +$("#i-extra").value || 0), price = Math.max(0, +$("#i-price").value || 0);
+  const cost = costOf(parts, joints, extra, $("#i-pack").value);
+  const margin = price ? (price - cost) / price * 100 : 0;
+  const ok = margin >= 60;
+  $("#i-calc").replaceChildren(
+    el("div", {}, el("span", {class: "small muted", text: "ต้นทุนต่อชิ้น"}), el("b", {text: cost.toFixed(2) + " บาท"})),
+    el("div", {}, el("span", {class: "small muted", text: "กำไรต่อชิ้น"}), el("b", {text: (price - cost).toFixed(2) + " บาท"})),
+    el("div", {class: ok ? "ok" : "bad"}, el("span", {class: "small muted", text: "กำไรขั้นต้น (ประตู 1 ต้อง 60%+)"}), el("b", {text: Math.round(margin) + "%"})),
+    el("div", {}, el("span", {class: "small muted", text: "ราคาต่ำสุดที่ผ่านประตู 1"}), el("b", {text: Math.ceil(cost / 0.4) + " บาท"})));
+  return {parts, joints, extra, price};
+}
+$("#new-idea").addEventListener("click", () => { $("#idea-form").hidden = false; $("#i-name").focus(); });
+$("#i-cancel").addEventListener("click", () => { $("#idea-form").hidden = true; });
+$("#idea-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#i-msg"), {parts, joints, extra, price} = calcIdea();
+  if (!parts.length) { msg.className = "err"; msg.textContent = "ใส่จำนวนชิ้นอย่างน้อย 1 แบบ"; return; }
+  const id = "i-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  $("#i-save").disabled = true; msg.className = ""; msg.textContent = "กำลังบันทึก…";
+  try {
+    await db.collection("items").doc(id).set({kind: "idea", name: $("#i-name").value.trim().slice(0, 60), who: $("#i-who").value.trim().slice(0, 80),
+      price, parts, joints, extra, pack: $("#i-pack").value, stage: "idea", blocker: "", note: "", updated: new Date().toISOString()});
+    msg.className = "saved"; msg.textContent = "เพิ่มลงบอร์ดแล้ว";
+    $("#idea-form").reset(); calcIdea(); filter = "idea"; renderBoard();
+  } catch { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
+  $("#i-save").disabled = !canWrite;
+});
+
+// ------------------------------------------------------------ process
+function renderProcess() {
+  const flow = $("#flow");
+  flow.replaceChildren(...D.stages.slice(0, 5).map((s, k) => el("li", {},
+    el("div", {class: "rail"}, el("span", {class: "n", style: `background:${stageColor(s.key)};color:${stageText(s.key)}`, text: k + 1})),
+    el("div", {class: "body"}, el("h3", {text: s.name}), el("p", {class: "muted", text: s.what}),
+      D.gates[k] ? el("div", {class: "gate"}, el("b", {text: `ประตู ${k + 1} · ${D.gates[k].name}`}), el("span", {class: "muted", text: `อนุมัติโดย ${D.gates[k].who}`}),
+        el("ul", {}, ...D.gates[k].items.map(x => el("li", {text: x})))) : null))));
+  flow.append(el("li", {}, el("div", {class: "rail"}, el("span", {class: "n", style: `background:var(--chip);color:var(--ink)`, text: "–"})),
+    el("div", {class: "body"}, el("h3", {text: STAGE.hold.name}), el("p", {class: "muted", text: STAGE.hold.what + " ย้ายมาได้จากทุกขั้น และย้ายกลับได้เมื่อแก้แล้ว"}))));
+  $("#protocol").replaceChildren(...D.tests.map(t => el("tr", {}, el("td", {}, el("b", {text: t.name})), el("td", {text: t.how}))));
+}
+
+// ------------------------------------------------------------ tabs
+const TABS = ["overview", "board", "tests", "process", "plan"];
+function go(tab) {
+  if (!TABS.includes(tab)) tab = "overview";
+  for (const t of TABS) $("#v-" + t).hidden = t !== tab;
+  document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  try { localStorage.setItem("pd-tab", tab); } catch {}
+}
+document.querySelectorAll("nav.tabs a").forEach(a => a.addEventListener("click", e => { e.preventDefault(); go(a.dataset.tab); window.scrollTo({top: 0}); }));
+
+function renderAll() { renderOverview(); renderBoard(); initTestForm(); renderLog(); }
+function setWritable(on) {
+  canWrite = on;
+  for (const s of ["#t-save", "#i-save"]) $(s).disabled = !on;
+}
+
+renderProcess(); initIdea(); setWritable(false); renderAll();
+{
+  let start = location.hash.slice(1);
+  if (!TABS.includes(start)) { try { start = localStorage.getItem("pd-tab") || "overview"; } catch { start = "overview"; } }
+  go(start);
+}
+
+(async () => {
+  const note = $("#dbnote");
+  db = window.claude ? await window.claude.use("db") : null;
+  if (!db) {
+    note.hidden = false;
+    note.textContent = "ตอนนี้เป็นมุมมองอ่านอย่างเดียว ขั้นที่เห็นคือค่าเริ่มต้นจาก brand.py เปิดหน้านี้ใน claude.ai ขณะลงชื่อเข้าใช้ เพื่อดูบอร์ดสดและบันทึกผล";
+    return;
+  }
+  setWritable(true);
+  db.collection("items").onSnapshot(snap => {
+    for (const k of Object.keys(over)) delete over[k];
+    for (const d of snap.docs) over[d.id] = d.data();
+    renderAll();
+  }, () => { note.hidden = false; note.textContent = "เชื่อมบอร์ดสดไม่ได้ในตอนนี้ ลองเปิดหน้าใหม่"; });
+  db.collection("tests").orderBy("at", "desc").limit(300).onSnapshot(snap => {
+    tests = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    renderAll();
+  }, () => {});
+})();
+</script>

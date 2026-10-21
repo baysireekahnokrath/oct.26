@@ -35,6 +35,7 @@ Reply to the owner in Thai, short and plain. He decides fast; on logo questions 
 - Tech Pack https://claude.ai/artifact/XR5yqf6HFfA4JoJ9eQvapd (+ `techpack/oct26-techpack-a4.pdf`)
 - Birthday deck (Slides type) https://claude.ai/artifact/D61pf56uCqYrktNuuFG2c6 — slides from `deck/build.py`, images are `/_blob/` assets
 - Logo Lab, Color Lab, Product Lab, palettes, alternatives: see `site/urls.json`
+- Product Development https://claude.ai/artifact/SfbLavVZF6JAnZKXP75EFy — live board + test log in its database, source `../product-dev-20261021/`
 - Cost sheet (Google Sheet): see `site/urls.json` key `sheet`
 To update a page from a new session, publish with its URL as `url` (read it first).
 

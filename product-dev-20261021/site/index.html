@@ -1,0 +1,632 @@
+<title>ฝ่ายพัฒนาสินค้า OCT. 26</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  /* Layout: one 987px column (Fibonacci), sticky tab bar, sections swap in place; sizes from phi like the brand book.
+     Palette #2 Soi Candy from brand.py; leather is only for drawing pieces. */
+  --bg:#FFF6EC;--card:#FFFFFF;--ink:#1C1B22;--muted:#5A5664;--line:#F1DCCB;--chip:#FBE9DA;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --good:#138A6C;--bad:#D63A17;--on-accent:#FFFFFF;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+  --latin:"Jost","IBM Plex Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--card:#1F1E27;--ink:#FFF6EC;--muted:#C2BDCF;--line:#34323F;--chip:#2A2833;
+  --cobalt:#7C97FF;--leather:#D9965A;--good:#4FD6B2;--bad:#FF7A5C;--on-accent:#14131A;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14131A;--card:#1F1E27;--ink:#FFF6EC;--muted:#C2BDCF;--line:#34323F;--chip:#2A2833;
+  --cobalt:#7C97FF;--leather:#D9965A;--good:#4FD6B2;--bad:#FF7A5C;--on-accent:#14131A;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s6)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:var(--t2)}h3{font-size:var(--t1)}
+p{margin:0}
+.muted{color:var(--muted)}
+.small{font-size:var(--t-1)}
+.num{font-variant-numeric:tabular-nums}
+code{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--chip);padding:1px 6px;border-radius:4px;word-break:break-all}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+
+header.top{padding-block:var(--s5) var(--s4);display:grid;gap:var(--s3)}
+.wordmark{width:144px;height:auto;color:var(--ink);display:block}
+.eyebrow{font-family:var(--latin);font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:var(--t1);max-width:40ch;color:var(--muted)}
+
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  display:flex;gap:var(--s1);overflow-x:auto;padding-block:var(--s2);margin-bottom:var(--s5)}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-family:var(--display);font-weight:500;padding:6px 14px;border-radius:999px}
+nav.tabs a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+section.view{display:grid;gap:var(--s5)}
+.block{display:grid;gap:var(--s3)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s3)}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s3) var(--s4);display:grid;gap:2px;min-width:0}
+.stat b{font-family:var(--latin);font-weight:500;font-size:var(--t3);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat.alert b{color:var(--bad)}
+
+.pipe{display:flex;height:34px;border-radius:8px;overflow:hidden;background:var(--chip)}
+.pipe span{display:flex;align-items:center;justify-content:center;font-size:var(--t-1);font-weight:600;color:#1C1B22;min-width:0;overflow:hidden;white-space:nowrap}
+.legend{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);font-size:var(--t-1);color:var(--muted)}
+.legend i,.pill i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+.risk{display:grid;gap:var(--s2);list-style:none;margin:0;padding:0}
+.risk li{display:grid;grid-template-columns:48px 1fr auto;gap:var(--s3);align-items:center;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s2) var(--s3)}
+.risk li > div{min-width:0}
+.risk .why{font-size:var(--t-1);color:var(--muted)}
+.risk .why.block-txt{color:var(--bad)}
+
+.btn{border:1px solid var(--ink);background:transparent;border-radius:999px;padding:6px 14px;font-family:var(--display);font-weight:500}
+.btn.primary{background:var(--cobalt);border-color:var(--cobalt);color:var(--on-accent)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.notice{background:var(--chip);border-radius:13px;padding:var(--s3) var(--s4);font-size:var(--t-1)}
+
+.chips{display:flex;gap:var(--s2);overflow-x:auto;padding-bottom:4px}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:var(--t-1)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:var(--s3)}
+.card{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s3);display:grid;grid-template-columns:56px 1fr;gap:var(--s3);align-items:start}
+.card:hover{border-color:var(--ink)}
+.card > div{min-width:0;display:grid;gap:4px}
+.card .name{font-family:var(--display);font-weight:600;line-height:1.3}
+.card .meta{font-size:var(--t-1);color:var(--muted)}
+.card .blk{font-size:var(--t-1);color:var(--bad)}
+.pill{display:inline-flex;align-items:center;font-size:var(--t-1);font-weight:600;border-radius:999px;padding:1px 10px 1px 8px;background:var(--chip);width:max-content}
+.star{color:var(--tomato);font-size:var(--t-1);font-weight:600}
+.thumb{width:56px;height:56px}
+.thumb path{fill:none;stroke:var(--leather);stroke-width:2.2}
+.thumb line{stroke:var(--tomato);stroke-width:2.2}
+.thumb.big{width:96px;height:96px}
+.marks{display:flex;gap:4px;flex-wrap:wrap}
+.mark{font-size:11px;font-weight:600;border-radius:4px;padding:0 5px;background:var(--chip);color:var(--muted)}
+.mark.pass{color:var(--good)}.mark.fail{color:var(--bad)}
+
+dialog{border:none;border-radius:21px;background:var(--card);color:var(--ink);padding:0;width:min(610px,calc(100vw - 32px));max-height:calc(100dvh - 48px)}
+dialog::backdrop{background:rgba(20,19,26,.55)}
+.dlg{padding:var(--s4);display:grid;gap:var(--s4)}
+.dlg-head{display:grid;grid-template-columns:96px 1fr auto;gap:var(--s3);align-items:start}
+.dlg-head > div{min-width:0}
+.x{border:none;background:var(--chip);border-radius:50%;width:34px;height:34px;font-size:18px;line-height:1}
+.stagepick{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.stagepick button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 12px;font-size:var(--t-1)}
+.stagepick button[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+label{display:grid;gap:4px;font-size:var(--t-1);color:var(--muted)}
+input,select,textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;width:100%;font-size:var(--t0)}
+textarea{min-height:68px;resize:vertical}
+dl.spec{display:grid;grid-template-columns:auto 1fr;gap:4px var(--s3);margin:0;font-size:var(--t-1)}
+dl.spec dt{color:var(--muted)}dl.spec dd{margin:0;min-width:0}
+ol.steps{margin:0;padding-left:1.3em;font-size:var(--t-1)}
+.row{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.saved{font-size:var(--t-1);color:var(--good)}
+.err{font-size:var(--t-1);color:var(--bad)}
+
+.form{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:var(--s4);display:grid;gap:var(--s3)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s3)}
+.tri{display:grid;gap:var(--s2)}
+.tri > div{display:grid;grid-template-columns:1fr auto;gap:var(--s2);align-items:center;border-top:1px solid var(--line);padding-top:var(--s2)}
+.tri > div > div{min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:none;background:transparent;padding:5px 12px;font-size:var(--t-1)}
+.seg button[aria-pressed="true"][data-v="pass"]{background:var(--good);color:var(--on-accent)}
+.seg button[aria-pressed="true"][data-v="fail"]{background:var(--bad);color:var(--on-accent)}
+.seg button[aria-pressed="true"][data-v=""]{background:var(--chip)}
+.pieces{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:var(--s2)}
+.piece{display:grid;grid-template-columns:40px 1fr;gap:var(--s2);align-items:center;font-size:var(--t-1)}
+.piece .thumb{width:40px;height:40px}
+.piece input{padding:4px 8px}
+.calc{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:var(--s2);background:var(--chip);border-radius:13px;padding:var(--s3)}
+.calc b{display:block;font-family:var(--latin);font-weight:500;font-size:var(--t1);font-variant-numeric:tabular-nums}
+.calc .bad b{color:var(--bad)}.calc .ok b{color:var(--good)}
+
+.log{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
+.log li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s2) var(--s3);display:grid;gap:4px}
+
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.flow > li{display:grid;grid-template-columns:34px 1fr;gap:var(--s3)}
+.flow .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--latin);font-weight:500;color:#1C1B22}
+.flow .rail{display:grid;justify-items:center;grid-template-rows:34px 1fr}
+.flow .rail::after{content:"";width:2px;background:var(--line);min-height:21px}
+.flow > li:last-child .rail::after{display:none}
+.flow .body{padding-bottom:var(--s4);display:grid;gap:var(--s2);min-width:0}
+.gate{border:1px dashed var(--ink);border-radius:13px;padding:var(--s3);display:grid;gap:4px;font-size:var(--t-1)}
+.gate ul{margin:0;padding-left:1.2em}
+.gate b{font-family:var(--display)}
+table{border-collapse:collapse;width:100%;font-size:var(--t-1)}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:600}
+.scroll{overflow-x:auto}
+ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.role{display:grid;grid-template-columns:14px 1fr;gap:var(--s3);align-items:start}
+.role > div{min-width:0}
+.dot{width:14px;height:14px;border-radius:50%;margin-top:6px}
+.tag{font-size:var(--t-1);background:var(--chip);border-radius:999px;padding:1px 8px}
+.rules li p,.role p{font-size:var(--t-1);color:var(--muted)}
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
+.timeline li{display:grid;grid-template-columns:150px 1fr;gap:var(--s3);border-top:1px solid var(--line);padding-top:var(--s3)}
+.timeline li > div{min-width:0}
+.timeline time{font-family:var(--display);font-weight:600;color:var(--cobalt)}
+.timeline p{font-size:var(--t-1);color:var(--muted)}
+.files li{display:grid;gap:2px}
+.files span{font-size:var(--t-1);color:var(--muted)}
+@media (max-width:560px){
+  .timeline li{grid-template-columns:1fr;gap:2px}
+  .dlg-head{grid-template-columns:64px 1fr auto}
+  .thumb.big{width:64px;height:64px}
+}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 176" class="wordmark" role="img" aria-label="OCT. 26"><g transform="translate(38.20,138.20)"><g transform="scale(1.00000)"><circle cx="52.13" cy="-50.00" r="44.83" fill="none" stroke="currentColor" stroke-width="14.59"/><path d="M204.03,-19.72 A44.83,44.83 0 1 1 204.03,-80.28" fill="none" stroke="currentColor" stroke-width="14.59"/><rect x="224.00" y="-100.00" width="80.90" height="14.59" fill="currentColor"/><rect x="257.16" y="-100.00" width="14.59" height="100.00" fill="currentColor"/><circle cx="325.73" cy="-11.80" r="11.80" fill="var(--tomato)"/><clipPath id="ow15"><rect x="361.80" y="-102.13" width="61.80" height="102.13"/></clipPath><g clip-path="url(#ow15)"><path d="M371.31,-61.25 A23.61,23.61 0 1 1 411.31,-56.69 L366.18,-10.21" fill="none" stroke="currentColor" stroke-width="14.59"/><rect x="361.80" y="-14.59" width="61.80" height="14.59" fill="currentColor"/></g><clipPath id="ow16"><rect x="423.61" y="-100.00" width="90.98" height="114.59"/></clipPath><g clip-path="url(#ow16)"><circle cx="469.10" cy="-28.77" r="23.61" fill="none" stroke="currentColor" stroke-width="14.59"/><line x1="477.75" y1="-114.59" x2="447.16" y2="-37.48" stroke="currentColor" stroke-width="14.59"/></g></g></g></svg>
+  <p class="eyebrow">Product Development · ฝ่ายพัฒนาสินค้า</p>
+  <h1>ทุกสินค้าเดินผ่าน 5 ขั้น และ 4 ประตู ก่อนขึ้นโต๊ะบูธ</h1>
+  <p class="lede">ที่นี่คือที่ทำงานของฝ่าย เปลี่ยนขั้นของสินค้า บันทึกผลทดสอบ และคิดไอเดียใหม่ ทุกคนในบ้านเห็นบอร์ดเดียวกัน</p>
+</header>
+
+<nav class="tabs" aria-label="ส่วนของหน้า">
+  <a href="#overview" data-tab="overview">ภาพรวม</a>
+  <a href="#board" data-tab="board">บอร์ดสินค้า</a>
+  <a href="#tests" data-tab="tests">ทดสอบ</a>
+  <a href="#process" data-tab="process">ขั้นตอน</a>
+  <a href="#plan" data-tab="plan">แผน 12 เดือน</a>
+</nav>
+
+<p class="notice" id="dbnote" hidden></p>
+
+<section class="view" id="v-overview">
+  <div class="stats" id="stats"></div>
+  <div class="block">
+    <h2>สินค้าทั้ง 30 แบบอยู่ขั้นไหน</h2>
+    <div class="pipe" id="pipe" role="img"></div>
+    <div class="legend" id="legend"></div>
+  </div>
+  <div class="block">
+    <h2>ต้องจบก่อนบูธ 23 ต.ค.</h2>
+    <p class="muted">สินค้าหลักหน้าบูธที่ยังไม่ถึงขั้นพร้อมผลิต ทดสอบให้ผ่าน หรือย้ายไปพักไว้แล้วใช้ตัวที่พร้อมแทน</p>
+    <ul class="risk" id="risk-hero"></ul>
+  </div>
+  <div class="block">
+    <h3>สต็อกบูธตัวอื่นที่ยังไม่พร้อม เรียงตามยอดขายที่จะหายไป</h3>
+    <ul class="risk" id="risk-rest"></ul>
+  </div>
+  <div class="block">
+    <h2>ทีม</h2>
+    <p class="muted small">ข้อเสนอ ปรับได้ตามที่บ้านตกลงกัน</p>
+    <ul class="plain"><li class="role"><span class="dot" style="background:var(--cobalt)"></span><div><b>พ่อเบ</b> <span class="tag">หัวหน้าฝ่าย</span><p>ออกแบบแพตเทิร์นและบล็อกตัด คุมต้นทุนใน brand.py อนุมัติประตู 2 และ 3</p></div></li><li class="role"><span class="dot" style="background:var(--tomato)"></span><div><b>แม่ (คุณบิ๊ง)</b> <span class="tag">ผู้อนุมัติสุดท้าย</span><p>ตัดสินหน้าตา ราคา และว่าสินค้าไหนขึ้นขาย อนุมัติประตู 1 และ 4</p></div></li><li class="role"><span class="dot" style="background:var(--sun)"></span><div><b>Beiya · Beana · Bene</b> <span class="tag">ทีมทดสอบ</span><p>ต่อเองจากการ์ด จับเวลา ดึง แกะ บอกว่าอยากได้ไหม สินค้าที่ลูกต่อเองไม่ได้ ยังไม่ขาย</p></div></li></ul>
+  </div>
+  <div class="block">
+    <h2>ไฟล์ของฝ่าย</h2>
+    <ul class="plain files"><li><code>../brand-20261014/brand.py</code><span>สินค้า 30 แบบ ราคา ต้นทุน สถานะเริ่มต้น</span></li><li><code>../diecut-leather-20261014/</code><span>แพตเทิร์นบล็อก 6 แบบ SVG DXF และ PDF 1:1 สำหรับตัดกระดาษแข็ง</span></li><li><code>../diecut-leather-20261013/assembly-01/</code><span>สายหัวใจ 200 และ 250</span></li><li><code>pd.py</code><span>ขั้นตอน ประตู การทดสอบ สิ่งที่ต้องลองของแต่ละสินค้า แผน 12 เดือน</span></li><li><code>site/build.py → site/index.html</code><span>หน้าฝ่ายพัฒนาสินค้า บอร์ดสด และบันทึกการทดสอบ</span></li></ul>
+  </div>
+</section>
+
+<section class="view" id="v-board" hidden>
+  <div class="row" style="justify-content:space-between">
+    <h2>บอร์ดสินค้า</h2>
+    <button class="btn primary" id="new-idea">เพิ่มไอเดีย</button>
+  </div>
+  <div class="chips" id="filters" role="group" aria-label="กรองตามขั้น"></div>
+  <div class="grid" id="cards"></div>
+
+  <form class="form" id="idea-form" hidden>
+    <h3>ไอเดียใหม่</h3>
+    <div class="two">
+      <label for="i-name">ชื่อสินค้า<input id="i-name" required maxlength="60" placeholder="เช่น ที่ห้อยกุญแจกังหัน"></label>
+      <label for="i-who">ใครซื้อ ซื้อไปทำอะไร<input id="i-who" maxlength="80" placeholder="เช่น นักเรียน ห้อยกระเป๋า"></label>
+    </div>
+    <p class="small muted">ใช้ชิ้นไหนบ้าง กี่ชิ้น (รูปคือแพตเทิร์นบล็อกจริง)</p>
+    <div class="pieces" id="i-pieces"></div>
+    <div class="two">
+      <label for="i-joints">จุดต่อ (สอดปีกเข้าร่อง)<input id="i-joints" type="number" min="0" max="99" value="0" inputmode="numeric"></label>
+      <label for="i-extra">ชิ้นเสริม บาท (ห่วง เชือก ไม้ก๊อก)<input id="i-extra" type="number" min="0" step="0.5" value="0" inputmode="decimal"></label>
+      <label for="i-pack">แพ็กเกจ<select id="i-pack"></select></label>
+      <label for="i-price">ราคาตั้ง บาท<input id="i-price" type="number" min="1" value="99" inputmode="numeric"></label>
+    </div>
+    <div class="calc" id="i-calc"></div>
+    <div class="row"><button class="btn primary" type="submit" id="i-save">เพิ่มลงบอร์ด</button><button class="btn" type="button" id="i-cancel">ยกเลิก</button><span id="i-msg"></span></div>
+  </form>
+</section>
+
+<section class="view" id="v-tests" hidden>
+  <div class="block">
+    <h2>บันทึกการทดสอบ</h2>
+    <p class="muted">ทดสอบบนหนังจริง ข้อที่ยังไม่ได้ลองให้เว้นไว้ ผ่านครบ 5 ข้อจากคนทดสอบ 2 คนขึ้นไป จึงย้ายไปขั้นทดสอบผ่าน</p>
+  </div>
+  <form class="form" id="test-form">
+    <div class="two">
+      <label for="t-item">สินค้า<select id="t-item"></select></label>
+      <label for="t-tester">คนทดสอบ<select id="t-tester"></select></label>
+    </div>
+    <p class="small" id="t-check"></p>
+    <div class="tri" id="t-tri"></div>
+    <div class="two">
+      <label for="t-sec">เวลาต่อเสร็จ (วินาที)<input id="t-sec" type="number" min="0" inputmode="numeric" placeholder="เช่น 95"></label>
+      <label for="t-note">เจออะไร<input id="t-note" maxlength="200" placeholder="เช่น ร่องล่างฉีกรอบที่ 8"></label>
+    </div>
+    <div class="row"><button class="btn primary" type="submit" id="t-save">บันทึกผล</button><span id="t-msg"></span></div>
+  </form>
+  <div class="block">
+    <h3>ผลล่าสุด</h3>
+    <ul class="log" id="log"></ul>
+  </div>
+</section>
+
+<section class="view" id="v-process" hidden>
+  <div class="block">
+    <h2>5 ขั้น 4 ประตู</h2>
+    <p class="muted">ผ่านประตูได้เมื่อทุกข้อเป็นจริง คนที่อนุมัติแต่ละประตูเขียนไว้ในกรอบ</p>
+    <ol class="flow" id="flow"></ol>
+  </div>
+  <div class="block">
+    <h2>ทดสอบ 5 ข้อ</h2>
+    <div class="scroll"><table><thead><tr><th>ข้อ</th><th>วิธีทดสอบ</th></tr></thead><tbody id="protocol"></tbody></table></div>
+  </div>
+  <div class="block">
+    <h2>หลักของฝ่าย</h2>
+    <ul class="plain rules"><li><b>ใช้บล็อกที่มีก่อน</b><p>บล็อกใหม่ราคา 550–600 บาท สั่งเมื่อมีอย่างน้อย 3 สินค้าใช้ร่วมกัน</p></li><li><b>ลูกต่อเองได้</b><p>ทุกสินค้าผ่านมือลูกก่อนขาย งานยากขึ้นทีละขั้นเมื่อลูกโตขึ้น</p></li><li><b>ต่อกันเอง ไม่ใช้กาว</b><p>ความแข็งแรงมาจากปีกกับร่อง ถ้าต้องใช้กาว ให้กลับไปแก้แบบ</p></li><li><b>ทดสอบบนหนังจริง</b><p>กระดาษแข็งใช้ดูรูปทรง หนังจริงใช้ตัดสิน เพราะความหนาและความยืดต่างกัน</p></li><li><b>ตัวเลขอยู่ที่เดียว</b><p>ราคา ต้นทุน และสเปกแก้ใน brand.py แล้วรันสร้างหน้าใหม่ ไม่แก้ตัวเลขในหน้าเว็บตรง ๆ</p></li></ul>
+  </div>
+</section>
+
+<section class="view" id="v-plan" hidden>
+  <div class="block">
+    <h2>แผน 12 เดือน</h2>
+    <p class="muted">ข้อเสนอสำหรับคุยกันหลังบูธ วันที่ยึดตามเทศกาลและวันเกิดของแบรนด์</p>
+    <ol class="timeline"><li><time>22 ต.ค. 2569</time><div><b>คัดก่อนบูธ</b><p>ทดสอบสินค้าหลักที่ยังไม่พร้อม 4 ตัวให้จบ ตัวที่ไม่ผ่านให้เอาออกจากหน้าบูธ ใช้ตัวที่พร้อมแทน</p></div></li><li><time>23–26 ต.ค.</time><div><b>บูธแรกและเปิดแบรนด์</b><p>จดว่าลูกค้าหยิบตัวไหน ถามอะไร และซื้อตัวไหน ในสมุดเล่มเดียวกับยอดขาย</p></div></li><li><time>27 ต.ค.–15 พ.ย.</time><div><b>ทบทวนหลังบูธ</b><p>ตัดสินทุกสินค้า เก็บ ปรับ หรือพัก ใส่ความหนาหนังและเวลาประกอบจริงลง brand.py</p></div></li><li><time>พ.ย.–ธ.ค.</time><div><b>ของขวัญปลายปี</b><p>ของแขวนต้นคริสต์มาส กล่องของขวัญสลับลาย ชุดที่รองแก้ว 4 ลาย ลง Shopee ก่อน 1 ธ.ค.</p></div></li><li><time>ม.ค.–ก.พ. 2570</time><div><b>ตรุษจีนและวาเลนไทน์</b><p>ซองอั่งเปาพับกังหันพร้อมขายก่อนตรุษจีน 6 ก.พ. และห้าหมี Love ช่วงวาเลนไทน์</p></div></li><li><time>ม.ค.–มี.ค. 2570</time><div><b>หมีของเราเอง</b><p>วาดแพตเทิร์นหมีใหม่ของเราเอง แทนแพตเทิร์น 01 ก่อนยื่นจดเครื่องหมายการค้าห้าหมี</p></div></li><li><time>เม.ย.–พ.ค. 2570</time><div><b>ห้าหมี School</b><p>ป้ายชื่อติดกระเป๋านักเรียนและชุดเปิดเทอม ขายก่อนเปิดเทอมกลางเดือน พ.ค.</p></div></li><li><time>26 ต.ค. 2570</time><div><b>รุ่นวันเกิด No. 43</b><p>รุ่นวันเกิดประจำปี ลูก ๆ เลือกสี เริ่มไอเดียภายใน ก.ค.</p></div></li></ol>
+  </div>
+</section>
+</div>
+
+<dialog id="dlg" aria-labelledby="d-name"><div class="dlg" id="dlg-body"></div></dialog>
+
+<script>
+const D = {"products":[{"n":1,"id":"p01","name":"ที่เก็บสายชาร์จหมี","price":59,"stock":30,"cost":12.2,"parts":[["01",1]],"joints":0,"extra":null,"size":"10.4 × 10.4 ซม.","who":"นักเรียน คนทำงาน","hook":"สายชาร์จพันกันในกระเป๋าทุกวัน หมีตัวนี้ช่วยได้","steps":["พันสายชาร์จรอบหัวหมี","เหน็บหัวปลั๊กเข้าร่องข้างแก้ม","เหน็บอีกปลายเข้าร่องล่าง"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 1","hero":true,"check":"สายชาร์จ USB-C ยาว 1 ม. พันแล้วไม่คลายในกระเป๋า","blocker":"","stage":"ready"},{"n":2,"id":"p02","name":"ที่คั่นหนังสือหมี","price":59,"stock":20,"cost":12.2,"parts":[["01",1]],"joints":0,"extra":null,"size":"10.4 × 10.4 ซม.","who":"นักอ่าน ของขวัญวันครู","hook":"หมีเฝ้าหน้าที่อ่านค้างไว้ให้","steps":["หาร่องสองเส้นที่ตั้งฉากกัน","เหน็บมุมหน้ากระดาษเข้าร่อง","หมีโผล่ที่มุมหนังสือ"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 1","hero":false,"check":"เหน็บมุมหน้ากระดาษ ปิดหนังสือแล้วหมีไม่หลุด","blocker":"","stage":"proto"},{"n":3,"id":"p03","name":"ป้ายชื่อติดกระเป๋านักเรียน","price":129,"stock":20,"cost":18.96,"parts":[["01",1],["01-S250",1]],"joints":2,"extra":null,"size":"หมี 10.4 ซม. สาย 25 ซม.","who":"ผู้ปกครอง","hook":"เปิดเทอมนี้ กระเป๋าลูกจะไม่หายไปกับของเพื่อน","steps":["เขียนชื่อหลังหัวหมี","ร้อยสายหัวใจผ่านร่องทั้งสอง","คล้องหูกระเป๋าแล้วสอดปลายสายล็อก"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 1 + สายหัวใจ 250 × 1","hero":false,"check":"สายหัวใจ 250 ร้อยผ่านร่องทั้งสอง คล้องหูกระเป๋านักเรียนจริง","blocker":"บล็อกสายหัวใจยังไม่มีราคา (ประเมิน 950 บาท)","stage":"proto"},{"n":4,"id":"p04","name":"ห่วงผ้าเช็ดปากหมี","price":79,"stock":10,"cost":18.96,"parts":[["01",1],["01-S200",1]],"joints":2,"extra":null,"size":"หมี 10.4 ซม.","who":"ร้านอาหาร งานวันเกิด","hook":"โต๊ะวันเกิดเด็กที่หมีนั่งเฝ้าทุกจาน","steps":["ร้อยสายสั้นผ่านร่องแก้มซ้าย","อ้อมหลังแล้วร้อยร่องล่าง","สอดผ้าเช็ดปากหรือช้อนส้อมเข้าห่วง"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 1 + สายหัวใจ 200 × 1","hero":false,"check":"ผ้าเช็ดปากผ้าจริงและช้อนส้อมหนึ่งชุด สอดเข้าห่วงพอดี","blocker":"บล็อกสายหัวใจยังไม่มีราคา (ประเมิน 950 บาท)","stage":"proto"},{"n":5,"id":"p05","name":"ซองอั่งเปาพับกังหัน","price":69,"stock":20,"cost":9.83,"parts":[["02",1]],"joints":4,"extra":null,"size":"5.4 × 5.4 ซม. เมื่อพับ","who":"ของขวัญองค์กร ตรุษจีน","hook":"อั่งเปาที่ผู้รับเก็บไว้ใช้ต่อ ไม่ทิ้ง","steps":["พับธนบัตรให้เล็กกว่า 5 ซม.","วางกลางแผ่น พับกลีบเข้ากลางทีละกลีบ","กลีบสุดท้ายสอดใต้กลีบแรก"],"line":"OCT. 26 · SOI. 02","pieces":"กังหัน 02 × 1","hero":true,"check":"ธนบัตร 100 พับให้เล็กกว่า 5 ซม. ใส่แล้วกลีบไม่เด้งออก","blocker":"","stage":"proto"},{"n":6,"id":"p06","name":"ซองใส่เครื่องประดับ","price":69,"stock":10,"cost":9.83,"parts":[["02",1]],"joints":4,"extra":null,"size":"5.4 × 5.4 ซม.","who":"ร้านเครื่องประดับ งานแต่ง","hook":"ห่อแหวนด้วยหนังแท้แทนกล่องกระดาษ","steps":["วางแหวนหรือต่างหูตรงกลาง","พับกลีบเข้ากลางแบบกังหัน","กลีบสุดท้ายสอดล็อก"],"line":"OCT. 26 · SOI. 02","pieces":"กังหัน 02 × 1","hero":false,"check":"แหวนและต่างหูคู่หนึ่ง เขย่าแล้วไม่หลุดออกด้านข้าง","blocker":"","stage":"proto"},{"n":7,"id":"p07","name":"ซองการ์ดติดของขวัญ","price":59,"stock":10,"cost":9.83,"parts":[["02",1]],"joints":4,"extra":null,"size":"5.4 × 5.4 ซม.","who":"ร้านดอกไม้ ร้านของขวัญ","hook":"การ์ดอวยพรที่ห่อมาอย่างตั้งใจ","steps":["เขียนการ์ด 5 × 5 ซม.","วางการ์ดแล้วพับกลีบแบบกังหัน","ผูกเชือกติดกล่องหรือช่อดอกไม้"],"line":"OCT. 26 · SOI. 02","pieces":"กังหัน 02 × 1","hero":false,"check":"การ์ด 5 × 5 ซม. ใส่พอดี ผูกเชือกติดกล่องได้","blocker":"","stage":"proto"},{"n":8,"id":"p08","name":"กล่องแหวนหนังแท้","price":290,"stock":2,"cost":23.47,"parts":[["03",6]],"joints":12,"extra":null,"size":"4.5 × 4.5 × 4.5 ซม.","who":"คนขอแต่งงาน","hook":"กล่องแหวนที่เปิดทีละด้านได้ เซอร์ไพรส์นานขึ้นอีกนิด","steps":["ต่อ 4 ชิ้นเป็นวงรอบ","สอดชิ้นก้นปิดด้านล่าง","ใส่แหวน แล้วสอดชิ้นฝาปิดด้านบน"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทแคปซูล 03 × 6","hero":false,"check":"กล่อง 6 ชิ้นปิดฝาแล้วไม่หลวม ใส่แหวนจริง","blocker":"","stage":"proto"},{"n":9,"id":"p09","name":"ลูกเต๋าหนัง","price":159,"stock":3,"cost":23.47,"parts":[["03",6]],"joints":12,"extra":null,"size":"4.5 ซม.","who":"คาเฟ่บอร์ดเกม","hook":"ลูกเต๋าที่ทอยแล้วไม่ดัง เล่นตอนดึกได้","steps":["ปั๊มจุด 1 ถึง 6 บนแต่ละชิ้น","ต่อ 4 ชิ้นเป็นวง","ปิดบนล่างให้ด้านตรงข้ามรวมได้ 7"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทแคปซูล 03 × 6","hero":false,"check":"ทอยบนโต๊ะ 20 ครั้ง ไม่แตกออก","blocker":"","stage":"proto"},{"n":10,"id":"p10","name":"ซองใส่ AirTag","price":129,"stock":5,"cost":12.21,"parts":[["03",2]],"joints":4,"extra":null,"size":"4.5 × 4.5 ซม.","who":"คนเดินทาง","hook":"AirTag ห้อยกระเป๋าแบบไม่ต้องใช้ไขควง","steps":["ประกบสองชิ้นหน้าหลัง","ใส่ AirTag ตรงกลาง","สอดปีกล็อกทั้งสี่ขอบ"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทแคปซูล 03 × 2","hero":false,"check":"AirTag จริง (Ø 31.9 มม. หนา 8 มม.) ใส่ได้และไม่หลุด","blocker":"ยังไม่มีห่วงแขวนในรายการชิ้นส่วน","stage":"proto"},{"n":11,"id":"p11","name":"ชุดตัวต่อหนัง 24 ชิ้น","price":390,"stock":2,"cost":88.55,"parts":[["03",24]],"joints":0,"extra":null,"size":"ชุด 24 ชิ้น","who":"พ่อแม่ โรงเรียน","hook":"ของเล่นที่ไม่มีพลาสติกสักชิ้น","steps":["เทชิ้นหนังออกจากถุง","สอดปีกเข้าร่องของอีกชิ้น","ต่อเป็นลูกบาศก์ สายโซ่ หรือแผ่นใหญ่"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทแคปซูล 03 × 24","hero":false,"check":"ต่อ 24 ชิ้นเป็นแผ่นและเป็นลูกบาศก์ตามการ์ด","blocker":"","stage":"proto"},{"n":12,"id":"p12","name":"ที่ใส่ปากกามงกุฎ","price":199,"stock":2,"cost":20.23,"parts":[["04",5]],"joints":8,"extra":null,"size":"6.4 ซม. + ยอดมงกุฎ","who":"ออฟฟิศ","hook":"ปากกาบนโต๊ะทำงานได้มงกุฎของตัวเอง","steps":["ต่อ 4 ชิ้นเป็นผนัง","สอดชิ้นก้น","พับปีกบนขึ้นเป็นยอดมงกุฎ"],"line":"OCT. 26 · SOI. 02","pieces":"สี่เหลี่ยมมน 04 × 5","hero":false,"check":"ปากกา 10 แท่งตั้งแล้วไม่ล้ม","blocker":"","stage":"proto"},{"n":13,"id":"p13","name":"แผ่นรองจานลายข้าวหลามตัด","price":390,"stock":1,"cost":39.76,"parts":[["04",12]],"joints":17,"extra":null,"size":"ประมาณ 27 × 36 ซม.","who":"โฮมเดคอร์ ร้านอาหาร","hook":"จานธรรมดาดูแพงขึ้นทันที","steps":["วางชิ้นเป็นตาราง 3 × 4","สอดปีกเข้าร่องชิ้นข้าง ๆ ทีละแถว","พลิกดูลายข้าวหลามตัดด้านหน้า"],"line":"OCT. 26 · SOI. 02","pieces":"สี่เหลี่ยมมน 04 × 12","hero":false,"check":"ต่อ 12 ชิ้นแล้วแผ่นเรียบ วางจานได้ไม่โยก","blocker":"","stage":"proto"},{"n":14,"id":"p14","name":"ปลอกแก้วกาแฟ","price":149,"stock":3,"cost":16.98,"parts":[["05",4]],"joints":4,"extra":null,"size":"รอบวง 25.5 ซม. แก้ว 12 oz","who":"คอกาแฟ คาเฟ่","hook":"กาแฟร้อนแค่ไหนก็ถือได้","steps":["ต่อ 4 ชิ้นเป็นแถว","ม้วนเป็นวง","สอดปีกชิ้นสุดท้ายเข้าชิ้นแรก"],"line":"OCT. 26 · SOI. 02","pieces":"วงกลม 05 × 4","hero":false,"check":"แก้ว 12 oz รอบวง 25.5 ซม. ใส่กาแฟร้อนแล้วไม่ลื่น","blocker":"","stage":"proto"},{"n":15,"id":"p15","name":"ที่รองแก้วไส้ไม้ก๊อก","price":99,"stock":5,"cost":22.21,"parts":[["05",2]],"joints":4,"extra":["แผ่นไม้ก๊อก 6 × 6 ซม.",10],"size":"6.4 ซม.","who":"คาเฟ่ บาร์","hook":"แก้วเย็นแค่ไหนโต๊ะก็ไม่เปียก","steps":["วางไม้ก๊อกบนชิ้นล่าง","ประกบชิ้นบน","สอดปีกล็อกทั้งสี่ขอบ"],"line":"OCT. 26 · SOI. 02","pieces":"วงกลม 05 × 2","hero":false,"check":"แผ่นไม้ก๊อก 6 × 6 ซม. ใส่พอดี วางแก้วเย็นที่มีหยดน้ำ","blocker":"ต้องหาแผ่นไม้ก๊อก 6 × 6 ซม.","stage":"proto"},{"n":16,"id":"p16","name":"กระเป๋าเหรียญจิ๋ว","price":99,"stock":10,"cost":11.93,"parts":[["05",2]],"joints":3,"extra":null,"size":"6.4 ซม.","who":"วัยรุ่น ของที่ระลึก","hook":"เหรียญสิบไม่หล่นหายในกระเป๋าอีก","steps":["ประกบสองชิ้น","สอดปีกล็อกสามขอบ","ขอบที่สี่เป็นฝาเปิดปิด"],"line":"OCT. 26 · SOI. 02","pieces":"วงกลม 05 × 2","hero":false,"check":"เหรียญ 10 บาท 5 เหรียญ เขย่าแล้วไม่หลุด","blocker":"","stage":"proto"},{"n":17,"id":"p17","name":"กล่องของขวัญสลับลาย","price":249,"stock":2,"cost":23.62,"parts":[["04",3],["05",3]],"joints":12,"extra":null,"size":"6.4 ซม.","who":"ร้านของขวัญ","hook":"กล่องของขวัญที่สวยกว่าของข้างใน","steps":["สลับชิ้นเหลี่ยมกับชิ้นกลม","ต่อ 4 ชิ้นเป็นวง","ปิดก้นและฝา"],"line":"OCT. 26 · SOI. 02","pieces":"สี่เหลี่ยมมน 04 × 3 + วงกลม 05 × 3","hero":false,"check":"ชิ้น 04 กับ 05 ต่อกันได้จริง (คอปีก 29.5 กับร่อง 30)","blocker":"","stage":"proto"},{"n":18,"id":"p18","name":"กล่องของชำร่วยงานแต่ง","price":159,"stock":8,"cost":23.77,"parts":[["06",6]],"joints":12,"extra":null,"size":"6 × 6 × 6 ซม.","who":"คู่บ่าวสาว ออแกไนเซอร์","hook":"ของชำร่วยที่แขกเก็บไว้ ไม่ทิ้งไว้บนโต๊ะ","steps":["ต่อ 4 ชิ้นเป็นวง","ปิดก้น","ใส่ขนมหรือสบู่ แล้วปิดฝา"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทนุ่ม 06 × 6","hero":true,"check":"ของชำร่วยจริงชิ้นหนึ่งใส่ในกล่อง 6 ซม. ได้","blocker":"","stage":"proto"},{"n":19,"id":"p19","name":"ที่ใส่แปรงแต่งหน้า","price":199,"stock":2,"cost":20.23,"parts":[["06",5]],"joints":8,"extra":null,"size":"6 ซม.","who":"ของขวัญผู้หญิง","hook":"โต๊ะเครื่องแป้งเป็นระเบียบในหนึ่งนาที","steps":["ต่อ 4 ชิ้นเป็นผนัง","สอดชิ้นก้น","ตั้งแปรงในกล่อง"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทนุ่ม 06 × 5","hero":false,"check":"แปรงแต่งหน้า 5 ด้ามตั้งได้ไม่ล้ม","blocker":"","stage":"proto"},{"n":20,"id":"p20","name":"ของแขวนต้นคริสต์มาส","price":159,"stock":3,"cost":26.77,"parts":[["06",6]],"joints":12,"extra":["ริบบิ้น",3],"size":"6 ซม.","who":"ช่วงปลายปี","hook":"ต้นคริสต์มาสปีนี้มีของแขวนหนังแท้","steps":["เลือกหนังหลายสี","ต่อเป็นลูกบาศก์","ผูกริบบิ้นที่มุมบน"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทนุ่ม 06 × 6","hero":false,"check":"แขวนด้วยริบบิ้นบนต้นไม้ 1 วัน กล่องไม่คลาย","blocker":"ต้องหาริบบิ้น","stage":"proto"},{"n":21,"id":"p21","name":"ราวหมีห้าตัว","price":349,"stock":10,"cost":41.25,"parts":[["01",5]],"joints":4,"extra":["เชือกแขวน",5],"size":"ยาวประมาณ 45 ซม.","who":"ครอบครัว ห้องเด็ก","hook":"พ่อ แม่ และลูกสามคน แขวนไว้หน้าห้องให้รู้ว่าบ้านนี้มีกันกี่คน","steps":["วางหมีเรียงห้าตัว","เสียบหูหมีตัวหนึ่งเข้าร่องแก้มของตัวถัดไป","ผูกเชือกที่หมีตัวแรกและตัวสุดท้าย"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 5","hero":true,"check":"หมี 5 ตัวบนเชือก แขวนแล้วเรียงตรง ไม่หมุนกลับหลัง","blocker":"","stage":"proto"},{"n":22,"id":"p22","name":"ที่รองแก้วหมี","price":59,"stock":30,"cost":12.2,"parts":[["01",1]],"joints":0,"extra":null,"size":"10.4 ซม.","who":"ทุกบ้าน","hook":"แก้วนมตอนเช้ามีหมีรองอยู่","steps":["หยิบออกจากถุง","วางแก้ว","เสร็จ"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 1","hero":true,"check":"วางแก้วเย็นที่มีหยดน้ำ 1 ชม. ดูคราบน้ำบนหนัง","blocker":"","stage":"ready"},{"n":23,"id":"p23","name":"ที่ห้อยกระเป๋าหมีหัวใจ","price":129,"stock":30,"cost":26.96,"parts":[["01",1],["01-S200",1]],"joints":2,"extra":["ห่วงกุญแจโลหะ",8],"size":"หมี 10.4 ซม.","who":"วัยรุ่น ของขวัญ","hook":"หมีห้อยกระเป๋าที่บอกว่าใครรักคุณอยู่","steps":["ร้อยห่วงโลหะที่ปลายสายหัวใจ","สอดสายผ่านร่องแก้มและร่องล่าง","คล้องห่วงกับกระเป๋า"],"line":"ห้าหมี by OCT. 26 · Love","pieces":"หัวหมี 01 × 1 + สายหัวใจ 200 × 1","hero":true,"check":"ห่วงกุญแจโลหะกับสายหัวใจ 200 ห้อยกระเป๋าแล้วดึงไม่หลุด","blocker":"บล็อกสายหัวใจยังไม่มีราคา และต้องหาห่วงกุญแจโลหะ","stage":"proto"},{"n":24,"id":"p24","name":"ที่รองแก้วกังหัน","price":49,"stock":20,"cost":8.72,"parts":[["02",1]],"joints":0,"extra":null,"size":"9 ซม.","who":"ทุกบ้าน","hook":"ที่รองแก้วลายกังหัน หนังแท้ทั้งแผ่น","steps":["หยิบออกจากถุง","วางแก้ว","เสร็จ"],"line":"OCT. 26 · SOI. 02","pieces":"กังหัน 02 × 1","hero":false,"check":"วางแก้วเย็นที่มีหยดน้ำ 1 ชม. ดูคราบน้ำบนหนัง","blocker":"","stage":"ready"},{"n":25,"id":"p25","name":"กังหันลมหนัง","price":89,"stock":5,"cost":16.72,"parts":[["02",1]],"joints":0,"extra":["ไม้เสียบและหมุด",8],"size":"9 ซม.","who":"เด็ก ของฝาก","hook":"ของเล่นที่ลูกเป่าเล่นได้ทั้งวัน","steps":["พับปลายกลีบเข้าหาจุดกลางทีละกลีบ","ตอกหมุดผ่านจุดกลาง","เป่าดูให้หมุน"],"line":"OCT. 26 · SOI. 02","pieces":"กังหัน 02 × 1","hero":false,"check":"ไม้เสียบและหมุด เป่าหรือถือวิ่งแล้วหมุนได้จริง","blocker":"อาจหมุนไม่ได้ ต้องลองก่อน","stage":"proto"},{"n":26,"id":"p26","name":"ป้ายห้อยของขวัญ","price":39,"stock":20,"cost":10.72,"parts":[["03",1]],"joints":0,"extra":["เชือกปอ",2],"size":"9 ซม.","who":"ร้านของขวัญ","hook":"ป้ายชื่อที่ผู้รับเก็บไว้ห้อยกุญแจต่อได้","steps":["เขียนชื่อผู้รับด้วยปากกาเพ้นท์","ร้อยเชือกผ่านร่อง","ผูกกับถุงของขวัญ"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทแคปซูล 03 × 1","hero":false,"check":"เขียนด้วยปากกาเมจิกได้ ผูกเชือกปอติดถุงของขวัญ","blocker":"","stage":"ready"},{"n":27,"id":"p27","name":"ที่รองแก้วสี่เหลี่ยม","price":49,"stock":15,"cost":8.77,"parts":[["04",1]],"joints":0,"extra":null,"size":"9 ซม.","who":"ทุกบ้าน","hook":"ที่รองแก้วทรงเหลี่ยมมน หนังแท้","steps":["หยิบออกจากถุง","วางแก้ว","เสร็จ"],"line":"OCT. 26 · SOI. 02","pieces":"สี่เหลี่ยมมน 04 × 1","hero":false,"check":"วางแก้วเย็นที่มีหยดน้ำ 1 ชม. ดูคราบน้ำบนหนัง","blocker":"","stage":"ready"},{"n":28,"id":"p28","name":"ที่รองแก้ววงกลม","price":49,"stock":15,"cost":8.72,"parts":[["05",1]],"joints":0,"extra":null,"size":"9 ซม.","who":"ทุกบ้าน","hook":"ที่รองแก้วทรงกลม หนังแท้","steps":["หยิบออกจากถุง","วางแก้ว","เสร็จ"],"line":"OCT. 26 · SOI. 02","pieces":"วงกลม 05 × 1","hero":false,"check":"วางแก้วเย็นที่มีหยดน้ำ 1 ชม. ดูคราบน้ำบนหนัง","blocker":"","stage":"ready"},{"n":29,"id":"p29","name":"ชุดที่รองแก้ว 4 ลาย","price":179,"stock":10,"cost":45.4,"parts":[["01",1],["02",1],["04",1],["05",1]],"joints":0,"extra":["เชือกมัดชุด",1],"size":"9–10.4 ซม.","who":"ของขวัญขึ้นบ้านใหม่","hook":"สี่แก้ว สี่ลาย ไม่ต้องจำว่าแก้วไหนของใคร","steps":["เลือกสี่ลายที่ชอบ","มัดรวมด้วยเชือกปอ","ใส่ถุงผ้า"],"line":"OCT. 26 · SOI. 02","pieces":"หัวหมี 01 × 1 + กังหัน 02 × 1 + สี่เหลี่ยมมน 04 × 1 + วงกลม 05 × 1","hero":true,"check":"4 ลายซ้อนกัน มัดเชือกแล้วไม่เลื่อน","blocker":"","stage":"ready"},{"n":30,"id":"p30","name":"ชุดต่อเองกล่องลูกบาศก์","price":129,"stock":10,"cost":45.94,"parts":[["06",6]],"joints":0,"extra":null,"size":"6 ซม. เมื่อต่อเสร็จ","who":"เด็ก ครอบครัว เวิร์กช็อป","hook":"ต่อเองได้ในห้านาที ไม่ต้องใช้กาว ไม่ต้องใช้เข็ม","steps":["เทชิ้นหนังหกชิ้นออกจากถุง","ทำตามการ์ด ต่อ 4 ชิ้นเป็นวง","ปิดก้นและฝา เสร็จในห้านาที"],"line":"OCT. 26 · SOI. 02","pieces":"กากบาทนุ่ม 06 × 6","hero":true,"check":"เด็กที่ไม่เคยทำ ต่อเสร็จได้ใน 5 นาทีจากการ์ด","blocker":"","stage":"ready"}],"heroes":[21,23,1,22,30,18,29,5],"stages":[{"key":"idea","name":"ไอเดีย","color":"sun","what":"มีชื่อ คนซื้อ ชิ้นที่ใช้ และราคาตั้ง"},{"key":"proto","name":"ลองต้นแบบ","color":"pink","what":"ตัดกระดาษแข็งจาก PDF 1:1 แล้วตัดเศษหนังจริง"},{"key":"tested","name":"ทดสอบผ่าน","color":"mint","what":"ผ่านทดสอบ 5 ข้อบนหนังจริง"},{"key":"ready","name":"พร้อมผลิต","color":"cobalt","what":"สเปก ต้นทุน การ์ดวิธีต่อ และรูปสินค้าครบ"},{"key":"selling","name":"วางขายแล้ว","color":"tomato","what":"อยู่ที่บูธหรือ Shopee เก็บยอดและคำถามลูกค้า"},{"key":"hold","name":"พักไว้","color":"muted","what":"ยังไม่ทำต่อ เก็บเหตุผลไว้"}],"gates":[{"name":"ไอเดีย → ลองต้นแบบ","who":"แม่กับพ่อเบ","items":["ใช้บล็อก 6 แบบที่มีอยู่ได้ หรือมีอย่างน้อย 3 สินค้าที่จะใช้บล็อกใหม่ร่วมกัน","กำไรขั้นต้นที่ราคาตั้ง 60% ขึ้นไป (เครื่องคิดในบอร์ดคำนวณให้)","บอกได้ในประโยคเดียวว่าใครซื้อ และซื้อไปทำอะไร"]},{"name":"ลองต้นแบบ → ทดสอบผ่าน","who":"พ่อเบ","items":["ตัดหนังจริงอย่างน้อย 3 ชิ้น จากล็อตเศษหนังที่จะใช้ขาย","ผ่านทดสอบครบ 5 ข้อ โดยคนทดสอบอย่างน้อย 2 คน (ลูกอย่างน้อย 1 คน)","แก้แบบแล้วต้องทดสอบใหม่ทั้ง 5 ข้อ"]},{"name":"ทดสอบผ่าน → พร้อมผลิต","who":"พ่อเบ","items":["ล็อกสเปกใน brand.py: ชิ้นส่วน ขนาด ชิ้นเสริม แพ็กเกจ ราคา","ใส่เวลาประกอบที่จับได้จริงแทนค่าประมาณ 20 วินาทีต่อจุด","มีขั้นตอน 3 ข้อสำหรับการ์ดวิธีต่อ และรูปสินค้า 1 รูป"]},{"name":"พร้อมผลิต → วางขาย","who":"แม่","items":["ผลิตนำร่อง 10 ชิ้น เสียไม่เกิน 1 ชิ้น","ป้ายห้อย ราคา และแพ็กเกจพร้อม","ลูกที่ขายที่บูธสาธิตได้ภายใน 1 นาที"]}],"tests":[{"key":"build","name":"ต่อเองได้","how":"คนที่ไม่เคยเห็นสินค้า ต่อเสร็จได้จากขั้นตอน 3 ข้อ จับเวลาเป็นวินาที"},{"key":"pull","name":"ดึงไม่หลุด","how":"ดึงทุกจุดต่อแรงพอประมาณ 10 ครั้ง ไม่หลุด ไม่ยืดจนหลวม"},{"key":"fit","name":"ใช้ได้จริง","how":"ลองกับของจริงตามช่อง ‘ต้องลองกับ’ ของสินค้านั้น"},{"key":"tear","name":"ไม่ฉีก","how":"ต่อแล้วแกะ 10 รอบ ปลายร่องไม่ฉีก ไม่ขาด"},{"key":"photo","name":"น่าซื้อ","how":"ถ่ายรูปด้วยมือถือ 1 รูป คนในบ้านอย่างน้อย 3 คนบอกว่าอยากได้"}],"testers":["พ่อเบ","แม่ (คุณบิ๊ง)","Beiya","Beana","Bene"],"pieceCost":{"01":5.862,"01-S200":6.212,"01-S250":6.212,"02":2.384,"03":2.384,"04":2.434,"05":2.384,"06":2.434},"pieceName":{"01":"หัวหมี 01","01-S200":"สายหัวใจ 200","01-S250":"สายหัวใจ 250","02":"กังหัน 02","03":"กากบาทแคปซูล 03","04":"สี่เหลี่ยมมน 04","05":"วงกลม 05","06":"กากบาทนุ่ม 06"},"jointCost":0.2777777777777778,"packCost":0.8333333333333334,"packs":{"flat":{"name":"ของแบน ใส่ซอง","cost":5.5},"wrap":{"name":"กล่องและของชิ้นใหญ่ ห่อกระดาษบาง","cost":5.0},"kit":{"name":"ชุดทำเองและชุดหลายชิ้น ใส่ถุงผ้า","cost":30.5}},"thumbs":{"01":{"vb":"0 0 104.36 104.36","d":"M100.650,53.709 C95.699,48.758 87.670,48.758 82.719,53.709 C82.629,53.799 82.544,53.893 82.457,53.985 C80.841,46.368 77.077,39.115 71.161,33.199 C65.245,27.283 57.992,23.519 50.375,21.903 C50.468,21.816 50.561,21.731 50.651,21.641 C55.602,16.689 55.602,8.661 50.651,3.710 C45.699,-1.242 37.671,-1.242 32.720,3.710 C27.768,8.661 27.768,16.689 32.720,21.641 C32.810,21.731 32.903,21.816 32.995,21.903 C25.378,23.519 18.126,27.283 12.210,33.199 C-4.070,49.478 -4.070,75.872 12.209,92.151 C28.488,108.430 54.882,108.430 71.161,92.151 C77.077,86.234 80.841,78.982 82.457,71.365 C82.544,71.457 82.629,71.550 82.719,71.641 C87.670,76.592 95.699,76.592 100.650,71.641 C105.602,66.689 105.602,58.661 100.650,53.709 Z","slits":[[11.2,71.615,11.2,53.705],[32.745,93.16,50.655,93.16]]},"02":{"vb":"0 0 90.0 90.0","d":"M90.000,45.000 C90.000,32.834 82.599,22.398 72.053,17.946 C67.602,7.401 57.166,0.000 45.000,0.000 C32.834,0.000 22.398,7.401 17.947,17.946 C7.401,22.398 0.000,32.834 0.000,45.000 C0.000,57.166 7.401,67.602 17.947,72.053 C22.398,82.599 32.834,90.000 45.000,90.000 C57.166,90.000 67.602,82.599 72.053,72.053 C82.599,67.602 90.000,57.166 90.000,45.000 Z","slits":[[73.054,72.054,45.0,72.054],[17.946,73.054,17.946,45.0],[72.054,16.946,72.054,45.0],[16.946,17.946,45.0,17.946]]},"03":{"vb":"0 0 90.01 90.0","d":"M67.508,22.500 C67.505,22.500 67.503,22.501 67.499,22.501 C67.499,22.499 67.500,22.497 67.500,22.496 C67.500,10.070 57.426,-0.004 45.000,-0.004 C32.573,-0.004 22.499,10.070 22.499,22.496 C22.499,22.497 22.500,22.499 22.500,22.500 C10.073,22.500 0.000,32.574 0.000,45.000 C0.000,57.427 10.073,67.500 22.500,67.500 C22.501,67.500 22.503,67.500 22.504,67.500 C22.504,79.926 32.578,90.000 45.004,90.000 C57.430,90.000 67.504,79.926 67.504,67.500 C67.505,67.500 67.507,67.500 67.508,67.500 C79.934,67.500 90.008,57.427 90.008,45.000 C90.008,32.574 79.934,22.500 67.508,22.500 Z","slits":[[22.5,56.25,22.5,33.75],[67.5,56.25,67.5,33.75],[68.5,22.5,56.0,22.5],[21.5,22.5,34.0,22.5],[68.5,67.5,56.0,67.5],[21.5,67.5,34.0,67.5]]},"04":{"vb":"0 0 90.0 90.0","d":"M90.000,5.000 L90.000,85.000 C90.000,87.761 87.761,90.000 85.000,90.000 L5.000,90.000 C2.238,90.000 0.000,87.761 0.000,85.000 L0.000,5.000 C0.000,2.238 2.238,0.000 5.000,0.000 L85.000,0.000 C87.761,0.000 90.000,2.238 90.000,5.000 Z","slits":[[56.893,78.107,78.107,56.893],[11.893,33.107,33.107,11.893],[90.707,45.707,77.93,32.93],[44.293,-0.707,57.07,12.07],[45.707,90.707,32.93,77.93],[-0.707,44.293,12.07,57.07]]},"05":{"vb":"0 0 90.0 90.0","d":"M90.000,45.000 C90.000,69.852 69.853,90.000 45.000,90.000 C20.147,90.000 0.000,69.852 0.000,45.000 C0.000,20.147 20.147,-0.001 45.000,-0.001 C69.853,-0.001 90.000,20.147 90.000,45.000 Z","slits":[[30.0,13.18,60.0,13.18],[30.0,76.82,60.0,76.82],[76.82,12.18,76.82,30.25],[76.82,77.82,76.82,59.75],[13.18,12.18,13.18,30.25],[13.18,77.82,13.18,59.75]]},"06":{"vb":"0 0 90.0 90.0","d":"M75.308,27.319 L75.299,27.311 C68.332,27.307 62.685,21.657 62.685,14.687 L62.686,14.687 C62.681,6.575 54.765,0.000 45.000,0.000 C35.233,0.000 27.314,6.579 27.314,14.695 C27.314,14.695 27.313,14.696 27.313,14.697 C27.308,21.661 21.664,27.306 14.701,27.311 C14.700,27.312 14.693,27.319 14.693,27.319 C6.578,27.319 0.000,35.238 0.000,45.008 C0.000,54.777 6.578,62.697 14.693,62.697 C14.834,62.697 14.974,62.689 15.114,62.684 C21.889,62.907 27.314,68.467 27.314,75.297 L27.314,75.298 C27.314,75.300 27.314,75.303 27.314,75.305 C27.314,83.421 35.233,90.000 45.000,90.000 C54.768,90.000 62.686,83.421 62.686,75.305 L62.694,75.297 L62.685,75.297 C62.685,68.467 68.110,62.907 74.885,62.684 C75.026,62.689 75.166,62.697 75.308,62.697 C83.422,62.697 90.000,54.777 90.000,45.008 C90.000,35.238 83.422,27.319 75.308,27.319 Z","slits":[[36.25,14.99,53.75,14.99],[36.25,74.99,53.75,74.99],[75.0,26.307,75.0,36.49],[75.0,63.688,75.0,53.49],[15.0,26.307,15.0,36.49],[15.0,63.688,15.0,53.49]]},"01-S200":{"vb":"0 0 200 24","d":"M11.899,18.500 L188.101,18.500 L190.334,21.090 A5.5,5.5 0 1 0 194.500,12.000 A5.5,5.5 0 1 0 190.334,2.910 L188.101,5.500 L11.899,5.500 L9.666,2.910 A5.5,5.5 0 1 0 5.500,12.000 A5.5,5.5 0 1 0 9.666,21.090 L11.899,18.500 Z","slits":[]},"01-S250":{"vb":"0 0 250 24","d":"M11.899,18.500 L238.101,18.500 L240.334,21.090 A5.5,5.5 0 1 0 244.500,12.000 A5.5,5.5 0 1 0 240.334,2.910 L238.101,5.500 L11.899,5.500 L9.666,2.910 A5.5,5.5 0 1 0 5.500,12.000 A5.5,5.5 0 1 0 9.666,21.090 L11.899,18.500 Z","slits":[]}}};
+const $ = s => document.querySelector(s);
+const el = (tag, attrs = {}, ...kids) => {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k === "text") n.textContent = v;
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else if (v !== false && v != null) n.setAttribute(k, v);
+  }
+  for (const k of kids) if (k != null) n.append(k);
+  return n;
+};
+const SVGNS = "http://www.w3.org/2000/svg";
+const STAGE = Object.fromEntries(D.stages.map(s => [s.key, s]));
+const stageColor = k => `var(--${STAGE[k]?.color || "muted"})`;
+const stageText = k => STAGE[k]?.color === "cobalt" ? "var(--on-accent)" : "#1C1B22";
+const baht = v => v.toLocaleString("th-TH", {maximumFractionDigits: 0});
+const READYISH = new Set(["ready", "selling"]);
+
+function thumb(code, cls = "thumb") {
+  const t = D.thumbs[code] || D.thumbs["05"];
+  const [x, y, w, h] = t.vb.split(" ").map(Number), m = Math.max(w, h), pad = 4;
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("viewBox", `${x - pad + (w - m) / 2} ${y - pad + (h - m) / 2} ${m + 2 * pad} ${m + 2 * pad}`);
+  svg.setAttribute("class", cls); svg.setAttribute("aria-hidden", "true");
+  const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", t.d); svg.append(p);
+  for (const [x1, y1, x2, y2] of t.slits) {
+    const l = document.createElementNS(SVGNS, "line");
+    Object.entries({x1, y1, x2, y2}).forEach(([k, v]) => l.setAttribute(k, v)); svg.append(l);
+  }
+  return svg;
+}
+function pill(stage) {
+  const s = STAGE[stage] || STAGE.proto;
+  return el("span", {class: "pill"}, el("i", {style: `background:${stageColor(s.key)}`}), s.name);
+}
+
+// ------------------------------------------------------------ state
+let db = null, canWrite = false;
+const over = {};          // items/<id> docs from the shared database
+let tests = [];           // tests docs, newest first
+let filter = "all";
+
+function costOf(parts, joints, extra, pack) {
+  const pieces = parts.reduce((a, [c, q]) => a + (D.pieceCost[c] || 0) * q, 0);
+  return pieces + joints * D.jointCost + D.packCost + (D.packs[pack]?.cost || 0) + extra;
+}
+function items() {
+  const list = D.products.map(p => {
+    const o = over[p.id] || {};
+    return {...p, kind: "product", stage: o.stage || p.stage, blocker: o.blocker ?? p.blocker, note: o.note || "", updated: o.updated || ""};
+  });
+  for (const [id, o] of Object.entries(over)) {
+    if (o.kind !== "idea") continue;
+    const parts = Array.isArray(o.parts) ? o.parts.filter(x => Array.isArray(x) && D.pieceCost[x[0]] && x[1] > 0) : [];
+    const joints = +o.joints || 0, extra = +o.extra || 0, price = +o.price || 0;
+    list.push({id, kind: "idea", n: null, name: String(o.name || "ไอเดีย"), who: String(o.who || ""), price, stock: 0,
+      parts, joints, extra: extra ? ["ชิ้นเสริม", extra] : null, pack: o.pack, cost: costOf(parts, joints, extra, o.pack),
+      stage: STAGE[o.stage] ? o.stage : "idea", blocker: String(o.blocker || ""), note: String(o.note || ""), hero: false,
+      pieces: parts.map(([c, q]) => `${D.pieceName[c]} × ${q}`).join(" + "), check: "", steps: [], updated: o.updated || ""});
+  }
+  return list;
+}
+const testsFor = id => tests.filter(t => t.item === id);
+function bestMarks(id) {
+  const res = {};
+  for (const t of D.tests) {
+    const vals = testsFor(id).map(x => x[t.key]).filter(Boolean);
+    res[t.key] = vals[0] || "";               // newest result wins
+  }
+  return res;
+}
+
+// ------------------------------------------------------------ overview
+function renderOverview() {
+  const all = items(), prods = all.filter(i => i.kind === "product");
+  const count = k => all.filter(i => i.stage === k).length;
+  const notReady = prods.filter(p => !READYISH.has(p.stage) && p.stage !== "hold");
+  const heroes = D.heroes.map(n => prods.find(p => p.n === n));
+  const heroOpen = heroes.filter(p => !READYISH.has(p.stage));
+  const stockAll = prods.reduce((a, p) => a + p.stock, 0);
+  const salesAll = prods.reduce((a, p) => a + p.stock * p.price, 0);
+  const riskStock = notReady.reduce((a, p) => a + p.stock, 0);
+  const riskSales = notReady.reduce((a, p) => a + p.stock * p.price, 0);
+  const ideas = all.filter(i => i.kind === "idea").length;
+  $("#stats").replaceChildren(
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "สินค้าบนบอร์ด"}), el("b", {text: all.length}), el("span", {class: "small muted", text: `30 แบบเดิม${ideas ? ` + ไอเดียใหม่ ${ideas}` : ""}`})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "พร้อมผลิตหรือขายแล้ว"}), el("b", {text: count("ready") + count("selling")}), el("span", {class: "small muted", text: "จาก 30 แบบเดิม"})),
+    el("div", {class: "stat" + (heroOpen.length ? " alert" : "")}, el("span", {class: "small muted", text: "สินค้าหลักหน้าบูธที่ยังไม่พร้อม"}), el("b", {text: `${heroOpen.length}/${heroes.length}`}), el("span", {class: "small muted", text: "ต้องจบภายใน 22 ต.ค."})),
+    el("div", {class: "stat" + (riskStock ? " alert" : "")}, el("span", {class: "small muted", text: "ชิ้นในสต็อกบูธที่ยังไม่พร้อม"}), el("b", {class: "num", text: `${riskStock}/${stockAll}`}), el("span", {class: "small muted num", text: `ยอดขาย ${baht(riskSales)} จาก ${baht(salesAll)} บาท`})),
+  );
+  const pipe = $("#pipe"); pipe.replaceChildren();
+  pipe.setAttribute("aria-label", D.stages.map(s => `${s.name} ${count(s.key)}`).join(", "));
+  for (const s of D.stages) {
+    const c = count(s.key); if (!c) continue;
+    pipe.append(el("span", {style: `flex:${c};background:${stageColor(s.key)};color:${stageText(s.key)}`, title: `${s.name} ${c}`, text: c}));
+  }
+  $("#legend").replaceChildren(...D.stages.map(s => el("span", {}, el("i", {style: `background:${stageColor(s.key)}`}), `${s.name} ${count(s.key)}`)));
+
+  const row = p => el("li", {},
+    thumb(p.parts[0]?.[0] || "05"),
+    el("div", {}, el("b", {text: `${p.n}. ${p.name}`}), " ", pill(p.stage),
+      el("p", {class: "why" + (p.blocker ? " block-txt" : ""), text: p.blocker || `ต้องลองกับ: ${p.check}`}),
+      el("p", {class: "why num", text: `สต็อกบูธ ${p.stock} ชิ้น · ${p.price} บาท`})),
+    el("button", {class: "btn", type: "button", onclick: () => openItem(p.id), text: "เปิด"}));
+  $("#risk-hero").replaceChildren(...(heroOpen.length ? heroOpen.map(row) : [el("li", {}, el("span"), el("p", {text: "สินค้าหลักหน้าบูธพร้อมครบทั้ง 8 ตัว"}), el("span"))]));
+  const rest = notReady.filter(p => !p.hero && p.stock > 0).sort((a, b) => b.stock * b.price - a.stock * a.price);
+  $("#risk-rest").replaceChildren(...rest.map(row));
+}
+
+// ------------------------------------------------------------ board
+function renderBoard() {
+  const all = items();
+  const chip = (key, label, n) => el("button", {class: "chip", type: "button", "aria-pressed": String(filter === key), onclick: () => { filter = key; renderBoard(); }}, label + ` ${n}`);
+  $("#filters").replaceChildren(chip("all", "ทั้งหมด", all.length), ...D.stages.map(s => chip(s.key, s.name, all.filter(i => i.stage === s.key).length)));
+  const shown = all.filter(i => filter === "all" || i.stage === filter);
+  $("#cards").replaceChildren(...shown.map(i => {
+    const marks = bestMarks(i.id);
+    const margin = i.price ? Math.round((i.price - i.cost) / i.price * 100) : 0;
+    return el("button", {class: "card", type: "button", onclick: () => openItem(i.id)},
+      thumb(i.parts[0]?.[0] || "05"),
+      el("div", {},
+        el("span", {class: "name", text: (i.n ? `${i.n}. ` : "") + i.name}),
+        el("span", {class: "row"}, pill(i.stage), i.hero ? el("span", {class: "star", text: "★ หน้าบูธ"}) : null, i.kind === "idea" ? el("span", {class: "tag", text: "ไอเดียใหม่"}) : null),
+        el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${margin}%` + (i.stock ? ` · บูธ ${i.stock} ชิ้น` : "")}),
+        el("span", {class: "marks"}, ...D.tests.map(t => el("span", {class: "mark " + marks[t.key], title: t.name, text: (marks[t.key] === "pass" ? "✓ " : marks[t.key] === "fail" ? "✗ " : "") + t.name}))),
+        i.blocker ? el("span", {class: "blk", text: i.blocker}) : null));
+  }));
+  if (!shown.length) $("#cards").append(el("p", {class: "muted", text: "ยังไม่มีสินค้าในขั้นนี้"}));
+}
+
+// ------------------------------------------------------------ item dialog
+function openItem(id) {
+  const i = items().find(x => x.id === id); if (!i) return;
+  let stage = i.stage;
+  const body = $("#dlg-body");
+  const msg = el("span");
+  const blocker = el("textarea", {id: "d-blocker", maxlength: "200", placeholder: "เช่น รอบล็อกสายหัวใจ"}); blocker.value = i.blocker;
+  const note = el("textarea", {id: "d-note", maxlength: "500", placeholder: "แก้แบบอะไร ลองอะไรไปแล้ว"}); note.value = i.note;
+  const picks = el("div", {class: "stagepick", role: "group", "aria-label": "ขั้น"});
+  const drawPicks = () => picks.replaceChildren(...D.stages.map(s => el("button", {type: "button", "aria-pressed": String(stage === s.key),
+    onclick: () => { stage = s.key; drawPicks(); }}, el("i", {style: `display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:${stageColor(s.key)}`}), s.name)));
+  drawPicks();
+  const margin = i.price ? Math.round((i.price - i.cost) / i.price * 100) : 0;
+  const hist = testsFor(id);
+  const save = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "บันทึก"});
+  save.addEventListener("click", async () => {
+    save.disabled = true; msg.className = ""; msg.textContent = "กำลังบันทึก…";
+    const base = i.kind === "idea" ? {...over[id]} : {};
+    try {
+      await db.collection("items").doc(id).set({...base, stage, blocker: blocker.value.trim(), note: note.value.trim(), updated: new Date().toISOString()});
+      msg.className = "saved"; msg.textContent = "บันทึกแล้ว";
+    } catch (e) { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
+    save.disabled = !canWrite;
+  });
+  body.replaceChildren(
+    el("div", {class: "dlg-head"}, thumb(i.parts[0]?.[0] || "05", "thumb big"),
+      el("div", {}, el("p", {class: "eyebrow", text: i.kind === "idea" ? "ไอเดียใหม่" : (i.line || "")}), el("h3", {id: "d-name", text: (i.n ? `${i.n}. ` : "") + i.name}), i.hook ? el("p", {class: "small muted", text: i.hook}) : null),
+      el("button", {class: "x", type: "button", "aria-label": "ปิด", onclick: () => $("#dlg").close(), text: "×"})),
+    el("dl", {class: "spec num"},
+      el("dt", {text: "ชิ้นส่วน"}), el("dd", {text: i.pieces || "-"}),
+      el("dt", {text: "จุดต่อ"}), el("dd", {text: `${i.joints} จุด` + (i.extra ? ` · ${i.extra[0]} ${i.extra[1]} บาท` : "")}),
+      i.size ? el("dt", {text: "ขนาด"}) : null, i.size ? el("dd", {text: i.size}) : null,
+      el("dt", {text: "ราคา / ต้นทุน"}), el("dd", {text: `${i.price} / ${i.cost.toFixed(2)} บาท · กำไรขั้นต้น ${margin}%`}),
+      i.who ? el("dt", {text: "คนซื้อ"}) : null, i.who ? el("dd", {text: i.who}) : null,
+      i.stock ? el("dt", {text: "สต็อกบูธ"}) : null, i.stock ? el("dd", {text: `${i.stock} ชิ้น`}) : null,
+      i.check ? el("dt", {text: "ต้องลองกับ"}) : null, i.check ? el("dd", {text: i.check}) : null),
+    i.steps.length ? el("div", {}, el("p", {class: "small muted", text: "ขั้นตอนบนการ์ดวิธีต่อ"}), el("ol", {class: "steps"}, ...i.steps.map(s => el("li", {text: s})))) : null,
+    el("div", {class: "block"}, el("p", {class: "small muted", text: "ขั้น"}), picks),
+    el("label", {for: "d-blocker"}, "ติดอะไรอยู่", blocker),
+    el("label", {for: "d-note"}, "บันทึก", note),
+    el("div", {class: "row"}, save,
+      el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = id; drawTestForm(); }, text: "บันทึกการทดสอบ"}), msg),
+    el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
+  );
+  $("#dlg").showModal();
+}
+
+// ------------------------------------------------------------ tests
+const triState = {};
+function drawTestForm() {
+  const id = $("#t-item").value, i = items().find(x => x.id === id);
+  $("#t-check").textContent = i?.check ? `ต้องลองกับ: ${i.check}` : "";
+}
+function initTestForm() {
+  const sel = $("#t-item");
+  const cur = sel.value;
+  sel.replaceChildren(...items().map(i => el("option", {value: i.id, text: (i.n ? `${i.n}. ` : "ใหม่ · ") + i.name})));
+  if (cur) sel.value = cur;
+  if (!$("#t-tester").options.length) $("#t-tester").replaceChildren(...D.testers.map(t => el("option", {value: t, text: t})));
+  if (!$("#t-tri").children.length) {
+    $("#t-tri").replaceChildren(...D.tests.map(t => {
+      triState[t.key] = "";
+      const seg = el("div", {class: "seg", role: "group", "aria-label": t.name});
+      const draw = () => seg.replaceChildren(...[["pass", "ผ่าน"], ["fail", "ไม่ผ่าน"], ["", "ยังไม่ลอง"]].map(([v, label]) =>
+        el("button", {type: "button", "data-v": v, "aria-pressed": String(triState[t.key] === v), onclick: () => { triState[t.key] = v; draw(); }, text: label})));
+      draw(); seg._draw = draw;
+      return el("div", {}, el("div", {}, el("b", {text: t.name}), el("p", {class: "small muted", text: t.how})), seg);
+    }));
+  }
+  drawTestForm();
+}
+function logRow(t) {
+  const i = items().find(x => x.id === t.item);
+  const when = t.at ? new Date(t.at).toLocaleString("th-TH", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "";
+  return el("li", {},
+    el("div", {class: "row"}, el("b", {text: i ? (i.n ? `${i.n}. ` : "") + i.name : t.item}), el("span", {class: "small muted", text: `${t.tester || ""} · ${when}` + (t.seconds ? ` · ${t.seconds} วินาที` : "")})),
+    el("span", {class: "marks"}, ...D.tests.map(x => el("span", {class: "mark " + (t[x.key] || ""), text: (t[x.key] === "pass" ? "✓ " : t[x.key] === "fail" ? "✗ " : "– ") + x.name}))),
+    t.note ? el("p", {class: "small", text: t.note}) : null);
+}
+function renderLog() {
+  const list = $("#log");
+  list.replaceChildren(...(tests.length ? tests.slice(0, 40).map(logRow) : [el("li", {}, el("p", {class: "muted small", text: "ยังไม่มีผลทดสอบ เลือกสินค้า กดผ่านหรือไม่ผ่านทีละข้อ แล้วกดบันทึกผล ผลจะขึ้นที่นี่และบนการ์ดในบอร์ด"}))]));
+}
+$("#t-item").addEventListener("change", drawTestForm);
+$("#test-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#t-msg"), id = $("#t-item").value;
+  if (!D.tests.some(t => triState[t.key])) { msg.className = "err"; msg.textContent = "เลือกผลอย่างน้อย 1 ข้อ"; return; }
+  const rec = {item: id, tester: $("#t-tester").value, seconds: Math.max(0, parseInt($("#t-sec").value, 10) || 0),
+    note: $("#t-note").value.trim().slice(0, 200), at: new Date().toISOString()};
+  for (const t of D.tests) rec[t.key] = triState[t.key];
+  $("#t-save").disabled = true; msg.className = ""; msg.textContent = "กำลังบันทึก…";
+  try {
+    await db.collection("tests").add(rec);
+    msg.className = "saved"; msg.textContent = "บันทึกแล้ว";
+    for (const t of D.tests) triState[t.key] = "";
+    document.querySelectorAll("#t-tri .seg").forEach(s => s._draw());
+    $("#t-sec").value = ""; $("#t-note").value = "";
+    const i = items().find(x => x.id === id);
+    const passAll = D.tests.every(t => bestMarks(id)[t.key] === "pass" || rec[t.key] === "pass");
+    const testers = new Set([...testsFor(id).map(x => x.tester), rec.tester]);
+    if (i && i.stage === "proto" && passAll && testers.size >= 2) {
+      msg.replaceChildren("บันทึกแล้ว ผ่านครบ 5 ข้อจาก 2 คนขึ้นไป ",
+        el("button", {class: "btn", type: "button", text: "ย้ายไป ทดสอบผ่าน", onclick: async ev => {
+          ev.target.disabled = true;
+          const base = i.kind === "idea" ? {...over[id]} : {};
+          try { await db.collection("items").doc(id).set({...base, stage: "tested", blocker: i.blocker, note: i.note, updated: new Date().toISOString()}); msg.textContent = "ย้ายแล้ว"; }
+          catch { msg.className = "err"; msg.textContent = "ย้ายไม่ได้ ลองใหม่จากบอร์ด"; }
+        }}));
+    }
+  } catch { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
+  $("#t-save").disabled = !canWrite;
+});
+
+// ------------------------------------------------------------ ideas
+const CODES = ["01", "01-S200", "01-S250", "02", "03", "04", "05", "06"];
+function initIdea() {
+  $("#i-pieces").replaceChildren(...CODES.map(c => el("label", {class: "piece", for: "i-q-" + c}, thumb(c),
+    el("span", {}, D.pieceName[c], el("input", {id: "i-q-" + c, type: "number", min: "0", max: "48", value: "0", inputmode: "numeric"})))));
+  $("#i-pack").replaceChildren(...Object.entries(D.packs).map(([k, v]) => el("option", {value: k, text: `${v.name} (${v.cost} บาท)`})));
+  $("#idea-form").addEventListener("input", calcIdea);
+  calcIdea();
+}
+function ideaParts() { return CODES.map(c => [c, Math.max(0, parseInt($("#i-q-" + c).value, 10) || 0)]).filter(([, q]) => q > 0); }
+function calcIdea() {
+  const parts = ideaParts(), joints = Math.max(0, +$("#i-joints").value || 0), extra = Math.max(0, +$("#i-extra").value || 0), price = Math.max(0, +$("#i-price").value || 0);
+  const cost = costOf(parts, joints, extra, $("#i-pack").value);
+  const margin = price ? (price - cost) / price * 100 : 0;
+  const ok = margin >= 60;
+  $("#i-calc").replaceChildren(
+    el("div", {}, el("span", {class: "small muted", text: "ต้นทุนต่อชิ้น"}), el("b", {text: cost.toFixed(2) + " บาท"})),
+    el("div", {}, el("span", {class: "small muted", text: "กำไรต่อชิ้น"}), el("b", {text: (price - cost).toFixed(2) + " บาท"})),
+    el("div", {class: ok ? "ok" : "bad"}, el("span", {class: "small muted", text: "กำไรขั้นต้น (ประตู 1 ต้อง 60%+)"}), el("b", {text: Math.round(margin) + "%"})),
+    el("div", {}, el("span", {class: "small muted", text: "ราคาต่ำสุดที่ผ่านประตู 1"}), el("b", {text: Math.ceil(cost / 0.4) + " บาท"})));
+  return {parts, joints, extra, price};
+}
+$("#new-idea").addEventListener("click", () => { $("#idea-form").hidden = false; $("#i-name").focus(); });
+$("#i-cancel").addEventListener("click", () => { $("#idea-form").hidden = true; });
+$("#idea-form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("#i-msg"), {parts, joints, extra, price} = calcIdea();
+  if (!parts.length) { msg.className = "err"; msg.textContent = "ใส่จำนวนชิ้นอย่างน้อย 1 แบบ"; return; }
+  const id = "i-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  $("#i-save").disabled = true; msg.className = ""; msg.textContent = "กำลังบันทึก…";
+  try {
+    await db.collection("items").doc(id).set({kind: "idea", name: $("#i-name").value.trim().slice(0, 60), who: $("#i-who").value.trim().slice(0, 80),
+      price, parts, joints, extra, pack: $("#i-pack").value, stage: "idea", blocker: "", note: "", updated: new Date().toISOString()});
+    msg.className = "saved"; msg.textContent = "เพิ่มลงบอร์ดแล้ว";
+    $("#idea-form").reset(); calcIdea(); filter = "idea"; renderBoard();
+  } catch { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
+  $("#i-save").disabled = !canWrite;
+});
+
+// ------------------------------------------------------------ process
+function renderProcess() {
+  const flow = $("#flow");
+  flow.replaceChildren(...D.stages.slice(0, 5).map((s, k) => el("li", {},
+    el("div", {class: "rail"}, el("span", {class: "n", style: `background:${stageColor(s.key)};color:${stageText(s.key)}`, text: k + 1})),
+    el("div", {class: "body"}, el("h3", {text: s.name}), el("p", {class: "muted", text: s.what}),
+      D.gates[k] ? el("div", {class: "gate"}, el("b", {text: `ประตู ${k + 1} · ${D.gates[k].name}`}), el("span", {class: "muted", text: `อนุมัติโดย ${D.gates[k].who}`}),
+        el("ul", {}, ...D.gates[k].items.map(x => el("li", {text: x})))) : null))));
+  flow.append(el("li", {}, el("div", {class: "rail"}, el("span", {class: "n", style: `background:var(--chip);color:var(--ink)`, text: "–"})),
+    el("div", {class: "body"}, el("h3", {text: STAGE.hold.name}), el("p", {class: "muted", text: STAGE.hold.what + " ย้ายมาได้จากทุกขั้น และย้ายกลับได้เมื่อแก้แล้ว"}))));
+  $("#protocol").replaceChildren(...D.tests.map(t => el("tr", {}, el("td", {}, el("b", {text: t.name})), el("td", {text: t.how}))));
+}
+
+// ------------------------------------------------------------ tabs
+const TABS = ["overview", "board", "tests", "process", "plan"];
+function go(tab) {
+  if (!TABS.includes(tab)) tab = "overview";
+  for (const t of TABS) $("#v-" + t).hidden = t !== tab;
+  document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  try { localStorage.setItem("pd-tab", tab); } catch {}
+}
+document.querySelectorAll("nav.tabs a").forEach(a => a.addEventListener("click", e => { e.preventDefault(); go(a.dataset.tab); window.scrollTo({top: 0}); }));
+
+function renderAll() { renderOverview(); renderBoard(); initTestForm(); renderLog(); }
+function setWritable(on) {
+  canWrite = on;
+  for (const s of ["#t-save", "#i-save"]) $(s).disabled = !on;
+}
+
+renderProcess(); initIdea(); setWritable(false); renderAll();
+{
+  let start = location.hash.slice(1);
+  if (!TABS.includes(start)) { try { start = localStorage.getItem("pd-tab") || "overview"; } catch { start = "overview"; } }
+  go(start);
+}
+
+(async () => {
+  const note = $("#dbnote");
+  db = window.claude ? await window.claude.use("db") : null;
+  if (!db) {
+    note.hidden = false;
+    note.textContent = "ตอนนี้เป็นมุมมองอ่านอย่างเดียว ขั้นที่เห็นคือค่าเริ่มต้นจาก brand.py เปิดหน้านี้ใน claude.ai ขณะลงชื่อเข้าใช้ เพื่อดูบอร์ดสดและบันทึกผล";
+    return;
+  }
+  setWritable(true);
+  db.collection("items").onSnapshot(snap => {
+    for (const k of Object.keys(over)) delete over[k];
+    for (const d of snap.docs) over[d.id] = d.data();
+    renderAll();
+  }, () => { note.hidden = false; note.textContent = "เชื่อมบอร์ดสดไม่ได้ในตอนนี้ ลองเปิดหน้าใหม่"; });
+  db.collection("tests").orderBy("at", "desc").limit(300).onSnapshot(snap => {
+    tests = snap.docs.map(d => ({id: d.id, ...d.data()}));
+    renderAll();
+  }, () => {});
+})();
+</script>
