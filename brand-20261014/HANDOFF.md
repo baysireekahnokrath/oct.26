@@ -1,6 +1,6 @@
 # OCT. 26 — handoff for the next session
 
-Read this first, then `README.md` (build order) and `/CLAUDE.md` (always publish a Thai summary page for deliverables).
+Website work: see `../website/HANDOFF.md`. Read this first, then `README.md` (build order) and `/CLAUDE.md` (always publish a Thai summary page for deliverables).
 State as of 21 Oct 2026. Moved from repo exact-8-bingo (branch `claude/brave-faraday-2x1ygq`, commit f07c22a) into this repo, folders unchanged.
 
 ## The project
@@ -58,4 +58,4 @@ To update a page from a new session, publish with its URL as `url` (read it firs
 3. Heart-strap die price. AirTag pouch (S2-10) has no hanging loop in its parts list. Windmill (S2-25) may not spin.
 4. Real leather thickness and real assembly times from prototypes → update brand.py.
 5. Test-print OCT. 26 at 34 mm wide and the tag 26 at 8 mm tall before ordering print.
-6. Web Builder: merge `claude/funny-tesla-4dkwm7` into `main` so its "ขึ้นเว็บ" button works, then run one real publish. Owner to choose: push straight to `main` (now) or open a PR per change.
+6. Web Builder: merge `claude/funny-tesla-4dkwm7` into `main` so its "ขึ้นเว็บ" button works, then run one real publish. Each publish opens a PR the owner merges (see `../website/HANDOFF.md`).

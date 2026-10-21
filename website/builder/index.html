@@ -179,7 +179,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .req .h{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;align-items:center}
 .pill{font-family:var(--display);font-size:13px;padding:2px 10px;border-radius:99px;background:var(--chip)}
 .pill.waiting{background:var(--sun);color:#1C1B22}.pill.working{background:var(--cobalt);color:#FFFFFF}
-.pill.live{background:var(--mint);color:#1C1B22}.pill.failed{background:var(--tomato);color:#FFFFFF}
+.pill.review{background:var(--pink);color:#1C1B22}.pill.live{background:var(--mint);color:#1C1B22}.pill.failed{background:var(--tomato);color:#FFFFFF}
 .req small{color:var(--muted);font-size:13px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--cobalt);color:#FFFFFF;
   font-family:var(--display);font-size:14px;padding:var(--s2) var(--s4);border-radius:99px;max-width:calc(100% - 32px)}
@@ -193,7 +193,7 @@ pre.msg{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);border:
 <div class="wrap"><main>
 <section style="padding-top:var(--s5)"><span class="eyebrow">แก้เว็บเองได้ ไม่ต้องเขียนโค้ด</span>
 <h1>แก้ราคา ชื่อ และของหมด แล้วกดขึ้นเว็บ</h1>
-<p class="lead">แตะสินค้าเพื่อแก้ ทุกอย่างบันทึกเป็นร่างทันที เว็บจริงยังไม่เปลี่ยนจนกว่าจะกด “ขึ้นเว็บ” แล้ว Claude ทำโปสเตอร์ใหม่และอัปเดตเว็บให้</p>
+<p class="lead">แตะสินค้าเพื่อแก้ ทุกอย่างบันทึกเป็นร่างทันที เว็บจริงยังไม่เปลี่ยน กด “ขึ้นเว็บ” แล้ว Claude ทำโปสเตอร์และเว็บใหม่ ส่งมาให้กด Merge ที่ GitHub กดแล้วเว็บเปลี่ยน</p>
 <p class="note warn" id="ro" hidden>เปิดหน้านี้ในบัญชี claude.ai ของเจ้าของร้านเพื่อแก้ไข ตอนนี้ดูได้อย่างเดียว</p>
 <div class="sum"><div><b id="nShow">30</b><span>สินค้าที่โชว์บนเว็บ</span></div><div><b id="nOff">0</b><span>ซ่อนอยู่</span></div>
 <div><b id="nSold">0</b><span>หมดชั่วคราว</span></div><div class="hot"><b id="nEd">0</b><span>แก้ไว้ ยังไม่ขึ้นเว็บ</span></div></div></section>
@@ -218,12 +218,13 @@ pre.msg{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);border:
 <div class="row"><button type="button" class="primary order" id="go">ขึ้นเว็บ</button><button type="button" id="clear">ล้างร่างทั้งหมด</button></div>
 <div class="note warn" id="clearAsk" hidden><p>ล้างร่างทั้งหมด แล้วกลับไปเหมือนเว็บตอนนี้?</p>
 <div class="row" style="margin-top:var(--s2)"><button type="button" id="clearYes">ล้างเลย</button><button type="button" id="clearNo">ไม่ล้าง</button></div></div>
+<p class="note" id="inReview" hidden>มีงานรอกด Merge อยู่ ส่งเพิ่มได้ Claude จะรวมไว้ในงานเดียวกัน กด Merge ครั้งเดียวขึ้นเว็บทั้งหมด</p>
 <p class="note" id="sending" hidden>กำลังส่งให้ Claude … หน้าต่างขออนุญาตอาจขึ้นมาครั้งแรก</p>
 <div class="note warn stack" id="fallback" hidden><p>บันทึกคำขอ <b id="sentId"></b> แล้ว <span id="why"></span></p>
 <pre class="msg" id="msg"></pre><div class="row"><button type="button" id="copy">คัดลอกข้อความ</button></div></div></div></section>
 
 <section id="history"><span class="eyebrow">ประวัติ</span><h2>การขึ้นเว็บ</h2>
-<p class="cap">Claude ใช้เวลาราว 5–10 นาที ทำโปสเตอร์ใหม่ สร้างเว็บ แล้วส่งขึ้น Cloudflare จากนั้นเว็บเปลี่ยนในไม่กี่นาที</p>
+<p class="cap">Claude ใช้เวลาราว 5–10 นาที ทำโปสเตอร์และเว็บใหม่ แล้วเปิดงานให้กด Merge ที่ GitHub พอกด Merge แล้ว Cloudflare เปลี่ยนเว็บในไม่กี่นาที</p>
 <p class="empty" id="noReq">ยังไม่เคยขึ้นเว็บจากหน้านี้ คำขอแรกจะขึ้นที่นี่พร้อมสถานะ</p>
 <div class="reqs" id="reqs"></div></section>
 </main></div>
@@ -232,7 +233,7 @@ pre.msg{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);border:
 <div class="toast" id="toast" role="status" hidden></div>
 <script>
 const LIVE = {"products": {"01": {"name": "ที่เก็บสายชาร์จหมี", "size": "10.4 × 10.4 ซม.", "hook": "สายชาร์จพันกันในกระเป๋าทุกวัน หมีตัวนี้ช่วยได้", "price": 59, "hide": false, "sold": false, "coll": "love"}, "02": {"name": "ที่คั่นหนังสือหมี", "size": "10.4 × 10.4 ซม.", "hook": "หมีเฝ้าหน้าที่อ่านค้างไว้ให้", "price": 59, "hide": false, "sold": false, "coll": "love"}, "03": {"name": "ป้ายชื่อติดกระเป๋านักเรียน", "size": "หมี 10.4 ซม. สาย 25 ซม.", "hook": "เปิดเทอมนี้ กระเป๋าลูกจะไม่หายไปกับของเพื่อน", "price": 129, "hide": false, "sold": false, "coll": "love"}, "04": {"name": "ห่วงผ้าเช็ดปากหมี", "size": "หมี 10.4 ซม.", "hook": "โต๊ะวันเกิดเด็กที่หมีนั่งเฝ้าทุกจาน", "price": 79, "hide": false, "sold": false, "coll": "love"}, "05": {"name": "ซองอั่งเปาพับกังหัน", "size": "5.4 × 5.4 ซม. เมื่อพับ", "hook": "อั่งเปาที่ผู้รับเก็บไว้ใช้ต่อ ไม่ทิ้ง", "price": 69, "hide": false, "sold": false, "coll": "soi2"}, "06": {"name": "ซองใส่เครื่องประดับ", "size": "5.4 × 5.4 ซม.", "hook": "ห่อแหวนด้วยหนังแท้แทนกล่องกระดาษ", "price": 69, "hide": false, "sold": false, "coll": "soi2"}, "07": {"name": "ซองการ์ดติดของขวัญ", "size": "5.4 × 5.4 ซม.", "hook": "การ์ดอวยพรที่ห่อมาอย่างตั้งใจ", "price": 59, "hide": false, "sold": false, "coll": "soi2"}, "08": {"name": "กล่องแหวนหนังแท้", "size": "4.5 × 4.5 × 4.5 ซม.", "hook": "กล่องแหวนที่เปิดทีละด้านได้ เซอร์ไพรส์นานขึ้นอีกนิด", "price": 290, "hide": false, "sold": false, "coll": "soi2"}, "09": {"name": "ลูกเต๋าหนัง", "size": "4.5 ซม.", "hook": "ลูกเต๋าที่ทอยแล้วไม่ดัง เล่นตอนดึกได้", "price": 159, "hide": false, "sold": false, "coll": "soi2"}, "10": {"name": "ซองใส่ AirTag", "size": "4.5 × 4.5 ซม.", "hook": "AirTag ห้อยกระเป๋าแบบไม่ต้องใช้ไขควง", "price": 129, "hide": false, "sold": false, "coll": "soi2"}, "11": {"name": "ชุดตัวต่อหนัง 24 ชิ้น", "size": "ชุด 24 ชิ้น", "hook": "ของเล่นที่ไม่มีพลาสติกสักชิ้น", "price": 390, "hide": false, "sold": false, "coll": "soi2"}, "12": {"name": "ที่ใส่ปากกามงกุฎ", "size": "6.4 ซม. + ยอดมงกุฎ", "hook": "ปากกาบนโต๊ะทำงานได้มงกุฎของตัวเอง", "price": 199, "hide": false, "sold": false, "coll": "soi2"}, "13": {"name": "แผ่นรองจานลายข้าวหลามตัด", "size": "ประมาณ 27 × 36 ซม.", "hook": "จานธรรมดาดูแพงขึ้นทันที", "price": 390, "hide": false, "sold": false, "coll": "soi2"}, "14": {"name": "ปลอกแก้วกาแฟ", "size": "รอบวง 25.5 ซม. แก้ว 12 oz", "hook": "กาแฟร้อนแค่ไหนก็ถือได้", "price": 149, "hide": false, "sold": false, "coll": "soi2"}, "15": {"name": "ที่รองแก้วไส้ไม้ก๊อก", "size": "6.4 ซม.", "hook": "แก้วเย็นแค่ไหนโต๊ะก็ไม่เปียก", "price": 99, "hide": false, "sold": false, "coll": "soi2"}, "16": {"name": "กระเป๋าเหรียญจิ๋ว", "size": "6.4 ซม.", "hook": "เหรียญสิบไม่หล่นหายในกระเป๋าอีก", "price": 99, "hide": false, "sold": false, "coll": "soi2"}, "17": {"name": "กล่องของขวัญสลับลาย", "size": "6.4 ซม.", "hook": "กล่องของขวัญที่สวยกว่าของข้างใน", "price": 249, "hide": false, "sold": false, "coll": "soi2"}, "18": {"name": "กล่องของชำร่วยงานแต่ง", "size": "6 × 6 × 6 ซม.", "hook": "ของชำร่วยที่แขกเก็บไว้ ไม่ทิ้งไว้บนโต๊ะ", "price": 159, "hide": false, "sold": false, "coll": "soi2"}, "19": {"name": "ที่ใส่แปรงแต่งหน้า", "size": "6 ซม.", "hook": "โต๊ะเครื่องแป้งเป็นระเบียบในหนึ่งนาที", "price": 199, "hide": false, "sold": false, "coll": "soi2"}, "20": {"name": "ของแขวนต้นคริสต์มาส", "size": "6 ซม.", "hook": "ต้นคริสต์มาสปีนี้มีของแขวนหนังแท้", "price": 159, "hide": false, "sold": false, "coll": "soi2"}, "21": {"name": "ราวหมีห้าตัว", "size": "ยาวประมาณ 45 ซม.", "hook": "พ่อ แม่ และลูกสามคน แขวนไว้หน้าห้องให้รู้ว่าบ้านนี้มีกันกี่คน", "price": 349, "hide": false, "sold": false, "coll": "love"}, "22": {"name": "ที่รองแก้วหมี", "size": "10.4 ซม.", "hook": "แก้วนมตอนเช้ามีหมีรองอยู่", "price": 59, "hide": false, "sold": false, "coll": "love"}, "23": {"name": "ที่ห้อยกระเป๋าหมีหัวใจ", "size": "หมี 10.4 ซม.", "hook": "หมีห้อยกระเป๋าที่บอกว่าใครรักคุณอยู่", "price": 129, "hide": false, "sold": false, "coll": "love"}, "24": {"name": "ที่รองแก้วกังหัน", "size": "9 ซม.", "hook": "ที่รองแก้วลายกังหัน หนังแท้ทั้งแผ่น", "price": 49, "hide": false, "sold": false, "coll": "soi2"}, "25": {"name": "กังหันลมหนัง", "size": "9 ซม.", "hook": "ของเล่นที่ลูกเป่าเล่นได้ทั้งวัน", "price": 89, "hide": false, "sold": false, "coll": "soi2"}, "26": {"name": "ป้ายห้อยของขวัญ", "size": "9 ซม.", "hook": "ป้ายชื่อที่ผู้รับเก็บไว้ห้อยกุญแจต่อได้", "price": 39, "hide": false, "sold": false, "coll": "soi2"}, "27": {"name": "ที่รองแก้วสี่เหลี่ยม", "size": "9 ซม.", "hook": "ที่รองแก้วทรงเหลี่ยมมน หนังแท้", "price": 49, "hide": false, "sold": false, "coll": "soi2"}, "28": {"name": "ที่รองแก้ววงกลม", "size": "9 ซม.", "hook": "ที่รองแก้วทรงกลม หนังแท้", "price": 49, "hide": false, "sold": false, "coll": "soi2"}, "29": {"name": "ชุดที่รองแก้ว 4 ลาย", "size": "9–10.4 ซม.", "hook": "สี่แก้ว สี่ลาย ไม่ต้องจำว่าแก้วไหนของใคร", "price": 179, "hide": false, "sold": false, "coll": "soi2"}, "30": {"name": "ชุดต่อเองกล่องลูกบาศก์", "size": "6 ซม. เมื่อต่อเสร็จ", "hook": "ต่อเองได้ในห้านาที ไม่ต้องใช้กาว ไม่ต้องใช้เข็ม", "price": 129, "hide": false, "sold": false, "coll": "soi2"}}, "booth": {"until": "2026-11-01"}};
-const CFG = {"url": "https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG", "env": "env_01WKXaiUwedx7f5o3VCkUxPz", "repo": "https://github.com/baysireekahnokrath/oct.26", "branch": "main", "site": "https://oct26brand.com", "base": "2026-11-01"};
+const CFG = {"url": "https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG", "env": "env_01WKXaiUwedx7f5o3VCkUxPz", "repo": "https://github.com/baysireekahnokrath/oct.26", "base": "main", "work": "web-builder", "site": "https://oct26brand.com", "boothBase": "2026-11-01"};
 const FIELDS = ["name","price","hook","size","hide","sold"];
 const NS = Object.keys(LIVE.products).sort();   // "10" sorts before "01" as an object key, so keep our own order
 const LABEL = {name:"ชื่อ",price:"ราคา",hook:"ประโยคขาย",size:"ขนาด",hide:"แสดงบนเว็บ",sold:"หมดชั่วคราว"};
@@ -373,7 +374,7 @@ async function send(){
   for(const n of Object.keys(pending)) await flush(n);
   const cs=changes(); if(!cs.length){ btn.disabled=false; return; }
   const ref=db.collection("requests").doc();
-  const req={at:Date.now(),by:me||"",status:"waiting",changes:cs.map(changeText),drafts:snapshotDrafts(),note:$("#memo").value.trim().slice(0,300),base:CFG.base};
+  const req={at:Date.now(),by:me||"",status:"waiting",changes:cs.map(changeText),drafts:snapshotDrafts(),note:$("#memo").value.trim().slice(0,300),boothBase:CFG.boothBase};
   try{ await ref.set(req); }catch(e){ failWrite(e); btn.disabled=false; return; }
   $("#sentId").textContent=ref.id;
   const msg=`ขึ้นเว็บตาม OCT.26 Web Builder คำขอ ${ref.id}\nทำตาม website/builder/APPLY.md · หน้า Web Builder: ${CFG.url}`;
@@ -382,7 +383,7 @@ async function send(){
   if(!mcp){ $("#fallback").hidden=false; $("#why").textContent="หน้านี้สั่ง Claude เองไม่ได้ในมุมมองนี้"; btn.disabled=false; return; }
   $("#sending").hidden=false;
   try{
-    const r=await mcp.callTool("Claude Code Remote","create_session",{environment_id:CFG.env,source_url:CFG.repo,source_revision:CFG.branch,outcome_branch:CFG.branch,
+    const r=await mcp.callTool("Claude Code Remote","create_session",{environment_id:CFG.env,source_url:CFG.repo,source_revision:CFG.base,outcome_branch:CFG.work,
       title:"OCT.26 Web Builder · "+ref.id,prompt:msg});
     const sid=(JSON.stringify(r.payload??r).match(/session_[A-Za-z0-9]+/)||[])[0]||"";
     try{ await ref.update({status:"working",session:sid,startedAt:Date.now()}); }catch(_){}
@@ -401,7 +402,7 @@ async function send(){
 function paintReqs(){
   const box=$("#reqs"); box.innerHTML="";
   $("#noReq").hidden=!!reqs.length;
-  const word={waiting:"รอ Claude",working:"Claude กำลังทำ",live:"ขึ้นเว็บแล้ว",failed:"ไม่ผ่าน"};
+  const word={waiting:"รอ Claude",working:"Claude กำลังทำ",review:"รอกด Merge",live:"ขึ้นเว็บแล้ว",failed:"ไม่ผ่าน"};
   for(const r of reqs){
     const d=r.data(), el=document.createElement("div"); el.className="req";
     const h=document.createElement("div"); h.className="h";
@@ -411,6 +412,7 @@ function paintReqs(){
     const s=document.createElement("small"); s.textContent=`คำขอ ${r.id} · ${(d.changes||[]).length} อย่าง`+(d.commit?` · commit ${String(d.commit).slice(0,7)}`:""); el.appendChild(s);
     for(const c of (d.changes||[]).slice(0,6)){ const li=document.createElement("small"); li.textContent="• "+c; el.appendChild(li); }
     if(d.result){ const p=document.createElement("p"); p.style.fontSize="14px"; p.textContent=d.result; el.appendChild(p); }
+    if(d.pr&&/^https:\/\/github\.com\//.test(d.pr)){ const a=document.createElement("a"); a.href=d.pr; a.target="_blank"; a.rel="noopener"; a.textContent=d.status==="review"?"เปิด GitHub แล้วกด Merge":"ดูใน GitHub"; a.className=d.status==="review"?"btn order":""; a.style.fontSize="14px"; a.style.alignSelf="flex-start"; el.appendChild(a); }
     if(d.session){ const a=document.createElement("a"); a.href="https://claude.ai/code/"+encodeURIComponent(d.session); a.target="_blank"; a.rel="noopener"; a.textContent="ดูที่ Claude ทำ"; a.style.fontSize="14px"; el.appendChild(a); }
     box.appendChild(el);
   }
@@ -444,7 +446,7 @@ async function start(){
     for(const d of s.docs){ const n=d.id.slice(1); if(pending[n]||busy[n]) continue; drafts[d.id]=d.data(); }
     paint();
   },()=>{});
-  db.collection("requests").orderBy("at","desc").limit(8).onSnapshot(s=>{ reqs=s.docs; paintReqs(); },()=>{});
+  db.collection("requests").orderBy("at","desc").limit(8).onSnapshot(s=>{ reqs=s.docs; paintReqs(); $("#inReview").hidden=!reqs.some(r=>r.data().status==="review"); },()=>{});
   paint();
 }
 start();

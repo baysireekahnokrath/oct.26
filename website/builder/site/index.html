@@ -49,23 +49,24 @@ code{font-size:14px;background:var(--chip);padding:1px 6px;border-radius:4px;ove
 <figure><img src="editor.jpg" alt="แผงแก้สินค้า: ชื่อ ราคาพร้อมปุ่มบวกลบ 10 บาท ประโยคขาย" width="400" height="700"><figcaption>แผงแก้สินค้า ราคามีปุ่ม −10 / +10 แถบล่างบอกว่าแก้ไว้กี่อย่าง</figcaption></figure></div></section>
 
 <section><span class="eyebrow">ทำงานยังไง</span><h2>จากมือถือถึง oct26brand.com</h2>
-<div class="flow"><svg viewBox="0 0 640 150" role="img" aria-label="แก้ในหน้า Web Builder บันทึกเป็นร่าง กดขึ้นเว็บ Claude ทำโปสเตอร์และเว็บใหม่ แล้ว Cloudflare อัปเดตเว็บ">
+<div class="flow"><svg viewBox="0 0 640 150" role="img" aria-label="แก้ในหน้า Web Builder บันทึกเป็นร่าง กดขึ้นเว็บ Claude ทำโปสเตอร์และเว็บใหม่แล้วเปิดงานใน GitHub กด Merge แล้ว Cloudflare อัปเดตเว็บ">
 <g font-family="Anuphan, IBM Plex Sans Thai, sans-serif" font-size="15" text-anchor="middle">
 <rect x="4" y="30" width="136" height="64" rx="12" fill="var(--chip)"/><text x="72" y="58" fill="var(--ink)">แก้บนมือถือ</text><text x="72" y="80" fill="var(--muted)" font-size="12.5">บันทึกเป็นร่างทันที</text>
 <rect x="168" y="30" width="136" height="64" rx="12" fill="var(--tomato)"/><text x="236" y="58" fill="#FFFFFF">กด “ขึ้นเว็บ”</text><text x="236" y="80" fill="#FFFFFF" font-size="12.5">ตรวจรายการก่อน</text>
-<rect x="332" y="30" width="136" height="64" rx="12" fill="var(--cobalt)"/><text x="400" y="58" fill="#FFFFFF">Claude ทำให้</text><text x="400" y="80" fill="#FFFFFF" font-size="12.5">โปสเตอร์ + เว็บใหม่</text>
-<rect x="496" y="30" width="140" height="64" rx="12" fill="var(--mint)"/><text x="566" y="58" fill="#1C1B22">เว็บเปลี่ยน</text><text x="566" y="80" fill="#1C1B22" font-size="12.5">Cloudflare ไม่กี่นาที</text>
+<rect x="332" y="30" width="136" height="64" rx="12" fill="var(--cobalt)"/><text x="400" y="58" fill="#FFFFFF">Claude ทำให้</text><text x="400" y="80" fill="#FFFFFF" font-size="12.5">โปสเตอร์ เว็บ ส่งให้ตรวจ</text>
+<rect x="496" y="30" width="140" height="64" rx="12" fill="var(--mint)"/><text x="566" y="58" fill="#1C1B22">กด Merge</text><text x="566" y="80" fill="#1C1B22" font-size="12.5">แล้วเว็บเปลี่ยนเอง</text>
 <g stroke="var(--muted)" stroke-width="2" fill="none"><path d="M142 62h22M306 62h22M470 62h22"/></g>
 <g fill="var(--muted)"><path d="M164 57l6 5-6 5zM328 57l6 5-6 5zM492 57l6 5-6 5z"/></g>
-<text x="320" y="130" fill="var(--muted)" font-size="13">สถานะขึ้นที่หน้า Web Builder: รอ Claude → กำลังทำ → ขึ้นเว็บแล้ว</text></g></svg></div></section>
+<text x="320" y="130" fill="var(--muted)" font-size="13">สถานะขึ้นที่หน้า Web Builder: รอ Claude → กำลังทำ → รอกด Merge → ขึ้นเว็บแล้ว</text></g></svg></div></section>
 
 <section><span class="eyebrow">ตัวเลข</span><h2>สิ่งที่แก้ได้</h2>
 <div class="nums"><div><b>30</b><span>สินค้าทุกชิ้นบนเว็บ</span></div><div><b>6</b><span>ชื่อ ราคา ประโยคขาย ขนาด ซ่อน หมด</span></div>
-<div><b>1</b><span>ประกาศออกบูธ ตั้งวันปิดเองได้</span></div><div><b>5–10</b><span>นาที กดแล้วเว็บเปลี่ยน</span></div></div>
+<div><b>1</b><span>ประกาศออกบูธ ตั้งวันปิดเองได้</span></div><div><b>5–10</b><span>นาที Claude ทำเสร็จ รอกด Merge</span></div></div>
 <ul><li>เปลี่ยนชื่อ ราคา หรือประโยคขาย Claude ทำโปสเตอร์ของสินค้านั้นใหม่ให้ด้วย (ทดสอบแล้ว ภาพเหมือนเดิมทุกพิกเซลยกเว้นตรงที่แก้)</li>
 <li>“หมดชั่วคราว” ยังโชว์สินค้าบนเว็บ แต่ขึ้นป้ายหมด และข้อความสั่งซื้อเปลี่ยนเป็นขอสั่งจองรอบหน้า</li>
 <li>ราคาเก็บที่เดียวใน brand.py แผนบูธและโปสเตอร์จึงใช้ราคาเดียวกับเว็บ</li>
-<li>ร่างแก้ได้เฉพาะเจ้าของร้านและคนที่แชร์ให้เป็น Editor คนอื่นดูได้อย่างเดียว</li></ul></section>
+<li>ร่างแก้ได้เฉพาะเจ้าของร้านและคนที่แชร์ให้เป็น Editor คนอื่นดูได้อย่างเดียว</li>
+<li>เว็บจริงไม่เปลี่ยนจนกว่าพ่อเบกด Merge ที่ GitHub เอง ส่งหลายครั้งก่อน Merge ได้ Claude รวมไว้ในงานเดียว</li></ul></section>
 
 <section><div class="todo"><span class="eyebrow" style="color:var(--tomato)">ต้องทำก่อนใช้ปุ่มขึ้นเว็บ</span>
 <p><b>รวมงานนี้เข้า main หนึ่งครั้ง</b> ตอนนี้งานอยู่ในกิ่ง <code>claude/funny-tesla-4dkwm7</code> ปุ่มขึ้นเว็บเปิด Claude บน main จึงต้องมีไฟล์ชุดนี้ก่อน บอก Claude ว่า “รวมเข้า main” หรือเปิด PR แล้วกด Merge</p>

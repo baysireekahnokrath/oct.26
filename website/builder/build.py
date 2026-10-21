@@ -3,7 +3,8 @@
 The page shows every product as the site shows it now (live.json, read from brand.py and website/build.py) and
 keeps the owner's edits as drafts in the Artifact's database (collection "drafts": p01..p30 and booth).
 "ขึ้นเว็บ" saves a request (collection "requests") holding the reviewed drafts and starts a Claude Code session
-in the OCT.26 environment that follows APPLY.md: apply.py -> rebuild -> push -> republish this page.
+in the OCT.26 environment that follows APPLY.md: apply.py -> rebuild -> PR to main. The owner approves each change by
+merging it (website/HANDOFF.md); after the merge the page is republished with the new baseline.
 
 python3 website/builder/build.py -> website/builder/index.html (publish with the thumbs in FILES below)
 """
@@ -31,7 +32,8 @@ E = html.escape
 URL = "https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG"   # this page: the session reads and republishes it
 ENV = "env_01WKXaiUwedx7f5o3VCkUxPz"                # Claude Code environment "OCT.26"
 REPO_URL = "https://github.com/baysireekahnokrath/oct.26"
-BRANCH = "main"                                     # the branch Cloudflare deploys; the session pushes the change here
+BASE = "main"                                       # the branch Cloudflare deploys; the owner merges each change into it
+WORK = "web-builder"                                # the session pushes here and opens (or updates) one PR to main
 # published path -> source, for the Artifact publish (thumbnails of every product)
 FILES = {f"thumbs/{p['n']:02d}.jpg": os.path.join(BRAND_DIR, "posters", "thumb", f"{p['n']:02d}.jpg") for p in B.PRODUCTS}
 
@@ -103,7 +105,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .req .h{display:flex;justify-content:space-between;gap:var(--s2);flex-wrap:wrap;align-items:center}
 .pill{font-family:var(--display);font-size:13px;padding:2px 10px;border-radius:99px;background:var(--chip)}
 .pill.waiting{background:var(--sun);color:#1C1B22}.pill.working{background:var(--cobalt);color:#FFFFFF}
-.pill.live{background:var(--mint);color:#1C1B22}.pill.failed{background:var(--tomato);color:#FFFFFF}
+.pill.review{background:var(--pink);color:#1C1B22}.pill.live{background:var(--mint);color:#1C1B22}.pill.failed{background:var(--tomato);color:#FFFFFF}
 .req small{color:var(--muted);font-size:13px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:7;background:var(--cobalt);color:#FFFFFF;
   font-family:var(--display);font-size:14px;padding:var(--s2) var(--s4);border-radius:99px;max-width:calc(100% - 32px)}
@@ -255,7 +257,7 @@ async function send(){
   for(const n of Object.keys(pending)) await flush(n);
   const cs=changes(); if(!cs.length){ btn.disabled=false; return; }
   const ref=db.collection("requests").doc();
-  const req={at:Date.now(),by:me||"",status:"waiting",changes:cs.map(changeText),drafts:snapshotDrafts(),note:$("#memo").value.trim().slice(0,300),base:CFG.base};
+  const req={at:Date.now(),by:me||"",status:"waiting",changes:cs.map(changeText),drafts:snapshotDrafts(),note:$("#memo").value.trim().slice(0,300),boothBase:CFG.boothBase};
   try{ await ref.set(req); }catch(e){ failWrite(e); btn.disabled=false; return; }
   $("#sentId").textContent=ref.id;
   const msg=`ขึ้นเว็บตาม OCT.26 Web Builder คำขอ ${ref.id}\nทำตาม website/builder/APPLY.md · หน้า Web Builder: ${CFG.url}`;
@@ -264,7 +266,7 @@ async function send(){
   if(!mcp){ $("#fallback").hidden=false; $("#why").textContent="หน้านี้สั่ง Claude เองไม่ได้ในมุมมองนี้"; btn.disabled=false; return; }
   $("#sending").hidden=false;
   try{
-    const r=await mcp.callTool("Claude Code Remote","create_session",{environment_id:CFG.env,source_url:CFG.repo,source_revision:CFG.branch,outcome_branch:CFG.branch,
+    const r=await mcp.callTool("Claude Code Remote","create_session",{environment_id:CFG.env,source_url:CFG.repo,source_revision:CFG.base,outcome_branch:CFG.work,
       title:"OCT.26 Web Builder · "+ref.id,prompt:msg});
     const sid=(JSON.stringify(r.payload??r).match(/session_[A-Za-z0-9]+/)||[])[0]||"";
     try{ await ref.update({status:"working",session:sid,startedAt:Date.now()}); }catch(_){}
@@ -283,7 +285,7 @@ async function send(){
 function paintReqs(){
   const box=$("#reqs"); box.innerHTML="";
   $("#noReq").hidden=!!reqs.length;
-  const word={waiting:"รอ Claude",working:"Claude กำลังทำ",live:"ขึ้นเว็บแล้ว",failed:"ไม่ผ่าน"};
+  const word={waiting:"รอ Claude",working:"Claude กำลังทำ",review:"รอกด Merge",live:"ขึ้นเว็บแล้ว",failed:"ไม่ผ่าน"};
   for(const r of reqs){
     const d=r.data(), el=document.createElement("div"); el.className="req";
     const h=document.createElement("div"); h.className="h";
@@ -293,6 +295,7 @@ function paintReqs(){
     const s=document.createElement("small"); s.textContent=`คำขอ ${r.id} · ${(d.changes||[]).length} อย่าง`+(d.commit?` · commit ${String(d.commit).slice(0,7)}`:""); el.appendChild(s);
     for(const c of (d.changes||[]).slice(0,6)){ const li=document.createElement("small"); li.textContent="• "+c; el.appendChild(li); }
     if(d.result){ const p=document.createElement("p"); p.style.fontSize="14px"; p.textContent=d.result; el.appendChild(p); }
+    if(d.pr&&/^https:\/\/github\.com\//.test(d.pr)){ const a=document.createElement("a"); a.href=d.pr; a.target="_blank"; a.rel="noopener"; a.textContent=d.status==="review"?"เปิด GitHub แล้วกด Merge":"ดูใน GitHub"; a.className=d.status==="review"?"btn order":""; a.style.fontSize="14px"; a.style.alignSelf="flex-start"; el.appendChild(a); }
     if(d.session){ const a=document.createElement("a"); a.href="https://claude.ai/code/"+encodeURIComponent(d.session); a.target="_blank"; a.rel="noopener"; a.textContent="ดูที่ Claude ทำ"; a.style.fontSize="14px"; el.appendChild(a); }
     box.appendChild(el);
   }
@@ -326,7 +329,7 @@ async function start(){
     for(const d of s.docs){ const n=d.id.slice(1); if(pending[n]||busy[n]) continue; drafts[d.id]=d.data(); }
     paint();
   },()=>{});
-  db.collection("requests").orderBy("at","desc").limit(8).onSnapshot(s=>{ reqs=s.docs; paintReqs(); },()=>{});
+  db.collection("requests").orderBy("at","desc").limit(8).onSnapshot(s=>{ reqs=s.docs; paintReqs(); $("#inReview").hidden=!reqs.some(r=>r.data().status==="review"); },()=>{});
   paint();
 }
 start();
@@ -337,7 +340,7 @@ def page():
     live = A.live()
     for n, p in live["products"].items():
         p["coll"] = next(q["coll"] for q in B.PRODUCTS if q["n"] == int(n))
-    cfg = dict(url=URL, env=ENV, repo=REPO_URL, branch=BRANCH, site=W.SITE_URL, base=B.BOOTH["until"])
+    cfg = dict(url=URL, env=ENV, repo=REPO_URL, base=BASE, work=WORK, site=W.SITE_URL, boothBase=B.BOOTH["until"])
     js = JS.replace("/*LIVE*/{}", json.dumps(live, ensure_ascii=False)).replace("/*CFG*/{}", json.dumps(cfg))
     n = len(live["products"])
     return f"""<title>OCT.26 Web Builder</title>
@@ -349,7 +352,7 @@ def page():
 <div class="wrap"><main>
 <section style="padding-top:var(--s5)"><span class="eyebrow">แก้เว็บเองได้ ไม่ต้องเขียนโค้ด</span>
 <h1>แก้ราคา ชื่อ และของหมด แล้วกดขึ้นเว็บ</h1>
-<p class="lead">แตะสินค้าเพื่อแก้ ทุกอย่างบันทึกเป็นร่างทันที เว็บจริงยังไม่เปลี่ยนจนกว่าจะกด “ขึ้นเว็บ” แล้ว Claude ทำโปสเตอร์ใหม่และอัปเดตเว็บให้</p>
+<p class="lead">แตะสินค้าเพื่อแก้ ทุกอย่างบันทึกเป็นร่างทันที เว็บจริงยังไม่เปลี่ยน กด “ขึ้นเว็บ” แล้ว Claude ทำโปสเตอร์และเว็บใหม่ ส่งมาให้กด Merge ที่ GitHub กดแล้วเว็บเปลี่ยน</p>
 <p class="note warn" id="ro" hidden>เปิดหน้านี้ในบัญชี claude.ai ของเจ้าของร้านเพื่อแก้ไข ตอนนี้ดูได้อย่างเดียว</p>
 <div class="sum"><div><b id="nShow">{n}</b><span>สินค้าที่โชว์บนเว็บ</span></div><div><b id="nOff">0</b><span>ซ่อนอยู่</span></div>
 <div><b id="nSold">0</b><span>หมดชั่วคราว</span></div><div class="hot"><b id="nEd">0</b><span>แก้ไว้ ยังไม่ขึ้นเว็บ</span></div></div></section>
@@ -374,12 +377,13 @@ def page():
 <div class="row"><button type="button" class="primary order" id="go">ขึ้นเว็บ</button><button type="button" id="clear">ล้างร่างทั้งหมด</button></div>
 <div class="note warn" id="clearAsk" hidden><p>ล้างร่างทั้งหมด แล้วกลับไปเหมือนเว็บตอนนี้?</p>
 <div class="row" style="margin-top:var(--s2)"><button type="button" id="clearYes">ล้างเลย</button><button type="button" id="clearNo">ไม่ล้าง</button></div></div>
+<p class="note" id="inReview" hidden>มีงานรอกด Merge อยู่ ส่งเพิ่มได้ Claude จะรวมไว้ในงานเดียวกัน กด Merge ครั้งเดียวขึ้นเว็บทั้งหมด</p>
 <p class="note" id="sending" hidden>กำลังส่งให้ Claude … หน้าต่างขออนุญาตอาจขึ้นมาครั้งแรก</p>
 <div class="note warn stack" id="fallback" hidden><p>บันทึกคำขอ <b id="sentId"></b> แล้ว <span id="why"></span></p>
 <pre class="msg" id="msg"></pre><div class="row"><button type="button" id="copy">คัดลอกข้อความ</button></div></div></div></section>
 
 <section id="history"><span class="eyebrow">ประวัติ</span><h2>การขึ้นเว็บ</h2>
-<p class="cap">Claude ใช้เวลาราว 5–10 นาที ทำโปสเตอร์ใหม่ สร้างเว็บ แล้วส่งขึ้น Cloudflare จากนั้นเว็บเปลี่ยนในไม่กี่นาที</p>
+<p class="cap">Claude ใช้เวลาราว 5–10 นาที ทำโปสเตอร์และเว็บใหม่ แล้วเปิดงานให้กด Merge ที่ GitHub พอกด Merge แล้ว Cloudflare เปลี่ยนเว็บในไม่กี่นาที</p>
 <p class="empty" id="noReq">ยังไม่เคยขึ้นเว็บจากหน้านี้ คำขอแรกจะขึ้นที่นี่พร้อมสถานะ</p>
 <div class="reqs" id="reqs"></div></section>
 </main></div>
