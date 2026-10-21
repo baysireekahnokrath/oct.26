@@ -159,6 +159,16 @@ ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
 .timeline p{font-size:var(--t-1);color:var(--muted)}
 .files li{display:grid;gap:2px}
 .files span{font-size:var(--t-1);color:var(--muted)}
+.cmts{display:grid;gap:var(--s2);border-top:1px solid var(--line);padding-top:var(--s3)}
+.cmts ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
+.cmt{background:var(--bg);border-radius:13px;padding:var(--s2) var(--s3);display:grid;gap:2px}
+.cmt .who{font-weight:600;font-size:var(--t-1)}
+.cmt .when{font-size:var(--t-1);color:var(--muted);font-weight:400}
+.cmt p{white-space:pre-wrap;overflow-wrap:anywhere}
+.cmt-form{display:grid;gap:var(--s2)}
+.cmt-form textarea{min-height:56px}
+.feed li{cursor:pointer}
+.feed li:hover{border-color:var(--ink)}
 .xgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:var(--s3)}
 .xcard{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:0 0 var(--s3);display:grid;gap:var(--s2);overflow:hidden}
 .xcard:hover{border-color:var(--ink)}
@@ -216,6 +226,12 @@ table.compat td.ok{color:var(--good);font-weight:600}
   <div class="block">
     <h3>สต็อกบูธตัวอื่นที่ยังไม่พร้อม เรียงตามยอดขายที่จะหายไป</h3>
     <ul class="risk" id="risk-rest"></ul>
+  </div>
+  <div class="block">
+    <h2>ความเห็นล่าสุดจากทีม</h2>
+    <p class="muted small">ทุกสินค้าและทุกแบบ 3D มีช่องความเห็น แตะรายการเพื่อเปิดสินค้านั้น</p>
+    <ul class="log feed" id="c-latest"></ul>
+    <div id="c-general"></div>
   </div>
   <div class="block">
     <h2>ทีม</h2>
@@ -372,6 +388,8 @@ function pill(stage) {
 let db = null, canWrite = false;
 const over = {};          // items/<id> docs from the shared database
 let tests = [];           // tests docs, newest first
+let comments = [];        // comments docs, newest first: {item, name, text, at}
+let openThread = null;    // the comment block on screen, refreshed on every snapshot
 let filter = "all";
 
 function costOf(parts, joints, extra, pack) {
@@ -403,6 +421,68 @@ function bestMarks(id) {
     res[t.key] = vals[0] || "";               // newest result wins
   }
   return res;
+}
+
+// ------------------------------------------------------------ comments (one thread per product, idea or 3D design)
+function myName() { try { return localStorage.getItem("pd-name") || ""; } catch { return ""; } }
+function threadLabel(key) {
+  if (key === "general") return "พูดคุยทั้งทีม";
+  const p = D.products.find(x => x.id === key); if (p) return `${p.n}. ${p.name}`;
+  const x = typeof X3D !== "undefined" && X3D.items.find(y => y.id === key); if (x) return `${x.id} ${x.name}`;
+  const o = over[key]; if (o && o.name) return String(o.name);
+  return key;
+}
+const when = at => at ? new Date(at).toLocaleString("th-TH", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "";
+function cmtRow(c) {
+  return el("li", {class: "cmt"}, el("span", {class: "who"}, String(c.name || "ไม่ระบุชื่อ"), " ", el("span", {class: "when", text: when(c.at)})), el("p", {text: String(c.text || "")}));
+}
+function commentsBlock(key, title = "ความเห็น") {
+  const list = el("ul");
+  const uid = "c-" + key.replace(/[^A-Za-z0-9_-]/g, "_");
+  const name = el("input", {id: uid + "-name", maxlength: "40", placeholder: "ชื่อของคุณ", autocomplete: "name"}); name.value = myName();
+  const text = el("textarea", {id: uid + "-text", maxlength: "1000", placeholder: "ลองแล้วเป็นอย่างไร ชอบตรงไหน ควรแก้อะไร"});
+  const msg = el("span", {class: "small"});
+  const send = el("button", {class: "btn primary", type: "submit", disabled: !canWrite, text: "ส่งความเห็น"});
+  const form = el("form", {class: "cmt-form"},
+    el("label", {for: uid + "-name"}, "ชื่อ", name), el("label", {for: uid + "-text"}, "ความเห็น", text), el("div", {class: "row"}, send, msg));
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const n = name.value.trim(), t = text.value.trim();
+    if (!n || !t) { msg.className = "err"; msg.textContent = "ใส่ชื่อและความเห็นก่อนส่ง"; return; }
+    try { localStorage.setItem("pd-name", n); } catch {}
+    send.disabled = true; msg.className = "small"; msg.textContent = "กำลังส่ง…";
+    try {
+      await db.collection("comments").add({item: key, name: n.slice(0, 40), text: t.slice(0, 1000), at: new Date().toISOString()});
+      text.value = ""; msg.className = "saved"; msg.textContent = "ส่งแล้ว";
+    } catch { msg.className = "err"; msg.textContent = "ส่งไม่ได้ ลองใหม่อีกครั้ง"; }
+    send.disabled = !canWrite;
+  });
+  const box = el("div", {class: "cmts"}, el("p", {class: "small muted", text: title}), list, form);
+  const draw = () => {
+    const mine = comments.filter(c => c.item === key).slice().reverse();
+    list.replaceChildren(...(mine.length ? mine.map(cmtRow) : [el("li", {class: "small muted", text: "ยังไม่มีความเห็น เป็นคนแรกได้เลย"})]));
+    send.disabled = !canWrite;
+  };
+  box._draw = draw; draw();
+  return box;
+}
+function openThreadFor(key) {
+  if (D.products.some(p => p.id === key) || (over[key] && over[key].kind === "idea")) { go("board"); openItem(key); }
+  else if (typeof X3D !== "undefined" && X3D.items.some(x => x.id === key)) { go("cross"); x3dOpen(key); }
+  else { go("overview"); $("#c-general").scrollIntoView({behavior: "smooth"}); }
+}
+let generalBox = null;
+function renderComments() {
+  const feed = comments.slice(0, 12);
+  $("#c-latest").replaceChildren(...(feed.length ? feed.map(c => {
+    const li = el("li", {tabindex: "0", role: "button", onclick: () => openThreadFor(c.item), onkeydown: e => { if (e.key === "Enter") openThreadFor(c.item); }},
+      el("div", {class: "row"}, el("b", {text: threadLabel(c.item)}), el("span", {class: "small muted", text: `${String(c.name || "")} · ${when(c.at)}`})),
+      el("p", {class: "small", text: String(c.text || "").slice(0, 160)}));
+    return li;
+  }) : [el("li", {}, el("p", {class: "small muted", text: "ยังไม่มีความเห็น เปิดสินค้าหรือแบบ 3D แล้วเขียนได้เลย"}))]));
+  if (!generalBox) { generalBox = commentsBlock("general", "พูดคุยทั้งทีม เรื่องที่ไม่ได้เป็นของสินค้าตัวใดตัวหนึ่ง"); $("#c-general").replaceChildren(generalBox); }
+  generalBox._draw();
+  if (openThread && openThread.isConnected) openThread._draw();
 }
 
 // ------------------------------------------------------------ overview
@@ -507,8 +587,9 @@ function openItem(id) {
       el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = id; drawTestForm(); }, text: "บันทึกการทดสอบ"}),
       i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null, msg),
     el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
+    (openThread = commentsBlock(i.x3d || id)),
   );
-  $("#dlg").showModal();
+  if (!$("#dlg").open) $("#dlg").showModal();
 }
 
 // ------------------------------------------------------------ tests
@@ -644,10 +725,11 @@ function go(tab) {
 }
 document.querySelectorAll("nav.tabs a").forEach(a => a.addEventListener("click", e => { e.preventDefault(); go(a.dataset.tab); window.scrollTo({top: 0}); }));
 
-function renderAll() { renderOverview(); renderBoard(); initTestForm(); renderLog(); }
+function renderAll() { renderOverview(); renderBoard(); initTestForm(); renderLog(); renderComments(); }
 function setWritable(on) {
   canWrite = on;
   for (const s of ["#t-save", "#i-save"]) $(s).disabled = !on;
+  if (generalBox) generalBox._draw();
 }
 
 renderProcess(); initIdea(); setWritable(false); renderAll();
@@ -657,12 +739,14 @@ renderProcess(); initIdea(); setWritable(false); renderAll();
   go(start);
 }
 
+__DB_ADAPTER__
+
 (async () => {
   const note = $("#dbnote");
-  db = window.claude ? await window.claude.use("db") : null;
+  db = await getDb();
   if (!db) {
     note.hidden = false;
-    note.textContent = "ตอนนี้เป็นมุมมองอ่านอย่างเดียว ขั้นที่เห็นคือค่าเริ่มต้นจาก brand.py เปิดหน้านี้ใน claude.ai ขณะลงชื่อเข้าใช้ เพื่อดูบอร์ดสดและบันทึกผล";
+    note.textContent = DB_OFFLINE;
     return;
   }
   setWritable(true);
@@ -674,6 +758,10 @@ renderProcess(); initIdea(); setWritable(false); renderAll();
   db.collection("tests").orderBy("at", "desc").limit(300).onSnapshot(snap => {
     tests = snap.docs.map(d => ({id: d.id, ...d.data()}));
     renderAll();
+  }, () => {});
+  db.collection("comments").orderBy("at", "desc").limit(1000).onSnapshot(snap => {
+    comments = snap.docs.map(d => ({id: d.id, ...d.data()})).filter(c => typeof c.item === "string");
+    renderComments();
   }, () => {});
 })();
 </script>

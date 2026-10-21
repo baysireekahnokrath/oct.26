@@ -92,9 +92,25 @@ X_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{b}
 ])
 
 TEMPLATE = open(os.path.join(HERE, "template.html")).read()
-out = (TEMPLATE.replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
+WEB = "--web" in sys.argv            # pd.oct26brand.com (Cloudflare Pages) instead of the claude.ai Artifact
+ADAPTER = open(os.path.join(HERE, "adapters", "web.js" if WEB else "artifact.js")).read()
+out = (TEMPLATE.replace("__DB_ADAPTER__", ADAPTER).replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
        .replace("__WORDMARK__", WORDMARK).replace("__ROLES__", ROLES_HTML).replace("__RULES__", RULES_HTML)
        .replace("__PLAN__", PLAN_HTML).replace("__FILES__", FILES_HTML)
        .replace("__X_STATS__", X_STATS).replace("__X_COMPAT__", X_COMPAT).replace("__CROSS3D_JS__", CROSS_JS))
-open(os.path.join(HERE, "index.html"), "w").write(out)
-print("site/index.html", len(out), "bytes")
+if WEB:
+    out = out.replace("<title>ฝ่ายพัฒนาสินค้า OCT. 26</title>", "<title>OCT. 26 PD · ระบบงานฝ่ายพัฒนาสินค้า</title>")
+    cut = out.index('<div class="wrap">')
+    head_part = out[:cut].replace('<meta name="claude:viewport-fit-sides" content="cover">\n', "")
+    out = ('<!doctype html><html lang="th"><head><meta charset="utf-8">'
+           '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+           '<meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="light dark">'
+           '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2213%22 fill=%22none%22 stroke=%22%231C1B22%22 stroke-width=%225%22/%3E%3Ccircle cx=%2226%22 cy=%2226%22 r=%224%22 fill=%22%23FF5A36%22/%3E%3C/svg%3E">'
+           '<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>'
+           + head_part + '</head><body>' + out[cut:] + '</body></html>')
+    dest = os.path.join(REPO, "pd-os", "public", "index.html")
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+else:
+    dest = os.path.join(HERE, "index.html")
+open(dest, "w").write(out)
+print(os.path.relpath(dest, REPO), len(out), "bytes")

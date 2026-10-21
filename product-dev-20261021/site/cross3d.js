@@ -126,8 +126,9 @@ function x3dOpen(id) {
       el("dt", {text: "คนซื้อ"}), el("dd", {text: i.who}),
       el("dt", {text: "ผลตรวจ"}), el("dd", {class: "x-pass", text: "ผ่าน: ปีกพอดีร่อง ร่องไม่ใช้ซ้ำ ชิ้นไม่ทะลุกัน วงปิดตรง"})),
     el("div", {}, el("p", {class: "small muted", text: "วิธีต่อ"}), el("ol", {class: "steps"}, ...i.steps.map(s => el("li", {text: s})))),
-    el("div", {class: "row"}, send, msg));
-  $("#dlg").showModal();
+    el("div", {class: "row"}, send, msg),
+    (openThread = commentsBlock(i.id, "ความเห็นต่อแบบนี้ ลองแล้วเป็นอย่างไร")));
+  if (!$("#dlg").open) $("#dlg").showModal();
   x3dViewer(canvas, slider, i);
 }
 
