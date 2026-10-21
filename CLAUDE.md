@@ -22,7 +22,7 @@ After every deliverable, update it there through the Google Drive connector:
 
 ## Status doc (always, every session)
 Short shared status for every session and team (web, marketing, product development): Google Doc "OCT. 26 สถานะล่าสุด"
-(doc id 1294g6UX5TfVL2ZSYksFvKMiuYQ2naGqTOMmB2aHtl-w, in the Drive folder below).
+(doc id 1294g6UX5TfVL2ZSYksFvKMiuYQ2naGqTOMmB2aHtl-w, in the Drive folder above).
 - Before starting any task, read it with the Google Drive connector's read_file_content (it is about one page; do not
   read the full index doc just to learn the current state). What it says overrides older notes in the repo or in other docs.
 - When your work changes a fact in it (stock, prices, costs, what may or may not be used, decisions), edit the matching
