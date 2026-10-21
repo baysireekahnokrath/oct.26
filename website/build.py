@@ -27,7 +27,7 @@ E = html.escape
 OUT = os.path.join(HERE, "public")
 PREVIEW = os.path.join(HERE, "preview")
 
-SITE_URL = "https://oct26.pages.dev"      # change if the Cloudflare project gets another name or a domain
+SITE_URL = "https://oct-26.arthitbay.workers.dev"   # the Worker's workers.dev address; change if a domain is added
 H = B.BRAND["handle"]
 ORDER = f"https://ig.me/m/{H}"            # opens an Instagram chat with the shop
 HIDE = set()                              # product numbers to keep off the site (a prototype that failed its test)
