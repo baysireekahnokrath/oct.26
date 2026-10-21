@@ -1,0 +1,10 @@
+// Cloudflare Workers static site. In the Cloudflare app settings: Path = website, Build command empty,
+// Deploy command = npx wrangler deploy. The name must match the Worker's name in Cloudflare.
+{
+  "name": "oct-26",
+  "compatibility_date": "2025-10-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}

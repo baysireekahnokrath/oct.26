@@ -10,11 +10,13 @@ logos are the drawn SVGs, never typed.
 `render.mjs` makes `play.png`, the still of the pattern play on the home page. Change a price or a product in
 `brand.py`, rebuild, commit and push: Cloudflare Pages redeploys on every push.
 
-## Cloudflare Pages (one time, by the owner)
-1. dash.cloudflare.com → Workers & Pages → Create → Pages → Connect to Git → GitHub → repo `oct.26`
-2. Project name `oct26` (gives oct26.pages.dev) · Production branch: the branch that holds this folder
-   · Framework preset: None · Build command: (empty) · Build output directory: `website/public`
-3. Save and Deploy. If the name is taken, put the given address in `SITE_URL` in `build.py` and rebuild.
+## Cloudflare (one time, by the owner)
+Cloudflare's "Create an app" now makes a Worker with static assets, set up by `wrangler.jsonc` in this folder.
+1. dash.cloudflare.com → Workers & Pages → Create → connect GitHub → repo `oct.26`
+2. Project name `oct-26` (must match `name` in wrangler.jsonc) · Build command: (empty) · Deploy command: `npx wrangler deploy`
+   · Advanced settings → Path: `website` · API token: let it create one
+3. Deploy. The Worker builds from the production branch: it must be a branch that holds this folder
+   (Settings → Build → Branch control). Put the address it gives (…workers.dev or a domain) in `SITE_URL` and rebuild.
 
 Preview before it goes live: https://claude.ai/artifact/6CL8DCjTaKR6TRtnJCRTmD (`preview/index.html` + `public/` files).
 Hide a product whose prototype fails: add its number to `HIDE` in `build.py`.
