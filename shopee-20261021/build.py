@@ -2,7 +2,8 @@
 
 openpyxl cannot open Shopee's file (sheetView activePane="bottom_left" is invalid), so rows are written straight into
 xl/worksheets/sheet2.xml (form "แบบฟอร์มการลงสินค้า", data from row 7) and every other part is copied byte for byte.
-python3 shopee-20261021/build.py -> oct26-shopee-ready.xlsx
+python3 shopee-20261021/build.py -> oct26-shopee-ready.xlsx (all SKUs) and oct26-shopee-add-24-29.xlsx (the two 02
+products only, for a shop that already holds the first five).
 
 What may be sold comes from the shared Google Doc "OCT. 26 สถานะล่าสุด" (21 Oct): joints between pieces have not passed
 testing and 06 was never cut, so only the single-piece SKUs listed there go in, and the text makes no assembly or
@@ -18,7 +19,7 @@ TEMPLATE = os.path.join(HERE, "template.xlsx")
 IMG = "https://" + B.SOCIAL["web"] + "/assets/posters/{:02d}.png"   # How-to posters on the live site, 1080x1350, < 120 KB
 SHOPEE_STOCK = 5          # booth and Shopee share stock until 1 Nov; raise in Seller Centre after the fair
 HEAVY = {11, 13, 21, 29, 30}  # sets and large pieces, 0.2 kg packed; the rest 0.1 kg
-HOLD_PIECES = {"02"}      # owner, 21 Oct: piece 02 (กังหัน) is not usable yet, so no product with it goes to Shopee
+ADDED = {24, 29}          # owner, 21 Oct: the 02 products go on Shopee too, after the first five were listed
 # event SKUs from the status doc (codes match the accounting sheet "OCT. 26 บัญชี SKU สต็อก และบันทึกการขาย")
 SKU = {1: "OC-01-01", 22: "OC-01-22", 24: "OC-02-24", 26: "OC-03-26", 27: "OC-04-27", 28: "OC-05-28", 29: "OC-MX-29"}
 
@@ -29,7 +30,7 @@ def shopee_text(p):
     desc = (f"{p['hook']}\n\n"
             f"• คอลเลกชัน: {p['line']}\n"
             f"• วัสดุ: เศษหนังวัวแท้ หนา 1.0–1.2 มม. สีและลายแต่ละชิ้นต่างกันเล็กน้อย ทุกชิ้นมีชิ้นเดียว\n"
-            f"• ทำจาก: {p['pieces_txt']} ตัดด้วยบล็อกจากหนังแผ่นเดียว\n"
+            f"• ทำจาก: {p['pieces_txt']} {'แต่ละชิ้น' if len(p['parts']) > 1 else ''}ตัดด้วยบล็อกจากหนังแผ่นเดียว\n"
             f"• ขนาด: {p['size']}\n"
             f"• เหมาะกับ: {p['who']}\n\n"
             f"วิธีใช้\n{B._steps(p)}\n\n"
@@ -85,10 +86,10 @@ def build(products, out):
 
 def split():
     sale = [p for p in B.PRODUCTS if p["n"] in SKU]
-    held = [p for p in sale if HOLD_PIECES & {c for c, _ in p["parts"]}]
-    return [p for p in sale if p not in held], held
+    return sale, [p for p in sale if p["n"] in ADDED]
 
 
 if __name__ == "__main__":
-    ready, held = split()
-    build(ready, os.path.join(HERE, "oct26-shopee-ready.xlsx"))
+    sale, added = split()
+    build(sale, os.path.join(HERE, "oct26-shopee-ready.xlsx"))
+    build(added, os.path.join(HERE, "oct26-shopee-add-24-29.xlsx"))
