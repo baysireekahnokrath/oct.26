@@ -1,6 +1,6 @@
 # OCT. 26 — handoff for the next session
 
-Read this first, then `README.md` (build order) and `/CLAUDE.md` (always publish a Thai summary page for deliverables).
+Website work: see `../website/HANDOFF.md`. Read this first, then `README.md` (build order) and `/CLAUDE.md` (always publish a Thai summary page for deliverables).
 State as of 16 Oct 2026. Moved from repo exact-8-bingo (branch `claude/brave-faraday-2x1ygq`, commit f07c22a) into this repo, folders unchanged.
 
 ## The project
