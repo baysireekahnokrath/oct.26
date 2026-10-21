@@ -1,0 +1,262 @@
+<title>OCT. 26 Facebook</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<style>
+.post{display:grid;grid-template-columns:minmax(0,233px) minmax(0,1fr);gap:var(--s4);align-items:start}
+.post .pic{display:flex;flex-direction:column;gap:var(--s2)}.post .pic img{border-radius:var(--s3);border:1px solid var(--line)}
+.post .body{display:flex;flex-direction:column;gap:var(--s3);min-width:0}.post .when{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s2)}
+.shot{aspect-ratio:4/5;border:2px dashed var(--line);border-radius:var(--s3);display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:var(--s3);color:var(--muted);font-size:14px}
+.cards{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}.cards figure{margin:0;display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.cards img{border-radius:var(--s3);border:1px solid var(--line)}
+@media (max-width:600px){.post{grid-template-columns:1fr}.post .pic{max-width:233px}}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">ฝ่ายการตลาด · 21 ต.ค. 2569</span><h1>Facebook OCT. 26</h1>
+<p class="lead">สิ่งที่เหลือบนเพจ ข้อความตอบอัตโนมัติ และโพสต์ 12 โพสต์ตั้งแต่ 22 ต.ค. ถึง 2 พ.ย. ทำตามหน้าสถานะล่าสุด:
+ขายเฉพาะ 7 แบบชิ้นเดียว ไม่มี 06 และไม่พูดว่าต่อเองหรือไม่ต้องเย็บ</p></header>
+<section><span class="eyebrow">ตั้งค่าเพจ</span><h2>ที่ยังเหลือ</h2>
+<p class="cap">รูปโปรไฟล์ ภาพปก และ Intro ทำแล้ว</p><div class="card"><ol><li><b>ชื่อผู้ใช้เพจ</b><br>ตั้งเป็น oct26brand ให้ตรงกับเว็บ oct26brand.com ถ้ามีคนใช้แล้ว ใช้ oct26.brand (Facebook ใช้ได้แค่ตัวอักษร ตัวเลข และจุด ใช้ขีดล่างแบบ IG ไม่ได้) · ในเพจ: การตั้งค่า → การตั้งค่าเพจ → ชื่อผู้ใช้</li><li><b>ปุ่มบนเพจ</b><br>ตอนนี้ใช้ปุ่ม ส่งข้อความ ได้ลิงก์ร้าน Shopee แล้วค่อยเปลี่ยนเป็น ซื้อเลย ลิงก์ไปร้าน</li><li><b>เชื่อม Instagram</b><br>Meta Business Suite → การตั้งค่า → บัญชี Instagram → เชื่อม @oct.26_brand จะตอบข้อความ FB กับ IG ได้ในที่เดียว และโพสต์พร้อมกันได้</li><li><b>เช็ก Intro</b><br>ข้อความที่แนะนำ (89 ตัวอักษร): ของใช้จากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน พ่อ แม่ และลูกสามคน · SOI. 02 · ห้าหมี FIVE BEARS · ถ้าของเดิมมีคำว่า ไม่ต้องเย็บ หรือ ต่อเอง ให้เปลี่ยน</li><li><b>ข้อมูลติดต่อ</b><br>เว็บไซต์ https://oct26brand.com · Instagram · YouTube · ไม่ต้องใส่ที่อยู่บ้าน</li></ol></div></section>
+<section><span class="eyebrow">Messenger</span><h2>ข้อความตอบอัตโนมัติ</h2>
+<p class="cap">Meta Business Suite → กล่องข้อความ → การทำงานอัตโนมัติ</p>
+<div class="card"><div class="ch"><div class="h"><span class="cap">ข้อความทักทาย</span><button class="copy" data-for="g">คัดลอก</button></div><pre class="txt" id="g">สวัสดีครับ OCT. 26 ของใช้จากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน ทักมาถามได้เลยครับ</pre></div><div class="ch"><div class="h"><span class="cap">ตอบกลับทันที</span><button class="copy" data-for="i">คัดลอก</button></div><pre class="txt" id="i">ขอบคุณที่ทักมาครับ ช่วงนี้เราอาจอยู่ที่บูธ จะรีบตอบนะครับ
+ระหว่างนี้ดูสินค้าและสั่งได้ที่ Shopee ร้าน OCT.26 - Our crafted things.</pre></div></div>
+<h3>คำถามที่พบบ่อย 4 ข้อ</h3><div class="card"><div class="ch"><div class="h"><span class="cap">บูธอยู่ที่ไหน วันไหน</span><button class="copy" data-for="q0">คัดลอก</button></div><pre class="txt" id="q0">บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี</pre></div><div class="ch"><div class="h"><span class="cap">สั่งออนไลน์ได้ไหม</span><button class="copy" data-for="q1">คัดลอก</button></div><pre class="txt" id="q1">ได้ครับ ที่ Shopee ร้าน OCT.26 - Our crafted things. มีครบทั้ง 7 แบบ</pre></div><div class="ch"><div class="h"><span class="cap">มีอะไรบ้าง ราคาเท่าไร</span><button class="copy" data-for="q2">คัดลอก</button></div><pre class="txt" id="q2">ที่เก็บสายชาร์จหมี 59 บาท
+ที่รองแก้วหมี 59 บาท
+ที่รองแก้วกังหัน 49 บาท
+ป้ายห้อยของขวัญ 39 บาท
+ที่รองแก้วสี่เหลี่ยม 49 บาท
+ที่รองแก้ววงกลม 49 บาท
+ชุดที่รองแก้ว 4 ลาย 179 บาท</pre></div><div class="ch"><div class="h"><span class="cap">ทำจากอะไร</span><button class="copy" data-for="q3">คัดลอก</button></div><pre class="txt" id="q3">เศษหนังวัวแท้ หนา 1.0–1.2 มม. ตัดด้วยบล็อกแล้วทำกันเองทั้งบ้าน แต่ละชิ้นสีและลายไม่ซ้ำกัน</pre></div></div></section>
+<section><span class="eyebrow">22 ต.ค.–2 พ.ย.</span><h2>แผนโพสต์</h2>
+<p class="cap">ตั้งเวลาโพสต์ล่วงหน้าได้ใน Meta Business Suite → แพลนเนอร์ · ช่องเส้นประคือรูปที่ต้องถ่ายเอง</p><article class="card post"><div class="pic"><img src="launch-post-1080x1350.png" alt="แบนเนอร์เชิญมาบูธ" loading="lazy"></div><div class="body"><div class="when"><span class="chip">พฤ. 22 ต.ค. · 19:00</span><h3>โพสต์เชิญมาบูธ แล้วปักหมุดไว้บนสุด</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p0">คัดลอก</button></div><pre class="txt" id="p0">OCT. 26 เปิดตัวครั้งแรกที่บ้านและสวนแฟร์ Living Festival 2026 ในโซนหนูทดลอง KIDS MARKET
+
+ที่บูธเรามี DIY leather craft ให้ลองทำด้วยมือตัวเอง เลือกชิ้นหนังแท้ที่ชอบ เขียนชื่อหรือวาดลายของตัวเอง แล้วรับกลับบ้านได้เลย เด็กทำได้ ผู้ใหญ่ก็สนุก
+
+ลูก ๆ อยู่ที่บูธ คอยสอนทีละขั้น
+ตามหาบูธ OCT. 26 ในโซนหนูทดลอง KIDS MARKET แล้วแวะมาลองกันนะ
+
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+OCT. 26 · our crafted things. ของที่เราทำกันเอง
+#OCT26 #ourcraftedthings #หนูทดลองKidsMarket #บ้านและสวนแฟร์ #บ้านและสวนแฟร์2026 #LivingFestival2026 #DIY #leathercraft #งานแฮนด์เมด</pre></div></div></article><article class="card post"><div class="pic"><div class="shot">รูปบูธจริงตอนจัดเสร็จ</div></div><div class="body"><div class="when"><span class="chip">ศ. 23 ต.ค. · 08:30</span><h3>วันแรก</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p1">คัดลอก</button></div><pre class="txt" id="p1">วันนี้วันแรก เจอกันที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+มาลองแต่งชิ้นหนังแท้ของตัวเอง เขียนชื่อหรือวาดลาย แล้วรับกลับบ้าน ลูก ๆ รอสอนอยู่
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026</pre></div></div></article><article class="card post"><div class="pic"><div class="shot">คลิปแนวตั้ง 15 วินาที</div></div><div class="body"><div class="when"><span class="chip">ศ. 23 ต.ค. · 19:00</span><h3>Reels คลิปลูก ๆ แต่งชิ้นหนัง</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p2">คัดลอก</button></div><pre class="txt" id="p2">แต่งหนังแท้ด้วยมือ ชิ้นเดียวของคุณเอง
+มาลองเองได้ที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026 · อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3 · 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+
+#OCT26 #ourcraftedthings #หนูทดลองKidsMarket #บ้านและสวนแฟร์ #บ้านและสวนแฟร์2026 #LivingFestival2026 #DIY #leathercraft #งานแฮนด์เมด #reels</pre></div></div></article><article class="card post"><div class="pic"><img src="OC-MX-29.png" alt="การ์ดสินค้า OC-MX-29" loading="lazy"></div><div class="body"><div class="when"><span class="chip">ส. 24 ต.ค. · 12:00</span><h3>สินค้า: ชุดที่รองแก้ว 4 ลาย</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p3">คัดลอก</button></div><pre class="txt" id="p3">สี่แก้ว สี่ลาย ไม่ต้องจำว่าแก้วไหนของใคร
+
+ชุดที่รองแก้ว 4 ลาย · 179 บาท
+หนังวัวแท้ หัวหมี 01 × 1 + กังหัน 02 × 1 + สี่เหลี่ยมมน 04 × 1 + วงกลม 05 × 1 · ขนาด 9–10.4 ซม.
+
+วิธีใช้
+1. เลือกสี่ลายที่ชอบ
+2. มัดรวมด้วยเชือกปอ
+3. ใส่ถุงผ้า
+
+มีขายที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+สั่งออนไลน์: Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026 #SOI02</pre></div></div></article><article class="card post"><div class="pic"><img src="OC-01-01.png" alt="การ์ดสินค้า OC-01-01" loading="lazy"></div><div class="body"><div class="when"><span class="chip">อา. 25 ต.ค. · 12:00</span><h3>สินค้า: ที่เก็บสายชาร์จหมี</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p4">คัดลอก</button></div><pre class="txt" id="p4">สายชาร์จพันกันในกระเป๋าทุกวัน หมีตัวนี้ช่วยได้
+
+ที่เก็บสายชาร์จหมี · 59 บาท
+หนังวัวแท้ หัวหมี 01 × 1 · ขนาด 10.4 × 10.4 ซม.
+
+วิธีใช้
+1. พันสายชาร์จรอบหัวหมี
+2. เหน็บหัวปลั๊กเข้าร่องข้างแก้ม
+3. เหน็บอีกปลายเข้าร่องล่าง
+
+มีขายที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+สั่งออนไลน์: Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026 #ห้าหมี #FiveBears</pre></div></div></article><article class="card post"><div class="pic"><div class="shot">รูปครอบครัวที่บูธ (ไม่เห็นหน้าลูกก็ได้)</div></div><div class="body"><div class="when"><span class="chip">จ. 26 ต.ค. · 19:00</span><h3>วันเกิดแบรนด์</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p5">คัดลอก</button></div><pre class="txt" id="p5">26 ตุลาคม
+
+แบรนด์นี้ตั้งชื่อตามวันเกิดของแม่ และเกิดในวันเดียวกัน คือ 26 ตุลาคม 2569 หนึ่งวันหลังจากลูก ๆ ออกบูธครั้งแรก ทุกปีในวันนี้ เราจะออกรุ่นวันเกิดหนึ่งชุด เลขรุ่นคืออายุของแม่ในปีนั้น
+
+ขอบคุณทุกคนที่แวะมาที่บูธเมื่อสุดสัปดาห์ที่ผ่านมา สุดสัปดาห์นี้ลูก ๆ จะกลับไปอีกรอบ 30 ต.ค.–1 พ.ย. โซนหนูทดลอง KIDS MARKET
+
+#OCT26 #ourcraftedthings</pre></div></div></article><article class="card post"><div class="pic"><img src="OC-01-22.png" alt="การ์ดสินค้า OC-01-22" loading="lazy"></div><div class="body"><div class="when"><span class="chip">อ. 27 ต.ค. · 19:00</span><h3>สินค้า: ที่รองแก้วหมี</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p6">คัดลอก</button></div><pre class="txt" id="p6">แก้วนมตอนเช้ามีหมีรองอยู่
+
+ที่รองแก้วหมี · 59 บาท
+หนังวัวแท้ หัวหมี 01 × 1 · ขนาด 10.4 ซม.
+
+วิธีใช้
+1. หยิบออกจากถุง
+2. วางแก้ว
+3. เสร็จ
+
+มีขายที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+สั่งออนไลน์: Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026 #ห้าหมี #FiveBears</pre></div></div></article><article class="card post"><div class="pic"><img src="OC-02-24.png" alt="การ์ดสินค้า OC-02-24" loading="lazy"></div><div class="body"><div class="when"><span class="chip">พ. 28 ต.ค. · 19:00</span><h3>สินค้า: ที่รองแก้วกังหัน</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p7">คัดลอก</button></div><pre class="txt" id="p7">ที่รองแก้วลายกังหัน หนังแท้ทั้งแผ่น
+
+ที่รองแก้วกังหัน · 49 บาท
+หนังวัวแท้ กังหัน 02 × 1 · ขนาด 9 ซม.
+
+วิธีใช้
+1. หยิบออกจากถุง
+2. วางแก้ว
+3. เสร็จ
+
+มีขายที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+สั่งออนไลน์: Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026 #SOI02</pre></div></div></article><article class="card post"><div class="pic"><img src="OC-03-26.png" alt="การ์ดสินค้า OC-03-26" loading="lazy"></div><div class="body"><div class="when"><span class="chip">พฤ. 29 ต.ค. · 19:00</span><h3>สินค้า: ป้ายห้อยของขวัญ</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p8">คัดลอก</button></div><pre class="txt" id="p8">ป้ายชื่อที่ผู้รับเก็บไว้ห้อยกุญแจต่อได้
+
+ป้ายห้อยของขวัญ · 39 บาท
+หนังวัวแท้ กากบาทแคปซูล 03 × 1 · ขนาด 9 ซม.
+
+วิธีใช้
+1. เขียนชื่อผู้รับด้วยปากกาเพ้นท์
+2. ร้อยเชือกผ่านร่อง
+3. ผูกกับถุงของขวัญ
+
+มีขายที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+สั่งออนไลน์: Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026 #SOI02</pre></div></div></article><article class="card post"><div class="pic"><img src="OC-04-27.png" alt="การ์ดสินค้า OC-04-27" loading="lazy"><img src="OC-05-28.png" alt="การ์ดสินค้า OC-05-28" loading="lazy"></div><div class="body"><div class="when"><span class="chip">ศ. 30 ต.ค. · 08:30</span><h3>สัปดาห์ที่สอง + ที่รองแก้วสองทรง</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p9">คัดลอก</button></div><pre class="txt" id="p9">ที่รองแก้วหนังวัวแท้ สองทรง เลือกได้ตามโต๊ะ
+
+ที่รองแก้วสี่เหลี่ยม · 49 บาท · ขนาด 9 ซม.
+ที่รองแก้ววงกลม · 49 บาท · ขนาด 9 ซม.
+หนังแต่ละชิ้นสีและลายไม่ซ้ำกัน หยิบออกจากถุงแล้ววางแก้วได้เลย
+
+สัปดาห์ที่สองเริ่มวันนี้ มีขายที่บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+สั่งออนไลน์: Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026 #SOI02</pre></div></div></article><article class="card post"><div class="pic"><div class="shot">รูปบูธหรือชิ้นงานที่ลูกค้าแต่ง</div></div><div class="body"><div class="when"><span class="chip">อา. 1 พ.ย. · 09:00</span><h3>วันสุดท้าย</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p10">คัดลอก</button></div><pre class="txt" id="p10">วันสุดท้ายแล้ว ใครยังไม่ได้แวะ วันนี้ถึง 17:00
+
+บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET
+บ้านและสวนแฟร์ Living Festival 2026
+อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3
+23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569
+ศุกร์–อาทิตย์ 10:00–17:00 · เข้างานฟรี
+
+หลังงานยังสั่งได้ที่ Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #ของขวัญ #งานแฮนด์เมด #หนูทดลองKidsMarket #บ้านและสวนแฟร์2026</pre></div></div></article><article class="card post"><div class="pic"><div class="shot">รูปรวมสองสุดสัปดาห์</div></div><div class="body"><div class="when"><span class="chip">จ. 2 พ.ย. · 19:00</span><h3>ขอบคุณ</h3></div><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="p11">คัดลอก</button></div><pre class="txt" id="p11">ขอบคุณทุกคนที่แวะมาที่บูธ OCT. 26 ทั้งสองสุดสัปดาห์
+
+งานแรกของบ้านเรา ลูก ๆ ได้ขายเอง ทอนเงินเอง และได้เจอคนใจดีเยอะมาก
+
+ของที่เหลือสั่งได้ที่ Shopee ร้าน OCT.26 - Our crafted things.
+
+#OCT26 #ourcraftedthings</pre></div></div></article></section>
+<section><span class="eyebrow">รูป</span><h2>การ์ดสินค้า 7 แบบ</h2><p class="cap">1080 × 1350 · กดค้างที่รูปเพื่อบันทึกลงมือถือ</p>
+<div class="cards"><figure><img src="OC-01-01.png" alt="ที่เก็บสายชาร์จหมี" loading="lazy"><figcaption class="cap">OC-01-01 · ที่เก็บสายชาร์จหมี · 59 บาท</figcaption></figure><figure><img src="OC-01-22.png" alt="ที่รองแก้วหมี" loading="lazy"><figcaption class="cap">OC-01-22 · ที่รองแก้วหมี · 59 บาท</figcaption></figure><figure><img src="OC-02-24.png" alt="ที่รองแก้วกังหัน" loading="lazy"><figcaption class="cap">OC-02-24 · ที่รองแก้วกังหัน · 49 บาท</figcaption></figure><figure><img src="OC-03-26.png" alt="ป้ายห้อยของขวัญ" loading="lazy"><figcaption class="cap">OC-03-26 · ป้ายห้อยของขวัญ · 39 บาท</figcaption></figure><figure><img src="OC-04-27.png" alt="ที่รองแก้วสี่เหลี่ยม" loading="lazy"><figcaption class="cap">OC-04-27 · ที่รองแก้วสี่เหลี่ยม · 49 บาท</figcaption></figure><figure><img src="OC-05-28.png" alt="ที่รองแก้ววงกลม" loading="lazy"><figcaption class="cap">OC-05-28 · ที่รองแก้ววงกลม · 49 บาท</figcaption></figure><figure><img src="OC-MX-29.png" alt="ชุดที่รองแก้ว 4 ลาย" loading="lazy"><figcaption class="cap">OC-MX-29 · ชุดที่รองแก้ว 4 ลาย · 179 บาท</figcaption></figure></div></section>
+<section><h2>ต้องเช็ก</h2><div class="card"><ol><li>ราคา 7 แบบยังเป็นราคาร่างตามหน้าสถานะ ยืนยันก่อนลงโพสต์สินค้าวันที่ 24 ต.ค.</li><li>DIY ที่บูธเขียนไว้ว่า เลือกชิ้นหนัง เขียนชื่อหรือวาดลาย แล้วรับกลับบ้าน ถ้ากิจกรรมจริงต่างจากนี้ บอกได้ จะแก้ข้อความให้</li><li>รูปลูก: ถ่ายมือเป็นหลัก ไม่บอกชื่อจริง ไม่ใส่ชุดหรือป้ายโรงเรียน และถามลูกก่อนโพสต์</li><li>แท็กเพจผู้จัดในโพสต์เชิญและโพสต์วันแรก เขาอาจแชร์ต่อ</li><li>การ์ดสินค้าในชุดนี้ใช้แทนโปสเตอร์ How-to เดิม เพราะโปสเตอร์เดิมเขียนว่า ไม่ต้องเย็บ ห้ามใช้ตามหน้าสถานะ รวมถึงภาพปกใน Shopee ที่ดึงโปสเตอร์เดิมไป ควรเปลี่ยนเป็นการ์ดชุดนี้ใน Seller Centre</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">facebook-20261021/cards/*.png</td><td>การ์ดสินค้า 7 แบบ</td></tr>
+<tr><td class="mono" style="white-space:nowrap">social-20261021/banners/*.png</td><td>แบนเนอร์เชิญ (แก้แล้ว ไม่มีชิ้น 06)</td></tr>
+<tr><td class="mono" style="white-space:nowrap">facebook-20261021/build.py</td><td>ข้อความทั้งหมดในหน้านี้ แก้แล้วรันใหม่</td></tr>
+<tr><td>Google Doc "OCT. 26 Facebook โพสต์และตั้งค่าเพจ"</td><td>ข้อความชุดเดียวกัน ในโฟลเดอร์ OCT. 26 ไฟล์งาน</td></tr>
+</tbody></table></div></section>
+</div><script>
+document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
+const t=document.getElementById(b.dataset.for);const s=t.innerText;
+const done=()=>{const o=b.textContent;b.textContent='คัดลอกแล้ว';setTimeout(()=>b.textContent=o,1400)};
+const sel=()=>{const r=document.createRange();r.selectNodeContents(t);const w=getSelection();w.removeAllRanges();w.addRange(r);b.textContent='เลือกข้อความแล้ว กดคัดลอก'};
+try{navigator.clipboard.writeText(s).then(done,sel)}catch(_){sel()}});
+</script>

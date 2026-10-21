@@ -1,6 +1,8 @@
 """Launch posts for the first booth: invitation copy for Facebook, Instagram, YouTube (and TikTok for tonight's
 demo video), and the launch banner in three sizes. No products or prices: the message is only that the booth
 has DIY leather craft to try. No event booth number yet.
+Status doc 21 Oct: joints between pieces have not passed testing and 06 was never cut, so the DIY is decorating a
+single leather piece (writing a name, drawing), nothing is joined, and no 06 piece appears.
 
 python3 social-20261021/build.py                          -> banners/*.html, banners/jobs.json, site/index.html
 node brand-20261014/tools/render.mjs social-20261021/banners/jobs.json   -> banners/*.png
@@ -40,13 +42,13 @@ TAGS = ("#OCT26 #ourcraftedthings #หนูทดลองKidsMarket #บ้า
 FIND = f"ตามหาบูธ OCT. 26 ในโซน{ZONE}"
 WHERE = f"{FAIR}\n{PLACE} {HALL}\n{DATES}\n{HOURS} · เข้างานฟรี"
 # leather pieces scattered as the DIY motif; the bear head (01) stays out so no FIVE BEARS mark sits next to OCT. 26
-PIECES = ["02", "04", "05", "06", "02"]
+PIECES = ["02", "04", "05", "03", "02"]
 
 # ---------------------------------------------------------------- copy
 COPY = [
     ("Facebook", "โพสต์คู่กับแบนเนอร์ 1080 × 1350", f"""OCT. 26 เปิดตัวครั้งแรกที่{FAIR} ในโซน{ZONE}
 
-ที่บูธเรามี DIY leather craft ให้ลองทำด้วยมือตัวเอง หยิบเศษหนังแท้ที่เหลือจากการผลิตโซฟา มาต่อเป็นชิ้นงาน ราว 5 นาทีก็เสร็จ เด็กทำได้ ผู้ใหญ่ก็สนุก
+ที่บูธเรามี DIY leather craft ให้ลองทำด้วยมือตัวเอง เลือกชิ้นหนังแท้ที่ชอบ เขียนชื่อหรือวาดลายของตัวเอง แล้วรับกลับบ้านได้เลย เด็กทำได้ ผู้ใหญ่ก็สนุก
 
 ลูก ๆ อยู่ที่บูธ คอยสอนทีละขั้น
 {FIND} แล้วแวะมาลองกันนะ
@@ -58,43 +60,43 @@ OCT. 26 · our crafted things. ของที่เราทำกันเอ�
     ("Instagram", "แคปชันคู่กับแบนเนอร์ 1080 × 1350", f"""เปิดตัวครั้งแรก {FAIR}
 
 มาลอง DIY leather craft ที่บูธ OCT. 26 โซน{ZONE}
-ต่อเศษหนังแท้ด้วยมือตัวเอง ราว 5 นาทีเสร็จ ลูก ๆ รอสอนอยู่
+เลือกชิ้นหนังแท้ เขียนชื่อหรือวาดลายเอง ลูก ๆ รอสอนอยู่
 
 {WHERE}
 
 our crafted things. ของที่เราทำกันเอง
 {TAGS} #handmade #workshop"""),
     ("Instagram Story", "สามหน้า ใช้แบนเนอร์ 1080 × 1920 เป็นหน้าแรก", f"""หน้า 1: แบนเนอร์ story
-หน้า 2: คลิปมือต่อหนัง + ข้อความ: มาลองต่อหนังแท้ด้วยมือ
+หน้า 2: คลิปมือเด็กเขียนชื่อบนชิ้นหนัง + ข้อความ: มาแต่งหนังแท้ชิ้นของคุณเอง
 หน้า 3: ข้อความ: {FIND} · {PLACE} {HALL} · {DATES} + สติกเกอร์นับถอยหลังตั้งเวลา 23 ต.ค. 10:00 + แท็กเพจผู้จัด"""),
     ("YouTube · โพสต์ชุมชน", "แนบแบนเนอร์ 1080 × 1080", f"""OCT. 26 เปิดตัวครั้งแรกที่{FAIR} โซน{ZONE}
-มี DIY leather craft ให้ลองต่อเศษหนังแท้ด้วยมือตัวเองที่บูธ ลูก ๆ จะอยู่สอน
+มี DIY leather craft ให้ลองแต่งชิ้นหนังแท้ด้วยมือตัวเองที่บูธ ลูก ๆ จะอยู่สอน
 {PLACE} {HALL} · {DATES} · {HOURS}
 
 ช่องนี้จะลงคลิปเบื้องหลังวันออกบูธ ติดตามไว้ได้เลย"""),
 ]
 
 VIDEO_COPY = [
-    ("YouTube Shorts · ชื่อคลิป", "ลูก ๆ ต่อเศษหนังแท้ด้วยมือ | OCT. 26 DIY leather craft #Shorts"),
-    ("YouTube Shorts · คำอธิบาย", f"""ลูก ๆ สาธิตการต่อเศษหนังแท้เข้าด้วยกันด้วยมือ
-มาลองต่อเองได้ที่บูธ OCT. 26 โซน{ZONE}
+    ("YouTube Shorts · ชื่อคลิป", "ลูก ๆ แต่งชิ้นหนังแท้ด้วยมือ | OCT. 26 DIY leather craft #Shorts"),
+    ("YouTube Shorts · คำอธิบาย", f"""ลูก ๆ สาธิตการแต่งชิ้นหนังแท้ด้วยมือ เขียนชื่อ วาดลาย
+มาลองเองได้ที่บูธ OCT. 26 โซน{ZONE}
 {WHERE}
 
 OCT. 26 · our crafted things. ของที่เราทำกันเอง
 ติดตาม @{H} ได้ทุกช่องทาง
 {TAGS}"""),
-    ("Facebook / Instagram Reels", f"""ต่อหนังแท้ด้วยมือ ทีละชิ้น
+    ("Facebook / Instagram Reels", f"""แต่งหนังแท้ด้วยมือ ชิ้นเดียวของคุณเอง
 มาลองเองได้ที่บูธ OCT. 26 โซน{ZONE}
 {FAIR} · {PLACE} {HALL} · {DATES}
 
 {TAGS} #reels"""),
-    ("TikTok", f"""ลูกเราต่อเศษหนังแท้ด้วยมือ มาลองเองได้ที่บูธ OCT. 26 โซน{ZONE} {FAIR} {PLACE} {DATES} {TAGS} #DIYง่ายๆ"""),
+    ("TikTok", f"""ลูกเราแต่งชิ้นหนังแท้ด้วยมือ มาลองเองได้ที่บูธ OCT. 26 โซน{ZONE} {FAIR} {PLACE} {DATES} {TAGS} #DIYง่ายๆ"""),
 ]
 
 SHOTS = [
-    ("0–2 วิ", "เปิดด้วยชิ้นหนังที่ยังไม่ต่อ วางบนผ้าลินินสีครีม มือเด็กหยิบขึ้นมา", "ข้อความบนจอ: มาลองต่อหนังแท้ด้วยมือ"),
-    ("2–10 วิ", "ถ่ายมือจากด้านบน ต่อทีละขั้น ช้า ๆ ให้เห็นทุกจังหวะ", "ไม่ต้องพูด ใช้เสียงจริงตอนหนังเข้าล็อก"),
-    ("10–13 วิ", "ชูชิ้นที่ต่อเสร็จ ดึงให้ดูว่าแน่น", ""),
+    ("0–2 วิ", "เปิดด้วยชิ้นหนังเปล่า วางบนผ้าลินินสีครีม มือเด็กหยิบขึ้นมา", "ข้อความบนจอ: มาแต่งหนังแท้ชิ้นของคุณเอง"),
+    ("2–10 วิ", "ถ่ายมือจากด้านบน เขียนชื่อหรือวาดลายช้า ๆ ให้เห็นทุกเส้น", "ไม่ต้องพูด ใช้เสียงปากกาบนหนังจริง"),
+    ("10–13 วิ", "ชูชิ้นที่แต่งเสร็จ หันให้เห็นชื่อหรือลาย", ""),
     ("13–15 วิ", "ภาพนิ่งชิ้นงานบนผ้า", f"ข้อความบนจอ: บ้านและสวนแฟร์ · โซน{ZONE} · {DATES}"),
 ]
 SHOOT_TIPS = [
