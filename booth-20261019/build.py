@@ -1,4 +1,5 @@
-"""Booth plan for งานบ้านและสวน, 23–25 Oct 2569: one 2 x 2 m booth, gear that is easy to buy.
+"""Booth plan for หนูทดลอง KIDS MARKET at บ้านและสวนแฟร์ Living Festival 2026, two weekends (23–25 Oct and
+30 Oct–1 Nov 2569): one 2 x 2 m booth, gear that is easy to buy.
 
 The organiser gives each booth a pallet coffee table (117 x 80 cm, 50 cm high) and two folding chairs
 (site/organizer-table.jpg, their drawing, received 20 Oct). Reads products and prices from
@@ -16,8 +17,12 @@ S = importlib.util.module_from_spec(_sp); _sp.loader.exec_module(S)
 E = html.escape
 P = {p["n"]: p for p in B.PRODUCTS}
 
-FAIR = "งานบ้านและสวน"
-DATES = "23–25 ต.ค. 2569"
+FAIR = "บ้านและสวนแฟร์ Living Festival 2026"
+ZONE = "หนูทดลอง KIDS MARKET"
+PLACE = "อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3"
+DATES = "23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569"
+HOURS = "ศุกร์–อาทิตย์ 10:00–17:00"
+SALE_DAYS = 6          # two weekends, confirmed 21 Oct
 W = D = 200            # booth, cm
 TABLE = (117, 80, 50)  # organiser's pallet table w, d, h (cm), steel frame, slatted top
 TX, TY = 3, D - 80 - 3 # table pushed into the front-left corner; the front-right corner is the way in
@@ -86,10 +91,10 @@ SAVED = (900, 1900)   # folding table, long tablecloth and two stools from the f
 
 ASK = [
     ("บูธติดทางเดินด้านไหน", "บูธไม่มีผนัง ลูกค้าเดินมาจากกี่ด้าน หน้าหลักหันไปทางไหน และมีป้ายชื่อบูธหรือไฟสปอตไลต์ไหม"),
-    ("เก็บของข้ามคืน", "ทิ้งของไว้ในบูธข้ามคืนได้ไหม มียามไหม ถ้าไม่ได้ ขนสต็อกกลับบ้านทุกเย็น"),
+    ("เก็บของข้ามคืน", "ทิ้งของไว้ในบูธข้ามคืน และระหว่างสองสัปดาห์ (จ.–พฤ.) ได้ไหม มียามไหม ถ้าไม่ได้ ขนสต็อกกลับบ้านทุกเย็น"),
     ("ป้ายชื่อหน้าบูธ", "ส่งชื่อให้สะกด OCT. 26 ตัวใหญ่ มีจุด และเว้นวรรคก่อน 26"),
     ("เลขบูธ ฮอลล์ โซน", "ใส่ในโพสต์ เจอกันที่บูธ และในการ์ด"),
-    ("เวลาเข้าจัดและรื้อบูธ", "ทั้งวันแรกและวันสุดท้าย และจุดขนของ ลานจอดรถ"),
+    ("เวลาเข้าจัดและรื้อบูธ", "ทั้งสองสัปดาห์ จุดขนของ ลานจอดรถ"),
     ("บัตรผู้ออกบูธ", "ได้กี่ใบ เด็กต้องมีบัตรไหม เราไปกัน 5 คน"),
     ("กฎการตกแต่ง", "ของตั้งสูงได้ไม่เกินเท่าไร (X-stand 160 ซม. ตะแกรงราว 180 ซม.) ใช้ไฟของตัวเองได้ไหม"),
 ]
@@ -108,8 +113,11 @@ PLAN = [
     ("พ. 21 ต.ค.", "", "รับ X-stand และงานพิมพ์ · ตัดฟิวเจอร์บอร์ดติดเทปบานพับ ทำป้ายจากเศษ · ติดป้ายห้อยสินค้า · ของ Shopee ไม่มาภายในวันนี้ ซื้อหน้าร้านแทน"),
     ("พฤ. 22 ต.ค.", "ซ้อมใหญ่", "ตีเทปกรอบ 2 × 2 ม. บนพื้นบ้าน ใช้โต๊ะกาแฟที่บ้านแทนโต๊ะพาเลท จัดตามผัง ถ่ายรูปเก็บไว้เป็นแบบ ซ้อมขาย แล้วแพ็คกล่อง A B C D"),
     ("ศ. 23 ต.ค.", "วันแรก", "ถึงก่อนเปิดอย่างน้อย 90 นาที จัดตามลำดับด้านล่าง โพสต์รูปบูธพร้อมเลขบูธก่อนงานเปิด"),
-    ("23–25 ต.ค.", "ทุกเย็น", "ปิดยอด นับเงิน เทียบสมุด จดว่าตัวไหนหมด เติมของจากกล่อง D ก่อนกลับ"),
-    ("อา. 25 ต.ค.", "รื้อบูธ", "เก็บตามเวลาผู้จัด คืนโต๊ะเก้าอี้ตามที่ผู้จัดบอก ถ่ายรูปบูธครั้งสุดท้าย เตรียมโพสต์ Happy 26.10 พรุ่งนี้"),
+    ("ทุกวันขาย", "ทุกเย็น", "ปิดยอด นับเงิน เทียบสมุด จดว่าตัวไหนหมด เติมของจากกล่อง D ก่อนกลับ"),
+    ("อา. 25 ต.ค.", "จบสัปดาห์แรก", "เก็บของตามที่ผู้จัดบอก ถ่ายรูปบูธ เตรียมโพสต์ Happy 26.10 พรุ่งนี้"),
+    ("จ. 26 ต.ค.", "วันเกิดแบรนด์", "โพสต์ Happy 26.10 ขอบคุณลูกค้า สรุปยอดสัปดาห์แรกต่อสินค้า"),
+    ("27–29 ต.ค.", "เติมของ", "ตัดและประกอบตัวที่ขายดีเพิ่ม ใช้เศษหนังล็อตใหญ่ที่เหลือ (หัวหมี) · โพสต์คลิปจากสัปดาห์แรก ชวนมาสัปดาห์ที่สอง"),
+    ("30 ต.ค.–1 พ.ย.", "สัปดาห์ที่สอง", "ที่เดิม เวลาเดิม ย้ายตัวที่ขายดีไปหน้าโต๊ะ อาทิตย์เย็นรื้อบูธ คืนโต๊ะเก้าอี้ ถ่ายรูปบูธครั้งสุดท้าย"),
 ]
 
 SETUP = [
@@ -297,7 +305,9 @@ def page():
     tot = B.event_totals()
     must = [g for g in GEAR if g[5] == "buy"]
     lo_buy, hi_buy = sum(g[3] for g in must), sum(g[4] for g in must)
-    per_day_units, per_day_sales = tot["units"] / 3, tot["sales"] / 3
+    _, big, small = B.piece_usage()
+    LOT_BIG_LEFT, LOT_SMALL_NEED, LOT_SMALL_CAP = B.LOT_CAPACITY["ใหญ่"] - big, small, B.LOT_CAPACITY["เล็ก"]
+    per_day_units, per_day_sales = tot["units"] / SALE_DAYS, tot["sales"] / SALE_DAYS
     tw, td, th = TABLE
 
     gear_rows = "".join(
@@ -333,8 +343,8 @@ def page():
     return f"""{S.head("บูธ OCT. 26 บ้านและสวน")}<style>{SVG_CSS}</style>
 <div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
 <span class="eyebrow">แผนบูธ · ฝ่ายการตลาดและการขาย · อัปเดต 20 ต.ค. 2569</span>
-<h1>บูธ OCT. 26 ที่{FAIR}</h1>
-<p class="lead">{DATES} · บูธ 2 × 2 เมตร ผู้จัดให้โต๊ะพาเลท {tw} × {td} ซม. สูง {th} ซม. กับเก้าอี้ {CHAIRS} ตัว
+<h1>บูธ OCT. 26 ที่บ้านและสวนแฟร์</h1>
+<p class="lead">โซน{ZONE} · {FAIR} · {PLACE} · {DATES} · {HOURS} รวม {SALE_DAYS} วันขาย · บูธ 2 × 2 เมตร ผู้จัดให้โต๊ะพาเลท {tw} × {td} ซม. สูง {th} ซม. กับเก้าอี้ {CHAIRS} ตัว
 โต๊ะสูงเท่าโต๊ะกาแฟในบ้าน หน้าโต๊ะจึงจัดเป็นโต๊ะกาแฟจริงที่ใช้ของ SOI. 02 ส่วนห้าหมีแขวนบนตะแกรงกลางด้านหลัง และ X-stand มุมหน้าขวาขายของแทนเราตลอดเวลา</p>
 <div class="grid s">
 <div class="card kpi"><p class="cap">พื้นที่</p><b class="mono">4 ตร.ม.</b></div>
@@ -402,7 +412,7 @@ def page():
 <div class="card"><ul>{answered}</ul></div>
 <div class="card"><ul>{ask}</ul></div></section>
 
-<section id="days"><span class="eyebrow">20–25 ต.ค.</span><h2>ทำอะไรวันไหน</h2>
+<section id="days"><span class="eyebrow">20 ต.ค.–1 พ.ย.</span><h2>ทำอะไรวันไหน</h2>
 <div class="tbl"><table><tbody>{plan_rows}</tbody></table></div></section>
 
 <section id="setup"><span class="eyebrow">เช้าวันแรก</span><h2>ลำดับจัดบูธ {len(SETUP)} ขั้น</h2>
@@ -415,11 +425,16 @@ def page():
 
 <section id="target"><span class="eyebrow">เป้า</span><h2>ตัวเลขที่ต้องจดทุกเย็น</h2>
 <div class="grid s">
-<div class="card kpi"><p class="cap">ขายหมดทั้งงาน</p><b class="mono">{tot['sales']:,.0f} ฿</b></div>
+<div class="card kpi"><p class="cap">ขายหมดทั้ง {SALE_DAYS} วัน</p><b class="mono">{tot['sales']:,.0f} ฿</b></div>
 <div class="card kpi"><p class="cap">เฉลี่ยต่อวัน</p><b class="mono">{per_day_units:.0f} ชิ้น</b></div>
 <div class="card kpi"><p class="cap">ยอดต่อวัน</p><b class="mono">{per_day_sales:,.0f} ฿</b></div>
 <div class="card kpi"><p class="cap">ต้นทุนของ+แพ็ค</p><b class="mono">{tot['cost']:,.0f} ฿</b></div></div>
-<p class="cap">ทุกเย็นจดสามอย่าง: ยอดเงิน จำนวนชิ้นต่อสินค้า และจำนวนออเดอร์สั่งทำ วันที่สองย้ายตัวที่ขายดีไปไว้หน้าสุด</p></section>
+<p class="cap">ทุกเย็นจดสามอย่าง: ยอดเงิน จำนวนชิ้นต่อสินค้า และจำนวนออเดอร์สั่งทำ วันที่สองย้ายตัวที่ขายดีไปไว้หน้าสุด</p>
+<div class="card"><h3>สต็อกสำหรับสองสัปดาห์</h3><ul style="margin-top:6px">
+<li>ของ {tot["units"]} ชิ้นที่เตรียมไว้ ต้องพอ {SALE_DAYS} วัน เฉลี่ยวันละราว {per_day_units:.0f} ชิ้น สัปดาห์แรกอย่าเพิ่งเอาออกหมด เก็บราวหนึ่งในสามไว้ที่บ้าน</li>
+<li>จันทร์ 26 ดูยอดจริงต่อสินค้า แล้ว 27–29 ทำเพิ่มเฉพาะตัวที่หมดหรือใกล้หมด</li>
+<li>เศษหนังล็อตใหญ่ (หัวหมี) ยังเหลือราว {LOT_BIG_LEFT} ชิ้น ทำที่รองแก้วหมี ที่เก็บสายชาร์จ ที่ห้อยกระเป๋าเพิ่มได้</li>
+<li>เศษหนังล็อตเล็ก (แพตเทิร์น 02–06 ของ SOI. 02) แผนสต็อกเดิมต้องใช้ {LOT_SMALL_NEED} ชิ้น แต่ล็อตที่ซื้อได้ {LOT_SMALL_CAP} ชิ้น ต้องซื้อเศษเพิ่ม หรือลดจำนวน SOI. 02 ลง</li></ul></div></section>
 
 <section id="files"><span class="eyebrow">ไฟล์</span><h2>ไฟล์ที่ส่ง</h2>
 <div class="tbl"><table><tbody>

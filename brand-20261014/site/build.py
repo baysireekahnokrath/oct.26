@@ -315,7 +315,7 @@ def launch():
 <div class="wrap">
 <nav class="top" aria-label="หัวข้อ"><a href="#plan">แผนถึงวันงาน</a><a href="#social">โซเชียลและ Shopee</a><a href="#products">สินค้า 30 ตัว</a>
 <a href="#stock">สต็อกไปงาน</a><a href="#kids">ลูก ๆ ขายของ</a><a href="#print">ของต้องพิมพ์</a><a href="#more">แนะนำเพิ่ม</a></nav>
-<header style="padding-top:28px;display:flex;flex-direction:column;gap:12px"><span class="eyebrow">LAUNCH KIT · บูธ 23–25 ต.ค. 2569</span>
+<header style="padding-top:28px;display:flex;flex-direction:column;gap:12px"><span class="eyebrow">LAUNCH KIT · บูธ 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569</span>
 <h1>OCT. 26 พร้อมออกบูธ</h1>
 <p class="lead">ทุกอย่างที่ต้องทำก่อนวันงาน ข้อความโพสต์ของสินค้า 30 ตัวสำหรับ 5 ช่องทาง และคู่มือให้ลูก ๆ ขายของเอง สินค้าแบ่งเป็นคอลเลกชัน SOI. 02 และห้าหมี Love กดปุ่มคัดลอกแล้ววางในแอปได้เลย</p>
 <div class="grid s">
@@ -337,7 +337,7 @@ def launch():
 <div class="card"><h3>9 โพสต์แรก</h3><ol style="margin-top:6px">
 <li>ทำไมชื่อ OCT. 26 (ใช้ข้อความใน Brand Book + โลโก้ OCT. 26)</li><li>เปิดตัวคอลเลกชัน SOI. 02 และห้าหมี Love (ป้าย SOI. 02 กับป้าย Love)</li><li>แนะนำลูกสามคน และหน้าที่ที่บูธ</li>
 {"".join(f"<li>How-to {E(next(p['name'] for p in B.PRODUCTS if p['n']==h))}</li>" for h in B.HEROES[:6])}
-<li>เจอกันที่บูธ 23–25 ต.ค. พร้อมแผนที่และเลขบูธ</li></ol></div></section>
+<li>เจอกันที่บูธ โซนหนูทดลอง KIDS MARKET บ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย.</li></ol></div></section>
 
 <section id="products"><span class="eyebrow">สินค้า 30 ตัว</span><h2>โปสเตอร์และโพสต์ทุกช่องทาง</h2>
 <p class="lead">แตะรูปเพื่อเปิดโปสเตอร์ขนาดเต็ม แต่ละตัวมีภาพ story 1080 × 1920 สำหรับ TikTok, Reels และ Shorts อยู่ในโฟลเดอร์ posters/png</p>
@@ -674,7 +674,8 @@ AUDIT = [
 
 def summary():
     tot = B.event_totals()
-    rows = [("แผนบูธ งานบ้านและสวน", "booth", "บูธ 2 × 2 ม. 23–25 ต.ค.: ผังจากด้านบนและหน้าบูธ อุปกรณ์หาง่ายพร้อมงบ ไทม์ไลน์ถึงวันงาน ใครยืนตรงไหน"),
+    rows = [("แผนบูธ บ้านและสวนแฟร์", "booth", "บูธ 2 × 2 ม. สองสัปดาห์ 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย.: ผัง X-stand อุปกรณ์ในงบ 3,000 ไทม์ไลน์ สต็อก ใครยืนตรงไหน"),
+            ("โพสต์เปิดตัว", "social", "แบนเนอร์เปิดตัวสามขนาด คำเชิญชวน Facebook IG YouTube และแคปชันคลิปสาธิตของลูก ๆ"),
             ("Tech Pack สินค้า 30 แบบ", "techpack", "หนึ่งหน้าต่อสินค้า: ชิ้นส่วน แผนภาพประกอบตามเลขรอยต่อ เวลา ใครทำ ต้นทุน และรายการตรวจก่อนแพ็ค พิมพ์ A4 ได้"),
             ("Logo Lab", "logolab", "สรุปแล้ว เหลือสี่โลโก้ ใช้ทีละตัว: OCT. 26 ป้ายห้อย 26 ห้าหมี และหมีหัวใจ"),
             ("Color Lab", "colorlab", "เลือกแล้ว ชุดที่ 2 Soi Candy ทางเลือกอื่นเก็บไว้เทียบ"),
@@ -700,7 +701,7 @@ def summary():
     ftable = "".join(f'<tr><td class="mono" style="white-space:nowrap">{E(f)}</td><td>{E(d)}</td></tr>' for f, d in files)
     return f"""{head("OCT. 26 สรุปโปรเจกต์")}
 <div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
-<span class="eyebrow">สรุปโปรเจกต์ · อัปเดต 19 ต.ค. 2569</span><h1>OCT. 26 ก่อนออกบูธ 23–25 ต.ค.</h1>
+<span class="eyebrow">สรุปโปรเจกต์ · อัปเดต 21 ต.ค. 2569</span><h1>OCT. 26 ก่อนออกบูธ 23 ต.ค.–1 พ.ย.</h1>
 <div class="paper" style="aspect-ratio:16/7"><img src="logo/oct-wordmark.svg" alt="โลโก้ OCT. 26" style="max-height:100%"></div>
 <p class="lead">ชื่อแบรนด์ เรื่องเล่า โลโก้และ brand book ช่องทางโซเชียลกับ Shopee สินค้า 30 ตัวพร้อมโปสเตอร์และโพสต์ทุกช่องทาง คู่มือให้ลูก ๆ ขายเอง และสไลด์สำหรับวันเกิดเธอ</p></header>
 <section><span class="eyebrow">คำตอบ</span><h2>หมี 5 ตัวเป็นซับแบรนด์ได้</h2>

@@ -26,7 +26,8 @@ C = B.C
 FONTS = "file://" + os.path.join(BRAND_DIR, "fonts")
 H = B.BRAND["handle"]
 
-# from the organiser's post (หนูทดลอง KIDS MARKET, 21 Oct): our two girls are on both weekend lists
+# from the organiser's post (หนูทดลอง KIDS MARKET, 21 Oct); both weekends confirmed by the owner 21 Oct.
+# The DIY price stays out of every post until the owner decides it.
 FAIR = "บ้านและสวนแฟร์ Living Festival 2026"
 ZONE = "หนูทดลอง KIDS MARKET"
 PLACE, HALL = "อิมแพ็ค เมืองทองธานี", "ชาเลนเจอร์ 2–3"
@@ -183,8 +184,6 @@ def summary():
 <div class="card"><ul>{tips}</ul></div>
 <div class="card" style="display:flex;flex-direction:column;gap:8px">{vcopy}</div></section>
 <section><h2>ต้องเช็กก่อนโพสต์</h2><div class="card"><ol>
-<li>เราออกบูธทั้งสองสัปดาห์ (ในรายชื่อของผู้จัดมีทั้ง 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย.) ถ้าออกสัปดาห์เดียว บอกผม จะแก้วันที่ทุกชิ้น</li>
-<li>DIY ที่บูธให้ลองฟรี หรือคิดเงิน ถ้าคิดเงิน บอกผม จะเพิ่มราคาในโพสต์</li>
 <li>ชื่อ @{H} ใช้ได้จริงทุกช่องทาง</li>
 <li>ลูก ๆ โอเคกับคลิปที่จะโพสต์</li></ol></div></section>
 <section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
