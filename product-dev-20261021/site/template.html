@@ -169,6 +169,19 @@ ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
 .cmt-form textarea{min-height:56px}
 .feed li{cursor:pointer}
 .feed li:hover{border-color:var(--ink)}
+.s50wrap{background:var(--chip);aspect-ratio:1;display:grid;place-items:center;padding:8px}
+.s50{width:100%;height:100%}
+.s50 .hide{fill:var(--card);stroke:var(--leather);stroke-width:.9}
+.s50 .cut{stroke:var(--tomato);stroke-width:1}
+.s50 .stick{stroke:#8A5A2B;stroke-linecap:round}.s50 .straw{stroke:var(--mint);stroke-linecap:round}
+.s50 .ribbon{stroke:var(--cobalt);opacity:.8}.s50 .card{stroke:var(--sun)}.s50 .elastic{stroke:var(--ink)}
+.s50 .pin{stroke:var(--muted)}.s50 .pinhead{fill:var(--muted)}
+.s50 .behind{stroke-dasharray:3 3;opacity:.45}
+.s50 .rim{stroke:var(--ink);stroke-linecap:round}.s50 .twist{fill:var(--sun);opacity:.85}
+.s50 .clip{stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+.s50 .obj{fill:var(--mint);opacity:.25;stroke:var(--mint)}
+.s50 .s50txt{font:600 8px var(--display);fill:var(--ink);text-anchor:middle}.s50 .s50txt.end{text-anchor:end;font-size:10px}
+.s50big{background:var(--chip);border-radius:13px;padding:var(--s3);max-width:340px;margin:0 auto;width:100%}
 .xgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:var(--s3)}
 .xcard{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:0 0 var(--s3);display:grid;gap:var(--s2);overflow:hidden}
 .xcard:hover{border-color:var(--ink)}
@@ -204,6 +217,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
 <nav class="tabs" aria-label="ส่วนของหน้า">
   <a href="#overview" data-tab="overview">ภาพรวม</a>
   <a href="#board" data-tab="board">บอร์ดสินค้า</a>
+  <a href="#single" data-tab="single">ชิ้นเดียว 50</a>
   <a href="#cross" data-tab="cross">ไขว้ 3D</a>
   <a href="#tests" data-tab="tests">ทดสอบ</a>
   <a href="#process" data-tab="process">ขั้นตอน</a>
@@ -270,6 +284,17 @@ table.compat td.ok{color:var(--good);font-weight:600}
     <div class="calc" id="i-calc"></div>
     <div class="row"><button class="btn primary" type="submit" id="i-save">เพิ่มลงบอร์ด</button><button class="btn" type="button" id="i-cancel">ยกเลิก</button><span id="i-msg"></span></div>
   </form>
+</section>
+
+<section class="view" id="v-single" hidden>
+  <div class="block">
+    <p class="eyebrow">Single piece · ชิ้นเดียว</p>
+    <h2>50 สินค้าใหม่ ชิ้นเดียว ไม่ต้องต่อชิ้น</h2>
+    <p class="muted">ทำตามเอกสารสถานะ: ไม่ใช้ 06 ไม่ต่อชิ้นกับชิ้น ใช้หนัง 1.0–1.2 มม. และชิ้นที่ตัดไว้แล้ว ร่องของแต่ละชิ้นใช้รับของอย่างอื่น เช่น ไม้ ริบบิ้น หลอด การ์ด ยางยืด เข็มกลัด หรือขอบภาชนะ ทุกแบบยังไม่ได้ลองกับของจริง แตะการ์ดเพื่อดูวิธีลอง ส่งเข้าบอร์ด หรือเขียนความเห็น</p>
+  </div>
+  <div class="stats">__S_STATS__</div>
+  <div class="chips" id="s-filters" role="group" aria-label="กรองไอเดียชิ้นเดียว"></div>
+  <div class="xgrid" id="s-cards"></div>
 </section>
 
 <section class="view" id="v-cross" hidden>
@@ -411,7 +436,8 @@ function items() {
       parts, joints, extra: extra ? ["ชิ้นเสริม", extra] : null, pack: o.pack, cost: costOf(parts, joints, extra, o.pack),
       stage: STAGE[o.stage] ? o.stage : "idea", blocker: String(o.blocker || ""), note: String(o.note || ""), hero: false,
       pieces: parts.map(([c, q]) => `${D.pieceName[c]} × ${q}`).join(" + "), check: "", steps: [], updated: o.updated || "",
-      x3d: typeof o.x3d === "string" && X3D.items.some(x => x.id === o.x3d) ? o.x3d : null});
+      x3d: typeof o.x3d === "string" && X3D.items.some(x => x.id === o.x3d) ? o.x3d : null,
+      s50: typeof o.s50 === "string" && S50.items.some(x => x.id === o.s50) ? o.s50 : null});
   }
   return list;
 }
@@ -431,6 +457,7 @@ function threadLabel(key) {
   if (key === "general") return "พูดคุยทั้งทีม";
   const p = D.products.find(x => x.id === key); if (p) return `${p.n}. ${p.name}`;
   const x = typeof X3D !== "undefined" && X3D.items.find(y => y.id === key); if (x) return `${x.id} ${x.name}`;
+  const s = typeof S50 !== "undefined" && S50.items.find(y => y.id === key); if (s) return `${s.id} ${s.name}`;
   const o = over[key]; if (o && o.name) return String(o.name);
   return key;
 }
@@ -471,6 +498,7 @@ function commentsBlock(key, title = "ความเห็น") {
 function openThreadFor(key) {
   if (D.products.some(p => p.id === key) || (over[key] && over[key].kind === "idea")) { go("board"); openItem(key); }
   else if (typeof X3D !== "undefined" && X3D.items.some(x => x.id === key)) { go("cross"); x3dOpen(key); }
+  else if (typeof S50 !== "undefined" && S50.items.some(x => x.id === key)) { go("single"); s50Open(key); }
   else { go("overview"); $("#c-general").scrollIntoView({behavior: "smooth"}); }
 }
 let generalBox = null;
@@ -583,9 +611,10 @@ function openItem(id) {
     el("label", {for: "d-note"}, "บันทึก", note),
     el("div", {class: "row"}, save,
       el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = id; drawTestForm(); }, text: "บันทึกการทดสอบ"}),
-      i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null, msg),
+      i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null,
+      i.s50 ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("single"); s50Open(i.s50); }, text: "ดูแบบ"}) : null, msg),
     el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
-    (openThread = commentsBlock(i.x3d || id)),
+    (openThread = commentsBlock(i.x3d || i.s50 || id)),
   );
   if (!$("#dlg").open) $("#dlg").showModal();
 }
@@ -711,13 +740,16 @@ function renderProcess() {
 
 __CROSS3D_JS__
 
+__S50_JS__
+
 // ------------------------------------------------------------ tabs
-const TABS = ["overview", "board", "cross", "tests", "process", "plan"];
-let crossReady = false;
+const TABS = ["overview", "board", "single", "cross", "tests", "process", "plan"];
+let crossReady = false, singleReady = false;
 function go(tab) {
   if (!TABS.includes(tab)) tab = "overview";
   for (const t of TABS) $("#v-" + t).hidden = t !== tab;
   if (tab === "cross" && !crossReady) { crossReady = true; x3dCards(); }
+  if (tab === "single" && !singleReady) { singleReady = true; s50Cards(); }
   document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   try { localStorage.setItem("pd-tab", tab); } catch {}
 }

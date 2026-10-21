@@ -92,13 +92,25 @@ X_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{b}
     ("กำไรขั้นต้นเฉลี่ย", f"{round(sum(i['margin'] for i in xi) / len(xi) * 100)}%", f"ต่ำสุด {round(min(i['margin'] for i in xi) * 100)}%"),
 ])
 
+# ---------------------------------------------------------------- tab "ชิ้นเดียว 50" (data from ../single50/build.py)
+S50 = json.load(open(os.path.join(ROOT, "single50", "single50.json")))
+S50_JS = open(os.path.join(HERE, "single50.js")).read().replace("__S50__", json.dumps(S50, ensure_ascii=False, separators=(",", ":")))
+si = S50["items"]
+S_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{v}</b><span class="small muted">{c}</span></div>' for a, v, c in [
+    ("ไอเดียชิ้นเดียว", len(si), f"{len({i['group'] for i in si})} กลุ่ม"),
+    ("ทำได้กับหนังที่มี", sum(not i["load"] for i in si), f"อีก {sum(i['load'] for i in si)} แบบรับแรง รอหนัง 2 มม."),
+    ("ใช้ชิ้น 07", sum(i["uses07"] for i in si), "07 มี 200 ชิ้น ยังไม่มีสินค้า"),
+    ("กำไรขั้นต้น", f"{round(min(i['margin'] for i in si) * 100)}–{round(max(i['margin'] for i in si) * 100)}%", "ต้นทุนชิ้นหนังตามเอกสารสถานะ"),
+])
+
 TEMPLATE = open(os.path.join(HERE, "template.html")).read()
 WEB = "--web" in sys.argv            # pd.oct26brand.com (Cloudflare Pages) instead of the claude.ai Artifact
 ADAPTER = open(os.path.join(HERE, "adapters", "web.js" if WEB else "artifact.js")).read()
 out = (TEMPLATE.replace("__DB_ADAPTER__", ADAPTER).replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
        .replace("__WORDMARK__", WORDMARK).replace("__ROLES__", ROLES_HTML).replace("__RULES__", RULES_HTML)
        .replace("__PLAN__", PLAN_HTML).replace("__FILES__", FILES_HTML)
-       .replace("__X_STATS__", X_STATS).replace("__X_COMPAT__", X_COMPAT).replace("__CROSS3D_JS__", CROSS_JS))
+       .replace("__X_STATS__", X_STATS).replace("__X_COMPAT__", X_COMPAT).replace("__CROSS3D_JS__", CROSS_JS)
+       .replace("__S_STATS__", S_STATS).replace("__S50_JS__", S50_JS))
 if WEB:
     out = out.replace("<title>ฝ่ายพัฒนาสินค้า OCT. 26</title>", "<title>OCT. 26 PD · ระบบงานฝ่ายพัฒนาสินค้า</title>")
     cut = out.index('<div class="wrap">')

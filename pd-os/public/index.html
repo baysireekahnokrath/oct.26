@@ -168,6 +168,19 @@ ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
 .cmt-form textarea{min-height:56px}
 .feed li{cursor:pointer}
 .feed li:hover{border-color:var(--ink)}
+.s50wrap{background:var(--chip);aspect-ratio:1;display:grid;place-items:center;padding:8px}
+.s50{width:100%;height:100%}
+.s50 .hide{fill:var(--card);stroke:var(--leather);stroke-width:.9}
+.s50 .cut{stroke:var(--tomato);stroke-width:1}
+.s50 .stick{stroke:#8A5A2B;stroke-linecap:round}.s50 .straw{stroke:var(--mint);stroke-linecap:round}
+.s50 .ribbon{stroke:var(--cobalt);opacity:.8}.s50 .card{stroke:var(--sun)}.s50 .elastic{stroke:var(--ink)}
+.s50 .pin{stroke:var(--muted)}.s50 .pinhead{fill:var(--muted)}
+.s50 .behind{stroke-dasharray:3 3;opacity:.45}
+.s50 .rim{stroke:var(--ink);stroke-linecap:round}.s50 .twist{fill:var(--sun);opacity:.85}
+.s50 .clip{stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+.s50 .obj{fill:var(--mint);opacity:.25;stroke:var(--mint)}
+.s50 .s50txt{font:600 8px var(--display);fill:var(--ink);text-anchor:middle}.s50 .s50txt.end{text-anchor:end;font-size:10px}
+.s50big{background:var(--chip);border-radius:13px;padding:var(--s3);max-width:340px;margin:0 auto;width:100%}
 .xgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:var(--s3)}
 .xcard{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:0 0 var(--s3);display:grid;gap:var(--s2);overflow:hidden}
 .xcard:hover{border-color:var(--ink)}
@@ -203,6 +216,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
 <nav class="tabs" aria-label="ส่วนของหน้า">
   <a href="#overview" data-tab="overview">ภาพรวม</a>
   <a href="#board" data-tab="board">บอร์ดสินค้า</a>
+  <a href="#single" data-tab="single">ชิ้นเดียว 50</a>
   <a href="#cross" data-tab="cross">ไขว้ 3D</a>
   <a href="#tests" data-tab="tests">ทดสอบ</a>
   <a href="#process" data-tab="process">ขั้นตอน</a>
@@ -240,7 +254,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
   </div>
   <div class="block">
     <h2>ไฟล์ของฝ่าย</h2>
-    <ul class="plain files"><li><code>../brand-20261014/brand.py</code><span>สินค้า 30 แบบ ราคา ต้นทุน สถานะเริ่มต้น</span></li><li><code>../diecut-leather-20261014/</code><span>แพตเทิร์นบล็อก 6 แบบ SVG DXF และ PDF 1:1 สำหรับตัดกระดาษแข็ง</span></li><li><code>../diecut-leather-20261013/assembly-01/</code><span>สายหัวใจ 200 และ 250</span></li><li><code>pd.py</code><span>ขั้นตอน ประตู การทดสอบ สิ่งที่ต้องลองของแต่ละสินค้า แผน 12 เดือน</span></li><li><code>pinwheel02/</code><span>02 กังหัน: ทำไมไขว้แล้วหลุด สินค้า 02 ที่ขายได้ และวิธีลองแก้ร่อง</span></li><li><code>cross3d/</code><span>ไขว้ 3D: อ่านปีกและร่องจากบล็อก ประกอบ 3D ตรวจการชน และ 50 แบบใน ideas.py</span></li><li><code>site/build.py → site/index.html</code><span>หน้าฝ่ายพัฒนาสินค้า บอร์ดสด บันทึกการทดสอบ และแท็บไขว้ 3D</span></li></ul>
+    <ul class="plain files"><li><code>../brand-20261014/brand.py</code><span>สินค้า 30 แบบ ราคา ต้นทุน สถานะเริ่มต้น</span></li><li><code>../diecut-leather-20261014/</code><span>แพตเทิร์นบล็อก 6 แบบ SVG DXF และ PDF 1:1 สำหรับตัดกระดาษแข็ง</span></li><li><code>../diecut-leather-20261013/assembly-01/</code><span>สายหัวใจ 200 และ 250</span></li><li><code>pd.py</code><span>ขั้นตอน ประตู การทดสอบ สิ่งที่ต้องลองของแต่ละสินค้า แผน 12 เดือน</span></li><li><code>single50/</code><span>50 สินค้าใหม่แบบชิ้นเดียว ไม่ต่อชิ้น ไม่ใช้ 06 (single_ideas.py) และข้อมูลแท็บชิ้นเดียว 50</span></li><li><code>pinwheel02/</code><span>02 กังหัน: ทำไมไขว้แล้วหลุด สินค้า 02 ที่ขายได้ และวิธีลองแก้ร่อง</span></li><li><code>cross3d/</code><span>ไขว้ 3D: อ่านปีกและร่องจากบล็อก ประกอบ 3D ตรวจการชน และ 50 แบบใน ideas.py</span></li><li><code>site/build.py → site/index.html</code><span>หน้าฝ่ายพัฒนาสินค้า บอร์ดสด บันทึกการทดสอบ และแท็บไขว้ 3D</span></li></ul>
   </div>
 </section>
 
@@ -271,6 +285,17 @@ table.compat td.ok{color:var(--good);font-weight:600}
   </form>
 </section>
 
+<section class="view" id="v-single" hidden>
+  <div class="block">
+    <p class="eyebrow">Single piece · ชิ้นเดียว</p>
+    <h2>50 สินค้าใหม่ ชิ้นเดียว ไม่ต้องต่อชิ้น</h2>
+    <p class="muted">ทำตามเอกสารสถานะ: ไม่ใช้ 06 ไม่ต่อชิ้นกับชิ้น ใช้หนัง 1.0–1.2 มม. และชิ้นที่ตัดไว้แล้ว ร่องของแต่ละชิ้นใช้รับของอย่างอื่น เช่น ไม้ ริบบิ้น หลอด การ์ด ยางยืด เข็มกลัด หรือขอบภาชนะ ทุกแบบยังไม่ได้ลองกับของจริง แตะการ์ดเพื่อดูวิธีลอง ส่งเข้าบอร์ด หรือเขียนความเห็น</p>
+  </div>
+  <div class="stats"><div class="stat"><span class="small muted">ไอเดียชิ้นเดียว</span><b>50</b><span class="small muted">7 กลุ่ม</span></div><div class="stat"><span class="small muted">ทำได้กับหนังที่มี</span><b>48</b><span class="small muted">อีก 2 แบบรับแรง รอหนัง 2 มม.</span></div><div class="stat"><span class="small muted">ใช้ชิ้น 07</span><b>13</b><span class="small muted">07 มี 200 ชิ้น ยังไม่มีสินค้า</span></div><div class="stat"><span class="small muted">กำไรขั้นต้น</span><b>61–86%</b><span class="small muted">ต้นทุนชิ้นหนังตามเอกสารสถานะ</span></div></div>
+  <div class="chips" id="s-filters" role="group" aria-label="กรองไอเดียชิ้นเดียว"></div>
+  <div class="xgrid" id="s-cards"></div>
+</section>
+
 <section class="view" id="v-cross" hidden>
   <div class="block">
     <p class="eyebrow">Cross Lab · ไขว้ 3D</p>
@@ -282,7 +307,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
   <div class="block">
     <h3>ปีกไหนเข้าร่องไหนได้</h3>
     <p class="small muted">ปีกต้องสั้นกว่าร่อง 0 ถึง 1 มม. จึงแน่นพอดีและไม่ฉีก ตัวเลขคือความยาวเป็นมิลลิเมตร ส่วน 02 กังหันไม่มีปีก ใช้ร่องเปิดจากขอบถึงกลางชิ้น ไขว้กันเองแบบช่องกล่องไข่</p>
-    <div class="scroll"><table class='compat num'><thead><tr><th></th><th>ร่อง 01<br><span class='small muted'>17.9</span></th><th>ร่อง 03<br><span class='small muted'>22.5</span></th><th>ร่อง 04<br><span class='small muted'>30.0</span></th><th>ร่อง 05<br><span class='small muted'>30.0</span></th><th>ร่อง 06<br><span class='small muted'>17.5</span></th></tr></thead><tbody><tr><th>ปีก 01 หัวหมี<br><span class='small muted'>17.4</span></th><td class='ok'>✓ 0.5</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.1</td></tr><tr><th>ปีก 03 กากบาทแคปซูล<br><span class='small muted'>22.0</span></th><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td></tr><tr><th>ปีก 04 สี่เหลี่ยมมน<br><span class='small muted'>29.5</span></th><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='ok'>✓ 0.5</td><td class='muted'>–</td></tr><tr><th>ปีก 05 วงกลม<br><span class='small muted'>29.5</span></th><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='ok'>✓ 0.5</td><td class='muted'>–</td></tr><tr><th>ปีก 06 กากบาทนุ่ม<br><span class='small muted'>17.0</span></th><td class='ok'>✓ 0.9</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.5</td></tr></tbody></table></div>
+    <div class="scroll"><table class='compat num'><thead><tr><th></th><th>ร่อง 01<br><span class='small muted'>17.9</span></th><th>ร่อง 03<br><span class='small muted'>22.5</span></th><th>ร่อง 04<br><span class='small muted'>30.0</span></th><th>ร่อง 05<br><span class='small muted'>30.0</span></th><th>ร่อง 06<br><span class='small muted'>17.5</span></th><th>ร่อง 07<br><span class='small muted'>17.1</span></th></tr></thead><tbody><tr><th>ปีก 01 หัวหมี<br><span class='small muted'>17.4</span></th><td class='ok'>✓ 0.5</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.1</td><td class='muted'>–</td></tr><tr><th>ปีก 03 กากบาทแคปซูล<br><span class='small muted'>22.0</span></th><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td></tr><tr><th>ปีก 04 สี่เหลี่ยมมน<br><span class='small muted'>29.5</span></th><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='ok'>✓ 0.5</td><td class='muted'>–</td><td class='muted'>–</td></tr><tr><th>ปีก 05 วงกลม<br><span class='small muted'>29.5</span></th><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='ok'>✓ 0.5</td><td class='muted'>–</td><td class='muted'>–</td></tr><tr><th>ปีก 06 กากบาทนุ่ม<br><span class='small muted'>17.0</span></th><td class='ok'>✓ 0.9</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.5</td><td class='ok'>✓ 0.1</td></tr><tr><th>ปีก 07 กากบาทข้อต่อวงกลม<br><span class='small muted'>16.6</span></th><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='muted'>–</td><td class='ok'>✓ 0.9</td><td class='ok'>✓ 0.5</td></tr></tbody></table></div>
   </div>
   <div class="chips" id="x-filters" role="group" aria-label="กรองตามกลุ่ม"></div>
   <p class="small muted" id="x-status">กำลังโหลดภาพ 3D…</p>
@@ -410,7 +435,8 @@ function items() {
       parts, joints, extra: extra ? ["ชิ้นเสริม", extra] : null, pack: o.pack, cost: costOf(parts, joints, extra, o.pack),
       stage: STAGE[o.stage] ? o.stage : "idea", blocker: String(o.blocker || ""), note: String(o.note || ""), hero: false,
       pieces: parts.map(([c, q]) => `${D.pieceName[c]} × ${q}`).join(" + "), check: "", steps: [], updated: o.updated || "",
-      x3d: typeof o.x3d === "string" && X3D.items.some(x => x.id === o.x3d) ? o.x3d : null});
+      x3d: typeof o.x3d === "string" && X3D.items.some(x => x.id === o.x3d) ? o.x3d : null,
+      s50: typeof o.s50 === "string" && S50.items.some(x => x.id === o.s50) ? o.s50 : null});
   }
   return list;
 }
@@ -430,6 +456,7 @@ function threadLabel(key) {
   if (key === "general") return "พูดคุยทั้งทีม";
   const p = D.products.find(x => x.id === key); if (p) return `${p.n}. ${p.name}`;
   const x = typeof X3D !== "undefined" && X3D.items.find(y => y.id === key); if (x) return `${x.id} ${x.name}`;
+  const s = typeof S50 !== "undefined" && S50.items.find(y => y.id === key); if (s) return `${s.id} ${s.name}`;
   const o = over[key]; if (o && o.name) return String(o.name);
   return key;
 }
@@ -470,6 +497,7 @@ function commentsBlock(key, title = "ความเห็น") {
 function openThreadFor(key) {
   if (D.products.some(p => p.id === key) || (over[key] && over[key].kind === "idea")) { go("board"); openItem(key); }
   else if (typeof X3D !== "undefined" && X3D.items.some(x => x.id === key)) { go("cross"); x3dOpen(key); }
+  else if (typeof S50 !== "undefined" && S50.items.some(x => x.id === key)) { go("single"); s50Open(key); }
   else { go("overview"); $("#c-general").scrollIntoView({behavior: "smooth"}); }
 }
 let generalBox = null;
@@ -582,9 +610,10 @@ function openItem(id) {
     el("label", {for: "d-note"}, "บันทึก", note),
     el("div", {class: "row"}, save,
       el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = id; drawTestForm(); }, text: "บันทึกการทดสอบ"}),
-      i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null, msg),
+      i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null,
+      i.s50 ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("single"); s50Open(i.s50); }, text: "ดูแบบ"}) : null, msg),
     el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
-    (openThread = commentsBlock(i.x3d || id)),
+    (openThread = commentsBlock(i.x3d || i.s50 || id)),
   );
   if (!$("#dlg").open) $("#dlg").showModal();
 }
@@ -883,13 +912,129 @@ async function x3dViewer(canvas, slider, item) {
 }
 
 
+// ------------------------------------------------------------ tab "ชิ้นเดียว 50": single-piece ideas (data from ../single50/build.py)
+// Each drawing is the real die outline with what the piece holds drawn over it: a stick, ribbon, straw, card,
+// elastic or pin through the two slits, a rim in an open slot, or an object on top.
+const S50 = {"geo":{"01":{"vb":"0 0 104.36 104.36","d":"M100.650,53.709 C95.699,48.758 87.670,48.758 82.719,53.709 C82.629,53.799 82.544,53.893 82.457,53.985 C80.841,46.368 77.077,39.115 71.161,33.199 C65.245,27.283 57.992,23.519 50.375,21.903 C50.468,21.816 50.561,21.731 50.651,21.641 C55.602,16.689 55.602,8.661 50.651,3.710 C45.699,-1.242 37.671,-1.242 32.720,3.710 C27.768,8.661 27.768,16.689 32.720,21.641 C32.810,21.731 32.903,21.816 32.995,21.903 C25.378,23.519 18.126,27.283 12.210,33.199 C-4.070,49.478 -4.070,75.872 12.209,92.151 C28.488,108.430 54.882,108.430 71.161,92.151 C77.077,86.234 80.841,78.982 82.457,71.365 C82.544,71.457 82.629,71.550 82.719,71.641 C87.670,76.592 95.699,76.592 100.650,71.641 C105.602,66.689 105.602,58.661 100.650,53.709 Z","slits":[[11.2,71.615,11.2,53.705],[32.745,93.16,50.655,93.16]],"slots":[]},"02":{"vb":"0 0 90.0 90.0","d":"M90.000,45.000 C90.000,32.834 82.599,22.398 72.053,17.946 C67.602,7.401 57.166,0.000 45.000,0.000 C32.834,0.000 22.398,7.401 17.947,17.946 C7.401,22.398 0.000,32.834 0.000,45.000 C0.000,57.166 7.401,67.602 17.947,72.053 C22.398,82.599 32.834,90.000 45.000,90.000 C57.166,90.000 67.602,82.599 72.053,72.053 C82.599,67.602 90.000,57.166 90.000,45.000 Z","slits":[],"slots":[[73.054,72.054,45.0,72.054],[17.946,73.054,17.946,45.0],[72.054,16.946,72.054,45.0],[16.946,17.946,45.0,17.946]]},"03":{"vb":"0 0 90.01 90.0","d":"M67.508,22.500 C67.505,22.500 67.503,22.501 67.499,22.501 C67.499,22.499 67.500,22.497 67.500,22.496 C67.500,10.070 57.426,-0.004 45.000,-0.004 C32.573,-0.004 22.499,10.070 22.499,22.496 C22.499,22.497 22.500,22.499 22.500,22.500 C10.073,22.500 0.000,32.574 0.000,45.000 C0.000,57.427 10.073,67.500 22.500,67.500 C22.501,67.500 22.503,67.500 22.504,67.500 C22.504,79.926 32.578,90.000 45.004,90.000 C57.430,90.000 67.504,79.926 67.504,67.500 C67.505,67.500 67.507,67.500 67.508,67.500 C79.934,67.500 90.008,57.427 90.008,45.000 C90.008,32.574 79.934,22.500 67.508,22.500 Z","slits":[[22.5,56.25,22.5,33.75],[67.5,56.25,67.5,33.75]],"slots":[[68.5,22.5,56.0,22.5],[21.5,22.5,34.0,22.5],[68.5,67.5,56.0,67.5],[21.5,67.5,34.0,67.5]]},"04":{"vb":"0 0 90.0 90.0","d":"M90.000,5.000 L90.000,85.000 C90.000,87.761 87.761,90.000 85.000,90.000 L5.000,90.000 C2.238,90.000 0.000,87.761 0.000,85.000 L0.000,5.000 C0.000,2.238 2.238,0.000 5.000,0.000 L85.000,0.000 C87.761,0.000 90.000,2.238 90.000,5.000 Z","slits":[[56.893,78.107,78.107,56.893],[11.893,33.107,33.107,11.893]],"slots":[[90.707,45.707,77.93,32.93],[44.293,-0.707,57.07,12.07],[45.707,90.707,32.93,77.93],[-0.707,44.293,12.07,57.07]]},"05":{"vb":"0 0 90.0 90.0","d":"M90.000,45.000 C90.000,69.852 69.853,90.000 45.000,90.000 C20.147,90.000 0.000,69.852 0.000,45.000 C0.000,20.147 20.147,-0.001 45.000,-0.001 C69.853,-0.001 90.000,20.147 90.000,45.000 Z","slits":[[30.0,13.18,60.0,13.18],[30.0,76.82,60.0,76.82]],"slots":[[76.82,12.18,76.82,30.25],[76.82,77.82,76.82,59.75],[13.18,12.18,13.18,30.25],[13.18,77.82,13.18,59.75]]},"07":{"vb":"0 0 90.0 90.0","d":"M90.000,45.000 C90.000,35.846 82.580,28.426 73.427,28.426 C73.401,28.426 73.377,28.429 73.352,28.429 L73.333,28.410 C66.888,28.359 61.672,23.160 61.592,16.722 L61.584,16.714 C61.584,16.667 61.588,16.621 61.588,16.573 C61.588,7.420 54.168,0.000 45.015,0.000 C35.861,0.000 28.441,7.420 28.441,16.573 C28.441,16.617 28.445,16.660 28.445,16.704 L28.408,16.742 C28.318,23.167 23.112,28.353 16.678,28.409 L16.658,28.429 C16.630,28.429 16.602,28.426 16.573,28.426 C7.420,28.426 0.000,35.846 0.000,45.000 C0.000,54.153 7.420,61.573 16.573,61.573 C16.575,61.573 16.577,61.573 16.579,61.573 L16.579,61.573 C23.111,61.577 28.406,66.870 28.412,73.402 L28.441,73.432 C28.445,82.582 35.863,90.000 45.015,90.000 C54.168,90.000 61.588,82.580 61.588,73.427 C61.588,73.425 61.588,73.423 61.588,73.421 L61.588,73.421 C61.588,73.418 61.588,73.415 61.588,73.412 C61.588,66.874 66.888,61.573 73.427,61.573 C73.428,61.573 73.430,61.573 73.432,61.573 L73.432,61.573 C82.583,61.570 90.000,54.151 90.000,45.000 Z","slits":[[36.46,16.57,53.56,16.57],[36.46,73.43,53.56,73.43]],"slots":[[73.44,27.427,73.44,36.7],[73.44,62.573,73.44,53.3],[16.58,27.427,16.58,36.7],[16.58,62.574,16.58,53.3]]}},"items":[{"id":"S01","group":"บ้านและสวน","name":"ป้ายปักกระถาง","pieces":[["03",1]],"how":"สอดไม้ไผ่เข้าร่องหนึ่ง ลอดหลังชิ้น ออกอีกร่อง แล้วปักดิน เขียนชื่อต้นไม้ด้วยปากกาเพ้นท์","mech":"stick","extras":[["ไม้ไผ่ 25 ซม.",1]],"pack":"flat","who":"คนปลูกต้นไม้ ร้านต้นไม้","price":39,"load":false,"test":"ปักกระถางที่รดน้ำทุกวัน 7 วัน ดูว่าหนังบวมหรือขึ้นราไหม","stamp":"","cost":11.83,"margin":0.697,"piecesTxt":"กากบาทแคปซูล 03 × 1","uses07":false},{"id":"S02","group":"บ้านและสวน","name":"ป้ายเสียบขอบกระถาง","pieces":[["07",1]],"how":"ดันร่องเปิดข้างชิ้นสวมขอบกระถางพลาสติก ไม่ต้องใช้ไม้","mech":"slot","extras":[],"pack":"flat","who":"คนปลูกต้นไม้ ร้านต้นไม้","price":35,"load":false,"test":"สวมขอบกระถาง 4 นิ้ว ยกกระถางเอียง 45° ป้ายไม่หลุด","stamp":"","cost":10.83,"margin":0.691,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S03","group":"บ้านและสวน","name":"ชุดป้ายแปลงผักสวนครัว 5 ชิ้น","pieces":[["03",5]],"how":"ป้ายปักกระถาง 5 ชิ้น ปั๊มชื่อผักไว้ให้ เช่น กะเพรา โหระพา พริก มะนาว ข่า","mech":"set","extras":[["ไม้ไผ่ 25 ซม.",5]],"pack":"flat","who":"คนปลูกผักสวนครัว ของขวัญขึ้นบ้านใหม่","price":149,"load":false,"test":"ปั๊มอักษรไทยบนหนัง 1.0 มม. อ่านออกไหม","stamp":"กะเพรา","cost":33.82,"margin":0.773,"piecesTxt":"กากบาทแคปซูล 03 × 5","uses07":false},{"id":"S04","group":"บ้านและสวน","name":"แผ่นรองกระถางแคคตัสกันโต๊ะเป็นรอย","pieces":[["05",1]],"how":"วางใต้กระถางเล็ก 3 นิ้วที่ไม่ต้องรดน้ำบ่อย กันก้นกระถางขูดโต๊ะไม้","mech":"object","extras":[],"pack":"flat","who":"คนเลี้ยงแคคตัส คนทำงานที่มีต้นไม้บนโต๊ะ","price":49,"load":false,"test":"วางกระถางดินเผามีความชื้น 3 วัน ดูคราบบนหนัง","stamp":"","cost":10.55,"margin":0.785,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S05","group":"บ้านและสวน","name":"ฝาปิดแก้วกันแมลง เสียบหลอดได้","pieces":[["05",1]],"how":"วางบนปากแก้วนั่งในสวน กันแมลงตกแก้ว แทงหลอดลงร่องได้ และพลิกเป็นที่รองแก้วได้","mech":"straw","extras":[],"pack":"flat","who":"คนนั่งเล่นในสวน คาเฟ่ที่มีที่นั่งนอกร้าน","price":59,"load":false,"test":"ปิดแก้วปาก 7–8 ซม. แทงหลอด 6 มม. ผ่านร่อง หลอดไม่ล้ม","stamp":"","cost":10.83,"margin":0.816,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S06","group":"บ้านและสวน","name":"แผ่นรองแจกันและโคมไฟกันรอย","pieces":[["04",1]],"how":"รองใต้แจกันหรือฐานโคมไฟบนโต๊ะไม้ กันรอยขีด","mech":"object","extras":[],"pack":"flat","who":"คนแต่งบ้าน","price":49,"load":false,"test":"วางแจกันแก้วมีน้ำหนัก 1 กก. ลากเบา ๆ หนังไม่ยับ","stamp":"","cost":10.55,"margin":0.785,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S07","group":"บ้านและสวน","name":"ป้ายคาดโหลเครื่องเทศ","pieces":[["07",1]],"how":"ร้อยยางยืดผ่านร่องสองร่อง แล้วคาดรอบโหล เขียนชื่อเครื่องเทศ เปลี่ยนโหลได้","mech":"elastic","extras":[["ยางยืดแบน 20 ซม.",2]],"pack":"flat","who":"คนชอบทำครัว ร้านของใช้ในบ้าน","price":45,"load":false,"test":"คาดโหลแก้ว 8 ซม. เปิดปิดฝา 20 ครั้ง ป้ายไม่เลื่อน","stamp":"","cost":12.83,"margin":0.715,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S08","group":"บ้านและสวน","name":"ที่รองเทียนหอม","pieces":[["05",1]],"how":"รองใต้โหลเทียนหอม กันคราบเทียนและความร้อนบนโต๊ะ","mech":"object","extras":[],"pack":"flat","who":"ร้านเทียนหอม สปา","price":49,"load":false,"test":"จุดเทียน 2 ชม. แตะดูว่าหนังใต้โหลร้อนหรือเปลี่ยนสีไหม","stamp":"","cost":10.55,"margin":0.785,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S09","group":"บ้านและสวน","name":"ป้ายบอกรดน้ำแล้ว สองหน้า","pieces":[["05",1]],"how":"ปั๊ม 'รดแล้ว' ด้านหนึ่ง 'ยังไม่รด' อีกด้าน ปักไม้ในกระถาง พลิกบอกคนในบ้าน","mech":"stick","extras":[["ไม้ไผ่ 25 ซม.",1]],"pack":"flat","who":"บ้านที่ช่วยกันรดน้ำต้นไม้ ครอบครัวมีเด็ก","price":49,"load":false,"test":"ปั๊มสองหน้าบนหนัง 1.0 มม. ตัวอักษรไม่ทะลุอีกด้าน","stamp":"รดแล้ว","cost":12.11,"margin":0.753,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S10","group":"ครัวและโต๊ะอาหาร","name":"ปลอกตะเกียบคู่","pieces":[["03",1]],"how":"สอดตะเกียบคู่ผ่านร่องทั้งสองให้อยู่ด้วยกัน ขายพร้อมตะเกียบไม้เป็นชุดของขวัญ","mech":"stick","extras":[["ตะเกียบไม้ 1 คู่",8]],"pack":"flat","who":"ของขวัญ ร้านอาหารญี่ปุ่น","price":79,"load":false,"test":"สอดตะเกียบปลายเรียว 7 มม. ถอดใส่ 10 ครั้ง ร่องไม่ฉีก","stamp":"","cost":18.83,"margin":0.762,"piecesTxt":"กากบาทแคปซูล 03 × 1","uses07":false},{"id":"S11","group":"ครัวและโต๊ะอาหาร","name":"ป้ายชื่อเมนูเสียบขอบชามบุฟเฟต์","pieces":[["05",1]],"how":"ดันร่องเปิดสวมขอบชามหรือถาด เขียนชื่ออาหารด้วยชอล์กมาร์กเกอร์","mech":"slot","extras":[],"pack":"flat","who":"ร้านจัดเลี้ยง โรงแรม","price":39,"load":false,"test":"สวมขอบชามเซรามิกหนา 4 มม. ไม่หลุดเมื่อเลื่อนชาม","stamp":"","cost":10.83,"margin":0.722,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S12","group":"ครัวและโต๊ะอาหาร","name":"ที่รัดผ้าเช็ดปากแบบสอดร่อง","pieces":[["04",1]],"how":"พับผ้าเช็ดปากเป็นแถบกว้าง 2.5 ซม. สอดผ่านร่องทแยงทั้งสอง ไม่ต้องมีสาย","mech":"ribbon","extras":[],"pack":"flat","who":"ร้านอาหาร งานเลี้ยง","price":49,"load":false,"test":"พับผ้าเช็ดปากผ้าฝ้ายจริง สอดผ่านร่อง 30 มม. ได้ไหม","stamp":"","cost":10.83,"margin":0.779,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S13","group":"ครัวและโต๊ะอาหาร","name":"ที่ปิดปากถุงขนม","pieces":[["05",1]],"how":"บิดปากถุงขนมปังหรือถุงกาแฟแล้วดันผ่านร่องเดียว ร่องบีบไว้แทนคลิปพลาสติก","mech":"twist","extras":[],"pack":"flat","who":"ทุกบ้าน","price":39,"load":false,"test":"ปิดถุงขนมปัง วางคว่ำ 1 คืน ขนมไม่แข็ง","stamp":"","cost":10.83,"margin":0.722,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S14","group":"ครัวและโต๊ะอาหาร","name":"ป้ายหลอดเครื่องดื่ม ชุด 10 ชิ้น","pieces":[["07",10]],"how":"แทงหลอดผ่านร่องสองร่อง ป้ายตั้งอยู่บนหลอดเหนือแก้ว ปั๊มชื่อร้านได้","mech":"straw","extras":[],"pack":"flat","who":"คาเฟ่ ร้านน้ำ ร้านอาหารเด็ก","price":199,"load":false,"test":"หลอดกระดาษ 6 มม. ไม่ยุบตอนแทง และป้ายไม่หมุนลง","stamp":"CAFE","cost":54.09,"margin":0.728,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 10","uses07":true},{"id":"S15","group":"ครัวและโต๊ะอาหาร","name":"ป้ายติดก้านแก้วไวน์ ชุด 5 ลาย","pieces":[["02",1],["03",1],["04",1],["05",1],["07",1]],"how":"สวมร่องเปิดข้างชิ้นเข้าก้านแก้ว ใช้ลายบอกว่าแก้วไหนของใคร","mech":"slot","extras":[],"pack":"flat","who":"ปาร์ตี้ที่บ้าน ร้านไวน์","price":149,"load":false,"test":"สวมก้านแก้ว 7 มม. ยกดื่ม 20 ครั้ง ป้ายไม่หลุด","stamp":"","cost":28.82,"margin":0.807,"piecesTxt":"กังหัน 02 × 1 + กากบาทแคปซูล 03 × 1 + สี่เหลี่ยมมน 04 × 1 + วงกลม 05 × 1 + กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S16","group":"ครัวและโต๊ะอาหาร","name":"ป้ายชื่อเสียบขอบแก้วกระดาษ ชุด 6","pieces":[["07",6]],"how":"สวมร่องเปิดเข้าขอบแก้วกระดาษหรือแก้วพลาสติก เขียนชื่อ ปาร์ตี้จบเก็บไว้ใช้ใหม่","mech":"slot","extras":[],"pack":"flat","who":"ปาร์ตี้วันเกิด งานบริษัท","price":99,"load":false,"test":"สวมขอบแก้วกระดาษ ร่องไม่ทำขอบแก้วยุบ","stamp":"","cost":33.32,"margin":0.663,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 6","uses07":true},{"id":"S17","group":"ปาร์ตี้และของขวัญ","name":"ป้ายปักเค้กวันเกิดปั๊มชื่อ","pieces":[["05",1]],"how":"ปั๊มชื่อหรือ HBD สอดไม้ผ่านร่องแล้วปักเค้ก ไม้แตะเค้ก หนังไม่แตะ เก็บเป็นที่ระลึกได้","mech":"stick","extras":[["ไม้ปักอาหาร 20 ซม.",1]],"pack":"flat","who":"ครอบครัว งานวันเกิด","price":79,"load":false,"test":"ปักเค้กจริง ป้ายไม่เอียงล้ม หนังไม่แตะครีม","stamp":"HBD","cost":12.11,"margin":0.847,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S18","group":"ปาร์ตี้และของขวัญ","name":"ตัวคาดริบบิ้นกล่องของขวัญ","pieces":[["04",1]],"how":"ร้อยริบบิ้นผ่านร่องทแยงสองร่อง แล้วผูกกล่อง ชิ้นหนังเป็นของตกแต่งที่ผู้รับเก็บต่อได้","mech":"ribbon","extras":[["ริบบิ้นผ้า 1 ม.",6]],"pack":"flat","who":"ร้านห่อของขวัญ ทุกเทศกาล","price":49,"load":false,"test":"ริบบิ้นกว้าง 2.5 ซม. ลอดร่อง 30 มม. ไม่ย่น","stamp":"","cost":16.83,"margin":0.657,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S19","group":"ปาร์ตี้และของขวัญ","name":"ป้ายข้อความปักช่อดอกไม้","pieces":[["03",1]],"how":"เขียนหรือปั๊มข้อความ สอดไม้เขียวแล้วปักในช่อ แทนการ์ดกระดาษ","mech":"stick","extras":[["ไม้ปักดอกไม้สีเขียว",2]],"pack":"flat","who":"ร้านดอกไม้","price":45,"load":false,"test":"ปักในโฟมช่อดอกไม้ ป้ายตั้งตรงไม่หมุน","stamp":"LOVE","cost":13.11,"margin":0.709,"piecesTxt":"กากบาทแคปซูล 03 × 1","uses07":false},{"id":"S20","group":"ปาร์ตี้และของขวัญ","name":"ป้ายขวดของขวัญร้อยริบบิ้น","pieces":[["07",1]],"how":"ร้อยริบบิ้นแคบผ่านร่องแล้วผูกรอบคอขวดไวน์ น้ำผึ้ง หรือซอส","mech":"ribbon","extras":[["ริบบิ้น 15 มม. 50 ซม.",3]],"pack":"flat","who":"ของขวัญปีใหม่ ร้านของฝาก","price":49,"load":false,"test":"ริบบิ้น 15 มม. ลอดร่อง 17.1 มม. พอดีไหม","stamp":"","cost":13.83,"margin":0.718,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S21","group":"ปาร์ตี้และของขวัญ","name":"ป้ายเลขโต๊ะงานเลี้ยง","pieces":[["05",1]],"how":"ปั๊มเลขโต๊ะ สอดไม้แล้วปักกลางแจกันดอกไม้บนโต๊ะ","mech":"stick","extras":[["ไม้ไผ่ 30 ซม.",1]],"pack":"flat","who":"ออแกไนเซอร์งานแต่ง โรงแรม","price":59,"load":false,"test":"อ่านเลขจากระยะ 3 ม. ได้ไหม","stamp":"12","cost":12.11,"margin":0.795,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S22","group":"ปาร์ตี้และของขวัญ","name":"ของชำร่วยงานแต่งปั๊มชื่อบ่าวสาว","pieces":[["05",1]],"how":"ที่รองแก้วปั๊มชื่อและวันที่ ใส่ซอง สั่งขั้นต่ำ 50 ชิ้น ราคานี้ต่อชิ้น","mech":"stamp","extras":[],"pack":"flat","who":"คู่บ่าวสาว ออแกไนเซอร์","price":45,"load":false,"test":"ปั๊มชื่อไทยยาว 2 คำบนวงกลม 9 ซม. อ่านชัด","stamp":"บิ๊ง ♥ เบ","cost":11.11,"margin":0.753,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S23","group":"ปาร์ตี้และของขวัญ","name":"ของชำร่วยงานขึ้นบ้านใหม่","pieces":[["04",1]],"how":"ที่รองแก้วปั๊มบ้านเลขที่และวันที่ขึ้นบ้าน สั่งขั้นต่ำ 30 ชิ้น ราคานี้ต่อชิ้น","mech":"stamp","extras":[],"pack":"flat","who":"เจ้าภาพงานทำบุญ","price":45,"load":false,"test":"ปั๊มตัวเลขบนสี่เหลี่ยมมน เรียงตรงไหม","stamp":"26/10","cost":11.11,"margin":0.753,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S24","group":"ปาร์ตี้และของขวัญ","name":"ตัวคาดธนบัตรใส่ซองอั่งเปา","pieces":[["05",1]],"how":"พับธนบัตรตามยาวกว้าง 2.5 ซม. สอดผ่านร่องสองร่อง ให้เงินพร้อมของที่เก็บไว้ได้","mech":"card","extras":[],"pack":"flat","who":"ตรุษจีน งานแต่ง ของขวัญผู้ใหญ่","price":49,"load":false,"test":"ธนบัตร 1000 พับ 3 ทบ สอดผ่านร่อง 30 มม. ไม่ยับมาก","stamp":"","cost":10.83,"margin":0.779,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S25","group":"เด็กและครอบครัว","name":"เกม XO หนังแท้","pieces":[["01",5],["05",5]],"how":"หมี 5 ตัวกับวงกลม 5 ชิ้นเป็นตัวหมาก ตาราง 3 × 3 พิมพ์บนถุงผ้า เล่นได้ทั้งบ้านและคาเฟ่","mech":"set","extras":[],"pack":"kit","who":"ครอบครัว คาเฟ่บอร์ดเกม","price":249,"load":false,"test":"เล่นบนถุงผ้าพิมพ์ตาราง ช่องกว้างพอวางชิ้น 9–10 ซม.","stamp":"","cost":71.88,"margin":0.711,"piecesTxt":"หัวหมี 01 × 5 + วงกลม 05 × 5","uses07":false},{"id":"S26","group":"เด็กและครอบครัว","name":"เกมจับคู่ภาพ 12 ชิ้น","pieces":[["05",12]],"how":"ปั๊มรูปเป็นคู่ 6 แบบ คว่ำแล้วเปิดหาคู่ หลังชิ้นเหมือนกันหมดเพราะเป็นหนังแผ่นเดียว","mech":"set","extras":[],"pack":"kit","who":"พ่อแม่ ครูอนุบาล","price":249,"load":false,"test":"ด้านหลังชิ้นไม่บอกคู่ (ลายหนังไม่เหมือนกันเกินไป)","stamp":"★","cost":85.31,"margin":0.657,"piecesTxt":"วงกลม 05 × 12","uses07":false},{"id":"S27","group":"เด็กและครอบครัว","name":"ป้ายชื่อเสียบขอบกล่องข้าว","pieces":[["07",1]],"how":"ดันร่องเปิดสวมขอบกล่องข้าวหรือกล่องดินสอ ปั๊มชื่อลูก","mech":"slot","extras":[],"pack":"flat","who":"ผู้ปกครองเด็กเล็ก","price":49,"load":false,"test":"สวมขอบกล่องพลาสติก 2 มม. ล้างกล่องแล้วถอดใส่ใหม่","stamp":"BENE","cost":11.11,"margin":0.773,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S28","group":"เด็กและครอบครัว","name":"ป้ายชื่อขวดน้ำคาดยางยืด","pieces":[["05",1]],"how":"ร้อยยางยืดผ่านร่องสองร่องแล้วคาดรอบขวดน้ำ ปั๊มชื่อลูก","mech":"elastic","extras":[["ยางยืดแบน 25 ซม.",2]],"pack":"flat","who":"ผู้ปกครอง โรงเรียน","price":59,"load":false,"test":"คาดขวด 7 ซม. ล้างขวดแล้วยางยังแน่น","stamp":"BEANA","cost":13.11,"margin":0.778,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S29","group":"เด็กและครอบครัว","name":"ป้ายชื่อติดเสื้อเด็ก","pieces":[["07",1]],"how":"สอดเข็มกลัดเข้าร่องหนึ่งออกอีกร่องด้านหลัง ติดเสื้อวันไปเที่ยวหรือวันกีฬาสี","mech":"pin","extras":[["เข็มกลัดซ่อนปลาย",3]],"pack":"flat","who":"ผู้ปกครอง ครู","price":59,"load":false,"test":"เข็มกลัดไม่โผล่ด้านหน้า ติดเสื้อยืดแล้วไม่ห้อยหน้าคว่ำ","stamp":"BEIYA","cost":14.11,"margin":0.761,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S30","group":"เด็กและครอบครัว","name":"ที่คั่นหนังสือปั๊มชื่อพู่ริบบิ้น","pieces":[["03",1]],"how":"ร้อยริบบิ้นผ่านร่องเป็นหางยาว เหน็บในหนังสือ ชิ้นหนังโผล่หัว","mech":"ribbon","extras":[["ริบบิ้น 15 มม. 30 ซม.",2]],"pack":"flat","who":"เด็กเริ่มอ่าน ของขวัญวันเด็ก","price":49,"load":false,"test":"ปิดหนังสือแล้วหนังไม่ทำหน้ากระดาษเป็นรอย","stamp":"READ","cost":13.11,"margin":0.732,"piecesTxt":"กากบาทแคปซูล 03 × 1","uses07":false},{"id":"S31","group":"เด็กและครอบครัว","name":"ชุดระบายสีที่รองแก้ว","pieces":[["05",1],["04",1]],"how":"หนังเปล่า 2 ชิ้นกับสีอะคริลิกสำหรับหนัง 3 สี เด็กระบายเองที่บูธหรือที่บ้าน","mech":"set","extras":[["สีอะคริลิก 3 สี",15],["พู่กัน",3]],"pack":"kit","who":"เด็ก 5–12 ปี เวิร์กช็อป","price":149,"load":false,"test":"สีอะคริลิกแห้งบนหนังใน 30 นาที ไม่ติดมือ","stamp":"","cost":57.77,"margin":0.612,"piecesTxt":"วงกลม 05 × 1 + สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S32","group":"เด็กและครอบครัว","name":"เหรียญรางวัลหนังปั๊มคำชม","pieces":[["05",1]],"how":"ร้อยริบบิ้นคล้องคอผ่านร่อง ปั๊มคำชม เช่น เก่งมาก ขายโรงเรียนและงานกีฬาสี","mech":"ribbon","extras":[["ริบบิ้นคล้องคอ",6]],"pack":"flat","who":"โรงเรียน ผู้ปกครอง","price":69,"load":true,"test":"ห้อยคอวิ่ง 5 นาที ร่องไม่ฉีก (เป็นของแขวน รอหนัง 2 มม.)","stamp":"เก่งมาก","cost":17.11,"margin":0.752,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S33","group":"แต่งตัว","name":"ที่รัดผ้าพันคอ","pieces":[["05",1]],"how":"สอดชายผ้าพันคอทั้งสองข้างผ่านร่อง ดึงให้แน่น แทนการผูกปม","mech":"ribbon","extras":[],"pack":"flat","who":"ผู้หญิงวัยทำงาน ของขวัญ","price":79,"load":false,"test":"ผ้าพันคอผ้าไหมลื่น ไม่เลื่อนหลุดเมื่อเดิน","stamp":"","cost":10.83,"margin":0.863,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S34","group":"แต่งตัว","name":"ปิ่นปักผมหนัง","pieces":[["04",1]],"how":"รวบผม วางชิ้นหนัง สอดไม้ปิ่นเข้าร่องหนึ่ง ลอดใต้ผม ออกอีกร่อง","mech":"stick","extras":[["ไม้ปิ่น 15 ซม.",10]],"pack":"flat","who":"ผู้หญิงผมยาว","price":149,"load":true,"test":"ยึดผมได้ 4 ชม. (ต้องรับแรง รอหนัง 2 มม.)","stamp":"","cost":20.83,"margin":0.86,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S35","group":"แต่งตัว","name":"เข็มกลัดหนังลายดอก","pieces":[["07",1]],"how":"สอดเข็มกลัดผ่านร่องด้านหลัง ติดกระเป๋าผ้า หมวก หรือเสื้อแจ็กเก็ต","mech":"pin","extras":[["เข็มกลัด",3]],"pack":"flat","who":"วัยรุ่น คนชอบแต่งกระเป๋าผ้า","price":69,"load":false,"test":"ติดกระเป๋าผ้าแล้วชิ้นไม่ห้อยพับ","stamp":"","cost":13.83,"margin":0.8,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S36","group":"แต่งตัว","name":"ที่เก็บกิ๊บติดผม","pieces":[["03",1]],"how":"หนีบกิ๊บดำเรียงตามขอบและร่อง ใส่กระเป๋าแล้วกิ๊บไม่กระจาย","mech":"clips","extras":[],"pack":"flat","who":"ผู้หญิง ร้านเครื่องประดับ","price":39,"load":false,"test":"หนีบกิ๊บ 12 ตัว ใส่กระเป๋าทั้งวัน","stamp":"","cost":10.83,"margin":0.722,"piecesTxt":"กากบาทแคปซูล 03 × 1","uses07":false},{"id":"S37","group":"แต่งตัว","name":"ที่รัดชายเสื้อยืด","pieces":[["05",1]],"how":"รวบชายเสื้อยืดเป็นจุก ดันผ่านร่องเดียว ได้ทรงเสื้อผูกปมโดยไม่ยับ","mech":"twist","extras":[],"pack":"flat","who":"วัยรุ่น","price":49,"load":false,"test":"ใส่เดินครึ่งวัน ชายเสื้อไม่หลุดจากร่อง","stamp":"","cost":10.83,"margin":0.779,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S38","group":"แต่งตัว","name":"ถาดวางแหวนข้างเตียง","pieces":[["07",1]],"how":"วางแหวน ต่างหู นาฬิกาก่อนนอน ทรงดอกไม้ของ 07 ช่วยกันของกลิ้ง","mech":"object","extras":[],"pack":"flat","who":"ผู้หญิง ของขวัญ","price":49,"load":false,"test":"วางแหวนแล้วไม่กลิ้งตกเมื่อแตะโต๊ะ","stamp":"","cost":10.55,"margin":0.785,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S39","group":"แต่งตัว","name":"ที่ห่อสายนาฬิกาตอนเดินทาง","pieces":[["03",1]],"how":"พันสายนาฬิกาหรือกำไลรอบชิ้น เหน็บปลายเข้าร่อง ใส่กระเป๋าแล้วไม่ขีดกับของอื่น","mech":"ribbon","extras":[],"pack":"flat","who":"คนเดินทาง","price":59,"load":false,"test":"สายนาฬิกาหนัง 20 มม. เหน็บร่อง 22.5 มม. ได้","stamp":"","cost":10.83,"margin":0.816,"piecesTxt":"กากบาทแคปซูล 03 × 1","uses07":false},{"id":"S40","group":"ร้านค้าและออฟฟิศ","name":"ที่รองแก้วปั๊มโลโก้ร้าน","pieces":[["05",1]],"how":"ปั๊มโลโก้ร้านกาแฟด้วยบล็อกปั๊มของร้าน สั่งขั้นต่ำ 30 ชิ้น ราคานี้ต่อชิ้น","mech":"stamp","extras":[],"pack":"flat","who":"ร้านกาแฟ คาเฟ่","price":45,"load":false,"test":"ปั๊มโลโก้ลายเส้นบางบนหนัง 1.0 มม. คมไหม","stamp":"LOGO","cost":11.11,"margin":0.753,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S41","group":"ร้านค้าและออฟฟิศ","name":"ป้ายแบ่งไซซ์ราวเสื้อ ชุด 5","pieces":[["05",5]],"how":"สอดตะขอไม้แขวนผ่านร่อง ป้ายคั่นราวเสื้อตามไซซ์ S M L XL XXL","mech":"hook","extras":[],"pack":"flat","who":"ร้านเสื้อผ้า","price":149,"load":false,"test":"ตะขอลวด 4 มม. ลอดร่อง 30 มม. ป้ายห้อยตรง","stamp":"M","cost":30.21,"margin":0.797,"piecesTxt":"วงกลม 05 × 5","uses07":false},{"id":"S42","group":"ร้านค้าและออฟฟิศ","name":"ป้ายราคาเสียบขอบตะกร้า","pieces":[["07",1]],"how":"ดันร่องเปิดสวมขอบตะกร้าหวายหรือลวด เขียนราคาด้วยชอล์กมาร์กเกอร์ ลบแล้วเขียนใหม่ได้","mech":"slot","extras":[],"pack":"flat","who":"ร้านค้าตลาดนัด บูธเราเอง","price":29,"load":false,"test":"ชอล์กมาร์กเกอร์ลบออกจากหนังได้ไหม","stamp":"49.-","cost":11.11,"margin":0.617,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S43","group":"ร้านค้าและออฟฟิศ","name":"ป้ายคั่นแฟ้มเอกสาร","pieces":[["04",1]],"how":"สวมร่องเปิดเข้าขอบแฟ้ม เขียนหมวด ดึงหาแฟ้มง่าย","mech":"slot","extras":[],"pack":"flat","who":"ออฟฟิศ ครู","price":39,"load":false,"test":"สวมขอบแฟ้มพลาสติก ดึงแฟ้มออกจากชั้น 20 ครั้ง","stamp":"","cost":10.83,"margin":0.722,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S44","group":"ร้านค้าและออฟฟิศ","name":"ที่เสียบปากกาคาดสมุด","pieces":[["05",1]],"how":"ร้อยยางยืดผ่านร่องคาดรอบปกสมุด แล้วสอดปากกาใต้ยางบนชิ้นหนัง","mech":"elastic","extras":[["ยางยืดแบน 40 ซม.",3]],"pack":"flat","who":"นักเรียน คนจดบันทึก","price":69,"load":false,"test":"คาดสมุด A5 ปากกาไม่หลุดเมื่อใส่กระเป๋า","stamp":"","cost":13.83,"margin":0.8,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S45","group":"ร้านค้าและออฟฟิศ","name":"ป้ายจองโต๊ะคาเฟ่","pieces":[["05",1]],"how":"ปั๊มคำว่าจองแล้ว วางบนโต๊ะ ใช้แทนป้ายพลาสติก","mech":"stamp","extras":[],"pack":"flat","who":"คาเฟ่ ร้านอาหาร","price":39,"load":false,"test":"ปั๊มสองภาษา จองแล้ว/RESERVED อ่านชัดจากระยะ 2 ม.","stamp":"จองแล้ว","cost":11.11,"margin":0.715,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S46","group":"ปั๊มชื่อและชุดของขวัญ","name":"ป้ายชื่อห้องปั๊มชื่อ","pieces":[["04",1]],"how":"ปั๊มชื่อหรือคำว่าห้องของ… ติดประตูด้วยเทปโฟมสองหน้า","mech":"stamp","extras":[["เทปโฟมสองหน้า",2]],"pack":"flat","who":"ห้องเด็ก ห้องทำงาน","price":79,"load":false,"test":"เทปโฟมติดหนังหลังชิ้นได้ไหม ลอกออกแล้วประตูไม่เสีย","stamp":"ROOM","cost":13.11,"margin":0.834,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false},{"id":"S47","group":"ปั๊มชื่อและชุดของขวัญ","name":"ที่รองแก้ววันเกิดปั๊มวันที่","pieces":[["05",1]],"how":"ปั๊มวันเดือนเกิดแบบโลโก้ OCT. 26 เช่น MAR. 23 ของขวัญวันเกิดที่เล่าเรื่องแบรนด์","mech":"stamp","extras":[],"pack":"flat","who":"ของขวัญวันเกิด คู่รัก","price":69,"load":false,"test":"ปั๊มแบบอักษรโลโก้ให้หน้าตาคล้ายโลโก้แบรนด์","stamp":"MAR. 23","cost":11.11,"margin":0.839,"piecesTxt":"วงกลม 05 × 1","uses07":false},{"id":"S48","group":"ปั๊มชื่อและชุดของขวัญ","name":"ที่รองแก้ว 07 ลายดอก","pieces":[["07",1]],"how":"SKU ใหม่ให้ชิ้น 07 ที่มี 200 ชิ้นแต่ยังไม่มีสินค้าเลย ขายคู่กับที่รองแก้วอีก 4 ลาย","mech":"plain","extras":[],"pack":"flat","who":"ทุกบ้าน","price":49,"load":false,"test":"วางแก้วเย็น 1 ชม. ดูคราบน้ำเหมือนที่รองแก้วลายอื่น","stamp":"","cost":10.55,"margin":0.785,"piecesTxt":"กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S49","group":"ปั๊มชื่อและชุดของขวัญ","name":"แม่เหล็กติดตู้เย็น ชุด 4 ลาย","pieces":[["02",1],["03",1],["05",1],["07",1]],"how":"ติดแผ่นแม่เหล็กหลังชิ้น หนีบโน้ตบนตู้เย็น สี่ลายสี่สี","mech":"set","extras":[["แผ่นแม่เหล็กมีกาว",12]],"pack":"flat","who":"ทุกบ้าน ของฝาก","price":129,"load":false,"test":"แม่เหล็กยึดกระดาษ A4 1 แผ่นบนตู้เย็นได้","stamp":"","cost":35.21,"margin":0.727,"piecesTxt":"กังหัน 02 × 1 + กากบาทแคปซูล 03 × 1 + วงกลม 05 × 1 + กากบาทข้อต่อวงกลม 07 × 1","uses07":true},{"id":"S50","group":"ปั๊มชื่อและชุดของขวัญ","name":"การ์ดอวยพรหนังแท้สอดร่อง","pieces":[["04",1]],"how":"สอดการ์ดกระดาษผ่านร่องทแยงสองร่อง ชิ้นหนังเป็นปกหน้า ผู้รับเก็บหนังไว้ได้","mech":"card","extras":[["การ์ดพิมพ์ 9 × 12 ซม.",3]],"pack":"flat","who":"ร้านของขวัญ ทุกเทศกาล","price":59,"load":false,"test":"การ์ดกว้าง 2.5 ซม. ตรงส่วนที่ลอดร่อง พับไม่หักตอนสอด","stamp":"THANK YOU","cost":14.11,"margin":0.761,"piecesTxt":"สี่เหลี่ยมมน 04 × 1","uses07":false}],"dieUse":{"03":9,"07":13,"05":24,"04":10,"02":2,"01":1}};
+let sFilter = "all";
+
+function s50Svg(item, big = false) {
+  const code = item.pieces[0][0], g = S50.geo[code];
+  const [vx, vy, vw, vh] = g.vb.split(" ").map(Number), pad = 22;
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("viewBox", `${vx - pad} ${vy - pad} ${vw + 2 * pad} ${vh + 2 * pad}`);
+  svg.setAttribute("class", big ? "s50 big" : "s50"); svg.setAttribute("aria-hidden", "true");
+  const add = (tag, attrs) => { const n = document.createElementNS(SVGNS, tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); svg.append(n); return n; };
+  const piece = (dx = 0, dy = 0, s = 1) => {
+    const grp = add("g", {transform: `translate(${dx} ${dy}) scale(${s})`});
+    const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", g.d); p.setAttribute("class", "hide"); grp.append(p);
+    for (const [x1, y1, x2, y2] of [...g.slits, ...g.slots]) {
+      const l = document.createElementNS(SVGNS, "line"); Object.entries({x1, y1, x2, y2}).forEach(([k, v]) => l.setAttribute(k, v)); l.setAttribute("class", "cut"); grp.append(l);
+    }
+    return grp;
+  };
+  const cx = vx + vw / 2, cy = vy + vh / 2;
+  if (item.mech === "set" && item.pieces.reduce((a, [, q]) => a + q, 0) > 1) {
+    const codes = item.pieces.flatMap(([c, q]) => Array(Math.min(q, 3)).fill(c)).slice(0, 4);
+    codes.forEach((c, k) => {
+      const gg = S50.geo[c], [, , w, h] = gg.vb.split(" ").map(Number);
+      const grp = add("g", {transform: `translate(${vx + (k % 2) * vw / 2 + 4} ${vy + Math.floor(k / 2) * vh / 2 + 4}) scale(${0.44 * Math.min(vw / w, vh / h)})`});
+      const p = document.createElementNS(SVGNS, "path"); p.setAttribute("d", gg.d); p.setAttribute("class", "hide"); grp.append(p);
+    });
+    const n = item.pieces.reduce((a, [, q]) => a + q, 0);
+    add("text", {x: vx + vw, y: vy + vh + 14, class: "s50txt end"}).textContent = `× ${n}`;
+    return svg;
+  }
+  piece();
+  const mid = s => [(s[0] + s[2]) / 2, (s[1] + s[3]) / 2];
+  const two = g.slits.length >= 2 ? [mid(g.slits[0]), mid(g.slits[1])] : null;
+  const len = s => Math.hypot(s[2] - s[0], s[3] - s[1]);
+  const slitLen = g.slits.length ? len(g.slits[0]) : 20;
+  const through = (cls, w, ext) => {                      // in at slit A, under the bridge, out at slit B
+    if (!two) return;
+    let [[ax, ay], [bx, by]] = two; const L = Math.hypot(bx - ax, by - ay), ux = (bx - ax) / L, uy = (by - ay) / L;
+    add("line", {x1: ax - ux * ext, y1: ay - uy * ext, x2: ax, y2: ay, class: cls, "stroke-width": w});
+    add("line", {x1: ax, y1: ay, x2: bx, y2: by, class: cls + " behind", "stroke-width": w});
+    add("line", {x1: bx, y1: by, x2: bx + ux * ext, y2: by + uy * ext, class: cls, "stroke-width": w});
+  };
+  const m = item.mech;
+  if (m === "stick") through("stick", 3, 34);
+  if (m === "hook") through("stick", 2, 14);
+  if (m === "straw") { through("straw", 6, 40); }
+  if (m === "ribbon") through("ribbon", Math.min(slitLen - 3, 22), 30);
+  if (m === "card") through("card", Math.min(slitLen - 4, 24), 26);
+  if (m === "elastic") { through("elastic", 2, 30); }
+  if (m === "pin") { through("pin", 1.6, 4); if (two) add("circle", {cx: two[0][0], cy: two[0][1], r: 2.6, class: "pinhead"}); }
+  if (m === "twist" && g.slits.length) {
+    const s = g.slits[0], [mx, my] = mid(s), L = len(s), nx = -(s[3] - s[1]) / L, ny = (s[2] - s[0]) / L;
+    add("path", {d: `M${mx - (s[2] - s[0]) / 3},${my - (s[3] - s[1]) / 3} L${mx + nx * 26 - 10},${my + ny * 26} L${mx + nx * 26 + 10},${my + ny * 26} L${mx + (s[2] - s[0]) / 3},${my + (s[3] - s[1]) / 3} Z`, class: "twist"});
+  }
+  if (m === "slot" && g.slots.length) {
+    const s = g.slots.reduce((a, b) => len(b) > len(a) ? b : a), L = len(s), ux = (s[2] - s[0]) / L, uy = (s[3] - s[1]) / L;
+    add("line", {x1: s[0] - ux * 26, y1: s[1] - uy * 26, x2: s[2], y2: s[3], class: "rim", "stroke-width": 3.2});
+  }
+  if (m === "clips") for (const [x1, y1, x2, y2] of g.slits) add("path", {d: `M${x1},${y1} L${x2},${y2}`, class: "clip"});
+  if (m === "object") add("circle", {cx, cy, r: Math.min(vw, vh) * 0.3, class: "obj"});
+  if (item.stamp) add("text", {x: cx, y: cy + 4, class: "s50txt"}).textContent = item.stamp;
+  return svg;
+}
+
+function s50Cards() {
+  const groups = [...new Set(S50.items.map(i => i.group))];
+  const chip = (key, label, n) => el("button", {class: "chip", type: "button", "aria-pressed": String(sFilter === key), onclick: () => { sFilter = key; s50Cards(); }}, `${label} ${n}`);
+  $("#s-filters").replaceChildren(chip("all", "ทั้งหมด", S50.items.length), chip("ready", "ทำได้กับหนังที่มี", S50.items.filter(i => !i.load).length),
+    chip("07", "ใช้ 07", S50.items.filter(i => i.uses07).length), ...groups.map(g => chip(g, g, S50.items.filter(i => i.group === g).length)));
+  const shown = S50.items.filter(i => sFilter === "all" || (sFilter === "ready" && !i.load) || (sFilter === "07" && i.uses07) || i.group === sFilter);
+  $("#s-cards").replaceChildren(...shown.map(i => el("button", {class: "xcard scard", type: "button", onclick: () => s50Open(i.id)},
+    el("div", {class: "s50wrap"}, s50Svg(i)),
+    el("div", {},
+      el("span", {class: "eyebrow", text: `${i.id} · ${i.group}`}),
+      el("span", {class: "name", text: i.name}),
+      el("span", {class: "meta num", text: `${i.piecesTxt}`}),
+      el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${Math.round(i.margin * 100)}%`}),
+      i.load ? el("span", {class: "blk", text: "รับแรง รอหนัง 2 มม."}) : null))));
+}
+
+function s50Open(id) {
+  const i = S50.items.find(x => x.id === id); if (!i) return;
+  const msg = el("span");
+  const send = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "ส่งเข้าบอร์ดเป็นไอเดีย"});
+  send.addEventListener("click", async () => {
+    send.disabled = true; msg.className = ""; msg.textContent = "กำลังส่ง…";
+    try {
+      await db.collection("items").doc("s-" + i.id).set({kind: "idea", name: `${i.name} (${i.id})`, who: i.who, price: i.price, parts: i.pieces,
+        joints: 0, extra: i.extras.reduce((a, [, t]) => a + t, 0), pack: i.pack, stage: "idea", blocker: i.load ? "รับแรง ต้องใช้หนัง 2 มม." : "",
+        note: `${i.how} · ลองแบบนี้: ${i.test}`, s50: i.id, updated: new Date().toISOString()});
+      msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว ขั้นไอเดีย";
+    } catch { msg.className = "err"; msg.textContent = "ส่งไม่ได้ ลองใหม่อีกครั้ง"; send.disabled = !canWrite; }
+  });
+  if (over["s-" + i.id]) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว"; }
+  $("#dlg-body").replaceChildren(
+    el("div", {class: "dlg-head x-head"},
+      el("div", {}, el("p", {class: "eyebrow", text: `${i.id} · ${i.group}`}), el("h3", {id: "d-name", text: i.name}), el("p", {class: "small muted", text: i.who})),
+      el("button", {class: "x", type: "button", "aria-label": "ปิด", onclick: () => $("#dlg").close(), text: "×"})),
+    el("div", {class: "s50big"}, s50Svg(i, true)),
+    el("p", {text: i.how}),
+    el("dl", {class: "spec num"},
+      el("dt", {text: "ชิ้นหนัง"}), el("dd", {text: i.piecesTxt}),
+      el("dt", {text: "ของเสริม"}), el("dd", {text: i.extras.length ? i.extras.map(([n, t]) => `${n} ${t} บาท`).join(" · ") : "ไม่มี"}),
+      el("dt", {text: "ราคา / ต้นทุน"}), el("dd", {text: `${i.price} / ${i.cost.toFixed(2)} บาท · กำไรขั้นต้น ${Math.round(i.margin * 100)}%`}),
+      el("dt", {text: "หนัง"}), el("dd", {class: i.load ? "err" : "x-pass", text: i.load ? "ของนี้รับแรงหรือแขวน ตามมติ 16 ต.ค. ต้องใช้หนัง 2 มม. ขึ้นไป หนังที่มี (1.0–1.2) ยังใช้ไม่ได้" : "ไม่รับแรง ใช้หนัง 1.0–1.2 มม. ที่มีได้"}),
+      el("dt", {text: "ลองแบบนี้"}), el("dd", {text: i.test})),
+    el("div", {class: "row"}, send, msg),
+    (openThread = commentsBlock(i.id, "ความเห็นต่อแบบนี้")));
+  if (!$("#dlg").open) $("#dlg").showModal();
+}
+
+
 // ------------------------------------------------------------ tabs
-const TABS = ["overview", "board", "cross", "tests", "process", "plan"];
-let crossReady = false;
+const TABS = ["overview", "board", "single", "cross", "tests", "process", "plan"];
+let crossReady = false, singleReady = false;
 function go(tab) {
   if (!TABS.includes(tab)) tab = "overview";
   for (const t of TABS) $("#v-" + t).hidden = t !== tab;
   if (tab === "cross" && !crossReady) { crossReady = true; x3dCards(); }
+  if (tab === "single" && !singleReady) { singleReady = true; s50Cards(); }
   document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   try { localStorage.setItem("pd-tab", tab); } catch {}
 }

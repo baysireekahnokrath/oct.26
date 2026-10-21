@@ -13,7 +13,9 @@ REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
 SVG = os.path.join(REPO, "diecut-leather-20261014", "svg")
 FILES = {"01": "01-bear-head", "02": "02-pinwheel-4-lobe", "03": "03-capsule-cross",
          "04": "04-rounded-square-diagonal", "05": "05-circle", "06": "06-soft-cross"}
-NAME = {"01": "หัวหมี", "02": "กังหัน", "03": "กากบาทแคปซูล", "04": "สี่เหลี่ยมมน", "05": "วงกลม", "06": "กากบาทนุ่ม"}
+FILES["07"] = os.path.join("..", "..", "diecut-leather-20261019", "svg", "07-round-joint-cross")     # REV 20261019
+NAME = {"01": "หัวหมี", "02": "กังหัน", "03": "กากบาทแคปซูล", "04": "สี่เหลี่ยมมน", "05": "วงกลม", "06": "กากบาทนุ่ม",
+        "07": "กากบาทข้อต่อวงกลม"}
 
 def _path_points(d, steps=16):
     toks = re.findall(r"[MCLZ]|-?\d+\.?\d*", d)
