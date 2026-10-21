@@ -146,6 +146,8 @@ def make():
             "centre": centre, "radius": round(math.sqrt(sum(d * d for d in dims)) / 2, 1),
             "place": [{"c": code, "R": [round(R[i][j], 5) for i in range(3) for j in range(3)], "t": [round(v, 2) for v in t]} for code, R, t in place],
             "steps": steps_text(spec), "spec": spec,
+            # real-leather result: 02 pieces crossed into each other fall apart (owner's test, 21 Oct 2026)
+            "real": "fail" if "02" in spec["pieces"] else "",
         })
     return items, report
 

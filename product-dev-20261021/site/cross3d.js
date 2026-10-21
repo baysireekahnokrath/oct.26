@@ -90,7 +90,8 @@ function x3dCards() {
       el("span", {class: "eyebrow", text: `${i.id} · ${i.group}`}),
       el("span", {class: "name", text: i.name}),
       el("span", {class: "meta num", text: `${i.pieces.length} ชิ้น · ล็อก ${i.locks} จุด · ${i.dims}`}),
-      el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${Math.round(i.margin * 100)}%`})))));
+      el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${Math.round(i.margin * 100)}%`}),
+      i.real === "fail" ? el("span", {class: "blk", text: "ลองจริงแล้วหลุด · พักไว้"}) : null))));
   x3dThumbs();
 }
 
@@ -124,7 +125,9 @@ function x3dOpen(id) {
       el("dt", {text: "ขายแบบ"}), el("dd", {text: i.sell}),
       el("dt", {text: "ราคา / ต้นทุน"}), el("dd", {text: `${i.price} / ${i.cost.toFixed(2)} บาท · กำไรขั้นต้น ${Math.round(i.margin * 100)}%`}),
       el("dt", {text: "คนซื้อ"}), el("dd", {text: i.who}),
-      el("dt", {text: "ผลตรวจ"}), el("dd", {class: "x-pass", text: "ผ่าน: ปีกพอดีร่อง ร่องไม่ใช้ซ้ำ ชิ้นไม่ทะลุกัน วงปิดตรง"})),
+      el("dt", {text: "ผลตรวจ"}), el("dd", {class: "x-pass", text: "รูปทรงผ่าน: ปีกพอดีร่อง ร่องไม่ใช้ซ้ำ ชิ้นไม่ทะลุกัน วงปิดตรง"}),
+      i.real === "fail" ? el("dt", {text: "ลองกับหนังจริง"}) : null,
+      i.real === "fail" ? el("dd", {class: "err", text: "หลุด: ร่องของ 02 จับหนังด้วยกันไม่อยู่ พักไว้จนกว่าจะลองบล็อก 02 รุ่น B"}) : null),
     el("div", {}, el("p", {class: "small muted", text: "วิธีต่อ"}), el("ol", {class: "steps"}, ...i.steps.map(s => el("li", {text: s})))),
     el("div", {class: "row"}, send, msg),
     (openThread = commentsBlock(i.id, "ความเห็นต่อแบบนี้ ลองแล้วเป็นอย่างไร")));
