@@ -1,6 +1,8 @@
 # Website handoff — for the OCT.26 Web Builder session
 
-State on 21 Oct 2026, from the marketing and sales session. Read `/CLAUDE.md` (publish a Thai summary page for
+State on 21 Oct 2026, from the marketing and sales session.
+**Owner's rule (21 Oct): mock first.** Show every website change as a mock-up page (claude.ai Artifact, private) and
+change nothing in `website/`, `brand.py`, the posters or the Web Builder's data until the owner says "แก้เว็บจริงเลยครับ". Read `/CLAUDE.md` (publish a Thai summary page for
 every deliverable) and `brand-20261014/HANDOFF.md` (brand decisions not to reopen). Reply to the owner in Thai, short.
 
 ## Live
