@@ -120,7 +120,7 @@ def tag_back(x, y, name, name_font, price, code, lines):
     g.append(f'<line x1="{x+M:.1f}" y1="{y+GL-34:.1f}" x2="{x+TW-M:.1f}" y2="{y+GL-34:.1f}" stroke="{LINE}" stroke-width="2"/>')
     for i, t in enumerate(lines):
         g.append(line_fit(t, 21, cx, y + GL + i * 34, mw, INK, PLEX))
-    g.append(text("@oct26.crafted", 21, cx, y + TH_ - M, COB, JOST, anchor="middle")[0])
+    g.append(text("@oct.26_brand", 21, cx, y + TH_ - M, COB, JOST, anchor="middle")[0])
     return "".join(g)
 
 def tag_soi2(p):
@@ -175,7 +175,7 @@ def card():
         g.append(line_fit(t, 21, x + m, y2 + m + 26 + 55 + i * 34, w - 2 * m, INK, PLEX, anchor="start"))
     g.append(f'<rect x="{x + w - m - q:.1f}" y="{y2 + h - m - q:.1f}" width="{q}" height="{q}" rx="8" fill="#FFFFFF" stroke="{COB}" stroke-width="2" stroke-dasharray="6 5"/>')
     g.append(text("QR IG", 21, x + w - m - q / 2, y2 + h - m - q / 2 + 8, COB, JOST, anchor="middle")[0])
-    g.append(text("@oct26.crafted", 21, x + m, y2 + h - m, TOM, JOST)[0])
+    g.append(text("@oct.26_brand", 21, x + m, y2 + h - m, TOM, JOST)[0])
     return svg(W, H, "".join(g), None, "การ์ดเล่าเรื่อง 89 × 55 มม. หน้าและหลัง")
 
 # ---------------------------------------------------------------- bag, 130 x 210 x 80 mm

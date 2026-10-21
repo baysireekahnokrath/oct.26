@@ -112,8 +112,8 @@ def page():
 <div class="row"><div class="cta">เข้ามาลองต่อเองได้</div><div class="price"><i>เริ่ม</i><b>{low}</b><i>บาท</i></div></div></section>
 <section class="contact"><div class="qr">{qr_svg()}<div>สแกนติดตาม</div></div>
 <div class="ch"><div class="h">@{h}</div>
-<div class="l">Instagram · Facebook<br>TikTok · YouTube</div>
-<div class="l">Shopee ร้าน OCT. 26</div>
+<div class="l">Instagram · Facebook<br>YouTube</div>
+<div class="l">ค้นหา OCT. 26</div>
 <div class="o">สั่งทำเป็นชุด ของชำร่วย<br>ของขวัญองค์กร ทักไอจีได้เลย</div></div></section>
 <section class="goods"><div class="t">มีอะไรขายบ้าง</div><div class="grid">{goods}</div></section>
 <section class="foot"><div class="c">SOI. 02 · <span>ห้าหมี</span> FIVE BEARS</div><div class="s">หนังแท้ทุกชิ้น สีและลายไม่ซ้ำกัน เพราะทำจากเศษหนังจริง</div></section>

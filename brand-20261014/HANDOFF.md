@@ -28,6 +28,10 @@ Reply to the owner in Thai, short and plain. He decides fast; on logo questions 
 - Builders: `logo/`, `posters/`, `bible/`, `colorlab/`, `research/`, `logolab/`, `techpack/`, `deck/`, `site/build.py`.
 - Die files: `../diecut-leather-20261014/` (svg, dxf, cost sheet scripts). Heart straps: `../diecut-leather-20261013/assembly-01/`.
 
+## Social accounts (opened, given 21 Oct)
+Instagram https://www.instagram.com/oct.26_brand/ · YouTube https://www.youtube.com/@OCT.26_brand · Facebook https://www.facebook.com/profile.php?id=61595850110023
+Handle everywhere: oct.26_brand (`BRAND["handle"]`, `SOCIAL` in brand.py). TikTok and Shopee not open yet: print and posts name only the three above.
+
 ## Published pages (private, owner shares them)
 - Summary https://claude.ai/artifact/1bBApc1D6ewCk8bpq3AydB
 - Brand Book https://claude.ai/artifact/3asVqkM4vs6fGM3rihHSYp

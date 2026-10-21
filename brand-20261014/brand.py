@@ -12,7 +12,7 @@ BRAND = {
     "th": "OCT. 26",
     "en": "OCT. 26",
     "say": "อ็อก ยี่สิบหก",
-    "handle": "oct26.crafted",
+    "handle": "oct.26_brand",      # real accounts opened, given 21 Oct (see SOCIAL)
     "acro": "our · crafted · things",
     "tag_th": "ของที่เราทำกันเอง",
     "tag_en": "our crafted things.",
@@ -402,17 +402,21 @@ def shopee(p):
 
 # ---------------------------------------------------------------- channels setup
 H = BRAND["handle"]
+# accounts that exist (owner, 21 Oct). TikTok and Shopee are not open yet: print and posts name only these three.
+SOCIAL = {"instagram": "https://www.instagram.com/oct.26_brand/",
+          "youtube": "https://www.youtube.com/@OCT.26_brand",
+          "facebook": "https://www.facebook.com/profile.php?id=61595850110023"}
 CHANNELS = [
-    ("Facebook Page", "OCT. 26", f"facebook.com/{H}",
-     "ชื่อเพจ OCT. 26 ชื่อผู้ใช้ @oct26.crafted หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
+    ("Facebook Page", "OCT. 26", SOCIAL["facebook"],
+     "ชื่อเพจ OCT. 26 (ยังไม่ได้ตั้งชื่อผู้ใช้ ลิงก์เป็น profile.php?id=…) หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
      STORY_BIO + "\nสั่งซื้อ: Shopee ร้าน OCT. 26"),
-    ("Instagram", f"@{H}", f"instagram.com/{H}",
+    ("Instagram", f"@{H}", SOCIAL["instagram"],
      "บัญชีธุรกิจ เชื่อมกับเพจ Facebook · ไฮไลต์สามอัน SOI. 02 · ห้าหมี · How-to · ลิงก์ในโปรไฟล์ไป Shopee",
      "OCT. 26 · our crafted things.\nของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nสั่งซื้อที่ลิงก์ด้านล่าง"),
     ("TikTok", f"@{H}", f"tiktok.com/@{H}",
      "บัญชีธุรกิจ · เปิด TikTok Shop ภายหลังได้ · คลิปมือต่อหนัง 15 วินาที คลิปห้าหมีใช้เพลงน่ารัก คลิป SOI. 02 ใช้เพลงเรียบ",
      "งานหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nShopee: OCT. 26"),
-    ("YouTube", f"@{H}", f"youtube.com/@{H}",
+    ("YouTube", "@OCT.26_brand", SOCIAL["youtube"],
      "เริ่มจาก Shorts ที่ตัดจากคลิป TikTok · คลิปยาวเดือนละครั้ง เช่น เบื้องหลังวันออกบูธ และวันเกิดแบรนด์ 26.10",
      "OCT. 26 our crafted things.\nช่องของครอบครัวที่ทำของใช้จากเศษหนังแท้ด้วยกันทั้งบ้าน\nพ่อ แม่ และลูกสามคน"),
     ("Shopee", "OCT. 26", f"shopee.co.th/{H}",
@@ -424,7 +428,7 @@ CHANNELS = [
 
 # ---------------------------------------------------------------- plan to the event
 TIMELINE = [
-    ("14 ต.ค.", "พ.", "เลือกชื่อ OCT. 26 แล้ว เช็กชื่อ @oct26.crafted ว่างทุกช่องทาง สั่งทำบล็อกที่ยังไม่มี (ร้านบล็อกใช้ 2–5 วัน)"),
+    ("14 ต.ค.", "พ.", "เลือกชื่อ OCT. 26 แล้ว เช็กชื่อบัญชีว่างทุกช่องทาง (ได้ @oct.26_brand) สั่งทำบล็อกที่ยังไม่มี (ร้านบล็อกใช้ 2–5 วัน)"),
     ("15 ต.ค.", "พฤ.", "เปิด Facebook Page, IG, TikTok, YouTube, Shopee ส่งไฟล์โลโก้ไปร้านพิมพ์ (สติกเกอร์ ป้าย ป้ายราคา)"),
     ("16 ต.ค.", "ศ.", "ตัดหนังล็อตแรกด้วยบล็อกที่มีแล้ว โพสต์แรก ทำไมชื่อ OCT. 26"),
     ("17 ต.ค.", "ส.", "ลูก ๆ ฝึกประกอบสินค้าหลัก 8 ตัว ถ่ายคลิปมือต่อหนังเก็บไว้"),
