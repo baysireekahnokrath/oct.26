@@ -1,0 +1,20 @@
+[
+{
+"src": "/home/user/oct.26/social-20261021/banners/launch-post-1080x1350.html",
+"out": "/home/user/oct.26/social-20261021/banners/launch-post-1080x1350.png",
+"w": 1080,
+"h": 1350
+},
+{
+"src": "/home/user/oct.26/social-20261021/banners/launch-story-1080x1920.html",
+"out": "/home/user/oct.26/social-20261021/banners/launch-story-1080x1920.png",
+"w": 1080,
+"h": 1920
+},
+{
+"src": "/home/user/oct.26/social-20261021/banners/launch-square-1080x1080.html",
+"out": "/home/user/oct.26/social-20261021/banners/launch-square-1080x1080.png",
+"w": 1080,
+"h": 1080
+}
+]

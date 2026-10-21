@@ -1,0 +1,213 @@
+<title>บูธ OCT. 26 บ้านและสวน</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style><style>
+.draw{width:100%;height:auto;display:block}
+.draw text{font-family:var(--body);fill:var(--ink)}
+.draw .t{font-size:17px}.draw .ts{font-size:14px;fill:var(--muted)}.draw .tz{font-size:16px;font-weight:600}
+.draw .td{font-size:14px;fill:var(--muted)}.draw .tb{font-size:14px;font-weight:600;fill:#1C1B22}
+.chip{white-space:nowrap}
+.draw .floor{fill:var(--paper);stroke:var(--ink);stroke-width:1.5;stroke-dasharray:6 4}
+.draw .open{fill:var(--chip)}
+.draw .grid{fill:none;stroke:var(--ink);stroke-width:2}
+.draw .roll{fill:var(--cobalt);stroke:none}
+.draw .box{fill:var(--chip);stroke:var(--muted);stroke-dasharray:3 3}
+.draw .pallet{fill:#D9B48C;stroke:#8A5A2B;stroke-width:1.5}
+.draw .slat{stroke:#8A5A2B;stroke-width:1}
+.draw .frame{fill:none;stroke:var(--ink);stroke-width:2.5}
+.draw .chair{fill:#E9DFD0;stroke:#8A7A66;stroke-width:1.2}
+.draw .zl{stroke:#6B4420;stroke-dasharray:3 3}
+.draw .bk{fill:var(--line)}.draw .bs{fill:#FFC23C}.draw .bm{fill:#2EC4A0}.draw .bp{fill:#FF8AC4}
+.draw .lamp{fill:#FFC23C;stroke:var(--ink);stroke-width:1}
+.draw .dim{stroke:var(--muted);stroke-width:1}
+.draw .aisle{fill:var(--line);opacity:.6}
+.draw .arw{stroke:var(--tomato);stroke-width:2.5}.draw .arh{fill:var(--tomato)}
+.draw .leg{stroke:var(--ink);stroke-width:1.5}.draw .xs-edge{fill:none;stroke:var(--ink);stroke-width:1}
+.draw .mesh{stroke:var(--muted);stroke-width:.6;opacity:.6}
+.draw .logo{font-family:"Jost","Anuphan",sans-serif;font-weight:500;font-size:22px;fill:#FFFFFF}
+.draw .logo-s{font-size:10px;fill:#FFFFFF}
+.draw .garland{fill:none;stroke:#B8743A;stroke-width:1.5}.draw .bear{fill:#B8743A}
+.draw .item{fill:#B8743A;opacity:.85}.draw .qr{fill:var(--ink)}
+.draw .riser{fill:#C99A68;stroke:#8A5A2B;stroke-width:1}
+.draw .cup{fill:#FFFFFF;stroke:var(--ink)}.draw .plant{fill:#B8743A}.draw .leaf{fill:#2EC4A0}
+.draw .mat{fill:var(--ink)}
+.draw .sign{fill:#FFFFFF;stroke:var(--ink)}.draw .fb{fill:#FFFFFF;stroke:var(--ink);stroke-width:1.2}.draw .fb-t{font-size:13px;font-weight:600;fill:#2449D8}
+.draw .ground{stroke:var(--ink);stroke-width:2}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:var(--t-1);color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:-2px;margin-right:6px}
+.kpi b{font-family:var(--display);font-size:24px;display:block;line-height:1.3}
+.two{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(min(100%,377px),1fr))}
+.two>*{min-width:0}
+.photo{background:#FFFFFF;border-radius:var(--s3);padding:var(--s2)}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">แผนบูธ · ฝ่ายการตลาดและการขาย · อัปเดต 20 ต.ค. 2569</span>
+<h1>บูธ OCT. 26 ที่บ้านและสวนแฟร์</h1>
+<p class="lead">โซนหนูทดลอง KIDS MARKET · บ้านและสวนแฟร์ Living Festival 2026 · อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3 · 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569 · ศุกร์–อาทิตย์ 10:00–17:00 รวม 6 วันขาย · บูธ 2 × 2 เมตร ผู้จัดให้โต๊ะพาเลท 117 × 80 ซม. สูง 50 ซม. กับเก้าอี้ 2 ตัว
+โต๊ะสูงเท่าโต๊ะกาแฟในบ้าน หน้าโต๊ะจึงจัดเป็นโต๊ะกาแฟจริงที่ใช้ของ SOI. 02 ส่วนห้าหมีแขวนบนตะแกรงกลางด้านหลัง และ X-stand มุมหน้าขวาขายของแทนเราตลอดเวลา</p>
+<div class="grid s">
+<div class="card kpi"><p class="cap">พื้นที่</p><b class="mono">4 ตร.ม.</b></div>
+<div class="card kpi"><p class="cap">ของไปงาน</p><b class="mono">333 ชิ้น</b></div>
+<div class="card kpi"><p class="cap">ขายหมด ต่อวัน</p><b class="mono">5,452 ฿</b></div>
+<div class="card kpi"><p class="cap">งบแต่งบูธ (คิดราคาสูงสุด)</p><b class="mono">2,830 / 3,000 ฿</b></div>
+<div class="card kpi"><p class="cap">อยู่ในบูธพร้อมกัน</p><b class="mono">3–4 คน</b></div></div></header>
+
+<section id="given"><span class="eyebrow">ของที่ผู้จัดให้</span><h2>โต๊ะพาเลทกับเก้าอี้พับ</h2>
+<div class="two"><figure class="card" style="margin:0;display:flex;flex-direction:column;gap:10px">
+<div class="photo"><img src="organizer-table.jpg" alt="แบบโต๊ะพาเลท 1.17 × 0.80 ม. สูง 0.50 ม. ขาเหล็ก และเก้าอี้พับผ้าใบโครงไม้ จากผู้จัด"></div>
+<figcaption class="cap">แบบจากผู้จัด · ได้รับ 20 ต.ค.</figcaption></figure>
+<div style="display:flex;flex-direction:column;gap:var(--s3)">
+<ul><li><b>สูง 50 ซม. เท่าโต๊ะกาแฟ</b> ตรงกับไอเดียโต๊ะกาแฟจำลองพอดี และเด็กนั่งเก้าอี้สาธิตได้สบาย</li>
+<li><b>เตี้ยสำหรับผู้ใหญ่</b> ซ้อนกล่องห่อผ้ายกของขึ้นมา 75–100 ซม. และใช้ตะแกรงกับ X-stand เป็นจุดที่มองจากไกล</li>
+<li><b>ร่องไม้กว้าง</b> กางฟิวเจอร์บอร์ดพับได้รองก่อน แล้วปูผ้าลินินทับ พับขอบให้ยังเห็นไม้พาเลท</li>
+<li><b>เล็กกว่าโต๊ะพับในแผนแรก</b> ไม่ต้องซื้อโต๊ะ ผ้าคลุมยาว และเก้าอี้ ประหยัดราว 900–1,900 บาท และได้มุมหน้าขวาเป็นทางเข้า</li></ul>
+<p class="cap">ผู้จัดยืนยันแล้ว 20 ต.ค.: บูธละ 1 โต๊ะ 2 เก้าอี้ ย้ายโต๊ะเองได้ และมีปลั๊ก 5A</p></div></div></section>
+
+<section id="plan"><span class="eyebrow">มองจากด้านบน</span><h2>ผังบูธ</h2>
+<div class="two"><div class="card"><svg class="draw" viewBox="0 0 582 574" role="img" aria-label="ผังบูธ 2 × 2 เมตร มองจากด้านบน"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" class="arh"/></marker></defs><rect x="56.0" y="34.0" width="480.0" height="480.0" rx="0" class="floor"/><rect x="353.6" y="317.2" width="177.6" height="192.0" rx="6" class="open"/><text x="444.8" y="370.0" class="tz" text-anchor="middle">ทางเข้า</text><text x="444.8" y="398.8" class="ts" text-anchor="middle">ลูกค้าเดินเข้ามา</text><text x="444.8" y="422.8" class="ts" text-anchor="middle">ดูราวหมีได้</text><rect x="224.0" y="34.0" width="144.0" height="16.8" rx="3" class="grid"/><text x="296.0" y="82.0" class="ts" text-anchor="middle">ตะแกรง ห้าหมี · SOI. 02</text><rect x="387.2" y="490.0" width="144.0" height="9.6" rx="1" class="roll"/><line x1="401.6" y1="456.4" x2="516.8" y2="485.2" class="leg"/><line x1="516.8" y1="456.4" x2="401.6" y2="485.2" class="leg"/><text x="459.2" y="446.8" class="tz" text-anchor="middle">X-stand</text><rect x="63.2" y="192.4" width="67.2" height="81.6" rx="3" class="box"/><text x="96.8" y="242.8" class="tz" text-anchor="middle">D</text><rect x="143.6" y="173.2" width="120.0" height="120.0" rx="8" class="chair"/><rect x="270.8" y="173.2" width="120.0" height="120.0" rx="8" class="chair"/><rect x="63.2" y="314.8" width="280.8" height="192.0" rx="2" class="pallet"/><line x1="70.4" y1="353.2" x2="336.8" y2="353.2" class="slat"/><line x1="70.4" y1="391.6" x2="336.8" y2="391.6" class="slat"/><line x1="70.4" y1="430.0" x2="336.8" y2="430.0" class="slat"/><line x1="70.4" y1="468.4" x2="336.8" y2="468.4" class="slat"/><line x1="156.8" y1="320.8" x2="156.8" y2="500.8" class="zl"/><line x1="250.4" y1="320.8" x2="250.4" y2="500.8" class="zl"/><rect x="257.6" y="322.0" width="79.2" height="48.0" rx="2" class="riser"/><text x="110.0" y="410.8" class="tz" text-anchor="middle">A โต๊ะกาแฟ</text><text x="110.0" y="439.6" class="ts" text-anchor="middle">ของแต่งโต๊ะ</text><text x="203.6" y="410.8" class="tz" text-anchor="middle">B สาธิต</text><text x="203.6" y="439.6" class="ts" text-anchor="middle">เด็กลองต่อ</text><text x="297.2" y="410.8" class="tz" text-anchor="middle">C จ่ายเงิน</text><text x="297.2" y="439.6" class="ts" text-anchor="middle">กล่อง ห้าหมี</text><text x="203.6" y="482.8" class="ts" text-anchor="middle">โต๊ะพาเลท 117 × 80 ซม. สูง 50</text><circle cx="203.6" cy="233.2" r="14" class="bm"/><text x="203.6" y="238.2" class="tb" text-anchor="middle">2</text><circle cx="330.8" cy="233.2" r="14" class="bs"/><text x="330.8" y="238.2" class="tb" text-anchor="middle">1</text><circle cx="368.0" cy="456.4" r="14" class="bp"/><text x="368.0" y="461.4" class="tb" text-anchor="middle">3</text><circle cx="176.0" cy="130.0" r="14" class="bk"/><text x="176.0" y="135.0" class="tb" text-anchor="middle">พ</text><circle cx="264.8" cy="329.2" r="5" class="lamp"/><line x1="56.0" y1="20" x2="536.0" y2="20" class="dim"/><text x="296.0" y="12.4" class="td" text-anchor="middle">หน้ากว้าง 200 ซม.</text><line x1="38" y1="34.0" x2="38" y2="514.0" class="dim"/><text x="30" y="274.0" class="td" text-anchor="middle" transform="rotate(-90 30 274.0)">ลึก 200 ซม.</text><rect x="16.0" y="522.0" width="560.0" height="44" class="aisle"/><line x1="80.0" y1="544.0" x2="224.0" y2="544.0" class="arw" marker-end="url(#ah)"/><line x1="512.0" y1="544.0" x2="368.0" y2="544.0" class="arw" marker-end="url(#ah)"/><text x="296.0" y="549.0" class="tz" text-anchor="middle">ทางเดินลูกค้า</text></svg></div>
+<div style="display:flex;flex-direction:column;gap:var(--s3)">
+<p>โต๊ะพาเลทชิดมุมหน้าซ้าย มุมหน้าขวาเปิดให้ลูกค้าก้าวเข้ามาพ้นทางเดิน ยืนดูราวหมีและจ่ายเงินได้ไม่ขวางคนเดิน</p>
+<ul><li><b>A โต๊ะกาแฟ</b> ราว 39 ซม. แก้วบนที่รองแก้ว ผ้าเช็ดปากในห่วงหมี ต้นไม้ ตะกร้าที่รองแก้วลายอื่นให้หยิบเลือก</li>
+<li><b>B จุดสาธิต</b> ราว 39 ซม. ลูกนั่งต่อหนังให้ดู ขอบหน้าวางกล่องทดลองให้เด็กลองต่อ</li>
+<li><b>C จ่ายเงิน</b> ราว 39 ซม. กล่องห่อผ้าซ้อนที่ขอบหลัง วางห้าหมีชิ้นเล็กกับ QR</li>
+<li>ใต้โต๊ะใส่กล่อง A B C ของแต่ละโซน กล่อง D ของสำรองอยู่หลังโต๊ะฝั่งซ้าย คลุมผ้า</li></ul>
+<p class="legend"><span><i style="background:#FFC23C"></i>1 หัวหน้าร้าน</span><span><i style="background:#2EC4A0"></i>2 นักสาธิต</span>
+<span><i style="background:#FF8AC4"></i>3 ผู้ต้อนรับ</span><span><i style="background:var(--line)"></i>พ พ่อหรือแม่</span></p></div></div></section>
+
+<section id="front"><span class="eyebrow">มองจากทางเดิน</span><h2>หน้าบูธ</h2>
+<div class="two"><div class="card"><svg class="draw" viewBox="0 0 432 520" role="img" aria-label="หน้าบูธมองจากทางเดิน"><rect x="183.4" y="156.0" width="97.2" height="270.0" rx="2" class="grid"/><line x1="199.6" y1="156.0" x2="199.6" y2="426.0" class="mesh"/><line x1="215.8" y1="156.0" x2="215.8" y2="426.0" class="mesh"/><line x1="232.0" y1="156.0" x2="232.0" y2="426.0" class="mesh"/><line x1="248.2" y1="156.0" x2="248.2" y2="426.0" class="mesh"/><line x1="264.4" y1="156.0" x2="264.4" y2="426.0" class="mesh"/><line x1="183.4" y1="399.0" x2="280.6" y2="399.0" class="mesh"/><line x1="183.4" y1="372.0" x2="280.6" y2="372.0" class="mesh"/><line x1="183.4" y1="345.0" x2="280.6" y2="345.0" class="mesh"/><line x1="183.4" y1="318.0" x2="280.6" y2="318.0" class="mesh"/><line x1="183.4" y1="291.0" x2="280.6" y2="291.0" class="mesh"/><line x1="183.4" y1="264.0" x2="280.6" y2="264.0" class="mesh"/><line x1="183.4" y1="237.0" x2="280.6" y2="237.0" class="mesh"/><line x1="183.4" y1="210.0" x2="280.6" y2="210.0" class="mesh"/><line x1="183.4" y1="183.0" x2="280.6" y2="183.0" class="mesh"/><text x="232.0" y="145.2" class="ts" text-anchor="middle">ตะแกรง ห้าหมี · SOI. 02</text><path d="M185.2 174.0 Q232.0 195.6 278.8 174.0" class="garland"/><circle cx="196.0" cy="181.2" r="5" class="bear"/><circle cx="214.0" cy="184.8" r="5" class="bear"/><circle cx="232.0" cy="184.8" r="5" class="bear"/><circle cx="250.0" cy="184.8" r="5" class="bear"/><circle cx="268.0" cy="181.2" r="5" class="bear"/><rect x="199.6" y="228.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="199.6" y="291.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="199.6" y="354.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="228.4" y="228.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="228.4" y="291.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="228.4" y="354.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="257.2" y="228.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="257.2" y="291.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="257.2" y="354.0" width="14.4" height="18.0" rx="3" class="item"/><rect x="119.5" y="332.4" width="86.4" height="75.6" rx="4" class="chair"/><rect x="214.9" y="332.4" width="86.4" height="75.6" rx="4" class="chair"/><rect x="61.0" y="411.6" width="203.4" height="68.4" rx="0" class="frame"/><rect x="57.4" y="390.0" width="210.6" height="21.6" rx="1" class="pallet"/><line x1="110.1" y1="391.8" x2="110.1" y2="409.8" class="slat"/><line x1="162.7" y1="391.8" x2="162.7" y2="409.8" class="slat"/><line x1="215.3" y1="391.8" x2="215.3" y2="409.8" class="slat"/><rect x="205.0" y="364.8" width="55.8" height="25.2" rx="2" class="riser"/><rect x="212.2" y="339.6" width="41.4" height="25.2" rx="2" class="riser"/><rect x="215.8" y="325.2" width="10.8" height="14.4" rx="2" class="item"/><rect x="233.8" y="325.2" width="10.8" height="14.4" rx="2" class="item"/><rect x="251.8" y="321.6" width="7.2" height="18.0" rx="2" class="qr"/><rect x="64.6" y="387.3" width="57.6" height="2.7" rx="2" class="item"/><rect x="75.4" y="367.5" width="16.2" height="19.8" rx="2" class="cup"/><rect x="104.2" y="366.6" width="12.6" height="23.4" rx="2" class="plant"/><circle cx="110.5" cy="357.6" r="9" class="leaf"/><rect x="138.4" y="387.3" width="48.6" height="2.7" rx="2" class="mat"/><line x1="307.6" y1="480.0" x2="354.4" y2="444.0" class="leg"/><line x1="401.2" y1="480.0" x2="354.4" y2="444.0" class="leg"/><image href="xstand-preview.png" x="300.4" y="174.0" width="108.0" height="288.0" preserveAspectRatio="none"/><rect x="300.4" y="174.0" width="108.0" height="288.0" class="xs-edge"/><text x="354.4" y="163.2" class="ts" text-anchor="middle">X-stand 60 × 160</text><text x="44" y="484.0" class="td" text-anchor="end">0</text><text x="44" y="394.0" class="td" text-anchor="end">50</text><text x="44" y="304.0" class="td" text-anchor="end">100</text><text x="44" y="214.0" class="td" text-anchor="end">150</text><text x="44" y="124.0" class="td" text-anchor="end">200</text><text x="44" y="34.0" class="td" text-anchor="end">250</text><text x="44" y="18.0" class="td" text-anchor="end">ซม.</text><line x1="22.0" y1="480.0" x2="422.0" y2="480.0" class="ground"/><text x="232.0" y="505.2" class="ts" text-anchor="middle">ระดับสายตาคนเดิน 150–170 ซม.</text></svg></div>
+<div style="display:flex;flex-direction:column;gap:var(--s3)">
+<p>บูธมีสามระดับให้คนเห็นจากระยะต่างกัน</p>
+<ul><li><b>140–180 ซม.</b> โลโก้ OCT. 26 บน X-stand และราวหมีห้าตัวบนตะแกรงกลางด้านหลัง มองเห็นจากไกล</li>
+<li><b>75–140 ซม.</b> ของแขวนบนตะแกรงและกล่องบนโต๊ะ ระดับมือผู้ใหญ่</li>
+<li><b>50 ซม.</b> หน้าโต๊ะพาเลท โต๊ะกาแฟจริงกับจุดสาธิต ระดับเดียวกับเด็ก</li></ul>
+<p class="cap">บูธไม่มีผนัง ทุกอย่างตั้งได้ด้วยขาของตัวเอง ตะแกรงโปร่ง คนที่เดินผ่านด้านหลังหรือด้านข้างก็เห็นของแขวน X-stand มุมหน้าขวาชวนให้เข้ามาลองต่อ</p></div></div></section>
+
+<section id="xstand"><span class="eyebrow">ป้ายที่ขายของได้เอง</span><h2>X-stand 60 × 160 ซม.</h2>
+<div class="two"><figure class="card" style="margin:0;display:flex;justify-content:center">
+<img src="xstand-preview.png" alt="แบบ X-stand OCT. 26: โลโก้บนพื้นโคบอลต์ ข้อความ ของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน ราคาเริ่ม 39 บาท QR ไอจี สินค้าหกอย่างพร้อมราคา" style="max-height:640px;width:auto"></figure>
+<div style="display:flex;flex-direction:column;gap:var(--s3)">
+<p>ตั้งแล้วขายได้เลย เรียงจากบนลงล่างตามระดับที่คนมอง ขอบบนป้ายสูงจากพื้นราว 170 ซม.</p>
+<ol><li><b>แบรนด์ (170–130 ซม.)</b> โลโก้ OCT. 26 บนพื้นโคบอลต์ our crafted things. ของที่เราทำกันเอง และเรื่อง 26 ตุลาคม ให้จำได้</li>
+<li><b>ขายตั้งแต่ไกล</b> ของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน วงกลมสีมะเขือเทศ เริ่ม 39 บาท และ เข้ามาลองต่อเองได้</li>
+<li><b>ติดต่อ (ราว 100 ซม.)</b> QR ขนาด 20 ซม. สแกนได้จากราว 2 เมตร ไปไอจี @oct.26_brand พร้อมทุกช่องทาง Shopee และรับสั่งทำของชำร่วย</li>
+<li><b>สินค้าที่ขาย</b> หกอย่างพร้อมราคา วาดจากรูปทรงชิ้นหนังจริง</li>
+<li><b>คอลเลกชัน</b> SOI. 02 · ห้าหมี FIVE BEARS</li></ol>
+<p class="cap">ไม่มีชื่องานหรือวันที่ ใช้ซ้ำได้ทุกงาน · ส่งร้าน: ไฟล์ PDF แบบเวกเตอร์ ฝังฟอนต์แล้ว หรือ JPG 100 dpi ขนาด 2363 × 6299 พิกเซล · ขอบมุมทั้งสี่เว้นไว้ให้ตาไก่ของขาตั้ง</p></div></div></section>
+
+<section id="sell"><span class="eyebrow">ขายอะไรหน้าบูธ</span><h2>คนงานบ้านและสวนมาหาของแต่งบ้าน</h2>
+<p class="lead">งานนี้ให้ของแต่งโต๊ะเป็นตัวหลัก ส่วนห้าหมีเป็นของขวัญ ประโยคแรกที่ใช้ทัก: “ลองวางแก้วดูได้เลยค่ะ/ครับ หนังแท้จากเศษหนัง ทำกันเองทั้งบ้าน”</p>
+<div class="tbl"><table><thead><tr><th>สินค้า</th><th>ราคา ฿</th><th>เตรียมไป</th></tr></thead><tbody><tr><td>ชุดที่รองแก้ว 4 ลาย<div class="cap mono">#29 · SOI. 02</div></td><td class="n">179</td><td class="n">10</td></tr><tr><td>ที่รองแก้วหมี<div class="cap mono">#22 · ห้าหมี Love</div></td><td class="n">59</td><td class="n">30</td></tr><tr><td>ที่รองแก้วไส้ไม้ก๊อก <span class="chip mid">รับสั่งเป็นชุด</span><div class="cap mono">#15 · SOI. 02</div></td><td class="n">99</td><td class="n">5</td></tr><tr><td>ห่วงผ้าเช็ดปากหมี<div class="cap mono">#04 · ห้าหมี Love</div></td><td class="n">79</td><td class="n">10</td></tr><tr><td>ปลอกแก้วกาแฟ <span class="chip mid">รับสั่งเป็นชุด</span><div class="cap mono">#14 · SOI. 02</div></td><td class="n">149</td><td class="n">3</td></tr><tr><td>แผ่นรองจานลายข้าวหลามตัด <span class="chip mid">รับสั่งเป็นชุด</span><div class="cap mono">#13 · SOI. 02</div></td><td class="n">390</td><td class="n">1</td></tr><tr><td>ราวหมีห้าตัว<div class="cap mono">#21 · ห้าหมี Love</div></td><td class="n">349</td><td class="n">10</td></tr><tr><td>ที่ห้อยกระเป๋าหมีหัวใจ<div class="cap mono">#23 · ห้าหมี Love</div></td><td class="n">129</td><td class="n">30</td></tr><tr><td>ชุดต่อเองกล่องลูกบาศก์<div class="cap mono">#30 · SOI. 02</div></td><td class="n">129</td><td class="n">10</td></tr></tbody></table></div>
+<p class="cap">แผ่นรองจาน ปลอกแก้ว และที่รองแก้วไส้ไม้ก๊อกมีของน้อย ให้วางโชว์แล้วรับสั่งทำเป็นชุด 4 หรือ 6 ชิ้น จดชื่อกับเบอร์หรือไอจีลงสมุดรับออเดอร์ และส่งราคาให้หลังงาน
+ลูกค้าขอลดราคา ใช้บทเดิม: ซื้อสามชิ้นได้สติกเกอร์หมีฟรี ราคาเท่าเดิม</p></section>
+
+<section id="gear"><span class="eyebrow">อุปกรณ์</span><h2>ของที่ต้องเตรียม</h2>
+<p>ต้องซื้อจริงประมาณ <b class="mono">1,650–2,830 บาท</b> อยู่ในงบแต่งบูธ 3,000 บาท แม้คิดราคาสูงสุด ของที่เหลือใช้ของที่บ้าน
+ราคาเป็นราคาประมาณ ยังไม่ได้เช็กกับร้าน ค่างานพิมพ์ป้ายราคา การ์ด สติกเกอร์ อยู่ในรายการพิมพ์ของ Launch Kit แยกต่างหาก</p>
+<div class="tbl"><table><thead><tr><th>ของ</th><th>บาท</th><th></th></tr></thead><tbody><tr><td><b style="font-weight:600">โต๊ะพาเลท 117 × 80 ซม. สูง 50 และเก้าอี้พับ</b> <span class="cap">× 1 โต๊ะ 2 เก้าอี้</span><div class="cap">ผู้จัดให้</div><div class=cap>ผู้จัดยืนยันแล้ว บูธละหนึ่งชุด</div></td><td class="n">–</td><td><span class="chip ok">ผู้จัดให้</span></td></tr><tr><td><b style="font-weight:600">ฟิวเจอร์บอร์ด 5 มม. 65 × 130 ซม. และเทปผ้า</b> <span class="cap">× 2 แผ่น 1 ม้วน</span><div class="cap">ซื้อที่ ร้านเครื่องเขียน, ร้านถ่ายเอกสาร</div><div class=cap>ร่องไม้พาเลทกว้าง ต้องมีแผ่นรองก่อนปูผ้า ตัดแผ่นละ 58 × 80 ซม. ให้ลอนวิ่งขวางร่องไม้ แล้วติดเทปผ้าด้านล่างตามแนว 80 ซม. เป็นบานพับ พับเหลือ 58 × 80 ใส่รถง่าย</div></td><td class="n">150–300</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ผ้าลินินหรือผ้าดิบ สีครีม</b> <span class="cap">× 2 ม.</span><div class="cap">ซื้อที่ ร้านผ้า, Shopee</div><div class=cap>ปูทับฟิวเจอร์บอร์ด พับขอบให้ยังเห็นไม้พาเลท เศษที่เหลือห่อกล่องยกของและคลุมกล่องสต็อก</div></td><td class="n">150–300</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ป้าย X-stand 60 × 160 ซม. พร้อมขาตั้ง</b> <span class="cap">× 1 ชุด</span><div class="cap">ซื้อที่ ร้านพิมพ์ไวนิลใกล้บ้าน ส่วนใหญ่เสร็จวันเดียว</div><div class=cap>ไฟล์พิมพ์พร้อมส่ง: xstand/oct26-xstand-60x160.pdf · ตั้งมุมหน้าขวาติดทางเดิน ลูกค้าเห็นทั้งแผ่นและสแกน QR ได้ ตั้งได้เอง พับเก็บใส่ถุงได้</div></td><td class="n">300–500</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ตะแกรงลวดแขวนของ 60 × 150 ซม. พร้อมขาตั้ง</b> <span class="cap">× 1 ชุด</span><div class="cap">ซื้อที่ Shopee, HomePro</div><div class=cap>ตั้งด้วยขาของตัวเอง กลางด้านหลัง ตะแกรงโปร่ง ลูกค้าเห็นของแขวนได้ทั้งสองฝั่ง ห้าหมีอยู่บน SOI. 02 อยู่ล่าง</div></td><td class="n">350–600</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ตะขอแขวนตะแกรงและตะขอตัว S</b> <span class="cap">× 20 อัน</span><div class="cap">ซื้อที่ Shopee, ร้าน 20 บาท</div><div class=cap>แขวนราวหมี ที่ห้อยกระเป๋า ป้ายชื่อ</div></td><td class="n">50–100</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ตะกร้าหวายหรือถาดไม้ใบเล็ก</b> <span class="cap">× 4 ใบ</span><div class="cap">ซื้อที่ ร้าน 20 บาท, Daiso, จตุจักร</div><div class=cap>แยกที่รองแก้วตามลาย ลูกค้าหยิบเลือกเองได้</div></td><td class="n">200–300</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">กรอบป้ายอะคริลิกตั้งโต๊ะ A5</b> <span class="cap">× 2 อัน</span><div class="cap">ซื้อที่ ร้านเครื่องเขียน, Shopee</div><div class=cap>QR พร้อมเพย์ จุดจ่ายเงินและโต๊ะกาแฟ</div></td><td class="n">80–140</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ไม้หนีบผ้าไม้เล็ก</b> <span class="cap">× 12 อัน</span><div class="cap">ซื้อที่ ร้าน 20 บาท</div><div class=cap>หนีบป้ายราคาแทนกรอบอะคริลิก เข้ากับงานไม้พาเลท</div></td><td class="n">20–40</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">โคมไฟหนีบ LED แสงวอร์ม</b> <span class="cap">× 1 ดวง</span><div class="cap">ซื้อที่ HomePro, Shopee</div><div class=cap>หนีบที่กล่องโซน C ส่องโต๊ะกาแฟ หนังดูสวยใต้แสงอุ่น ไม่เกิน 10 วัตต์ ปลั๊กบูธ 5A รับได้สบาย</div></td><td class="n">200–350</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ของจิปาถะ: เคเบิลไทร์ เทปสองหน้า เทปใส กรรไกร คัตเตอร์ ปากกาเมจิก ถุงขยะ ทิชชู่</b> <span class="cap">× 1 ถุง</span><div class="cap">ซื้อที่ ร้าน 20 บาท, 7-Eleven</div></td><td class="n">150–200</td><td><span class="chip ext">ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">ป้ายคอลเลกชัน SOI. 02 และห้าหมี Love</b> <span class="cap">× 2 แผ่น</span><div class="cap">ซื้อที่ เศษฟิวเจอร์บอร์ดที่ตัดเหลือ</div><div class=cap>พิมพ์ชื่อคอลเลกชันติดบนเศษบอร์ด วางที่โต๊ะ ข้อความชวนเข้าบูธอยู่บน X-stand แล้ว</div></td><td class="n">–</td><td><span class="chip ok">ไม่ต้องซื้อ</span></td></tr><tr><td><b style="font-weight:600">กล่องรองเท้าหรือกล่องกระดาษแข็ง ห่อผ้า</b> <span class="cap">× 2 ใบ</span><div class="cap">ซื้อที่ จากบ้าน</div><div class=cap>แทนลังไม้ โต๊ะสูงแค่ 50 ซม. ซ้อนกล่องยกของขึ้นมาระดับมือผู้ใหญ่ 75–100 ซม.</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">ปลั๊กพ่วง มอก. ยาว 5 ม.</b> <span class="cap">× 1 อัน</span><div class="cap">ซื้อที่ จากบ้าน</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">กล่องพลาสติกมีฝา ซ้อนได้</b> <span class="cap">× 4 ใบ</span><div class="cap">ซื้อที่ จากบ้าน</div><div class=cap>A B C ใต้โต๊ะพาเลท D หลังโต๊ะฝั่งซ้าย คลุมผ้า</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">ผ้าสักหลาดหรือแผ่นรองตัด</b> <span class="cap">× 1 แผ่น</span><div class="cap">ซื้อที่ จากบ้าน</div><div class=cap>พื้นจุดสาธิต</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">แก้วกาแฟ ผ้าเช็ดปาก จานรอง</b> <span class="cap">× 1 ชุด</span><div class="cap">ซื้อที่ จากบ้าน</div><div class=cap>ใช้จัดโต๊ะกาแฟ</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">ต้นไม้กระถางเล็ก</b> <span class="cap">× 1 กระถาง</span><div class="cap">ซื้อที่ จากบ้าน</div><div class=cap>วางบนที่รองแก้วไส้ไม้ก๊อก เข้าธีมบ้านและสวน ถ้าที่บ้านไม่มี ซื้อในงานราว 100 บาท</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">กล่องเงินและเงินทอน 1,500 บาท</b> <span class="cap">× 1 กล่อง</span><div class="cap">ซื้อที่ จากบ้าน</div><div class=cap>บูธเปิดทุกด้าน กล่องเงินอยู่กับหัวหน้าร้านหรือพ่อแม่ตลอด ห้ามวางทิ้งบนโต๊ะ ไม่นับในงบแต่งบูธ</div></td><td class="n">–</td><td><span class="chip ok">มีที่บ้าน</span></td></tr><tr><td><b style="font-weight:600">โคมไฟหนีบดวงที่ 2</b> <span class="cap">× 1 ดวง</span><div class="cap">ซื้อที่ HomePro, Shopee</div><div class=cap>หนีบตะแกรง ถ้าแสงในฮอลล์มืด</div></td><td class="n">200–350</td><td><span class="chip mid">มีก็ดี</span></td></tr><tr><td><b style="font-weight:600">กระจกตั้งโต๊ะเล็ก</b> <span class="cap">× 1 บาน</span><div class="cap">ซื้อที่ ร้าน 20 บาท</div><div class=cap>ลูกค้าลองห้อยที่ห้อยกระเป๋าแล้วส่องดู</div></td><td class="n">60–120</td><td><span class="chip mid">มีก็ดี</span></td></tr><tr><td><b style="font-weight:600">รถเข็นพับได้</b> <span class="cap">× 1 คัน</span><div class="cap">ซื้อที่ ยืม</div><div class=cap>ขนกล่องจากลานจอดถึงฮอลล์ทีเดียวจบ</div></td><td class="n">–</td><td><span class="chip mid">มีก็ดี</span></td></tr></tbody></table></div>
+<div class="card"><h3>ปรับอะไรให้อยู่ในงบ</h3><ul style="margin-top:6px"><li><s>ป้ายโรลอัพ 80 × 200</s> → ป้าย X-stand 60 × 160 ตั้งได้เอง เพราะบูธไม่มีผนัง</li><li><s>ตะแกรง 2 ชุด</s> → ตะแกรง 1 ชุดกลางด้านหลัง</li><li><s>ลังไม้ 3 ใบ</s> → กล่องจากบ้านห่อผ้า</li><li><s>ป้ายตั้งพื้นขาตั้ง A</s> → X-stand ทำหน้าที่ชวนเข้าบูธแทน</li><li><s>กรอบอะคริลิก 12 อัน</s> → กรอบ A5 2 อันสำหรับ QR กับไม้หนีบ</li><li><s>ไฟหนีบ 3 ดวง</s> → 1 ดวง ดวงที่ 2 ซื้อเมื่อแสงในฮอลล์มืด</li></ul></div></section>
+
+<section id="ask"><span class="eyebrow">ผู้จัดงาน</span><h2>ตอบแล้ว 5 ข้อ ยังต้องถาม 7 ข้อ</h2>
+<div class="card"><ul><li><span class="chip ok">ตอบแล้ว</span> <b>โต๊ะและเก้าอี้</b> · ได้บูธละ 1 ชุด: โต๊ะพาเลท 1 ตัว เก้าอี้ 2 ตัว</li><li><span class="chip ok">ตอบแล้ว</span> <b>ย้ายโต๊ะ</b> · ย้ายโต๊ะพาเลทไปมุมหน้าซ้ายเองได้</li><li><span class="chip ok">ตอบแล้ว</span> <b>หน้าโต๊ะ</b> · ร่องไม้กว้าง ต้องมีแผ่นรองก่อน ใช้ฟิวเจอร์บอร์ดพับได้</li><li><span class="chip ok">ตอบแล้ว</span> <b>ผนัง</b> · ไม่มีผนังทั้งสี่ด้าน ใช้ป้ายและตะแกรงที่ตั้งได้เอง</li><li><span class="chip ok">ตอบแล้ว</span> <b>ไฟ</b> · มีปลั๊ก 5A (ราว 1,100 วัตต์) ไฟหนีบ LED กับชาร์จมือถือใช้ไม่ถึง 50 วัตต์ ห้ามเสียบกาต้มน้ำหรือไดร์เป่าผม</li></ul></div>
+<div class="card"><ul><li><b>บูธติดทางเดินด้านไหน</b> · บูธไม่มีผนัง ลูกค้าเดินมาจากกี่ด้าน หน้าหลักหันไปทางไหน และมีป้ายชื่อบูธหรือไฟสปอตไลต์ไหม</li><li><b>เก็บของข้ามคืน</b> · ทิ้งของไว้ในบูธข้ามคืน และระหว่างสองสัปดาห์ (จ.–พฤ.) ได้ไหม มียามไหม ถ้าไม่ได้ ขนสต็อกกลับบ้านทุกเย็น</li><li><b>ป้ายชื่อหน้าบูธ</b> · ส่งชื่อให้สะกด OCT. 26 ตัวใหญ่ มีจุด และเว้นวรรคก่อน 26</li><li><b>เลขบูธ ฮอลล์ โซน</b> · ใส่ในโพสต์ เจอกันที่บูธ และในการ์ด</li><li><b>เวลาเข้าจัดและรื้อบูธ</b> · ทั้งสองสัปดาห์ จุดขนของ ลานจอดรถ</li><li><b>บัตรผู้ออกบูธ</b> · ได้กี่ใบ เด็กต้องมีบัตรไหม เราไปกัน 5 คน</li><li><b>กฎการตกแต่ง</b> · ของตั้งสูงได้ไม่เกินเท่าไร (X-stand 160 ซม. ตะแกรงราว 180 ซม.) ใช้ไฟของตัวเองได้ไหม</li></ul></div></section>
+
+<section id="days"><span class="eyebrow">20 ต.ค.–1 พ.ย.</span><h2>ทำอะไรวันไหน</h2>
+<div class="tbl"><table><tbody><tr><td style="white-space:nowrap"><b>อ. 20 ต.ค.</b><div class="cap">วันนี้</div></td><td>ถามผู้จัด 7 ข้อด้านล่าง · สั่งของ Shopee แบบส่งด่วน (ตะแกรง ตะขอ ไฟหนีบ) · ส่งไฟล์ X-stand (xstand/oct26-xstand-60x160.pdf) เข้าร้านพิมพ์ · ซื้อฟิวเจอร์บอร์ด ผ้า ตะกร้า ไม้หนีบ กรอบ A5 ที่ร้านเครื่องเขียน ร้านผ้า ร้าน 20 บาท</td></tr><tr><td style="white-space:nowrap"><b>พ. 21 ต.ค.</b><div class="cap"></div></td><td>รับ X-stand และงานพิมพ์ · ตัดฟิวเจอร์บอร์ดติดเทปบานพับ ทำป้ายจากเศษ · ติดป้ายห้อยสินค้า · ของ Shopee ไม่มาภายในวันนี้ ซื้อหน้าร้านแทน</td></tr><tr><td style="white-space:nowrap"><b>พฤ. 22 ต.ค.</b><div class="cap">ซ้อมใหญ่</div></td><td>ตีเทปกรอบ 2 × 2 ม. บนพื้นบ้าน ใช้โต๊ะกาแฟที่บ้านแทนโต๊ะพาเลท จัดตามผัง ถ่ายรูปเก็บไว้เป็นแบบ ซ้อมขาย แล้วแพ็คกล่อง A B C D</td></tr><tr><td style="white-space:nowrap"><b>ศ. 23 ต.ค.</b><div class="cap">วันแรก</div></td><td>ถึงก่อนเปิดอย่างน้อย 90 นาที จัดตามลำดับด้านล่าง โพสต์รูปบูธพร้อมเลขบูธก่อนงานเปิด</td></tr><tr><td style="white-space:nowrap"><b>ทุกวันขาย</b><div class="cap">ทุกเย็น</div></td><td>ปิดยอด นับเงิน เทียบสมุด จดว่าตัวไหนหมด เติมของจากกล่อง D ก่อนกลับ</td></tr><tr><td style="white-space:nowrap"><b>อา. 25 ต.ค.</b><div class="cap">จบสัปดาห์แรก</div></td><td>เก็บของตามที่ผู้จัดบอก ถ่ายรูปบูธ เตรียมโพสต์ Happy 26.10 พรุ่งนี้</td></tr><tr><td style="white-space:nowrap"><b>จ. 26 ต.ค.</b><div class="cap">วันเกิดแบรนด์</div></td><td>โพสต์ Happy 26.10 ขอบคุณลูกค้า สรุปยอดสัปดาห์แรกต่อสินค้า</td></tr><tr><td style="white-space:nowrap"><b>27–29 ต.ค.</b><div class="cap">เติมของ</div></td><td>ตัดและประกอบตัวที่ขายดีเพิ่ม ใช้เศษหนังล็อตใหญ่ที่เหลือ (หัวหมี) · โพสต์คลิปจากสัปดาห์แรก ชวนมาสัปดาห์ที่สอง</td></tr><tr><td style="white-space:nowrap"><b>30 ต.ค.–1 พ.ย.</b><div class="cap">สัปดาห์ที่สอง</div></td><td>ที่เดิม เวลาเดิม ย้ายตัวที่ขายดีไปหน้าโต๊ะ อาทิตย์เย็นรื้อบูธ คืนโต๊ะเก้าอี้ ถ่ายรูปบูธครั้งสุดท้าย</td></tr></tbody></table></div></section>
+
+<section id="setup"><span class="eyebrow">เช้าวันแรก</span><h2>ลำดับจัดบูธ 9 ขั้น</h2>
+<div class="card"><ol><li><b>ขยับโต๊ะพาเลทไปมุมหน้าซ้าย กางฟิวเจอร์บอร์ด แล้วปูผ้า</b><div class="cap" style="font-size:14px">เว้นมุมหน้าขวาไว้เป็นทางเข้า · ใส่กล่อง A B C ใต้โต๊ะ</div></li><li><b>ตั้งตะแกรงกลางด้านหลัง และ X-stand มุมหน้าขวา</b><div class="cap" style="font-size:14px">หันหน้า X-stand ไปทางเดินหลัก ถ้ามีลมแอร์แรง ถ่วงขาด้วยถุงทรายหรือขวดน้ำ</div></li><li><b>วางเก้าอี้สองตัวหลังโต๊ะ</b><div class="cap" style="font-size:14px">ตัวซ้ายนักสาธิต ตัวขวาหัวหน้าร้าน</div></li><li><b>ซ้อนกล่องห่อผ้าที่ขอบหลังของโต๊ะ</b><div class="cap" style="font-size:14px">โซน C สูงขึ้นมาราว 75 ซม. วางห้าหมีชิ้นเล็ก และ QR</div></li><li><b>จัดโต๊ะกาแฟที่ขอบหน้าโซน A</b><div class="cap" style="font-size:14px">แผ่นรองจาน แก้วบนที่รองแก้ว ผ้าเช็ดปากใส่ห่วงหมี ต้นไม้บนที่รองแก้วไส้ไม้ก๊อก ตะกร้าที่รองแก้วลายอื่นวางข้าง ๆ</div></li><li><b>แขวนของบนตะแกรง</b><div class="cap" style="font-size:14px">ราวหมีห้าตัวพาดบนสุด ที่ห้อยกระเป๋า ป้ายชื่อ · แถวล่าง SOI. 02 (กังหัน ของแขวน ปลอกแก้ว ซอง AirTag)</div></li><li><b>หนีบไฟ</b><div class="cap" style="font-size:14px">ที่กล่องโซน C ส่องโต๊ะกาแฟ</div></li><li><b>ป้ายราคา QR และป้ายคอลเลกชัน</b><div class="cap" style="font-size:14px">QR พร้อมเพย์ในกรอบ A5 ตรงจุดจ่ายเงินและโต๊ะกาแฟ · ป้ายราคาหนีบไม้หนีบ · ป้ายคอลเลกชันบนโต๊ะ</div></li><li><b>ถ่ายรูปบูธจากทางเดิน</b><div class="cap" style="font-size:14px">โพสต์สตอรี่ เจอกันที่บูธ พร้อมเลขบูธ</div></li></ol></div>
+<p class="cap">ทั้งหมดใช้เวลาประมาณ 60–90 นาที ถ้าซ้อมที่บ้านวันพฤหัสแล้ว</p></section>
+
+<section id="who"><span class="eyebrow">คนในบูธ</span><h2>ใครอยู่ตรงไหน</h2>
+<p>หลังโต๊ะลึกราว 115 ซม. มีเก้าอี้ผู้จัด 2 ตัวให้นักสาธิตกับหัวหน้าร้าน อยู่ได้พร้อมกัน 3–4 คน เด็กทำกะละ 45 นาที พัก 15 นาที พ่อหรือแม่อยู่ที่บูธตลอด อีกคนพาลูกที่ไม่เข้ากะไปพักหรือเดินดูงาน</p>
+<div class="grid"><div class="card" style="display:flex;flex-direction:column;gap:6px"><p><span class="legend"><span><i style="background:#FFC23C"></i>1</span></span></p><h3>ลูกหมีคนโต · หัวหน้าร้าน</h3><p class="cap" style="font-size:14px">นั่งเก้าอี้ขวาหลังโซน C ข้าง QR ลูกค้าที่เดินเข้ามุมขวาจ่ายเงินตรงนี้ จดยอด ส่งถุง</p></div><div class="card" style="display:flex;flex-direction:column;gap:6px"><p><span class="legend"><span><i style="background:#2EC4A0"></i>2</span></span></p><h3>ลูกหมีคนกลาง · นักสาธิต</h3><p class="cap" style="font-size:14px">นั่งเก้าอี้ซ้ายหลังโซน B โต๊ะสูง 50 ซม. พอดีมือเด็ก ลูกค้าตัวเล็กยืนลองต่อฝั่งตรงข้ามได้</p></div><div class="card" style="display:flex;flex-direction:column;gap:6px"><p><span class="legend"><span><i style="background:#FF8AC4"></i>3</span></span></p><h3>ลูกหมีคนเล็ก · ผู้ต้อนรับ</h3><p class="cap" style="font-size:14px">ยืนมุมหน้าขวาข้าง X-stand ยิ้ม ยื่นการ์ด ชวนลูกค้าเดินเข้ามาดูราวหมี</p></div><div class="card" style="display:flex;flex-direction:column;gap:6px"><p><span class="legend"><span><i style="background:var(--line)"></i>พ</span></span></p><h3>พ่อหรือแม่</h3><p class="cap" style="font-size:14px">ยืนหลังโต๊ะฝั่งซ้าย ดูด้านหลังกับกล่อง D เพราะบูธเปิดทุกด้าน เก็บกล่องเงิน ตอบเรื่องสั่งทำ อีกคนพาลูกที่ไม่เข้ากะไปพัก</p></div></div></section>
+
+<section id="target"><span class="eyebrow">เป้า</span><h2>ตัวเลขที่ต้องจดทุกเย็น</h2>
+<div class="grid s">
+<div class="card kpi"><p class="cap">ขายหมดทั้ง 6 วัน</p><b class="mono">32,712 ฿</b></div>
+<div class="card kpi"><p class="cap">เฉลี่ยต่อวัน</p><b class="mono">56 ชิ้น</b></div>
+<div class="card kpi"><p class="cap">ยอดต่อวัน</p><b class="mono">5,452 ฿</b></div>
+<div class="card kpi"><p class="cap">ต้นทุนของ+แพ็ค</p><b class="mono">8,283 ฿</b></div></div>
+<p class="cap">ทุกเย็นจดสามอย่าง: ยอดเงิน จำนวนชิ้นต่อสินค้า และจำนวนออเดอร์สั่งทำ วันที่สองย้ายตัวที่ขายดีไปไว้หน้าสุด</p>
+<div class="card"><h3>สต็อกสำหรับสองสัปดาห์</h3><ul style="margin-top:6px">
+<li>ของ 333 ชิ้นที่เตรียมไว้ ต้องพอ 6 วัน เฉลี่ยวันละราว 56 ชิ้น สัปดาห์แรกอย่าเพิ่งเอาออกหมด เก็บราวหนึ่งในสามไว้ที่บ้าน</li>
+<li>จันทร์ 26 ดูยอดจริงต่อสินค้า แล้ว 27–29 ทำเพิ่มเฉพาะตัวที่หมดหรือใกล้หมด</li>
+<li>เศษหนังล็อตใหญ่ (หัวหมี) ยังเหลือราว 245 ชิ้น ทำที่รองแก้วหมี ที่เก็บสายชาร์จ ที่ห้อยกระเป๋าเพิ่มได้</li>
+<li>เศษหนังล็อตเล็ก (แพตเทิร์น 02–06 ของ SOI. 02) แผนสต็อกเดิมต้องใช้ 445 ชิ้น แต่ล็อตที่ซื้อได้ 224 ชิ้น ต้องซื้อเศษเพิ่ม หรือลดจำนวน SOI. 02 ลง</li></ul></div></section>
+
+<section id="files"><span class="eyebrow">ไฟล์</span><h2>ไฟล์ที่ส่ง</h2>
+<div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">booth-20261019/build.py</td><td>ข้อมูลแผนบูธ: ขนาดโต๊ะ ผัง อุปกรณ์ ราคา ไทม์ไลน์ แก้ที่นี่แล้วรันใหม่</td></tr>
+<tr><td class="mono" style="white-space:nowrap">booth-20261019/site/index.html</td><td>หน้านี้ (สร้างจาก build.py)</td></tr>
+<tr><td class="mono" style="white-space:nowrap">booth-20261019/xstand/oct26-xstand-60x160.pdf</td><td>ไฟล์ X-stand ส่งร้านพิมพ์ (มี .jpg ด้วย) สร้างจาก xstand/build.py</td></tr>
+<tr><td class="mono" style="white-space:nowrap">booth-20261019/site/organizer-table.jpg</td><td>แบบโต๊ะพาเลทและเก้าอี้จากผู้จัด</td></tr>
+<tr><td class="mono" style="white-space:nowrap">brand-20261014/brand.py</td><td>ราคาและสต็อกสินค้าอ่านจากไฟล์นี้</td></tr>
+</tbody></table></div></section>
+
+<section id="check"><span class="eyebrow">ต้องเช็ก</span><h2>ก่อนซื้อของ</h2>
+<div class="card"><ol>
+<li>ฟิวเจอร์บอร์ดวางบนโต๊ะที่บ้านแล้วกดดู ถ้ายวบตรงร่อง เพิ่มอีกชั้นหรือใช้ 5 มม. สองชั้น</li>
+<li>เลขบูธ เอามาใส่โพสต์ เจอกันที่บูธ</li>
+<li>สแกน QR บนป้ายด้วยมือถือก่อนส่งพิมพ์ ต้องเปิดไอจี @oct.26_brand ได้จริง</li>
+<li>ไฟล์ X-stand ส่งร้านพิมพ์วันนี้ ให้ได้รับทันวันพุธ</li>
+<li>บูธติดทางเดินด้านไหน ถ้าหน้าหลักไม่ใช่ด้านที่วาดไว้ หมุนผังทั้งชุดให้โต๊ะหันหาทางเดินหลัก</li>
+<li>ของจาก Shopee ถ้าร้านส่งไม่ทันวันพุธ ซื้อหน้าร้านแทน</li></ol></div></section>
+</div>

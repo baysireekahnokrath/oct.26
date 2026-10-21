@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://oct26brand.com/sitemap.xml

@@ -12,7 +12,7 @@ BRAND = {
     "th": "OCT. 26",
     "en": "OCT. 26",
     "say": "อ็อก ยี่สิบหก",
-    "handle": "oct26.crafted",
+    "handle": "oct.26_brand",      # real accounts opened, given 21 Oct (see SOCIAL)
     "acro": "our · crafted · things",
     "tag_th": "ของที่เราทำกันเอง",
     "tag_en": "our crafted things.",
@@ -347,8 +347,13 @@ def event_totals():
 # ---------------------------------------------------------------- channel copy
 TAGS = "#OCT26 #ourcraftedthings #หนังแท้ #ไม่ต้องเย็บ #ของขวัญ #งานแฮนด์เมด"
 TAGS_COLL = {"soi2": "#SOI02", "love": "#ห้าหมี #FiveBears #LoveCollection"}
-EVENT = "บูธ OCT. 26 งาน [ชื่องาน] 23–25 ต.ค. 2569"
-SHOP = "Shopee ร้าน OCT. 26"
+BOOTH = dict(zone="หนูทดลอง KIDS MARKET", fair="บ้านและสวนแฟร์ Living Festival 2026",
+             place="อิมแพ็ค เมืองทองธานี", hall="ชาเลนเจอร์ 2–3", hours="ศุกร์–อาทิตย์ 10:00–17:00",
+             weekends=("23–25 ต.ค. 2569", "30 ต.ค.–1 พ.ย. 2569"), until="2026-11-01")   # organiser's post, 21 Oct
+EVENT = ("บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET บ้านและสวนแฟร์ Living Festival 2026 "
+         "อิมแพ็ค เมืองทองธานี 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569")   # two weekends, confirmed 21 Oct
+SHOP_NAME = "OCT.26 - Our crafted things."      # the Shopee shop as registered (owner, 21 Oct)
+SHOP = f"Shopee ร้าน {SHOP_NAME}"
 
 def tags(p):
     return f"{TAGS} {TAGS_COLL[p['coll']]}"
@@ -401,17 +406,22 @@ def shopee(p):
 
 # ---------------------------------------------------------------- channels setup
 H = BRAND["handle"]
+# accounts that exist (owner, 21 Oct). TikTok and Shopee are not open yet: print and posts name only these three.
+SOCIAL = {"instagram": "https://www.instagram.com/oct.26_brand/",
+          "youtube": "https://www.youtube.com/@OCT.26_brand",
+          "facebook": "https://www.facebook.com/profile.php?id=61595850110023",
+          "web": "oct26brand.com"}          # registered 21 Oct, the customer website
 CHANNELS = [
-    ("Facebook Page", "OCT. 26", f"facebook.com/{H}",
-     "ชื่อเพจ OCT. 26 ชื่อผู้ใช้ @oct26.crafted หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
-     STORY_BIO + "\nสั่งซื้อ: Shopee ร้าน OCT. 26"),
-    ("Instagram", f"@{H}", f"instagram.com/{H}",
+    ("Facebook Page", "OCT. 26", SOCIAL["facebook"],
+     "ชื่อเพจ OCT. 26 (ยังไม่ได้ตั้งชื่อผู้ใช้ ลิงก์เป็น profile.php?id=…) หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
+     STORY_BIO + f"\nสั่งซื้อ: Shopee ร้าน {SHOP_NAME}"),
+    ("Instagram", f"@{H}", SOCIAL["instagram"],
      "บัญชีธุรกิจ เชื่อมกับเพจ Facebook · ไฮไลต์สามอัน SOI. 02 · ห้าหมี · How-to · ลิงก์ในโปรไฟล์ไป Shopee",
      "OCT. 26 · our crafted things.\nของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nสั่งซื้อที่ลิงก์ด้านล่าง"),
     ("TikTok", f"@{H}", f"tiktok.com/@{H}",
      "บัญชีธุรกิจ · เปิด TikTok Shop ภายหลังได้ · คลิปมือต่อหนัง 15 วินาที คลิปห้าหมีใช้เพลงน่ารัก คลิป SOI. 02 ใช้เพลงเรียบ",
-     "งานหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nShopee: OCT. 26"),
-    ("YouTube", f"@{H}", f"youtube.com/@{H}",
+     "งานหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nShopee: " + SHOP_NAME),
+    ("YouTube", "@OCT.26_brand", SOCIAL["youtube"],
      "เริ่มจาก Shorts ที่ตัดจากคลิป TikTok · คลิปยาวเดือนละครั้ง เช่น เบื้องหลังวันออกบูธ และวันเกิดแบรนด์ 26.10",
      "OCT. 26 our crafted things.\nช่องของครอบครัวที่ทำของใช้จากเศษหนังแท้ด้วยกันทั้งบ้าน\nพ่อ แม่ และลูกสามคน"),
     ("Shopee", "OCT. 26", f"shopee.co.th/{H}",
@@ -423,7 +433,7 @@ CHANNELS = [
 
 # ---------------------------------------------------------------- plan to the event
 TIMELINE = [
-    ("14 ต.ค.", "พ.", "เลือกชื่อ OCT. 26 แล้ว เช็กชื่อ @oct26.crafted ว่างทุกช่องทาง สั่งทำบล็อกที่ยังไม่มี (ร้านบล็อกใช้ 2–5 วัน)"),
+    ("14 ต.ค.", "พ.", "เลือกชื่อ OCT. 26 แล้ว เช็กชื่อบัญชีว่างทุกช่องทาง (ได้ @oct.26_brand) สั่งทำบล็อกที่ยังไม่มี (ร้านบล็อกใช้ 2–5 วัน)"),
     ("15 ต.ค.", "พฤ.", "เปิด Facebook Page, IG, TikTok, YouTube, Shopee ส่งไฟล์โลโก้ไปร้านพิมพ์ (สติกเกอร์ ป้าย ป้ายราคา)"),
     ("16 ต.ค.", "ศ.", "ตัดหนังล็อตแรกด้วยบล็อกที่มีแล้ว โพสต์แรก ทำไมชื่อ OCT. 26"),
     ("17 ต.ค.", "ส.", "ลูก ๆ ฝึกประกอบสินค้าหลัก 8 ตัว ถ่ายคลิปมือต่อหนังเก็บไว้"),
@@ -432,8 +442,10 @@ TIMELINE = [
     ("20 ต.ค.", "อ.", "ประกอบให้ครบจำนวน โพสต์ How-to วันละ 1 ตัว"),
     ("21 ต.ค.", "พ.", "รับงานพิมพ์ ติดป้ายห้อยและราคา แพ็คสินค้าใส่กล่องตามคอลเลกชัน"),
     ("22 ต.ค.", "พฤ.", "จัดบูธจำลองที่บ้าน เช็กลิสต์ของ ซ้อมขายรอบสุดท้าย โพสต์ เจอกันพรุ่งนี้"),
-    ("23–25 ต.ค.", "ศ.–อา.", "ออกบูธ โพสต์สตอรี่ทุกวัน จดยอดขายทุกเย็น"),
+    ("23–25 ต.ค.", "ศ.–อา.", "ออกบูธสัปดาห์แรก อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3 เวลา 10:00–17:00 โพสต์สตอรี่ทุกวัน จดยอดขายทุกเย็น"),
     ("26 ต.ค.", "จ.", "วันเกิดแม่ และวันเกิดแบรนด์ โพสต์ Happy 26.10 ขอบคุณลูกค้า สรุปยอด แบ่งส่วนแบ่งเข้ากระปุกลูก ๆ"),
+    ("27–29 ต.ค.", "อ.–พฤ.", "ดูยอดสัปดาห์แรก ตัดและประกอบตัวที่ขายดีเพิ่ม เติมสต็อก โพสต์ชวนมาสัปดาห์ที่สอง"),
+    ("30 ต.ค.–1 พ.ย.", "ศ.–อา.", "ออกบูธสัปดาห์ที่สอง ที่เดิม เวลาเดิม รื้อบูธเย็นวันอาทิตย์"),
 ]
 
 KIDS_ROLES = [
