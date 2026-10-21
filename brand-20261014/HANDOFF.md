@@ -37,6 +37,7 @@ Handle everywhere: oct.26_brand (`BRAND["handle"]`, `SOCIAL` in brand.py). TikTo
 - Brand Book https://claude.ai/artifact/3asVqkM4vs6fGM3rihHSYp
 - Brand Bible https://claude.ai/artifact/4FtQN6WRW3cUF1rATo3jvi
 - Launch Kit https://claude.ai/artifact/AyvcJTzj5BY6spbPkZYQXS
+- Pattern play mock-up https://claude.ai/artifact/AHD7ehgUYFz2AzfGhwKyQq — source `../play-20261021/` (website to go on Cloudflare Pages after sign-off)
 - Launch posts (banners + copy) https://claude.ai/artifact/BFoXWUu2bicNUJ2NRuSHo7 — source `../social-20261021/build.py`
 - Booth plan (บ้านและสวนแฟร์, 2 × 2 m) https://claude.ai/artifact/4DVjZ32YPCF9b9Ck8k7gz4 — source `../booth-20261019/build.py`
 - Tech Pack https://claude.ai/artifact/XR5yqf6HFfA4JoJ9eQvapd (+ `techpack/oct26-techpack-a4.pdf`)
