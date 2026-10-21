@@ -62,9 +62,39 @@ PLAN_HTML = "".join(
     f'<li><time>{esc(d)}</time><div><b>{esc(t)}</b><p>{esc(x)}</p></div></li>' for d, t, x in pd.ROADMAP)
 FILES_HTML = "".join(f"<li><code>{esc(f)}</code><span>{esc(w)}</span></li>" for f, w in pd.FILES)
 
+# ---------------------------------------------------------------- tab "ไขว้ 3D" (data from ../cross3d/catalogue.py)
+X3D = json.load(open(os.path.join(ROOT, "cross3d", "x3d.json")))
+for it in X3D["items"]: it.pop("spec", None)
+CROSS_JS = open(os.path.join(HERE, "cross3d.js")).read().replace("__X3D__", json.dumps(X3D, ensure_ascii=False, separators=(",", ":")))
+sys.path.insert(0, os.path.join(ROOT, "cross3d"))
+from geom import PIECES as XP, NAME as XNAME
+import math as _m
+tabs = [(c, k, _m.dist(f["a"], f["b"])) for c in sorted(XP) for k, f in XP[c]["feats"].items() if f["kind"] == "tab"]
+slits = [(c, k, _m.dist(f["a"], f["b"])) for c in sorted(XP) for k, f in XP[c]["feats"].items() if f["kind"] == "slit"]
+tab_n = {}; slit_n = {}
+for c, _, L in tabs: tab_n[c] = L
+for c, _, L in slits: slit_n[c] = L
+head = "".join(f"<th>ร่อง {c}<br><span class='small muted'>{slit_n[c]:.1f}</span></th>" for c in sorted(slit_n))
+rows = ""
+for c in sorted(tab_n):
+    cells = ""
+    for d in sorted(slit_n):
+        gap = slit_n[d] - tab_n[c]
+        cells += f"<td class='ok'>✓ {gap:.1f}</td>" if 0 <= gap <= 1.0 else "<td class='muted'>–</td>"
+    rows += f"<tr><th>ปีก {c} {XNAME[c]}<br><span class='small muted'>{tab_n[c]:.1f}</span></th>{cells}</tr>"
+X_COMPAT = f"<table class='compat num'><thead><tr><th></th>{head}</tr></thead><tbody>{rows}</tbody></table>"
+xi = X3D["items"]
+X_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{b}</b><span class="small muted">{c}</span></div>' for a, b, c in [
+    ("แบบที่ผ่านการตรวจ", len(xi), f"{len({i['group'] for i in xi})} กลุ่ม"),
+    ("บล็อกใหม่ที่ต้องสั่ง", 0, "ใช้บล็อก 01–06 ที่มีอยู่"),
+    ("ชิ้นต่อแบบ", f"{min(len(i['pieces']) for i in xi)}–{max(len(i['pieces']) for i in xi)}", f"ล็อก {min(i['locks'] for i in xi)}–{max(i['locks'] for i in xi)} จุด"),
+    ("กำไรขั้นต้นเฉลี่ย", f"{round(sum(i['margin'] for i in xi) / len(xi) * 100)}%", f"ต่ำสุด {round(min(i['margin'] for i in xi) * 100)}%"),
+])
+
 TEMPLATE = open(os.path.join(HERE, "template.html")).read()
 out = (TEMPLATE.replace("__DATA__", json.dumps(DATA, ensure_ascii=False, separators=(",", ":")))
        .replace("__WORDMARK__", WORDMARK).replace("__ROLES__", ROLES_HTML).replace("__RULES__", RULES_HTML)
-       .replace("__PLAN__", PLAN_HTML).replace("__FILES__", FILES_HTML))
+       .replace("__PLAN__", PLAN_HTML).replace("__FILES__", FILES_HTML)
+       .replace("__X_STATS__", X_STATS).replace("__X_COMPAT__", X_COMPAT).replace("__CROSS3D_JS__", CROSS_JS))
 open(os.path.join(HERE, "index.html"), "w").write(out)
 print("site/index.html", len(out), "bytes")
