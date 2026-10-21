@@ -239,7 +239,8 @@ const NOTES = `<section id="notes"><span class="eyebrow">หมายเหต�
 <ol class="notes"><li>เหลือ 7 สินค้าที่ขายจริง ไม่มี 06 ไม่มีของที่ต้องต่อชิ้น ไม่มีคำว่าไม่ต้องเย็บ</li>
 <li>ใช้รูปจริงแทนโปสเตอร์ (กด “ใส่รูปจริง” แถบเหลืองด้านบน)</li><li>เอาหน้าต่อลายออกจากเมนู</li>
 <li>ปุ่มสั่งติดล่างจอในหน้าสินค้า กดแล้วคัดลอกข้อความสั่งให้ด้วย</li><li>เพิ่มกล่องสั่งยังไง สามขั้น · LINE และ Shopee รอลิงก์</li>
-<li>ประกาศบูธเป็นแถบสั้น ไม่กินจอ</li></ol></section>`;
+<li>ประกาศบูธเป็นแถบสั้น ไม่กินจอ</li></ol>
+<p class="cap">ต้องเช็ก: ชื่อ ราคา (ยังเป็นราคาร่าง) รูปที่เลือก ข้อความสั่งยังไง · ต่อไป: ลิงก์ LINE และ Shopee แล้วพิมพ์ “แก้เว็บจริงเลยครับ” · ไฟล์: website-mock-20261021/ ในกิ่ง claude/funny-tesla-4dkwm7</p></section>`;
 
 let toastT;
 function toast(t){ const el=$("#toast"); el.textContent=t; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,2200); }
