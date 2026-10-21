@@ -3,22 +3,21 @@ import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "brand-20261014"))
 import brand as B
-from build import SHOPEE_STOCK, HEAVY, IMG, HOLD_PIECES, split
+from build import SHOPEE_STOCK, HEAVY, IMG, HOLD_PIECES, SKU, split
 
-ready, proto, held = split()
+ready, held = split()
 hold_names = " ".join(B.PIECE_NAME[c] for c in sorted(HOLD_PIECES))
 
 
 def card(p):
-    tag = "มีชิ้นเสริม" if p["status"] == B.EXTRA else "พร้อมผลิต"
     return (f'<li><img src="t/{p["n"]:02d}.jpg" alt="{p["name"]}" width="360" height="450" loading="lazy">'
-            f'<b>{p["name"]}</b><span class="meta">OCT26-{p["n"]:02d} · {tag}</span>'
+            f'<b>{p["name"]}</b><span class="meta">{SKU[p["n"]]} · ชิ้นเดียว ไม่ต้องต่อ</span>'
             f'<span class="row"><span class="price">฿{p["price"]}</span>'
             f'<span>คลัง {min(p["stock"], SHOPEE_STOCK)} · {0.2 if p["n"] in HEAVY else 0.1} กก.</span></span></li>')
 
 
 def line(p):
-    return f'<li><span>{p["n"]:02d}</span> {p["name"]} <em>฿{p["price"]}</em></li>'
+    return f'<li><span>{SKU[p["n"]]}</span> {p["name"]} <em>฿{p["price"]}</em></li>'
 
 
 html = f"""<title>OCT. 26 Shopee Upload</title>
@@ -57,30 +56,29 @@ ol.check{{margin:0;padding-left:1.3em;display:grid;gap:8px}}
 <header style="display:grid;gap:8px">
 <span class="eyebrow">Shopee · {B.SHOP_NAME}</span>
 <h1>ไฟล์ลงสินค้า Shopee พร้อมอัป</h1>
-<p>กรอกในฟอร์มของ Shopee ที่พ่อเบส่งมา (แบบพื้นฐาน 21 ต.ค.) ชื่อ คำอธิบาย ราคา และ SKU ดึงจากข้อมูลสินค้าชุดเดียวกับเว็บและโปสเตอร์ ภาพปกเป็นโปสเตอร์ How-to บน {B.SOCIAL["web"]}</p>
+<p>กรอกในฟอร์มของ Shopee ที่พ่อเบส่งมา (แบบพื้นฐาน 21 ต.ค.) ใส่เฉพาะสินค้าชิ้นเดียวตามหน้า "OCT. 26 สถานะล่าสุด" เพราะข้อต่อยังไม่ผ่านการทดสอบ และ 06 ไม่ได้ตัด SKU ตรงกับ Google Sheet บัญชี ภาพปกเป็นโปสเตอร์ How-to บน {B.SOCIAL["web"]}</p>
 </header>
 <div class="nums">
 <div><b>{len(ready)}</b><span>ชิ้น พร้อมอัปตอนนี้</span></div>
-<div><b>{len(proto)}</b><span>ชิ้น รอลองต้นแบบก่อน</span></div>
 <div><b>{len(held)}</b><span>ชิ้น พักไว้ ใช้ {hold_names}</span></div>
 <div><b>{SHOPEE_STOCK}</b><span>คลังต่อชิ้น (แบ่งจากบูธ)</span></div>
 </div>
 <section><h2>ไฟล์</h2>
 <ul class="files">
 <li><code>shopee-20261021/oct26-shopee-ready.xlsx</code><span class="ok">อัปไฟล์นี้ก่อน · {len(ready)} ชิ้น</span></li>
-<li><code>shopee-20261021/oct26-shopee-prototype.xlsx</code><span class="hold">อย่าเพิ่งอัป · {len(proto)} ชิ้นที่ยังไม่ได้ลองทำจริง</span></li>
-<li><code>shopee-20261021/build.py</code><span>แก้ราคาหรือชื่อใน brand.py แล้วรันใหม่ ได้ไฟล์ใหม่ทันที</span></li>
+<li><code>shopee-20261021/build.py</code><span>รายการ SKU ที่ขายอยู่ในไฟล์นี้ แก้แล้วรันใหม่ ได้ไฟล์ใหม่ทันที</span></li>
+<li><span>Google Sheet สำหรับเปิดดู "OCT. 26 Shopee สินค้าที่จะลง" ในโฟลเดอร์ OCT. 26 ไฟล์งาน</span></li>
 </ul></section>
 <section><h2>{len(ready)} ชิ้นในไฟล์ ready</h2>
 <ul class="grid">{"".join(card(p) for p in ready)}</ul></section>
 <section><h2>กรอกอะไรไว้บ้าง</h2>
 <div class="cols"><table>
 <tr><th>ช่อง</th><th>ใส่อะไร</th></tr>
-<tr><td>ชื่อสินค้า</td><td>ชื่อ + หนังแท้ ไม่ต้องเย็บ งานแฮนด์เมด OCT. 26 + คอลเลกชัน (67–97 ตัวอักษร)</td></tr>
-<tr><td>รายละเอียด</td><td>ประโยคเปิด วัสดุ ชิ้นที่ใช้ ขนาด เหมาะกับใคร วิธีประกอบ การดูแล ไม่มีลิงก์ภายนอก</td></tr>
-<tr><td>ราคา · SKU</td><td>ราคาตามเว็บ · OCT26-01 ถึง OCT26-30</td></tr>
+<tr><td>ชื่อสินค้า</td><td>ชื่อ + หนังวัวแท้ งานแฮนด์เมด OCT. 26 + คอลเลกชัน (62–80 ตัวอักษร) ไม่มีคำว่า ต่อเอง หรือ ไม่ต้องเย็บ</td></tr>
+<tr><td>รายละเอียด</td><td>ประโยคเปิด วัสดุ (หนา 1.0–1.2 มม.) ชิ้นที่ใช้ ขนาด เหมาะกับใคร วิธีใช้ การดูแล ไม่มีลิงก์ภายนอก</td></tr>
+<tr><td>ราคา · SKU</td><td>ราคาร่างตามหน้าสถานะ (รอยืนยัน) · OC-01-01, OC-01-22, OC-03-26, OC-04-27, OC-05-28</td></tr>
 <tr><td>ภาพปก</td><td><code>{IMG.format(1)}</code> ฯลฯ</td></tr>
-<tr><td>น้ำหนัก</td><td>0.1 กก. ชุดใหญ่ 0.2 กก. (เบอร์ {", ".join(f"{n:02d}" for n in sorted(HEAVY))})</td></tr>
+<tr><td>น้ำหนัก</td><td>0.1 กก. ทุกชิ้น</td></tr>
 <tr><td>ส่งธรรมดา</td><td>เปิด</td></tr>
 <tr><td>เว้นว่าง</td><td>หมวดหมู่ (ให้ Shopee แนะนำตอนตรวจ) ขนาดกล่อง ตัวเลือกสินค้า พรีออเดอร์</td></tr>
 </table></div></section>
@@ -91,14 +89,12 @@ ol.check{{margin:0;padding-left:1.3em;display:grid;gap:8px}}
 <li>คลังตั้งไว้ {SHOPEE_STOCK} ชิ้นต่อแบบ เพราะใช้ของชุดเดียวกับบูธ 23 ต.ค.–1 พ.ย. หลังงานค่อยเพิ่ม</li>
 <li>น้ำหนักเป็นค่าประมาณ ชั่งของจริงพร้อมซองแล้วแก้ใน Seller Centre ค่าส่งจะตรง</li>
 <li>ภาพปกเป็นแนวตั้ง 4:5 Shopee จะครอปเป็นจัตุรัส ภายหลังถ่ายรูปสินค้าจริงเพิ่มได้ในช่องรูปภาพ 1–8</li>
-<li>ชื่อสินค้ามีคำว่า ไม่ต้องเย็บ เพราะสินค้าทุกชิ้นต่อด้วยปีกและร่องจริง</li>
+<li>ราคายังเป็นราคาร่าง ยืนยันแล้วแก้ใน Seller Centre หรือบอกให้ทำไฟล์ใหม่</li>
+<li>หน้าสถานะเขียนว่างานเว็บและหน้าร้านออนไลน์ควรรอเรื่องแบรนด์ และยังไม่มีรูปถ่ายสินค้าจริง ตัดสินใจก่อนว่าจะเปิด Shopee ตอนนี้หรือรอ</li>
 </ol></section>
 <section><h2>{len(held)} ชิ้นที่พักไว้ เพราะใช้ {hold_names}</h2>
-<p>ชิ้น {hold_names} ยังใช้ไม่ได้ สินค้าที่มีชิ้นนี้จึงไม่อยู่ในไฟล์ไหนเลย ชิ้นพร้อมเมื่อไร บอกได้ จะใส่กลับให้</p>
+<p>พ่อเบสั่งให้เอาสินค้าที่ใช้ {hold_names} ออก แต่หน้าสถานะยังนับ 2 ชิ้นนี้ในของขายที่บูธ ถ้าจะขายใน Shopee ด้วย บอกได้ จะใส่กลับให้</p>
 <ul class="later">{"".join(line(p) for p in held)}</ul></section>
-<section><h2>{len(proto)} ชิ้นที่รอลองต้นแบบ</h2>
-<p>อยู่ในไฟล์ prototype แล้ว ลองทำชิ้นไหนผ่าน ค่อยลบแถวที่ยังไม่ผ่านออกแล้วอัป หรือบอกเลขมา จะทำไฟล์ใหม่ให้</p>
-<ul class="later">{"".join(line(p) for p in proto)}</ul></section>
 </main>
 """
 os.makedirs(os.path.join(HERE, "site"), exist_ok=True)

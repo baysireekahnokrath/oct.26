@@ -2,8 +2,11 @@
 
 openpyxl cannot open Shopee's file (sheetView activePane="bottom_left" is invalid), so rows are written straight into
 xl/worksheets/sheet2.xml (form "แบบฟอร์มการลงสินค้า", data from row 7) and every other part is copied byte for byte.
-python3 shopee-20261021/build.py -> oct26-shopee-ready.xlsx (READY + EXTRA) and oct26-shopee-prototype.xlsx (PROTO);
-products using a piece in HOLD_PIECES are left out of both.
+python3 shopee-20261021/build.py -> oct26-shopee-ready.xlsx
+
+What may be sold comes from the shared Google Doc "OCT. 26 สถานะล่าสุด" (21 Oct): joints between pieces have not passed
+testing and 06 was never cut, so only the single-piece SKUs listed there go in, and the text makes no assembly or
+no-sew claim. brand.shopee() still says ไม่ต้องเย็บ, so the Shopee text is written here instead.
 """
 import os, re, sys, zipfile
 from xml.sax.saxutils import escape
@@ -16,12 +19,29 @@ IMG = "https://" + B.SOCIAL["web"] + "/assets/posters/{:02d}.png"   # How-to pos
 SHOPEE_STOCK = 5          # booth and Shopee share stock until 1 Nov; raise in Seller Centre after the fair
 HEAVY = {11, 13, 21, 29, 30}  # sets and large pieces, 0.2 kg packed; the rest 0.1 kg
 HOLD_PIECES = {"02"}      # owner, 21 Oct: piece 02 (กังหัน) is not usable yet, so no product with it goes to Shopee
+# event SKUs from the status doc (codes match the accounting sheet "OCT. 26 บัญชี SKU สต็อก และบันทึกการขาย")
+SKU = {1: "OC-01-01", 22: "OC-01-22", 24: "OC-02-24", 26: "OC-03-26", 27: "OC-04-27", 28: "OC-05-28", 29: "OC-MX-29"}
+
+
+def shopee_text(p):
+    sub = "ห้าหมี FIVE BEARS Love" if p["coll"] == "love" else "SOI. 02"
+    title = f"{p['name']} หนังวัวแท้ งานแฮนด์เมด OCT. 26 {sub} ของขวัญ"
+    desc = (f"{p['hook']}\n\n"
+            f"• คอลเลกชัน: {p['line']}\n"
+            f"• วัสดุ: เศษหนังวัวแท้ หนา 1.0–1.2 มม. สีและลายแต่ละชิ้นต่างกันเล็กน้อย ทุกชิ้นมีชิ้นเดียว\n"
+            f"• ทำจาก: {p['pieces_txt']} ตัดด้วยบล็อกจากหนังแผ่นเดียว\n"
+            f"• ขนาด: {p['size']}\n"
+            f"• เหมาะกับ: {p['who']}\n\n"
+            f"วิธีใช้\n{B._steps(p)}\n\n"
+            f"การดูแล: เช็ดด้วยผ้าแห้ง เลี่ยงน้ำและแดดจัด\n"
+            f"OCT. 26 · our crafted things. ทำและแพ็คกันเองทั้งบ้าน พ่อ แม่ และลูกสามคน")
+    return title, desc
 
 
 def row(p):
-    title, desc = B.shopee(p)
+    title, desc = shopee_text(p)
     assert 20 <= len(title) <= 120 and 60 <= len(desc) <= 5000, p["n"]
-    sku = f"OCT26-{p['n']:02d}"
+    sku = SKU[p["n"]]
     return {"B": title, "C": desc, "I": sku, "P": str(p["price"]), "Q": str(min(p["stock"], SHOPEE_STOCK)),
             "R": sku, "V": IMG.format(p["n"]), "AE": "0.2" if p["n"] in HEAVY else "0.1", "AI": "เปิด"}
 
@@ -64,12 +84,11 @@ def build(products, out):
 
 
 def split():
-    held = [p for p in B.PRODUCTS if HOLD_PIECES & {c for c, _ in p["parts"]}]
-    rest = [p for p in B.PRODUCTS if p not in held]
-    return [p for p in rest if p["status"] != B.PROTO], [p for p in rest if p["status"] == B.PROTO], held
+    sale = [p for p in B.PRODUCTS if p["n"] in SKU]
+    held = [p for p in sale if HOLD_PIECES & {c for c, _ in p["parts"]}]
+    return [p for p in sale if p not in held], held
 
 
 if __name__ == "__main__":
-    ready, proto, held = split()
+    ready, held = split()
     build(ready, os.path.join(HERE, "oct26-shopee-ready.xlsx"))
-    build(proto, os.path.join(HERE, "oct26-shopee-prototype.xlsx"))
