@@ -220,13 +220,13 @@ table.compat td.ok{color:var(--good);font-weight:600}
     <div class="legend" id="legend"></div>
   </div>
   <div class="block">
-    <h2>ต้องจบก่อนบูธ 23 ต.ค.</h2>
-    <p class="muted">สินค้าหลักหน้าบูธที่ยังไม่ถึงขั้นพร้อมผลิต ทดสอบให้ผ่าน หรือย้ายไปพักไว้แล้วใช้ตัวที่พร้อมแทน</p>
-    <ul class="risk" id="risk-hero"></ul>
+    <h2>ขายที่บูธ 7 SKU ชิ้นเดียว</h2>
+    <p class="muted" id="status-note"></p>
+    <ul class="risk" id="booth-list"></ul>
   </div>
   <div class="block">
-    <h3>สต็อกบูธตัวอื่นที่ยังไม่พร้อม เรียงตามยอดขายที่จะหายไป</h3>
-    <ul class="risk" id="risk-rest"></ul>
+    <h3>ตอนนี้ห้ามใช้หรือยังขายไม่ได้</h3>
+    <ul class="risk" id="blocked-list"></ul>
   </div>
   <div class="block">
     <h2>ความเห็นล่าสุดจากทีม</h2>
@@ -278,6 +278,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
     <h2>50 แบบที่เสียบไขว้เป็น 3D จากบล็อก 6 แบบที่มีอยู่</h2>
     <p class="muted">ทุกแบบใช้ชิ้นหนังแผ่นเรียบจากบล็อกเดิม ไม่ต้องพับ ไม่ใช้กาว ไม่ต้องสั่งบล็อกใหม่ ตำแหน่งปีกและร่องอ่านจากไฟล์บล็อกจริง แล้วให้คอมพิวเตอร์ประกอบและตรวจทุกแบบ แตะการ์ดเพื่อหมุนดู แยกชิ้น และส่งแบบที่ชอบเข้าบอร์ด</p>
   </div>
+  <p class="notice" id="x-joints"></p>
   <div class="stats" id="x-stats">__X_STATS__</div>
   <div class="block">
     <h3>ปีกไหนเข้าร่องไหนได้</h3>
@@ -490,19 +491,15 @@ function renderComments() {
 function renderOverview() {
   const all = items(), prods = all.filter(i => i.kind === "product");
   const count = k => all.filter(i => i.stage === k).length;
-  const notReady = prods.filter(p => !READYISH.has(p.stage) && p.stage !== "hold");
-  const heroes = D.heroes.map(n => prods.find(p => p.n === n));
-  const heroOpen = heroes.filter(p => !READYISH.has(p.stage));
-  const stockAll = prods.reduce((a, p) => a + p.stock, 0);
-  const salesAll = prods.reduce((a, p) => a + p.stock * p.price, 0);
-  const riskStock = notReady.reduce((a, p) => a + p.stock, 0);
-  const riskSales = notReady.reduce((a, p) => a + p.stock * p.price, 0);
   const ideas = all.filter(i => i.kind === "idea").length;
+  const booth = D.booth.map(b => ({...prods.find(p => p.n === b.n), sku: b.sku}));
+  const uses06 = prods.filter(p => p.parts.some(([c]) => c === "06"));
+  const multi = prods.filter(p => p.joints > 0 && !uses06.includes(p));
   $("#stats").replaceChildren(
     el("div", {class: "stat"}, el("span", {class: "small muted", text: "สินค้าบนบอร์ด"}), el("b", {text: all.length}), el("span", {class: "small muted", text: `30 แบบเดิม${ideas ? ` + ไอเดียใหม่ ${ideas}` : ""}`})),
-    el("div", {class: "stat"}, el("span", {class: "small muted", text: "พร้อมผลิตหรือขายแล้ว"}), el("b", {text: count("ready") + count("selling")}), el("span", {class: "small muted", text: "จาก 30 แบบเดิม"})),
-    el("div", {class: "stat" + (heroOpen.length ? " alert" : "")}, el("span", {class: "small muted", text: "สินค้าหลักหน้าบูธที่ยังไม่พร้อม"}), el("b", {text: `${heroOpen.length}/${heroes.length}`}), el("span", {class: "small muted", text: "ต้องจบภายใน 22 ต.ค."})),
-    el("div", {class: "stat" + (riskStock ? " alert" : "")}, el("span", {class: "small muted", text: "ชิ้นในสต็อกบูธที่ยังไม่พร้อม"}), el("b", {class: "num", text: `${riskStock}/${stockAll}`}), el("span", {class: "small muted num", text: `ยอดขาย ${baht(riskSales)} จาก ${baht(salesAll)} บาท`})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "ขายที่บูธ"}), el("b", {text: booth.length}), el("span", {class: "small muted", text: "SKU ชิ้นเดียว ราคาร่าง"})),
+    el("div", {class: "stat alert"}, el("span", {class: "small muted", text: "ต้องต่อชิ้น รอข้อต่อผ่าน"}), el("b", {text: multi.length}), el("span", {class: "small muted", text: "ยังไม่ขายงานนี้"})),
+    el("div", {class: "stat alert"}, el("span", {class: "small muted", text: "ใช้ 06 ห้ามใช้ตอนนี้"}), el("b", {text: uses06.length}), el("span", {class: "small muted", text: "06 ยังไม่ได้ตัด"})),
   );
   const pipe = $("#pipe"); pipe.replaceChildren();
   pipe.setAttribute("aria-label", D.stages.map(s => `${s.name} ${count(s.key)}`).join(", "));
@@ -511,16 +508,16 @@ function renderOverview() {
     pipe.append(el("span", {style: `flex:${c};background:${stageColor(s.key)};color:${stageText(s.key)}`, title: `${s.name} ${c}`, text: c}));
   }
   $("#legend").replaceChildren(...D.stages.map(s => el("span", {}, el("i", {style: `background:${stageColor(s.key)}`}), `${s.name} ${count(s.key)}`)));
+  $("#status-note").textContent = `ตามเอกสาร "OCT. 26 สถานะล่าสุด" วันที่ ${D.statusDate} ${D.jointsOpen} ถ้าเอกสารนั้นเปลี่ยน ให้เชื่อเอกสารก่อนหน้านี้`;
 
-  const row = p => el("li", {},
+  const row = (p, sub) => el("li", {},
     thumb(p.parts[0]?.[0] || "05"),
-    el("div", {}, el("b", {text: `${p.n}. ${p.name}`}), " ", pill(p.stage),
+    el("div", {}, el("b", {text: `${p.sku ? p.sku + " · " : ""}${p.n}. ${p.name}`}), " ", pill(p.stage),
       el("p", {class: "why" + (p.blocker ? " block-txt" : ""), text: p.blocker || `ต้องลองกับ: ${p.check}`}),
-      el("p", {class: "why num", text: `สต็อกบูธ ${p.stock} ชิ้น · ${p.price} บาท`})),
+      el("p", {class: "why num", text: sub(p)})),
     el("button", {class: "btn", type: "button", onclick: () => openItem(p.id), text: "เปิด"}));
-  $("#risk-hero").replaceChildren(...(heroOpen.length ? heroOpen.map(row) : [el("li", {}, el("span"), el("p", {text: "สินค้าหลักหน้าบูธพร้อมครบทั้ง 8 ตัว"}), el("span"))]));
-  const rest = notReady.filter(p => !p.hero && p.stock > 0).sort((a, b) => b.stock * b.price - a.stock * a.price);
-  $("#risk-rest").replaceChildren(...rest.map(row));
+  $("#booth-list").replaceChildren(...booth.map(p => row(p, x => `${x.price} บาท (ราคาร่าง)`)));
+  $("#blocked-list").replaceChildren(...[...uses06, ...multi.slice().sort((a, b) => a.n - b.n)].map(p => row(p, x => x.parts.some(([c]) => c === "06") ? "ใช้ 06" : `ต่อ ${x.joints} จุด รอข้อต่อผ่านการทดสอบ`)));
 }
 
 // ------------------------------------------------------------ board
@@ -734,6 +731,7 @@ function setWritable(on) {
 }
 
 renderProcess(); initIdea(); setWritable(false); renderAll();
+$("#x-joints").textContent = `${D.jointsOpen} ทุกแบบในแท็บนี้เป็นไอเดียที่ผ่านแค่การตรวจรูปทรงในคอมพิวเตอร์ (สถานะ ${D.statusDate})`;
 {
   let start = location.hash.slice(1);
   if (!TABS.includes(start)) { try { start = localStorage.getItem("pd-tab") || "overview"; } catch { start = "overview"; } }

@@ -148,6 +148,8 @@ def make():
             "steps": steps_text(spec), "spec": spec,
             # real-leather result: 02 pieces crossed into each other fall apart (owner's test, 21 Oct 2026)
             "real": "fail" if "02" in spec["pieces"] else "",
+            # 06 was never cut, so it may not be used in new products for now (status doc, 21 Oct 2026)
+            "no06": "06" in spec["pieces"],
         })
     return items, report
 

@@ -91,7 +91,8 @@ function x3dCards() {
       el("span", {class: "name", text: i.name}),
       el("span", {class: "meta num", text: `${i.pieces.length} ชิ้น · ล็อก ${i.locks} จุด · ${i.dims}`}),
       el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${Math.round(i.margin * 100)}%`}),
-      i.real === "fail" ? el("span", {class: "blk", text: "ลองจริงแล้วหลุด · พักไว้"}) : null))));
+      i.real === "fail" ? el("span", {class: "blk", text: "ลองจริงแล้วหลุด · พักไว้"}) : null,
+      i.no06 ? el("span", {class: "blk", text: "ใช้ 06 ที่ยังไม่ได้ตัด · ห้ามใช้ตอนนี้"}) : null))));
   x3dThumbs();
 }
 
@@ -110,6 +111,7 @@ function x3dOpen(id) {
       msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว ขั้นไอเดีย";
     } catch { msg.className = "err"; msg.textContent = "ส่งไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; send.disabled = !canWrite; }
   });
+  if (i.no06) { send.disabled = true; msg.className = "err"; msg.textContent = "ส่งเข้าบอร์ดไม่ได้ เพราะใช้ 06"; }
   const inBoard = !!over["x-" + i.id];
   if (inBoard) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว"; }
   $("#dlg-body").replaceChildren(
@@ -127,7 +129,8 @@ function x3dOpen(id) {
       el("dt", {text: "คนซื้อ"}), el("dd", {text: i.who}),
       el("dt", {text: "ผลตรวจ"}), el("dd", {class: "x-pass", text: "รูปทรงผ่าน: ปีกพอดีร่อง ร่องไม่ใช้ซ้ำ ชิ้นไม่ทะลุกัน วงปิดตรง"}),
       i.real === "fail" ? el("dt", {text: "ลองกับหนังจริง"}) : null,
-      i.real === "fail" ? el("dd", {class: "err", text: "หลุด: ร่องของ 02 จับหนังด้วยกันไม่อยู่ พักไว้จนกว่าจะลองบล็อก 02 รุ่น B"}) : null),
+      i.real === "fail" ? el("dd", {class: "err", text: "หลุด: ร่องของ 02 จับหนังด้วยกันไม่อยู่ พักไว้จนกว่าจะลองบล็อก 02 รุ่น B"}) : null,
+      i.no06 ? el("dt", {text: "ใช้ได้ไหม"}) : null, i.no06 ? el("dd", {class: "err", text: D.no06}) : null),
     el("div", {}, el("p", {class: "small muted", text: "วิธีต่อ"}), el("ol", {class: "steps"}, ...i.steps.map(s => el("li", {text: s})))),
     el("div", {class: "row"}, send, msg),
     (openThread = commentsBlock(i.id, "ความเห็นต่อแบบนี้ ลองแล้วเป็นอย่างไร")));

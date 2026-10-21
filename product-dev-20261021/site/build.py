@@ -49,6 +49,7 @@ DATA = dict(
     pieceCost=B.PIECE_COST, pieceName=B.PIECE_NAME, jointCost=B.JOINT_COST, packCost=B.PACK_COST,
     packs={k: dict(name=v[0], cost=sum(B.PACK_ITEMS[i][2] for i in v[1])) for k, v in B.PACK_PROFILE.items()},
     thumbs=THUMBS,
+    booth=[dict(sku=s, n=n) for s, n in pd.BOOTH_SKUS], statusDate=pd.STATUS_DATE, no06=pd.NO_06, jointsOpen=pd.JOINTS_OPEN,
 )
 
 def esc(s):
@@ -85,7 +86,7 @@ for c in sorted(tab_n):
 X_COMPAT = f"<table class='compat num'><thead><tr><th></th>{head}</tr></thead><tbody>{rows}</tbody></table>"
 xi = X3D["items"]
 X_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{b}</b><span class="small muted">{c}</span></div>' for a, b, c in [
-    ("แบบที่ผ่านการตรวจ", len(xi), f"ลองจริงแล้วหลุด {sum(i.get('real') == 'fail' for i in xi)} แบบ (ใช้ 02)"),
+    ("แบบที่รูปทรงผ่าน", len(xi), f"ลองจริงแล้วหลุด {sum(i.get('real') == 'fail' for i in xi)} · ใช้ 06 ที่ยังไม่ได้ตัด {sum(i.get('no06', False) for i in xi)}"),
     ("บล็อกใหม่ที่ต้องสั่ง", 0, "ใช้บล็อก 01–06 ที่มีอยู่"),
     ("ชิ้นต่อแบบ", f"{min(len(i['pieces']) for i in xi)}–{max(len(i['pieces']) for i in xi)}", f"ล็อก {min(i['locks'] for i in xi)}–{max(i['locks'] for i in xi)} จุด"),
     ("กำไรขั้นต้นเฉลี่ย", f"{round(sum(i['margin'] for i in xi) / len(xi) * 100)}%", f"ต่ำสุด {round(min(i['margin'] for i in xi) * 100)}%"),
