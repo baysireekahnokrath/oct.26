@@ -179,7 +179,8 @@ def home(base=""):
 <div class="row"><a class="btn order" href="{ORDER}" target="_blank" rel="noopener">ทักไอจี</a>
 <a class="btn" href="{so['instagram']}" target="_blank" rel="noopener">Instagram</a>
 <a class="btn" href="{so['facebook']}" target="_blank" rel="noopener">Facebook</a>
-<a class="btn" href="{so['youtube']}" target="_blank" rel="noopener">YouTube</a></div></section>
+<a class="btn" href="{so['youtube']}" target="_blank" rel="noopener">YouTube</a></div>
+<p class="cap">Shopee: ค้นหาร้าน {E(B.SHOP_NAME)}</p></section>
 </main>{footer(base)}</div>{FILTER_JS}"""
     return desc, body
 

@@ -352,7 +352,8 @@ BOOTH = dict(zone="หนูทดลอง KIDS MARKET", fair="บ้านแ�
              weekends=("23–25 ต.ค. 2569", "30 ต.ค.–1 พ.ย. 2569"), until="2026-11-01")   # organiser's post, 21 Oct
 EVENT = ("บูธ OCT. 26 โซนหนูทดลอง KIDS MARKET บ้านและสวนแฟร์ Living Festival 2026 "
          "อิมแพ็ค เมืองทองธานี 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. 2569")   # two weekends, confirmed 21 Oct
-SHOP = "Shopee ร้าน OCT. 26"
+SHOP_NAME = "OCT.26 - Our crafted things."      # the Shopee shop as registered (owner, 21 Oct)
+SHOP = f"Shopee ร้าน {SHOP_NAME}"
 
 def tags(p):
     return f"{TAGS} {TAGS_COLL[p['coll']]}"
@@ -412,13 +413,13 @@ SOCIAL = {"instagram": "https://www.instagram.com/oct.26_brand/",
 CHANNELS = [
     ("Facebook Page", "OCT. 26", SOCIAL["facebook"],
      "ชื่อเพจ OCT. 26 (ยังไม่ได้ตั้งชื่อผู้ใช้ ลิงก์เป็น profile.php?id=…) หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
-     STORY_BIO + "\nสั่งซื้อ: Shopee ร้าน OCT. 26"),
+     STORY_BIO + f"\nสั่งซื้อ: Shopee ร้าน {SHOP_NAME}"),
     ("Instagram", f"@{H}", SOCIAL["instagram"],
      "บัญชีธุรกิจ เชื่อมกับเพจ Facebook · ไฮไลต์สามอัน SOI. 02 · ห้าหมี · How-to · ลิงก์ในโปรไฟล์ไป Shopee",
      "OCT. 26 · our crafted things.\nของใช้จากเศษหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nสั่งซื้อที่ลิงก์ด้านล่าง"),
     ("TikTok", f"@{H}", f"tiktok.com/@{H}",
      "บัญชีธุรกิจ · เปิด TikTok Shop ภายหลังได้ · คลิปมือต่อหนัง 15 วินาที คลิปห้าหมีใช้เพลงน่ารัก คลิป SOI. 02 ใช้เพลงเรียบ",
-     "งานหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nShopee: OCT. 26"),
+     "งานหนังแท้ ทำกันเองทั้งบ้าน\nSOI. 02 · ห้าหมี FIVE BEARS\nShopee: " + SHOP_NAME),
     ("YouTube", "@OCT.26_brand", SOCIAL["youtube"],
      "เริ่มจาก Shorts ที่ตัดจากคลิป TikTok · คลิปยาวเดือนละครั้ง เช่น เบื้องหลังวันออกบูธ และวันเกิดแบรนด์ 26.10",
      "OCT. 26 our crafted things.\nช่องของครอบครัวที่ทำของใช้จากเศษหนังแท้ด้วยกันทั้งบ้าน\nพ่อ แม่ และลูกสามคน"),
