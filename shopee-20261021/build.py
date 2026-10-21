@@ -2,7 +2,8 @@
 
 openpyxl cannot open Shopee's file (sheetView activePane="bottom_left" is invalid), so rows are written straight into
 xl/worksheets/sheet2.xml (form "แบบฟอร์มการลงสินค้า", data from row 7) and every other part is copied byte for byte.
-python3 shopee-20261021/build.py -> oct26-shopee-ready.xlsx (READY + EXTRA) and oct26-shopee-prototype.xlsx (PROTO)
+python3 shopee-20261021/build.py -> oct26-shopee-ready.xlsx (READY + EXTRA) and oct26-shopee-prototype.xlsx (PROTO);
+products using a piece in HOLD_PIECES are left out of both.
 """
 import os, re, sys, zipfile
 from xml.sax.saxutils import escape
@@ -14,6 +15,7 @@ TEMPLATE = os.path.join(HERE, "template.xlsx")
 IMG = "https://" + B.SOCIAL["web"] + "/assets/posters/{:02d}.png"   # How-to posters on the live site, 1080x1350, < 120 KB
 SHOPEE_STOCK = 5          # booth and Shopee share stock until 1 Nov; raise in Seller Centre after the fair
 HEAVY = {11, 13, 21, 29, 30}  # sets and large pieces, 0.2 kg packed; the rest 0.1 kg
+HOLD_PIECES = {"02"}      # owner, 21 Oct: piece 02 (กังหัน) is not usable yet, so no product with it goes to Shopee
 
 
 def row(p):
@@ -61,8 +63,13 @@ def build(products, out):
     print(f"wrote {os.path.basename(out)}: {len(products)} products, rows 7-{last}")
 
 
+def split():
+    held = [p for p in B.PRODUCTS if HOLD_PIECES & {c for c, _ in p["parts"]}]
+    rest = [p for p in B.PRODUCTS if p not in held]
+    return [p for p in rest if p["status"] != B.PROTO], [p for p in rest if p["status"] == B.PROTO], held
+
+
 if __name__ == "__main__":
-    ready = [p for p in B.PRODUCTS if p["status"] != B.PROTO]
-    proto = [p for p in B.PRODUCTS if p["status"] == B.PROTO]
+    ready, proto, held = split()
     build(ready, os.path.join(HERE, "oct26-shopee-ready.xlsx"))
     build(proto, os.path.join(HERE, "oct26-shopee-prototype.xlsx"))

@@ -3,10 +3,10 @@ import os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "brand-20261014"))
 import brand as B
-from build import SHOPEE_STOCK, HEAVY, IMG
+from build import SHOPEE_STOCK, HEAVY, IMG, HOLD_PIECES, split
 
-ready = [p for p in B.PRODUCTS if p["status"] != B.PROTO]
-proto = [p for p in B.PRODUCTS if p["status"] == B.PROTO]
+ready, proto, held = split()
+hold_names = " ".join(B.PIECE_NAME[c] for c in sorted(HOLD_PIECES))
 
 
 def card(p):
@@ -62,6 +62,7 @@ ol.check{{margin:0;padding-left:1.3em;display:grid;gap:8px}}
 <div class="nums">
 <div><b>{len(ready)}</b><span>ชิ้น พร้อมอัปตอนนี้</span></div>
 <div><b>{len(proto)}</b><span>ชิ้น รอลองต้นแบบก่อน</span></div>
+<div><b>{len(held)}</b><span>ชิ้น พักไว้ ใช้ {hold_names}</span></div>
 <div><b>{SHOPEE_STOCK}</b><span>คลังต่อชิ้น (แบ่งจากบูธ)</span></div>
 </div>
 <section><h2>ไฟล์</h2>
@@ -92,7 +93,10 @@ ol.check{{margin:0;padding-left:1.3em;display:grid;gap:8px}}
 <li>ภาพปกเป็นแนวตั้ง 4:5 Shopee จะครอปเป็นจัตุรัส ภายหลังถ่ายรูปสินค้าจริงเพิ่มได้ในช่องรูปภาพ 1–8</li>
 <li>ชื่อสินค้ามีคำว่า ไม่ต้องเย็บ เพราะสินค้าทุกชิ้นต่อด้วยปีกและร่องจริง</li>
 </ol></section>
-<section><h2>{len(proto)} ชิ้นที่รอไว้ก่อน</h2>
+<section><h2>{len(held)} ชิ้นที่พักไว้ เพราะใช้ {hold_names}</h2>
+<p>ชิ้น {hold_names} ยังใช้ไม่ได้ สินค้าที่มีชิ้นนี้จึงไม่อยู่ในไฟล์ไหนเลย ชิ้นพร้อมเมื่อไร บอกได้ จะใส่กลับให้</p>
+<ul class="later">{"".join(line(p) for p in held)}</ul></section>
+<section><h2>{len(proto)} ชิ้นที่รอลองต้นแบบ</h2>
 <p>อยู่ในไฟล์ prototype แล้ว ลองทำชิ้นไหนผ่าน ค่อยลบแถวที่ยังไม่ผ่านออกแล้วอัป หรือบอกเลขมา จะทำไฟล์ใหม่ให้</p>
 <ul class="later">{"".join(line(p) for p in proto)}</ul></section>
 </main>
