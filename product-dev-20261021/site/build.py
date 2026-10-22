@@ -98,7 +98,7 @@ S50_JS = open(os.path.join(HERE, "single50.js")).read().replace("__S50__", json.
 si = S50["items"]
 S_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{v}</b><span class="small muted">{c}</span></div>' for a, v, c in [
     ("ไอเดียชิ้นเดียว", len(si), f"{len({i['group'] for i in si})} กลุ่ม"),
-    ("ทำได้กับหนังที่มี", sum(not i["load"] for i in si), f"อีก {sum(i['load'] for i in si)} แบบรับแรง รอหนัง 2 มม."),
+    ("ผ่านกฎใหม่ 22 ต.ค.", sum(not i["drop"] for i in si), f"ตัดออก {sum(bool(i['drop']) for i in si)} แบบ: โดนอาหาร ของเด็ก หรือรับแรง"),
     ("ใช้ชิ้น 07", sum(i["uses07"] for i in si), "07 มี 200 ชิ้น ยังไม่มีสินค้า"),
     ("กำไรขั้นต้น", f"{round(min(i['margin'] for i in si) * 100)}–{round(max(i['margin'] for i in si) * 100)}%", "ต้นทุนชิ้นหนังตามเอกสารสถานะ"),
 ])

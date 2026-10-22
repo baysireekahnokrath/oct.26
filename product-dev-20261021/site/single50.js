@@ -68,9 +68,9 @@ function s50Svg(item, big = false) {
 function s50Cards() {
   const groups = [...new Set(S50.items.map(i => i.group))];
   const chip = (key, label, n) => el("button", {class: "chip", type: "button", "aria-pressed": String(sFilter === key), onclick: () => { sFilter = key; s50Cards(); }}, `${label} ${n}`);
-  $("#s-filters").replaceChildren(chip("all", "ทั้งหมด", S50.items.length), chip("ready", "ทำได้กับหนังที่มี", S50.items.filter(i => !i.load).length),
+  $("#s-filters").replaceChildren(chip("all", "ทั้งหมด", S50.items.length), chip("ok", "ผ่านกฎใหม่", S50.items.filter(i => !i.drop).length),
     chip("07", "ใช้ 07", S50.items.filter(i => i.uses07).length), ...groups.map(g => chip(g, g, S50.items.filter(i => i.group === g).length)));
-  const shown = S50.items.filter(i => sFilter === "all" || (sFilter === "ready" && !i.load) || (sFilter === "07" && i.uses07) || i.group === sFilter);
+  const shown = S50.items.filter(i => sFilter === "all" || (sFilter === "ok" && !i.drop) || (sFilter === "07" && i.uses07) || i.group === sFilter);
   $("#s-cards").replaceChildren(...shown.map(i => el("button", {class: "xcard scard", type: "button", onclick: () => s50Open(i.id)},
     el("div", {class: "s50wrap"}, s50Svg(i)),
     el("div", {},
@@ -78,7 +78,7 @@ function s50Cards() {
       el("span", {class: "name", text: i.name}),
       el("span", {class: "meta num", text: `${i.piecesTxt}`}),
       el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${Math.round(i.margin * 100)}%`}),
-      i.load ? el("span", {class: "blk", text: "รับแรง รอหนัง 2 มม."}) : null))));
+      i.drop ? el("span", {class: "blk", text: "ตัดออก: " + i.drop}) : null))));
 }
 
 function s50Open(id) {
@@ -94,12 +94,14 @@ function s50Open(id) {
       msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว ขั้นไอเดีย";
     } catch { msg.className = "err"; msg.textContent = "ส่งไม่ได้ ลองใหม่อีกครั้ง"; send.disabled = !canWrite; }
   });
+  if (i.drop) { send.disabled = true; msg.className = "err"; msg.textContent = "ส่งเข้าบอร์ดไม่ได้ เพราะตัดออกแล้ว"; }
   if (over["s-" + i.id]) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว"; }
   $("#dlg-body").replaceChildren(
     el("div", {class: "dlg-head x-head"},
       el("div", {}, el("p", {class: "eyebrow", text: `${i.id} · ${i.group}`}), el("h3", {id: "d-name", text: i.name}), el("p", {class: "small muted", text: i.who})),
       el("button", {class: "x", type: "button", "aria-label": "ปิด", onclick: () => $("#dlg").close(), text: "×"})),
     el("div", {class: "s50big"}, s50Svg(i, true)),
+    i.drop ? el("p", {class: "notice err", text: `ตัดออกจากชุดสินค้าตามกฎ 22 ต.ค. (ไม่โดนอาหาร ไม่ใช่ของเด็กเล็ก): ${i.drop}`}) : null,
     el("p", {text: i.how}),
     el("dl", {class: "spec num"},
       el("dt", {text: "ชิ้นหนัง"}), el("dd", {text: i.piecesTxt}),

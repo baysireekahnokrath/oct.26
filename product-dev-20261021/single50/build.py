@@ -10,6 +10,8 @@ sys.path.insert(0, HERE); sys.path.insert(0, os.path.join(ROOT, "cross3d")); sys
 import brand as B
 from geom import _path_points, inside, NAME
 from single_ideas import IDEAS, PIECE_REAL
+sys.path.insert(0, os.path.join(ROOT, "assortment"))
+from assortment import DROP           # owner's 22 Oct rules: no food contact, nothing for young children
 
 SVGS = {c: os.path.join(ROOT, "..", "diecut-leather-20261014", "svg", f) for c, f in
         (("01", "01-bear-head.svg"), ("02", "02-pinwheel-4-lobe.svg"), ("03", "03-capsule-cross.svg"),
@@ -45,7 +47,8 @@ for (i, group, name, pieces, how, mech, extras, pack, who, price, load, test, st
     items.append(dict(id=i, group=group, name=name, pieces=pieces, how=how, mech=mech, extras=extras, pack=pack, who=who,
                       price=price, load=load, test=test, stamp=stamp, cost=c, margin=round((price - c) / price, 3),
                       piecesTxt=" + ".join(f"{NAME[c]} {c} × {q}" for c, q in pieces),
-                      uses07="07" in [c for c, _ in pieces]))
+                      uses07="07" in [c for c, _ in pieces],
+                      drop=(" · ".join(DROP[i]) if i in DROP else "")))
 assert len(items) == 50 and len({x["id"] for x in items}) == 50
 use = {}
 for x in items:
