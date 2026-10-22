@@ -1,0 +1,179 @@
+<title>OCT. 26 แพตเทิร์นและ Bible</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+/* Same quiet column as the Brand Book pages. Mini pages are drawn in HTML at A4 landscape ratio as the mockup.
+   Light only on purpose: it shows printed work on cotton white. */
+:root{--cotton:#F4F0E8;--charcoal:#2A2725;--line:#DCD4C7;--card:#FBF8F2;--muted:#6E6A64;--hide:#B07A4A;
+  --dad:#A9442B;--mom:#5E7A3A;--beiya:#E9A825;--beana:#B9A3D6;--bene:#2E4A7D;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;color-scheme:light}
+body{background:var(--cotton);color:var(--charcoal);font:16px/1.7 var(--body)}
+.wrap{max-width:860px;margin:0 auto;padding-block:32px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:48px}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;line-height:1.3;text-wrap:balance}
+h1{font-size:2rem} h2{font-size:1.35rem} h3{font-size:1.05rem}
+p{margin:0;max-width:64ch} section{display:grid;gap:16px}
+.eyebrow{font-family:var(--latin);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.band{display:flex;height:3px;max-width:120px} .band span{flex:1}
+.muted{color:var(--muted)} .latin{font-family:var(--latin)}
+ul,ol{margin:0;padding-left:1.3em;display:grid;gap:6px;max-width:66ch}
+code{font-size:.85rem;word-break:break-all}
+.cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.cards figure{margin:0;display:grid;gap:4px}
+.cards img{width:100%;height:auto;display:block;box-shadow:0 1px 4px rgba(42,39,37,.16)}
+.cards figcaption{font-size:.82rem;color:var(--muted)}
+.opts{display:grid;gap:12px}
+.opt{background:var(--card);border:1px solid var(--line);padding:16px 18px;display:grid;gap:8px}
+.opt.rec{border-color:var(--charcoal);border-width:2px}
+.opt .k{font-family:var(--latin);font-weight:500;font-size:.85rem;letter-spacing:.08em}
+.opt .pill{justify-self:start;background:var(--charcoal);color:var(--cotton);font-size:.78rem;padding:2px 10px}
+.tree{display:grid;gap:6px;font-size:.92rem}
+.tree div{padding-left:calc(var(--d,0) * 18px)}
+.tree b{font-family:var(--latin);font-weight:500}
+/* mockup mini pages, A4 landscape */
+.pages{display:grid;gap:16px}
+.pg{aspect-ratio:297/210;background:var(--cotton);box-shadow:0 1px 5px rgba(42,39,37,.2);position:relative;overflow:hidden;container-type:inline-size}
+.pg .hd{position:absolute;left:5cqw;right:5cqw;top:4cqw;display:flex;justify-content:space-between;font-family:var(--latin);font-size:1.6cqw;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.pg .ft{position:absolute;left:0;right:0;bottom:0;height:.9cqw;display:flex} .pg .ft span{flex:1}
+.pg h4{position:absolute;left:5cqw;top:9cqw;margin:0;font-family:var(--display);font-weight:600;font-size:4.2cqw;line-height:1.2}
+.pg .bd{position:absolute;left:5cqw;right:5cqw;top:17cqw;bottom:6cqw;font-size:1.75cqw;line-height:1.5}
+.cover{background:var(--charcoal);color:var(--cotton)}
+.cover .lg{position:absolute;left:7cqw;top:9cqw;width:22cqw;height:22cqw;border:.5cqw solid var(--cotton);display:grid;place-content:center;font-family:var(--latin);font-weight:500;font-size:6cqw;line-height:.95;padding-left:1cqw}
+.cover .t{position:absolute;left:36cqw;top:11cqw;display:grid;gap:1.4cqw}
+.cover .t b{font-family:var(--display);font-weight:600;font-size:5.4cqw;line-height:1.15}
+.cover .t span{font-family:var(--latin);font-size:2.2cqw;opacity:.8}
+.cover .toc{position:absolute;left:36cqw;bottom:9cqw;font-size:1.6cqw;opacity:.85;columns:2;column-gap:4cqw}
+.lv{display:grid;grid-template-columns:repeat(4,1fr);gap:2cqw;height:100%}
+.lv div{border-top:.35cqw solid var(--charcoal);padding-top:1.2cqw;display:grid;align-content:start;gap:.6cqw}
+.lv b{font-family:var(--latin);font-weight:500;font-size:2.6cqw;line-height:1.1}
+.lv i{font-style:normal;color:var(--muted)}
+.lv .q{border-top-style:dashed}
+.pt{display:grid;grid-template-columns:repeat(6,1fr);gap:1.5cqw;height:100%;align-items:start}
+.pt figure{margin:0;display:grid;gap:.8cqw;justify-items:center}
+.pt img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.pt figcaption{font-size:1.5cqw;text-align:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:4cqw;height:100%}
+.sw{display:flex;gap:1cqw;margin-top:1cqw} .sw i{width:5cqw;height:5cqw;display:block}
+</style>
+<div class="wrap">
+  <header style="display:grid;gap:12px">
+    <p class="eyebrow">OCT. 26 · Patterns · Brand Bible · 22 Oct 2026</p>
+    <h1>รูปแพตเทิร์น SOI. 02 และ mockup สรุปแบรนด์</h1>
+    <div class="band"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div>
+    <p>ไดคัตชิ้นหนังจริงจากรูปต้นฉบับ 21 ต.ค. ปรับแสงและสีโดยเทียบกับกระดาษขาว ทำการ์ดแนะนำแพตเทิร์นแยกทีละแบบ ใช้ได้ทั้งบูธและทุกสื่อ เสนอความหมายของ SOI. 02 และ mockup เล่มสรุปแบรนด์ให้ดูก่อนทำจริง</p>
+  </header>
+
+  <section>
+    <p class="eyebrow">1 · Patterns</p>
+    <h2>การ์ดแนะนำแพตเทิร์น 6 แบบ + ภาพรวม</h2>
+    <div class="cards">
+      <figure><img src="pattern-01.jpg" alt="01 หมี Bear"><figcaption>01 หมี</figcaption></figure>
+      <figure><img src="pattern-02.jpg" alt="02 กังหัน Pinwheel"><figcaption>02 กังหัน</figcaption></figure>
+      <figure><img src="pattern-03.jpg" alt="03 กากบาทแคปซูล Capsule cross"><figcaption>03 กากบาทแคปซูล</figcaption></figure>
+      <figure><img src="pattern-04.jpg" alt="04 สี่เหลี่ยมมน Rounded square"><figcaption>04 สี่เหลี่ยมมน</figcaption></figure>
+      <figure><img src="pattern-05.jpg" alt="05 วงกลม Circle"><figcaption>05 วงกลม</figcaption></figure>
+      <figure><img src="pattern-07.jpg" alt="07 กากบาทข้อต่อวงกลม ภาพจากบล็อกตัด"><figcaption>07 ยังไม่มีรูปจริง</figcaption></figure>
+      <figure><img src="pattern-all.jpg" alt="ภาพรวมแพตเทิร์น 01–07"><figcaption>ภาพรวม 01–07</figcaption></figure>
+    </div>
+    <ul>
+      <li><b>รูปจริงทุกชิ้น</b>: ตัดพื้นหลังออก แก้แสงไม่เท่ากันให้เรียบ และปรับให้กระดาษเป็นขาวกลาง สีหนังจึงตรงกับที่ตาเห็น ขอบไม่ทาสี ผิวไม่แต่ง</li>
+      <li>ได้ชิ้นหนังไดคัต 33 ชิ้นจาก 7 รูป (01: 4 · 02: 4 · 03: 6 · 04: 10 · 05: 9) เป็นไฟล์ PNG พื้นใส ใช้ทำโพสต์ เว็บ Shopee และป้ายได้</li>
+      <li>ขนาดไฟล์ 1080×1350 สำหรับ IG / FB / LINE / Shopee และ PDF ขนาด A4 สำหรับวางที่บูธ (เลย์เอาต์เดียวกัน)</li>
+      <li><b>07 ยังไม่มีรูปจริง</b> ตอนนี้ใช้ภาพจากบล็อกตัดไปก่อน ถ่าย 07 บนกระดาษขาวมาให้ แล้วจะใส่ให้ตรงชุด</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="eyebrow">2 · SOI. 02</p>
+    <h2>SOI. 02 ควรเป็นอะไร</h2>
+    <p>ที่มาเดิม (เล่มแรก): ทุกอย่างเริ่มที่บ้านในซอย 2 คอลเลกชันแรกจึงชื่อ SOI. 02 ส่วนใน Brand Book v2 ผมเขียนว่าเป็น "รอบผลิต" ซึ่งไม่ตรงกับที่พ่อเบคิด ขอเสนอ 3 ทาง</p>
+    <div class="opts">
+      <div class="opt rec"><span class="pill">แนะนำ</span><span class="k">A · SOI. = ชุดบล็อกตัด (แพตเทิร์นชุดหนึ่ง)</span>
+        <p>SOI. 02 คือแพตเทิร์นชุดแรก 01–07 ที่เกิดในบ้านซอย 2 ทุกอย่างที่ตัดจากบล็อกชุดนี้อยู่ใน SOI. 02 ถ้าวันหนึ่งทำบล็อกชุดใหม่ ชุดนั้นจะเป็น SOI. 03</p>
+        <p class="muted">ข้อดี: จับต้องได้ อธิบายง่ายที่บูธ ("ชุดนี้มี 6 ลาย") ไปด้วยกันกับชุดที่รองแก้วสะสม 01–07 ที่ผ่านแล้ว และเลขแพตเทิร์นจะอยู่ใต้ SOI. ได้พอดี</p></div>
+      <div class="opt"><span class="k">B · SOI. = ที่มาหรือเรื่องราว</span>
+        <p>แต่ละคอลเลกชันตั้งชื่อตามที่ที่มีความหมายกับบ้าน SOI. 02 คือบ้าน คอลเลกชันต่อไปอาจตั้งตามที่อื่น</p>
+        <p class="muted">ข้อดี: มีเรื่องเล่า · ข้อเสีย: ต้องคิดเรื่องใหม่ทุกครั้ง และลูกค้าแยกไม่ออกว่าต่างกันตรงไหน</p></div>
+      <div class="opt"><span class="k">C · เลิกใช้ SOI.</span>
+        <p>ใช้แค่ OCT. 26 กับเลขแพตเทิร์น เช่น "02 ที่รองแก้ว"</p>
+        <p class="muted">ข้อดี: ง่ายที่สุด · ข้อเสีย: เสียชื่อที่มีที่มาจากบ้านไป</p></div>
+    </div>
+    <div class="tree" aria-label="โครงสร้างถ้าเลือก A">
+      <div><b>OCT. 26</b> <span class="muted">แบรนด์เดียว</span></div>
+      <div style="--d:1">└ <b>SOI. 02</b> <span class="muted">ชุดบล็อกตัดชุดแรก · จากบ้านซอย 2</span></div>
+      <div style="--d:2">└ <b>01 · 02 · 03 · 04 · 05 · 07</b> <span class="muted">แพตเทิร์น (ไม่มี 06)</span></div>
+      <div style="--d:3">└ <b>02 ที่รองแก้ว</b> <span class="muted">สินค้า = เลขแพตเทิร์น + หน้าที่</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">3 · Mockup</p>
+    <h2>Mockup เล่มสรุปแบรนด์ (Brand Bible ฉบับย่อ)</h2>
+    <p>รวม Brand Book v2 กับ Bible เล่มเดิมเป็นเล่มเดียว สั้น 10 หน้า A4 แนวนอน หน้าละเรื่อง อ่านจบใน 5 นาที ให้ทุกทีม (เว็บ การตลาด พัฒนาสินค้า) ใช้เล่มเดียว ด้านล่างคือหน้าตาตัวอย่าง 4 หน้า</p>
+    <ol>
+      <li>ปก</li><li>เราเป็นใคร: เรียบข้างนอก บ้านอยู่ข้างใน และหลัก 4 ข้อ</li><li>โครงสร้างแบรนด์: OCT. 26 › SOI. 02 › แพตเทิร์น › สินค้า</li>
+      <li>โลโก้: สี่เหลี่ยมและบรรทัดเดียว ขนาดเล็กสุด ที่ห้ามทำ</li><li>สี: 60 / 20 / 15 / 5 และห้าสีของบ้าน</li><li>ฟอนต์ Jost · Anuphan · IBM Plex Sans Thai</li>
+      <li>แพตเทิร์น 01–07 (รูปจริงชุดนี้)</li><li>ภาพถ่าย: กระดาษขาว แสงนิ่ง ไดคัต ไม่แต่งสี</li><li>ชื่อสินค้าและเสียงของแบรนด์</li><li>กติกา: ไม่โดนอาหาร ไม่ใช่ของเด็กเล็ก ไม่ทาสีขอบ ไม่โฆษณาว่าไม่ต้องเย็บ</li>
+    </ol>
+    <div class="pages">
+      <div class="pg cover" role="img" aria-label="ตัวอย่างปก">
+        <div class="lg">OCT.<br>26</div>
+        <div class="t"><span>Brand Bible · ฉบับย่อ</span><b>เรียบข้างนอก<br>บ้านอยู่ข้างใน</b><span>quiet outside, family inside.</span></div>
+        <div class="toc">01 เราเป็นใคร<br>02 โครงสร้าง<br>03 โลโก้<br>04 สี<br>05 ฟอนต์<br>06 แพตเทิร์น<br>07 ภาพถ่าย<br>08 ชื่อและน้ำเสียง<br>09 กติกา</div>
+        <div class="ft"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div>
+      </div>
+      <div class="pg" role="img" aria-label="ตัวอย่างหน้าโครงสร้างแบรนด์">
+        <div class="hd"><span>02 · Structure</span><span>OCT. 26</span></div><h4>แบรนด์เดียว สี่ชั้น</h4>
+        <div class="bd"><div class="lv">
+          <div><b>OCT. 26</b><span>แบรนด์ของแม่ ชื่อจากวันเกิดแม่</span><i>โลโก้สี่เหลี่ยม</i></div>
+          <div class="q"><b>SOI. 02</b><span>ชุดบล็อกตัดชุดแรก จากบ้านซอย 2</span><i>รอเลือก A / B / C</i></div>
+          <div><b>01–07</b><span>แพตเทิร์น หนึ่งบล็อก หนึ่งเลข ไม่มี 06</span><i>หมี กังหัน กากบาทแคปซูล …</i></div>
+          <div><b>02 ที่รองแก้ว</b><span>สินค้า = เลขแพตเทิร์น + หน้าที่</span><i>ราคา ป้าย รหัส</i></div>
+        </div></div>
+        <div class="ft"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div>
+      </div>
+      <div class="pg" role="img" aria-label="ตัวอย่างหน้าแพตเทิร์น">
+        <div class="hd"><span>06 · Patterns</span><span>OCT. 26</span></div><h4>แพตเทิร์นของเรา</h4>
+        <div class="bd"><div class="pt">
+          <figure><img src="pattern-01.jpg" alt=""><figcaption>01 หมี</figcaption></figure>
+          <figure><img src="pattern-02.jpg" alt=""><figcaption>02 กังหัน</figcaption></figure>
+          <figure><img src="pattern-03.jpg" alt=""><figcaption>03 กากบาทแคปซูล</figcaption></figure>
+          <figure><img src="pattern-04.jpg" alt=""><figcaption>04 สี่เหลี่ยมมน</figcaption></figure>
+          <figure><img src="pattern-05.jpg" alt=""><figcaption>05 วงกลม</figcaption></figure>
+          <figure><img src="pattern-07.jpg" alt=""><figcaption>07 ข้อต่อวงกลม</figcaption></figure>
+        </div></div>
+        <div class="ft"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div>
+      </div>
+      <div class="pg" role="img" aria-label="ตัวอย่างหน้าสีและภาพถ่าย">
+        <div class="hd"><span>04 · Colour · 07 · Photo</span><span>OCT. 26</span></div><h4>สีจากธรรมชาติ · ถ่ายบนกระดาษขาว</h4>
+        <div class="bd"><div class="two">
+          <div><b>60 ขาวฝ้าย · 20 ดำถ่าน · 15 สีหนัง · 5 ห้าสีของบ้าน</b>
+            <div class="sw"><i style="background:#F4F0E8;outline:1px solid #DCD4C7"></i><i style="background:#2A2725"></i><i style="background:#B07A4A"></i></div>
+            <div class="sw"><i style="background:var(--dad)"></i><i style="background:var(--mom)"></i><i style="background:var(--beiya)"></i><i style="background:var(--beana)"></i><i style="background:var(--bene)"></i></div>
+            <p style="margin-top:1cqw">ห้าสีของบ้านซ่อนอยู่หลังป้าย การ์ดในซอง และเส้นคาด</p></div>
+          <div><b>วิธีถ่ายรูปสินค้า</b><p>วางบนกระดาษ A4 ขาวทั้งแผ่น ไม่ให้ชิ้นหนังล้นขอบ วางห่างกัน 1 นิ้ว ถ่ายตรงจากด้านบน ใช้แสงจากหน้าต่าง ไม่เปิดแฟลช ถ่ายรูปละ 1 แพตเทิร์น แล้วส่งให้ไดคัต</p></div>
+        </div></div>
+        <div class="ft"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ที่ต้องเช็ก และขั้นต่อไป</h2>
+    <ul>
+      <li>ดูสีหนังในการ์ดว่าตรงกับของจริงไหม ถ้าชิ้นไหนเพี้ยน บอกเลขชิ้นมาได้</li>
+      <li>ชื่อแพตเทิร์นภาษาไทยและอังกฤษ (หมี / Bear, กังหัน / Pinwheel …) ถ้าอยากเปลี่ยน บอกได้เลย</li>
+      <li>เลือก SOI. 02 แบบ A, B หรือ C แล้วจะแก้ Brand Book v2 ที่ตอนนี้เขียนว่า "รอบผลิต" ให้ตรง</li>
+      <li>ถ้า mockup เล่มสรุปโอเค ตอบ "ทำเล่มสรุปจริงเลยครับ" จะทำเป็น PDF 10 หน้า</li>
+      <li>ถ่ายรูป 07 บนกระดาษขาว (และชิ้นที่ตกขอบใน 02) ส่งมา จะไดคัตเพิ่มให้ครบชุด</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>ไฟล์อยู่ที่ไหน</h2>
+    <ul>
+      <li>ZIP การ์ด (PNG 1080×1350 + PDF A4) และ ZIP ชิ้นหนังไดคัตความละเอียดเต็ม ส่งในแชตแล้ว (ไฟล์ใหญ่ ไม่ได้อัปขึ้น Drive)</li>
+      <li>ต้นฉบับใน repo ที่ <code>pattern-intro-20261022/</code> (ชิ้นหนังขนาดเว็บอยู่ใน <code>cut-web/</code> สคริปต์ไดคัตคือ <code>cutout.py</code>)</li>
+    </ul>
+  </section>
+</div>
