@@ -1,5 +1,12 @@
 # Six website directions (22 Oct 2026)
 
+Round 3, the owner chose direction 2 (ไม่ซ้ำสักชิ้น): https://claude.ai/artifact/3pQRoxfcDQsWK9rkak55gq (`template-v3.html`,
+`python3 build.py v3`). Sections run through the family colours in family order (dad, mom, eldest, middle, youngest,
+so indigo is back), each chapter labelled with whose colour it wears; on patterned bands the text sits on a solid plate
+so pattern and letters never overlap; product cards show plain pieces (customers might think faces come painted);
+faces stay in the hero, the simulator and the workshop as DIY ideas.
+
+
 Round 2, colourful: https://claude.ai/artifact/CZUKqtSgk7TUTyY6Qcucga (`template-v2.html` -> `index-v2.html`, `python3 build.py v2`).
 The owner asked for more colour: every section takes a family colour (full or light) with a craft texture (saddle stitch,
 punch holes, gingham, stripes, die-shape stamps, paper grain), pieces carry painted faces as DIY examples (six faces,
