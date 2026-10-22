@@ -167,10 +167,91 @@ def folder_back():
             f'<div class="jost" style="font-size:4.5mm;color:#555">IG @{H} · facebook.com/oct26brand</div></div></div>')
 
 
+# ------------------------------------------------------------------ shop sign, social sign, product list, sample (22 Oct)
+import segno
+PHOTO = "file://" + os.path.join(REPO, "ig-real-20261021", "ref", "bears.jpg")   # the owner's photo, 21 Oct
+
+
+def qr(url, mm):
+    q = segno.make(url, error="m")
+    return f'<div style="width:{mm}mm;height:{mm}mm">{q.svg_inline(dark=C["ink"], scale=4, border=1, svgclass="q").replace("<svg ", "<svg style=\'width:100%;height:100%\' ", 1)}</div>'
+
+
+def shop_sign():
+    """A4 landscape, set on a portrait page turned 90 degrees so the PDF stays all portrait."""
+    pcs = "".join(piece(c, 30 if c == "01" else 27) for c, _ in PIECES)
+    inner = (f'<div style="position:absolute;left:0;right:0;top:0;height:16mm;background:{C["cobalt"]}"></div>'
+             f'<div style="position:absolute;left:0;right:0;top:34mm;display:flex;flex-direction:column;align-items:center;gap:7mm">'
+             f'{word(190)}<div class="jost" style="font-size:12mm;letter-spacing:.04em">{B.BRAND["tag_en"]}</div>'
+             f'<div style="font-size:7mm;color:#333">ของใช้จากเศษหนังวัวแท้ · ทำกันเองทั้งบ้าน พ่อ แม่ และลูกสามคน</div></div>'
+             f'<div style="position:absolute;left:0;right:0;bottom:20mm;display:flex;justify-content:center;gap:9mm;align-items:center">{pcs}</div>')
+    return (f'<div class="page"><div style="position:absolute;left:0;top:0;width:297mm;height:210mm;transform-origin:0 0;'
+            f'transform:translate(210mm,0) rotate(90deg);overflow:hidden">{inner}</div></div>')
+
+
+def social_sign():
+    others = [("Instagram", "@" + H, B.SOCIAL["instagram"]), ("Facebook", "oct26brand", B.SOCIAL["facebook"]),
+              ("YouTube", "@OCT.26_brand", B.SOCIAL["youtube"])]
+    row = "".join(f'<div style="display:flex;flex-direction:column;align-items:center;gap:2.5mm;width:52mm">{qr(u, 44)}'
+                  f'<b class="jost" style="font-size:5mm">{E(n)}</b><span class="jost" style="font-size:4mm;color:#555">{E(h)}</span></div>'
+                  for n, h, u in others)
+    return (f'<div class="page"><div style="position:absolute;left:18mm;right:18mm;top:18mm;bottom:18mm;display:flex;flex-direction:column;align-items:center;gap:7mm;text-align:center">'
+            f'{word(70)}<h1 style="font-size:12mm;margin-top:3mm">ติดตามเราได้ที่นี่</h1>'
+            f'<div style="border:0.6mm solid #06C755;border-radius:6mm;padding:7mm 10mm;display:flex;align-items:center;gap:9mm;text-align:left">'
+            f'<img src="{LINE_QR}" style="width:62mm;height:62mm;image-rendering:pixelated">'
+            f'<div style="display:flex;flex-direction:column;gap:3mm"><b class="jost" style="font-size:9mm;color:#06C755">LINE</b>'
+            f'<span class="jost" style="font-size:6mm">{B.SOCIAL["line_id"]}</span>'
+            f'<span style="font-size:4.6mm;line-height:1.45;color:#333">แอดไว้ มีลายใหม่<br>ไอเดียใหม่ และรอบบูธหน้า<br>จะบอกทางนี้ก่อน</span></div></div>'
+            f'<div style="display:flex;justify-content:space-between;width:100%;margin-top:4mm">{row}</div>'
+            f'<div class="jost" style="font-size:4.6mm;color:#555;margin-top:auto">{B.SOCIAL["web"]} · Shopee {E(B.SHOP_NAME)}</div></div></div>')
+
+
+LIST = [  # (piece code or None, item, what you get, price) — examples until PD decides
+    ("01", "ชิ้นหนังหัวหมี", "1 แผ่น · 10.4 ซม.", f"{PRICE}"),
+    ("02", "ชิ้นหนังกังหัน", "1 แผ่น · 9 ซม.", f"{PRICE}"),
+    ("03", "ชิ้นหนังกากบาทแคปซูล", "1 แผ่น · 9 ซม.", f"{PRICE}"),
+    ("04", "ชิ้นหนังสี่เหลี่ยมมน", "1 แผ่น · 9 ซม.", f"{PRICE}"),
+    ("05", "ชิ้นหนังวงกลม", "1 แผ่น · 9 ซม.", f"{PRICE}"),
+    (None, "ชุดหมี 4 สี", "หัวหมี 4 แผ่น คนละสี มัดเชือกปอ", f"{4 * PRICE}"),
+    (None, "ชุดสะสม 5 ลาย", "แบบ 01–05 อย่างละ 1 แผ่น", f"{5 * PRICE}"),
+]
+
+
+def product_list():
+    rows = "".join(
+        f'<tr><td style="width:24mm">{piece(c, 16) if c else ""}</td><td><b style="font-size:5mm">{E(n)}</b><br>'
+        f'<span style="font-size:3.8mm;color:#555">{E(d)}</span></td>'
+        f'<td style="text-align:right;white-space:nowrap"><b class="jost" style="font-size:7mm;color:{C["tomato"]}">{p}</b> <span style="font-size:3.6mm">บาท</span></td></tr>'
+        for c, n, d, p in LIST)
+    return (f'<div class="page"><div style="position:absolute;left:20mm;right:20mm;top:20mm;display:flex;flex-direction:column;gap:6mm">'
+            f'<div style="display:flex;justify-content:space-between;align-items:center">{word(50)}<span style="font-size:3.6mm;color:#777">ตัวอย่าง · รอฝ่ายพัฒนาสินค้าสรุป</span></div>'
+            f'<h1 style="font-size:12mm">รายการสินค้า</h1>'
+            f'<table style="border-collapse:collapse;width:100%">{rows}</table>'
+            f'<p style="font-size:4.2mm;line-height:1.5;color:#333">หนังวัวแท้ หนา 1.0–1.2 มม. สีและลายแต่ละแผ่นไม่ซ้ำกัน · ราคาชุดเป็นตัวอย่าง</p></div>'
+            f'<style>.page table td{{border-bottom:0.3mm solid #E8DCCF;padding:3.2mm 2mm;vertical-align:middle}}</style></div>')
+
+
+def product_sample():
+    return (f'<div class="page"><div style="position:absolute;left:20mm;right:20mm;top:18mm;display:flex;flex-direction:column;gap:6mm">'
+            f'<div style="display:flex;justify-content:space-between;align-items:center">{word(44)}<span style="font-size:3.6mm;color:#777">ตัวอย่างสินค้า 1 ชุด</span></div>'
+            f'<img src="{PHOTO}" style="width:170mm;height:118mm;object-fit:cover;border-radius:3mm">'
+            f'<div style="display:flex;justify-content:space-between;align-items:baseline"><h1 style="font-size:12mm">ชุดหมี 4 สี</h1>'
+            f'<div><b class="jost" style="font-size:13mm;color:{C["tomato"]}">{4 * PRICE}</b> <span style="font-size:4.5mm">บาท</span></div></div>'
+            f'<p style="font-size:5mm;line-height:1.5">หัวหมีหนังวัวแท้ 4 แผ่น คนละสี มัดเชือกปอให้ ใช้เป็นที่รองแก้ว 4 ใบในบ้าน หรือแบ่งให้เพื่อน</p>'
+            f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;font-size:4.4mm;line-height:1.5">'
+            f'<div><b>ในชุดมี</b><br>หัวหมี 01 × 4 แผ่น · 10.4 ซม.<br>เชือกปอ 1 เส้น</div>'
+            f'<div><b>ใช้ยังไง</b><br>หยิบออกจากถุง วางแก้ว เสร็จ<br>เช็ดด้วยผ้าแห้ง เลี่ยงน้ำขังและแดดจัด</div></div>'
+            f'<p style="font-size:3.6mm;color:#777">รูปจริงจากของที่ตัดแล้ว · สีในชุดจริงอาจต่างจากรูป เพราะทุกแผ่นไม่ซ้ำกัน</p></div></div>')
+
+
 SHEETS = [  # (title, how many to print, cutting, html)
+    ("ป้ายร้าน A4 แนวนอน", "1 แผ่น", "ไม่ต้องตัด ติดหน้าโต๊ะหรือตะแกรง", shop_sign),
+    ("ป้ายโซเชียล A4 + QR LINE", "1 แผ่น", "ไม่ต้องตัด ใส่กรอบหรือติดตะแกรง", social_sign),
     ("ป้ายราคา A5", "1 แผ่น ได้ 2 ป้าย", "ตัดครึ่งตามขีดกลางแผ่น ใส่กรอบอะคริลิก A5", price_sign),
     ("ป้ายชื่อแบบ 9 × 5.5 ซม.", "1 แผ่น ได้ 10 ป้าย (แบบละ 2)", "ตัดตามขีดทุกเส้น หนีบไม้หนีบผ้าที่ตะกร้าแต่ละลาย", labels),
     ("การ์ด QR LINE A6", "1 แผ่น ได้ 4 ใบ", "ตัดตามขีดกลางทั้งแนวตั้งและแนวนอน วางโต๊ะจ่ายเงินและจุด DIY", line_cards),
+    ("ตัวอย่างรายการสินค้า", "1 แผ่น", "ไม่ต้องตัด วางโต๊ะหรือใส่แฟ้มหน้าแรก", product_list),
+    ("ตัวอย่างสินค้า 1 ชุด: ชุดหมี 4 สี", "1 แผ่น", "ไม่ต้องตัด ใส่แฟ้ม", product_sample),
     ("แฟ้มไอเดีย: ปก", "1 แผ่น", "ไม่ต้องตัด ใส่แฟ้มซองใส A4", folder_cover),
 ] + [(f"แฟ้มไอเดีย: แบบ {c}", "1 แผ่น", "ไม่ต้องตัด ใส่แฟ้ม · ชิ้นหนังขนาดจริง", (lambda c=c, n=n: folder_page(c, n))) for c, n in PIECES] + [
     ("แฟ้มไอเดีย: ปกหลัง", "1 แผ่น", "ไม่ต้องตัด ใส่แฟ้ม", folder_back),
@@ -199,9 +280,11 @@ def summary(n_pages):
 <li>ราคาแผ่นละ {PRICE} บาท ตามที่พ่อเบสั่ง 22 ต.ค. ใช้แทนราคา 7 แบบเดิม</li>
 <li>5 แบบคือ 01 หัวหมี · 02 กังหัน · 03 กากบาทแคปซูล · 04 สี่เหลี่ยมมน · 05 วงกลม (ไม่มี 06 และยังไม่ใส่ 07)</li>
 <li>ไอเดียในแฟ้มเป็นตัวอย่างใช้ชิ้นเดียว ไม่มีการต่อชิ้น ฝ่ายพัฒนาสินค้าจะส่งไอเดียจริงพร้อมรูปมาแทน</li>
+<li>ราคาชุดในรายการสินค้า (ชุดหมี 4 สี 120 · ชุดสะสม 5 ลาย 150) คิดจากแผ่นละ 30 บาท เป็นตัวอย่าง ยังไม่ได้ตั้ง</li>
 <li>QR LINE ในไฟล์เปิด lin.ee/O9AePgp สแกนดูอีกครั้งว่าขึ้นบัญชี OCT. 26</li></ol></div></section>
 <section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
 <tr><td class="mono" style="white-space:nowrap">print-20261022/oct26-print-a4.pdf</td><td>ไฟล์พิมพ์ทั้งหมด {n_pages} หน้า</td></tr>
+<tr><td class="mono" style="white-space:nowrap">print-20261022/oct26-print-new-4.pdf</td><td>เฉพาะ 4 หน้าที่เพิ่ม 22 ต.ค.: ป้ายร้าน ป้ายโซเชียล รายการสินค้า ตัวอย่างสินค้า</td></tr>
 <tr><td class="mono" style="white-space:nowrap">print-20261022/build.py</td><td>แก้ราคา ข้อความ หรือไอเดียที่นี่แล้วรันใหม่</td></tr>
 </tbody></table></div></section></div>{S.COPY_JS}"""
 
