@@ -1,7 +1,7 @@
 """Pattern introduction cards, one per pattern (22 Oct 2026): real die-cut photo, number, name, die outline, size.
 
 Social 1080 x 1350 PNG (IG / FB / LINE / Shopee / web) and A4 portrait PDF for the booth, same layout.
-07 has no photo yet (cut 22 Oct), so its card uses the die outline until a photo on white paper comes in.
+02 has no photo yet, so its card uses the die outline until a photo on white paper comes in.
 
 python3 cutout.py  -> cut/*.png  (real pieces)
 python3 build.py   -> html/*.html and jobs.json;  node render.cjs -> social/*.png, print/*.pdf
@@ -21,11 +21,11 @@ DIE = {"01": "diecut-leather-20261014/svg/01-bear-head.svg", "02": "diecut-leath
 
 PATTERNS = [  # number, Thai name, English name, use now, pieces (hero first; None = no photo yet)
     ("01", "หมี", "Bear", "ที่รองแก้ว · ที่เก็บสายชาร์จ", ["01-3", "01-1", "01-2"]),
-    ("02", "กังหัน", "Pinwheel", "ที่รองแก้ว", ["02-1", "02-4", "02-2"]),
-    ("03", "กากบาทแคปซูล", "Capsule cross", "ป้ายห้อยของขวัญ", ["03-2", "03-4", "03-3"]),
+    ("02", "กังหัน", "Pinwheel", "ที่รองแก้ว", None),
+    ("03", "กากบาทแคปซูล", "Capsule cross", "ป้ายห้อยของขวัญ", ["03-1", "03-4", "03-2"]),
     ("04", "สี่เหลี่ยมมน", "Rounded square", "ที่รองแก้ว", ["04-6", "04-2", "04-1"]),
     ("05", "วงกลม", "Circle", "ที่รองแก้ว", ["05-6", "05-4", "05-1"]),
-    ("07", "กากบาทข้อต่อวงกลม", "Round-joint cross", "สินค้าใหม่ เร็ว ๆ นี้", None),
+    ("07", "กากบาทข้อต่อวงกลม", "Round-joint cross", "สินค้าใหม่ เร็ว ๆ นี้", ["07-2", "07-4", "07-3"]),
 ]
 
 
@@ -46,7 +46,7 @@ def outline(code, cls="die"):
 
 
 def solid(code):
-    """07 until it is photographed: the die shape in hide brown, slits in cotton."""
+    """02 until it is photographed: the die shape in hide brown, slits in cotton."""
     w, h, cut, sl = die(code)
     return (f'<svg class="solid" viewBox="0 0 {w} {h}" aria-hidden="true">'
             f'<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#BE8A58"/>'
@@ -145,7 +145,7 @@ def overview():
     body = (f'<div class="c ov"><div class="top">{logo("square-light")}<span>our patterns</span></div>'
             f'<h1>แพตเทิร์นของเรา</h1><p class="sub">หนึ่งบล็อกตัด หนึ่งเลข · ชื่อสินค้าคือเลขแพตเทิร์นกับหน้าที่</p>'
             f'<div class="grid">{"".join(cells)}</div>'
-            f'<p class="note">ไม่มีเลข 06 · 07 ภาพจากบล็อกตัด รอรูปจริง</p>{band()}</div>')
+            f'<p class="note">ไม่มีเลข 06 · 02 ภาพจากบล็อกตัด รอรูปจริง</p>{band()}</div>')
     return page(body)
 
 

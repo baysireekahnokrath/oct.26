@@ -130,10 +130,10 @@ function icon(kind){
   const shapes = {
     bear: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/>`,
     bearcord: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/><path d="M6 66 C24 54 56 78 74 62" stroke="${k}" stroke-width="3" fill="none" stroke-linecap="round"/>`,
-    wheel: [0,90,180,270].map(a => `<path transform="rotate(${a} 40 40)" d="M40 40 L40 8 Q62 14 40 40Z" fill="${c}"/>`).join(""),
+    wheel: [[33,25],[55,33],[47,55],[25,47]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="19" fill="${c}"/>`).join(""),
     square: `<rect x="10" y="10" width="60" height="60" rx="16" fill="${c}"/>`,
     circle: `<circle cx="40" cy="40" r="31" fill="${c}"/>`,
-    tag: `<path d="M30 10h20v20h20v20H50v20H30V50H10V30h20z" fill="${c}"/><circle cx="40" cy="20" r="4" fill="var(--card)"/>`,
+    tag: [[26,26],[54,26],[26,54],[54,54]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="17" fill="${c}"/>`).join("") + `<rect x="24" y="24" width="32" height="32" fill="${c}"/><circle cx="26" cy="26" r="4" fill="var(--card)"/>`,
     set: `<circle cx="24" cy="24" r="15" fill="${c}"/><rect x="42" y="9" width="30" height="30" rx="9" fill="${c}"/><circle cx="24" cy="56" r="15" fill="${c}"/><circle cx="57" cy="56" r="15" fill="${c}"/>`,
   };
   return `<svg viewBox="0 0 80 80" aria-hidden="true">${shapes[kind]}</svg>`;

@@ -5,7 +5,7 @@ its uneven light is divided out (flat field) and it is set to neutral white, so 
 Each piece is then cut out with GrabCut seeded from its difference to the paper, edges smoothed, and saved as
 a transparent PNG at full resolution.
 
-python3 cutout.py -> cut/<pattern>-<n>.png, check/<photo>.jpg (mask outlines for checking)
+python3 cutout.py -> cut/<pattern>-<n>.png (no photo of 02 yet), check/<photo>.jpg (mask outlines for checking)
 """
 import os, sys
 import cv2
@@ -15,8 +15,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RAW, CUT, CHECK = (os.path.join(HERE, d) for d in ("raw", "cut", "check"))
 PHOTOS = {  # photo -> pattern
     "IMG_20261021_193050.jpg": "01",
-    "IMG_20261021_194139.jpg": "02",
-    "IMG_20261021_193425.jpg": "03",
+    "IMG_20261021_194139.jpg": "03",
+    "IMG_20261021_193425.jpg": "07",
     "IMG_20261021_193726.jpg": "04",
     "IMG_20261021_193754.jpg": "04",
     "IMG_20261021_194432.jpg": "05",

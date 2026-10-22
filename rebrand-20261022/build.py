@@ -18,9 +18,9 @@ PH = os.path.join(HERE, "photos")
 
 PRODUCTS = [  # SKU, name, spec, size, price, photo, food note
     ("OC-01-22", "01 ที่รองแก้ว", "หนังวัวแท้จากเศษหนัง", "10.4 ซม.", 59, "bears", True),
-    ("OC-01-01", "01 ที่เก็บสายชาร์จ", "หนังวัวแท้จากเศษหนัง", "10.4 ซม.", 59, "06", False),
-    ("OC-02-24", "02 ที่รองแก้ว", "หนังวัวแท้จากเศษหนัง", "9 ซม.", 49, "pinwheels", True),
-    ("OC-03-26", "03 ป้ายห้อยของขวัญ", "หนังวัวแท้จากเศษหนัง", "9 ซม.", 39, "08", False),
+    ("OC-01-01", "01 ที่เก็บสายชาร์จ", "หนังวัวแท้จากเศษหนัง", "10.4 ซม.", 59, "bear01-close", False),
+    ("OC-02-24", "02 ที่รองแก้ว", "หนังวัวแท้จากเศษหนัง", "9 ซม.", 49, "die02", True),
+    ("OC-03-26", "03 ป้ายห้อยของขวัญ", "หนังวัวแท้จากเศษหนัง", "9 ซม.", 39, "clover03", False),
     ("OC-04-27", "04 ที่รองแก้ว", "หนังวัวแท้จากเศษหนัง", "9 ซม.", 49, "squares", True),
     ("OC-05-28", "05 ที่รองแก้ว", "หนังวัวแท้จากเศษหนัง", "9 ซม.", 49, "circles", True),
     ("OC-MX-29", "ชุดที่รองแก้ว 01 · 02 · 04 · 05", "4 ชิ้น 4 แบบ คละสี", "9–10.4 ซม.", 179, "MX", True),
@@ -39,7 +39,7 @@ def img(name):
 
 def photo(p, cls="ph"):
     if p == "MX":
-        return f'<div class="{cls} mx">' + "".join(f'<div style="background-image:url({img(n)})"></div>' for n in ("bears", "pinwheels", "squares", "circles")) + "</div>"
+        return f'<div class="{cls} mx">' + "".join(f'<div style="background-image:url({img(n)})"></div>' for n in ("bears", "die02", "squares", "circles")) + "</div>"
     return f'<div class="{cls}" style="background-image:url({img(p)})"></div>'
 
 BASE_CSS = f"""

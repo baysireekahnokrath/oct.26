@@ -26,7 +26,7 @@ def band():
 
 def photo(p, alt):
     if p == "MX":
-        return '<div class="ph mx">' + "".join(f'<img src="img/{n}.jpg" alt="" loading="lazy">' for n in ("bears", "pinwheels", "squares", "circles")) + "</div>"
+        return '<div class="ph mx">' + "".join(f'<img src="img/{n}.jpg" alt="" loading="lazy">' for n in ("bears", "die02", "squares", "circles")) + "</div>"
     return f'<div class="ph"><img src="img/{p}.jpg" alt="{alt}" loading="lazy"></div>'
 
 
@@ -118,7 +118,7 @@ def page():
 <p>OCT. 26 คือวันเกิดของแม่ แบรนด์จึงใช้ชื่อนี้ และหน้าตาของแบรนด์เป็นแบบที่แม่ชอบ เรียบ เท่ ตั้งใจ</p>
 <p>เราทำของใช้จากเศษหนังวัวแท้ที่เหลือจากโรงงาน พ่อออกแบบแพตเทิร์นและบล็อกตัด ทั้งบ้านช่วยกันคัดหนัง แพ็ก และขาย ผิวและขอบหนังปล่อยตามธรรมชาติ</p>
 <p>คนในบ้านห้าคนมีสีของตัวเอง ห้าสีนี้ซ่อนอยู่ในรายละเอียด หลังป้าย ในการ์ดในซอง คนที่พลิกดูถึงจะเจอ</p>{band()}</div>
-<img src="img/02.jpg" alt="ชิ้นหนังแพตเทิร์น 02 หลายสี" loading="lazy"></div></section>
+<img src="img/hand05.jpg" alt="มือถือชิ้นหนังวงกลม 05" loading="lazy"></div></section>
 
 <section id="booth"><div class="two"><div style="display:grid;gap:16px"><p class="eyebrow">Booth</p><h2>มาเจอกันที่บูธ</h2><dl>{booth}</dl></div>
 <div style="display:grid;gap:16px;align-content:start"><p class="eyebrow">Care</p><h2>ดูแลง่าย</h2><ul class="care">
