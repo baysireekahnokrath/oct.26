@@ -49,6 +49,8 @@ CSS = f"""
 *{{box-sizing:border-box;margin:0;padding:0}}
 body{{font-family:Plex,sans-serif;color:{C['ink']};-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 .page{{position:relative;width:210mm;height:297mm;overflow:hidden;page-break-after:always;background:#fff}}
+.page.land{{width:297mm;height:210mm;page:land}}
+@page land{{size:297mm 210mm;margin:0}}
 .cell{{position:absolute;overflow:hidden}}
 .mk{{position:absolute;background:#000}}
 .note{{position:absolute;font-size:2.6mm;color:#777;font-family:Plex}}
@@ -178,15 +180,14 @@ def qr(url, mm):
 
 
 def shop_sign():
-    """A4 landscape, set on a portrait page turned 90 degrees so the PDF stays all portrait."""
+    """A4 landscape: its own landscape page in the PDF (named @page "land")."""
     pcs = "".join(piece(c, 30 if c == "01" else 27) for c, _ in PIECES)
     inner = (f'<div style="position:absolute;left:0;right:0;top:0;height:16mm;background:{C["cobalt"]}"></div>'
              f'<div style="position:absolute;left:0;right:0;top:34mm;display:flex;flex-direction:column;align-items:center;gap:7mm">'
              f'{word(190)}<div class="jost" style="font-size:12mm;letter-spacing:.04em">{B.BRAND["tag_en"]}</div>'
              f'<div style="font-size:7mm;color:#333">ของใช้จากเศษหนังวัวแท้ · ทำกันเองทั้งบ้าน พ่อ แม่ และลูกสามคน</div></div>'
              f'<div style="position:absolute;left:0;right:0;bottom:20mm;display:flex;justify-content:center;gap:9mm;align-items:center">{pcs}</div>')
-    return (f'<div class="page"><div style="position:absolute;left:0;top:0;width:297mm;height:210mm;transform-origin:0 0;'
-            f'transform:translate(210mm,0) rotate(90deg);overflow:hidden">{inner}</div></div>')
+    return f'<div class="page land">{inner}</div>'
 
 
 def social_sign():
