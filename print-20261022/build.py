@@ -346,6 +346,16 @@ def summary(n_pages):
 <li>ถ้ามีกระดาษสีครีม 160–200 แกรม ใช้แทนกระดาษขาวจะเข้ากับสีขาวฝ้ายของแบรนด์ ถ้ามีแค่ 80 แกรม ป้ายชื่อและการ์ด LINE ให้ติดบนเศษฟิวเจอร์บอร์ด</li></ol></div></section>
 <section><h2>รายการพิมพ์</h2><div class="tbl"><table><thead><tr><th>หน้า</th><th>อะไร</th><th>ได้กี่ชิ้น</th><th>ตัด / ใช้</th></tr></thead><tbody>{rows}</tbody></table></div></section>
 <section><h2>ตัวอย่างทุกหน้า</h2><div class="grid">{figs}</div></section>
+<section><span class="eyebrow">เพิ่ม 22 ต.ค. ค่ำ</span><h2>การ์ดแบรนด์ใส่ถุง 6.3 × 6.3 ซม.</h2>
+<div class="grid"><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="card-1.png" alt="หน้าการ์ด" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">หน้า · โลโก้แถบห้าสี</figcaption></figure>
+<figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="card-2.png" alt="หลังการ์ด" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">หลัง · QR LINE, IG, FB</figcaption></figure></div>
+<div class="card"><ol>
+<li>สี่เหลี่ยมจัตุรัสเหมือนโลโก้ ไม่เกิน 7 ซม. ตามที่ขอ A4 หนึ่งแผ่นได้ 12 ใบ</li>
+<li>หน้า: โลโก้แบบมีแถบห้าสี กับ our crafted things. · หลัง: QR LINE (สแกนแล้วเปิดถูกบัญชี) IG @oct.26_brand FB oct26brand และแถบห้าสี "ห้าคน ห้าสี ทำกันเองทั้งบ้าน" ตามการ์ดในซองของ Brand Book v2</li>
+<li>พิมพ์สองหน้า พลิกด้านยาว (Flip on long edge) ขนาดจริง 100% · ถ้าเครื่องพิมพ์สองหน้าเองไม่ได้ พิมพ์หน้า 1 แล้วใส่กระดาษกลับด้านพิมพ์หน้า 2 ลองแผ่นแรกด้วยกระดาษธรรมดาก่อน</li>
+<li>ตัวการ์ดอยู่ห่างขอบการ์ด 6 มม. ถ้าหน้าหลังเหลื่อมกัน 1–2 มม. ก็ยังไม่โดนตัด</li>
+<li>กระดาษ 200–250 แกรม (เท่าที่เครื่องรับได้) · เริ่ม 4 แผ่น = 48 ใบ ใส่ถุงละ 1 ใบ หมดค่อยพิมพ์เพิ่ม</li>
+<li>ไฟล์ print-20261022/oct26-brand-card.pdf (2 หน้า) · แก้ที่ print-20261022/card.py</li></ol></div></section>
 <section><h2>ต้องเช็ก</h2><div class="card"><ol>
 <li>ป้าย A4 ในงานรีแบรนด์ (booth-sign-A4) ยังเป็นราคา 7 แบบเดิมและเขียน "SOI. 02 รอบผลิตแรก" ไม่ตรงกับแผ่นละ {PRICE} บาท บูธพรุ่งนี้ใช้ป้ายราคาหน้า 3 ของชุดนี้แทน</li>
 <li>5 แพตเทิร์นคือ 01 หมี · 02 กังหัน · 03 กากบาทแคปซูล · 04 สี่เหลี่ยมมน · 05 วงกลม (07 มีของแล้ว แต่บูธนี้ขายแค่ 01–05)</li>
