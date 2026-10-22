@@ -1,5 +1,7 @@
 # OCT.26 Web Builder (21 Oct 2026)
 
+**Paused since 22 Oct**: the site now reads `website/catalog.py`; the builder still edits the old brand.py table. See APPLY.md.
+
 The owner's editor for the customer website, a claude.ai Artifact: https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG
 (private; share it from the page's Share menu, Editor level, to let someone else edit).
 

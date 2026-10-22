@@ -1,5 +1,10 @@
 # Apply a Web Builder request (for Claude)
 
+**Paused (22 Oct 2026).** The site was rebuilt from `website/catalog.py` (7 products, Brand Book v2). `apply.py` still
+patches the old 30-product table in `brand-20261014/brand.py`, which no longer drives the site. Do not apply requests:
+set the request to `{"status": "failed", "result": "Web Builder ยังไม่รองรับเว็บใหม่ แก้ใน website/catalog.py แทน"}` and
+tell the owner the builder needs rewiring to catalog.py.
+
 The owner edits the website on the Web Builder page (https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG) and presses
 "ขึ้นเว็บ". That saves a document `requests/<id>` in the page's database and starts a Claude Code session in the OCT.26
 environment with the message "ขึ้นเว็บตาม OCT.26 Web Builder คำขอ <id> …" (or the owner pastes that message).
