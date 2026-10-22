@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap">
 <style>
 /* Layout: one reading column, the tailor's numbers first, sheet previews below */
-:root{--paper:#FBF7F1;--card:#FFFFFF;--ink:#1C1B22;--muted:#6E6660;--line:#E6DCCF;--accent:#C8442A;
+:root{--paper:#FBF7F1;--card:#FFFFFF;--ink:#1C1B22;--muted:#6E6660;--line:#E6DCCF;--accent:#C8442A;--velcro:#3D6FB6;
   --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#18171C;--card:#221F27;--ink:#F3EDE6;--muted:#A79E96;--line:#35303B;--accent:#FF7A5C;color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#18171C;--card:#221F27;--ink:#F3EDE6;--muted:#A79E96;--line:#35303B;--accent:#FF7A5C;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#18171C;--card:#221F27;--ink:#F3EDE6;--muted:#A79E96;--line:#35303B;--accent:#FF7A5C;--velcro:#8FB2EA;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#18171C;--card:#221F27;--ink:#F3EDE6;--muted:#A79E96;--line:#35303B;--accent:#FF7A5C;--velcro:#8FB2EA;color-scheme:dark}
 body{background:var(--paper);color:var(--ink);font:16px/1.65 var(--body)}
 .wrap{max-width:720px;margin:0 auto;padding-block:28px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:32px}
 h1,h2{font-family:var(--display);font-weight:600;margin:0;line-height:1.3;text-wrap:balance}
@@ -23,54 +23,61 @@ th{font-size:.8rem;color:var(--muted);font-weight:600} td.r,th.r{text-align:righ
 .sheet img{display:block;width:100%;height:auto}
 ul,ol{margin:0;padding-left:1.3em;display:grid;gap:6px}
 .note{color:var(--muted);font-size:.9rem}
+.v{color:var(--velcro);font-weight:600}
 code{font-size:.85rem;word-break:break-all}
 </style>
 <div class="wrap">
   <header style="display:grid;gap:8px">
     <p class="eyebrow">OCT. 26 · บูธ · 22 ต.ค. 2569</p>
-    <h1>แพทเทิร์นผ้าคลุมโต๊ะพาเลท</h1>
-    <p>โต๊ะ 117 × 80 × สูง 50 ซม. ผ้าคลุมด้านบน ด้านหน้า และด้านข้างสองข้าง ด้านหลังเปิดไว้เก็บของใต้โต๊ะ ใช้ผ้าหน้ากว้าง 120 ซม. ไฟล์ PDF 3 หน้า ส่งให้ช่างได้เลย</p>
+    <h1>แพทเทิร์นผ้าคลุมโต๊ะพาเลท 1 ตัว</h1>
+    <p>โต๊ะ 117 × 80 × สูง 50 ซม. ผ้าคลุมด้านบน ด้านหน้า ด้านข้างสองข้าง และด้านหลังที่เปิดปิดได้ ใช้ผ้าหน้ากว้าง 120 ซม. ไฟล์ PDF 3 หน้า ส่งให้ช่างได้เลย</p>
   </header>
 
   <section>
-    <h2>ตัด 2 ชิ้นต่อโต๊ะ 1 ตัว</h2>
-    <div class="tbl"><table class="num">
-      <thead><tr><th>ชิ้น</th><th class="r">ขนาดตัด (ซม.)</th><th class="r">สำเร็จ (ซม.)</th></tr></thead>
-      <tbody>
-        <tr><td>ชิ้นบน</td><td class="r">122 × 85.5</td><td class="r">119 × 82</td></tr>
-        <tr><td>ผ้ากระโปรง หน้า + ข้าง 2 ด้าน ผืนเดียว</td><td class="r">287 × 53.5</td><td class="r">สูง 48</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">ขนาดตัดรวมกันเย็บ 1.5 ซม. ชายล่าง 4 ซม. (พับ 2 + 2) และริมด้านหลัง 2 ซม. (พับ 1 + 1) แล้ว · ผ้ากระโปรงบากมุมที่ 84 และ 203 ซม. · เผื่อหลวมด้านละ 1 ซม. ชายผ้าลอยจากพื้น 2 ซม.</p>
+    <h2>ด้านหลังเปิดปิดยังไง</h2>
+    <ul>
+      <li><b>ปิด:</b> ผ้าหลังมีปีกข้างละ 4 ซม. อ้อมมุมไปติด<span class="v">ตีนตุ๊กแก</span>บนผ้าข้างทั้งสองข้าง ดูเรียบเหมือนด้านอื่น</li>
+      <li><b>เปิด:</b> แกะตีนตุ๊กแก ม้วนผ้าหลังขึ้นไปถึงขอบโต๊ะ แล้วผูกเชือก 2 เส้นที่เย็บติดไว้ เก็บของใต้โต๊ะได้</li>
+    </ul>
   </section>
 
   <section>
-    <h2>ผ้าที่ต้องซื้อ</h2>
+    <h2>ตัด 5 ชิ้น</h2>
     <div class="tbl"><table class="num">
-      <thead><tr><th>จำนวนผ้าคลุม</th><th class="r">ใช้จริง</th><th class="r">ซื้อ (+5%)</th></tr></thead>
+      <thead><tr><th>ชิ้น</th><th class="r">ขนาดตัด (ซม.)</th><th class="r">จำนวน</th></tr></thead>
       <tbody>
-        <tr><td>6 ตัว (ชุดที่ทำเพิ่ม)</td><td class="r">15.9 ม.</td><td class="r"><b>17 ม.</b></td></tr>
-        <tr><td>9 ตัว (ชุดเดิม)</td><td class="r">25.3 ม.</td><td class="r"><b>27 ม.</b></td></tr>
-        <tr><td>15 ตัว (รวมทั้งหมด)</td><td class="r">41.3 ม.</td><td class="r"><b>44 ม.</b></td></tr>
+        <tr><td>ชิ้นบน</td><td class="r">122 × 85</td><td class="r">1</td></tr>
+        <tr><td>ผ้ากระโปรง หน้า + ข้าง 2 ด้าน ผืนเดียว</td><td class="r">287 × 53.5</td><td class="r">1</td></tr>
+        <tr><td>ผ้าหลัง เปิดปิดได้</td><td class="r">131 × 53.5</td><td class="r">1</td></tr>
+        <tr><td>เชือกผูกม้วนผ้าหลัง</td><td class="r">5 × 92</td><td class="r">2</td></tr>
       </tbody>
     </table></div>
-    <p class="note">ผ้า 5.31 ม. ได้ผ้าคลุม 2 ตัว (ชิ้นบน 2 ชิ้น แล้ววางผ้ากระโปรง 2 ผืนคู่กันตามหน้าผ้า) · เผื่อ 5% สำหรับผ้าหดและตัดเสีย</p>
+    <p class="note">สำเร็จ: ด้านบน 119 × 82 ซม. (เผื่อหลวมด้านละ 1 ซม.) ผ้าห้อยสูง 48 ซม. ลอยจากพื้น 2 ซม. · ขนาดตัดรวมกันเย็บ 1.5 ซม. ชายล่าง 4 ซม. และพับริมแล้ว</p>
+  </section>
+
+  <section>
+    <h2>ของที่ต้องซื้อ</h2>
+    <div class="tbl"><table class="num">
+      <tbody>
+        <tr><td>ผ้าหน้ากว้าง 120 ซม. (ใช้จริง 4.09 ม. เผื่อหดและตัดเสีย)</td><td class="r"><b>4.5 ม.</b></td></tr>
+        <tr><td>ตีนตุ๊กแก กว้าง 2.5 ซม. ด้านหนามและด้านขน (ใช้ด้านละ 2 เส้น เส้นละ 46 ซม.)</td><td class="r"><b>1 ม. คู่</b></td></tr>
+      </tbody>
+    </table></div>
   </section>
 
   <section>
     <h2>หน้าตาไฟล์ที่ส่งช่าง</h2>
-    <div class="sheet"><img src="preview-1.png" alt="หน้า 1: ภาพผ้าคลุม ขนาดสำเร็จ ชิ้นผ้า และจำนวนผ้าที่ต้องซื้อ"></div>
-    <div class="sheet"><img src="preview-2.png" alt="หน้า 2: ชิ้นบนและผ้ากระโปรง พร้อมขนาดตัด รอยบากมุม เส้นเย็บและเส้นพับ"></div>
-    <div class="sheet"><img src="preview-3.png" alt="หน้า 3: วิธีวางชิ้นผ้าบนหน้ากว้าง 120 ซม. และขั้นตอนเย็บ 8 ข้อ"></div>
+    <div class="sheet"><img src="preview-1.png" alt="หน้า 1: ภาพผ้าคลุม ภาพผ้าหลังตอนปิดและตอนเปิด ขนาดสำเร็จ ชิ้นผ้า และของที่ต้องซื้อ"></div>
+    <div class="sheet"><img src="preview-2.png" alt="หน้า 2: ชิ้นบน ผ้าหลัง และผ้ากระโปรง พร้อมขนาดตัด รอยบาก ตำแหน่งตีนตุ๊กแกและเชือก"></div>
+    <div class="sheet"><img src="preview-3.png" alt="หน้า 3: วิธีวางชิ้นผ้าบนหน้ากว้าง 120 ซม. และขั้นตอนเย็บ 10 ข้อ"></div>
   </section>
 
   <section>
     <h2>ที่ต้องเช็กก่อนส่งช่าง</h2>
     <ul>
-      <li>ด้านหน้าในแบบคือด้านยาว 117 ซม. ถ้าด้านหน้าจริงเป็นด้านกว้าง 80 ซม. ต้องคำนวณใหม่</li>
-      <li>วัดโต๊ะจริงอีกครั้ง โต๊ะเดิม 9 ตัวกับที่ทำเพิ่ม 6 ตัวต้องขนาดเท่ากัน</li>
-      <li>ให้ช่างเย็บตัวอย่าง 1 ตัว แล้วลองคลุมโต๊ะจริงก่อนตัดที่เหลือ</li>
-      <li>ด้านหลังไม่มีผ้า ผ้าข้างจะห้อยอิสระที่มุมหลัง ถ้าอยากให้เรียบ ใส่เชือกผูกจากเศษผ้าได้</li>
+      <li>ด้านหน้าในแบบคือด้านยาว 117 ซม. ถ้าด้านหน้าจริงเป็นด้าน 80 ซม. ต้องคำนวณใหม่</li>
+      <li>วัดโต๊ะจริงอีกครั้ง ถ้าต่างจาก 117 × 80 × 50 เกิน 1 ซม. ให้แก้ขนาดตัด</li>
+      <li>ถ้าเย็บตัวนี้แล้วใช้ดี ค่อยสั่งเพิ่มสำหรับโต๊ะตัวอื่น ผ้าตัวละ 4.5 ม.</li>
     </ul>
   </section>
 
