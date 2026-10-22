@@ -7,7 +7,7 @@ square logo, Anuphan / Jost / IBM Plex Sans Thai. Follows the shared status doc:
 only (no joining, no "no-sew"), no food contact, no products for small children.
 
 Die outlines are read 1:1 (mm) from the cutting files and sampled into polygons for the simulator and the shaped cards.
-python3 web-directions-20261022/build.py -> index.html (publish with assets/)
+python3 web-directions-20261022/build.py [v2] -> index.html / index-v2.html (publish with assets/)
 """
 import json, os, re
 
@@ -76,8 +76,10 @@ def logo(name):
 
 if __name__ == "__main__":
     shapes = {c: shape(c) for c in DIES}
-    t = open(os.path.join(HERE, "template.html")).read()
+    import sys
+    v = sys.argv[1] if len(sys.argv) > 1 else ""            # "v2": the colourful round (template-v2.html -> index-v2.html)
+    t = open(os.path.join(HERE, f"template{'-' + v if v else ''}.html")).read()
     t = (t.replace("/*SHAPES*/{}", json.dumps(shapes, ensure_ascii=False, separators=(",", ":")))
           .replace("{{LOGO_LIGHT}}", logo("square-light")).replace("{{LOGO_DARK}}", logo("square-dark")))
-    open(os.path.join(HERE, "index.html"), "w").write(t)
-    print("wrote index.html", len(t) // 1024, "KB;", {c: len(s["outline"]) for c, s in shapes.items()})
+    open(os.path.join(HERE, f"index{'-' + v if v else ''}.html"), "w").write(t)
+    print(f"wrote index{'-' + v if v else ''}.html", len(t) // 1024, "KB;", {c: len(s["outline"]) for c, s in shapes.items()})

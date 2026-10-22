@@ -1,5 +1,14 @@
 # Six website directions (22 Oct 2026)
 
+Round 2, colourful: https://claude.ai/artifact/CZUKqtSgk7TUTyY6Qcucga (`template-v2.html` -> `index-v2.html`, `python3 build.py v2`).
+The owner asked for more colour: every section takes a family colour (full or light) with a craft texture (saddle stitch,
+punch holes, gingham, stripes, die-shape stamps, paper grain), pieces carry painted faces as DIY examples (six faces,
+wobbly paint edges via an SVG displacement filter), and the 3D simulator paints a face decal in seven ink colours.
+This goes past Brand Book v2 (family colours as small details) and the status doc's "no bear face" rule, at the owner's
+request for this mock; both are flagged on the page's summary tab.
+
+Round 1:
+
 https://claude.ai/artifact/1xTex5SX5dq6MJTR1se7f7 (private) — mock-ups after the owner's six reference boards
 (Spring, faces, Originality, Cupful of Joy, Rayo, Markaworks). Not the live site: `website/` is unchanged until the
 owner says "แก้เว็บจริงเลยครับ".
