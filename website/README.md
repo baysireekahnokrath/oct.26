@@ -19,6 +19,7 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
   pages and the pattern play go to the product that sells now, or home).
 - The booth notice and "รับที่บูธ" lines hide themselves after `BOOTH["until"]` in catalog.py.
 - `builder/` — the Web Builder (paused: it still edits the old brand.py table).
+- `summary/` — Thai summary for the owner: https://claude.ai/artifact/FZ9KmqHeKZTpBu24TnGwjo · PR https://github.com/baysireekahnokrath/oct.26/pull/3
 
 ## Cloudflare (set up by the owner)
 Workers Builds from GitHub, production branch `main`, root directory `website`, build command none, deploy command
