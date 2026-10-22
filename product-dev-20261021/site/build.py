@@ -104,6 +104,16 @@ S_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{v}
     ("กำไรขั้นต้น", f"{round(min(i['margin'] for i in si) * 100)}–{round(max(i['margin'] for i in si) * 100)}%", "ต้นทุนชิ้นหนังตามเอกสารสถานะ"),
 ])
 
+# ---------------------------------------------------------------- tab "ตรวจผ่าน" (data from ../assortment, numbers from skucode.py)
+sys.path.insert(0, os.path.join(ROOT, "assortment"))
+import assortment as AS, skucode
+DRAFT = skucode.drafts_for(AS.A)
+REVIEW = dict(
+    waves=[[w, AS.WAVES[w]] for w in (0, 1, 2, "C")],
+    items=[dict(draft=DRAFT[a["code"]], old=a["code"] if a["wave"] == 0 else "", name=a["name"], family=a["family"], role=a["role"],
+                wave=a["wave"], price=a["price"], cost=round(a["cost"], 2), margin=round(a["margin"], 3), pieces=a["pieces"]) for a in AS.A])
+REVIEW_JS = open(os.path.join(HERE, "review.js")).read().replace("__REVIEW__", json.dumps(REVIEW, ensure_ascii=False, separators=(",", ":")))
+
 TEMPLATE = open(os.path.join(HERE, "template.html")).read()
 WEB = "--web" in sys.argv            # pd.oct26brand.com (Cloudflare Pages) instead of the claude.ai Artifact
 ADAPTER = open(os.path.join(HERE, "adapters", "web.js" if WEB else "artifact.js")).read()
@@ -111,7 +121,7 @@ out = (TEMPLATE.replace("__DB_ADAPTER__", ADAPTER).replace("__DATA__", json.dump
        .replace("__WORDMARK__", WORDMARK).replace("__ROLES__", ROLES_HTML).replace("__RULES__", RULES_HTML)
        .replace("__PLAN__", PLAN_HTML).replace("__FILES__", FILES_HTML)
        .replace("__X_STATS__", X_STATS).replace("__X_COMPAT__", X_COMPAT).replace("__CROSS3D_JS__", CROSS_JS)
-       .replace("__S_STATS__", S_STATS).replace("__S50_JS__", S50_JS))
+       .replace("__S_STATS__", S_STATS).replace("__S50_JS__", S50_JS).replace("__REVIEW_JS__", REVIEW_JS))
 if WEB:
     out = out.replace("<title>ฝ่ายพัฒนาสินค้า OCT. 26</title>", "<title>OCT. 26 PD · ระบบงานฝ่ายพัฒนาสินค้า</title>")
     cut = out.index('<div class="wrap">')

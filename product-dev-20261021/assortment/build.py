@@ -2,10 +2,12 @@
 import html, json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-import assortment as AS
+import assortment as AS, skucode
 E = html.escape
 GEO = json.load(open(os.path.join(ROOT, "single50", "single50.json")))["geo"]
 keep, dropped, use = AS.summary()
+DRAFT = skucode.drafts_for(AS.A)        # same numbers as the PD page tab ตรวจผ่าน
+PD_REVIEW = "https://claude.ai/artifact/SfbLavVZF6JAnZKXP75EFy#review"
 
 def thumb(code, size=44):
     g = GEO[code]; x, y, w, h = map(float, g["vb"].split()); m = max(w, h)
@@ -61,7 +63,7 @@ def line(a):
     pcs = " + ".join(f"{AS.NAME[c]} {c} × {q}" for c, q in a["pieces"])
     ex = (" · " + " · ".join(f"{E(n)} {t:g} บาท" for n, t in a["extras"])) if a["extras"] else ""
     return (f'<li class="line"><div class="ths">{thumbs(a["pieces"])}</div><div class="txt">'
-            f'<p class="eyebrow">{E(a["code"])} · {E(a["family"])} · <span class="{ROLE_CLS[a["role"]]} tagrole">{E(a["role"])}</span></p>'
+            f'<p class="eyebrow"><span class="draftno">ร่าง {DRAFT[a["code"]]}</span>{" · รหัสเดิม " + E(a["code"]) if a["wave"] == 0 else ""} · {E(a["family"])} · <span class="{ROLE_CLS[a["role"]]} tagrole">{E(a["role"])}</span></p>'
             f'<b>{E(a["name"])}</b><p class="small">{E(a["how"])}</p>'
             f'<p class="small muted num">{E(pcs)}{ex}</p></div>'
             f'<div class="price num"><b>{a["price"]}</b><span>ทุน {a["cost"]:.2f}</span><span>{round(a["margin"] * 100)}%</span></div></li>')
@@ -119,6 +121,8 @@ th{{font-family:var(--display)}}
 .sku{{display:inline-block;margin:0 4px 4px 0;padding:2px 9px;border-radius:999px;background:var(--chip);font-size:12px}}
 .r-core{{background:var(--cobalt);color:#fff}}.r-add{{background:var(--chip)}}.r-gift{{background:var(--pink);color:#1C1B22}}.r-custom{{background:transparent;border:1px solid var(--muted)}}
 .legend{{display:flex;flex-wrap:wrap;gap:8px;font-size:12px}}
+.draftno{{background:var(--chip);color:var(--ink);border-radius:6px;padding:0 6px;letter-spacing:.06em}}
+.cta{{display:inline-block;background:var(--ink);color:var(--bg);border-radius:999px;padding:8px 18px;text-decoration:none;font-weight:600}}
 .tagrole{{padding:0 6px;border-radius:999px;font-size:11px;text-transform:none;letter-spacing:0}}
 .two{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:21px;align-items:start}}
 .figure{{background:var(--card);border:1px solid var(--line);border-radius:21px;padding:13px 21px;display:grid;gap:8px}}
@@ -172,6 +176,9 @@ code{{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--c
 
 <section>
   <h2>ทุก SKU แยกตามระลอก</h2>
+  <div class="figure"><p><b>เลขร่างและเลขจริง</b> ทุก SKU มีเลขร่าง 4 หลัก (0001–{len(keep):04d}) ติ๊กผ่านหรือไม่ผ่านได้ที่หน้า PD แท็บตรวจผ่าน
+    ตัวที่ผ่านได้เลขจริง 8 หลักแบบ IKEA เช่น 260.001.72 รันตามลำดับที่ผ่าน ตัวที่ไม่ผ่านใส่เหตุผลได้</p>
+    <p><a class="cta" href="{PD_REVIEW}" target="_blank" rel="noopener">ไปติ๊กผ่าน / ไม่ผ่าน</a></p></div>
   {WAVE_LISTS}
 </section>
 
@@ -190,11 +197,13 @@ code{{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--c
   <ul class="rules">
     <li><b><code>product-dev-20261021/assortment/assortment.py</code></b><p>กติกา รายการ SKU ระลอก ต้นทุนจริง สิ่งที่ตัดออก หน้านี้สร้างจากไฟล์นี้ด้วย build.py</p></li>
     <li><b>หน้า PD แท็บชิ้นเดียว 50</b><p>ไอเดียที่ตัดออกขึ้นป้ายแดงพร้อมเหตุผล</p></li>
+    <li><b><code>product-dev-20261021/assortment/skucode.py</code> · <code>draft_numbers.json</code></b><p>กติกาเลขร่างและเลขจริง เลขร่างของแต่ละ SKU เก็บในไฟล์ json ไม่เลื่อนเมื่อรายการเปลี่ยน</p></li>
   </ul>
   <ol>
-    <li>ตอบคำถาม 4 ข้อข้างบน โดยเฉพาะอายุเด็กกับคำบนป้าย</li>
+    <li>ติ๊กผ่านหรือไม่ผ่านทุก SKU ในหน้า PD แท็บตรวจผ่าน ตัวที่ผ่านได้เลขจริงทันที</li>
+    <li>ตอบคำถาม {len(AS.QUESTIONS)} ข้อข้างบน โดยเฉพาะอายุเด็กกับคำบนป้าย</li>
     <li>26–29 ต.ค. ลอง {n[1]} SKU ของระลอก 1 ด้วยชิ้นที่ตัดไว้แล้ว ใช้ 07 มากที่สุด</li>
-    <li>ตัวที่ผ่าน งานบัญชีเพิ่มเข้าแท็บ SKU ในชีต และงานการตลาดทำการ์ดสินค้า ก่อนสุดสัปดาห์ที่สอง</li>
+    <li>ตัวที่ผ่าน งานบัญชีเพิ่มเข้าแท็บ SKU ในชีตด้วยเลขจริง (ปุ่มคัดลอกในแท็บตรวจผ่าน) และงานการตลาดทำการ์ดสินค้า ก่อนสุดสัปดาห์ที่สอง</li>
   </ol>
 </section>
 </div>

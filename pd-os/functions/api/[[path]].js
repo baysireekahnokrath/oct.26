@@ -1,8 +1,10 @@
 // OCT. 26 PD operation system: the /api the page talks to (Cloudflare Pages Function + D1 bound as DB).
 //
 //   GET  /api/config              {passcode: bool}  whether writes need the team passcode
-//   GET  /api/<col>               [{id, data}] newest first, col = items | tests | comments
+//   GET  /api/<col>               [{id, data}] newest first, col = items | tests | comments | reviews
 //   PUT  /api/items/<id>          set one board item (stage, blocker, note, or a whole idea)
+//   PUT  /api/reviews/<draft>     tick a SKU ผ่าน / ไม่ผ่าน {verdict, reason, name, seq, issued}; seq is its real number,
+//                                 refused (409) if another SKU holds it or this SKU already has a different one
 //   POST /api/tests               add a test result
 //   POST /api/comments            add a comment {item, name, text}
 //
@@ -12,6 +14,7 @@
 
 const READ_MAX = 2000, BODY_MAX = 8000, WRITE_LIMIT = 120, WINDOW_MS = 10 * 60 * 1000;
 const ID = /^[A-Za-z0-9_\-:.~@+]{1,80}$/;
+const DRAFT = /^[0-9]{4}$/, SEQ_MIN = 260001, SEQ_MAX = 999999;
 const STAGES = new Set(["idea", "proto", "tested", "ready", "selling", "hold"]);
 let ready = false;
 
@@ -47,6 +50,12 @@ function clean(col, d, now) {
     for (const k of ["build", "pull", "fit", "tear", "photo"]) out[k] = ["pass", "fail"].includes(d[k]) ? d[k] : "";
     return out;
   }
+  if (col === "reviews") {
+    if (!["", "pass", "fail"].includes(d.verdict ?? "") || !str(d.reason ?? "", 300) || !str(d.name ?? "", 40) || !str(d.issued ?? "", 40)) return null;
+    const seq = d.seq ?? null;
+    if (seq !== null && !(Number.isInteger(seq) && seq >= SEQ_MIN && seq <= SEQ_MAX)) return null;
+    return {verdict: d.verdict || "", reason: (d.reason || "").trim(), name: (d.name || "").trim(), seq, issued: seq ? (d.issued || now) : "", updated: now};
+  }
   if (col === "items") {
     if (d.stage !== undefined && !STAGES.has(d.stage)) return null;
     for (const [k, v] of Object.entries(d)) {
@@ -68,15 +77,15 @@ export async function onRequest({request, env, params}) {
   const method = request.method;
 
   if (col === "config" && method === "GET") return json({passcode: !!env.PD_PASSCODE});
-  if (!["items", "tests", "comments"].includes(col) || extra !== undefined) return json({error: "not found"}, 404);
+  if (!["items", "tests", "comments", "reviews"].includes(col) || extra !== undefined) return json({error: "not found"}, 404);
 
   if (method === "GET" && rawId === undefined) {
     const {results} = await db.prepare("SELECT id, data FROM docs WHERE col = ? ORDER BY updated DESC LIMIT ?").bind(col, READ_MAX).all();
     return json(results.map(r => ({id: r.id, data: JSON.parse(r.data)})));
   }
 
-  const isPut = method === "PUT" && col === "items" && rawId !== undefined;
-  const isPost = method === "POST" && col !== "items" && rawId === undefined;
+  const isPut = method === "PUT" && (col === "items" || col === "reviews") && rawId !== undefined;
+  const isPost = method === "POST" && (col === "tests" || col === "comments") && rawId === undefined;
   if (!isPut && !isPost) return json({error: "method not allowed"}, 405);
 
   if (env.PD_PASSCODE && request.headers.get("x-pd-code") !== env.PD_PASSCODE) return json({error: "passcode"}, 401);
@@ -94,7 +103,16 @@ export async function onRequest({request, env, params}) {
   if (!doc) return json({error: "invalid fields"}, 400);
 
   let id = isPut ? decodeURIComponent(rawId) : crypto.randomUUID();
-  if (!ID.test(id)) return json({error: "bad id"}, 400);
+  if (!ID.test(id) || (col === "reviews" && !DRAFT.test(id))) return json({error: "bad id"}, 400);
+
+  if (col === "reviews") {          // a real number belongs to one SKU for good
+    const old = await db.prepare("SELECT json_extract(data, '$.seq') AS seq FROM docs WHERE col = 'reviews' AND id = ?").bind(id).first();
+    if (old && old.seq && doc.seq !== old.seq) return json({error: "real number is permanent", seq: old.seq}, 409);
+    if (doc.seq) {
+      const other = await db.prepare("SELECT id FROM docs WHERE col = 'reviews' AND id != ? AND json_extract(data, '$.seq') = ?").bind(id, doc.seq).first();
+      if (other) return json({error: "real number taken", by: other.id}, 409);
+    }
+  }
 
   await db.batch([
     db.prepare("INSERT INTO docs (col, id, data, updated, ip) VALUES (?, ?, ?, ?, ?) ON CONFLICT (col, id) DO UPDATE SET data = excluded.data, updated = excluded.updated, ip = excluded.ip")

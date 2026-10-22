@@ -34,7 +34,7 @@ function makeApiDb() {
   async function write(method, url, data) {
     const r = await fetch(url, {method, headers: {"content-type": "application/json", "x-pd-code": PASS}, body: JSON.stringify(data)});
     if (r.status === 401) { askPass(!!PASS); throw Object.assign(new Error("passcode"), {code: "invalid_argument"}); }
-    if (!r.ok) throw Object.assign(new Error("write " + r.status), {code: r.status === 429 ? "resource_exhausted" : "unavailable"});
+    if (!r.ok) throw Object.assign(new Error("write " + r.status), {code: r.status === 429 ? "resource_exhausted" : r.status === 409 ? "already_exists" : "unavailable"});
     return r.json();
   }
   function query(col, ord, lim) {

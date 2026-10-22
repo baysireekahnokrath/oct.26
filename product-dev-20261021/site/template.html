@@ -116,6 +116,28 @@ ol.steps{margin:0;padding-left:1.3em;font-size:var(--t-1)}
 .tri{display:grid;gap:var(--s2)}
 .tri > div{display:grid;grid-template-columns:1fr auto;gap:var(--s2);align-items:center;border-top:1px solid var(--line);padding-top:var(--s2)}
 .tri > div > div{min-width:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.rv-wave{display:grid;gap:var(--s2);margin-bottom:var(--s4)}
+.rv-rows{list-style:none;margin:0;padding:0;display:grid;gap:var(--s2)}
+.rv-row{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--line);border-radius:13px;padding:var(--s3);display:grid;gap:var(--s2)}
+.rv-row.is-pass{border-left-color:var(--good)}.rv-row.is-fail{border-left-color:var(--bad)}
+.rv-head{display:grid;grid-template-columns:auto 1fr auto;gap:var(--s3);align-items:start}.rv-head > *{min-width:0}
+.rv-thumbs{display:grid;grid-template-columns:repeat(2,26px);gap:2px;width:54px}
+.rv-thumbs .thumb.sm{width:26px;height:26px}.rv-thumbs .thumb.sm:only-child{width:54px;height:54px}
+.draftno{background:var(--chip);color:var(--ink);border-radius:6px;padding:0 6px;letter-spacing:.06em}
+.realno{display:grid;justify-items:end;text-align:right}.realno b{font-family:var(--latin);font-weight:600;font-size:var(--t1);letter-spacing:.04em;white-space:nowrap}
+.realno.parked b{color:var(--muted);text-decoration:line-through}
+.rv-act{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.rv-pick{border:none;margin:0;padding:0;display:flex;gap:var(--s2)}
+.rv-opt{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 10px;cursor:pointer;min-height:40px}
+.rv-opt input{width:20px;height:20px;margin:0;accent-color:var(--ink)}
+.rv-opt.rv-pass:has(input:checked){background:var(--good);border-color:var(--good);color:var(--on-accent)}
+.rv-opt.rv-fail:has(input:checked){background:var(--bad);border-color:var(--bad);color:var(--on-accent)}
+.rv-opt:has(input:checked) input{accent-color:var(--on-accent)}
+.rv-opt:has(input:focus-visible){outline:2px solid var(--cobalt);outline-offset:2px}
+.rv-opt:has(input:disabled){opacity:.55;cursor:default}
+.rv-why{display:grid;gap:6px}.rv-why .chips{flex-wrap:wrap}
+@media (max-width:480px){.rv-head{grid-template-columns:auto 1fr}.realno{grid-column:1/-1;justify-items:start;text-align:left}}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
 .seg button{border:none;background:transparent;padding:5px 12px;font-size:var(--t-1)}
 .seg button[aria-pressed="true"][data-v="pass"]{background:var(--good);color:var(--on-accent)}
@@ -216,6 +238,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
 
 <nav class="tabs" aria-label="ส่วนของหน้า">
   <a href="#overview" data-tab="overview">ภาพรวม</a>
+  <a href="#review" data-tab="review">ตรวจผ่าน</a>
   <a href="#board" data-tab="board">บอร์ดสินค้า</a>
   <a href="#single" data-tab="single">ชิ้นเดียว 50</a>
   <a href="#cross" data-tab="cross">ไขว้ 3D</a>
@@ -284,6 +307,26 @@ table.compat td.ok{color:var(--good);font-weight:600}
     <div class="calc" id="i-calc"></div>
     <div class="row"><button class="btn primary" type="submit" id="i-save">เพิ่มลงบอร์ด</button><button class="btn" type="button" id="i-cancel">ยกเลิก</button><span id="i-msg"></span></div>
   </form>
+</section>
+
+<section class="view" id="v-review" hidden>
+  <div class="block">
+    <p class="eyebrow">Review · ตรวจผ่าน</p>
+    <h2>ติ๊กผ่านหรือไม่ผ่าน ทีละ SKU</h2>
+    <p class="muted">ทุก SKU ในชุดสินค้าใหม่มีเลขร่าง 4 หลัก (0001 ขึ้นไป) ตัวที่ติ๊ก <b>ผ่าน</b> ได้เลขจริง 8 หลักแบบ IKEA เช่น <b class="num">260.001.72</b>
+      เลขจริงรันตามลำดับที่ผ่าน (260 มาจาก OCT. 26) สองหลักท้ายเป็นเลขตรวจ ถ้าพิมพ์ผิดหนึ่งตัวหรือสลับสองตัว เลขจะไม่ตรงกับสินค้าไหนเลย
+      ตัวที่ติ๊ก <b>ไม่ผ่าน</b> ใส่เหตุผลได้ ไม่ใส่ก็ได้ เลขจริงที่ออกแล้วไม่ให้สินค้าอื่น ถ้าเปลี่ยนเป็นไม่ผ่านภายหลัง เลขจะพักไว้ และกลับมาเมื่อผ่านอีกครั้ง</p>
+    <label for="rv-name" class="small" style="max-width:280px;display:grid;gap:4px">ชื่อคนตรวจ <input id="rv-name" maxlength="40" placeholder="ชื่อของคุณ" autocomplete="name"></label>
+  </div>
+  <div class="stats" id="rv-stats"></div>
+  <div class="chips" id="rv-filters" role="group" aria-label="กรองตามผลตรวจ"></div>
+  <div id="rv-list"></div>
+  <div class="block">
+    <h3>เลขจริงที่ออกแล้ว</h3>
+    <div class="scroll" id="rv-real"></div>
+    <div class="row"><button class="btn" type="button" id="rv-copy">คัดลอกไปวางในชีต</button><span id="rv-copymsg" class="small"></span></div>
+    <p class="small muted">เลขจริงยังไม่ได้ใส่ในชีตบัญชีและ Shopee ให้งานบัญชีวางจากปุ่มนี้ 7 SKU ที่ขายอยู่ยังใช้รหัสเดิม (OC-…) จนกว่าจะเปลี่ยนในชีตและ Shopee</p>
+  </div>
 </section>
 
 <section class="view" id="v-single" hidden>
@@ -742,14 +785,17 @@ __CROSS3D_JS__
 
 __S50_JS__
 
+__REVIEW_JS__
+
 // ------------------------------------------------------------ tabs
-const TABS = ["overview", "board", "single", "cross", "tests", "process", "plan"];
+const TABS = ["overview", "review", "board", "single", "cross", "tests", "process", "plan"];
 let crossReady = false, singleReady = false;
 function go(tab) {
   if (!TABS.includes(tab)) tab = "overview";
   for (const t of TABS) $("#v-" + t).hidden = t !== tab;
   if (tab === "cross" && !crossReady) { crossReady = true; x3dCards(); }
   if (tab === "single" && !singleReady) { singleReady = true; s50Cards(); }
+  if (tab === "review") renderReview();
   document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   try { localStorage.setItem("pd-tab", tab); } catch {}
 }
@@ -760,9 +806,10 @@ function setWritable(on) {
   canWrite = on;
   for (const s of ["#t-save", "#i-save"]) $(s).disabled = !on;
   if (generalBox) generalBox._draw();
+  renderReview();
 }
 
-renderProcess(); initIdea(); setWritable(false); renderAll();
+renderProcess(); initIdea(); initReview(); setWritable(false); renderAll();
 $("#x-joints").textContent = `${D.jointsOpen} ทุกแบบในแท็บนี้เป็นไอเดียที่ผ่านแค่การตรวจรูปทรงในคอมพิวเตอร์ (สถานะ ${D.statusDate})`;
 {
   let start = location.hash.slice(1);
@@ -789,6 +836,11 @@ __DB_ADAPTER__
   db.collection("tests").orderBy("at", "desc").limit(300).onSnapshot(snap => {
     tests = snap.docs.map(d => ({id: d.id, ...d.data()}));
     renderAll();
+  }, () => {});
+  db.collection("reviews").onSnapshot(snap => {
+    for (const k of Object.keys(reviews)) delete reviews[k];
+    for (const d of snap.docs) reviews[d.id] = d.data();
+    fixClashes(); renderReview();
   }, () => {});
   db.collection("comments").orderBy("at", "desc").limit(1000).onSnapshot(snap => {
     comments = snap.docs.map(d => ({id: d.id, ...d.data()})).filter(c => typeof c.item === "string");
