@@ -1,4 +1,6 @@
-// ------------------------------------------------------------ tab "ตรวจผ่าน": tick each SKU ผ่าน or ไม่ผ่าน (data from ../assortment)
+// ------------------------------------------------------------ tab "ตรวจผ่าน": tick each SKU ผ่าน or ไม่ผ่าน (data from ../assortment/tiers.py)
+// The range is in three tiers (owner 22 Oct): bare pieces, a piece plus a real add-on, ready-made sets.
+// Old draft numbers that were merged or dropped are listed apart; a real number they already hold is never reused.
 // Every SKU has a draft number (0001...). Ticking ผ่าน gives it a real number, digits only like IKEA: 260.001.CC,
 // 260001 upward in the order SKUs pass, CC = ISO 7064 mod 97-10 check digits (same rule as ../assortment/skucode.py).
 // A real number stays with its SKU for good: ticking ไม่ผ่าน later parks it, ผ่าน again brings the same number back.
@@ -60,9 +62,12 @@ function rvRow(a) {
   const head = el("div", {class: "rv-head"},
     el("div", {class: "rv-thumbs"}, ...a.pieces.slice(0, 4).map(([c]) => thumb(c, "thumb sm"))),
     el("div", {},
-      el("p", {class: "eyebrow num"}, el("span", {class: "draftno", text: "ร่าง " + d}), a.old ? ` · รหัสเดิม ${a.old}` : "", ` · ${a.family}`),
+      el("p", {class: "eyebrow num"}, el("span", {class: "draftno", text: "ร่าง " + d}), a.old ? ` · รหัสเดิม ${a.old}` : ""),
       el("b", {class: "rv-name", text: a.name}),
-      el("p", {class: "small muted num", text: `${a.price} บาท · ทุน ${a.cost.toFixed(2)} · กำไร ${Math.round(a.margin * 100)}% · ${a.role}`})),
+      el("p", {class: "small muted num", text: `${a.price} บาท · ทุน ${a.cost.toFixed(2)} · กำไร ${Math.round(a.margin * 100)}%`}),
+      a.extras.length ? el("p", {class: "small num", text: "ของเพิ่ม: " + a.extras.join(" · ")}) : null,
+      a.uses.length ? el("p", {class: "small", text: "ใช้ทำ: " + a.uses.join(" · ")}) : null,
+      a.note ? el("p", {class: "small muted", text: a.note}) : null),
     seq ? el("div", {class: "realno" + (v === "pass" ? "" : " parked")},
       el("span", {class: "small", text: v === "pass" ? "เลขจริง" : "เลขจริง (พักไว้)"}), el("b", {class: "num", text: realCode(seq)})) : null);
   const fs = el("fieldset", {class: "rv-pick"}, el("legend", {class: "sr", text: `ผลตรวจ ${a.name}`}), ...radios);
@@ -101,11 +106,20 @@ function renderReview() {
     onclick: () => { rvFilter = key; renderReview(); }}, `${label} ${n}`);
   $("#rv-filters").replaceChildren(chip("all", "ทั้งหมด", all.length), chip("", "รอตรวจ", nWait), chip("pass", "ผ่าน", nPass), chip("fail", "ไม่ผ่าน", nFail));
   const shown = all.filter(a => rvFilter === "all" || verdictOf(a.draft) === rvFilter);
-  $("#rv-list").replaceChildren(...RV.waves.map(([w, label]) => {
-    const its = shown.filter(a => a.wave === w);
+  $("#rv-list").replaceChildren(...RV.groups.map(([g, label]) => {
+    const its = shown.filter(a => a.group === g);
     return its.length ? el("section", {class: "rv-wave"}, el("h3", {}, label, " ", el("span", {class: "muted num", text: its.length})), el("ul", {class: "rv-rows"}, ...its.map(rvRow))) : null;
   }).filter(Boolean));
   if (!shown.length) $("#rv-list").append(el("p", {class: "muted", text: "ไม่มี SKU ในกลุ่มนี้"}));
+  const held = RV.retired.filter(x => seqOf(reviews[x.draft]));
+  $("#rv-retired").replaceChildren(
+    el("summary", {}, `เลขร่างเดิมที่รวมหรือเลิกใช้ ${RV.retired.length} ตัว`, held.length ? ` · ${held.length} ตัวเคยได้เลขจริง` : ""),
+    el("p", {class: "small muted", text: "จากรายการ 43 SKU เดิม ตัวที่เป็นชิ้นเดียวกันแต่ชื่อต่างกันย้ายไปเป็นไอเดียการใช้ ตัวที่สั่งทำเปลี่ยนเป็นชิ้นเปล่าตามจำนวนบวกการปั๊ม เลขจริงที่เคยออกให้จะยกเลิก ไม่ให้สินค้าอื่น"}),
+    el("ul", {class: "rv-gone"}, ...RV.retired.map(x => {
+      const s = seqOf(reviews[x.draft]);
+      return el("li", {class: "small"}, el("span", {class: "draftno", text: "ร่าง " + x.draft}), ` ${x.name} → ${x.reason}`,
+        x.into ? ` (ร่าง ${x.into})` : "", s ? el("b", {class: "num gone", text: ` เลขจริง ${realCode(s)} ยกเลิก`}) : null);
+    })));
   const real = all.filter(a => verdictOf(a.draft) === "pass" && seqOf(reviews[a.draft])).sort((x, y) => reviews[x.draft].seq - reviews[y.draft].seq);
   $("#rv-real").replaceChildren(real.length
     ? el("table", {class: "num"}, el("thead", {}, el("tr", {}, ...["เลขจริง", "ร่าง", "ชื่อ", "ราคา"].map(t => el("th", {text: t})))),

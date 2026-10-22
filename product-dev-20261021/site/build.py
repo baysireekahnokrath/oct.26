@@ -104,14 +104,21 @@ S_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{v}
     ("กำไรขั้นต้น", f"{round(min(i['margin'] for i in si) * 100)}–{round(max(i['margin'] for i in si) * 100)}%", "ต้นทุนชิ้นหนังตามเอกสารสถานะ"),
 ])
 
-# ---------------------------------------------------------------- tab "ตรวจผ่าน" (data from ../assortment, numbers from skucode.py)
+# ---------------------------------------------------------------- tab "ตรวจผ่าน" (data from ../assortment/tiers.py, numbers from skucode.py)
 sys.path.insert(0, os.path.join(ROOT, "assortment"))
-import assortment as AS, skucode
-DRAFT = skucode.drafts_for(AS.A)
+import assortment as AS, skucode, tiers as TR
+DRAFT = skucode.drafts_for(AS.A)                         # the 43 old lines keep their numbers
+DRAFT.update(skucode.drafts([a["key"] for a in TR.ALL]))  # new lines (bare 03, magnet, stamp) come after
+LIVE = {a["code"] for a in AS.A if a["wave"] == 0}        # selling now on Shopee under an OC code
+xname = lambda n, t: f"{n} {t:g} บาท"
 REVIEW = dict(
-    waves=[[w, AS.WAVES[w]] for w in (0, 1, 2, "C")],
-    items=[dict(draft=DRAFT[a["code"]], old=a["code"] if a["wave"] == 0 else "", name=a["name"], family=a["family"], role=a["role"],
-                wave=a["wave"], price=a["price"], cost=round(a["cost"], 2), margin=round(a["margin"], 3), pieces=a["pieces"]) for a in AS.A])
+    groups=[[g, label] for g, label, _ in TR.TIERS],
+    items=[dict(draft=DRAFT[a["key"]], old=a["key"] if a["key"] in LIVE else "", name=a["name"], group=a["group"],
+                price=a["price"], cost=a["cost"], margin=a["margin"], pieces=a["pieces"] or [["05", 1]], note=a["note"],
+                extras=[xname(n, t) for n, t in a["extras"]],
+                uses=[u for u, _ in TR.USES[a["pieces"][0][0]]] if a["tier"] == 1 else []) for a in TR.ALL],
+    retired=[dict(draft=DRAFT[k], name=TR.OLD[k]["name"], reason=r, into=DRAFT.get(t, "")) for k, (r, t) in
+             sorted(TR.RETIRED.items(), key=lambda kv: DRAFT[kv[0]])])
 REVIEW_JS = open(os.path.join(HERE, "review.js")).read().replace("__REVIEW__", json.dumps(REVIEW, ensure_ascii=False, separators=(",", ":")))
 
 TEMPLATE = open(os.path.join(HERE, "template.html")).read()

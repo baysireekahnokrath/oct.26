@@ -136,6 +136,9 @@ ol.steps{margin:0;padding-left:1.3em;font-size:var(--t-1)}
 .rv-opt:has(input:checked) input{accent-color:var(--on-accent)}
 .rv-opt:has(input:focus-visible){outline:2px solid var(--cobalt);outline-offset:2px}
 .rv-opt:has(input:disabled){opacity:.55;cursor:default}
+.rv-retired{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:var(--s3);margin-bottom:var(--s4)}
+.rv-retired summary{cursor:pointer;font-weight:600}
+.rv-gone{list-style:none;margin:var(--s2) 0 0;padding:0;display:grid;gap:4px}.rv-gone .gone{color:var(--bad);text-decoration:line-through}
 .rv-why{display:grid;gap:6px}.rv-why .chips{flex-wrap:wrap}
 @media (max-width:480px){.rv-head{grid-template-columns:auto 1fr}.realno{grid-column:1/-1;justify-items:start;text-align:left}}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
@@ -313,7 +316,9 @@ table.compat td.ok{color:var(--good);font-weight:600}
   <div class="block">
     <p class="eyebrow">Review · ตรวจผ่าน</p>
     <h2>ติ๊กผ่านหรือไม่ผ่าน ทีละ SKU</h2>
-    <p class="muted">ทุก SKU ในชุดสินค้าใหม่มีเลขร่าง 4 หลัก (0001 ขึ้นไป) ตัวที่ติ๊ก <b>ผ่าน</b> ได้เลขจริง 8 หลักแบบ IKEA เช่น <b class="num">260.001.72</b>
+    <p class="muted">สินค้าแบ่ง 3 ชั้น: ชิ้นเปล่า (ลายละ 1 SKU) · ชิ้นบวกของเพิ่มจริง เช่น เชือก ไม้ ริบบิ้น · ชุดที่จัดไว้แล้ว
+      ใช้ชิ้นเดียวกันทำอะไรได้บ้างเป็นไอเดียบนการ์ด ไม่ใช่ SKU ใหม่</p>
+    <p class="muted">ทุก SKU มีเลขร่าง 4 หลัก (0001 ขึ้นไป) ตัวที่ติ๊ก <b>ผ่าน</b> ได้เลขจริง 8 หลักแบบ IKEA เช่น <b class="num">260.001.72</b>
       เลขจริงรันตามลำดับที่ผ่าน (260 มาจาก OCT. 26) สองหลักท้ายเป็นเลขตรวจ ถ้าพิมพ์ผิดหนึ่งตัวหรือสลับสองตัว เลขจะไม่ตรงกับสินค้าไหนเลย
       ตัวที่ติ๊ก <b>ไม่ผ่าน</b> ใส่เหตุผลได้ ไม่ใส่ก็ได้ เลขจริงที่ออกแล้วไม่ให้สินค้าอื่น ถ้าเปลี่ยนเป็นไม่ผ่านภายหลัง เลขจะพักไว้ และกลับมาเมื่อผ่านอีกครั้ง</p>
     <label for="rv-name" class="small" style="max-width:280px;display:grid;gap:4px">ชื่อคนตรวจ <input id="rv-name" maxlength="40" placeholder="ชื่อของคุณ" autocomplete="name"></label>
@@ -321,6 +326,7 @@ table.compat td.ok{color:var(--good);font-weight:600}
   <div class="stats" id="rv-stats"></div>
   <div class="chips" id="rv-filters" role="group" aria-label="กรองตามผลตรวจ"></div>
   <div id="rv-list"></div>
+  <details id="rv-retired" class="rv-retired"></details>
   <div class="block">
     <h3>เลขจริงที่ออกแล้ว</h3>
     <div class="scroll" id="rv-real"></div>
