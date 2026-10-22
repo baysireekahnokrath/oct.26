@@ -1,5 +1,13 @@
 # Six website directions (22 Oct 2026)
 
+Round 4, full product pages in direction 2: https://claude.ai/artifact/AyK8eww8b729osmsne7737 (`template-v4.html`,
+`python3 build.py v4`). Home + one page per SKU (`#OC-04-27` …): gallery (real photo, sample leather tones, true-size
+drawing from the die file), lead, price, leather tone wish, quantity, sticky LINE order bar that copies the full order
+("สนใจ OC-04-27 04 ที่รองแก้ว × 2 ชิ้น · โทนเข้ม · รวม 98 บาท"), details table, uses, the 3D simulator opened on the
+product's pattern without a face, how to order, other products. Top band cotton so leather reads true, then mom ->
+eldest -> middle -> youngest.
+
+
 Round 3, the owner chose direction 2 (ไม่ซ้ำสักชิ้น): https://claude.ai/artifact/3pQRoxfcDQsWK9rkak55gq (`template-v3.html`,
 `python3 build.py v3`). Sections run through the family colours in family order (dad, mom, eldest, middle, youngest,
 so indigo is back), each chapter labelled with whose colour it wears; on patterned bands the text sits on a solid plate
