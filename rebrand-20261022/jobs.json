@@ -1,0 +1,86 @@
+[
+ {
+  "name": "card-OC-01-22",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "card-OC-01-01",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "card-OC-02-24",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "card-OC-03-26",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "card-OC-04-27",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "card-OC-05-28",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "card-OC-MX-29",
+  "kind": "png",
+  "w": 1080,
+  "h": 1350
+ },
+ {
+  "name": "profile-1080",
+  "kind": "png",
+  "w": 1080,
+  "h": 1080
+ },
+ {
+  "name": "fb-cover-1640x624",
+  "kind": "png",
+  "w": 1640,
+  "h": 624
+ },
+ {
+  "name": "shopee-banner-1200x600",
+  "kind": "png",
+  "w": 1200,
+  "h": 600
+ },
+ {
+  "name": "tags-55x89",
+  "kind": "pdf",
+  "w": null,
+  "h": null
+ },
+ {
+  "name": "insert-cards-89x55",
+  "kind": "pdf",
+  "w": null,
+  "h": null
+ },
+ {
+  "name": "stickers-34mm",
+  "kind": "pdf",
+  "w": null,
+  "h": null
+ },
+ {
+  "name": "booth-sign-A4",
+  "kind": "pdf-land",
+  "w": null,
+  "h": null
+ }
+]

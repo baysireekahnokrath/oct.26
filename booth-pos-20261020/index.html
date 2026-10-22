@@ -6,20 +6,20 @@
 <style>
 /* Layout: a till for small hands — big product tiles on top, one sticky "คิดเงิน" bar, then full-screen steps for paying */
 :root{
-  --paper:#FFF6EC; --card:#FFFFFF; --ink:#1C1B22; --muted:#6E6660; --line:#EADFD2;
-  --cobalt:#2449D8; --tomato:#E5492A; --sun:#FFC23C; --mint:#1FA586; --pink:#FF8AC4;
-  --ok:#14805F; --okbg:#DDF5EC; --warnbg:#FFF0D1; --chip:#F3E9DD;
+  --paper:#F4F0E8; --card:#FBF8F2; --ink:#2A2725; --muted:#6E6A64; --line:#DCD4C7; --hide:#B07A4A;
+  --cobalt:#2E4A7D; --tomato:#A9442B; --sun:#E9A825; --mint:#5E7A3A; --pink:#B9A3D6;
+  --ok:#4E6A2F; --okbg:#E3EAD8; --warnbg:#F6EBD2; --chip:#ECE5D9;
   --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
   --body:"IBM Plex Sans Thai",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#17161C; --card:#221F28; --ink:#F4EEE7; --muted:#ABA198; --line:#36313D;
-  --cobalt:#7D96FF; --tomato:#FF7A5C; --sun:#FFC948; --mint:#45D3B0; --pink:#FF9FCF;
-  --ok:#5FE0B4; --okbg:#173A30; --warnbg:#3A2F17; --chip:#2E2A34; color-scheme:dark}}
+  --paper:#1E1C1A; --card:#292623; --ink:#F4F0E8; --muted:#ABA49B; --line:#3A3632; --hide:#C38E5C;
+  --cobalt:#8CA6D6; --tomato:#D9765E; --sun:#F0BF4F; --mint:#9DB777; --pink:#CDBDE6;
+  --ok:#9DB777; --okbg:#28331E; --warnbg:#3A3220; --chip:#34302C; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#17161C; --card:#221F28; --ink:#F4EEE7; --muted:#ABA198; --line:#36313D;
-  --cobalt:#7D96FF; --tomato:#FF7A5C; --sun:#FFC948; --mint:#45D3B0; --pink:#FF9FCF;
-  --ok:#5FE0B4; --okbg:#173A30; --warnbg:#3A2F17; --chip:#2E2A34; color-scheme:dark}
+  --paper:#1E1C1A; --card:#292623; --ink:#F4F0E8; --muted:#ABA49B; --line:#3A3632; --hide:#C38E5C;
+  --cobalt:#8CA6D6; --tomato:#D9765E; --sun:#F0BF4F; --mint:#9DB777; --pink:#CDBDE6;
+  --ok:#9DB777; --okbg:#28331E; --warnbg:#3A3220; --chip:#34302C; color-scheme:dark}
 html,body{height:100%}
 body{background:var(--paper);color:var(--ink);font:17px/1.5 var(--body);-webkit-tap-highlight-color:transparent}
 .app{max-width:640px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:12px 0}
@@ -29,7 +29,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 button:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
 button:disabled{opacity:.45;cursor:default}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px}
-.brand{font-family:var(--display);font-weight:700;font-size:1.25rem;letter-spacing:.02em}
+.brand{display:flex;line-height:0}.brand svg{box-shadow:0 0 0 1px var(--line)}
 .tabs{display:flex;background:var(--chip);border-radius:99px;padding:4px}
 .tabs button{padding:8px 18px;border-radius:99px;font-weight:600}
 .tabs button[aria-pressed="true"]{background:var(--card);box-shadow:0 1px 3px rgba(0,0,0,.12)}
@@ -114,29 +114,27 @@ td{padding:6px 0;border-bottom:1px solid var(--line)} td.r{text-align:right}
 const SHEET_ID = "1xYmJ75Lbq4HhlR3ubhO6C2Uu82prpjb2HFFlB9U5nQg";
 // Booth catalogue: the SKUs ticked "ขายงานนี้" in the Google Sheet, with their draft prices.
 const PRODUCTS = [
-  {sku:"OC-01-22", nick:"หมีรองแก้ว",   name:"ที่รองแก้วหมี",          price:59,  icon:"bear",   color:"--tomato"},
-  {sku:"OC-01-01", nick:"หมีเก็บสาย",   name:"ที่เก็บสายชาร์จหมี",      price:59,  icon:"bearcord",color:"--pink"},
-  {sku:"OC-02-24", nick:"กังหัน",       name:"ที่รองแก้วกังหัน",        price:49,  icon:"wheel",  color:"--sun"},
-  {sku:"OC-04-27", nick:"สี่เหลี่ยม",   name:"ที่รองแก้วสี่เหลี่ยม",     price:49,  icon:"square", color:"--cobalt"},
-  {sku:"OC-05-28", nick:"วงกลม",       name:"ที่รองแก้ววงกลม",         price:49,  icon:"circle", color:"--mint"},
-  {sku:"OC-03-26", nick:"ป้ายของขวัญ",  name:"ป้ายห้อยของขวัญ",         price:39,  icon:"tag",    color:"--pink"},
-  {sku:"OC-MX-29", nick:"ชุด 4 ลาย",    name:"ชุดที่รองแก้ว 4 ลาย",     price:179, icon:"set",    color:"--tomato"},
-  {sku:"OC-06-30", nick:"กล่องต่อเอง",  name:"ชุดต่อเองกล่องลูกบาศก์",  price:129, icon:"cube",   color:"--mint"},
+  {sku:"OC-01-22", nick:"01 ที่รองแก้ว",      name:"01 ที่รองแก้ว",                 price:59,  icon:"bear"},
+  {sku:"OC-01-01", nick:"01 ที่เก็บสายชาร์จ",  name:"01 ที่เก็บสายชาร์จ",            price:59,  icon:"bearcord"},
+  {sku:"OC-02-24", nick:"02 ที่รองแก้ว",      name:"02 ที่รองแก้ว",                 price:49,  icon:"wheel"},
+  {sku:"OC-04-27", nick:"04 ที่รองแก้ว",      name:"04 ที่รองแก้ว",                 price:49,  icon:"square"},
+  {sku:"OC-05-28", nick:"05 ที่รองแก้ว",      name:"05 ที่รองแก้ว",                 price:49,  icon:"circle"},
+  {sku:"OC-03-26", nick:"03 ป้ายห้อยของขวัญ",  name:"03 ป้ายห้อยของขวัญ",            price:39,  icon:"tag"},
+  {sku:"OC-MX-29", nick:"ชุดที่รองแก้ว 4 แบบ", name:"ชุดที่รองแก้ว 01 · 02 · 04 · 05", price:179, icon:"set"},
 ];
 const BY_SKU = Object.fromEntries(PRODUCTS.map(p => [p.sku, p]));
 const PAY_LABEL = {cash:"เงินสด", transfer:"โอน / พร้อมเพย์"};
 
-function icon(kind, color){
-  const c = `var(${color})`, k = "var(--ink)";
+function icon(kind){
+  const c = "var(--hide)", k = "var(--ink)";
   const shapes = {
-    bear: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/><circle cx="31" cy="40" r="3.5" fill="${k}"/><circle cx="49" cy="40" r="3.5" fill="${k}"/><ellipse cx="40" cy="52" rx="7" ry="5" fill="${k}"/>`,
-    bearcord: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/><circle cx="31" cy="40" r="3.5" fill="${k}"/><circle cx="49" cy="40" r="3.5" fill="${k}"/><path d="M6 66 C24 54 56 78 74 62" stroke="${k}" stroke-width="4" fill="none" stroke-linecap="round"/>`,
-    wheel: [0,90,180,270].map(a => `<path transform="rotate(${a} 40 40)" d="M40 40 L40 8 Q62 14 40 40Z" fill="${c}" stroke="${k}" stroke-width="2"/>`).join("") + `<circle cx="40" cy="40" r="5" fill="${k}"/>`,
-    square: `<rect x="10" y="10" width="60" height="60" rx="16" fill="${c}"/><rect x="22" y="22" width="36" height="36" rx="8" fill="none" stroke="var(--card)" stroke-width="3" stroke-dasharray="5 5"/>`,
-    circle: `<circle cx="40" cy="40" r="31" fill="${c}"/><circle cx="40" cy="40" r="19" fill="none" stroke="var(--card)" stroke-width="3" stroke-dasharray="5 5"/>`,
-    tag: `<path d="M14 26 L34 8 H66 V72 H34 L14 54Z" fill="${c}"/><circle cx="28" cy="40" r="5" fill="var(--card)"/><path d="M28 40 C10 40 6 60 18 70" stroke="${k}" stroke-width="3" fill="none"/>`,
-    set: `<circle cx="24" cy="24" r="15" fill="var(--tomato)"/><rect x="42" y="9" width="30" height="30" rx="9" fill="var(--cobalt)"/><circle cx="24" cy="56" r="15" fill="var(--mint)"/><circle cx="57" cy="56" r="15" fill="var(--sun)"/>`,
-    cube: `<path d="M40 8 L70 24 L40 40 L10 24Z" fill="${c}"/><path d="M10 24 L40 40 V72 L10 56Z" fill="var(--sun)"/><path d="M70 24 L40 40 V72 L70 56Z" fill="var(--cobalt)"/>`,
+    bear: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/>`,
+    bearcord: `<circle cx="22" cy="22" r="12" fill="${c}"/><circle cx="58" cy="22" r="12" fill="${c}"/><circle cx="40" cy="44" r="26" fill="${c}"/><path d="M6 66 C24 54 56 78 74 62" stroke="${k}" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+    wheel: [0,90,180,270].map(a => `<path transform="rotate(${a} 40 40)" d="M40 40 L40 8 Q62 14 40 40Z" fill="${c}"/>`).join(""),
+    square: `<rect x="10" y="10" width="60" height="60" rx="16" fill="${c}"/>`,
+    circle: `<circle cx="40" cy="40" r="31" fill="${c}"/>`,
+    tag: `<path d="M30 10h20v20h20v20H50v20H30V50H10V30h20z" fill="${c}"/><circle cx="40" cy="20" r="4" fill="var(--card)"/>`,
+    set: `<circle cx="24" cy="24" r="15" fill="${c}"/><rect x="42" y="9" width="30" height="30" rx="9" fill="${c}"/><circle cx="24" cy="56" r="15" fill="${c}"/><circle cx="57" cy="56" r="15" fill="${c}"/>`,
   };
   return `<svg viewBox="0 0 80 80" aria-hidden="true">${shapes[kind]}</svg>`;
 }
@@ -286,7 +284,7 @@ async function savePromptPay(){
 function render(){
   const app = document.getElementById("app");
   const focusId = document.activeElement && document.activeElement.id;
-  const head = `<div class="top"><span class="brand">OCT. 26</span>
+  const head = `<div class="top"><span class="brand"><svg class="lg" role="img" aria-label="OCT. 26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.14 461.14" width="40" height="40"><title>OCT. 26</title><rect width="461.14" height="461.14" fill="#F4F0E8"/><g transform="translate(61.80,199.67)"><circle cx="52.13" cy="-50.00" r="44.83" fill="none" stroke="#2A2725" stroke-width="14.59"/><path d="M204.03,-19.72 A44.83,44.83 0 1 1 204.03,-80.28" fill="none" stroke="#2A2725" stroke-width="14.59"/><rect x="224.00" y="-100.00" width="80.90" height="14.59" fill="#2A2725"/><rect x="257.16" y="-100.00" width="14.59" height="100.00" fill="#2A2725"/><circle cx="325.73" cy="-11.80" r="11.80" fill="#5E7A3A"/></g><g transform="translate(61.80,361.47)"><clipPath id="squarelightb0"><rect x="0.00" y="-102.13" width="61.80" height="102.13"/></clipPath><g clip-path="url(#squarelightb0)"><path d="M9.51,-61.25 A23.61,23.61 0 1 1 49.50,-56.69 L4.38,-10.21" fill="none" stroke="#2A2725" stroke-width="14.59"/><rect x="0.00" y="-14.59" width="61.80" height="14.59" fill="#2A2725"/></g><clipPath id="squarelightb1"><rect x="61.80" y="-100.00" width="90.98" height="114.59"/></clipPath><g clip-path="url(#squarelightb1)"><circle cx="107.29" cy="-28.77" r="23.61" fill="none" stroke="#2A2725" stroke-width="14.59"/><line x1="115.95" y1="-114.59" x2="85.35" y2="-37.48" stroke="#2A2725" stroke-width="14.59"/></g></g></svg></span>
     <div class="tabs" role="group" aria-label="หน้า">
       <button id="t-sell" aria-pressed="${S.view !== "today"}" data-act="tab" data-v="sell">ขาย</button>
       <button id="t-today" aria-pressed="${S.view === "today"}" data-act="tab" data-v="today">วันนี้</button>
@@ -307,8 +305,8 @@ function viewSell(){
   const tiles = PRODUCTS.map(p => {
     const q = S.cart[p.sku]?.qty || 0;
     return `<button class="tile${q ? " on" : ""}" id="p-${p.sku}" data-act="add" data-sku="${p.sku}" aria-label="${esc(p.name)} ${p.price} บาท${q ? `, เลือกแล้ว ${q}` : ""}">
-      ${q ? `<span class="badge num">${q}</span>` : ""}${icon(p.icon, p.color)}
-      <span class="nick">${esc(p.nick)}</span><span class="full">${esc(p.name)}</span><span class="price num">${p.price} บาท</span></button>`;
+      ${q ? `<span class="badge num">${q}</span>` : ""}${icon(p.icon)}
+      <span class="nick">${esc(p.nick)}</span>${p.name !== p.nick ? `<span class="full">${esc(p.name)}</span>` : ""}<span class="price num">${p.price} บาท</span></button>`;
   }).join("");
   const n = count();
   return `<div class="grid">${tiles}</div>
