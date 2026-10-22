@@ -1,0 +1,185 @@
+<title>OCT. 26 UX ที่ควรเป็น</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column for a discussion paper; OCT. 26 Soi Candy tokens, Fibonacci spacing. Wireframes in plain greys so they read as sketches, not designs. */
+:root{--bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;--cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--chip:#FBE9DA;
+  --wf:#E9E4DE;--wf2:#CFC7BE;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;--display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--chip:#2A2833;--wf:#2C2A35;--wf2:#45424F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--chip:#2A2833;--wf:#2C2A35;--wf2:#45424F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:var(--s5) var(--s6)}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:var(--s6)}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,7vw,42px)}h2{font-size:25px}h3{font-size:19px}
+p{margin:0}a{color:var(--cobalt)}
+section{display:flex;flex-direction:column;gap:var(--s3)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:12.6px;letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:19px;color:var(--muted)}
+.cap{font-size:14px;color:var(--muted)}
+.big3{display:flex;flex-direction:column;gap:var(--s2);margin:0;padding:0;list-style:none;counter-reset:b}
+.big3 li{counter-increment:b;display:grid;grid-template-columns:34px minmax(0,1fr);gap:var(--s3);background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3) var(--s4)}
+.big3 li::before{content:counter(b);font-family:var(--logo);font-weight:500;font-size:26px;line-height:1.2;color:var(--tomato)}
+.big3 b{font-family:var(--display);font-weight:600}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--s3)}
+.facts div{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3) var(--s4);display:flex;flex-direction:column;gap:2px}
+.facts b{font-family:var(--logo);font-weight:500;font-size:30px;line-height:1.2;font-variant-numeric:tabular-nums}
+.facts span{font-size:14px}.facts small{font-size:12px;color:var(--muted)}
+.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2)}
+.shots figure{margin:0;display:flex;flex-direction:column;gap:var(--s1);min-width:0}
+.shots img{width:100%;height:auto;display:block;border-radius:var(--s2);border:1px solid var(--line)}
+figcaption{font-size:13px;color:var(--muted);line-height:1.4}
+.issues{display:flex;flex-direction:column;gap:var(--s2)}
+.issue{border-left:4px solid var(--tomato);background:var(--paper);border-radius:0 var(--s3) var(--s3) 0;padding:var(--s3) var(--s4);display:flex;flex-direction:column;gap:var(--s1)}
+.issue.mid{border-left-color:var(--sun)}
+.issue h3{font-size:17px}
+.issue p{font-size:15px}
+.sev{font-family:var(--display);font-size:12px;padding:2px 8px;border-radius:99px;background:var(--tomato);color:#FFFFFF;align-self:flex-start}
+.mid .sev{background:var(--sun);color:#1C1B22}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s3)}
+.rules div{background:var(--paper);border:1px solid var(--line);border-radius:var(--s3);padding:var(--s3) var(--s4);display:flex;flex-direction:column;gap:var(--s1)}
+.rules b{font-family:var(--display);font-weight:600;font-size:17px}
+.rules p{font-size:15px;color:var(--muted)}
+.wfs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4)}
+.wfs figure{margin:0;display:flex;flex-direction:column;gap:var(--s2);min-width:0}
+.wfs svg{width:100%;height:auto;display:block}
+.flow{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center;font-family:var(--display);font-size:15px}
+.flow span{background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:var(--s1) var(--s3)}
+.flow i{font-style:normal;color:var(--muted)}
+.ask{display:flex;flex-direction:column;gap:var(--s2);margin:0;padding-left:1.3em}
+.ask li{padding-left:var(--s1)}
+.ask b{font-family:var(--display);font-weight:600}
+.src{font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:4px;margin:0;padding-left:1.2em}
+.src a{overflow-wrap:anywhere}
+@media (max-width:480px){.shots{grid-template-columns:repeat(3,minmax(0,1fr))}.wfs{gap:var(--s3)}}
+</style>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:var(--s3)">
+<span class="eyebrow">OCT. 26 · เว็บลูกค้า · 21 ต.ค. 2569</span>
+<h1>UX ที่ควรเป็นของ oct26brand.com</h1>
+<p class="lead">ศึกษาแนวทางเว็บขายของบนมือถือ พฤติกรรมคนไทยซื้อของออนไลน์ และไล่ดูเว็บเราทีละหน้า เพื่อคุยกันก่อนทำ mock ยังไม่ได้แก้เว็บจริง</p>
+</header>
+
+<section><div class="issue" style="border-left-color:var(--cobalt)"><span class="sev" style="background:var(--cobalt)">อัปเดตตามเอกสารสถานะล่าสุด</span>
+<h3>ข้อมูลใหม่ที่เปลี่ยนข้อเสนอในหน้านี้</h3>
+<p>งานนี้ขายแค่ <b>7 SKU ชิ้นเดียว</b> (01 22 24 26 27 28 29) · <b>ห้ามใช้ 06</b> · <b>การต่อชิ้นยังไม่ผ่าน</b> ห้ามโฆษณาว่าต่อเองได้ไม่ต้องเย็บ · ยังไม่มีรูปสินค้าจริง · กำลังร่างแบรนด์ทางเลือก งานเว็บควรรอ</p>
+<p>เว็บจริงตอนนี้ยังโชว์ 30 ชิ้น รวมของจาก 06 ของที่ต้องต่อชิ้น คำว่า “ไม่ต้องเย็บ” และหน้าต่อลาย ไม่ตรงกับสถานะ ซึ่งเป็นเรื่องที่ควรแก้ก่อนเรื่องอื่น เพราะ QR ที่บูธพาคนมาที่เว็บนี้ ยังไม่ได้แก้ รอพ่อเบสั่ง</p>
+<p>เพราะเหลือ 7 ชิ้น การแบ่งหมวดตามโอกาสและช่วงราคาจึงยังไม่จำเป็น หน้าแรกโชว์ 7 ชิ้นได้ในจอเดียว หลักเรื่องรูปจริง ปุ่มแชทติดจอ LINE และบอกตรงเรื่องของยังใช้ได้เหมือนเดิม</p></div></section>
+
+<section><span class="eyebrow">สรุปก่อน</span><h2>สามเรื่องที่สำคัญที่สุด</h2>
+<ol class="big3">
+<li><div><b>ลูกค้าต้องเห็นหนังจริง</b> รูปสินค้าตอนนี้เป็นโปสเตอร์วิธีต่อ ย่อแล้วอ่านไม่ออก และไม่เห็นผิวหนัง ของแฮนด์เมดขายด้วยรูปจริง มือคนทำ และเรื่องของบ้าน</div></li>
+<li><div><b>เว็บเราคือแคตตาล็อกที่พาไปแชท ไม่ใช่ร้านที่มีตะกร้า</b> ทุกหน้าควรมีปุ่มสั่งทางแชทติดจอ พร้อมข้อความที่เขียนไว้ให้แล้ว และควรมี LINE เพราะคนไทยใช้ LINE มากกว่าไอจี</div></li>
+<li><div><b>จัดสินค้าตามที่ลูกค้าคิด ไม่ใช่ตามคอลเลกชัน</b> คนเข้ามาคิดว่า “ของขวัญ ไม่เกิน 100 บาท” หรือ “ของชำร่วยงานแต่ง” ไม่ได้คิดว่า SOI. 02 หรือ Love</div></li>
+</ol></section>
+
+<section><span class="eyebrow">ลูกค้าเรา</span><h2>คนไทยซื้อของแบบนี้ยังไง</h2>
+<div class="facts">
+<div><b>82.6%</b><span>ของคนใช้เน็ตไทยใช้ LINE (ต.ค. 2568)</span><small>Ken Research</small></div>
+<div><b>69%+</b><span>เคยซื้อของจากร้านบน Facebook, LINE, IG</span><small>ศูนย์วิจัยกสิกรไทย</small></div>
+<div><b>66%</b><span>แนะนำ Shopee ให้คนอื่นซื้อ อันดับหนึ่ง</span><small>YouGov</small></div>
+<div><b>~44%</b><span>จ่ายด้วยโอน/พร้อมเพย์ มากที่สุด</span><small>คู่มือผู้ให้บริการชำระเงิน</small></div>
+</div>
+<p class="cap">ตัวเลขเหล่านี้ส่วนใหญ่มาจากแหล่งรองหรือบทสรุปรายงาน ใช้ดูทิศทาง ไม่ใช่ตัวเลขแม่นยำ</p>
+<p>ลูกค้าของเราเข้าเว็บจากสามทาง: สแกน QR ที่บูธ, กดลิงก์จากไอจี/เฟซบุ๊ก, และค้นชื่อร้าน เกือบทั้งหมดเปิดบนมือถือ และไม่ได้มาซื้อทันที มาดูว่ามีอะไร ราคาเท่าไร แล้วทักแชท ทางที่ควรลื่นที่สุดคือ</p>
+<div class="flow"><span>เห็นของชอบ</span><i>→</i><span>กดดูรูปจริง ราคา</span><i>→</i><span>กดสั่งทางแชท</span><i>→</i><span>ร้านยืนยันของ + พร้อมเพย์</span><i>→</i><span>ส่งของ / รับที่บูธ</span></div>
+<p class="cap">Baymard (2026): หน้าสินค้าบนมือถือที่ “พอใช้ได้” ขึ้นไปมีแค่ 38% ของเว็บที่ทดสอบ และข้อมูลที่ซ่อนไว้ในหน้าย่อยมักถูกมองข้าม หน้าสินค้าควรมีทุกอย่างที่ต้องใช้ตัดสินใจในหน้าเดียว</p></section>
+
+<section><span class="eyebrow">เว็บตอนนี้</span><h2>ไล่ดูบนมือถือ (กว้าง 390 px)</h2>
+<div class="shots">
+<figure><img src="now-home.jpg" alt="หน้าแรกตอนนี้: หัวข้อ ปุ่มดูสินค้า และภาพลายกังหัน" width="390" height="844"><figcaption>หน้าแรก: จอแรกเป็นลายกังหัน ยังไม่เห็นสินค้าหรือคน</figcaption></figure>
+<figure><img src="now-grid.jpg" alt="รายการสินค้าตอนนี้: โปสเตอร์ย่อ ชื่อ และราคา" width="390" height="844"><figcaption>รายการสินค้า: โปสเตอร์ย่ออ่านไม่ออก ชื่อและราคาซ้ำกับข้างใต้</figcaption></figure>
+<figure><img src="now-product.jpg" alt="หน้าสินค้าตอนนี้: โปสเตอร์ ชื่อ ราคา ปุ่มสั่งทางไอจี" width="390" height="844"><figcaption>หน้าสินค้า: รูปเดียวเป็นโปสเตอร์ ปุ่มสั่งเลื่อนหายเมื่อเลื่อนจอ</figcaption></figure>
+</div>
+<p>ส่วนที่ดีอยู่แล้ว: โหลดเร็ว ตัวหนังสือไทยอ่านง่าย สีแบรนด์ชัด ราคาเห็นทันที มีข้อความสั่งซื้อให้คัดลอก ประกาศออกบูธเด่น ส่วนที่ควรแก้</p>
+<div class="issues">
+<div class="issue"><span class="sev">สำคัญมาก</span><h3>ไม่มีรูปสินค้าจริง</h3><p>ทั้ง 30 ชิ้นใช้โปสเตอร์วิธีต่อเป็นรูปหลัก ย่อเหลือ 170 px แล้วอ่านไม่ออก ลูกค้าไม่เห็นผิว สี และขนาดจริง ของแฮนด์เมดต้องพิสูจน์คุณภาพด้วยรูป</p></div>
+<div class="issue"><span class="sev">สำคัญมาก</span><h3>สั่งซื้อได้ทางเดียว และปุ่มไม่ติดจอ</h3><p>มีแค่ไอจี ไม่มี LINE ไม่มีลิงก์ Shopee ในหน้าสินค้า ปุ่มสั่งอยู่กลางหน้า เลื่อนลงอ่านวิธีต่อแล้วต้องเลื่อนกลับขึ้นมา และการคัดลอกข้อความแยกจากปุ่ม ต้องทำสองขั้น</p></div>
+<div class="issue"><span class="sev">สำคัญมาก</span><h3>หน้าแรกยาว 7,700 px สินค้า 30 ชิ้นเรียงยาวชุดเดียว</h3><p>กรองได้แค่ตามคอลเลกชัน ซึ่งลูกค้าไม่รู้จัก ไม่มีหมวดตามโอกาส (ของขวัญ งานแต่ง ของเด็ก ใช้ในบ้าน) ไม่มีช่วงราคา ทั้งที่ 14 ชิ้นราคาต่ำกว่า 100 บาท</p></div>
+<div class="issue mid"><span class="sev">ควรแก้</span><h3>จอแรกไม่บอกว่าขายอะไร ใครทำ</h3><p>ภาพใหญ่ในจอแรกเป็นลายกังหันจากหน้าต่อลาย ยังไม่เห็นสินค้า ไม่เห็นมือหรือหน้าคนในบ้าน เรื่อง “ห้าคนในบ้านช่วยกันทำ” ซึ่งเป็นจุดขายที่สุด อยู่ลึกลงไป</p></div>
+<div class="issue"><span class="sev">สำคัญมาก</span><h3>โชว์ของที่ยังขายไม่ได้</h3><p>ขายได้จริง 7 จาก 30 ชิ้น อีก 23 ชิ้นใช้ 06 หรือต้องต่อชิ้น ซึ่งยังไม่ผ่านการทดสอบ ลูกค้าทักมาแล้วได้คำตอบว่าไม่มี จะเสียความรู้สึก และเว็บยังเขียนว่าไม่ต้องเย็บ</p></div>
+<div class="issue mid"><span class="sev">ควรแก้</span><h3>ไม่ตอบคำถามก่อนซื้อ</h3><p>ส่งยังไง ค่าส่งเท่าไร จ่ายยังไง รับที่บูธได้ไหม สั่งจำนวนมากได้ไหม ต้องทักถามทุกครั้ง ส่วนรีวิวหรือรูปลูกค้าจริง ยังไม่มีเลย</p></div>
+<div class="issue mid"><span class="sev">ควรแก้</span><h3>ปุ่มเล็ก และเมนูให้ “ต่อลาย” เด่นเท่า “สินค้า”</h3><p>ลิงก์ก่อนหน้า/ถัดไปในหน้าสินค้าสูงไม่ถึง 44 px กดยากบนมือถือ หน้าต่อลายสนุก แต่เป็นของเล่น ไม่ควรเป็นเมนูที่สองข้างปุ่มดูสินค้า</p></div>
+</div></section>
+
+<section><span class="eyebrow">หลักคิด</span><h2>UX ที่ควรเป็น หกข้อ</h2>
+<div class="rules">
+<div><b>รูปจริงก่อนกราฟิก</b><p>รูปแรกของทุกสินค้าเป็นรูปถ่ายจริงบนพื้นเรียบ รูปที่สองเห็นขนาดเทียบมือหรือของใช้ โปสเตอร์วิธีต่อไว้เป็นรูปท้าย</p></div>
+<div><b>ปุ่มสั่งติดจอเสมอ</b><p>แถบล่างในหน้าสินค้า: ราคา + “สั่งทาง LINE” + “สั่งทาง IG” กดแล้วเปิดแชทพร้อมข้อความชื่อสินค้าและราคา</p></div>
+<div><b>เลือกตามโอกาสและงบ</b><p>หมวด: ของขวัญ · ใช้ในบ้าน · ของเด็ก · งานแต่ง/ของชำร่วย · ต่อเองได้ และช่วงราคา ต่ำกว่า 100 / 100–199 / 200 ขึ้นไป</p></div>
+<div><b>คนในบ้านคือแบรนด์</b><p>จอแรกเห็นมือคนในบ้านกับของจริง หนึ่งประโยคบอกว่าเป็นเศษหนังแท้ที่ทำกันเองทั้งบ้าน ส่วนหน้าลูกไม่ต้องโชว์ก็ได้ ใช้มือแทน</p></div>
+<div><b>บอกตรงเรื่องของและการส่ง</b><p>ป้ายบนสินค้า: พร้อมส่ง / สั่งทำ 3–5 วัน / หมดชั่วคราว และกล่องสั้น ๆ “สั่งยังไง” สามขั้น อยู่ทุกหน้า</p></div>
+<div><b>หน้าแรกสั้น พาไปที่ใช่</b><p>ไม่ต้องเรียงครบ 30 ชิ้นในหน้าแรก โชว์ขายดี 8 ชิ้น (ราวหมีห้าตัว ที่ห้อยกระเป๋าหมี …) แล้วพาเข้าหมวด</p></div>
+</div></section>
+
+<section><span class="eyebrow">โครงหน้า</span><h2>ร่างคร่าว ๆ ไว้คุย ยังไม่ใช่ mock</h2>
+<div class="wfs">
+<figure><svg viewBox="0 0 200 420" role="img" aria-label="ร่างหน้าแรก: เมนู รูปมือคนทำกับสินค้า ปุ่มสองปุ่ม แถบบูธ หมวดตามโอกาส ขายดี วิธีสั่ง เรื่องของเรา">
+<g font-family="Anuphan, IBM Plex Sans Thai, sans-serif" font-size="9" fill="var(--ink)">
+<rect x="1" y="1" width="198" height="418" rx="16" fill="var(--paper)" stroke="var(--wf2)"/>
+<rect x="12" y="12" width="52" height="10" rx="3" fill="var(--wf2)"/><rect x="150" y="10" width="38" height="14" rx="7" fill="var(--wf)"/><text x="169" y="20" text-anchor="middle" font-size="7.5">สินค้า</text>
+<rect x="12" y="32" width="176" height="104" rx="8" fill="var(--wf)"/><text x="100" y="80" text-anchor="middle" fill="var(--muted)">รูปมือคนในบ้าน</text><text x="100" y="93" text-anchor="middle" fill="var(--muted)">กับของจริง</text>
+<rect x="12" y="142" width="140" height="9" rx="2" fill="var(--wf2)"/><rect x="12" y="155" width="110" height="7" rx="2" fill="var(--wf)"/>
+<rect x="12" y="168" width="84" height="20" rx="10" fill="var(--tomato)"/><text x="54" y="181" text-anchor="middle" fill="#FFFFFF" font-size="8">ดูของขวัญ</text>
+<rect x="102" y="168" width="86" height="20" rx="10" fill="var(--wf)"/><text x="145" y="181" text-anchor="middle" font-size="8">ทัก LINE</text>
+<rect x="12" y="196" width="176" height="22" rx="6" fill="var(--cobalt)"/><text x="100" y="210" text-anchor="middle" fill="#FFFFFF" font-size="8">เจอกันที่บ้านและสวนแฟร์ 23–25 ต.ค.</text>
+<g font-size="7.5"><rect x="12" y="226" width="54" height="34" rx="6" fill="var(--wf)"/><text x="39" y="246" text-anchor="middle">ของขวัญ</text>
+<rect x="73" y="226" width="54" height="34" rx="6" fill="var(--wf)"/><text x="100" y="246" text-anchor="middle">ใช้ในบ้าน</text>
+<rect x="134" y="226" width="54" height="34" rx="6" fill="var(--wf)"/><text x="161" y="246" text-anchor="middle">งานแต่ง</text></g>
+<g font-size="7"><rect x="12" y="266" width="54" height="14" rx="7" fill="var(--chip)"/><text x="39" y="276" text-anchor="middle">&lt; 100 บาท</text>
+<rect x="73" y="266" width="54" height="14" rx="7" fill="var(--chip)"/><text x="100" y="276" text-anchor="middle">100–199</text>
+<rect x="134" y="266" width="54" height="14" rx="7" fill="var(--chip)"/><text x="161" y="276" text-anchor="middle">200 ขึ้นไป</text></g>
+<text x="12" y="296" font-size="8.5">ขายดี</text>
+<g><rect x="12" y="302" width="84" height="60" rx="6" fill="var(--wf)"/><rect x="104" y="302" width="84" height="60" rx="6" fill="var(--wf)"/>
+<text x="54" y="336" text-anchor="middle" fill="var(--muted)" font-size="7.5">รูปจริง</text><text x="146" y="336" text-anchor="middle" fill="var(--muted)" font-size="7.5">รูปจริง</text></g>
+<rect x="12" y="368" width="176" height="20" rx="6" fill="var(--chip)"/><text x="100" y="381" text-anchor="middle" font-size="7.5">สั่งยังไง: ทักแชท → ยืนยัน + พร้อมเพย์ → ส่ง</text>
+<rect x="12" y="394" width="176" height="16" rx="6" fill="var(--wf)"/><text x="100" y="405" text-anchor="middle" font-size="7.5">เรื่องของเรา · 26 ตุลาคม</text>
+</g></svg><figcaption>หน้าแรก: จอแรกเห็นคนกับของจริง แล้วพาเข้าหมวดตามโอกาสและงบ</figcaption></figure>
+<figure><svg viewBox="0 0 200 420" role="img" aria-label="ร่างหน้าสินค้า: รูปจริงเลื่อนได้หลายรูป ชื่อ ราคา ป้ายพร้อมส่ง รายละเอียด วิธีต่อ สินค้าที่คล้ายกัน และแถบสั่งซื้อติดล่างจอ">
+<g font-family="Anuphan, IBM Plex Sans Thai, sans-serif" font-size="9" fill="var(--ink)">
+<rect x="1" y="1" width="198" height="418" rx="16" fill="var(--paper)" stroke="var(--wf2)"/>
+<rect x="12" y="12" width="52" height="10" rx="3" fill="var(--wf2)"/>
+<rect x="12" y="30" width="176" height="150" rx="8" fill="var(--wf)"/><text x="100" y="100" text-anchor="middle" fill="var(--muted)">รูปจริง 1 / 4</text><text x="100" y="113" text-anchor="middle" fill="var(--muted)" font-size="7.5">ปัดดูรูปเทียบขนาด · วิธีต่อ</text>
+<g fill="var(--wf2)"><circle cx="88" cy="172" r="2.5"/><circle cx="96" cy="172" r="2.5" fill="var(--ink)"/><circle cx="104" cy="172" r="2.5"/><circle cx="112" cy="172" r="2.5"/></g>
+<rect x="12" y="188" width="44" height="12" rx="6" fill="var(--mint)"/><text x="34" y="197" text-anchor="middle" font-size="7" fill="#1C1B22">พร้อมส่ง</text>
+<rect x="12" y="206" width="120" height="10" rx="2" fill="var(--wf2)"/><rect x="12" y="221" width="150" height="7" rx="2" fill="var(--wf)"/>
+<text x="12" y="248" font-size="16" fill="var(--tomato)" font-family="Jost, sans-serif">349 บาท</text>
+<rect x="12" y="256" width="176" height="46" rx="6" fill="var(--wf)"/><text x="100" y="282" text-anchor="middle" fill="var(--muted)" font-size="7.5">ขนาด · ชิ้นหนัง · วัสดุ · ดูแล</text>
+<rect x="12" y="308" width="176" height="30" rx="6" fill="var(--chip)"/><text x="100" y="326" text-anchor="middle" font-size="7.5">ส่งยังไง · ค่าส่ง · รับที่บูธได้</text>
+<text x="12" y="352" font-size="8.5">ชิ้นอื่นในหมวดเดียวกัน</text>
+<rect x="12" y="357" width="54" height="22" rx="5" fill="var(--wf)"/><rect x="73" y="357" width="54" height="22" rx="5" fill="var(--wf)"/><rect x="134" y="357" width="54" height="22" rx="5" fill="var(--wf)"/>
+<rect x="1" y="386" width="198" height="33" fill="var(--ink)"/>
+<text x="14" y="406" font-size="10" fill="var(--bg)" font-family="Jost, sans-serif">349.-</text>
+<rect x="66" y="392" width="62" height="20" rx="10" fill="var(--mint)"/><text x="97" y="405" text-anchor="middle" font-size="7.5" fill="#1C1B22">สั่งทาง LINE</text>
+<rect x="134" y="392" width="56" height="20" rx="10" fill="var(--tomato)"/><text x="162" y="405" text-anchor="middle" font-size="7.5" fill="#FFFFFF">สั่งทาง IG</text>
+</g></svg><figcaption>หน้าสินค้า: รูปจริงหลายรูป ป้ายพร้อมส่ง และแถบสั่งซื้อติดล่างจอตลอด</figcaption></figure>
+</div>
+<p class="cap">หน้าต่อลายยังอยู่ ย้ายจากเมนูหลักไปเป็นส่วน “ลองต่อลายเล่น” ท้ายหน้าแรกและในหน้าสินค้าที่ใช้ชิ้นนั้น Web Builder จะเพิ่มช่อง หมวด สถานะของ และรูปจริงตามไปด้วย</p></section>
+
+<section><span class="eyebrow">ต้องตัดสินใจ</span><h2>คำถามถึงพ่อเบ ก่อนทำ mock</h2>
+<ol class="ask">
+<li><b>รูปจริง:</b> ถ่ายรูปสินค้าได้กี่ชิ้น เมื่อไร ถ้ายังไม่มี จะทำ mock ด้วยกรอบรูปจริงเปล่า ๆ ไว้ก่อน หรือใช้รูปชิ้นหนังจากไฟล์แม่พิมพ์แทนชั่วคราว</li>
+<li><b>LINE:</b> มี LINE OA ของร้านหรือยัง ถ้ามี ขอลิงก์ lin.ee หรือ @id</li>
+<li><b>Shopee:</b> ขอลิงก์ร้าน จะได้ใส่ปุ่ม “ซื้อใน Shopee” ให้คนที่อยากจ่ายผ่าน Shopee</li>
+<li><b>23 ชิ้นที่ยังขายไม่ได้:</b> ซ่อนจากเว็บไปก่อน (แนะนำ) หรือโชว์เป็น “เร็ว ๆ นี้” · หน้าต่อลาย ซ่อนไปก่อนจนกว่าข้อต่อจะผ่าน</li>
+<li><b>จังหวะ:</b> แก้เว็บตอนนี้ให้ตรง 7 SKU ก่อนบูธ 23 ต.ค. แล้วค่อยออกแบบใหม่หลังตัดสินใจแบรนด์ หรือรอแบรนด์ก่อนทั้งหมด</li>
+<li><b>การส่งและจ่ายเงิน:</b> ส่งด้วยอะไร ค่าส่งเท่าไร รับพร้อมเพย์ไหม จะได้เขียนกล่อง “สั่งยังไง”</li>
+<li><b>ลำดับ mock:</b> เริ่มหน้าสินค้าก่อน (ปิดการขายตรงนั้น) แล้วค่อยหน้าแรก หรือกลับกัน</li>
+</ol></section>
+
+<section><span class="eyebrow">แหล่งข้อมูล</span><h3>อ่านเพิ่ม</h3>
+<ul class="src">
+<li><a href="https://baymard.com/research-articles/current-state-ecommerce-product-page-ux" target="_blank" rel="noopener">Baymard: Current state of ecommerce product page UX</a></li>
+<li><a href="https://baymard.com/research-articles/mobile-ux-ecommerce" target="_blank" rel="noopener">Baymard: Mobile ecommerce UX</a></li>
+<li><a href="https://www.relevantaudience.com/digital-marketing-en/line-thailand-business-solutions-2026/" target="_blank" rel="noopener">LINE Thailand 2026 business stack (Relevant Audience)</a></li>
+<li><a href="https://www.kenresearch.com/industry-reports/thailand-social-commerce-market" target="_blank" rel="noopener">Ken Research: Thailand social commerce market</a></li>
+<li><a href="https://www.kasikornresearch.com/en/analysis/k-econ/business/Pages/33792.aspx" target="_blank" rel="noopener">ศูนย์วิจัยกสิกรไทย: ช่องทางซื้อของออนไลน์</a></li>
+<li><a href="https://yougov.com/articles/53250" target="_blank" rel="noopener">YouGov: แพลตฟอร์มที่คนไทยแนะนำ</a></li>
+<li><a href="https://ecommpay.com/blog/most-popular-payment-methods-thailand/" target="_blank" rel="noopener">วิธีจ่ายเงินที่คนไทยใช้ (Ecommpay)</a></li>
+<li><a href="https://www.limely.co.uk/blog/the-role-of-storytelling-in-ecommerce-ux" target="_blank" rel="noopener">Storytelling in ecommerce UX (Limely)</a></li>
+</ul></section>
+</div>

@@ -1,0 +1,574 @@
+<title>OCT. 26 Web Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Six directions, one content set. Brand Book v2 (22 Oct 2026): cotton ground, charcoal type, hide and teak for leather,
+   the five family colours only as small hidden details. One committed light look, like every printed piece. */
+:root{
+  --cotton:#F4F0E8;--paper:#FBF9F4;--charcoal:#2A2725;--muted:#6E6A64;--stone:#8C8A85;--line:#DCD4C7;
+  --hide:#B07A4A;--teak:#8B5E3C;--hide-l:#E6D6C1;--stone-l:#DEDAD2;
+  --dad:#A9442B;--mom:#5E7A3A;--beiya:#E9A825;--beana:#B9A3D6;--bene:#2E4A7D;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --th:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+  --latin:"Jost","IBM Plex Sans Thai",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cotton);color:var(--charcoal);font-family:var(--body);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s6);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--charcoal)}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--th);font-weight:500;line-height:1.25;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,9vw,58px)}h2{font-size:clamp(26px,6vw,38px)}h3{font-size:19px}
+p{margin:0}a{color:inherit}
+.full{margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.in{max-width:1080px;margin:0 auto}
+.eyebrow{font-family:var(--latin);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:18px;color:var(--muted);max-width:60ch}
+.cap{font-size:14px;color:var(--muted)}
+.latin{font-family:var(--latin)}
+.row{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.stack{display:flex;flex-direction:column;gap:var(--s3)}
+.sec{padding-block:var(--s7) 0;display:flex;flex-direction:column;gap:var(--s4)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:46px;padding:var(--s2) var(--s4);border-radius:0;
+  font-family:var(--th);font-size:15px;text-decoration:none;border:1px solid var(--charcoal);background:transparent;color:var(--charcoal);cursor:pointer}
+.btn.dark{background:var(--charcoal);color:var(--cotton)}
+.btn:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--bene);outline-offset:2px}
+button{font:inherit;color:inherit}
+.band{display:flex;height:6px;width:100%}.band span{flex:1}
+.lg{display:block;width:72px;height:auto}
+
+#view [id]{scroll-margin-top:120px}
+.sum{display:flex;flex-direction:column;gap:var(--s4);padding-block:var(--s5)}
+.sum table{border-collapse:collapse;width:100%;font-size:14px}.sum th,.sum td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.sum .tw{overflow-x:auto}
+/* switcher */
+.switch{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--charcoal);color:var(--cotton);padding-block:var(--s2)}
+.switch .in{display:flex;flex-direction:column;gap:6px}
+.switch .tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.switch a{flex:none;text-decoration:none;font-family:var(--th);font-size:14px;padding:6px 12px;border:1px solid #5A5550;color:var(--cotton);white-space:nowrap}
+.switch a[aria-current="page"]{background:var(--cotton);color:var(--charcoal);border-color:var(--cotton)}
+.switch .what{font-size:13px;color:#CFC8BD;display:flex;gap:var(--s3);flex-wrap:wrap;justify-content:space-between}
+.fit i{display:inline-block;width:8px;height:8px;margin-left:3px;background:#5A5550}.fit i.on{background:var(--beiya)}
+
+/* site header inside each mock */
+.mhead{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding-block:var(--s3)}
+.mhead nav{display:flex;gap:var(--s3);overflow-x:auto;scrollbar-width:none;font-family:var(--th);font-size:14px}
+.mhead nav a{text-decoration:none;flex:none}
+.mhead .lg{width:52px}
+
+/* parallax */
+.px{position:absolute;will-change:transform;pointer-events:none;filter:drop-shadow(0 10px 14px rgba(42,39,37,.22))}
+@media (prefers-reduced-motion:reduce){.px{will-change:auto}html{scroll-behavior:auto}}
+
+/* booth strip */
+.booth{border:1px solid var(--charcoal);padding:var(--s3) var(--s4);display:flex;flex-direction:column;gap:2px;font-size:15px}
+.booth b{font-family:var(--th);font-weight:500}
+
+/* simulator */
+.sim{display:grid;gap:var(--s4);grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.sim{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center}}
+.sim-stage{position:relative;aspect-ratio:1/1;max-width:100%;background:radial-gradient(60% 50% at 50% 58%,#E9E2D6 0%,var(--cotton) 70%);touch-action:pan-y;cursor:grab}
+.sim-stage canvas,.sim-stage svg{position:absolute;inset:0;width:100%;height:100%}
+.sim-stage .hint{position:absolute;left:var(--s3);bottom:var(--s3);font-size:12px;color:var(--muted);font-family:var(--latin);letter-spacing:.1em;text-transform:uppercase}
+.sim-ui{display:flex;flex-direction:column;gap:var(--s3)}
+.sim-ui .lbl{font-family:var(--latin);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.pchips{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.pchips button{border:1px solid var(--line);background:var(--paper);padding:6px 2px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;min-height:56px}
+.pchips button svg{width:30px;height:30px}
+.pchips button span{font-family:var(--latin);font-size:13px}
+.pchips button[aria-pressed="true"]{border-color:var(--charcoal);background:#fff}
+.swatches{display:flex;flex-wrap:wrap;gap:8px}
+.swatches button{width:40px;height:40px;border-radius:50%;border:2px solid var(--cotton);box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
+.swatches button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--charcoal)}
+.sim-info{font-family:var(--th);font-size:18px}
+
+/* product cards (base) */
+.shop{display:grid;gap:var(--s4) var(--s3);grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:820px){.shop{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.card{min-width:0;display:flex;flex-direction:column;gap:6px}
+.card .media{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--hide-l);display:flex;align-items:center;justify-content:center}
+.card .media>img{width:100%;height:100%;object-fit:cover}
+.card .media .cut{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(42,39,37,.25))}
+.card .media.mx{display:grid;grid-template-columns:1fr 1fr;gap:4%;padding:10%}
+.card .media.mx img,.card .media.mx svg{width:100%;height:100%;object-fit:contain}
+.card h3{font-size:16px}
+.card .spec{font-size:13px;color:var(--muted)}
+.card .food{font-size:12px;color:var(--muted)}
+.card .price{font-family:var(--latin);font-size:18px;font-weight:500}
+.card .buy{font-size:14px;text-decoration:none;border-bottom:1px solid currentColor;align-self:flex-start}
+.note02{position:absolute;left:6px;bottom:6px;font-size:11px;background:var(--cotton);padding:2px 6px;color:var(--muted)}
+
+/* corporate + workshop */
+.split{display:grid;gap:var(--s4);grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.split{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}}
+.ticks{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.ticks li{padding-left:20px;position:relative}.ticks li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:1px;background:var(--charcoal)}
+.steps{display:grid;gap:var(--s2);grid-template-columns:repeat(3,minmax(0,1fr));counter-reset:s}
+.steps div{border-top:1px solid var(--charcoal);padding-top:var(--s2);font-size:14px;counter-increment:s}
+.steps div::before{content:"0" counter(s);display:block;font-family:var(--latin);font-size:22px;font-weight:300}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input{font:inherit;font-size:16px;color:var(--charcoal);background:var(--paper);border:1px solid var(--line);border-radius:0;padding:var(--s2) var(--s3);min-height:46px;width:100%}
+.ncard{width:100%;max-width:360px;aspect-ratio:89/55;background:var(--paper);box-shadow:0 2px 10px rgba(42,39,37,.15);display:grid;grid-template-columns:auto 1fr;gap:var(--s3);align-items:center;padding:var(--s3) var(--s4);position:relative;overflow:hidden}
+.ncard .lg{width:46px}
+.ncard b{font-family:var(--th);font-weight:500;font-size:18px;display:block;overflow-wrap:anywhere}
+.ncard small{font-size:12px;color:var(--muted)}
+.ncard .band{position:absolute;left:0;right:0;bottom:0;height:5px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{border:1px solid var(--line);background:var(--paper);padding:6px 12px;min-height:40px;cursor:pointer;font-family:var(--th);font-size:14px}
+.opts button[aria-pressed="true"]{border-color:var(--charcoal);background:var(--charcoal);color:var(--cotton)}
+.stepper{display:flex;align-items:center;gap:var(--s2)}
+.stepper button{width:44px;height:44px;border:1px solid var(--charcoal);background:transparent;font-size:20px;cursor:pointer}
+.stepper output{font-family:var(--latin);font-size:22px;min-width:3ch;text-align:center}
+.mocknote{font-size:12px;color:var(--muted);border-left:3px solid var(--beiya);padding-left:var(--s2)}
+
+/* footer */
+.mfoot{margin-top:var(--s7);padding-block:var(--s5);border-top:1px solid var(--charcoal);display:grid;gap:var(--s4);grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.mfoot{grid-template-columns:auto 1fr 1fr 1fr}}
+.mfoot .col{display:flex;flex-direction:column;gap:4px;font-size:14px}
+.mfoot .col b{font-family:var(--latin);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:400}
+.mfoot a{text-decoration:none}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--charcoal);color:var(--cotton);
+  font-family:var(--th);font-size:14px;padding:var(--s2) var(--s4);max-width:calc(100% - 32px)}
+
+/* ---------- D1 สมุดภาพ (Spring) ---------- */
+.d1 .hero{position:relative;min-height:min(92vh,760px);display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.d1 .hero .blob{position:absolute;border-radius:50%;filter:blur(28px);opacity:.28}
+.d1 .hero .t{position:relative;z-index:2;display:flex;flex-direction:column;gap:var(--s3);align-items:center;max-width:24ch}
+.d1 .hero h1{font-size:clamp(40px,12vw,84px);line-height:1.1}
+.d1 .chapter{display:grid;grid-template-columns:96px minmax(0,1fr);gap:var(--s4);align-items:center;padding:var(--s5) var(--s4);background:var(--paper);margin-top:var(--s7);box-shadow:0 6px 24px rgba(42,39,37,.08)}
+.d1 .chapter img{width:96px;height:96px;object-fit:contain}
+.d1 .chapter .part{font-family:var(--latin);font-weight:300;font-size:clamp(28px,7vw,44px);letter-spacing:.02em}
+.d1 .sec{padding-top:var(--s5)}
+.d1 .card .media{background:var(--paper)}
+
+/* ---------- D2 ไม่ซ้ำสักชิ้น (faces) ---------- */
+.d2 .faces{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(6px,2vw,18px);padding-block:var(--s5)}
+.d2 .faces button{border:0;background:none;padding:0;aspect-ratio:1/1;cursor:pointer}
+.d2 .faces img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 5px rgba(42,39,37,.22));transition:transform .25s}
+.d2 .faces button:hover img,.d2 .faces button.on img{transform:scale(1.12) rotate(-6deg)}
+.d2 .hero-t{display:flex;flex-direction:column;gap:var(--s3);text-align:center;align-items:center}
+.d2 .who{display:flex;gap:var(--s4);flex-wrap:wrap}
+.d2 .who div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px;color:var(--muted);width:64px;text-align:center}
+.d2 .who span{width:44px;height:44px;border-radius:50%}
+.d2 .card .media{background:transparent}
+.d2 .shop{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (min-width:820px){.d2 .shop{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.d2 .card{text-align:center;align-items:center}.d2 .card .buy{align-self:center}
+
+/* ---------- D3 บทความ (Originality) ---------- */
+.d3 .hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:var(--s3);padding-block:var(--s5) var(--s6);min-height:620px}
+.d3 .hero .left{display:flex;flex-direction:column;justify-content:space-between;gap:var(--s5);position:relative;z-index:2}
+.d3 .hero .small{font-family:var(--latin);font-size:14px;line-height:1.4;max-width:22ch}
+.d3 .hero .vert{writing-mode:vertical-rl;font-family:var(--latin);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:15px;justify-self:end}
+.d3 .hero .big{font-family:var(--latin);font-weight:500;font-size:clamp(34px,10vw,76px);letter-spacing:.04em;line-height:1;text-transform:uppercase}
+.d3 .hero .acc{width:44px;height:28px;background:var(--bene)}
+.d3 .hero .px{width:min(70vw,460px);right:8%;top:16%}
+.d3 .partno{display:flex;align-items:baseline;gap:var(--s2);font-family:var(--latin)}
+.d3 .partno span{font-size:14px;font-weight:500}.d3 .partno b{font-size:clamp(54px,14vw,96px);font-weight:500;line-height:.9}
+.d3 .ed{display:grid;gap:var(--s4);grid-template-columns:minmax(0,1fr);align-items:center}
+@media (min-width:820px){.d3 .ed{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.d3 .ed.rev>:first-child{order:2}}
+.d3 .ed .ph{aspect-ratio:4/5;overflow:hidden;background:var(--hide-l)}.d3 .ed .ph img{width:100%;height:100%;object-fit:cover}
+.d3 .shop{grid-template-columns:minmax(0,1fr);gap:var(--s5)}
+@media (min-width:820px){.d3 .shop{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.d3 .card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--s3);align-items:end}
+.d3 .card .media{grid-row:span 6;aspect-ratio:3/4}
+.d3 .card .no{font-family:var(--latin);font-size:42px;font-weight:500;line-height:1}
+.d3 .sq{display:inline-block;width:14px;height:14px;margin-right:6px;vertical-align:middle}
+
+/* ---------- D4 ขอบหยัก (Cupful of Joy) ---------- */
+.d4 .hero{position:relative;background:var(--hide-l);padding-block:var(--s6) 120px;text-align:center;overflow:hidden}
+.d4 .scal{position:relative}
+.d4 .scal::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:28px;
+  background:radial-gradient(circle at 14px 0,transparent 13px,var(--cotton) 14px) repeat-x;background-size:28px 28px}
+.d4 .hero h1{font-size:clamp(40px,11vw,76px);line-height:1.08}
+.d4 .hero .doodle{position:absolute;opacity:.75}
+.d4 .hero .row{justify-content:center}
+.d4 .hero .seat{position:absolute;bottom:18px;width:30%;max-width:220px}
+.d4 .ttl{text-align:center;align-items:center}
+.d4 .card{background:var(--paper);padding:var(--s3);border-radius:28px;align-items:center;text-align:center}
+.d4 .card .media{background:none;aspect-ratio:1/1;width:100%}
+.d4 .card .media .shaped{width:88%;height:88%}
+.d4 .card .pill{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+.d4 .card .buy{border:0;background:var(--charcoal);color:var(--cotton);padding:4px 14px;border-radius:99px;font-size:13px}
+.d4 .about{position:relative;max-width:560px;margin:0 auto;width:100%}
+.d4 .about img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:36px}
+.d4 .bub{position:absolute;background:var(--paper);border-radius:22px;padding:8px 14px;font-size:14px;max-width:62%;box-shadow:0 6px 16px rgba(42,39,37,.15)}
+.d4 .sec{background:var(--cotton)}
+.d4 .wave{background:var(--paper);border-radius:40px;padding:var(--s5) var(--s4)}
+
+/* ---------- D5 แคตตาล็อก (Rayo) ---------- */
+.d5 .mhead nav{background:var(--paper);border-radius:99px;padding:4px}
+.d5 .mhead nav a{padding:4px 12px;border-radius:99px}.d5 .mhead nav a.on{background:var(--charcoal);color:var(--cotton)}
+.d5 .hero{text-align:center;padding-block:var(--s6) var(--s4);display:flex;flex-direction:column;gap:var(--s3);align-items:center}
+.d5 .hero h1{font-size:clamp(34px,8.5vw,62px)}
+.d5 .search{width:min(100%,360px);border:1px solid var(--line);background:var(--paper);border-radius:99px;padding:8px 16px;font-size:14px;color:var(--muted);text-align:left}
+.d5 .filters{display:flex;gap:6px;justify-content:space-between;flex-wrap:wrap;width:100%}
+.d5 .filters .opts button{border-radius:99px}
+.d5 .card .media{border-radius:14px;background:var(--t,var(--stone-l))}
+.d5 .card .media .cut{width:66%;height:66%}
+.d5 .card .dot{position:absolute;right:10px;top:10px;width:30px;height:30px;border-radius:50%;background:var(--paper);display:flex;align-items:center;justify-content:center}
+.d5 .card .dot i{width:10px;height:10px;border-radius:50%}
+.d5 .card .row{justify-content:space-between}
+.d5 .card .buy{border:0;background:var(--charcoal);color:var(--cotton);border-radius:99px;padding:4px 12px;font-size:13px}
+.d5 .bigfoot{background:var(--charcoal);color:var(--cotton);border-radius:22px;padding:var(--s5) var(--s4);margin-top:var(--s7);display:grid;gap:var(--s4);grid-template-columns:minmax(0,1fr)}
+@media (min-width:820px){.d5 .bigfoot{grid-template-columns:1.3fr 1fr 1fr 1fr}}
+.d5 .bigfoot .lg{width:84px}.d5 .bigfoot .col b{color:#B8B1A6}.d5 .mfoot{display:none}
+
+/* ---------- D6 หน้าต่างแพตเทิร์น (Markaworks) ---------- */
+.d6 .grid12{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(6px,1.6vw,14px);padding-block:var(--s5)}
+.d6 .tile{position:relative;aspect-ratio:1/1;overflow:hidden;border-radius:10px;background:var(--c,var(--hide))}
+.d6 .tile .ph{position:absolute;inset:-12% 0;width:100%;height:124%;object-fit:cover}
+.d6 .tile svg.win{position:absolute;inset:0;width:100%;height:100%}
+.d6 .tile .tag{position:absolute;left:10px;top:8px;font-family:var(--latin);font-size:10px;letter-spacing:.14em;color:var(--fg,var(--cotton));text-transform:uppercase}
+.d6 .tile .hex{position:absolute;left:10px;bottom:8px;font-family:var(--latin);font-size:10px;color:var(--fg,var(--cotton))}
+.d6 .tile .cutp{position:absolute;inset:14%;width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 6px 8px rgba(0,0,0,.25))}
+.d6 .ttl{text-align:center;align-items:center}
+.d6 .card{background:#fff;padding:0;box-shadow:0 2px 8px rgba(42,39,37,.12)}
+.d6 .card .media{aspect-ratio:1/1;background:var(--t,var(--hide-l))}
+.d6 .card .lab{padding:var(--s2) var(--s3) var(--s3);display:flex;flex-direction:column;gap:2px}
+.d6 .card .code{font-family:var(--latin);font-size:11px;letter-spacing:.14em;font-weight:500}
+.d6 .swatches button{border-radius:6px;width:46px;height:58px}
+</style>
+<div class="switch full"><div class="in">
+<div class="tabs" role="tablist" aria-label="เลือกแบบ" id="tabs"></div>
+<div class="what"><span id="what"></span><span class="fit" id="fit"></span></div></div></div>
+<main id="view"></main>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const SH = /*SHAPES*/{};
+const LOGO = {light:`{{LOGO_LIGHT}}`, dark:`{{LOGO_DARK}}`};
+const FAM = [["พ่อ","แดงดินลูกรัง","#A9442B"],["แม่","เขียวใบตอง","#5E7A3A"],["ลูกคนโต","เหลืองทานตะวัน","#E9A825"],["ลูกคนกลาง","ม่วงดอกอินทนิล","#B9A3D6"],["ลูกคนเล็ก","น้ำเงินคราม","#2E4A7D"]];
+// leather is a material colour (scrap tones from the photos), never a brand colour
+const LEATHER = [["ดำ","#2D2926"],["ช็อกโกแลต","#4B3328"],["คอนญัก","#7A4330"],["น้ำตาลหนัง","#B07A4A"],["ทราย","#C9A77E"],["ครีม","#E5DAC4"],["เทาตุ่น","#857A71"],["น้ำเงินหม่น","#3E4A5D"]];
+const PROD = [
+ {n:"01",id:"OC-01-22",name:"01 ที่รองแก้ว",price:59,size:"10.4 ซม.",img:"bears",cut:"01-1",food:true,kind:"coaster",t:"#E7DFD2",dot:"#A9442B"},
+ {n:"01",id:"OC-01-01",name:"01 ที่เก็บสายชาร์จ",price:59,size:"10.4 ซม.",img:"bear01-close",cut:"01-2",food:false,kind:"other",t:"#D9C6AC",dot:"#5E7A3A"},
+ {n:"02",id:"OC-02-24",name:"02 ที่รองแก้ว",price:49,size:"9 ซม.",img:"die02",cut:null,food:true,kind:"coaster",t:"#DCD8D0",dot:"#E9A825"},
+ {n:"03",id:"OC-03-26",name:"03 ป้ายห้อยของขวัญ",price:39,size:"9 ซม.",img:"clover03",cut:"03-1",food:false,kind:"other",t:"#EADFCC",dot:"#B9A3D6"},
+ {n:"04",id:"OC-04-27",name:"04 ที่รองแก้ว",price:49,size:"9 ซม.",img:"squares",cut:"04-3",food:true,kind:"coaster",t:"#D5C2A8",dot:"#2E4A7D"},
+ {n:"05",id:"OC-05-28",name:"05 ที่รองแก้ว",price:49,size:"9 ซม.",img:"circles",cut:"05-3",food:true,kind:"coaster",t:"#E2DCD2",dot:"#A9442B"},
+ {n:"MX",id:"OC-MX-29",name:"ชุดที่รองแก้ว 01 · 02 · 04 · 05",price:179,size:"9–10.4 ซม.",img:"squares",cuts:["01-2","02","04-1","05-1"],food:true,kind:"set",t:"#E9E2D5",dot:"#5E7A3A"}];
+const LINK = {line:"https://line.me/R/ti/p/@155riuqj", ig:"https://www.instagram.com/oct.26_brand/", fb:"https://www.facebook.com/oct26brand"};
+const DIRS = [
+ {id:"d1",name:"สมุดภาพ",ref:"Spring",fit:3,what:"เล่าเป็นบท Part One–Five ชิ้นหนังจริงลอยรอบหัวข้อ เลื่อนแล้วขยับคนละจังหวะ"},
+ {id:"d2",name:"ไม่ซ้ำสักชิ้น",ref:"faces",fit:4,what:"ชิ้นหนัง 30 ชิ้นเรียงแบบภาพหน้าคน ทุกชิ้นสีลายไม่ซ้ำ ห้าสีบ้านเป็นวงกลมห้าวง"},
+ {id:"d3",name:"บทความ",ref:"Originality",fit:5,what:"ตัวหนังสือใหญ่ พื้นที่ว่างเยอะ ตัวเลข Part 01 จัดเรียงแบบนิตยสาร ใกล้เล่มแบรนด์ v2 ที่สุด"},
+ {id:"d4",name:"ขอบหยัก",ref:"Cupful of Joy",fit:2,what:"สนุกกว่า ขอบหยัก การ์ดสินค้าตัดเป็นรูปแพตเทิร์นจริง ป้ายบอกเรื่องบนรูปมือ"},
+ {id:"d5",name:"แคตตาล็อก",ref:"Rayo",fit:4,what:"ขายของเป็นหลัก ช่องสี่เหลี่ยมสีพื้น กรองตามประเภท ท้ายหน้าเป็นบล็อกสีเข้มใหญ่"},
+ {id:"d6",name:"หน้าต่างแพตเทิร์น",ref:"Markaworks",fit:3,what:"ช่องสีเจาะเป็นรูปแพตเทิร์น มองทะลุเห็นรูปจริง ป้ายสีหนังแบบแถบสี Pantone"}];
+
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const band = () => `<div class="band" aria-hidden="true">${FAM.map(f=>`<span style="background:${f[2]}"></span>`).join("")}</div>`;
+let toastT; function toast(t){ const el=$("#toast"); el.textContent=t; el.hidden=false; clearTimeout(toastT); toastT=setTimeout(()=>el.hidden=true,2400); }
+
+/* ---------- die shapes ---------- */
+function pathD(code){ const s=SH[code]; return [s.outline,...s.holes].map(p=>"M"+p.map(q=>q[0]+" "+q[1]).join("L")+"Z").join(""); }
+function sil(code, fill, opts={}){
+  const s=SH[code], sw=opts.stroke?`stroke="${opts.stroke}" stroke-width="${opts.sw||1}" vector-effect="non-scaling-stroke"`:"";
+  const slits = opts.slits===false?"":s.slits.map(l=>`<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}" stroke="${opts.slit||"rgba(0,0,0,.45)"}" stroke-width="${opts.sw||1}" vector-effect="non-scaling-stroke"/>`).join("");
+  return `<svg viewBox="0 0 ${s.w} ${s.h}" aria-hidden="true" class="${opts.cls||""}"><path d="${pathD(code)}" fill="${fill}" fill-rule="evenodd" ${sw}/>${slits}</svg>`;
+}
+// normalised path for clipPath objectBoundingBox
+function clipD(code){ const s=SH[code]; return "M"+s.outline.map(p=>(p[0]/s.w).toFixed(4)+" "+(p[1]/s.h).toFixed(4)).join("L")+"Z"; }
+const CODES = ["01","02","03","04","05","07"];
+
+/* ---------- shared sections ---------- */
+function booth(){ return `<div class="booth"><b>ออกบูธ บ้านและสวนแฟร์ Living Festival 2026</b><span>อิมแพ็ค เมืองทองธานี ชาเลนเจอร์ 2–3 · 23–25 ต.ค. และ 30 ต.ค.–1 พ.ย. · 10:00–17:00</span>
+<span class="cap">ที่บูธมีชิ้นหนังเปล่า 01–05 แผ่นละ 30 บาท แต่งเอง เขียนชื่อ วาดลายได้</span></div>`; }
+
+function storyText(){ return `<p class="lead">OCT. 26 คือวันเกิดของแม่ เราเริ่มจากเศษหนังวัวแท้ที่เกือบถูกขายทิ้ง ตัดเป็นแพตเทิร์นเรียบ ๆ ด้วยบล็อกขนาดจริง แล้วทำกันเองทั้งบ้าน พ่อ แม่ และลูกสามคน</p>
+<p>ข้างนอกเรียบ ข้างในมีห้าสีของคนในบ้าน ซ่อนอยู่หลังป้าย ในการ์ดในซอง และเส้นคาดซอง ส่วนขอบหนังเราไม่ทาสี ให้เห็นเนื้อหนังจริง</p>`; }
+function famRow(){ return `<div class="row" style="gap:var(--s3)">${FAM.map(f=>`<span class="cap" style="display:flex;align-items:center;gap:6px"><i style="width:12px;height:12px;border-radius:50%;background:${f[2]};display:inline-block"></i>${f[0]} · ${f[1]}</span>`).join("")}</div>`; }
+function facts(){ return `<div class="row" style="gap:var(--s5)">${[["6","แพตเทิร์น 01–05 และ 07"],["1.0–1.2","มม. หนังวัวแท้"],["0","สีทาขอบ เห็นเนื้อหนังจริง"]].map(f=>`<div><div class="latin" style="font-size:34px;font-weight:300;line-height:1">${f[0]}</div><div class="cap">${f[1]}</div></div>`).join("")}</div>`; }
+
+function media(p, mode){
+  if(mode==="photo") return `<div class="media"><img src="assets/img/${p.img}.jpg" alt="${esc(p.name)}" loading="lazy">${p.n==="02"?'<span class="note02">ภาพจากบล็อกตัด</span>':""}</div>`;
+  if(p.kind==="set") return `<div class="media mx">${p.cuts.map(c=>c==="02"?sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"}):`<img src="assets/cut/${c}.webp" alt="" loading="lazy">`).join("")}</div>`;
+  if(mode==="shape"){
+    const inner = p.cut?`<image href="assets/cut/${p.cut}.webp" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice"/>`:`<rect width="1" height="1" fill="#B07A4A"/>`;
+    return `<div class="media"><svg class="shaped" viewBox="0 0 1 1" aria-label="${esc(p.name)}"><defs><clipPath id="cp${p.id}" clipPathUnits="objectBoundingBox"><path d="${clipD(p.n)}"/></clipPath></defs>
+      <g clip-path="url(#cp${p.id})"><rect width="1" height="1" fill="${p.t}"/>${inner}</g></svg></div>`;
+  }
+  const img = p.cut?`<img class="cut" src="assets/cut/${p.cut}.webp" alt="${esc(p.name)}" loading="lazy">`:`<div class="cut" style="width:66%">${sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"})}</div><span class="note02">ยังไม่มีรูปจริง</span>`;
+  return `<div class="media" style="--t:${p.t}">${img}${mode==="tile"?`<span class="dot"><i style="background:${p.dot}"></i></span>`:""}</div>`;
+}
+function card(p, mode, i){
+  const food = p.food?`<span class="food">ไม่ใช่ภาชนะใส่อาหาร</span>`:"";
+  const ask = `สนใจ ${p.id} ${p.name} ${p.price} บาท`;
+  const buy = `<a class="buy" href="${LINK.line}" target="_blank" rel="noopener" data-copy="${esc(ask)}">ทัก LINE</a>`;
+  if(mode==="editorial") return `<article class="card">${media(p,"photo")}<span class="no">${p.n==="MX"?"SET":p.n}</span><h3>${esc(p.name)}</h3><span class="spec">${p.size}</span>${food}<span class="price">${p.price}.-</span>${buy}</article>`;
+  if(mode==="swatch") return `<article class="card" style="--t:${p.t}">${media(p,"cut")}<div class="lab"><span class="code">${p.id}</span><h3>${esc(p.name)}</h3><span class="spec">${p.size}</span>${food}<div class="row" style="justify-content:space-between"><span class="price">${p.price}.-</span>${buy}</div></div></article>`;
+  if(mode==="tile") return `<article class="card" data-kind="${p.kind}">${media(p,"tile")}<div class="row"><h3>${esc(p.name)}</h3></div><span class="spec">${p.size}</span>${food}<div class="row"><span class="price">${p.price}.-</span>${buy}</div></article>`;
+  if(mode==="shape") return `<article class="card">${media(p,"shape")}<h3>${esc(p.name)}</h3>${food}<div class="pill"><span class="price">${p.price}.-</span>${buy}</div></article>`;
+  return `<article class="card">${media(p,mode)}<h3>${esc(p.name)}</h3><span class="spec">${p.size} · หนังวัวแท้จากเศษหนัง</span>${food}<span class="price">${p.price} บาท</span>${buy}</article>`;
+}
+function shop(mode){ return `<div class="shop">${PROD.map((p,i)=>card(p,mode,i)).join("")}</div>
+<p class="cap">ราคาร่าง รอยืนยัน · สีหนังแต่ละชิ้นต่างกันเล็กน้อย · สั่งได้ทาง LINE @155riuqj ไอจี และ Shopee ร้าน OCT.26 - Our crafted things.</p>`; }
+
+function corp(){ return `<div class="split"><div class="stack">
+<p class="lead">ของที่ระลึกจากหนังแท้ สำหรับงานสัมมนา งานเปิดตัว และของขวัญลูกค้า เลือกแพตเทิร์นและโทนหนังได้ การ์ดในซองพิมพ์ข้อความหรือโลโก้องค์กร</p>
+<ul class="ticks"><li>เลือกจาก 6 แพตเทิร์น 01–05 และ 07 ใช้แบบที่เลือกในตัวจำลองได้เลย</li><li>หนังวัวแท้จากเศษหนัง แต่ละชิ้นสีลายไม่ซ้ำ</li><li>ห่อในซองพร้อมการ์ด แจกได้ทันที</li></ul>
+<div class="steps"><div>บอกจำนวน และวันที่ใช้</div><div>ส่งตัวอย่างสีหนัง ให้เลือก</div><div>ผลิต ห่อ และส่ง</div></div>
+<div class="row"><a class="btn dark" href="${LINK.line}" target="_blank" rel="noopener" data-copy="สนใจของที่ระลึกองค์กร">ขอใบเสนอราคาทาง LINE</a></div>
+<p class="mocknote">mock: จำนวนขั้นต่ำ ราคา และระยะผลิต ยังไม่กำหนด</p></div>
+<div class="stack"><div class="field"><label for="org">ลองใส่ชื่อองค์กร ดูการ์ดในซอง</label><input id="org" maxlength="40" value="บริษัทของคุณ" autocomplete="off"></div>
+<div class="ncard">${LOGO.light}<div><b data-org>บริษัทของคุณ</b><small>ขอบคุณที่มาร่วมงาน · ทำจากเศษหนังวัวแท้</small></div>${band()}</div>
+<p class="cap" data-pick></p></div></div>`; }
+
+function work(){ return `<div class="split"><div class="stack">
+<p class="lead">เวิร์กช็อปแต่งชิ้นหนังของตัวเอง เลือกแพตเทิร์น เขียนชื่อ วาดลายด้วยปากกาสำหรับหนัง แล้วได้ชิ้นที่แต่งเองกลับบ้าน</p>
+<ul class="ticks"><li>ครอบครัว ทำด้วยกันที่บูธหรือที่งานอีเวนต์</li><li>ทีมงานองค์กร กิจกรรมสั้น ๆ ระหว่างสัมมนา</li><li>ร้านค้าและคาเฟ่ จัดเป็นกิจกรรมให้ลูกค้า</li></ul>
+<p class="mocknote">mock: ระยะเวลา ราคา และอายุผู้เข้าร่วม ยังไม่กำหนด · แต่งชิ้นอย่างเดียว ไม่ต่อชิ้น</p></div>
+<form class="stack" data-book><div class="field"><label>แบบเวิร์กช็อป</label><div class="opts" data-one>
+<button type="button" aria-pressed="true">ครอบครัว</button><button type="button" aria-pressed="false">ทีมองค์กร</button><button type="button" aria-pressed="false">อีเวนต์ / ร้านค้า</button></div></div>
+<div class="field"><label>จำนวนคน</label><div class="stepper"><button type="button" data-st="-1" aria-label="ลด">−</button><output>6</output><button type="button" data-st="1" aria-label="เพิ่ม">+</button></div></div>
+<div class="field"><label for="wdate">วันที่สะดวก</label><input id="wdate" type="date"></div>
+<div class="field"><label for="wname">ชื่อผู้ติดต่อ</label><input id="wname" autocomplete="name" placeholder="ชื่อ"></div>
+<div class="row"><button type="submit" class="btn dark">ขอจองเวิร์กช็อป</button></div></form></div>`; }
+
+function sim(){ return `<div class="sim-slot"></div>`; }
+function foot(){ return `<footer class="mfoot"><div>${LOGO.light}</div>
+<div class="col"><b>สั่งซื้อ</b><a href="${LINK.line}" target="_blank" rel="noopener">LINE @155riuqj</a><span>Shopee: OCT.26 - Our crafted things.</span></div>
+<div class="col"><b>ติดตาม</b><a href="${LINK.ig}" target="_blank" rel="noopener">Instagram @oct.26_brand</a><a href="${LINK.fb}" target="_blank" rel="noopener">Facebook oct26brand</a></div>
+<div class="col"><b>OCT. 26</b><span>our crafted things.</span><span class="cap">© 2569 OCT. 26</span></div></footer>`; }
+function head(nav){ return `<header class="mhead"><a href="#top" aria-label="หน้าแรก">${LOGO.light}</a><nav aria-label="เมนู">${nav||'<a href="#story">เรื่องของเรา</a><a href="#sim">ลองสีหนัง</a><a href="#shop">ของพร้อมส่ง</a><a href="#corp">องค์กร</a><a href="#work">เวิร์กช็อป</a>'}</nav></header>`; }
+const sec = (id, eyebrow, title, body, extra="") => `<section class="sec" id="${id}" ${extra}><span class="eyebrow">${eyebrow}</span><h2>${title}</h2>${body}</section>`;
+
+/* ---------- six directions ---------- */
+function d1(){
+  const cuts=[["01-1",.35,8,6,30,-8],["05-3",.18,70,4,26,10],["04-1",.5,-6,62,28,6],["07-2",.28,74,60,30,-14],["03-1",.42,40,78,22,4],["01-2",.12,82,30,18,18]];
+  const blobs=[["#A9442B",10,20,220],["#E9A825",70,12,180],["#5E7A3A",20,70,200],["#2E4A7D",75,70,170]];
+  const part=(n,label,img)=>`<div class="chapter"><img src="assets/cut/${img}.webp" alt="" loading="lazy"><div><div class="part">Part ${n}</div><div class="cap">${label}</div></div></div>`;
+  return `${head()}<section class="hero full" id="top">${blobs.map(b=>`<span class="blob" style="background:${b[0]};left:${b[1]}%;top:${b[2]}%;width:${b[3]}px;height:${b[3]}px"></span>`).join("")}
+${cuts.map(c=>`<img class="px" src="assets/cut/${c[0]}.webp" alt="" data-depth="${c[1]}" data-rot="${c[5]}" style="left:${c[2]}%;top:${c[3]}%;width:${c[4]}vw;max-width:220px">`).join("")}
+<div class="t"><span class="eyebrow">our crafted things.</span><h1>ของที่เราทำกันเอง</h1><p class="lead">เศษหนังวัวแท้ ตัดเป็นแพตเทิร์นเรียบ ๆ ทำกันเองทั้งบ้าน</p>
+<div class="row" style="justify-content:center"><a class="btn dark" href="#shop">ดูของพร้อมส่ง</a><a class="btn" href="#sim">ลองเลือกสีหนัง</a></div></div></section>
+${booth()}
+${part("One","เรื่องของเรา","01-1")}${sec("story","26 ตุลาคม","เรียบข้างนอก บ้านอยู่ข้างใน",storyText()+famRow()+facts())}
+${part("Two","ลองเลือกแพตเทิร์นและสีหนัง","05-3")}${sec("sim","ตัวจำลอง 3D","หมุนดูชิ้นหนังจริง",sim())}
+${part("Three","ของที่ซื้อได้เลย","04-1")}${sec("shop","ของพร้อมส่ง","7 ชิ้นที่เราทำแล้ว",shop("photo"))}
+${part("Four","สำหรับองค์กร","07-2")}${sec("corp","ลูกค้าองค์กร","ของที่ระลึกจากหนังแท้",corp())}
+${part("Five","เวิร์กช็อป","03-1")}${sec("work","จ้างทำเวิร์กช็อป","แต่งชิ้นหนังของตัวเอง",work())}${foot()}`;
+}
+function d2(){
+  const pool=["01-1","01-2","03-1","03-2","04-1","04-3","05-1","05-3","07-1","07-2"];
+  const lab={"01":"01 หมี","03":"03 กากบาทแคปซูล","04":"04 สี่เหลี่ยมมน","05":"05 วงกลม","07":"07 กากบาทข้อต่อวงกลม"};
+  let faces=""; for(let i=0;i<30;i++){ const c=pool[(i*7+Math.floor(i/6)*3)%pool.length], r=((i*37)%23)-11, s=(.86+((i*13)%9)/60).toFixed(2);
+    faces+=`<button type="button" data-lab="${lab[c.slice(0,2)]}" aria-label="${lab[c.slice(0,2)]}"><img src="assets/cut/${c}.webp" alt="" loading="lazy" style="transform:rotate(${r}deg) scale(${s})"></button>`; }
+  return `${head()}<section id="top"><div class="faces">${faces}</div>
+<div class="hero-t"><span class="eyebrow">our crafted things.</span><h1>หน้าตาไม่ซ้ำกันสักชิ้น</h1>
+<p class="lead">เศษหนังแต่ละชิ้นมีสีและลายของตัวเอง เหมือนคน แตะชิ้นไหนก็ได้ ดูว่าเป็นแพตเทิร์นอะไร</p><p class="cap" id="faceLab">&nbsp;</p>
+<div class="row" style="justify-content:center"><a class="btn dark" href="#shop">ดูของพร้อมส่ง</a><a class="btn" href="#sim">ลองสีหนัง</a></div></div></section>
+<div style="margin-top:var(--s6)">${booth()}</div>
+${sec("story","เรื่องของเรา","ห้าคน ห้าสี ในบ้านเดียว",`<div class="who">${FAM.map(f=>`<div><span style="background:${f[2]}"></span>${f[0]}<br>${f[1]}</div>`).join("")}</div>`+storyText()+facts())}
+${sec("sim","ตัวจำลอง 3D","เลือกหน้าตาของชิ้นคุณ",sim())}
+${sec("shop","ของพร้อมส่ง","ซื้อได้เลย 7 ชิ้น",shop("cut"))}
+${sec("corp","ลูกค้าองค์กร","ของที่ระลึก ที่ไม่ซ้ำกันสักชิ้น",corp())}
+${sec("work","เวิร์กช็อป","มาแต่งหน้าตาให้ชิ้นของคุณ",work())}${foot()}`;
+}
+function d3(){
+  const part=(n,eb,title,body,img,rev)=>`<section class="sec" id="${eb}"><div class="ed ${rev?"rev":""}"><div class="ph"><img src="assets/img/${img}.jpg" alt="" loading="lazy"></div>
+<div class="stack"><div class="partno"><span>Part.</span><b>${n}</b></div><h2>${title}</h2>${body}</div></div></section>`;
+  return `${head()}<section class="hero" id="top"><div class="left"><div class="small">OCT. 26<br>our crafted things.<br><br><span class="cap">เศษหนังวัวแท้ ตัดเป็นแพตเทิร์นเรียบ ทำกันเองทั้งบ้าน</span></div>
+<div class="stack"><div class="acc"></div><div class="big">Our<br>Crafted<br>Things</div><div class="row"><a class="btn dark" href="#shop">ของพร้อมส่ง</a><a class="btn" href="#sim">ลองสีหนัง</a></div></div></div>
+<div class="vert">Plain outside · Home inside</div><img class="px" src="assets/cut/07-1.webp" alt="" data-depth=".22" data-rot="-10"></section>
+${booth()}
+${part("01","story","เรียบข้างนอก บ้านอยู่ข้างใน",storyText()+famRow(),"hand05")}
+<section class="sec" id="sim"><div class="partno"><span>Part.</span><b>02</b></div><h2>หมุนดู เลือกสีหนัง</h2>${sim()}</section>
+<section class="sec" id="shop"><div class="partno"><span>Part.</span><b>03</b></div><h2>ของพร้อมส่ง</h2>${shop("editorial")}</section>
+${part("04","corp","ของที่ระลึกสำหรับองค์กร",corp(),"squares",true)}
+${part("05","work","เวิร์กช็อปแต่งชิ้นหนัง",work(),"circles")}${foot()}`;
+}
+function d4(){
+  const doodles=[["05",8,14,70,-6],["07",78,8,64,12],["03",84,52,52,8],["04",4,50,58,-14]];
+  return `${head()}<section class="hero full scal" id="top">
+${doodles.map(d=>`<div class="doodle" style="left:${d[1]}%;top:${d[2]}%;width:${d[3]}px;transform:rotate(${d[4]}deg)">${sil(d[0],"none",{stroke:"#8B5E3C",sw:2.5,slit:"#8B5E3C"})}</div>`).join("")}
+<div class="in stack" style="align-items:center;position:relative;z-index:2"><h1>เศษหนัง<br>ที่ได้ไปต่อ</h1><p class="lead">ที่รองแก้ว ป้ายห้อย และของใช้ชิ้นเล็ก จากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน</p>
+<div class="row"><a class="btn dark" href="#shop">ดูของพร้อมส่ง</a></div></div>
+<img class="px seat" src="assets/cut/05-1.webp" alt="" data-depth=".1" data-rot="-8" style="left:4%"><img class="px seat" src="assets/cut/04-3.webp" alt="" data-depth=".16" data-rot="6" style="left:36%;bottom:4px"><img class="px seat" src="assets/cut/07-2.webp" alt="" data-depth=".08" data-rot="-4" style="right:4%"></section>
+${booth()}
+${sec("shop","ของพร้อมส่ง",'<span style="display:block;text-align:center">ของน่าใช้ 7 ชิ้น</span>',shop("shape"),'style="text-align:left"')}
+<section class="sec" id="story"><span class="eyebrow" style="text-align:center">เกี่ยวกับเรา</span><h2 style="text-align:center">บ้านเดียว ห้าคน</h2>
+<div class="about"><img src="assets/img/hand05.jpg" alt="มือถือชิ้นหนังวงกลม" loading="lazy">
+<span class="bub" style="left:-2%;top:8%">เศษหนังวัวแท้ ที่เกือบถูกขายทิ้ง</span><span class="bub" style="right:-2%;top:42%">ตัดด้วยบล็อกขนาดจริง ขอบไม่ทาสี</span><span class="bub" style="left:4%;bottom:6%">ห้าสีของบ้าน ซ่อนอยู่ในการ์ดในซอง ${band()}</span></div>${storyText()}</section>
+${sec("sim","ตัวจำลอง 3D","ลองหมุน ลองเปลี่ยนสี",`<div class="wave">${sim()}</div>`)}
+${sec("corp","ลูกค้าองค์กร","ของแจกที่คนเก็บไว้ใช้",`<div class="wave">${corp()}</div>`)}
+${sec("work","เวิร์กช็อป","มาแต่งชิ้นหนังด้วยกัน",`<div class="wave">${work()}</div>`)}${foot()}`;
+}
+function d5(){
+  const nav='<a class="on" href="#shop">แคตตาล็อก</a><a href="#sim">ลองสี</a><a href="#corp">องค์กร</a><a href="#work">เวิร์กช็อป</a><a href="#story">เกี่ยวกับเรา</a>';
+  return `${head(nav)}<section class="hero" id="top"><h1>ของ 7 ชิ้น จากเศษหนังแท้</h1><p class="lead">ราคา 39–179 บาท · หนังวัวแท้ทุกชิ้น · สีลายไม่ซ้ำ</p>
+<div class="search" aria-hidden="true">ค้นหาสินค้า…</div>
+<div class="filters"><div class="opts" data-filter><button type="button" aria-pressed="true" data-k="all">ทั้งหมด</button><button type="button" aria-pressed="false" data-k="coaster">ที่รองแก้ว</button><button type="button" aria-pressed="false" data-k="other">ป้ายและอื่น ๆ</button><button type="button" aria-pressed="false" data-k="set">ชุด</button></div></div></section>
+<section id="shop">${shop("tile")}</section>
+<div style="margin-top:var(--s6)">${booth()}</div>
+${sec("sim","ตัวจำลอง 3D","ไม่เจอสีที่ชอบ ลองเลือกเอง",sim())}
+${sec("corp","ลูกค้าองค์กร","สั่งจำนวนมาก",corp())}
+${sec("work","เวิร์กช็อป","จ้างเราไปสอน",work())}
+${sec("story","เกี่ยวกับเรา","เรียบข้างนอก บ้านอยู่ข้างใน",storyText()+famRow())}
+<footer class="bigfoot"><div class="stack">${LOGO.dark}<span>our crafted things.</span></div>
+<div class="col stack" style="gap:4px"><b class="eyebrow" style="color:#B8B1A6">สั่งซื้อ</b><a href="${LINK.line}" target="_blank" rel="noopener">LINE @155riuqj</a><span>Shopee</span></div>
+<div class="col stack" style="gap:4px"><b class="eyebrow" style="color:#B8B1A6">ติดตาม</b><a href="${LINK.ig}" target="_blank" rel="noopener">Instagram</a><a href="${LINK.fb}" target="_blank" rel="noopener">Facebook</a></div>
+<div class="col stack" style="gap:4px"><b class="eyebrow" style="color:#B8B1A6">ข่าวใหม่</b><span>แพตเทิร์นใหม่ บูธใหม่ ทาง LINE</span>${band()}</div></footer>${foot()}`;
+}
+function d6(){
+  const T=[["c","#B07A4A","Leather · Hide","#B07A4A","05","circles"],["p","","","","","bears"],["c","#2A2725","Leather · Black","#2D2926","01","bear01-close"],
+           ["p","","","","","clover03"],["c","#E9A825","Family · Sunflower","#E9A825","07","joint07"],["c","#DEDAD2","Leather · Cream","#E5DAC4","04","squares"],
+           ["c","#8B5E3C","Leather · Teak","#8B5E3C","03","hand05"],["p","","","","","circles"],["c","#5E7A3A","Family · Banana leaf","#5E7A3A","02","die02"],
+           ["c","#F4F0E8","Cotton","#F4F0E8","07","squares"],["p","","","","","joint07"],["c","#2E4A7D","Family · Indigo","#2E4A7D","05","bears"]];
+  const tiles=T.map((t,i)=>{ if(t[0]==="p") return `<div class="tile"><img class="ph" src="assets/img/${t[5]}.jpg" alt="" loading="lazy" data-depth="${(.06+(i%3)*.04).toFixed(2)}" data-in="1"></div>`;
+    const s=SH[t[4]], fg=["#F4F0E8","#DEDAD2","#E9A825"].includes(t[1])?"#2A2725":"#F4F0E8";
+    return `<div class="tile" style="--c:${t[1]};--fg:${fg}"><img class="ph" src="assets/img/${t[5]}.jpg" alt="" loading="lazy" data-depth="${(.1+(i%4)*.03).toFixed(2)}" data-in="1">
+<svg class="win" viewBox="-30 -30 ${s.w+60} ${s.h+60}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><path fill="${t[1]}" fill-rule="evenodd" d="M-2000 -2000H2000V2000H-2000Z ${pathD(t[4])}"/></svg>
+<span class="tag">${t[2]}</span><span class="hex">${t[3]} · ${t[4]}</span></div>`; }).join("");
+  return `${head()}<section id="top"><div class="grid12">${tiles}</div>
+<div class="stack ttl" style="display:flex"><span class="eyebrow">our crafted things.</span><h1>มองผ่านแพตเทิร์น</h1><p class="lead">หกแพตเทิร์น 01–05 และ 07 ตัดจากเศษหนังวัวแท้ เลือกสีหนังได้ แต่ละชิ้นไม่ซ้ำ</p>
+<div class="row" style="justify-content:center"><a class="btn dark" href="#shop">ดูของพร้อมส่ง</a><a class="btn" href="#sim">ลองสีหนัง</a></div></div></section>
+<div style="margin-top:var(--s6)">${booth()}</div>
+${sec("sim","Leather swatch","แถบสีหนัง แบบหมุนได้",sim())}
+${sec("shop","ของพร้อมส่ง","7 ชิ้น 7 รหัส",shop("swatch"))}
+${sec("story","เรื่องของเรา","เรียบข้างนอก บ้านอยู่ข้างใน",storyText()+famRow()+facts())}
+${sec("corp","ลูกค้าองค์กร","ของที่ระลึก สีตามองค์กร",corp())}
+${sec("work","เวิร์กช็อป","แต่งชิ้นหนังของตัวเอง",work())}${foot()}`;
+}
+function sum(){
+  const rows=DIRS.map(d=>`<tr><td><a href="#${d.id}" data-go="${d.id}">${d.id.slice(1)} · ${d.name}</a></td><td>${d.ref}</td><td>${"■".repeat(d.fit)}${"□".repeat(5-d.fit)}</td><td>${d.what}</td></tr>`).join("");
+  return `<div class="sum"><span class="eyebrow">สรุป · 22 ต.ค. 2569</span><h1>เว็บ OCT. 26 หกแบบ</h1>
+<p class="lead">mockup 6 แบบจากภาพอ้างอิง 6 ภาพ ทุกแบบใช้ข้อมูลชุดเดียวกัน: เรื่องของแบรนด์ ตัวจำลอง 3D เลือกแพตเทิร์นและสีหนัง ของพร้อมส่ง 7 ชิ้น ลูกค้าองค์กร และจองเวิร์กช็อป ทุกแบบใช้สี โลโก้ และฟอนต์ตาม Brand Book v2 ยังไม่ใช่เว็บจริง</p>
+<div class="tw"><table><thead><tr><th>แบบ</th><th>อ้างอิง</th><th>เข้ากับ v2</th><th>ลักษณะ</th></tr></thead><tbody>${rows}</tbody></table></div>
+<h2>ตัวเลข</h2><ul class="ticks"><li>6 แพตเทิร์นในตัวจำลอง (01–05, 07) รูปทรงและร่องจากไฟล์บล็อกตัดขนาดจริง หนา 1.2 มม.</li><li>8 โทนสีหนังจากรูปเศษหนังจริง</li><li>7 สินค้าตามสถานะล่าสุด ราคา 39–179 บาท (ราคาร่าง)</li><li>ภาพเคลื่อนตามการเลื่อนจอ (parallax) ในแบบ 1, 3, 4, 6</li></ul>
+<h2>ตามกฎในเอกสารสถานะ</h2><ul class="ticks"><li>ไม่มี 06 ใช้ 07 แทน · ไม่มีหน้าหมี หัวใจ หรือห้าหมี</li><li>ไม่มีของที่ต้องต่อชิ้น ไม่มีคำว่าไม่ต้องเย็บ · เวิร์กช็อปคือแต่งชิ้น เขียนชื่อ วาดลาย</li><li>ที่รองแก้วทุกชิ้นเขียนว่าไม่ใช่ภาชนะใส่อาหาร · ไม่มีของเด็กเล็ก</li><li>ห้าสีของบ้านใช้เป็นจุดเล็ก ๆ ตามเล่ม ยกเว้นช่องสีในแบบ 6 ที่ใช้ใหญ่กว่า</li></ul>
+<h2>ต้องเช็ก</h2><ul class="ticks"><li>ชอบแบบไหน หรืออยากผสมส่วนไหนจากแบบไหน</li><li>ตัวจำลอง 3D บนมือถือจริง: หมุนลื่นไหม สีหนังตรงไหม</li><li>คำในส่วนองค์กรและเวิร์กช็อป · จำนวนขั้นต่ำ ราคา ระยะเวลา ยังไม่กำหนด</li><li>ยังไม่มีรูปจริงของ 02 (ใช้ภาพบล็อกตัดแทน)</li></ul>
+<h2>ไฟล์</h2><p class="cap">web-directions-20261022/ ในกิ่ง claude/funny-tesla-4dkwm7 · template.html (หน้า) · build.py (อ่านไฟล์บล็อกตัด) · assets/ (รูปจริงและชิ้นหนังพื้นใสจากงานรีแบรนด์ 22 ต.ค.)</p>
+<h2>ต่อไป</h2><p>เลือกแบบ แล้วผมทำเป็น mock เต็มหน้าทั้งหน้าแรกและหน้าสินค้า แก้เว็บจริงเมื่อพิมพ์ “แก้เว็บจริงเลยครับ”</p></div>`;
+}
+const RENDER = {d1,d2,d3,d4,d5,d6,sum};
+
+/* ---------- 3D simulator: one instance, moved into each direction ---------- */
+const S = {code:"05", leather:3, three:null};
+const simEl = document.createElement("div"); simEl.className="sim"; simEl.id="simbox";
+simEl.innerHTML = `<div class="sim-stage" id="stage"><canvas id="simc" aria-label="ชิ้นหนังจำลอง 3D"></canvas><div id="flat" hidden></div><span class="hint">ลากเพื่อหมุน</span></div>
+<div class="sim-ui"><span class="lbl">แพตเทิร์น</span><div class="pchips" id="pchips">${CODES.map(c=>`<button type="button" data-code="${c}" aria-pressed="${c===S.code}" aria-label="แพตเทิร์น ${c} ${SH[c].name}">${sil(c,"#B07A4A",{slit:"rgba(0,0,0,.35)"})}<span>${c}</span></button>`).join("")}</div>
+<span class="lbl">สีหนัง · <span id="lname"></span></span><div class="swatches" id="swatches">${LEATHER.map((l,i)=>`<button type="button" data-i="${i}" aria-pressed="${i===S.leather}" aria-label="${l[0]}" style="background:${l[1]}"></button>`).join("")}</div>
+<p class="sim-info" id="info"></p>
+<div class="row"><a class="btn dark" id="simbuy" href="${LINK.line}" target="_blank" rel="noopener" data-copy="">สั่งแบบนี้ทาง LINE</a></div>
+<p class="cap">สีจริงแต่ละชิ้นต่างกันเล็กน้อย เพราะเป็นเศษหนังจริง · รูปทรงและรอยร่องมาจากไฟล์บล็อกตัดขนาดจริง · หนา 1.0–1.2 มม. ขอบไม่ทาสี</p></div>`;
+function simText(){
+  const s=SH[S.code], l=LEATHER[S.leather], cm=(Math.max(s.w,s.h)/10).toFixed(1);
+  $("#lname",simEl).textContent=l[0];
+  $("#info",simEl).textContent=`${S.code} ${s.name} · ${l[0]} · ${cm} ซม.`;
+  $("#simbuy",simEl).dataset.copy=`สนใจแพตเทิร์น ${S.code} ${s.name} หนังสี${l[0]}`;
+  document.querySelectorAll("[data-pick]").forEach(e=>e.textContent=`แบบที่เลือกไว้: ${S.code} ${s.name} · หนังสี${l[0]}`);
+}
+function noiseTex(){
+  const c=document.createElement("canvas"); c.width=c.height=256; const g=c.getContext("2d"), d=g.createImageData(256,256);
+  for(let i=0;i<d.data.length;i+=4){ const v=128+(Math.random()-.5)*90; d.data[i]=d.data[i+1]=d.data[i+2]=v; d.data[i+3]=255; }
+  g.putImageData(d,0,0); g.globalAlpha=.08;
+  for(let k=0;k<180;k++){ g.fillStyle=Math.random()<.5?"#000":"#fff"; g.beginPath(); g.ellipse(Math.random()*256,Math.random()*256,4+Math.random()*16,2+Math.random()*8,Math.random()*3,0,7); g.fill(); }
+  const t=new THREE.CanvasTexture(c); t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(1/45,1/45); return t;
+}
+// soft mottling multiplied into the leather colour: scraps are never one flat tone
+function mottleTex(){
+  const c=document.createElement("canvas"); c.width=c.height=512; const g=c.getContext("2d");
+  g.fillStyle="#fff"; g.fillRect(0,0,512,512);
+  for(let k=0;k<260;k++){ const x=Math.random()*512,y=Math.random()*512,r=10+Math.random()*60, v=200+Math.random()*55|0;
+    const gr=g.createRadialGradient(x,y,0,x,y,r); gr.addColorStop(0,`rgba(${v},${v},${v},.35)`); gr.addColorStop(1,"rgba(255,255,255,0)"); g.fillStyle=gr; g.fillRect(x-r,y-r,2*r,2*r); }
+  const d=g.getImageData(0,0,512,512); for(let i=0;i<d.data.length;i+=4){ const n=(Math.random()-.5)*26; d.data[i]+=n; d.data[i+1]+=n; d.data[i+2]+=n; } g.putImageData(d,0,0);
+  const t=new THREE.CanvasTexture(c); t.encoding=THREE.sRGBEncoding; t.wrapS=t.wrapT=THREE.RepeatWrapping; t.repeat.set(1/70,1/70); return t;
+}
+function buildMesh(){
+  const T=S.three, s=SH[S.code], cx=s.w/2, cy=s.h/2;
+  if(T.mesh){ T.group.remove(T.mesh); T.mesh.traverse(o=>{ if(o.geometry) o.geometry.dispose(); }); }
+  const shp=new THREE.Shape(s.outline.map(p=>new THREE.Vector2(p[0]-cx, cy-p[1])));
+  s.holes.forEach(h=>shp.holes.push(new THREE.Path(h.map(p=>new THREE.Vector2(p[0]-cx, cy-p[1])))));
+  const depth=1.2, g=new THREE.ExtrudeGeometry(shp,{depth,bevelEnabled:true,bevelThickness:.18,bevelSize:.18,bevelSegments:2,curveSegments:6});
+  g.translate(0,0,-depth/2);
+  const m=new THREE.Mesh(g,[T.top,T.edge]);
+  const slitMat=new THREE.MeshBasicMaterial({color:0x1a1513});
+  s.slits.forEach(l=>{ const x1=l[0]-cx,y1=cy-l[1],x2=l[2]-cx,y2=cy-l[3], len=Math.hypot(x2-x1,y2-y1);
+    const b=new THREE.Mesh(new THREE.BoxGeometry(len,.55,depth+.5),slitMat); b.position.set((x1+x2)/2,(y1+y2)/2,0); b.rotation.z=Math.atan2(y2-y1,x2-x1); m.add(b); });
+  T.mesh=m; T.group.add(m); setColor();
+}
+// raw edge, never painted: a little lighter and drier than the grain side
+function setColor(){ const T=S.three; if(!T) return; const c=new THREE.Color(LEATHER[S.leather][1]).convertSRGBToLinear();
+  T.top.color.copy(c); T.edge.color.copy(c.clone().lerp(new THREE.Color("#D8C2A2").convertSRGBToLinear(),.4)); }
+function flat(){ const f=$("#flat",simEl); f.hidden=false; f.innerHTML=sil(S.code,LEATHER[S.leather][1],{slit:"rgba(0,0,0,.5)"}); f.firstChild.style.cssText="position:absolute;inset:14%;width:72%;height:72%"; $("#simc",simEl).hidden=true; }
+function initThree(){
+  if(S.three!==null) return;
+  if(!window.THREE){ S.three=false; flat(); return; }
+  const cv=$("#simc",simEl); let r;
+  try{ r=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}); }catch(_){ S.three=false; flat(); return; }
+  r.setPixelRatio(Math.min(2,devicePixelRatio)); r.outputEncoding=THREE.sRGBEncoding;
+  const scene=new THREE.Scene(), cam=new THREE.PerspectiveCamera(32,1,1,2000); cam.position.set(0,-120,190); cam.lookAt(0,0,0);
+  scene.add(new THREE.HemisphereLight(0xfff3e2,0x5a4c40,.55));
+  const dl=new THREE.DirectionalLight(0xffffff,.75); dl.position.set(-90,-40,150); scene.add(dl);
+  const rim=new THREE.DirectionalLight(0xffe2c4,.45); rim.position.set(120,140,40); scene.add(rim);
+  const tex=noiseTex();
+  const top=new THREE.MeshStandardMaterial({roughness:.72,metalness:0,map:mottleTex(),bumpMap:tex,bumpScale:.55});
+  const edge=new THREE.MeshStandardMaterial({roughness:.95,metalness:0,bumpMap:tex,bumpScale:.3});
+  const group=new THREE.Group(); scene.add(group);
+  S.three={r,scene,cam,group,top,edge,mesh:null,rx:-.55,ry:.5,drag:null,visible:false};
+  buildMesh();
+  const stage=$("#stage",simEl);
+  const size=()=>{ const w=stage.clientWidth||300; r.setSize(w,w,false); cam.aspect=1; cam.updateProjectionMatrix(); };
+  size(); new ResizeObserver(size).observe(stage);
+  stage.addEventListener("pointerdown",e=>{ S.three.drag={x:e.clientX,y:e.clientY,rx:S.three.rx,ry:S.three.ry}; stage.setPointerCapture(e.pointerId); stage.style.cursor="grabbing"; });
+  stage.addEventListener("pointermove",e=>{ const d=S.three.drag; if(!d) return; S.three.ry=d.ry+(e.clientX-d.x)*.01; S.three.rx=Math.max(-1.4,Math.min(1.2,d.rx+(e.clientY-d.y)*.01)); });
+  const up=()=>{ S.three.drag=null; stage.style.cursor=""; }; stage.addEventListener("pointerup",up); stage.addEventListener("pointercancel",up);
+  new IntersectionObserver(es=>{ S.three.visible=es[0].isIntersecting; }).observe(stage);
+  const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  (function loop(){ requestAnimationFrame(loop); const T=S.three; if(!T.visible) return;
+    if(!T.drag && !still) T.ry+=.006; T.group.rotation.set(T.rx,0,0); T.mesh.rotation.set(0,0,T.ry); T.r.render(T.scene,T.cam); })();
+}
+simEl.addEventListener("click",e=>{
+  const p=e.target.closest("[data-code]"); if(p){ S.code=p.dataset.code; simEl.querySelectorAll("[data-code]").forEach(b=>b.setAttribute("aria-pressed",String(b===p))); S.three?buildMesh():S.three===false&&flat(); simText(); }
+  const w=e.target.closest("[data-i]"); if(w){ S.leather=+w.dataset.i; simEl.querySelectorAll("[data-i]").forEach(b=>b.setAttribute("aria-pressed",String(b===w))); S.three?setColor():S.three===false&&flat(); simText(); }
+});
+
+/* ---------- page wiring ---------- */
+function parallax(){
+  const vh=innerHeight;
+  document.querySelectorAll("#view [data-depth]").forEach(el=>{ const host=el.dataset.in?el.parentElement:el.parentElement;
+    const r=host.getBoundingClientRect(); if(r.bottom<-200||r.top>vh+200) return;
+    const off=(r.top+r.height/2-vh/2)*-(+el.dataset.depth); el.style.transform=`translate3d(0,${off.toFixed(1)}px,0) rotate(${el.dataset.rot||0}deg)`; });
+}
+let ticking=false; addEventListener("scroll",()=>{ if(!ticking){ ticking=true; requestAnimationFrame(()=>{ parallax(); ticking=false; }); } },{passive:true});
+const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function show(id, keepScroll){
+  if(id==="sum"){ $("#view").className="sumv"; $("#view").innerHTML=sum(); document.querySelectorAll("#tabs a").forEach(a=>a.setAttribute("aria-current",a.dataset.id==="sum"?"page":"false"));
+    $("#what").textContent="สรุปงาน สิ่งที่ต้องเช็ก และไฟล์"; $("#fit").innerHTML=""; if(!keepScroll) scrollTo(0,0); return; }
+  const d=DIRS.find(x=>x.id===id)||DIRS[0];
+  $("#view").className=d.id; $("#view").innerHTML=RENDER[d.id]();
+  document.querySelectorAll("#tabs a").forEach(a=>a.setAttribute("aria-current",a.dataset.id===d.id?"page":"false"));
+  $("#what").textContent=`แบบ ${d.id.slice(1)} ${d.name} (ref ${d.ref}) · ${d.what}`;
+  $("#fit").innerHTML=`เข้ากับ Brand Book v2 ${[1,2,3,4,5].map(i=>`<i class="${i<=d.fit?"on":""}"></i>`).join("")}`;
+  $(".sim-slot").appendChild(simEl); simText();
+  if(!keepScroll) scrollTo(0,0);
+  if(!still) parallax(); else document.querySelectorAll("#view [data-depth]").forEach(el=>el.style.transform=`rotate(${el.dataset.rot||0}deg)`);
+  new IntersectionObserver((es,o)=>{ if(es[0].isIntersecting){ initThree(); o.disconnect(); } },{rootMargin:"300px"}).observe(simEl);
+}
+$("#tabs").innerHTML=DIRS.map(d=>`<a href="#${d.id}" data-id="${d.id}" role="tab">${d.id.slice(1)} · ${d.name}</a>`).join("")+`<a href="#sum" data-id="sum" role="tab">สรุป</a>`;
+document.addEventListener("click",e=>{
+  const t=e.target.closest("#tabs a"); if(t){ e.preventDefault(); history.replaceState(null,"","#"+t.dataset.id); show(t.dataset.id); return; }
+  const g=e.target.closest("[data-go]"); if(g){ e.preventDefault(); history.replaceState(null,"","#"+g.dataset.go); show(g.dataset.go); return; }
+  const a=e.target.closest('#view a[href^="#"]'); if(a){ e.preventDefault(); const el=document.getElementById(a.getAttribute("href").slice(1)); if(el) el.scrollIntoView({behavior:still?"auto":"smooth"}); return; }
+  const c=e.target.closest("[data-copy]"); if(c&&c.dataset.copy){ try{ navigator.clipboard.writeText(c.dataset.copy).then(()=>toast("คัดลอกข้อความแล้ว วางในแชท LINE ได้เลย"),()=>{}); }catch(_){} }
+  const f=e.target.closest(".faces button"); if(f){ document.querySelectorAll(".faces button.on").forEach(b=>b.classList.remove("on")); f.classList.add("on"); const l=$("#faceLab"); if(l) l.textContent=f.dataset.lab+" · ชิ้นนี้มีชิ้นเดียว"; }
+  const o=e.target.closest("[data-one] button"); if(o){ o.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b===o))); }
+  const st=e.target.closest("[data-st]"); if(st){ const out=st.parentElement.querySelector("output"); out.textContent=Math.max(2,Math.min(60,+out.textContent+ +st.dataset.st)); }
+  const fl=e.target.closest("[data-filter] button"); if(fl){ fl.parentElement.querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",String(b===fl)));
+    document.querySelectorAll("#view .card[data-kind]").forEach(cd=>cd.hidden=fl.dataset.k!=="all"&&cd.dataset.kind!==fl.dataset.k); }
+});
+document.addEventListener("input",e=>{ if(e.target.id==="org") document.querySelectorAll("[data-org]").forEach(b=>b.textContent=e.target.value.trim()||"บริษัทของคุณ"); });
+document.addEventListener("submit",e=>{ if(e.target.matches("[data-book]")){ e.preventDefault(); toast("mock: เว็บจริงจะส่งคำขอนี้ต่อไป LINE ของร้าน"); } });
+show((location.hash.match(/^#(d[1-6]|sum)$/)||[])[1]||"d1", true);
+</script>
