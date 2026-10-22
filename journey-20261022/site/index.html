@@ -1,0 +1,94 @@
+<title>OCT. 26 Customer Journey</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<style>
+.flow{overflow-x:auto}.flow svg{min-width:900px;width:100%;height:auto}
+.flow .box{fill:var(--paper);stroke:var(--line);stroke-width:1.5}.flow .hub{fill:var(--cobalt)}
+.flow .t{font:500 14px var(--body);fill:var(--ink)}.flow .hubt{fill:#FFFFFF}
+.flow .lab{font:600 15px var(--display);fill:var(--muted)}.flow .arr{stroke:var(--muted);stroke-width:1.5;fill:none}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">ฝ่ายการตลาด · 22 ต.ค. 2569</span><h1>Customer Journey ของ OCT. 26</h1>
+<p class="lead">ลูกค้าเจอเราได้ 2 ทาง คือที่บูธกับออนไลน์ ทั้งสองทางพาไปจบที่ LINE OA
+เพราะเป็นช่องทางเดียวที่เราทักลูกค้ากลับได้เองเมื่อมีของใหม่หรือรอบบูธถัดไป
+Shopee ใช้ปิดการขายออนไลน์ ส่วน IG กับ FB ใช้พาคนใหม่เข้ามา</p></header>
+<section><span class="eyebrow">ภาพรวม</span><h2>สองทาง จบที่เดียว</h2><div class="card flow"><svg viewBox="0 -10 975 270" role="img" aria-label="เส้นทางลูกค้าสองทาง ทั้งสองทางมาจบที่ LINE OA"><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--muted)"/></marker></defs><text x="0" y="28" class="lab">เจอที่บูธ</text><rect x="0" y="40" width="140" height="74" rx="13" class="box"/><text x="70.0" y="73.0" class="t" text-anchor="middle">เห็น IG/FB</text><text x="70.0" y="91.0" class="t" text-anchor="middle">หรือเดินผ่าน</text><path d="M144 77.0 h16" class="arr" marker-end="url(#a)"/><rect x="166" y="40" width="140" height="74" rx="13" class="box"/><text x="236.0" y="73.0" class="t" text-anchor="middle">แวะ</text><text x="236.0" y="91.0" class="t" text-anchor="middle">ลองแต่งชิ้นหนัง</text><path d="M310 77.0 h16" class="arr" marker-end="url(#a)"/><rect x="332" y="40" width="140" height="74" rx="13" class="box"/><text x="402.0" y="82.0" class="t" text-anchor="middle">ซื้อที่บูธ</text><path d="M476 77.0 h16" class="arr" marker-end="url(#a)"/><rect x="498" y="40" width="140" height="74" rx="13" class="hub"/><text x="568.0" y="73.0" class="t hubt" text-anchor="middle">แอด LINE</text><text x="568.0" y="91.0" class="t hubt" text-anchor="middle">ตอนจ่ายเงิน</text><path d="M642 77.0 h16" class="arr" marker-end="url(#a)"/><rect x="664" y="40" width="140" height="74" rx="13" class="hub"/><text x="734.0" y="73.0" class="t hubt" text-anchor="middle">LINE</text><text x="734.0" y="91.0" class="t hubt" text-anchor="middle">แจ้งของใหม่</text><path d="M808 77.0 h16" class="arr" marker-end="url(#a)"/><rect x="830" y="40" width="140" height="74" rx="13" class="box"/><text x="900.0" y="82.0" class="t" text-anchor="middle">กลับมาซื้อ</text><text x="0" y="158" class="lab">เจอออนไลน์</text><rect x="0" y="170" width="140" height="74" rx="13" class="box"/><text x="70.0" y="212.0" class="t" text-anchor="middle">เห็นโพสต์ IG</text><path d="M144 207.0 h16" class="arr" marker-end="url(#a)"/><rect x="166" y="170" width="140" height="74" rx="13" class="box"/><text x="236.0" y="212.0" class="t" text-anchor="middle">กดลิงก์ที่โปรไฟล์</text><path d="M310 207.0 h16" class="arr" marker-end="url(#a)"/><rect x="332" y="170" width="140" height="74" rx="13" class="box"/><text x="402.0" y="212.0" class="t" text-anchor="middle">ซื้อใน Shopee</text><path d="M476 207.0 h16" class="arr" marker-end="url(#a)"/><rect x="498" y="170" width="140" height="74" rx="13" class="hub"/><text x="568.0" y="203.0" class="t hubt" text-anchor="middle">การ์ดในกล่องชวนแอด</text><text x="568.0" y="221.0" class="t hubt" text-anchor="middle">LINE</text><path d="M642 207.0 h16" class="arr" marker-end="url(#a)"/><rect x="664" y="170" width="140" height="74" rx="13" class="hub"/><text x="734.0" y="203.0" class="t hubt" text-anchor="middle">LINE</text><text x="734.0" y="221.0" class="t hubt" text-anchor="middle">แจ้งของใหม่</text><path d="M808 207.0 h16" class="arr" marker-end="url(#a)"/><rect x="830" y="170" width="140" height="74" rx="13" class="box"/><text x="900.0" y="212.0" class="t" text-anchor="middle">กลับมาซื้อ</text></svg></div>
+<p class="cap">กล่องสีน้ำเงินคือจุดที่ลูกค้าเข้ามาอยู่ใน LINE OA</p></section>
+<section><span class="eyebrow">แต่ละช่องทาง</span><h2>ใช้ทำอะไร และไม่ใช้ทำอะไร</h2>
+<div class="tbl"><table><thead><tr><th>ช่องทาง</th><th>หน้าที่</th><th>ไม่ใช้ทำ</th></tr></thead><tbody><tr><td><b>Instagram</b></td><td>ให้คนเห็นแล้วจำได้ว่าของเราหน้าตาแบบไหน โทนเดียวกันทุกโพสต์</td><td class='cap'>ไม่ขายของในโพสต์ ลิงก์ไป LINE กับ Shopee อยู่ที่โปรไฟล์</td></tr><tr><td><b>Facebook</b></td><td>ข่าวบูธ วันเวลา สถานที่ และเรื่องของครอบครัว คนรุ่นพ่อแม่อยู่ที่นี่</td><td class='cap'>ไม่ใช้ตอบแชทยาว ๆ ตอบสั้นแล้วชวนไป LINE</td></tr><tr><td><b>บูธ</b></td><td>ให้จับของจริง ลองแต่งชิ้นหนัง คุยกับลูก ๆ และซื้อครั้งแรก</td><td class='cap'>ไม่ใช่ที่เดียวที่ขาย ทุกบิลต้องได้ LINE กลับไปด้วย</td></tr><tr><td><b>LINE OA</b></td><td>บ้านของลูกค้าที่รู้จักเราแล้ว แจ้งรอบบูธ ของใหม่ รุ่นวันเกิด ตอบคำถาม รับสั่งทำ</td><td class='cap'>ไม่ส่งข้อความถี่ เดือนละ 2–4 ครั้ง</td></tr><tr><td><b>Shopee</b></td><td>ที่จ่ายเงินและส่งของสำหรับคนที่ไม่ได้มาบูธ ได้รีวิวและความน่าเชื่อถือ</td><td class='cap'>ไม่ใช่ที่เล่าเรื่อง ทุกกล่องใส่การ์ดชวนแอด LINE</td></tr><tr><td><b>YouTube</b></td><td>คลิปเบื้องหลัง ลูก ๆ ทำงาน วันออกบูธ</td><td class='cap'>ไม่ต้องลงถี่ ลงเมื่อมีคลิปดี</td></tr><tr><td><b>เว็บ oct26brand.com</b></td><td>แคตตาล็อกและเรื่องแบรนด์สำหรับคนที่อยากรู้มากขึ้น</td><td class='cap'>ยังไม่ตรงกับ 7 แบบ ยังไม่ชี้คนไปจนกว่าจะแก้</td></tr></tbody></table></div></section>
+<section><span class="eyebrow">7 ขั้น</span><h2>ลูกค้าทำอะไร เราทำอะไร นับอะไร</h2>
+<div class="tbl"><table><thead><tr><th>ขั้น</th><th>ลูกค้า</th><th>เรา</th><th>นับ</th></tr></thead><tbody><tr><td style='white-space:nowrap'><b>1 · เห็น</b><br><span class='cap'>IG · FB · เพจผู้จัด · เดินผ่านบูธ</span></td><td>เห็นรูปหนังสีสวย ๆ เห็นว่าเป็นของที่ครอบครัวทำ</td><td>โพสต์ mood ใน IG โพสต์ข่าวบูธใน FB แท็กเพจผู้จัด X-stand หันหน้าเข้าทางเดิน</td><td class='cap'>ยอดเข้าถึง · ผู้ติดตามใหม่</td></tr><tr><td style='white-space:nowrap'><b>2 · แวะ</b><br><span class='cap'>บูธ</span></td><td>หยุดดู จับหนัง ลองเขียนชื่อหรือวาดลายบนชิ้นหนัง</td><td>ลูก ๆ ชวนลอง ยื่นชิ้นหนังให้จับ เล่าสั้น ๆ ว่าเศษหนังมาจากไหน</td><td class='cap'>คนที่แวะ · คนที่ลอง DIY</td></tr><tr><td style='white-space:nowrap'><b>3 · ซื้อครั้งแรก</b><br><span class='cap'>บูธ (เงินสด · พร้อมเพย์) หรือ Shopee</span></td><td>เลือก 1 ชิ้นหรือชุด 4 ลาย จ่ายเงิน</td><td>แนะนำชุดที่รองแก้ว 4 ลาย ห่อให้ ใส่การ์ดในถุง</td><td class='cap'>จำนวนบิล · ยอดต่อบิล</td></tr><tr><td style='white-space:nowrap'><b>4 · แอด LINE</b><br><span class='cap'>ตอนจ่ายเงิน · การ์ดในถุงหรือในกล่อง Shopee</span></td><td>สแกน QR แอด LINE OA</td><td>ลูก ๆ ชวนทุกบิล: แอด LINE แล้วรับ [ของที่ให้ — รอพ่อเบเลือก] และข่าวรอบบูธถัดไป</td><td class='cap'>เพื่อนใหม่ใน LINE เทียบกับจำนวนบิล (เป้า 3 ใน 10)</td></tr><tr><td style='white-space:nowrap'><b>5 · ใช้และเล่าต่อ</b><br><span class='cap'>บ้านลูกค้า · IG ของลูกค้า</span></td><td>ใช้ที่รองแก้วทุกวัน ถ่ายรูปลงสตอรี่</td><td>การ์ดชวนถ่ายรูปแล้วแท็ก @oct.26_brand เรารีโพสต์ลงสตอรี่และขอบคุณ</td><td class='cap'>จำนวนแท็ก · รีวิว Shopee</td></tr><tr><td style='white-space:nowrap'><b>6 · กลับมาซื้อ</b><br><span class='cap'>LINE OA → บูธรอบหน้า หรือ Shopee</span></td><td>สะสมลายใหม่ ซื้อเป็นของขวัญ</td><td>LINE แจ้งลายใหม่ รุ่นวันเกิด 26 ต.ค. และรอบบูธ · ชุดที่รองแก้วสะสมให้มีเหตุผลกลับมาเก็บลายที่ขาด</td><td class='cap'>ลูกค้าที่ซื้อครั้งที่ 2</td></tr><tr><td style='white-space:nowrap'><b>7 · ชวนคนอื่น</b><br><span class='cap'>LINE OA · ปากต่อปาก</span></td><td>ซื้อเป็นของขวัญ ของชำร่วย ของที่ระลึกบริษัท</td><td>รับสั่งทำจำนวนมากผ่าน LINE ป้ายห้อยของขวัญเขียนชื่อให้</td><td class='cap'>งานสั่งทำ · ลูกค้าที่มาจากการแนะนำ</td></tr></tbody></table></div>
+<p class="cap">ขั้นที่ 4 สำคัญที่สุดสำหรับงานนี้ คนที่ซื้อแล้วไม่ได้แอด LINE เราจะไม่มีทางทักกลับได้อีก</p></section>
+<section><span class="eyebrow">ต้องทำ</span><h2>ของที่ต้องเตรียม</h2>
+<div class="tbl"><table><thead><tr><th>อะไร</th><th>ขั้น</th><th>เมื่อไร</th></tr></thead><tbody><tr><td>ป้าย QR LINE ตั้งโต๊ะ A6</td><td class='mono'>4</td><td>คืนนี้ 22 ต.ค.</td></tr><tr><td>การ์ดใส่ถุงและกล่อง 9 × 5.5 ซม.: QR LINE · @oct.26_brand · วิธีดูแลหนัง · ชวนแท็กรูป</td><td class='mono'>4–5</td><td>คืนนี้ 22 ต.ค. (พิมพ์ร้านด่วน หรือพิมพ์บ้านแล้วตัด)</td></tr><tr><td>ประโยคชวนแอด LINE ให้ลูก ๆ พูดตอนรับเงิน</td><td class='mono'>4</td><td>คืนนี้ 22 ต.ค.</td></tr><tr><td>LINE OA: ข้อความต้อนรับ เมนูหลัก 4 ปุ่ม ตอบอัตโนมัติ</td><td class='mono'>4–6</td><td>ก่อน 23 ต.ค. 10:00</td></tr><tr><td>ใส่ลิงก์ LINE และ Shopee ในโปรไฟล์ IG และข้อมูลเพจ FB</td><td class='mono'>1–3</td><td>ก่อน 23 ต.ค.</td></tr><tr><td>ข้อความ LINE ส่งครั้งแรก: ขอบคุณที่แวะบูธ + รอบ 30 ต.ค.–1 พ.ย.</td><td class='mono'>6</td><td>จ. 27 ต.ค.</td></tr><tr><td>แท็กลูกค้าใน LINE ตามที่มา (บูธสัปดาห์ 1 · บูธสัปดาห์ 2 · Shopee)</td><td class='mono'>6</td><td>ทำทุกวันที่มีเพื่อนใหม่</td></tr></tbody></table></div></section>
+<section><h2>รอพ่อเบตัดสินใจ</h2><div class="card"><ol><li>แอด LINE แล้วได้อะไร: เช่น ส่วนลดครั้งหน้า 10 บาท · เขียนชื่อบนชิ้นหนังฟรี · ได้ข่าวลายใหม่ก่อนคนอื่น (เลือก 1 อย่าง ผมแนะนำเขียนชื่อฟรี เพราะไม่ลดราคาและใช้ของที่มีอยู่แล้ว)</li><li>ราคา 7 แบบ ยังเป็นราคาร่าง</li><li>ชุดที่รองแก้วสะสม: จะทำบัตรสะสมลายไหม (สะสมครบ 6 ลายได้อะไร) หรือแค่บอกใน LINE ว่ามีลายใหม่</li><li>ใครตอบแชท LINE ช่วงบูธ และตอบภายในกี่ชั่วโมง</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">journey-20261022/build.py</td><td>เนื้อหาทั้งหมดในหน้านี้</td></tr>
+<tr><td>Google Doc "OCT. 26 Customer Journey"</td><td>ข้อความชุดเดียวกัน ในโฟลเดอร์ OCT. 26 ไฟล์งาน</td></tr>
+<tr><td class="mono" style="white-space:nowrap">brand-20261014/line/</td><td>QR LINE OA 3 ขนาด</td></tr>
+</tbody></table></div></section></div><script>
+document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
+const t=document.getElementById(b.dataset.for);const s=t.innerText;
+const done=()=>{const o=b.textContent;b.textContent='คัดลอกแล้ว';setTimeout(()=>b.textContent=o,1400)};
+const sel=()=>{const r=document.createRange();r.selectNodeContents(t);const w=getSelection();w.removeAllRanges();w.addRange(r);b.textContent='เลือกข้อความแล้ว กดคัดลอก'};
+try{navigator.clipboard.writeText(s).then(done,sel)}catch(_){sel()}});
+</script>
