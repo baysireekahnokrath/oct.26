@@ -8,6 +8,7 @@ Family leather brand OCT. 26 (our crafted things.), its first collection SOI. 02
 - `website/` — the customer website for Cloudflare Pages: home, catalogue, product pages, pattern play (`build.py` → `website/public`).
 - `website/builder/` — OCT.26 Web Builder, the owner's no-code editor for the site (names, prices, sales lines, hide, sold out, booth notice): https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG
 - `play-20261021/` — mock-up of the website's pattern play: drag the six real pieces into a repeating tile (`build.py`).
+- `web-directions-20261022/` — six website directions with a 3D leather simulator, Brand Book v2 (mock-ups): https://claude.ai/artifact/1xTex5SX5dq6MJTR1se7f7
 - `website-mock-20261021/` — mock of the website for the booth: 7 SKUs, real photos, order bar (not live): https://claude.ai/artifact/E4BtLMaiyNGmTgY9dJGakF
 - `ux-20261021/` — UX/UI study for the customer website (findings, six principles, rough layouts, questions): https://claude.ai/artifact/MdtiWbf2jsQGY1gsAcD5XW
 - `diecut-leather-20261014/` — the six die-cut patterns (SVG, DXF, 1:1 PDF) and the cost sheet scripts.
