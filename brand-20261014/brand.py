@@ -410,7 +410,10 @@ H = BRAND["handle"]
 SOCIAL = {"instagram": "https://www.instagram.com/oct.26_brand/",
           "youtube": "https://www.youtube.com/@OCT.26_brand",
           "facebook": "https://www.facebook.com/oct26brand",
-          "web": "oct26brand.com"}          # registered 21 Oct, the customer website
+          "web": "oct26brand.com",
+          # LINE Official Account (owner, 22 Oct): basic ID from the QR file name; the QR in line/ opens lin.ee/O9AePgp,
+          # the owner's link is lin.ee/PKopJND (LINE makes a separate link per source, both add the same account)
+          "line": "https://lin.ee/PKopJND", "line_id": "@155riuqj"}          # registered 21 Oct, the customer website
 CHANNELS = [
     ("Facebook Page", "OCT. 26", SOCIAL["facebook"],
      "ชื่อเพจ OCT. 26 · ชื่อผู้ใช้ oct26brand (ตั้ง 21 ต.ค.) หมวด งานศิลปะและหัตถกรรม · ปุ่มหลัก ส่งข้อความ · อัลบั้มแยก SOI. 02 และ ห้าหมี Love",
