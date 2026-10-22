@@ -106,6 +106,27 @@ TIERS = [("t1", "ชั้น 1 · ชิ้นเปล่า", T1), ("t2", "�
          ("t2r", "ชั้น 2 · สำรอง เพิ่มเมื่อมีคนถาม", T2_RESERVE), ("t3", "ชั้น 3 · ชุดที่จัดไว้แล้ว", T3)]
 ALL = T1 + T2 + T2_RESERVE + T3
 
+# where each line stands today (stages of ../pd.py); the PD page keeps changes in its database
+STAGE = {"OC-01-22": "selling", "OC-02-24": "selling", "P-03": "selling", "OC-04-27": "selling", "OC-05-28": "selling",
+         "OC-07-31": "ready", "OC-03-26": "selling", "OC-MX-29": "selling", "OC-MX-32": "ready"}
+for _a in ALL:
+    _a["stage"] = STAGE.get(_a["key"], "hold" if _a["group"] == "t2r" else "idea")
+
+# the first board (brand.py, 30 products) in the new structure: in the range, an idea still to try,
+# waiting for a joint that passes, or out under the 22 Oct rules (assortment.DROP_OLD)
+BOARD_IN_RANGE = {1: "OC-01-22", 2: "OC-01-22", 22: "OC-01-22", 24: "OC-02-24", 26: "OC-03-26", 27: "OC-04-27",
+                  28: "OC-05-28", 29: "OC-MX-29"}
+BOARD_TRY = {25: "ชิ้นเดียว + ไม้เสียบ ต้องลองก่อนว่าหมุนได้จริง ถ้าได้เข้าชั้น 2"}
+BOARD_NOTE = {2: "เป็นไอเดียการใช้ของชิ้น 01"}
+
+def board_place(p):
+    """'range' | 'try' | 'joint' | 'out' for one brand.py product."""
+    n = p["n"]
+    if n in AS.DROP_OLD: return "out"
+    if n in BOARD_IN_RANGE: return "range"
+    if n in BOARD_TRY: return "try"
+    return "joint" if p["joints"] else "try"
+
 # every old SKU that is not a line above, and where it went
 _USE = "ไอเดียการใช้ของชิ้น {}"
 RETIRED = {

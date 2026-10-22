@@ -3,7 +3,7 @@
 //   GET  /api/config              {passcode: bool}  whether writes need the team passcode
 //   GET  /api/<col>               [{id, data}] newest first, col = items | tests | comments | reviews
 //   PUT  /api/items/<id>          set one board item (stage, blocker, note, or a whole idea)
-//   PUT  /api/reviews/<draft>     tick a SKU ผ่าน / ไม่ผ่าน {verdict, reason, name, seq, issued}; seq is its real number,
+//   PUT  /api/reviews/<draft>     tick a SKU ผ่าน / ไม่ผ่าน and its stage {verdict, reason, name, seq, issued, stage}; seq is its real number,
 //                                 refused (409) if another SKU holds it or this SKU already has a different one
 //   POST /api/tests               add a test result
 //   POST /api/comments            add a comment {item, name, text}
@@ -52,9 +52,11 @@ function clean(col, d, now) {
   }
   if (col === "reviews") {
     if (!["", "pass", "fail"].includes(d.verdict ?? "") || !str(d.reason ?? "", 300) || !str(d.name ?? "", 40) || !str(d.issued ?? "", 40)) return null;
+    if (d.stage !== undefined && !STAGES.has(d.stage)) return null;
     const seq = d.seq ?? null;
     if (seq !== null && !(Number.isInteger(seq) && seq >= SEQ_MIN && seq <= SEQ_MAX)) return null;
-    return {verdict: d.verdict || "", reason: (d.reason || "").trim(), name: (d.name || "").trim(), seq, issued: seq ? (d.issued || now) : "", updated: now};
+    return {verdict: d.verdict || "", reason: (d.reason || "").trim(), name: (d.name || "").trim(), seq, issued: seq ? (d.issued || now) : "",
+      ...(d.stage ? {stage: d.stage} : {}), updated: now};
   }
   if (col === "items") {
     if (d.stage !== undefined && !STAGES.has(d.stage)) return null;

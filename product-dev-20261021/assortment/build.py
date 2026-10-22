@@ -6,8 +6,8 @@ import assortment as AS, skucode, tiers as TR
 E = html.escape
 GEO = json.load(open(os.path.join(ROOT, "single50", "single50.json")))["geo"]
 DRAFT = skucode.drafts_for(AS.A)
-DRAFT.update(skucode.drafts([a["key"] for a in TR.ALL]))     # same numbers as the PD page tab ตรวจผ่าน
-PD_REVIEW = "https://claude.ai/artifact/SfbLavVZF6JAnZKXP75EFy#review"
+DRAFT.update(skucode.drafts([a["key"] for a in TR.ALL]))     # same numbers as the PD page tab สินค้า
+PD_REVIEW = "https://claude.ai/artifact/SfbLavVZF6JAnZKXP75EFy#products"
 # real numbers the owner had given when this page was built (PD database, reviews, 22 Oct 05:48 UTC); live list on the PD page
 TICKED = {"0001": 260001, "0002": 260002, "0003": 260003, "0004": 260004, "0005": 260005, "0006": 260006,
           "0008": 260007, "0009": 260008}
@@ -166,7 +166,7 @@ code{{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--c
 
 <section>
   <h2>ทุก SKU แยกตามชั้น</h2>
-  <p class="muted small">เลขร่างไม่เปลี่ยน เลขจริงคือที่เจ้าของติ๊กผ่านแล้ว ณ ตอนทำหน้านี้ ดูล่าสุดในหน้า PD แท็บตรวจผ่าน ราคาทุกตัวยังเป็นราคาร่าง</p>
+  <p class="muted small">เลขร่างไม่เปลี่ยน เลขจริงคือที่เจ้าของติ๊กผ่านแล้ว ณ ตอนทำหน้านี้ ดูล่าสุดในหน้า PD แท็บสินค้า ราคาทุกตัวยังเป็นราคาร่าง</p>
   {TIER_HTML}
 </section>
 
@@ -200,12 +200,12 @@ code{{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--c
 <section>
   <h2>ไฟล์และขั้นต่อไป</h2>
   <ul class="rules">
-    <li><b><code>product-dev-20261021/assortment/tiers.py</code></b><p>รายการ 3 ชั้น ไอเดียการใช้ของแต่ละลาย และ 43 เดิมไปไหน หน้านี้กับแท็บตรวจผ่านสร้างจากไฟล์นี้</p></li>
+    <li><b><code>product-dev-20261021/assortment/tiers.py</code></b><p>รายการ 3 ชั้น ไอเดียการใช้ของแต่ละลาย และ 43 เดิมไปไหน หน้านี้กับแท็บสินค้าสร้างจากไฟล์นี้</p></li>
     <li><b><code>assortment/skucode.py</code> · <code>draft_numbers.json</code></b><p>เลขร่างและเลขจริงแบบ IKEA เลขร่างไม่เลื่อน เลขจริงไม่ใช้ซ้ำ</p></li>
   </ul>
   <ol>
     <li>ตอบคำถามข้างบน</li>
-    <li>ติ๊กชั้น 2 และชิ้น 03 ในหน้า PD แท็บตรวจผ่าน</li>
+    <li>ติ๊กชั้น 2 และชิ้น 03 ในหน้า PD แท็บสินค้า</li>
     <li>26–29 ต.ค. ลองชั้น 2 ทั้ง {len(TR.T2)} แบบกับชิ้นจริง ซื้อเชือก ไม้ไผ่ ริบบิ้น ยางยืด การ์ด</li>
     <li>ทีมการตลาดเอาไอเดียการใช้ไปใส่แฟ้ม A4 และการ์ด งานบัญชีรวม 2 หน้าใน Shopee ที่เป็นชิ้น 01 เดียวกัน</li>
   </ol>

@@ -101,19 +101,19 @@ function x3dOpen(id) {
   const canvas = el("canvas", {class: "x-canvas", "aria-label": `ภาพ 3D ${i.name} ลากเพื่อหมุน`});
   const slider = el("input", {id: "x-explode", type: "range", min: "0", max: "100", value: "0"});
   const msg = el("span");
-  const send = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "ส่งเข้าบอร์ดเป็นไอเดีย"});
+  const send = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "ส่งเข้าไอเดียจากทีม"});
   send.addEventListener("click", async () => {
     send.disabled = true; msg.className = ""; msg.textContent = "กำลังส่ง…";
     const parts = Object.entries(i.pieces.reduce((a, c) => (a[c] = (a[c] || 0) + 1, a), {}));
     try {
       await db.collection("items").doc("x-" + i.id).set({kind: "idea", name: `${i.name} (${i.id})`, who: i.who, price: i.price, parts,
         joints: i.locks, extra: 0, pack: i.pack, stage: "idea", blocker: "", note: `ไขว้ 3D ${i.id}: ${i.dims}, ล็อก ${i.locks} จุด`, x3d: i.id, updated: new Date().toISOString()});
-      msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว ขั้นไอเดีย";
+      msg.className = "saved"; msg.textContent = "อยู่ในไอเดียจากทีมแล้ว ขั้นไอเดีย";
     } catch { msg.className = "err"; msg.textContent = "ส่งไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; send.disabled = !canWrite; }
   });
-  if (i.no06) { send.disabled = true; msg.className = "err"; msg.textContent = "ส่งเข้าบอร์ดไม่ได้ เพราะใช้ 06"; }
+  if (i.no06) { send.disabled = true; msg.className = "err"; msg.textContent = "ส่งไม่ได้ เพราะใช้ 06"; }
   const inBoard = !!over["x-" + i.id];
-  if (inBoard) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว"; }
+  if (inBoard) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในไอเดียจากทีมแล้ว"; }
   $("#dlg-body").replaceChildren(
     el("div", {class: "dlg-head x-head"},
       el("div", {}, el("p", {class: "eyebrow", text: `${i.id} · ${i.group}`}), el("h3", {id: "d-name", text: i.name}), el("p", {class: "small muted", text: i.use})),

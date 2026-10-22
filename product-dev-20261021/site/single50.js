@@ -68,9 +68,10 @@ function s50Svg(item, big = false) {
 function s50Cards() {
   const groups = [...new Set(S50.items.map(i => i.group))];
   const chip = (key, label, n) => el("button", {class: "chip", type: "button", "aria-pressed": String(sFilter === key), onclick: () => { sFilter = key; s50Cards(); }}, `${label} ${n}`);
-  $("#s-filters").replaceChildren(chip("all", "ทั้งหมด", S50.items.length), chip("ok", "ผ่านกฎใหม่", S50.items.filter(i => !i.drop).length),
+  $("#s-filters").replaceChildren(chip("all", "ทั้งหมด", S50.items.length), chip("used", "ใช้แล้ว", S50.items.filter(i => i.place).length),
+    chip("ok", "ผ่านกฎ ยังไม่ใช้", S50.items.filter(i => !i.drop && !i.place).length),
     chip("07", "ใช้ 07", S50.items.filter(i => i.uses07).length), ...groups.map(g => chip(g, g, S50.items.filter(i => i.group === g).length)));
-  const shown = S50.items.filter(i => sFilter === "all" || (sFilter === "ok" && !i.drop) || (sFilter === "07" && i.uses07) || i.group === sFilter);
+  const shown = S50.items.filter(i => sFilter === "all" || (sFilter === "ok" && !i.drop && !i.place) || (sFilter === "used" && i.place) || (sFilter === "07" && i.uses07) || i.group === sFilter);
   $("#s-cards").replaceChildren(...shown.map(i => el("button", {class: "xcard scard", type: "button", onclick: () => s50Open(i.id)},
     el("div", {class: "s50wrap"}, s50Svg(i)),
     el("div", {},
@@ -78,24 +79,25 @@ function s50Cards() {
       el("span", {class: "name", text: i.name}),
       el("span", {class: "meta num", text: `${i.piecesTxt}`}),
       el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${Math.round(i.margin * 100)}%`}),
-      i.drop ? el("span", {class: "blk", text: "ตัดออก: " + i.drop}) : null))));
+      i.drop ? el("span", {class: "blk", text: "ตัดออก: " + i.drop}) : i.place ? el("span", {class: "ok", text: i.place}) : el("span", {class: "meta", text: "ยังไม่ใช้"})))));
 }
 
 function s50Open(id) {
   const i = S50.items.find(x => x.id === id); if (!i) return;
   const msg = el("span");
-  const send = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "ส่งเข้าบอร์ดเป็นไอเดีย"});
+  const send = el("button", {class: "btn primary", type: "button", disabled: !canWrite, text: "ส่งเข้าไอเดียจากทีม"});
   send.addEventListener("click", async () => {
     send.disabled = true; msg.className = ""; msg.textContent = "กำลังส่ง…";
     try {
       await db.collection("items").doc("s-" + i.id).set({kind: "idea", name: `${i.name} (${i.id})`, who: i.who, price: i.price, parts: i.pieces,
         joints: 0, extra: i.extras.reduce((a, [, t]) => a + t, 0), pack: i.pack, stage: "idea", blocker: i.load ? "รับแรง ต้องใช้หนัง 2 มม." : "",
         note: `${i.how} · ลองแบบนี้: ${i.test}`, s50: i.id, updated: new Date().toISOString()});
-      msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว ขั้นไอเดีย";
+      msg.className = "saved"; msg.textContent = "อยู่ในไอเดียจากทีมแล้ว ขั้นไอเดีย";
     } catch { msg.className = "err"; msg.textContent = "ส่งไม่ได้ ลองใหม่อีกครั้ง"; send.disabled = !canWrite; }
   });
-  if (i.drop) { send.disabled = true; msg.className = "err"; msg.textContent = "ส่งเข้าบอร์ดไม่ได้ เพราะตัดออกแล้ว"; }
-  if (over["s-" + i.id]) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในบอร์ดแล้ว"; }
+  if (i.drop) { send.disabled = true; msg.className = "err"; msg.textContent = "ส่งไม่ได้ เพราะตัดออกแล้ว"; }
+  if (i.place) { send.disabled = true; msg.className = "saved"; msg.textContent = i.place; }
+  if (over["s-" + i.id]) { send.disabled = true; msg.className = "saved"; msg.textContent = "อยู่ในไอเดียจากทีมแล้ว"; }
   $("#dlg-body").replaceChildren(
     el("div", {class: "dlg-head x-head"},
       el("div", {}, el("p", {class: "eyebrow", text: `${i.id} · ${i.group}`}), el("h3", {id: "d-name", text: i.name}), el("p", {class: "small muted", text: i.who})),

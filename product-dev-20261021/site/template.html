@@ -81,7 +81,10 @@ section.view{display:grid;gap:var(--s5)}
 .card > div{min-width:0;display:grid;gap:4px}
 .card .name{font-family:var(--display);font-weight:600;line-height:1.3}
 .card .meta{font-size:var(--t-1);color:var(--muted)}
-.card .blk{font-size:var(--t-1);color:var(--bad)}
+.card .blk{font-size:var(--t-1);color:var(--bad)}.card .ok{font-size:var(--t-1);color:var(--good)}
+.risk .big{font-family:var(--latin);font-weight:500;font-size:var(--t2);text-align:center}
+.ipanels{margin-bottom:var(--s3)}.ipanel{display:grid;gap:var(--s4)}
+.rv-stage{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap}
 .pill{display:inline-flex;align-items:center;font-size:var(--t-1);font-weight:600;border-radius:999px;padding:1px 10px 1px 8px;background:var(--chip);width:max-content}
 .star{color:var(--tomato);font-size:var(--t-1);font-weight:600}
 .thumb{width:56px;height:56px}
@@ -214,7 +217,7 @@ ul.plain{list-style:none;margin:0;padding:0;display:grid;gap:var(--s3)}
 .xcard > div{padding:0 var(--s3);display:grid;gap:2px;min-width:0}
 .xcard .name{font-family:var(--display);font-weight:600;line-height:1.3}
 .xcard .meta{font-size:var(--t-1);color:var(--muted)}
-.xcard .blk{font-size:var(--t-1);color:var(--bad);font-weight:600}
+.xcard .blk{font-size:var(--t-1);color:var(--bad);font-weight:600}.xcard .ok{font-size:var(--t-1);color:var(--good);font-weight:600}
 .x-head{grid-template-columns:1fr auto}
 .x-stage{position:relative;background:var(--chip);border-radius:13px;overflow:hidden}
 .x-canvas{display:block;width:100%;height:min(56vh,380px);touch-action:none;cursor:grab}
@@ -236,15 +239,13 @@ table.compat td.ok{color:var(--good);font-weight:600}
   __WORDMARK__
   <p class="eyebrow">Product Development · ฝ่ายพัฒนาสินค้า</p>
   <h1>ทุกสินค้าเดินผ่าน 5 ขั้น และ 4 ประตู ก่อนขึ้นโต๊ะบูธ</h1>
-  <p class="lede">ที่นี่คือที่ทำงานของฝ่าย เปลี่ยนขั้นของสินค้า บันทึกผลทดสอบ และคิดไอเดียใหม่ ทุกคนในบ้านเห็นบอร์ดเดียวกัน</p>
+  <p class="lede">ที่นี่คือที่ทำงานของฝ่าย เปลี่ยนขั้นของสินค้า บันทึกผลทดสอบ และคิดไอเดียใหม่ ทุกคนในบ้านเห็นข้อมูลชุดเดียวกัน</p>
 </header>
 
 <nav class="tabs" aria-label="ส่วนของหน้า">
   <a href="#overview" data-tab="overview">ภาพรวม</a>
-  <a href="#review" data-tab="review">ตรวจผ่าน</a>
-  <a href="#board" data-tab="board">บอร์ดสินค้า</a>
-  <a href="#single" data-tab="single">ชิ้นเดียว 50</a>
-  <a href="#cross" data-tab="cross">ไขว้ 3D</a>
+  <a href="#products" data-tab="products">สินค้า</a>
+  <a href="#ideas" data-tab="ideas">คลังไอเดีย</a>
   <a href="#tests" data-tab="tests">ทดสอบ</a>
   <a href="#process" data-tab="process">ขั้นตอน</a>
   <a href="#plan" data-tab="plan">แผน 12 เดือน</a>
@@ -255,17 +256,18 @@ table.compat td.ok{color:var(--good);font-weight:600}
 <section class="view" id="v-overview">
   <div class="stats" id="stats"></div>
   <div class="block">
-    <h2>สินค้าทั้ง 30 แบบอยู่ขั้นไหน</h2>
+    <h2 id="pipe-title">สินค้าอยู่ขั้นไหน</h2>
     <div class="pipe" id="pipe" role="img"></div>
     <div class="legend" id="legend"></div>
   </div>
   <div class="block">
-    <h2>ขายที่บูธ 7 SKU ชิ้นเดียว</h2>
+    <h2>ขายที่บูธ 23 ต.ค.</h2>
     <p class="muted" id="status-note"></p>
     <ul class="risk" id="booth-list"></ul>
   </div>
   <div class="block">
-    <h3>ตอนนี้ห้ามใช้หรือยังขายไม่ได้</h3>
+    <h3>คลังไอเดีย ยังไม่ใช่สินค้า</h3>
+    <p class="small muted">ไอเดียเข้าเป็นสินค้าได้เมื่อผ่านกฎ ลองกับชิ้นจริง แล้วเจ้าของติ๊กผ่านในแท็บสินค้า ไอเดียที่ต้องต่อชิ้นรอจนกว่าข้อต่อจะผ่านการทดสอบ</p>
     <ul class="risk" id="blocked-list"></ul>
   </div>
   <div class="block">
@@ -285,9 +287,89 @@ table.compat td.ok{color:var(--good);font-weight:600}
   </div>
 </section>
 
-<section class="view" id="v-board" hidden>
+
+
+
+
+<section class="view" id="v-products" hidden>
+  <div class="block">
+    <p class="eyebrow">Products · สินค้า</p>
+    <h2>สินค้ามีรายการเดียว: 3 ชั้น</h2>
+    <p class="muted">สินค้าแบ่ง 3 ชั้น: ชิ้นเปล่า (ลายละ 1 SKU) · ชิ้นบวกของเพิ่มจริง เช่น เชือก ไม้ ริบบิ้น · ชุดที่จัดไว้แล้ว
+      ใช้ชิ้นเดียวกันทำอะไรได้บ้างเป็นไอเดียบนการ์ด ไม่ใช่ SKU ใหม่ ไอเดียอื่นทั้งหมดอยู่ในแท็บคลังไอเดีย</p>
+    <p class="muted">แต่ละตัวติ๊กผ่านหรือไม่ผ่านได้เลย กดเปิดเพื่อเปลี่ยนขั้น ดูผลทดสอบ และเขียนความเห็น</p>
+    <p class="muted">ทุก SKU มีเลขร่าง 4 หลัก (0001 ขึ้นไป) ตัวที่ติ๊ก <b>ผ่าน</b> ได้เลขจริง 8 หลักแบบ IKEA เช่น <b class="num">260.001.72</b>
+      เลขจริงรันตามลำดับที่ผ่าน (260 มาจาก OCT. 26) สองหลักท้ายเป็นเลขตรวจ ถ้าพิมพ์ผิดหนึ่งตัวหรือสลับสองตัว เลขจะไม่ตรงกับสินค้าไหนเลย
+      ตัวที่ติ๊ก <b>ไม่ผ่าน</b> ใส่เหตุผลได้ ไม่ใส่ก็ได้ เลขจริงที่ออกแล้วไม่ให้สินค้าอื่น ถ้าเปลี่ยนเป็นไม่ผ่านภายหลัง เลขจะพักไว้ และกลับมาเมื่อผ่านอีกครั้ง</p>
+    <label for="rv-name" class="small" style="max-width:280px;display:grid;gap:4px">ชื่อคนตรวจ <input id="rv-name" maxlength="40" placeholder="ชื่อของคุณ" autocomplete="name"></label>
+  </div>
+  <div class="stats" id="rv-stats"></div>
+  <div class="chips" id="rv-filters" role="group" aria-label="กรองตามผลตรวจ"></div>
+  <div id="rv-list"></div>
+  <details id="rv-retired" class="rv-retired"></details>
+  <div class="block">
+    <h3>เลขจริงที่ออกแล้ว</h3>
+    <div class="scroll" id="rv-real"></div>
+    <div class="row"><button class="btn" type="button" id="rv-copy">คัดลอกไปวางในชีต</button><span id="rv-copymsg" class="small"></span></div>
+    <p class="small muted">เลขจริงยังไม่ได้ใส่ในชีตบัญชีและ Shopee ให้งานบัญชีวางจากปุ่มนี้ 7 SKU ที่ขายอยู่ยังใช้รหัสเดิม (OC-…) จนกว่าจะเปลี่ยนในชีตและ Shopee</p>
+  </div>
+</section>
+
+<section class="view" id="v-ideas" hidden>
+  <div class="block">
+    <p class="eyebrow">Idea bank · คลังไอเดีย</p>
+    <h2>ไอเดียทั้งหมด ยังไม่ใช่สินค้า</h2>
+    <p class="muted">สินค้ามีรายการเดียวคือแท็บสินค้า ที่นี่คือที่มาของสินค้า ไอเดียจะเป็นสินค้าได้เมื่อ ผ่านกฎ → ลองกับชิ้นจริง → เจ้าของติ๊กผ่าน ไอเดียที่ต้องต่อชิ้นรอจนกว่าข้อต่อจะผ่านการทดสอบ</p>
+  </div>
+  <div class="chips ipanels" id="ip-tabs" role="group" aria-label="ส่วนของคลังไอเดีย"></div>
+  <div class="ipanel" id="ip-single">
+
+  <div class="block">
+    <p class="eyebrow">Single piece · ชิ้นเดียว</p>
+    <h2>50 สินค้าใหม่ ชิ้นเดียว ไม่ต้องต่อชิ้น</h2>
+    <p class="muted">ทำตามเอกสารสถานะ: ไม่ใช้ 06 ไม่ต่อชิ้นกับชิ้น ใช้หนัง 1.0–1.2 มม. และชิ้นที่ตัดไว้แล้ว ร่องของแต่ละชิ้นใช้รับของอย่างอื่น เช่น ไม้ ริบบิ้น หลอด การ์ด ยางยืด เข็มกลัด หรือขอบภาชนะ ทุกแบบยังไม่ได้ลองกับของจริง แตะการ์ดเพื่อดูวิธีลอง ส่งเข้าไอเดียจากทีม หรือเขียนความเห็น</p>
+  </div>
+  <div class="stats">__S_STATS__</div>
+  <div class="chips" id="s-filters" role="group" aria-label="กรองไอเดียชิ้นเดียว"></div>
+  <div class="xgrid" id="s-cards"></div>
+  </div>
+  <div class="ipanel" id="ip-cross" hidden>
+
+  <div class="block">
+    <p class="eyebrow">Cross Lab · ไขว้ 3D</p>
+    <h2>50 แบบที่เสียบไขว้เป็น 3D จากบล็อก 6 แบบที่มีอยู่</h2>
+    <p class="muted">ทุกแบบใช้ชิ้นหนังแผ่นเรียบจากบล็อกเดิม ไม่ต้องพับ ไม่ใช้กาว ไม่ต้องสั่งบล็อกใหม่ ตำแหน่งปีกและร่องอ่านจากไฟล์บล็อกจริง แล้วให้คอมพิวเตอร์ประกอบและตรวจทุกแบบ แตะการ์ดเพื่อหมุนดู แยกชิ้น และส่งแบบที่ชอบเข้าไอเดียจากทีม</p>
+  </div>
+  <p class="notice" id="x-joints"></p>
+  <div class="stats" id="x-stats">__X_STATS__</div>
+  <div class="block">
+    <h3>ปีกไหนเข้าร่องไหนได้</h3>
+    <p class="small muted">ปีกต้องสั้นกว่าร่อง 0 ถึง 1 มม. จึงแน่นพอดีและไม่ฉีก ตัวเลขคือความยาวเป็นมิลลิเมตร ส่วน 02 กังหันไม่มีปีก ใช้ร่องเปิดจากขอบถึงกลางชิ้น ไขว้กันเองแบบช่องกล่องไข่</p>
+    <div class="scroll">__X_COMPAT__</div>
+  </div>
+  <div class="chips" id="x-filters" role="group" aria-label="กรองตามกลุ่ม"></div>
+  <p class="small muted" id="x-status">กำลังโหลดภาพ 3D…</p>
+  <div class="xgrid" id="x-cards"></div>
+  <div class="block">
+    <h3>ที่คอมพิวเตอร์ตรวจไม่ได้ ต้องลองกับหนังจริง</h3>
+    <ul class="plain rules">
+      <li><b>ความหนาหนัง</b><p>การตรวจคิดว่าร่องเป็นรอยมีดบาง ๆ และหนังหนาราว 2 มม. ถ้าหนังหนากว่านี้ ร่องอาจต้องกว้างขึ้นตอนตัด</p></li>
+      <li><b>ความแข็งแรงและการตั้ง</b><p>แบบไหนตั้งแล้วล้ม หรือล็อกหลวมเมื่อเขย่า รู้ได้จากการลองเท่านั้น ใช้ทดสอบ 5 ข้อในแท็บทดสอบ</p></li>
+      <li><b>ลำดับการต่อ</b><p>ล็อกสุดท้ายของลูกบาศก์ต้องงอหนังเล็กน้อยเพื่อสอด ลองกับกระดาษแข็งพิมพ์จาก PDF 1:1 ก่อนตัดหนัง</p></li>
+    </ul>
+  </div>
+  </div>
+  <div class="ipanel" id="ip-board" hidden>
+    <div class="block">
+      <h2>บอร์ดเดิม 30 สินค้า</h2>
+      <p class="muted">สินค้าชุดแรกจาก brand.py ก่อนมีกฎใหม่ ตอนนี้ทุกตัวมีที่อยู่แล้ว ความเห็นและผลทดสอบเดิมยังอยู่ครบ แตะการ์ดเพื่อเปิด</p>
+    </div>
+    <div id="board-groups"></div>
+  </div>
+  <div class="ipanel" id="ip-team" hidden>
+
   <div class="row" style="justify-content:space-between">
-    <h2>บอร์ดสินค้า</h2>
+    <p class="muted">ไอเดียที่ทีมเพิ่มเอง หรือส่งมาจากชิ้นเดียว 50 และไขว้ 3D แตะการ์ดเพื่อเปลี่ยนขั้น บันทึก หรือเขียนความเห็น</p>
     <button class="btn primary" id="new-idea">เพิ่มไอเดีย</button>
   </div>
   <div class="chips" id="filters" role="group" aria-label="กรองตามขั้น"></div>
@@ -308,67 +390,8 @@ table.compat td.ok{color:var(--good);font-weight:600}
       <label for="i-price">ราคาตั้ง บาท<input id="i-price" type="number" min="1" value="99" inputmode="numeric"></label>
     </div>
     <div class="calc" id="i-calc"></div>
-    <div class="row"><button class="btn primary" type="submit" id="i-save">เพิ่มลงบอร์ด</button><button class="btn" type="button" id="i-cancel">ยกเลิก</button><span id="i-msg"></span></div>
+    <div class="row"><button class="btn primary" type="submit" id="i-save">เพิ่มไอเดีย</button><button class="btn" type="button" id="i-cancel">ยกเลิก</button><span id="i-msg"></span></div>
   </form>
-</section>
-
-<section class="view" id="v-review" hidden>
-  <div class="block">
-    <p class="eyebrow">Review · ตรวจผ่าน</p>
-    <h2>ติ๊กผ่านหรือไม่ผ่าน ทีละ SKU</h2>
-    <p class="muted">สินค้าแบ่ง 3 ชั้น: ชิ้นเปล่า (ลายละ 1 SKU) · ชิ้นบวกของเพิ่มจริง เช่น เชือก ไม้ ริบบิ้น · ชุดที่จัดไว้แล้ว
-      ใช้ชิ้นเดียวกันทำอะไรได้บ้างเป็นไอเดียบนการ์ด ไม่ใช่ SKU ใหม่</p>
-    <p class="muted">ทุก SKU มีเลขร่าง 4 หลัก (0001 ขึ้นไป) ตัวที่ติ๊ก <b>ผ่าน</b> ได้เลขจริง 8 หลักแบบ IKEA เช่น <b class="num">260.001.72</b>
-      เลขจริงรันตามลำดับที่ผ่าน (260 มาจาก OCT. 26) สองหลักท้ายเป็นเลขตรวจ ถ้าพิมพ์ผิดหนึ่งตัวหรือสลับสองตัว เลขจะไม่ตรงกับสินค้าไหนเลย
-      ตัวที่ติ๊ก <b>ไม่ผ่าน</b> ใส่เหตุผลได้ ไม่ใส่ก็ได้ เลขจริงที่ออกแล้วไม่ให้สินค้าอื่น ถ้าเปลี่ยนเป็นไม่ผ่านภายหลัง เลขจะพักไว้ และกลับมาเมื่อผ่านอีกครั้ง</p>
-    <label for="rv-name" class="small" style="max-width:280px;display:grid;gap:4px">ชื่อคนตรวจ <input id="rv-name" maxlength="40" placeholder="ชื่อของคุณ" autocomplete="name"></label>
-  </div>
-  <div class="stats" id="rv-stats"></div>
-  <div class="chips" id="rv-filters" role="group" aria-label="กรองตามผลตรวจ"></div>
-  <div id="rv-list"></div>
-  <details id="rv-retired" class="rv-retired"></details>
-  <div class="block">
-    <h3>เลขจริงที่ออกแล้ว</h3>
-    <div class="scroll" id="rv-real"></div>
-    <div class="row"><button class="btn" type="button" id="rv-copy">คัดลอกไปวางในชีต</button><span id="rv-copymsg" class="small"></span></div>
-    <p class="small muted">เลขจริงยังไม่ได้ใส่ในชีตบัญชีและ Shopee ให้งานบัญชีวางจากปุ่มนี้ 7 SKU ที่ขายอยู่ยังใช้รหัสเดิม (OC-…) จนกว่าจะเปลี่ยนในชีตและ Shopee</p>
-  </div>
-</section>
-
-<section class="view" id="v-single" hidden>
-  <div class="block">
-    <p class="eyebrow">Single piece · ชิ้นเดียว</p>
-    <h2>50 สินค้าใหม่ ชิ้นเดียว ไม่ต้องต่อชิ้น</h2>
-    <p class="muted">ทำตามเอกสารสถานะ: ไม่ใช้ 06 ไม่ต่อชิ้นกับชิ้น ใช้หนัง 1.0–1.2 มม. และชิ้นที่ตัดไว้แล้ว ร่องของแต่ละชิ้นใช้รับของอย่างอื่น เช่น ไม้ ริบบิ้น หลอด การ์ด ยางยืด เข็มกลัด หรือขอบภาชนะ ทุกแบบยังไม่ได้ลองกับของจริง แตะการ์ดเพื่อดูวิธีลอง ส่งเข้าบอร์ด หรือเขียนความเห็น</p>
-  </div>
-  <div class="stats">__S_STATS__</div>
-  <div class="chips" id="s-filters" role="group" aria-label="กรองไอเดียชิ้นเดียว"></div>
-  <div class="xgrid" id="s-cards"></div>
-</section>
-
-<section class="view" id="v-cross" hidden>
-  <div class="block">
-    <p class="eyebrow">Cross Lab · ไขว้ 3D</p>
-    <h2>50 แบบที่เสียบไขว้เป็น 3D จากบล็อก 6 แบบที่มีอยู่</h2>
-    <p class="muted">ทุกแบบใช้ชิ้นหนังแผ่นเรียบจากบล็อกเดิม ไม่ต้องพับ ไม่ใช้กาว ไม่ต้องสั่งบล็อกใหม่ ตำแหน่งปีกและร่องอ่านจากไฟล์บล็อกจริง แล้วให้คอมพิวเตอร์ประกอบและตรวจทุกแบบ แตะการ์ดเพื่อหมุนดู แยกชิ้น และส่งแบบที่ชอบเข้าบอร์ด</p>
-  </div>
-  <p class="notice" id="x-joints"></p>
-  <div class="stats" id="x-stats">__X_STATS__</div>
-  <div class="block">
-    <h3>ปีกไหนเข้าร่องไหนได้</h3>
-    <p class="small muted">ปีกต้องสั้นกว่าร่อง 0 ถึง 1 มม. จึงแน่นพอดีและไม่ฉีก ตัวเลขคือความยาวเป็นมิลลิเมตร ส่วน 02 กังหันไม่มีปีก ใช้ร่องเปิดจากขอบถึงกลางชิ้น ไขว้กันเองแบบช่องกล่องไข่</p>
-    <div class="scroll">__X_COMPAT__</div>
-  </div>
-  <div class="chips" id="x-filters" role="group" aria-label="กรองตามกลุ่ม"></div>
-  <p class="small muted" id="x-status">กำลังโหลดภาพ 3D…</p>
-  <div class="xgrid" id="x-cards"></div>
-  <div class="block">
-    <h3>ที่คอมพิวเตอร์ตรวจไม่ได้ ต้องลองกับหนังจริง</h3>
-    <ul class="plain rules">
-      <li><b>ความหนาหนัง</b><p>การตรวจคิดว่าร่องเป็นรอยมีดบาง ๆ และหนังหนาราว 2 มม. ถ้าหนังหนากว่านี้ ร่องอาจต้องกว้างขึ้นตอนตัด</p></li>
-      <li><b>ความแข็งแรงและการตั้ง</b><p>แบบไหนตั้งแล้วล้ม หรือล็อกหลวมเมื่อเขย่า รู้ได้จากการลองเท่านั้น ใช้ทดสอบ 5 ข้อในแท็บทดสอบ</p></li>
-      <li><b>ลำดับการต่อ</b><p>ล็อกสุดท้ายของลูกบาศก์ต้องงอหนังเล็กน้อยเพื่อสอด ลองกับกระดาษแข็งพิมพ์จาก PDF 1:1 ก่อนตัดหนัง</p></li>
-    </ul>
   </div>
 </section>
 
@@ -504,6 +527,7 @@ function bestMarks(id) {
 function myName() { try { return localStorage.getItem("pd-name") || ""; } catch { return ""; } }
 function threadLabel(key) {
   if (key === "general") return "พูดคุยทั้งทีม";
+  if (key.startsWith("r-") && typeof RV !== "undefined") { const a = RV.items.find(x => "r-" + x.draft === key); if (a) return `${a.name} (ร่าง ${a.draft})`; }
   const p = D.products.find(x => x.id === key); if (p) return `${p.n}. ${p.name}`;
   const x = typeof X3D !== "undefined" && X3D.items.find(y => y.id === key); if (x) return `${x.id} ${x.name}`;
   const s = typeof S50 !== "undefined" && S50.items.find(y => y.id === key); if (s) return `${s.id} ${s.name}`;
@@ -545,9 +569,12 @@ function commentsBlock(key, title = "ความเห็น") {
   return box;
 }
 function openThreadFor(key) {
-  if (D.products.some(p => p.id === key) || (over[key] && over[key].kind === "idea")) { go("board"); openItem(key); }
-  else if (typeof X3D !== "undefined" && X3D.items.some(x => x.id === key)) { go("cross"); x3dOpen(key); }
-  else if (typeof S50 !== "undefined" && S50.items.some(x => x.id === key)) { go("single"); s50Open(key); }
+  if (key.startsWith("r-")) { go("products"); openProduct(key.slice(2)); }
+  else if (RV.items.some(a => a.legacy.includes(key))) { go("products"); openProduct(RV.items.find(a => a.legacy.includes(key)).draft); }
+  else if (D.products.some(p => p.id === key)) { go("ideas", "board"); openItem(key); }
+  else if (over[key] && over[key].kind === "idea") { go("ideas", "team"); openItem(key); }
+  else if (typeof X3D !== "undefined" && X3D.items.some(x => x.id === key)) { go("ideas", "cross"); x3dOpen(key); }
+  else if (typeof S50 !== "undefined" && S50.items.some(x => x.id === key)) { go("ideas", "single"); s50Open(key); }
   else { go("overview"); $("#c-general").scrollIntoView({behavior: "smooth"}); }
 }
 let generalBox = null;
@@ -558,26 +585,28 @@ function renderComments() {
       el("div", {class: "row"}, el("b", {text: threadLabel(c.item)}), el("span", {class: "small muted", text: `${String(c.name || "")} · ${when(c.at)}`})),
       el("p", {class: "small", text: String(c.text || "").slice(0, 160)}));
     return li;
-  }) : [el("li", {}, el("p", {class: "small muted", text: "ยังไม่มีความเห็น เปิดสินค้าหรือแบบ 3D แล้วเขียนได้เลย"}))]));
+  }) : [el("li", {}, el("p", {class: "small muted", text: "ยังไม่มีความเห็น เปิดสินค้าหรือไอเดียแล้วเขียนได้เลย"}))]));
   if (!generalBox) { generalBox = commentsBlock("general", "พูดคุยทั้งทีม เรื่องที่ไม่ได้เป็นของสินค้าตัวใดตัวหนึ่ง"); $("#c-general").replaceChildren(generalBox); }
   generalBox._draw();
   if (openThread && openThread.isConnected) openThread._draw();
 }
 
-// ------------------------------------------------------------ overview
+// ------------------------------------------------------------ overview: the range (tab สินค้า) first, the idea bank after
 function renderOverview() {
-  const all = items(), prods = all.filter(i => i.kind === "product");
-  const count = k => all.filter(i => i.stage === k).length;
-  const ideas = all.filter(i => i.kind === "idea").length;
-  const booth = D.booth.map(b => ({...prods.find(p => p.n === b.n), sku: b.sku}));
-  const uses07 = prods.filter(p => p.parts.some(([c]) => c === "07"));
-  const multi = prods.filter(p => p.joints > 0);
+  const range = RV.items, stageOf = a => rvStage(a);
+  const count = k => range.filter(a => stageOf(a) === k).length;
+  const passed = range.filter(a => verdictOf(a.draft) === "pass").length;
+  const team = items().filter(i => i.kind === "idea").length;
+  const joint = D.products.filter(p => p.place === "joint").length;
   $("#stats").replaceChildren(
-    el("div", {class: "stat"}, el("span", {class: "small muted", text: "สินค้าบนบอร์ด"}), el("b", {text: all.length}), el("span", {class: "small muted", text: `30 แบบเดิม${ideas ? ` + ไอเดียใหม่ ${ideas}` : ""}`})),
-    el("div", {class: "stat"}, el("span", {class: "small muted", text: "ขายที่บูธ"}), el("b", {text: booth.length}), el("span", {class: "small muted", text: "SKU ชิ้นเดียว ราคาร่าง"})),
-    el("div", {class: "stat alert"}, el("span", {class: "small muted", text: "ต้องต่อชิ้น รอข้อต่อผ่าน"}), el("b", {text: multi.length}), el("span", {class: "small muted", text: "ยังไม่ขายงานนี้"})),
-    el("div", {class: "stat"}, el("span", {class: "small muted", text: "เปลี่ยน 06 เป็น 07"}), el("b", {text: uses07.length}), el("span", {class: "small muted", text: "06 ไม่ได้ตัด ใช้ 07 แทน"})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "สินค้า 3 ชั้น"}), el("b", {text: range.length}),
+      el("span", {class: "small muted", text: `เริ่ม ${range.filter(a => a.group !== "t2r").length} · สำรอง ${range.filter(a => a.group === "t2r").length}`})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "เจ้าของติ๊กผ่าน"}), el("b", {text: passed}), el("span", {class: "small muted", text: "ได้เลขจริงแล้ว"})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "คลังไอเดีย"}), el("b", {text: S50.items.length + X3D.items.length + joint + team}),
+      el("span", {class: "small muted", text: `ชิ้นเดียว ${S50.items.length} · 3D ${X3D.items.length} · บอร์ดเดิม ${joint}${team ? ` · ทีม ${team}` : ""}`})),
+    el("div", {class: "stat alert"}, el("span", {class: "small muted", text: "รอข้อต่อผ่าน"}), el("b", {text: joint + X3D.items.length}), el("span", {class: "small muted", text: "ต้องต่อชิ้น ยังขายไม่ได้"})),
   );
+  $("#pipe-title").textContent = `สินค้า ${range.length} รายการอยู่ขั้นไหน`;
   const pipe = $("#pipe"); pipe.replaceChildren();
   pipe.setAttribute("aria-label", D.stages.map(s => `${s.name} ${count(s.key)}`).join(", "));
   for (const s of D.stages) {
@@ -585,37 +614,51 @@ function renderOverview() {
     pipe.append(el("span", {style: `flex:${c};background:${stageColor(s.key)};color:${stageText(s.key)}`, title: `${s.name} ${c}`, text: c}));
   }
   $("#legend").replaceChildren(...D.stages.map(s => el("span", {}, el("i", {style: `background:${stageColor(s.key)}`}), `${s.name} ${count(s.key)}`)));
-  $("#status-note").textContent = `ตามเอกสาร "OCT. 26 สถานะล่าสุด" วันที่ ${D.statusDate} ${D.jointsOpen} ถ้าเอกสารนั้นเปลี่ยน ให้เชื่อเอกสารก่อนหน้านี้`;
-
-  const row = (p, sub) => el("li", {},
-    thumb(p.parts[0]?.[0] || "05"),
-    el("div", {}, el("b", {text: `${p.sku ? p.sku + " · " : ""}${p.n}. ${p.name}`}), " ", pill(p.stage),
-      el("p", {class: "why" + (p.blocker ? " block-txt" : ""), text: p.blocker || `ต้องลองกับ: ${p.check}`}),
-      el("p", {class: "why num", text: sub(p)})),
-    el("button", {class: "btn", type: "button", onclick: () => openItem(p.id), text: "เปิด"}));
-  $("#booth-list").replaceChildren(...booth.map(p => row(p, x => `${x.price} บาท (ราคาร่าง)`)));
-  $("#blocked-list").replaceChildren(...multi.slice().sort((a, b) => a.n - b.n).map(p => row(p, x => `ต่อ ${x.joints} จุด รอข้อต่อผ่านการทดสอบ`)));
+  $("#status-note").textContent = `ชิ้นหนัง 01–05 แผ่นละ 30 บาท เป็นราคาบูธอย่างเดียว ไม่ลดตามจำนวน ตามเอกสาร "OCT. 26 สถานะล่าสุด" ${D.jointsOpen}`;
+  const row = (a, sub) => el("li", {},
+    thumb(a.pieces[0]?.[0] || "05"),
+    el("div", {}, el("b", {text: a.name}), " ", pill(stageOf(a)), el("p", {class: "why num", text: sub(a)})),
+    el("button", {class: "btn", type: "button", onclick: () => openProduct(a.draft), text: "เปิด"}));
+  const booth = range.filter(a => a.tier === 1 && ["01", "02", "03", "04", "05"].includes(a.pieces[0][0]));
+  $("#booth-list").replaceChildren(...booth.map(a => row(a, x => `ร่าง ${x.draft} · ที่บูธ ${x.price} บาท · ใช้ทำ ${x.uses.slice(0, 3).join(" · ")}`)));
+  const go2 = (panel, label, n, sub) => el("li", {}, el("span", {class: "big num", text: n}),
+    el("div", {}, el("b", {text: label}), el("p", {class: "why", text: sub})),
+    el("button", {class: "btn", type: "button", onclick: () => { go("ideas", panel); window.scrollTo({top: 0}); }, text: "ดู"}));
+  $("#blocked-list").replaceChildren(
+    go2("single", "ชิ้นเดียว 50", S50.items.length, `อยู่ในสินค้าหรือเป็นไอเดียการใช้แล้ว ${S50.items.filter(i => i.place).length} · ตัดออก ${S50.items.filter(i => i.drop).length}`),
+    go2("cross", "ไขว้ 3D 50", X3D.items.length, "ต้องต่อชิ้นทุกแบบ รอข้อต่อผ่านการทดสอบ"),
+    go2("board", "บอร์ดเดิม 30", D.products.length, `อยู่ในสินค้าแล้ว ${D.products.filter(p => p.place === "range").length} · รอข้อต่อ ${joint} · ต้องลอง ${D.products.filter(p => p.place === "try").length} · ตัดออก ${D.products.filter(p => p.place === "out").length}`),
+    go2("team", "ไอเดียจากทีม", team, "ไอเดียที่ทีมเพิ่มเองหรือส่งมาจากชิ้นเดียวและ 3D"));
 }
 
-// ------------------------------------------------------------ board
+// ------------------------------------------------------------ idea bank: team ideas and the first board
+function ideaCard(i) {
+  const marks = bestMarks(i.id);
+  const margin = i.price ? Math.round((i.price - i.cost) / i.price * 100) : 0;
+  return el("button", {class: "card", type: "button", onclick: () => openItem(i.id)},
+    thumb(i.parts[0]?.[0] || "05"),
+    el("div", {},
+      el("span", {class: "name", text: (i.n ? `${i.n}. ` : "") + i.name}),
+      el("span", {class: "row"}, i.kind === "idea" ? pill(i.stage) : null, i.kind === "idea" ? el("span", {class: "tag", text: "ไอเดียจากทีม"}) : null),
+      el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${margin}%`}),
+      el("span", {class: "marks"}, ...D.tests.map(t => el("span", {class: "mark " + marks[t.key], title: t.name, text: (marks[t.key] === "pass" ? "✓ " : marks[t.key] === "fail" ? "✗ " : "") + t.name}))),
+      i.placeNote ? el("span", {class: i.place === "range" ? "ok" : "blk", text: i.placeNote}) : (i.blocker ? el("span", {class: "blk", text: i.blocker}) : null)));
+}
 function renderBoard() {
-  const all = items();
+  const all = items().filter(i => i.kind === "idea");
   const chip = (key, label, n) => el("button", {class: "chip", type: "button", "aria-pressed": String(filter === key), onclick: () => { filter = key; renderBoard(); }}, label + ` ${n}`);
   $("#filters").replaceChildren(chip("all", "ทั้งหมด", all.length), ...D.stages.map(s => chip(s.key, s.name, all.filter(i => i.stage === s.key).length)));
   const shown = all.filter(i => filter === "all" || i.stage === filter);
-  $("#cards").replaceChildren(...shown.map(i => {
-    const marks = bestMarks(i.id);
-    const margin = i.price ? Math.round((i.price - i.cost) / i.price * 100) : 0;
-    return el("button", {class: "card", type: "button", onclick: () => openItem(i.id)},
-      thumb(i.parts[0]?.[0] || "05"),
-      el("div", {},
-        el("span", {class: "name", text: (i.n ? `${i.n}. ` : "") + i.name}),
-        el("span", {class: "row"}, pill(i.stage), i.hero ? el("span", {class: "star", text: "★ หน้าบูธ"}) : null, i.kind === "idea" ? el("span", {class: "tag", text: "ไอเดียใหม่"}) : null),
-        el("span", {class: "meta num", text: `${i.price} บาท · กำไร ${margin}%` + (i.stock ? ` · บูธ ${i.stock} ชิ้น` : "")}),
-        el("span", {class: "marks"}, ...D.tests.map(t => el("span", {class: "mark " + marks[t.key], title: t.name, text: (marks[t.key] === "pass" ? "✓ " : marks[t.key] === "fail" ? "✗ " : "") + t.name}))),
-        i.blocker ? el("span", {class: "blk", text: i.blocker}) : null));
-  }));
-  if (!shown.length) $("#cards").append(el("p", {class: "muted", text: "ยังไม่มีสินค้าในขั้นนี้"}));
+  $("#cards").replaceChildren(...shown.map(ideaCard));
+  if (!shown.length) $("#cards").append(el("p", {class: "muted", text: all.length ? "ไม่มีไอเดียในขั้นนี้" : "ยังไม่มีไอเดียจากทีม กดเพิ่มไอเดีย หรือส่งมาจากชิ้นเดียว 50 และไขว้ 3D"}));
+  const prods = items().filter(i => i.kind === "product");
+  const groups = [["range", "อยู่ในสินค้าแล้ว", "ย้ายไปแท็บสินค้า ใช้ชื่อและเลขร่างใหม่"], ["try", "ชิ้นเดียว ต้องลองก่อน", "ถ้าลองผ่าน เข้าสินค้าชั้น 2"],
+    ["joint", "รอข้อต่อผ่านการทดสอบ", "ต้องต่อชิ้น ขายไม่ได้จนกว่าข้อต่อจะผ่าน"], ["out", "ตัดออกตามกฎ 22 ต.ค.", "โดนอาหารหรือเป็นของเด็กเล็ก"]];
+  $("#board-groups").replaceChildren(...groups.map(([k, label, sub]) => {
+    const its = prods.filter(p => p.place === k);
+    return its.length ? el("div", {class: "block"}, el("h3", {}, label, " ", el("span", {class: "muted num", text: its.length})), el("p", {class: "small muted", text: sub}),
+      el("div", {class: "grid"}, ...its.map(ideaCard))) : null;
+  }).filter(Boolean));
 }
 
 // ------------------------------------------------------------ item dialog
@@ -655,13 +698,14 @@ function openItem(id) {
       i.stock ? el("dt", {text: "สต็อกบูธ"}) : null, i.stock ? el("dd", {text: `${i.stock} ชิ้น`}) : null,
       i.check ? el("dt", {text: "ต้องลองกับ"}) : null, i.check ? el("dd", {text: i.check}) : null),
     i.steps.length ? el("div", {}, el("p", {class: "small muted", text: "ขั้นตอนบนการ์ดวิธีต่อ"}), el("ol", {class: "steps"}, ...i.steps.map(s => el("li", {text: s})))) : null,
+    i.placeNote ? el("p", {class: "notice", text: `บอร์ดเดิม: ${i.placeNote}`}) : null,
     el("div", {class: "block"}, el("p", {class: "small muted", text: "ขั้น"}), picks),
     el("label", {for: "d-blocker"}, "ติดอะไรอยู่", blocker),
     el("label", {for: "d-note"}, "บันทึก", note),
     el("div", {class: "row"}, save,
       el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = id; drawTestForm(); }, text: "บันทึกการทดสอบ"}),
-      i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null,
-      i.s50 ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("single"); s50Open(i.s50); }, text: "ดูแบบ"}) : null, msg),
+      i.x3d ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("ideas", "cross"); x3dOpen(i.x3d); }, text: "ดู 3D"}) : null,
+      i.s50 ? el("button", {class: "btn", type: "button", onclick: () => { $("#dlg").close(); go("ideas", "single"); s50Open(i.s50); }, text: "ดูแบบ"}) : null, msg),
     el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
     (openThread = commentsBlock(i.x3d || i.s50 || id)),
   );
@@ -671,13 +715,17 @@ function openItem(id) {
 // ------------------------------------------------------------ tests
 const triState = {};
 function drawTestForm() {
-  const id = $("#t-item").value, i = items().find(x => x.id === id);
-  $("#t-check").textContent = i?.check ? `ต้องลองกับ: ${i.check}` : "";
+  const id = $("#t-item").value, i = items().find(x => x.id === id), a = RV.items.find(x => "r-" + x.draft === id);
+  $("#t-check").textContent = a ? `ลองแบบนี้: ${a.how}` : i?.check ? `ต้องลองกับ: ${i.check}` : "";
 }
 function initTestForm() {
   const sel = $("#t-item");
   const cur = sel.value;
-  sel.replaceChildren(...items().map(i => el("option", {value: i.id, text: (i.n ? `${i.n}. ` : "ใหม่ · ") + i.name})));
+  const its = items();
+  sel.replaceChildren(
+    el("optgroup", {label: "สินค้า 3 ชั้น"}, ...RV.items.map(a => el("option", {value: "r-" + a.draft, text: `${a.name} (ร่าง ${a.draft})`}))),
+    el("optgroup", {label: "ไอเดียจากทีม"}, ...its.filter(i => i.kind === "idea").map(i => el("option", {value: i.id, text: i.name}))),
+    el("optgroup", {label: "บอร์ดเดิม"}, ...its.filter(i => i.kind === "product" && i.place !== "out").map(i => el("option", {value: i.id, text: `${i.n}. ${i.name}`}))));
   if (cur) sel.value = cur;
   if (!$("#t-tester").options.length) $("#t-tester").replaceChildren(...D.testers.map(t => el("option", {value: t, text: t})));
   if (!$("#t-tri").children.length) {
@@ -693,16 +741,15 @@ function initTestForm() {
   drawTestForm();
 }
 function logRow(t) {
-  const i = items().find(x => x.id === t.item);
   const when = t.at ? new Date(t.at).toLocaleString("th-TH", {day: "numeric", month: "short", hour: "2-digit", minute: "2-digit"}) : "";
   return el("li", {},
-    el("div", {class: "row"}, el("b", {text: i ? (i.n ? `${i.n}. ` : "") + i.name : t.item}), el("span", {class: "small muted", text: `${t.tester || ""} · ${when}` + (t.seconds ? ` · ${t.seconds} วินาที` : "")})),
+    el("div", {class: "row"}, el("b", {text: threadLabel(t.item)}), el("span", {class: "small muted", text: `${t.tester || ""} · ${when}` + (t.seconds ? ` · ${t.seconds} วินาที` : "")})),
     el("span", {class: "marks"}, ...D.tests.map(x => el("span", {class: "mark " + (t[x.key] || ""), text: (t[x.key] === "pass" ? "✓ " : t[x.key] === "fail" ? "✗ " : "– ") + x.name}))),
     t.note ? el("p", {class: "small", text: t.note}) : null);
 }
 function renderLog() {
   const list = $("#log");
-  list.replaceChildren(...(tests.length ? tests.slice(0, 40).map(logRow) : [el("li", {}, el("p", {class: "muted small", text: "ยังไม่มีผลทดสอบ เลือกสินค้า กดผ่านหรือไม่ผ่านทีละข้อ แล้วกดบันทึกผล ผลจะขึ้นที่นี่และบนการ์ดในบอร์ด"}))]));
+  list.replaceChildren(...(tests.length ? tests.slice(0, 40).map(logRow) : [el("li", {}, el("p", {class: "muted small", text: "ยังไม่มีผลทดสอบ เลือกสินค้า กดผ่านหรือไม่ผ่านทีละข้อ แล้วกดบันทึกผล ผลจะขึ้นที่นี่และในหน้าของสินค้านั้น"}))]));
 }
 $("#t-item").addEventListener("change", drawTestForm);
 $("#test-form").addEventListener("submit", async e => {
@@ -719,16 +766,18 @@ $("#test-form").addEventListener("submit", async e => {
     for (const t of D.tests) triState[t.key] = "";
     document.querySelectorAll("#t-tri .seg").forEach(s => s._draw());
     $("#t-sec").value = ""; $("#t-note").value = "";
-    const i = items().find(x => x.id === id);
+    const i = items().find(x => x.id === id), a = RV.items.find(x => "r-" + x.draft === id);
     const passAll = D.tests.every(t => bestMarks(id)[t.key] === "pass" || rec[t.key] === "pass");
     const testers = new Set([...testsFor(id).map(x => x.tester), rec.tester]);
-    if (i && i.stage === "proto" && passAll && testers.size >= 2) {
+    if (a ? rvStage(a) === "proto" : i && i.stage === "proto") if (passAll && testers.size >= 2) {
       msg.replaceChildren("บันทึกแล้ว ผ่านครบ 5 ข้อจาก 2 คนขึ้นไป ",
         el("button", {class: "btn", type: "button", text: "ย้ายไป ทดสอบผ่าน", onclick: async ev => {
           ev.target.disabled = true;
-          const base = i.kind === "idea" ? {...over[id]} : {};
-          try { await db.collection("items").doc(id).set({...base, stage: "tested", blocker: i.blocker, note: i.note, updated: new Date().toISOString()}); msg.textContent = "ย้ายแล้ว"; }
-          catch { msg.className = "err"; msg.textContent = "ย้ายไม่ได้ ลองใหม่จากบอร์ด"; }
+          try {
+            if (a) await saveReview(a.draft, {stage: "tested"});
+            else await db.collection("items").doc(id).set({...(i.kind === "idea" ? {...over[id]} : {}), stage: "tested", blocker: i.blocker, note: i.note, updated: new Date().toISOString()});
+            msg.textContent = "ย้ายแล้ว";
+          } catch { msg.className = "err"; msg.textContent = "ย้ายไม่ได้ ลองใหม่อีกครั้ง"; }
         }}));
     }
   } catch { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
@@ -768,7 +817,7 @@ $("#idea-form").addEventListener("submit", async e => {
   try {
     await db.collection("items").doc(id).set({kind: "idea", name: $("#i-name").value.trim().slice(0, 60), who: $("#i-who").value.trim().slice(0, 80),
       price, parts, joints, extra, pack: $("#i-pack").value, stage: "idea", blocker: "", note: "", updated: new Date().toISOString()});
-    msg.className = "saved"; msg.textContent = "เพิ่มลงบอร์ดแล้ว";
+    msg.className = "saved"; msg.textContent = "เพิ่มในไอเดียจากทีมแล้ว";
     $("#idea-form").reset(); calcIdea(); filter = "idea"; renderBoard();
   } catch { msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง หรือขอสิทธิ์แก้ไขจากเจ้าของหน้า"; }
   $("#i-save").disabled = !canWrite;
@@ -793,15 +842,27 @@ __S50_JS__
 
 __REVIEW_JS__
 
-// ------------------------------------------------------------ tabs
-const TABS = ["overview", "review", "board", "single", "cross", "tests", "process", "plan"];
-let crossReady = false, singleReady = false;
-function go(tab) {
+// ------------------------------------------------------------ tabs (old links #review #board #single #cross still land in the right place)
+const TABS = ["overview", "products", "ideas", "tests", "process", "plan"];
+const OLD_TAB = {review: ["products"], board: ["ideas", "board"], single: ["ideas", "single"], cross: ["ideas", "cross"]};
+const PANELS = [["single", "ชิ้นเดียว 50"], ["cross", "ไขว้ 3D 50"], ["board", "บอร์ดเดิม 30"], ["team", "ไอเดียจากทีม"]];
+let crossReady = false, singleReady = false, panel = "single";
+function goPanel(p) {
+  if (!PANELS.some(([k]) => k === p)) p = "single";
+  panel = p;
+  for (const [k] of PANELS) $("#ip-" + k).hidden = k !== p;
+  const team = items().filter(i => i.kind === "idea").length;
+  $("#ip-tabs").replaceChildren(...PANELS.map(([k, label]) => el("button", {class: "chip", type: "button", "aria-pressed": String(k === p),
+    onclick: () => { goPanel(k); try { localStorage.setItem("pd-panel", k); } catch {} }}, k === "team" ? `${label} ${team}` : label)));
+  if (p === "cross" && !crossReady) { crossReady = true; x3dCards(); }
+  if (p === "single" && !singleReady) { singleReady = true; s50Cards(); }
+}
+function go(tab, sub) {
+  if (OLD_TAB[tab]) [tab, sub = sub] = OLD_TAB[tab];
   if (!TABS.includes(tab)) tab = "overview";
   for (const t of TABS) $("#v-" + t).hidden = t !== tab;
-  if (tab === "cross" && !crossReady) { crossReady = true; x3dCards(); }
-  if (tab === "single" && !singleReady) { singleReady = true; s50Cards(); }
-  if (tab === "review") renderReview();
+  if (tab === "ideas") goPanel(sub || panel);
+  if (tab === "products") renderReview();
   document.querySelectorAll("nav.tabs a").forEach(a => a.dataset.tab === tab ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   try { localStorage.setItem("pd-tab", tab); } catch {}
 }
@@ -819,7 +880,8 @@ renderProcess(); initIdea(); initReview(); setWritable(false); renderAll();
 $("#x-joints").textContent = `${D.jointsOpen} ทุกแบบในแท็บนี้เป็นไอเดียที่ผ่านแค่การตรวจรูปทรงในคอมพิวเตอร์ (สถานะ ${D.statusDate})`;
 {
   let start = location.hash.slice(1);
-  if (!TABS.includes(start)) { try { start = localStorage.getItem("pd-tab") || "overview"; } catch { start = "overview"; } }
+  if (!TABS.includes(start) && !OLD_TAB[start]) { try { start = localStorage.getItem("pd-tab") || "overview"; } catch { start = "overview"; } }
+  try { panel = localStorage.getItem("pd-panel") || panel; } catch {}
   go(start);
 }
 
@@ -838,7 +900,7 @@ __DB_ADAPTER__
     for (const k of Object.keys(over)) delete over[k];
     for (const d of snap.docs) over[d.id] = d.data();
     renderAll();
-  }, () => { note.hidden = false; note.textContent = "เชื่อมบอร์ดสดไม่ได้ในตอนนี้ ลองเปิดหน้าใหม่"; });
+  }, () => { note.hidden = false; note.textContent = "เชื่อมข้อมูลสดไม่ได้ในตอนนี้ ลองเปิดหน้าใหม่"; });
   db.collection("tests").orderBy("at", "desc").limit(300).onSnapshot(snap => {
     tests = snap.docs.map(d => ({id: d.id, ...d.data()}));
     renderAll();
@@ -846,11 +908,11 @@ __DB_ADAPTER__
   db.collection("reviews").onSnapshot(snap => {
     for (const k of Object.keys(reviews)) delete reviews[k];
     for (const d of snap.docs) reviews[d.id] = d.data();
-    fixClashes(); renderReview();
+    fixClashes(); renderReview(); renderOverview();
   }, () => {});
   db.collection("comments").orderBy("at", "desc").limit(1000).onSnapshot(snap => {
     comments = snap.docs.map(d => ({id: d.id, ...d.data()})).filter(c => typeof c.item === "string");
-    renderComments();
+    renderComments(); renderReview();
   }, () => {});
 })();
 </script>

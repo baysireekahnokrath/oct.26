@@ -114,11 +114,31 @@ xname = lambda n, t: f"{n} {t:g} บาท"
 REVIEW = dict(
     groups=[[g, label] for g, label, _ in TR.TIERS],
     items=[dict(draft=DRAFT[a["key"]], old=a["key"] if a["key"] in LIVE else "", name=a["name"], group=a["group"],
+                stage=a["stage"], how=a["how"], tier=a["tier"],
+                legacy=[f"p{n:02d}" for n, k in TR.BOARD_IN_RANGE.items() if k == a["key"]],
                 price=a["price"], cost=a["cost"], margin=a["margin"], pieces=a["pieces"] or [["05", 1]], note=a["note"],
                 extras=[xname(n, t) for n, t in a["extras"]],
                 uses=[u for u, _ in TR.USES[a["pieces"][0][0]]] if a["tier"] == 1 else []) for a in TR.ALL],
     retired=[dict(draft=DRAFT[k], name=TR.OLD[k]["name"], reason=r, into=DRAFT.get(t, "")) for k, (r, t) in
              sorted(TR.RETIRED.items(), key=lambda kv: DRAFT[kv[0]])])
+# the first board and the idea lists, placed in the new structure
+RANGE_NAME = {a["key"]: (DRAFT[a["key"]], a["name"]) for a in TR.ALL}
+for p in DATA["products"]:
+    src = next(q for q in B.PRODUCTS if q["n"] == p["n"])
+    p["place"] = TR.board_place(src)
+    if p["place"] == "range":
+        d, nm = RANGE_NAME[TR.BOARD_IN_RANGE[p["n"]]]
+        p["placeNote"] = TR.BOARD_NOTE.get(p["n"], f"อยู่ในสินค้าแล้ว: ร่าง {d} {nm}")
+    elif p["place"] == "try": p["placeNote"] = TR.BOARD_TRY.get(p["n"], "ชิ้นเดียว ต้องลองก่อน")
+    elif p["place"] == "out": p["placeNote"] = p["blocker"]
+    else: p["placeNote"] = f"ต่อ {p['joints']} จุด รอข้อต่อผ่านการทดสอบ"
+S_PLACE = {}
+for k, a in TR.OLD.items():
+    if not a["src"].startswith("S"): continue
+    if k in RANGE_NAME: S_PLACE[a["src"]] = "อยู่ในสินค้าแล้ว: " + RANGE_NAME[k][1]
+    elif k in TR.RETIRED: S_PLACE.setdefault(a["src"], TR.RETIRED[k][0])
+for i in S50["items"]: i["place"] = S_PLACE.get(i["id"], "")
+S50_JS = open(os.path.join(HERE, "single50.js")).read().replace("__S50__", json.dumps(S50, ensure_ascii=False, separators=(",", ":")))
 REVIEW_JS = open(os.path.join(HERE, "review.js")).read().replace("__REVIEW__", json.dumps(REVIEW, ensure_ascii=False, separators=(",", ":")))
 
 TEMPLATE = open(os.path.join(HERE, "template.html")).read()

@@ -16,11 +16,14 @@ const realCode = seq => { const s = String(seq).padStart(6, "0"); return `${s.sl
 const seqOf = r => Number.isInteger(r?.seq) && r.seq >= REAL_START ? r.seq : null;
 const verdictOf = d => reviews[d]?.verdict === "pass" || reviews[d]?.verdict === "fail" ? reviews[d].verdict : "";
 const nextSeq = () => Math.max(REAL_START - 1, ...Object.values(reviews).map(r => seqOf(r) || 0)) + 1;
+const rvStage = a => STAGE[reviews[a.draft]?.stage] ? reviews[a.draft].stage : a.stage;
 const REASONS = ["ไม่สวย", "ราคาไม่คุ้ม", "ทำยากหรือช้า", "ไม่แข็งแรง", "ซ้ำกับตัวอื่น", "ขัดกฎ"];
 
 async function saveReview(d, patch) {
   const cur = reviews[d] || {};
-  const doc = {verdict: cur.verdict || "", reason: cur.reason || "", name: cur.name || "", seq: seqOf(cur), issued: cur.issued || "", ...patch,
+  const a = RV.items.find(x => x.draft === d);
+  const doc = {verdict: cur.verdict || "", reason: cur.reason || "", name: cur.name || "", seq: seqOf(cur), issued: cur.issued || "",
+    stage: STAGE[cur.stage] ? cur.stage : (a?.stage || "idea"), ...patch,
     updated: new Date().toISOString()};
   if (doc.verdict === "pass" && !doc.seq) {              // first pass: take the next real number
     for (let tries = 0, floor = 0; ; tries++) {
@@ -29,7 +32,44 @@ async function saveReview(d, patch) {
       catch (e) { if (e?.code !== "already_exists" || tries > 5) throw e; floor = doc.seq + 1; }   // taken a moment ago: try the next one
     }
   } else await db.collection("reviews").doc(d).set(doc);
-  reviews[d] = doc; renderReview();
+  reviews[d] = doc; renderReview(); renderOverview();
+}
+
+// one product: stage, details, tests and comments (old board threads for the same piece are shown too)
+function openProduct(d) {
+  const a = RV.items.find(x => x.draft === d); if (!a) return;
+  const key = "r-" + d, msg = el("span");
+  let stage = rvStage(a);
+  const picks = el("div", {class: "stagepick", role: "group", "aria-label": "ขั้น"});
+  const drawPicks = () => picks.replaceChildren(...D.stages.map(s => el("button", {type: "button", "aria-pressed": String(stage === s.key), disabled: !canWrite,
+    onclick: async () => {
+      const was = stage; stage = s.key; drawPicks(); msg.className = "small"; msg.textContent = "กำลังบันทึก…";
+      try { await saveReview(d, {stage}); msg.className = "saved"; msg.textContent = "บันทึกขั้นแล้ว"; }
+      catch { stage = was; drawPicks(); msg.className = "err"; msg.textContent = "บันทึกไม่ได้ ลองใหม่อีกครั้ง"; }
+    }}, el("i", {style: `display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:${stageColor(s.key)}`}), s.name)));
+  drawPicks();
+  const ids = [key, ...a.legacy];
+  const hist = tests.filter(t => ids.includes(t.item));
+  const oldCmts = comments.filter(c => a.legacy.includes(c.item));
+  const seq = seqOf(reviews[d]), v = verdictOf(d);
+  $("#dlg-body").replaceChildren(
+    el("div", {class: "dlg-head"}, thumb(a.pieces[0]?.[0] || "05", "thumb big"),
+      el("div", {}, el("p", {class: "eyebrow num", text: `ร่าง ${d}` + (seq ? ` · ${v === "pass" ? "เลขจริง" : "เลขจริงพักไว้"} ${realCode(seq)}` : " · ยังไม่ได้เลขจริง")}),
+        el("h3", {id: "d-name", text: a.name}), el("p", {class: "small muted", text: a.how})),
+      el("button", {class: "x", type: "button", "aria-label": "ปิด", onclick: () => $("#dlg").close(), text: "×"})),
+    el("dl", {class: "spec num"},
+      el("dt", {text: "ชิ้นหนัง"}), el("dd", {text: a.pieces.map(([c, q]) => `${c} × ${q}`).join(" + ") || "-"}),
+      a.extras.length ? el("dt", {text: "ของเพิ่ม"}) : null, a.extras.length ? el("dd", {text: a.extras.join(" · ")}) : null,
+      el("dt", {text: "ราคา / ต้นทุน"}), el("dd", {text: `${a.price} / ${a.cost.toFixed(2)} บาท · กำไรขั้นต้น ${Math.round(a.margin * 100)}%`}),
+      a.uses.length ? el("dt", {text: "ใช้ทำ"}) : null, a.uses.length ? el("dd", {text: a.uses.join(" · ")}) : null,
+      a.note ? el("dt", {text: "หมายเหตุ"}) : null, a.note ? el("dd", {text: a.note}) : null),
+    el("div", {class: "block"}, el("p", {class: "small muted", text: "ขั้น (กดเพื่อเปลี่ยน บันทึกทันที)"}), picks),
+    el("div", {class: "row"}, el("button", {class: "btn", type: "button", text: "บันทึกการทดสอบ",
+      onclick: () => { $("#dlg").close(); go("tests"); $("#t-item").value = key; drawTestForm(); window.scrollTo({top: 0}); }}), msg),
+    el("div", {class: "block"}, el("p", {class: "small muted", text: `ผลทดสอบ ${hist.length} ครั้ง`}), el("ul", {class: "log"}, ...hist.slice(0, 6).map(logRow))),
+    oldCmts.length ? el("div", {class: "cmts"}, el("p", {class: "small muted", text: "ความเห็นเดิมจากบอร์ด"}), el("ul", {}, ...oldCmts.slice().reverse().map(cmtRow))) : null,
+    (openThread = commentsBlock(key)));
+  if (!$("#dlg").open) $("#dlg").showModal();
 }
 
 // Two browsers can pass two SKUs in the same moment and take the same number. The earlier one keeps it;
@@ -71,7 +111,10 @@ function rvRow(a) {
     seq ? el("div", {class: "realno" + (v === "pass" ? "" : " parked")},
       el("span", {class: "small", text: v === "pass" ? "เลขจริง" : "เลขจริง (พักไว้)"}), el("b", {class: "num", text: realCode(seq)})) : null);
   const fs = el("fieldset", {class: "rv-pick"}, el("legend", {class: "sr", text: `ผลตรวจ ${a.name}`}), ...radios);
-  const box = el("li", {class: "rv-row" + (v ? " is-" + v : "")}, head, el("div", {class: "rv-act"}, fs, msg));
+  const nC = comments.filter(c => c.item === "r-" + d || a.legacy.includes(c.item)).length;
+  const open = el("button", {class: "btn", type: "button", onclick: () => openProduct(d), text: nC ? `เปิด · ความเห็น ${nC}` : "เปิด"});
+  const box = el("li", {class: "rv-row" + (v ? " is-" + v : "")}, head,
+    el("div", {class: "rv-act"}, fs, el("span", {class: "rv-stage"}, pill(rvStage(a)), open), msg));
   if (v === "fail") {
     const rid = `rv-${d}-why`;
     const why = el("input", {id: rid, maxlength: "300", placeholder: "เหตุผล (ใส่หรือไม่ใส่ก็ได้)", disabled: !canWrite});

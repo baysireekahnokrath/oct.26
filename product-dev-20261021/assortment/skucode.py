@@ -2,7 +2,7 @@
 
 Draft number  4 digits, 0001, 0002 ... one per SKU in the assortment, given once and kept in draft_numbers.json
               so a number never moves to another product when the list changes.
-Real number   8 digits as 260.001.CC, given only when a SKU is ticked "ผ่าน" on the PD page (tab ตรวจผ่าน).
+Real number   8 digits as 260.001.CC, given only when a SKU is ticked "ผ่าน" on the PD page (tab สินค้า).
               260001, 260002 ... run in the order SKUs pass ("26" for OCT. 26). CC are two check digits
               (ISO 7064 mod 97-10, as in IBAN), so a mistyped digit or two swapped digits never reads as another product.
               A real number is never given to another product, even if its SKU is later ticked "ไม่ผ่าน".
