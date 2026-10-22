@@ -4,6 +4,7 @@ Social 1080 x 1350 PNG (IG / FB / LINE / Shopee / web) and A4 portrait PDF for t
 02 has no photo yet, so its card uses the die outline until a photo on white paper comes in.
 
 python3 cutout.py  -> cut/*.png  (real pieces)
+python3 plan.py    -> plan/*.png (straightened to a top-down view; the cards use these)
 python3 build.py   -> html/*.html and jobs.json;  node render.cjs -> social/*.png, print/*.pdf
 """
 import json, os, re, sys
@@ -114,7 +115,7 @@ def page(body, extra=""):
 
 
 def cut(n):
-    return f"file://{os.path.join(HERE, 'cut', n + '.png')}"
+    return f"file://{os.path.join(HERE, 'plan', n + '.png')}"
 
 
 def card(p):
