@@ -6,10 +6,22 @@
   "h": 1350
  },
  {
+  "name": "story-OC-01-22",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
+ },
+ {
   "name": "card-OC-01-01",
   "kind": "png",
   "w": 1080,
   "h": 1350
+ },
+ {
+  "name": "story-OC-01-01",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
  },
  {
   "name": "card-OC-02-24",
@@ -18,10 +30,22 @@
   "h": 1350
  },
  {
+  "name": "story-OC-02-24",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
+ },
+ {
   "name": "card-OC-03-26",
   "kind": "png",
   "w": 1080,
   "h": 1350
+ },
+ {
+  "name": "story-OC-03-26",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
  },
  {
   "name": "card-OC-04-27",
@@ -30,16 +54,34 @@
   "h": 1350
  },
  {
+  "name": "story-OC-04-27",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
+ },
+ {
   "name": "card-OC-05-28",
   "kind": "png",
   "w": 1080,
   "h": 1350
  },
  {
+  "name": "story-OC-05-28",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
+ },
+ {
   "name": "card-OC-MX-29",
   "kind": "png",
   "w": 1080,
   "h": 1350
+ },
+ {
+  "name": "story-OC-MX-29",
+  "kind": "png",
+  "w": 1080,
+  "h": 1920
  },
  {
   "name": "profile-1080",

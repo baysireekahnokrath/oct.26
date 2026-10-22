@@ -3,21 +3,63 @@
   "name": "pattern-01"
  },
  {
+  "name": "pattern-01-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
+ },
+ {
   "name": "pattern-02"
+ },
+ {
+  "name": "pattern-02-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
  },
  {
   "name": "pattern-03"
  },
  {
+  "name": "pattern-03-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
+ },
+ {
   "name": "pattern-04"
+ },
+ {
+  "name": "pattern-04-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
  },
  {
   "name": "pattern-05"
  },
  {
+  "name": "pattern-05-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
+ },
+ {
   "name": "pattern-07"
  },
  {
+  "name": "pattern-07-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
+ },
+ {
   "name": "pattern-all"
+ },
+ {
+  "name": "pattern-all-story",
+  "w": 1080,
+  "h": 1920,
+  "png_only": true
  }
 ]

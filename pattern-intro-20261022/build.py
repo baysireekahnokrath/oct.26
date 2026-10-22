@@ -30,13 +30,47 @@ PATTERNS = [  # number, Thai name, English name, use now, pieces (hero first; No
 ]
 
 
+ROT = {"01": -45}  # the bear die is drawn with its ears at 12 and 3 o'clock; turn it so they sit at 11 and 1
+
+
 def die(code):
-    """viewBox size in mm and the cut and slit paths of the real die drawing."""
+    """viewBox size in mm and the cut and slit paths of the real die drawing, ears up for 01."""
     s = open(os.path.join(ROOT, DIE[code])).read()
     w, h = (float(v) for v in re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', s).groups())
     cut = re.search(r'<g id="CUT"[^>]*>(.*?)</g>', s, re.S).group(1)
     sl = re.search(r'<g id="SLIT"[^>]*>(.*?)</g>', s, re.S).group(1)
+    if code in ROT:
+        x0, y0, w, h = turned_box(code, w, h, cut)
+        t = f'<g transform="translate({-x0:.3f} {-y0:.3f}) rotate({ROT[code]} {w0(s) / 2} {h0(s) / 2})">'
+        cut, sl = t + cut + "</g>", t + sl + "</g>"
     return w, h, cut, sl
+
+
+def w0(s):
+    return float(re.search(r'viewBox="0 0 ([\d.]+)', s).group(1))
+
+
+def h0(s):
+    return float(re.search(r'viewBox="0 0 [\d.]+ ([\d.]+)', s).group(1))
+
+
+def die_size(code):
+    """Size of the die as drawn (before any turn), for labels."""
+    s = open(os.path.join(ROOT, DIE[code])).read()
+    return w0(s), h0(s)
+
+
+def turned_box(code, w, h, cut):
+    """Bounding box in mm of the turned outline, found by rendering it on a roomy canvas."""
+    import io, cairosvg
+    from PIL import Image
+    k, pad = 10, 30
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-pad} {-pad} {w + 2 * pad} {h + 2 * pad}" '
+           f'width="{(w + 2 * pad) * k}" height="{(h + 2 * pad) * k}"><g transform="rotate({ROT[code]} {w / 2} {h / 2})">'
+           f'<g fill="#000" stroke="#000" stroke-width="0.3">{cut}</g></g></svg>')
+    a = Image.open(io.BytesIO(cairosvg.svg2png(bytestring=svg.encode()))).getchannel("A")
+    x1, y1, x2, y2 = a.getbbox()
+    return x1 / k - pad, y1 / k - pad, (x2 - x1) / k, (y2 - y1) / k
 
 
 def outline(code, cls="die"):
@@ -110,6 +144,9 @@ body{{font-family:Plex,sans-serif;color:{C['charcoal']};background:{C['cotton']}
 """
 
 
+STORY = ".c{position:absolute;top:190px;height:1540px;overflow:visible}.band{position:fixed;height:15px}"
+
+
 def page(body, extra=""):
     return f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}{extra}</style></head><body>{body}</body></html>"
 
@@ -120,7 +157,7 @@ def cut(n):
 
 def card(p):
     code, th, en, use, pcs = p
-    w, h, _, _ = die(code)
+    w, h = die_size(code)
     size = f"{w:.0f} × {h:.0f} มม."
     if pcs:
         stage = f'<img class="p0 shot" src="{cut(pcs[0])}" alt="">'
@@ -157,6 +194,10 @@ def run():
     for name, html in pages:
         open(os.path.join(HERE, "html", name + ".html"), "w").write(html)
         jobs.append({"name": name})
+        # story 1080 x 1920: the same card in a 1540 px box kept clear of the app's top and bottom bars
+        story = html.replace("</style>", STORY + "</style>")
+        open(os.path.join(HERE, "html", name + "-story.html"), "w").write(story)
+        jobs.append({"name": name + "-story", "w": 1080, "h": 1920, "png_only": True})
     json.dump(jobs, open(os.path.join(HERE, "jobs.json"), "w"), indent=1)
     print(len(jobs), "pages")
 

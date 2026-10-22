@@ -58,18 +58,21 @@ def doc(css, body, page=None):
     return f"<!doctype html><html><head><meta charset='utf-8'><style>{BASE_CSS}{pg}{css}</style></head><body>{body}</body></html>"
 
 # ---------------------------------------------------------------- social
-def card(p):
+def card(p, h=1350):
+    """Post 1080 x 1350, or story 1080 x 1920 (h=1920): the photo takes the extra height."""
     sku, name, spec, size, price, ph, food = p
+    story = h > 1350  # keep clear of the app's top and bottom bars (about 250 px each)
+    top, photo_h, price_b = (200, 1080, 300) if story else (64, 860, 96)
     css = f"""
-.c{{width:1080px;height:1350px;background:{C['cotton']};position:relative;padding:64px 64px 0}}
+.c{{width:1080px;height:{h}px;background:{C['cotton']};position:relative;padding:{top}px 64px 0}}
 .top{{display:flex;justify-content:space-between;align-items:center;height:96px}}
 .top span{{font-family:Jost;font-size:26px;letter-spacing:.06em;color:{C['stone']}}}
-.ph{{height:860px;margin-top:24px;background-size:cover;background-position:center}}
+.ph{{height:{photo_h}px;margin-top:24px;background-size:cover;background-position:center}}
 .mx{{display:grid;grid-template-columns:1fr 1fr;gap:10px}} .mx div{{background-size:cover;background-position:center}}
 .meta{{padding-top:40px;display:grid;gap:6px}}
 .n{{font-family:Anuphan;font-weight:500;font-size:60px;line-height:1.15}}
 .s{{font-size:28px;color:#6E6A64}}
-.p{{position:absolute;right:64px;bottom:96px;font-family:Jost;font-weight:500;font-size:56px}}
+.p{{position:absolute;right:64px;bottom:{price_b}px;font-family:Jost;font-weight:500;font-size:56px}}
 .band{{position:absolute;left:0;right:0;bottom:0;height:14px}}
 """
     body = (f'<div class="c"><div class="top">{logo("square-light", 96)}<span>our crafted things.</span></div>{photo(ph)}'
@@ -203,6 +206,7 @@ def build():
         jobs.append({"name": name, "kind": kind, "w": w, "h": h})
     for p in PRODUCTS:
         put("card-" + p[0], card(p), "png", 1080, 1350)
+        put("story-" + p[0], card(p, 1920), "png", 1080, 1920)
     put("profile-1080", profile(), "png", 1080, 1080)
     put("fb-cover-1640x624", cover(1640, 624, "ของใช้จากเศษหนังแท้<br>ทำกันเองทั้งบ้าน", "OCT. 26 · our crafted things."), "png", 1640, 624)
     put("shopee-banner-1200x600", cover(1200, 600, "หนังวัวแท้จากเศษหนัง<br>สีไม่ซ้ำกันทุกชิ้น", "OCT. 26 · our crafted things."), "png", 1200, 600)
