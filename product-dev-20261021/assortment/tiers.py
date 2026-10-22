@@ -14,7 +14,7 @@ Status doc 22 Oct: the booth sells pieces 01-05 at 30 baht each, ideas in an A4 
 import assortment as AS
 B = AS.B
 
-BOOTH_PRICE = 30                       # owner, 22 Oct (status doc): every piece, booth 23 Oct
+BOOTH_PRICE = 30                       # owner, 22 Oct: every piece, booth price only, no quantity discount
 AT_BOOTH = ("01", "02", "03", "04", "05")
 OLD = {a["code"]: a for a in AS.A}
 
@@ -69,7 +69,7 @@ def _from_old(key, group, name, note=""):
     return _t(key, 2, group, name, a["pieces"], a["price"], a["how"], a["extras"], note=note)
 
 
-SHOPEE = "Shopee ยังขายเป็นที่รองแก้ว 49–59 บาท"
+SHOPEE = "30 บาทเป็นราคาบูธอย่างเดียว ไม่ลดตามจำนวน · Shopee ขายเป็นที่รองแก้ว 49–59 บาท"
 T1 = [
     _t("OC-01-22", 1, "t1", "01 หัวหมี · ชิ้นหนัง", [("01", 1)], BOOTH_PRICE, "ชิ้นหนังหัวหมี 10.4 ซม.", merged=["OC-01-01"], note=SHOPEE),
     _t("OC-02-24", 1, "t1", "02 กังหัน · ชิ้นหนัง", [("02", 1)], BOOTH_PRICE, "ชิ้นหนังกังหัน 9 ซม.", note=SHOPEE),
@@ -128,9 +128,6 @@ RETIRED = {
 }
 
 QUESTIONS = [
-    "ราคาไม่ตรงกันระหว่างบูธกับ Shopee: ที่บูธชิ้นละ 30 แต่ Shopee ขายชิ้นเดียวกันเป็นที่รองแก้ว 49–59 และชุด 4 ลาย 179 "
-    "(ซื้อแยก 4 ชิ้นที่บูธได้ 120) จะให้ 30 เป็นราคาบูธอย่างเดียว หรือปรับ Shopee ให้ตรงกัน",
-    "ซื้อหลายชิ้นลดราคาไหม เช่น 4 ชิ้นขึ้นไป หรือ 10 ชิ้นขึ้นไป หรือ 30 บาทเท่ากันทุกจำนวน",
     "Shopee ตอนนี้มี 2 หน้าเป็นชิ้น 01 เดียวกัน (ที่รองแก้วหมี กับ ที่เก็บสายชาร์จหมี) ควรรวมเป็นหน้าเดียว แล้วเขียนการใช้ทั้งสองแบบ",
 ]
 
