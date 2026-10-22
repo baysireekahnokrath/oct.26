@@ -521,13 +521,13 @@ function renderOverview() {
   const count = k => all.filter(i => i.stage === k).length;
   const ideas = all.filter(i => i.kind === "idea").length;
   const booth = D.booth.map(b => ({...prods.find(p => p.n === b.n), sku: b.sku}));
-  const uses06 = prods.filter(p => p.parts.some(([c]) => c === "06"));
-  const multi = prods.filter(p => p.joints > 0 && !uses06.includes(p));
+  const uses07 = prods.filter(p => p.parts.some(([c]) => c === "07"));
+  const multi = prods.filter(p => p.joints > 0);
   $("#stats").replaceChildren(
     el("div", {class: "stat"}, el("span", {class: "small muted", text: "สินค้าบนบอร์ด"}), el("b", {text: all.length}), el("span", {class: "small muted", text: `30 แบบเดิม${ideas ? ` + ไอเดียใหม่ ${ideas}` : ""}`})),
     el("div", {class: "stat"}, el("span", {class: "small muted", text: "ขายที่บูธ"}), el("b", {text: booth.length}), el("span", {class: "small muted", text: "SKU ชิ้นเดียว ราคาร่าง"})),
     el("div", {class: "stat alert"}, el("span", {class: "small muted", text: "ต้องต่อชิ้น รอข้อต่อผ่าน"}), el("b", {text: multi.length}), el("span", {class: "small muted", text: "ยังไม่ขายงานนี้"})),
-    el("div", {class: "stat alert"}, el("span", {class: "small muted", text: "ใช้ 06 ห้ามใช้ตอนนี้"}), el("b", {text: uses06.length}), el("span", {class: "small muted", text: "06 ยังไม่ได้ตัด"})),
+    el("div", {class: "stat"}, el("span", {class: "small muted", text: "เปลี่ยน 06 เป็น 07"}), el("b", {text: uses07.length}), el("span", {class: "small muted", text: "06 ไม่ได้ตัด ใช้ 07 แทน"})),
   );
   const pipe = $("#pipe"); pipe.replaceChildren();
   pipe.setAttribute("aria-label", D.stages.map(s => `${s.name} ${count(s.key)}`).join(", "));
@@ -545,7 +545,7 @@ function renderOverview() {
       el("p", {class: "why num", text: sub(p)})),
     el("button", {class: "btn", type: "button", onclick: () => openItem(p.id), text: "เปิด"}));
   $("#booth-list").replaceChildren(...booth.map(p => row(p, x => `${x.price} บาท (ราคาร่าง)`)));
-  $("#blocked-list").replaceChildren(...[...uses06, ...multi.slice().sort((a, b) => a.n - b.n)].map(p => row(p, x => x.parts.some(([c]) => c === "06") ? "ใช้ 06" : `ต่อ ${x.joints} จุด รอข้อต่อผ่านการทดสอบ`)));
+  $("#blocked-list").replaceChildren(...multi.slice().sort((a, b) => a.n - b.n).map(p => row(p, x => `ต่อ ${x.joints} จุด รอข้อต่อผ่านการทดสอบ`)));
 }
 
 // ------------------------------------------------------------ board
@@ -687,7 +687,7 @@ $("#test-form").addEventListener("submit", async e => {
 });
 
 // ------------------------------------------------------------ ideas
-const CODES = ["01", "01-S200", "01-S250", "02", "03", "04", "05", "06"];
+const CODES = ["01", "01-S200", "01-S250", "02", "03", "04", "05", "07"];
 function initIdea() {
   $("#i-pieces").replaceChildren(...CODES.map(c => el("label", {class: "piece", for: "i-q-" + c}, thumb(c),
     el("span", {}, D.pieceName[c], el("input", {id: "i-q-" + c, type: "number", min: "0", max: "48", value: "0", inputmode: "numeric"})))));

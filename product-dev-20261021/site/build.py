@@ -23,6 +23,7 @@ def outline(path):
 
 SVG_DIR = os.path.join(REPO, "diecut-leather-20261014", "svg")
 THUMBS = {f[:2]: outline(os.path.join(SVG_DIR, f)) for f in sorted(os.listdir(SVG_DIR)) if f.endswith(".svg")}
+THUMBS["07"] = outline(os.path.join(REPO, "diecut-leather-20261019", "svg", "07-round-joint-cross.svg"))   # replaces 06
 for size in ("200", "250"):
     THUMBS["01-S" + size] = outline(os.path.join(REPO, "diecut-leather-20261013", "assembly-01", f"01S-heart-strap-{size}.svg"))
 
@@ -86,8 +87,8 @@ for c in sorted(tab_n):
 X_COMPAT = f"<table class='compat num'><thead><tr><th></th>{head}</tr></thead><tbody>{rows}</tbody></table>"
 xi = X3D["items"]
 X_STATS = "".join(f'<div class="stat"><span class="small muted">{a}</span><b>{b}</b><span class="small muted">{c}</span></div>' for a, b, c in [
-    ("แบบที่รูปทรงผ่าน", len(xi), f"ลองจริงแล้วหลุด {sum(i.get('real') == 'fail' for i in xi)} · ใช้ 06 ที่ยังไม่ได้ตัด {sum(i.get('no06', False) for i in xi)}"),
-    ("บล็อกใหม่ที่ต้องสั่ง", 0, "ใช้บล็อก 01–06 ที่มีอยู่"),
+    ("แบบที่รูปทรงผ่าน", len(xi), f"ลองจริงแล้วหลุด {sum(i.get('real') == 'fail' for i in xi)} · ใช้ 07 แทน 06 {sum('07' in i['pieces'] for i in xi)}"),
+    ("บล็อกใหม่ที่ต้องสั่ง", 0, "ใช้บล็อก 01–05 และ 07 ที่มีอยู่"),
     ("ชิ้นต่อแบบ", f"{min(len(i['pieces']) for i in xi)}–{max(len(i['pieces']) for i in xi)}", f"ล็อก {min(i['locks'] for i in xi)}–{max(i['locks'] for i in xi)} จุด"),
     ("กำไรขั้นต้นเฉลี่ย", f"{round(sum(i['margin'] for i in xi) / len(xi) * 100)}%", f"ต่ำสุด {round(min(i['margin'] for i in xi) * 100)}%"),
 ])

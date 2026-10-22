@@ -12,7 +12,8 @@ import brand as B
 
 DIES = os.path.join(REPO, "diecut-leather-20261014", "svg")
 FILES = {"01": "01-bear-head.svg", "02": "02-pinwheel-4-lobe.svg", "03": "03-capsule-cross.svg",
-         "04": "04-rounded-square-diagonal.svg", "05": "05-circle.svg", "06": "06-soft-cross.svg"}
+         "04": "04-rounded-square-diagonal.svg", "05": "05-circle.svg", "06": "06-soft-cross.svg",
+         "07": "../../diecut-leather-20261019/svg/07-round-joint-cross.svg"}
 
 
 def shape(code):

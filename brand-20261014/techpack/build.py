@@ -21,7 +21,8 @@ E = lambda t: html.escape(str(t))
 DIE_DIR = os.path.join(REPO, "diecut-leather-20261014", "svg")
 STRAP_DIR = os.path.join(REPO, "diecut-leather-20261013", "assembly-01")
 FILES = {"01": "01-bear-head", "02": "02-pinwheel-4-lobe", "03": "03-capsule-cross", "04": "04-rounded-square-diagonal",
-         "05": "05-circle", "06": "06-soft-cross"}
+         "05": "05-circle", "06": "06-soft-cross",
+         "07": "../../diecut-leather-20261019/svg/07-round-joint-cross"}
 INK, TOM, COB, PAPER = B.C["ink"], B.C["tomato"], B.C["cobalt"], B.C["paper"]
 TONES = ["#B8743A", "#8F5527", "#D49A5E", "#6E4222", "#C48448", "#A6693A"]   # leather scraps, material colour only
 
@@ -33,8 +34,9 @@ DIE = {   # code: name, fold square side, B slit, A neck, base rotation that put
     "04": ("สี่เหลี่ยมมน", 63.64, 30.0, 29.5, 45, 63.64),
     "05": ("วงกลม", 63.64, 30.0, 29.5, 0, 45.0),
     "06": ("กากบาทนุ่ม", 60.0, 17.5, 17.0, 0, 45.0),
+    "07": ("กากบาทข้อต่อวงกลม", 56.86, 17.1, 16.6, 0, 45.0),   # REV 20261019, replaces 06
 }
-SIZE = {"01": "104.4 × 104.4", "02": "90 × 90", "03": "90 × 90", "04": "90 × 90", "05": "Ø 90", "06": "90 × 90",
+SIZE = {"01": "104.4 × 104.4", "02": "90 × 90", "03": "90 × 90", "04": "90 × 90", "05": "Ø 90", "06": "90 × 90", "07": "90 × 90",
         "01-S200": "200 × 24", "01-S250": "250 × 24"}
 
 def load(code):

@@ -142,7 +142,7 @@ code{{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--c
 <header style="display:grid;gap:13px">
   <p class="eyebrow">OCT. 26 · Product Development · 22 ต.ค. 2569</p>
   <h1>Product assortment ชุดใหม่ ไม่โดนอาหาร ไม่ใช่ของเด็ก</h1>
-  <div class="verdict"><b>{len(keep)} SKU ใน 6 กลุ่ม ทุกตัวเป็นชิ้นเดียว ไม่ใช้ 06 ไม่รับแรง ไม่โดนอาหาร และไม่ใช่ของเด็ก</b>
+  <div class="verdict"><b>{len(keep)} SKU ใน 6 กลุ่ม ทุกตัวเป็นชิ้นเดียว ใช้ 07 แทน 06 ไม่รับแรง ไม่โดนอาหาร และไม่ใช่ของเด็ก</b>
     <p>ที่รองแก้วยังเป็นสินค้าหลัก เพิ่มของแต่งบ้าน ต้นไม้ โต๊ะทำงาน แต่งตัว และของขวัญ ให้เข้ากับงานบ้านและสวนแฟร์ ตัดไอเดียเดิมที่โดนอาหารหรือเป็นของเด็กออก 19 แบบ และสินค้าเดิมอีก 4 แบบ</p></div>
 </header>
 
