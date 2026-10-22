@@ -1,7 +1,7 @@
 """Fabric cover for one booth pallet table: pattern sheets for the tailor (Thai), 3 pages A4 landscape.
 
 Table 117 x 80 x 50 cm (owner's drawing, 22 Oct 2026). The cover hides the top, the front (117 side) and both
-80 cm sides. The back is a flap that closes with hook-and-loop tape onto the sides and rolls up with two ties.
+80 cm sides (front and side skirts are separate pieces). The back is a flap that closes with hook-and-loop tape onto the sides and rolls up with two ties.
 One cover. Fabric 120 cm wide.
 
 python3 build.py  -> pattern.html, then node render.cjs -> table-cover-pattern.pdf + preview PNGs
@@ -29,17 +29,19 @@ D = TABLE_D + EASE                                # finished top depth 82
 DROP = TABLE_H - FLOOR_GAP                        # finished drop 48
 
 TOP_CUT = (L + 2 * SEAM, D + 2 * SEAM)            # 122 x 85: seams on all four sides
-SKIRT_LEN = HEM_EDGE + D + L + D + HEM_EDGE       # 287, one strip wraps side-front-side
-SKIRT_H = SEAM + DROP + HEM_BOTTOM                # 53.5
-NOTCH = (HEM_EDGE + D, HEM_EDGE + D + L)          # corner marks on the skirt, from the left end
+FRONT_LEN = SEAM + L + SEAM                       # 122, front skirt, seamed to both sides at the corners
+SIDE_LEN = SEAM + D + HEM_EDGE                    # 85.5, side skirt: corner seam at the front, hem at the back
+SKIRT_H = SEAM + DROP + HEM_BOTTOM                # 53.5, all skirt pieces and the back flap
 FLAP_LEN = HEM_EDGE + WING + L + WING + HEM_EDGE  # 131
 FLAP_NOTCH = (HEM_EDGE + WING, HEM_EDGE + WING + L)
 VELCRO_LEN = DROP - 2                             # per strip, 2 cm short of the hem
-LENGTH_USED = TOP_CUT[0] + SKIRT_LEN              # top row, then skirt and flap side by side
+COL_A = FRONT_LEN + SIDE_LEN                      # two columns of skirt pieces side by side across the fabric
+COL_B = FLAP_LEN + SIDE_LEN
+LENGTH_USED = TOP_CUT[0] + max(COL_A, COL_B)      # top row, then the two columns
 BUY = math.ceil(LENGTH_USED * WASTE / 50) * 0.5   # rounded up to the half metre
 
 assert SKIRT_H * 2 <= FABRIC_W - 6 and TOP_CUT[1] + TIE[0] * 2 <= FABRIC_W - 4
-assert FLAP_LEN + 0 <= SKIRT_LEN and TIE[1] * 1 <= TOP_CUT[0]
+assert TIE[1] <= TOP_CUT[0]
 
 def f(x):
     return f"{x:g}"
@@ -148,7 +150,7 @@ def piece_top():
           txt(x0 + W / 2, y0 + Hh / 2 + 16, f"สำเร็จ {f(L)} × {f(D)}", size=13, color=MUTED),
           grain(x0 + W / 2 - 80, y0 + Hh / 2 + 44, 160),
           txt(x0 + W / 2, y0 - 8, "ขอบหลัง: เย็บติดผ้าหลัง + สอดเชือก 2 เส้นที่ ¼ และ ¾", size=11.5),
-          txt(x0 + W / 2, y0 + Hh + 16, "ขอบหน้า: เย็บติดผ้ากระโปรง", size=11.5),
+          txt(x0 + W / 2, y0 + Hh + 16, "ขอบหน้า: เย็บติดผ้าหน้า", size=11.5),
           txt(x0 - 10, y0 + Hh / 2, f"ทุกด้านกันเย็บ {f(SEAM)}", size=11.5, rot=-90),
           dim(x0, y0 + Hh + 40, x0 + W, y0 + Hh + 40, f"ตัด {f(w)}"),
           dim(x0 + W + 22, y0, x0 + W + 22, y0 + Hh, f"ตัด {f(h)}", vertical=True)]
@@ -179,34 +181,43 @@ def piece_flap():
     return f'<svg viewBox="0 0 {x0 + W + 50:.0f} {y0 + Hh + 52:.0f}" class="piece">{"".join(g)}</svg>'
 
 def piece_skirt():
-    w, h = SKIRT_LEN, SKIRT_H
-    sc = 3.25
-    W, Hh = w * sc, h * sc
-    x0, y0 = 30, 46
-    g = [f'<rect x="{x0}" y="{y0}" width="{W:.1f}" height="{Hh:.1f}" fill="{FILL2}" stroke="{INK}" stroke-width="1.6"/>',
-         f'<line x1="{x0 + HEM_EDGE * sc:.1f}" y1="{y0 + SEAM * sc:.1f}" x2="{x0 + W - HEM_EDGE * sc:.1f}" y2="{y0 + SEAM * sc:.1f}" stroke="{ACC}" stroke-width="1.2" stroke-dasharray="7 5"/>',
-         f'<line x1="{x0}" y1="{y0 + Hh - HEM_BOTTOM * sc:.1f}" x2="{x0 + W:.1f}" y2="{y0 + Hh - HEM_BOTTOM * sc:.1f}" stroke="{MUTED}" stroke-dasharray="3 4"/>']
-    for e in (x0 + HEM_EDGE * sc, x0 + W - HEM_EDGE * sc):
-        g.append(f'<line x1="{e:.1f}" y1="{y0}" x2="{e:.1f}" y2="{y0 + Hh:.1f}" stroke="{MUTED}" stroke-dasharray="3 4"/>')
-    vy, vh = y0 + SEAM * sc + 2, VELCRO_LEN * sc
-    g.append(velcro(x0 + HEM_EDGE * sc, vy, VELCRO_W * sc, vh))
-    g.append(velcro(x0 + W - HEM_EDGE * sc - VELCRO_W * sc, vy, VELCRO_W * sc, vh))
-    prev = x0 + HEM_EDGE * sc
-    names = [f"ข้างซ้าย {f(D)}", f"หน้า {f(L)}", f"ข้างขวา {f(D)}"]
-    stops = [x0 + n * sc for n in NOTCH] + [x0 + W - HEM_EDGE * sc]
-    for i, xx in enumerate(stops):
-        if i < 2:
-            g.append(notch(xx, y0, f"บากมุม {f(NOTCH[i])}"))
-            g.append(f'<line x1="{xx:.1f}" y1="{y0}" x2="{xx:.1f}" y2="{y0 + Hh:.1f}" stroke="{ACC}" stroke-width="0.8" stroke-dasharray="2 4"/>')
-        g.append(txt((prev + xx) / 2, y0 + Hh / 2, names[i], size=17, weight=600))
-        prev = xx
-    g += [txt(x0 + W / 2, y0 + Hh / 2 + 24, f"ผ้ากระโปรง หน้า + ข้าง 2 ด้าน ผืนเดียว · ตัด 1 · สำเร็จสูง {f(DROP)}", size=13, color=MUTED),
-          grain(x0 + W / 2 - 120, y0 + Hh / 2 + 44, 240),
-          txt(x0 + 6, y0 - 26, f"ขอบบน: เย็บติดชิ้นบน กันเย็บ {f(SEAM)}", size=11.5, anchor="start"),
-          txt(x0 + W / 2, y0 + Hh + 18, f"ตีนตุ๊กแกด้านหนาม ด้านนอก ที่ปลายทั้งสองข้าง {f(VELCRO_W)} × {f(VELCRO_LEN)} · ชายล่างพับ 2 + 2 · ปลายพับ 1 + 1", size=11.5, color=VEL),
-          dim(x0, y0 + Hh + 42, x0 + W, y0 + Hh + 42, f"ตัด {f(w)}"),
-          dim(x0 + W + 24, y0, x0 + W + 24, y0 + Hh, f"{f(h)}", vertical=True)]
-    return f'<svg viewBox="0 0 {x0 + W + 56:.0f} {y0 + Hh + 52:.0f}" class="piece">{"".join(g)}</svg>'
+    """Front skirt and one side skirt (cut 2) at the same scale."""
+    sc = 2.55
+    x0, y0 = 20, 46
+    Hh = SKIRT_H * sc
+    g = []
+    def body(x, w, fill):
+        W = w * sc
+        out = [f'<rect x="{x:.1f}" y="{y0}" width="{W:.1f}" height="{Hh:.1f}" fill="{fill}" stroke="{INK}" stroke-width="1.6"/>',
+               f'<line x1="{x:.1f}" y1="{y0 + Hh - HEM_BOTTOM * sc:.1f}" x2="{x + W:.1f}" y2="{y0 + Hh - HEM_BOTTOM * sc:.1f}" stroke="{MUTED}" stroke-dasharray="3 4"/>']
+        return out, W
+    # front: seams on top, left and right
+    out, Wf = body(x0, FRONT_LEN, FILL2)
+    g += out
+    g.append(f'<path d="M{x0 + SEAM * sc:.1f} {y0 + Hh - HEM_BOTTOM * sc:.1f} V{y0 + SEAM * sc:.1f} H{x0 + Wf - SEAM * sc:.1f} V{y0 + Hh - HEM_BOTTOM * sc:.1f}" fill="none" stroke="{ACC}" stroke-width="1.2" stroke-dasharray="7 5"/>')
+    g += [txt(x0 + Wf / 2, y0 + Hh / 2 - 4, "ผ้าหน้า · ตัด 1", size=17, weight=600),
+          txt(x0 + Wf / 2, y0 + Hh / 2 + 16, f"สำเร็จ {f(L)} × {f(DROP)}", size=12, color=MUTED),
+          grain(x0 + Wf / 2 - 70, y0 + Hh / 2 + 40, 140),
+          txt(x0 + Wf / 2, y0 - 10, "ขอบบนเย็บติดชิ้นบน · ขอบซ้ายขวาเย็บติดผ้าข้าง", size=11.5),
+          dim(x0, y0 + Hh + 24, x0 + Wf, y0 + Hh + 24, f"ตัด {f(FRONT_LEN)}"),
+          dim(x0 + Wf + 18, y0, x0 + Wf + 18, y0 + Hh, f"{f(SKIRT_H)}", vertical=True)]
+    # side: seam on top and on the front end, hem and tape at the back end
+    xs = x0 + Wf + 70
+    out, Ws = body(xs, SIDE_LEN, FILL2)
+    g += out
+    g.append(f'<path d="M{xs + SEAM * sc:.1f} {y0 + Hh - HEM_BOTTOM * sc:.1f} V{y0 + SEAM * sc:.1f} H{xs + Ws - HEM_EDGE * sc:.1f}" fill="none" stroke="{ACC}" stroke-width="1.2" stroke-dasharray="7 5"/>')
+    g.append(f'<line x1="{xs + Ws - HEM_EDGE * sc:.1f}" y1="{y0}" x2="{xs + Ws - HEM_EDGE * sc:.1f}" y2="{y0 + Hh:.1f}" stroke="{MUTED}" stroke-dasharray="3 4"/>')
+    g.append(velcro(xs + Ws - HEM_EDGE * sc - VELCRO_W * sc, y0 + SEAM * sc + 2, VELCRO_W * sc, VELCRO_LEN * sc))
+    g += [txt(xs + Ws / 2, y0 + Hh / 2 - 4, "ผ้าข้าง · ตัด 2", size=17, weight=600),
+          txt(xs + Ws / 2, y0 + Hh / 2 + 16, f"สำเร็จ {f(D)} × {f(DROP)}", size=12, color=MUTED),
+          grain(xs + Ws / 2 - 60, y0 + Hh / 2 + 40, 120),
+          txt(xs + 4, y0 - 10, "ปลายหน้า: เย็บติดผ้าหน้า", size=11.5, anchor="start"),
+          txt(xs + Ws, y0 - 26, "ปลายหลัง: พับ 1 + 1", size=11.5, anchor="end"),
+          txt(xs + Ws / 2, y0 + Hh + 44, f"ตีนตุ๊กแกด้านหนาม ด้านนอก ที่ปลายหลัง {f(VELCRO_W)} × {f(VELCRO_LEN)}", size=11.5, color=VEL),
+          txt(xs + Ws / 2, y0 + Hh + 60, "ซ้ายกับขวากลับด้านกัน: เย็บตีนตุ๊กแกด้านนอกของแต่ละข้าง", size=11, color=MUTED),
+          dim(xs, y0 + Hh + 24, xs + Ws, y0 + Hh + 24, f"ตัด {f(SIDE_LEN)}"),
+          dim(xs + Ws + 18, y0, xs + Ws + 18, y0 + Hh, f"{f(SKIRT_H)}", vertical=True)]
+    return f'<svg viewBox="0 0 {xs + Ws + 50:.0f} {y0 + Hh + 70:.0f}" class="piece">{"".join(g)}</svg>'
 
 # ---------------------------------------------------------------- page 3 layout
 def layout():
@@ -224,8 +235,11 @@ def layout():
         g.append(f'<rect x="{x0:.1f}" y="{ty + k * (TIE[0] * sc + 4):.1f}" width="{TIE[1] * sc:.1f}" height="{TIE[0] * sc:.1f}" fill="#F3E9DD" stroke="{INK}" stroke-width="1"/>')
         g.append(txt(x0 + TIE[1] * sc / 2, ty + k * (TIE[0] * sc + 4) + TIE[0] * sc / 2 + 4, f"เชือก {k + 1} · {f(TIE[0])} × {f(TIE[1])}", size=10))
     x = x0 + TOP_CUT[0] * sc
-    g.append(box(x, y0, SKIRT_LEN, SKIRT_H, FILL2, "ผ้ากระโปรง", f"{f(SKIRT_LEN)} × {f(SKIRT_H)}"))
-    g.append(box(x, y0 + SKIRT_H * sc, FLAP_LEN, SKIRT_H, FILL3, "ผ้าหลัง", f"{f(FLAP_LEN)} × {f(SKIRT_H)}"))
+    yb = y0 + SKIRT_H * sc
+    g.append(box(x, y0, FRONT_LEN, SKIRT_H, FILL2, "ผ้าหน้า", f"{f(FRONT_LEN)} × {f(SKIRT_H)}"))
+    g.append(box(x + FRONT_LEN * sc, y0, SIDE_LEN, SKIRT_H, FILL2, "ผ้าข้าง 1", f"{f(SIDE_LEN)} × {f(SKIRT_H)}"))
+    g.append(box(x, yb, FLAP_LEN, SKIRT_H, FILL3, "ผ้าหลัง", f"{f(FLAP_LEN)} × {f(SKIRT_H)}"))
+    g.append(box(x + FLAP_LEN * sc, yb, SIDE_LEN, SKIRT_H, FILL2, "ผ้าข้าง 2", f"{f(SIDE_LEN)} × {f(SKIRT_H)}"))
     g += [dim(x0, y0 + FW + 22, x0 + tot, y0 + FW + 22, f"ใช้ผ้ายาว {f(LENGTH_USED)} ซม. ({LENGTH_USED / 100:.2f} ม.)"),
           dim(x0 - 6, y0, x0 - 6, y0 + FW, f"หน้าผ้า {FABRIC_W}", vertical=True, left=True)]
     return f'<svg viewBox="0 0 {x0 + tot + 20:.0f} {y0 + FW + 40:.0f}" class="lay">{"".join(g)}</svg>'
@@ -233,12 +247,13 @@ def layout():
 # ---------------------------------------------------------------- page
 STEPS = [
     "ซักหรือแช่ผ้าก่อนตัด ถ้าเป็นผ้าฝ้ายหรือผ้าแคนวาส กันผ้าหดหลังซัก",
-    f"ตัด 5 ชิ้นตามหน้า 2 ให้ด้านยาวของทุกชิ้นอยู่ตามแนวยาวของผ้า บากมุมที่ผ้ากระโปรง ({f(NOTCH[0])} และ {f(NOTCH[1])}) และผ้าหลัง ({f(FLAP_NOTCH[0])} และ {f(FLAP_NOTCH[1])})",
+    f"ตัด 7 ชิ้นตามหน้า 2 ให้ด้านยาวของทุกชิ้นอยู่ตามแนวยาวของผ้า บากที่ผ้าหลัง ({f(FLAP_NOTCH[0])} และ {f(FLAP_NOTCH[1])} ซม.)",
     "โพ้งริมผ้าทุกด้าน กันผ้ารุ่ย",
     f"เชือก: พับครึ่งตามยาว พับริมเข้าหากันอีกครั้ง ได้กว้าง {TIE[0] / 4:g} ซม. แล้วเย็บทับตลอดเส้น",
-    "พับริมปลายผ้ากระโปรงและริมข้างผ้าหลัง แบบพับ 1 + 1 ซม. แล้วเย็บ",
-    f"เย็บตีนตุ๊กแกด้านหนามที่ด้านนอกปลายผ้ากระโปรงทั้งสองข้าง และด้านขนที่ด้านในปีกผ้าหลังทั้งสองข้าง ยาว {f(VELCRO_LEN)} ซม. เริ่มใต้เส้นเย็บบน",
-    f"ประกบผ้ากระโปรงกับชิ้นบน ด้านถูกเข้าหากัน รอยบากตรงมุมหน้า เย็บกันเย็บ {f(SEAM)} ซม. ถึงมุมให้ตัดเฉียงเข้าถึงเส้นเย็บแล้วหมุนผ้า",
+    f"เย็บผ้าข้างสองชิ้นติดกับปลายซ้ายและขวาของผ้าหน้า กันเย็บ {f(SEAM)} ซม. ได้ผ้ากระโปรง 3 ด้าน แล้วรีดตะเข็บแยก",
+    "พับริมปลายหลังของผ้าข้างทั้งสองชิ้นและริมข้างผ้าหลัง แบบพับ 1 + 1 ซม. แล้วเย็บ",
+    f"เย็บตีนตุ๊กแกด้านหนามที่ด้านนอกปลายหลังของผ้าข้างทั้งสองข้าง และด้านขนที่ด้านในปีกผ้าหลังทั้งสองข้าง ยาว {f(VELCRO_LEN)} ซม. เริ่มใต้เส้นเย็บบน",
+    f"ประกบผ้ากระโปรงกับชิ้นบน ด้านถูกเข้าหากัน ให้ตะเข็บมุมตรงมุมหน้าของชิ้นบน เย็บกันเย็บ {f(SEAM)} ซม. ถึงมุมให้หยุดที่ปลายตะเข็บมุม หมุนผ้าแล้วเย็บต่อ",
     f"ประกบผ้าหลังกับขอบหลังชิ้นบนเฉพาะช่วงระหว่างรอยบาก สอดกลางเชือกทั้ง 2 เส้นไว้ในตะเข็บที่ ¼ และ ¾ ของความกว้าง ให้ปลายเชือกห้อยทั้งด้านนอกและด้านใน ปีกผ้าหลังปล่อยอิสระ",
     "พับชายล่างผ้ากระโปรงและผ้าหลัง 2 + 2 ซม. แล้วเย็บ",
     f"ลองคลุมโต๊ะจริง: ปีกผ้าหลังต้องอ้อมมุมไปทับตีนตุ๊กแกบนผ้าข้างพอดี ขอบล่างลอยจากพื้นประมาณ {f(FLOOR_GAP)} ซม.",
@@ -261,7 +276,7 @@ table{{border-collapse:collapse;width:100%}} td,th{{padding:3px 8px;border-botto
 th{{font-weight:600;color:{MUTED};font-size:11.5px}} .r{{text-align:right;white-space:nowrap}}
 .box{{border:1.5px solid {ACC};border-radius:6px;padding:7px 12px}}
 .piece{{height:100%;width:auto;max-width:100%}}
-ol{{margin:0;padding-left:18px;display:grid;gap:2px}}
+ol{{margin:0;padding-left:18px;display:grid;gap:1px;font-size:12px;line-height:1.42}}
 .foot{{position:absolute;bottom:6mm;left:14mm;right:14mm;display:flex;justify-content:space-between;color:{MUTED};font-size:10.5px}}
 .legend{{display:flex;gap:18px;flex-wrap:wrap;color:{MUTED};font-size:11.5px}}
 .legend i{{display:inline-block;width:26px;border-top:2px dashed {ACC};vertical-align:middle;margin-right:6px}}
@@ -278,7 +293,8 @@ ol{{margin:0;padding-left:18px;display:grid;gap:2px}}
 <tr><td>ผ้าหน้า ข้าง และหลัง สูงจากขอบบน · ลอยจากพื้น</td><td class="r">{f(DROP)} · {f(FLOOR_GAP)}</td></tr></table>
 <table><tr><th>ชิ้นผ้า</th><th class="r">ขนาดตัด</th><th class="r">จำนวน</th></tr>
 <tr><td>ชิ้นบน</td><td class="r">{f(TOP_CUT[0])} × {f(TOP_CUT[1])}</td><td class="r">1</td></tr>
-<tr><td>ผ้ากระโปรง หน้า + ข้าง 2 ด้าน (ผืนเดียว)</td><td class="r">{f(SKIRT_LEN)} × {f(SKIRT_H)}</td><td class="r">1</td></tr>
+<tr><td>ผ้าหน้า</td><td class="r">{f(FRONT_LEN)} × {f(SKIRT_H)}</td><td class="r">1</td></tr>
+<tr><td>ผ้าข้าง</td><td class="r">{f(SIDE_LEN)} × {f(SKIRT_H)}</td><td class="r">2</td></tr>
 <tr><td>ผ้าหลัง เปิดปิดได้</td><td class="r">{f(FLAP_LEN)} × {f(SKIRT_H)}</td><td class="r">1</td></tr>
 <tr><td>เชือกผูกม้วนผ้าหลัง</td><td class="r">{f(TIE[0])} × {f(TIE[1])}</td><td class="r">2</td></tr></table>
 <table><tr><th>ของที่ต้องซื้อ</th><th class="r">จำนวน</th></tr>
@@ -287,15 +303,15 @@ ol{{margin:0;padding-left:18px;display:grid;gap:2px}}
 <div class="box">ขนาดตัดรวมกันเย็บ {f(SEAM)} ซม. ชายล่าง {f(HEM_BOTTOM)} ซม. (พับ 2 + 2) และริมปลาย {f(HEM_EDGE)} ซม. (พับ 1 + 1) แล้ว ตัดตามตัวเลขได้เลย</div>
 </div></div>{foot(1)}</section>"""
     p2 = f"""<section class="p">
-<div><h2>ชิ้นผ้าและขนาดตัด</h2><div class="sub">ภาพย่อส่วน ใช้ตัวเลขที่เขียนกำกับ · ด้านยาวของทุกชิ้นวางตามแนวยาวของผ้า · ผ้าหลังกับชิ้นบนใช้มาตราส่วนเดียวกัน ผ้ากระโปรงย่อมากกว่า</div></div>
-<div style="display:grid;grid-template-columns:1fr 1.18fr;gap:6mm;height:78mm"><div style="display:flex;justify-content:center">{piece_top()}</div><div style="display:flex;justify-content:center;align-items:center">{piece_flap()}</div></div>
-<div style="height:58mm;margin-top:3mm;display:flex;justify-content:center">{piece_skirt()}</div>
+<div><h2>ชิ้นผ้าและขนาดตัด</h2><div class="sub">ภาพย่อส่วน ใช้ตัวเลขที่เขียนกำกับ · ด้านยาวของทุกชิ้นวางตามแนวยาวของผ้า · ทุกชิ้นใช้มาตราส่วนเดียวกัน</div></div>
+<div style="display:grid;grid-template-columns:1fr 1.18fr;gap:6mm;height:76mm"><div style="display:flex;justify-content:center">{piece_top()}</div><div style="display:flex;justify-content:center;align-items:center">{piece_flap()}</div></div>
+<div style="height:64mm;margin-top:3mm;display:flex;justify-content:center">{piece_skirt()}</div>
 <div class="legend"><span><i></i>เส้นเย็บ</span><span><u></u>เส้นพับริม</span><span><b></b>ตีนตุ๊กแก</span><span style="color:{ACC}">▼ รอยบาก ตรงกับมุมของชิ้นบน</span><span>▮ ตำแหน่งเชือก</span><span>ชายล่างทุกชิ้นพับ 2 + 2 · ริมปลายพับ 1 + 1</span></div>
 {foot(2)}</section>"""
     steps = "".join(f"<li>{s}</li>" for s in STEPS)
     p3 = f"""<section class="p">
 <div><h2>วางผ้าบนหน้ากว้าง {FABRIC_W} ซม. และขั้นตอนเย็บ</h2><div class="sub">ด้านยาวของทุกชิ้นวางตามแนวยาวของผ้า ริมผ้าอยู่ขอบบนและล่างของภาพ · เชือก 2 เส้นตัดจากแถบข้างชิ้นบน</div></div>
-<div style="width:82%">{layout()}</div>
+<div style="width:66%">{layout()}</div>
 <div class="cols" style="grid-template-columns:1.55fr 1fr"><div><h2 style="font-size:15px;margin-bottom:3px">ขั้นตอนเย็บ</h2><ol>{steps}</ol></div>
 <div style="display:grid;gap:4mm;align-content:start"><div class="box">ใช้งาน: ปิด กดปีกผ้าหลังติดตีนตุ๊กแกที่มุมหลังทั้งสองข้าง · เปิด แกะตีนตุ๊กแก ม้วนผ้าหลังขึ้นไปถึงขอบโต๊ะ แล้วผูกเชือกทั้ง 2 เส้นรอบม้วน</div>
 <div class="box" style="border-color:{MUTED}">ตรวจก่อนตัด: วัดโต๊ะจริงอีกครั้ง ถ้าขนาดต่างจาก {TABLE_L} × {TABLE_D} × {TABLE_H} เกิน 1 ซม. ให้แก้ขนาดตัดตามโต๊ะ</div></div></div>
@@ -304,5 +320,5 @@ ol{{margin:0;padding-left:18px;display:grid;gap:2px}}
 
 if __name__ == "__main__":
     open(os.path.join(HERE, "pattern.html"), "w").write(page())
-    print("top", TOP_CUT, "skirt", SKIRT_LEN, SKIRT_H, NOTCH, "flap", FLAP_LEN, FLAP_NOTCH, "ties", TIE,
+    print("top", TOP_CUT, "front", FRONT_LEN, "side", SIDE_LEN, SKIRT_H, "flap", FLAP_LEN, FLAP_NOTCH, "ties", TIE,
           "velcro", VELCRO_LEN, "length", LENGTH_USED, "buy", BUY)
