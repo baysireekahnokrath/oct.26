@@ -1,0 +1,88 @@
+<title>OCT. 26 ไฟล์พิมพ์ A4</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">บูธ 23 ต.ค. · ร่างให้ตรวจ</span><h1>ไฟล์พิมพ์ A4 สำหรับบูธ</h1>
+<p class="lead">ขายชิ้นหนัง 5 แบบ แผ่นละ 30 บาท พิมพ์จากเครื่องที่บ้านได้ทั้งหมด 10 แผ่น A4
+ตัดตามขีดที่ขอบกระดาษ ไอเดียในแฟ้มเป็นตัวอย่าง รอฝ่ายพัฒนาสินค้าสรุป</p></header>
+<section><h2>วิธีพิมพ์</h2><div class="card"><ol>
+<li>เปิด PDF แล้วสั่งพิมพ์ <b>ขนาดจริง 100%</b> (Actual size) ห้ามเลือกพอดีหน้า (Fit)</li>
+<li>พิมพ์หน้า 2 ก่อน วัดแถบตรวจขนาดที่ขอบล่าง ต้องยาว 50 มม. ถ้าไม่ใช่ ตั้งค่าใหม่</li>
+<li>ขีดดำสั้น ๆ ที่ขอบกระดาษคือเส้นตัด วางไม้บรรทัดต่อขีดสองฝั่งแล้วตัดด้วยคัตเตอร์</li>
+<li>กระดาษหนา 160–200 แกรมจะตั้งได้ดีกว่า ถ้ามีแค่ 80 แกรม ป้ายชื่อและการ์ด LINE ให้ติดบนเศษฟิวเจอร์บอร์ด</li></ol></div></section>
+<section><h2>รายการพิมพ์</h2><div class="tbl"><table><thead><tr><th>หน้า</th><th>อะไร</th><th>ได้กี่ชิ้น</th><th>ตัด / ใช้</th></tr></thead><tbody><tr><td class="mono">1</td><td><b>ป้ายราคา A5</b></td><td>1 แผ่น ได้ 2 ป้าย</td><td>ตัดครึ่งตามขีดกลางแผ่น ใส่กรอบอะคริลิก A5</td></tr><tr><td class="mono">2</td><td><b>ป้ายชื่อแบบ 9 × 5.5 ซม.</b></td><td>1 แผ่น ได้ 10 ป้าย (แบบละ 2)</td><td>ตัดตามขีดทุกเส้น หนีบไม้หนีบผ้าที่ตะกร้าแต่ละลาย</td></tr><tr><td class="mono">3</td><td><b>การ์ด QR LINE A6</b></td><td>1 แผ่น ได้ 4 ใบ</td><td>ตัดตามขีดกลางทั้งแนวตั้งและแนวนอน วางโต๊ะจ่ายเงินและจุด DIY</td></tr><tr><td class="mono">4</td><td><b>แฟ้มไอเดีย: ปก</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้มซองใส A4</td></tr><tr><td class="mono">5</td><td><b>แฟ้มไอเดีย: แบบ 01</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้ม · ชิ้นหนังขนาดจริง</td></tr><tr><td class="mono">6</td><td><b>แฟ้มไอเดีย: แบบ 02</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้ม · ชิ้นหนังขนาดจริง</td></tr><tr><td class="mono">7</td><td><b>แฟ้มไอเดีย: แบบ 03</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้ม · ชิ้นหนังขนาดจริง</td></tr><tr><td class="mono">8</td><td><b>แฟ้มไอเดีย: แบบ 04</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้ม · ชิ้นหนังขนาดจริง</td></tr><tr><td class="mono">9</td><td><b>แฟ้มไอเดีย: แบบ 05</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้ม · ชิ้นหนังขนาดจริง</td></tr><tr><td class="mono">10</td><td><b>แฟ้มไอเดีย: ปกหลัง</b></td><td>1 แผ่น</td><td>ไม่ต้องตัด ใส่แฟ้ม</td></tr></tbody></table></div></section>
+<section><h2>ตัวอย่างทุกหน้า</h2><div class="grid"><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p01.png" alt="ป้ายราคา A5" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">1 · ป้ายราคา A5</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p02.png" alt="ป้ายชื่อแบบ 9 × 5.5 ซม." loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">2 · ป้ายชื่อแบบ 9 × 5.5 ซม.</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p03.png" alt="การ์ด QR LINE A6" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">3 · การ์ด QR LINE A6</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p04.png" alt="แฟ้มไอเดีย: ปก" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">4 · แฟ้มไอเดีย: ปก</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p05.png" alt="แฟ้มไอเดีย: แบบ 01" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">5 · แฟ้มไอเดีย: แบบ 01</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p06.png" alt="แฟ้มไอเดีย: แบบ 02" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">6 · แฟ้มไอเดีย: แบบ 02</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p07.png" alt="แฟ้มไอเดีย: แบบ 03" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">7 · แฟ้มไอเดีย: แบบ 03</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p08.png" alt="แฟ้มไอเดีย: แบบ 04" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">8 · แฟ้มไอเดีย: แบบ 04</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p09.png" alt="แฟ้มไอเดีย: แบบ 05" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">9 · แฟ้มไอเดีย: แบบ 05</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="p10.png" alt="แฟ้มไอเดีย: ปกหลัง" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">10 · แฟ้มไอเดีย: ปกหลัง</figcaption></figure></div></section>
+<section><h2>ต้องเช็ก</h2><div class="card"><ol>
+<li>ราคาแผ่นละ 30 บาท ตามที่พ่อเบสั่ง 22 ต.ค. ใช้แทนราคา 7 แบบเดิม</li>
+<li>5 แบบคือ 01 หัวหมี · 02 กังหัน · 03 กากบาทแคปซูล · 04 สี่เหลี่ยมมน · 05 วงกลม (ไม่มี 06 และยังไม่ใส่ 07)</li>
+<li>ไอเดียในแฟ้มเป็นตัวอย่างใช้ชิ้นเดียว ไม่มีการต่อชิ้น ฝ่ายพัฒนาสินค้าจะส่งไอเดียจริงพร้อมรูปมาแทน</li>
+<li>QR LINE ในไฟล์เปิด lin.ee/O9AePgp สแกนดูอีกครั้งว่าขึ้นบัญชี OCT. 26</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">print-20261022/oct26-print-a4.pdf</td><td>ไฟล์พิมพ์ทั้งหมด 10 หน้า</td></tr>
+<tr><td class="mono" style="white-space:nowrap">print-20261022/build.py</td><td>แก้ราคา ข้อความ หรือไอเดียที่นี่แล้วรันใหม่</td></tr>
+</tbody></table></div></section></div><script>
+document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
+const t=document.getElementById(b.dataset.for);const s=t.innerText;
+const done=()=>{const o=b.textContent;b.textContent='คัดลอกแล้ว';setTimeout(()=>b.textContent=o,1400)};
+const sel=()=>{const r=document.createRange();r.selectNodeContents(t);const w=getSelection();w.removeAllRanges();w.addRange(r);b.textContent='เลือกข้อความแล้ว กดคัดลอก'};
+try{navigator.clipboard.writeText(s).then(done,sel)}catch(_){sel()}});
+</script>
