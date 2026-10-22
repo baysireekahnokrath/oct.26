@@ -68,7 +68,7 @@ def p_story():
 def p_idea():
     pillars = [("01", "วัสดุพูดเอง", "หนังแท้ ขอบตัดจริง ไม่ทาสีทับผิว ไม่มีหน้าตาการ์ตูน ภาพถ่ายเห็นผิวหนังชัด บอกตรง ๆ ว่ามาจากเศษหนัง"),
                ("02", "ใช้งานก่อน", "ทุกชิ้นตอบได้ในประโยคเดียวว่าใช้ทำอะไร ชื่อสินค้าคือเลขแพตเทิร์นกับหน้าที่"),
-               ("03", "สีซ่อนอยู่", "ห้าสีของบ้านอยู่ในที่เล็ก ๆ หลังป้าย ขอบหนัง เชือก การ์ดในซอง ไม่ใช้เป็นพื้นใหญ่"),
+               ("03", "สีซ่อนอยู่", "ห้าสีของบ้านอยู่ในที่เล็ก ๆ หลังป้าย การ์ดในซอง เส้นคาดซอง ไม่ใช้เป็นพื้นใหญ่ ผิวและขอบหนังปล่อยตามธรรมชาติ"),
                ("04", "ทำทีละรอบ", "ผลิตเป็นรอบเล็ก ตั้งชื่อรอบว่า SOI. 02, SOI. 03 บอกจำนวนจริง ไม่รีบ ไม่ลดราคาแรง")]
     pl = "".join(f'<div class="pil"><span class="latin muted">{n}</span><h3>{t}</h3><p>{d}</p></div>' for n, t, d in pillars)
     return page(3, "แกนของแบรนด์", "เรียบข้างนอก บ้านอยู่ข้างใน",
@@ -125,7 +125,7 @@ def p_color():
 def p_family():
     sw = "".join(f'<div class="fsw"><i style="background:{h}"></i><b>{who} · {name}</b><span class="latin">{bd} · {h}</span><span class="muted">{src}</span></div>'
                  for _, who, bd, name, h, src in FAMILY)
-    where = ["แถบห้าสีหลังป้ายห้อย", "ทาสีขอบหนัง (edge paint) ชิ้นละสี ต้องทดลองก่อน", "เส้นคาดซองกระดาษคราฟต์", "แถบล่างโลโก้แบบมีแถบห้าสี",
+    where = ["แถบห้าสีหลังป้ายห้อย", "หลังการ์ดในซอง", "เส้นคาดซองกระดาษคราฟต์", "แถบล่างโลโก้แบบมีแถบห้าสี",
              "ป้ายหมวดสินค้าและปุ่มเล็ก ๆ บนเว็บ", "จุดหลัง OCT ใช้สีแม่เท่านั้น"]
     return page(8, "สี", "ห้าสีของบ้าน",
         f'''<div class="fsws">{sw}</div>
@@ -182,13 +182,14 @@ def tag_back(w=100):
             + '<em>ห้าคน ห้าสี<br>ทำกันเองทั้งบ้าน</em></div></div>')
 
 def p_apps1():
-    edges = "".join(f'<div class="edge" style="--c:{c}"></div>' for c in BAND)
+    cardf = f'<div class="ncard">{logo("square-light", 52)}<span>our crafted things.</span></div>'
+    cardb = '<div class="ncard back"><div class="nb">' + "".join(f'<span style="background:{c}"></span>' for c in BAND) + '</div><em>ห้าคน ห้าสี ทำกันเองทั้งบ้าน</em></div>'
     sleeve = (f'<div class="sleeve">{logo("square-mono", 80)}<div class="sb">' + "".join(f'<span style="background:{c}"></span>' for c in BAND) + '</div></div>')
-    return page(13, "การใช้งาน", "ป้าย ซอง ขอบหนัง",
+    return page(13, "การใช้งาน", "ป้าย ซอง การ์ด",
         f'''<div class="apps">
 <div class="app"><div class="ab">{tag_front()}{tag_back()}</div><span><b>ป้ายห้อย 55 × 89 มม.</b> หน้าเรียบ ชื่อและราคา หลังเป็นห้าสีของบ้าน กระดาษ 350 แกรม</span></div>
 <div class="app"><div class="ab">{sleeve}</div><span><b>ซองคราฟต์</b> ปั๊มตรายางโลโก้สีเดียว คาดเส้นห้าสีบาง ๆ ต้นทุนต่ำ</span></div>
-<div class="app"><div class="ab"><div class="edges">{edges}</div></div><span><b>ทาสีขอบหนัง</b> ชิ้นละหนึ่งสีของบ้าน มองด้านบนเป็นหนังธรรมดา ต้องทดลองและคิดค่าแรงก่อนใช้จริง</span></div>
+<div class="app"><div class="ab" style="flex-direction:column">{cardf}{cardb}</div><span><b>การ์ดในซอง 89 × 55 มม.</b> หน้าโลโก้ หลังห้าสีของบ้าน ขอบหนังไม่ทาสี ปล่อยตามธรรมชาติ</span></div>
 <div class="app"><div class="ab">{logo("square-leaf", 90)}{logo("square-family", 90)}</div><span><b>สติกเกอร์ 34 มม.</b> ปิดซองและถุง ใช้แบบเขียวใบตองหรือแบบแถบห้าสี</span></div>
 </div>''')
 
@@ -301,9 +302,10 @@ p{margin:0} ul{margin:0;padding-left:18px;display:grid;gap:2mm}
 .tb5 em{font-style:normal;color:#F4F0E8;background:#2A2725;font-size:8px;text-align:center;padding:5px 3px 7px;line-height:1.35}
 .sleeve{width:150px;height:110px;background:#CDB79A;position:relative;display:grid;place-items:center}
 .sleeve .sb{position:absolute;left:0;right:0;bottom:12px;height:4px;display:flex} .sleeve .sb span{flex:1}
-.edges{display:grid;gap:4px;width:150px}
-.edge{height:14px;background:#B07A4A;position:relative}
-.edge::after{content:"";position:absolute;inset:0;border-left:6px solid var(--c);border-right:6px solid var(--c)}
+.ncard{width:150px;height:93px;background:#F4F0E8;box-shadow:0 1px 3px rgba(42,39,37,.2);display:flex;gap:10px;align-items:center;padding:0 12px;font-family:Jost;font-size:9px;color:#6E6A64}
+.ncard.back{background:#2A2725;flex-direction:column;align-items:stretch;justify-content:flex-end;padding:0;gap:0}
+.ncard .nb{display:flex;height:60px} .ncard .nb span{flex:1}
+.ncard em{font-style:normal;font-family:Plex;color:#F4F0E8;font-size:8px;text-align:center;padding:9px 4px}
 .card{width:150px;height:188px;background:#F4F0E8;box-shadow:0 1px 3px rgba(42,39,37,.18);padding:9px;display:grid;grid-template-rows:1fr auto}
 .cph{background:#E3DCCF;display:grid;place-items:center}
 .cm{display:grid;font-size:9px;padding-top:6px} .cm b{font-family:Jost;font-weight:500;font-size:12px}
