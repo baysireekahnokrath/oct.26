@@ -1,0 +1,247 @@
+<title>OCT. 26 สีใหม่และโลโก้สี่เหลี่ยม</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+/* Layout: a mock-up book. Palette, then the square logo, then the logo and colours at work, then the brand map.
+   Single light look on purpose: every mock-up is shown on the cotton-white paper it will be printed on. */
+:root{
+  --cotton:#F4F0E8; --charcoal:#2A2725; --teak:#8B5E3C; --stone:#8C8A85; --hide:#B07A4A; --line:#DCD4C7; --card:#FBF8F2; --muted:#6E6A64;
+  --dad:#A9442B; --mom:#5E7A3A; --beiya:#E9A825; --beana:#B9A3D6; --bene:#2E4A7D;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif; --body:"IBM Plex Sans Thai",system-ui,sans-serif; --latin:"Jost","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+body{background:var(--cotton);color:var(--charcoal);font:16px/1.65 var(--body)}
+.wrap{max-width:900px;margin:0 auto;padding-block:28px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:48px}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;line-height:1.3;text-wrap:balance}
+h1{font-size:1.9rem} h2{font-size:1.35rem} h3{font-size:1.05rem}
+p{margin:0} section{display:grid;gap:16px}
+.eyebrow{font-size:.8rem;letter-spacing:.06em;color:var(--muted)}
+.note{color:var(--muted);font-size:.92rem}
+.mono{font-family:var(--latin);letter-spacing:.03em}
+.row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end}
+.cap{font-size:.85rem;color:var(--muted);margin-top:6px}
+.fig{display:grid;justify-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;display:grid;gap:12px;min-width:0}
+
+/* palette */
+.pal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.pal2{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:600px){.pal,.pal2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sw{border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.sw i{display:block;height:70px}
+.sw div{padding:8px 10px;font-size:.85rem;display:grid}
+.sw b{font-family:var(--display);font-weight:600;font-size:.98rem}
+
+/* square logo */
+.sq{--s:180px;width:var(--s);aspect-ratio:1;max-width:100%;display:grid;align-content:center;padding-left:calc(var(--s)*.14);box-sizing:border-box;position:relative;overflow:hidden;
+  font-family:var(--latin);font-weight:500;line-height:.86;letter-spacing:.01em}
+.sq .a{font-size:calc(var(--s)*.27)}
+.sq .b{font-size:calc(var(--s)*.40)}
+.sq .d{color:var(--mom)}
+.sq.light{background:var(--cotton);color:var(--charcoal);box-shadow:inset 0 0 0 1px var(--line)}
+.sq.dark{background:var(--charcoal);color:var(--cotton)} .sq.dark .d{color:#9DB777}
+.sq.leaf{background:var(--mom);color:var(--cotton)} .sq.leaf .d{color:var(--beiya)}
+.sq.hide{background:var(--hide);color:#5A3A1F} .sq.hide .d{color:#5A3A1F}
+.sq .fam{position:absolute;left:0;right:0;bottom:0;height:calc(var(--s)*.07);display:flex}
+.sq .fam span{flex:1}
+.sq.stripe{padding-bottom:calc(var(--s)*.07)}
+
+/* hang tag */
+.tag{width:150px;height:243px;background:var(--cotton);border:1px solid var(--line);border-radius:6px;position:relative;box-shadow:0 1px 4px rgba(42,39,37,.14);display:grid;justify-items:center;align-content:start;padding-top:40px;gap:12px;clip-path:polygon(16% 0,84% 0,100% 9%,100% 100%,0 100%,0 9%)}
+.tag::before{content:"";position:absolute;top:14px;left:50%;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;border:1.5px solid var(--charcoal)}
+.tag .price{font-family:var(--display);font-weight:600;font-size:1.3rem}
+.tag .name{font-size:.78rem;color:var(--muted);text-align:center;padding:0 10px;line-height:1.35}
+.tag .fam{position:absolute;left:0;right:0;bottom:0;height:16px;display:flex} .tag .fam span{flex:1}
+
+/* post */
+.post{width:300px;max-width:100%;aspect-ratio:4/5;background:var(--cotton);border:1px solid var(--line);border-radius:8px;position:relative;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.post .top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 0}
+.post .stage{display:grid;place-items:center}
+.post .bot{padding:0 16px 16px;display:grid;gap:2px}
+.post .bot b{font-family:var(--display);font-weight:600;font-size:1.15rem}
+.post .chip{justify-self:start;background:var(--mom);color:var(--cotton);font-size:.8rem;font-weight:600;border-radius:99px;padding:1px 10px}
+
+/* banner */
+.banner{width:100%;aspect-ratio:2/1;max-width:560px;background:var(--mom);color:var(--cotton);border-radius:8px;position:relative;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 6%}
+.banner h3{color:var(--cotton);font-size:clamp(1rem,3.4vw,1.6rem)}
+.banner p{font-size:clamp(.75rem,2vw,.95rem);opacity:.9}
+.banner .fam{position:absolute;left:0;right:0;bottom:0;height:10px;display:flex} .banner .fam span{flex:1}
+
+/* web */
+.web{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--cotton)}
+.web .bar{display:flex;gap:6px;padding:8px 10px;background:#E9E3D8} .web .bar i{width:9px;height:9px;border-radius:50%;background:#CFC6B8}
+.web nav{display:flex;align-items:center;gap:18px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:.9rem;flex-wrap:wrap}
+.web nav .sp{flex:1}
+.web .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;padding:22px 18px;align-items:center}
+@media (max-width:560px){.web .hero{grid-template-columns:1fr}}
+.web .btn{display:inline-block;background:var(--dad);color:var(--cotton);font-weight:600;border-radius:8px;padding:8px 16px;font-size:.9rem}
+.web .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;padding:0 18px 20px}
+.web .grid div{background:var(--card);border:1px solid var(--line);border-radius:8px;aspect-ratio:1;display:grid;place-items:center}
+
+/* pos */
+.pos{width:300px;max-width:100%;background:var(--cotton);border:1px solid var(--line);border-radius:22px;padding:12px;display:grid;gap:10px;box-shadow:0 2px 8px rgba(42,39,37,.12)}
+.pos .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pos .t{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;display:grid;justify-items:center;gap:2px;font-size:.8rem}
+.pos .t.on{border-color:var(--bene)}
+.pos .t b{font-family:var(--display);font-size:.95rem}
+.pos .go{background:var(--bene);color:var(--cotton);border-radius:12px;padding:10px;text-align:center;font-family:var(--display);font-weight:600}
+
+/* stickers, stamp */
+.stk{width:110px;height:110px;border-radius:18px;display:grid;place-items:center}
+
+/* map */
+.map{display:grid;gap:10px}
+.node{border:1.5px solid var(--charcoal);border-radius:10px;padding:10px 12px;background:#fff;display:grid;gap:2px}
+.node.muted{border-style:dashed;color:var(--muted);background:transparent}
+.node b{font-family:var(--display)}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.cols2{grid-template-columns:1fr}}
+.tree{display:grid;gap:8px;padding-left:16px;border-left:2px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+td,th{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.8rem;color:var(--muted);font-weight:600}
+.tbl{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+ol,ul{margin:0;padding-left:1.3em;display:grid;gap:6px}
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:8px">
+    <p class="eyebrow">OCT. 26 · mockup ก่อนแก้จริง · 22 ต.ค. 2569</p>
+    <h1>สีใหม่และโลโก้สี่เหลี่ยม</h1>
+    <p>ตัวอย่างนี้ใช้สีชุดใหม่ (แม่เขียวใบตอง Beiya เหลืองทานตะวัน) และโลโก้แบบสี่เหลี่ยมจัตุรัส ยังไม่ได้แก้ไฟล์จริง ถ้าโอเคแล้ว ผมจะไล่แก้ทุกอย่างตามรายการท้ายหน้า</p>
+  </header>
+
+  <section>
+    <h2>สีชุดใหม่</h2>
+    <div class="pal">
+      <div class="sw"><i style="background:var(--dad)"></i><div><b>พ่อเบ · แดงดินลูกรัง</b><span class="mono">#A9442B</span></div></div>
+      <div class="sw"><i style="background:var(--mom)"></i><div><b>แม่ · เขียวใบตอง</b><span class="mono">#5E7A3A</span></div></div>
+      <div class="sw"><i style="background:var(--beiya)"></i><div><b>Beiya · เหลืองทานตะวัน</b><span class="mono">#E9A825</span></div></div>
+      <div class="sw"><i style="background:var(--beana)"></i><div><b>Beana · ม่วงดอกอินทนิล</b><span class="mono">#B9A3D6</span></div></div>
+      <div class="sw"><i style="background:var(--bene)"></i><div><b>Bene · น้ำเงินคราม</b><span class="mono">#2E4A7D</span></div></div>
+    </div>
+    <div class="pal2">
+      <div class="sw"><i style="background:var(--cotton);border-bottom:1px solid var(--line)"></i><div><b>ขาวฝ้าย · พื้น</b><span class="mono">#F4F0E8</span></div></div>
+      <div class="sw"><i style="background:var(--charcoal)"></i><div><b>ดำถ่าน · ตัวหนังสือ</b><span class="mono">#2A2725</span></div></div>
+      <div class="sw"><i style="background:var(--teak)"></i><div><b>น้ำตาลไม้สัก · เส้น กรอบ</b><span class="mono">#8B5E3C</span></div></div>
+      <div class="sw"><i style="background:var(--stone)"></i><div><b>เทาหิน · ข้อความรอง</b><span class="mono">#8C8A85</span></div></div>
+      <div class="sw"><i style="background:var(--hide)"></i><div><b>สีหนังแท้ · วาดชิ้นหนัง</b><span class="mono">#B07A4A</span></div></div>
+    </div>
+    <p class="note">สีหลักของแบรนด์คือสีของแม่ (เขียวใบตอง) เพราะชื่อแบรนด์คือวันเกิดของแม่ สีของคนอื่นใช้เป็นแถบห้าสี และใช้แยกหมวดหรือปุ่มต่าง ๆ</p>
+  </section>
+
+  <section>
+    <h2>โลโก้สี่เหลี่ยม</h2>
+    <p>ชื่อเดิม OCT. 26 เรียงเป็นสองบรรทัดในกรอบจัตุรัส จุดหลัง OCT เป็นสีของแม่ ใช้ได้ทั้งรูปโปรไฟล์ สติกเกอร์ ป้าย และปั๊มบนหนัง ไม่ต้องมีโลโก้หลายแบบเหมือนเดิม</p>
+    <div class="row">
+      <div class="fig"><div class="sq light"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">หลัก: บนพื้นสว่าง</p></div>
+      <div class="fig"><div class="sq leaf"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">พื้นเขียวใบตอง: รูปโปรไฟล์</p></div>
+      <div class="fig"><div class="sq dark"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">บนพื้นเข้ม</p></div>
+      <div class="fig"><div class="sq light stripe"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span><div class="fam"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div></div><p class="cap">แบบมีแถบห้าสี: ป้ายและแพ็กเกจ</p></div>
+    </div>
+    <div class="row">
+      <div class="fig"><div class="sq hide" style="--s:110px"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">ปั๊มบนหนัง (สีเดียว)</p></div>
+      <div class="fig"><div class="sq leaf" style="--s:72px;border-radius:50%"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">ในวงกลมของ IG/FB</p></div>
+      <div class="fig"><div class="sq leaf" style="--s:40px"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">ขนาดเล็ก 40 px</p></div>
+      <div class="fig"><div class="sq light" style="--s:24px"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><p class="cap">ไอคอนแท็บ 24 px</p></div>
+    </div>
+    <p class="note">ตัวอย่างนี้ใช้ฟอนต์ Jost แทนตัวโลโก้ที่วาดเอง ตอนแก้จริงผมจะวาดตัวอักษรเดิมของโลโก้ OCT. 26 ลงกรอบจัตุรัส ทำไฟล์ SVG และ PNG ครบทุกสี</p>
+  </section>
+
+  <section>
+    <h2>ตัวอย่างงานจริง</h2>
+    <div class="row" style="align-items:flex-start">
+      <div class="fig"><div class="tag"><div class="sq light" style="--s:84px;box-shadow:none"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><span class="price">59.-</span><span class="name">ที่รองแก้วหมี<br>หนังแท้จากเศษหนัง</span><div class="fam"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div></div><p class="cap">ป้ายห้อย 55 × 89 มม.</p></div>
+
+      <div class="fig"><div class="post">
+        <div class="top"><div class="sq leaf" style="--s:38px"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><span class="note" style="font-size:.75rem">our crafted things.</span></div>
+        <div class="stage"><svg viewBox="0 0 120 120" width="150" aria-hidden="true"><circle cx="30" cy="34" r="16" fill="var(--hide)"/><circle cx="90" cy="34" r="16" fill="var(--hide)"/><circle cx="60" cy="68" r="40" fill="var(--hide)"/><rect x="24" y="64" width="3" height="16" rx="1.5" fill="#7A4E28"/><rect x="52" y="104" width="16" height="3" rx="1.5" fill="#7A4E28"/></svg></div>
+        <div class="bot"><span class="chip">ที่รองแก้ว</span><b>ที่รองแก้วหมี 59 บาท</b><span class="note" style="font-size:.8rem">หนังแท้จากเศษหนัง ทุกชิ้นสีไม่ซ้ำกัน</span></div>
+      </div><p class="cap">การ์ดสินค้า FB / IG 1080 × 1350 (ใส่รูปถ่ายจริงแทนภาพวาด)</p></div>
+
+      <div class="fig"><div class="pos">
+        <div class="row" style="justify-content:space-between;align-items:center"><div class="sq light" style="--s:30px"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><span style="font-size:.8rem;font-weight:600">ขาย · วันนี้</span></div>
+        <div class="tiles"><div class="t on"><svg viewBox="0 0 40 40" width="34"><circle cx="11" cy="11" r="6" fill="var(--dad)"/><circle cx="29" cy="11" r="6" fill="var(--dad)"/><circle cx="20" cy="23" r="13" fill="var(--dad)"/></svg><b>หมีรองแก้ว</b><span>59 บาท</span></div>
+        <div class="t"><svg viewBox="0 0 40 40" width="34"><circle cx="20" cy="20" r="15" fill="var(--mom)"/></svg><b>วงกลม</b><span>49 บาท</span></div>
+        <div class="t"><svg viewBox="0 0 40 40" width="34"><rect x="6" y="6" width="28" height="28" rx="8" fill="var(--bene)"/></svg><b>สี่เหลี่ยม</b><span>49 บาท</span></div>
+        <div class="t"><svg viewBox="0 0 40 40" width="34"><path d="M20 20 L20 4 Q32 7 20 20Z M20 20 L36 20 Q33 32 20 20Z M20 20 L20 36 Q8 33 20 20Z M20 20 L4 20 Q7 8 20 20Z" fill="var(--beiya)"/></svg><b>กังหัน</b><span>49 บาท</span></div></div>
+        <div class="go">คิดเงิน 59 บาท</div>
+      </div><p class="cap">หน้าขายของหน้างาน</p></div>
+    </div>
+
+    <div class="fig" style="width:100%"><div class="banner">
+      <div style="display:grid;gap:6px"><h3>ของใช้จากเศษหนังแท้<br>ทำกันเองทั้งบ้าน</h3><p>OCT. 26 · our crafted things.</p></div>
+      <div style="justify-self:end"><div class="sq leaf" style="--s:clamp(90px,22vw,170px);box-shadow:inset 0 0 0 2px var(--cotton)"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div></div>
+      <div class="fam"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div>
+    </div><p class="cap">แบนเนอร์ร้าน Shopee 1200 × 600 และปกเพจ</p></div>
+
+    <div class="fig" style="width:100%"><div class="web" style="width:100%">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <nav><div class="sq light" style="--s:34px;box-shadow:none"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div><span class="sp"></span><span>สินค้า</span><span>เรื่องของเรา</span><span>บูธ</span><span style="color:var(--dad);font-weight:600">Shopee</span></nav>
+      <div class="hero"><div style="display:grid;gap:10px"><h3 style="font-size:1.5rem">หนังแท้จากเศษหนัง<br>ทำกันเองทั้งบ้าน</h3><p class="note">ห้าคน ห้าสี ทุกชิ้นตัดจากหนังที่เหลือจากโรงงาน</p><span class="btn" style="justify-self:start">ดูสินค้า</span></div>
+        <div style="display:flex;height:140px;border-radius:10px;overflow:hidden"><span style="flex:1;background:var(--dad)"></span><span style="flex:1;background:var(--mom)"></span><span style="flex:1;background:var(--beiya)"></span><span style="flex:1;background:var(--beana)"></span><span style="flex:1;background:var(--bene)"></span></div></div>
+      <div class="grid"><div><svg viewBox="0 0 40 40" width="40"><circle cx="11" cy="11" r="6" fill="var(--hide)"/><circle cx="29" cy="11" r="6" fill="var(--hide)"/><circle cx="20" cy="23" r="13" fill="var(--hide)"/></svg></div><div><svg viewBox="0 0 40 40" width="40"><circle cx="20" cy="20" r="15" fill="var(--hide)"/></svg></div><div><svg viewBox="0 0 40 40" width="40"><rect x="6" y="6" width="28" height="28" rx="8" fill="var(--hide)"/></svg></div><div><svg viewBox="0 0 40 40" width="40"><path d="M20 20 L20 4 Q32 7 20 20Z M20 20 L36 20 Q33 32 20 20Z M20 20 L20 36 Q8 33 20 20Z M20 20 L4 20 Q7 8 20 20Z" fill="var(--hide)"/></svg></div></div>
+    </div><p class="cap">หน้าแรกของเว็บ oct26brand.com</p></div>
+
+    <div class="row">
+      <div class="fig"><div class="stk" style="background:var(--mom)"><div class="sq leaf" style="--s:84px"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span></div></div><p class="cap">สติกเกอร์ปิดถุง 34 มม.</p></div>
+      <div class="fig"><div class="stk" style="background:var(--cotton);box-shadow:inset 0 0 0 1px var(--line)"><div class="sq light stripe" style="--s:84px;box-shadow:none"><span class="a">OCT<span class="d">.</span></span><span class="b">26</span><div class="fam"><span style="background:var(--dad)"></span><span style="background:var(--mom)"></span><span style="background:var(--beiya)"></span><span style="background:var(--beana)"></span><span style="background:var(--bene)"></span></div></div></div><p class="cap">สติกเกอร์แบบแถบห้าสี</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>SOI. 02, ห้าหมี และ Love ทำหน้าที่อะไร</h2>
+    <div class="cols2">
+      <div class="card"><h3>ที่วางไว้ตอนแรก (14–15 ต.ค.)</h3>
+        <div class="map">
+          <div class="node"><b>OCT. 26</b><span class="note">แบรนด์หลัก ของใช้สำหรับผู้ใหญ่ เรียบ</span></div>
+          <div class="tree">
+            <div class="node"><b>SOI. 02</b><span class="note">คอลเลกชันแรก ของใช้ทุกวันจากแพตเทิร์น 02–06 ตั้งชื่อตามซอยบ้าน</span></div>
+            <div class="node"><b>ห้าหมี FIVE BEARS by OCT. 26</b><span class="note">แบรนด์ย่อย ไลน์ครอบครัวและเด็ก ตัวละครหมีห้าตัว จากแพตเทิร์น 01</span></div>
+            <div class="tree"><div class="node"><b>Love</b><span class="note">คอลเลกชันแรกของห้าหมี หัวหมีกับสายหัวใจ</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card"><h3>สิ่งที่เปลี่ยนไปตั้งแต่นั้น</h3>
+        <ul>
+          <li>ขายจริงมีแค่ 7 SKU เป็นชิ้นเดียวทั้งหมด หมี 2 ตัว นอกนั้น 5 ตัว</li>
+          <li>กฎใหม่ 22 ต.ค. ไม่ทำของเด็กเล็ก แต่ห้าหมีถูกวางไว้เป็นไลน์ครอบครัวและเด็ก</li>
+          <li>Love ต้องใช้สายหัวใจ ซึ่งยังไม่มีบล็อก ตอนนี้ไม่มีสินค้า Love ขายเลย</li>
+          <li>SOI. 02 ถูกนิยามด้วยแพตเทิร์น 02–06 แต่ 06 ไม่ได้ตัด และเปลี่ยนเป็น 07 แล้ว</li>
+          <li>ต้องดูแลโลโก้ 4 แบบ ป้าย 2 แบบ ฟอนต์ 2 ชุด สำหรับของแค่ 7 ชิ้น</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="border:2px solid var(--charcoal)"><h3>ที่ผมเสนอ: แบรนด์เดียว</h3>
+      <div class="map">
+        <div class="node"><b>OCT. 26 · our crafted things.</b><span class="note">แบรนด์เดียว โลโก้สี่เหลี่ยมอันเดียว สีครอบครัวห้าสีเล่าเรื่องบ้าน ห้าคน</span></div>
+        <div class="tree">
+          <div class="node"><b>หมี (แพตเทิร์น 01)</b><span class="note">เป็นรูปทรงประจำแบรนด์ ไม่ใช่แบรนด์ย่อย ใช้เป็นสินค้าขายดีและสติกเกอร์ ไม่ต้องมีโลโก้ห้าหมีแยก</span></div>
+          <div class="node"><b>SOI. 02 → ชื่อรอบผลิต</b><span class="note">ใช้เรียกของชุดแรกทั้งหมด (รวมหมี) รอบต่อไปเป็น SOI. 03 ได้ ลูกค้าไม่ต้องจำ ใช้ในเรื่องเล่าและป้ายบูธ</span></div>
+          <div class="node muted"><b>Love → พักไว้</b><span class="note">ไม่มีสินค้า เก็บชื่อไว้ใช้กับชุดของขวัญวาเลนไทน์หรือเมื่อมีบล็อกสายหัวใจ</span></div>
+          <div class="node muted"><b>ห้าหมี → พักไว้</b><span class="note">ถ้าวันหนึ่งทำไลน์ตัวละครจริงจัง ค่อยเปิดเป็นแบรนด์ย่อย</span></div>
+        </div>
+      </div>
+      <p class="note">เหตุผล: ของยังน้อย ลูกค้าจำชื่อเดียวง่ายกว่า กฎไม่ทำของเด็กทำให้ห้าหมีไม่มีหน้าที่ Love ไม่มีของ งานพิมพ์และจดเครื่องหมายการค้าเหลือชุดเดียว ประหยัดทั้งเงินและเวลา</p>
+    </div>
+    <p class="note">ทางเลือกอื่น: เก็บห้าหมีไว้เป็นไลน์หมีน่ารักสำหรับของขวัญวัยรุ่นและผู้ใหญ่ (ไม่ใช่เด็ก) โดยใช้โลโก้สี่เหลี่ยมเดียวกัน แล้วเขียนคำว่า ห้าหมี กำกับบนป้าย</p>
+  </section>
+
+  <section>
+    <h2>ถ้าโอเค จะแก้อะไรบ้าง</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>งาน</th><th>สิ่งที่แก้</th></tr></thead>
+      <tbody>
+        <tr><td>Brand Book และ Brand Bible</td><td>สีใหม่ โลโก้สี่เหลี่ยม โครงสร้างแบรนด์ใหม่ ทำ PDF ใหม่</td></tr>
+        <tr><td>โลโก้</td><td>วาดโลโก้สี่เหลี่ยม SVG/PNG ทุกสี รูปโปรไฟล์ ปก FB แบนเนอร์ Shopee สติกเกอร์</td></tr>
+        <tr><td>ป้ายห้อยและการ์ด</td><td>ป้ายห้อย การ์ดวิธีใช้ การ์ดสินค้า 7 แบบ</td></tr>
+        <tr><td>โพสต์และสตอรี่</td><td>ชุดโพสต์ FB/IG ที่ยังไม่ได้ลง (ที่ลงไปแล้วไม่ต้องลบ)</td></tr>
+        <tr><td>เว็บ oct26brand.com</td><td>สีและโลโก้ ทำพร้อมรอบแก้เว็บ 7 SKU</td></tr>
+        <tr><td>หน้าขายของ หน้าบัญชี หน้าแพทเทิร์น</td><td>สีและโลโก้</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">งานบูธพรุ่งนี้ (23 ต.ค.) ใช้ป้ายและของพิมพ์ชุดเดิมไปก่อนได้ ของใหม่ทยอยเปลี่ยนหลังงาน</p>
+  </section>
+</div>
