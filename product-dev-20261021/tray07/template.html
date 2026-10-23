@@ -1,0 +1,236 @@
+<title>ถาดวางของ 07</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  /* Layout: one 880px column. The 3D model leads, its fold slider directly under it; then the flat pattern and the numbers. Brand Book v2 nature palette. */
+  --bg:#F4F0E8;--card:#FFFFFF;--ink:#2A2725;--muted:#5E5953;--line:#E2DACB;--chip:#EBE4D6;
+  --accent:#5E7A3A;--warn:#A9442B;
+  --leather-a:#E6DCC6;--leather-b:#7A4E33;--leather-c:#B07A45;--cut:#2A2725;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--chip:#332F2A;--accent:#9DBA72;--warn:#E08A70;--cut:#1C1A18;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--chip:#332F2A;--accent:#9DBA72;--warn:#E08A70;--cut:#1C1A18;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+.wrap{max-width:880px;margin:0 auto;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.25;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,7vw,40px)}h2{font-size:24px}h3{font-size:18px}
+p{margin:0}.muted{color:var(--muted)}.small{font-size:13px}.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--latin);font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+section{display:grid;gap:16px}
+.stage{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+#view{display:block;width:100%;aspect-ratio:4/3;max-width:100%;touch-action:none;cursor:grab}
+#view:active{cursor:grabbing}
+.hint{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--muted);pointer-events:none}
+.status{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted)}
+.controls{display:grid;gap:12px}
+.slider{display:grid;gap:6px}
+.slider input{width:100%;accent-color:var(--accent)}
+.ticks{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:focus-visible,.slider input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:grid;gap:2px;min-width:0}
+.fact b{font-family:var(--latin);font-weight:500;font-size:28px;line-height:1.15}
+.net{width:100%;height:auto;max-width:100%;display:block;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px}
+.net .pc{stroke:var(--ink);stroke-width:.8;stroke-opacity:.35}
+.net .cut{stroke:var(--cut);stroke-width:1.6}
+.net .fold{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:6 5}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid var(--line)}
+ol,ul{margin:0;padding-left:1.25em;display:grid;gap:8px}
+.ask{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:14px;padding:16px 18px;display:grid;gap:10px}
+.note{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+<div class="wrap">
+<header style="display:grid;gap:10px">
+  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · ต้นแบบ 23 ต.ค. 2569</p>
+  <h1>ถาดวางของ 07</h1>
+  <p class="muted">ไอเดียของเจ้าของ: ฐาน 2 × 4 ชิ้น ขอบสูงขึ้นมา 2 ชิ้น แล้วพับกลับมาสอด ให้ขอบเหลือชั้นเดียว ทุกชิ้นเป็น 07 กากบาทข้อต่อวงกลม
+    โมเดลนี้วางชิ้นตามระยะข้อต่อจริงของบล็อก 07 เลื่อนแถบด้านล่างเพื่อดูตั้งแต่ชิ้นวางแบนจนพับเสร็จ</p>
+</header>
+
+<section aria-label="โมเดล 3D">
+  <div class="stage">
+    <canvas id="view" aria-label="โมเดล 3D ของถาด หมุนได้ด้วยการลาก"></canvas>
+    <p class="status" id="status">กำลังโหลดโมเดล 3D…</p>
+    <p class="hint">ลากเพื่อหมุน · หมุนล้อหรือบีบนิ้วเพื่อซูม</p>
+  </div>
+  <div class="controls">
+    <div class="slider">
+      <label for="fold"><b>ขั้นประกอบ</b> <span class="muted small" id="fold-label"></span></label>
+      <input id="fold" type="range" min="0" max="100" value="100">
+      <div class="ticks"><span>วางแบน</span><span>ยกขอบ</span><span>พับเข้าใน</span></div>
+    </div>
+    <div class="row" role="group" aria-label="มุมมอง">
+      <button class="btn" type="button" id="v-iso" aria-pressed="true">มุมเฉียง</button>
+      <button class="btn" type="button" id="v-top" aria-pressed="false">มุมบน</button>
+      <button class="btn" type="button" id="v-side" aria-pressed="false">ด้านข้าง</button>
+      <button class="btn" type="button" id="v-under" aria-pressed="false">ใต้ถาด</button>
+      <button class="btn" type="button" id="two-tone" aria-pressed="true">สองสีสลับ</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>ตัวเลข</h2>
+  <div class="facts num">
+    <div class="fact"><span class="small muted">ชิ้น 07 ต่อใบ</span><b>__N__</b><span class="small muted">ฐาน __NBASE__ · ขอบ __NRIM__ (รอบละ __NRIMROW__ × 2 แถว)</span></div>
+    <div class="fact"><span class="small muted">ขนาดด้านใน</span><b>__INNER__</b><span class="small muted">เซนติเมตร วัดถึงแนวขอบ</span></div>
+    <div class="fact"><span class="small muted">ขอบสูงหลังพับ</span><b>__WALL__</b><span class="small muted">เซนติเมตร ถึงแนวพับ ปลายกลีบโผล่อีก __LOBE__</span></div>
+    <div class="fact"><span class="small muted">ค่าชิ้นหนัง</span><b>__COST__</b><span class="small muted">บาท (3.45 × __N__) 07 มี 200 ชิ้น ทำได้ __MAKE__ ใบ</span></div>
+  </div>
+  <p class="note">ระยะชิ้นต่อชิ้น __PITCH__ มม. คือสองเท่าของระยะจากกลางชิ้นถึงร่อง (28.43 มม.) ชิ้นข้างกันหมุนสลับ 90° ปีกจึงเจอร่องทุกจุด เหมือนที่ห้อยกระเป๋า 4 ชิ้นที่ทำจริงวันนี้</p>
+</section>
+
+<section>
+  <h2>แพตเทิร์นคลี่แบน</h2>
+  <p class="muted">ต่อทุกชิ้นบนโต๊ะให้ได้รูปบวกแบบนี้ก่อน แล้วค่อยยกขอบ เส้นประคือแนวยกขอบ ตรงมุมไม่มีชิ้น เพราะขอบสองด้านเกี่ยวกันเองตอนยกขึ้น</p>
+  __NET__
+  <div class="legend"><span><i style="background:var(--leather-a)"></i>ฐาน 2 × 4</span><span><i style="background:var(--leather-b)"></i>ขอบแถว 1 (ตั้งขึ้น)</span><span><i style="background:var(--leather-c)"></i>ขอบแถว 2 (พับเข้าใน)</span></div>
+</section>
+
+<section>
+  <h2>ลำดับการประกอบตามโมเดล</h2>
+  <ol>
+    <li>ต่อฐาน 2 × 4 ชิ้น หมุนชิ้นข้างกันสลับ 90° ให้ปีกสอดเข้าร่องของชิ้นข้างๆ</li>
+    <li>ต่อขอบแถว 1 รอบฐาน __NRIMROW__ ชิ้น แล้วต่อแถว 2 อีก __NRIMROW__ ชิ้น ยังวางแบนบนโต๊ะ</li>
+    <li>ยกขอบตั้งขึ้นทั้งสี่ด้าน ปลายชิ้นที่มุมจะสอดเข้าร่องของด้านข้างกันพอดี</li>
+    <li>พับแถว 2 เข้าด้านในจนแนบแถว 1 ปลายกลีบสอดลงร่องที่ขอบฐาน ขอบจึงเหลือสูงชั้นเดียว และขอบบนเป็นแนวพับเรียบ</li>
+  </ol>
+</section>
+
+<section class="ask">
+  <h3>ให้เจ้าของยืนยัน</h3>
+  <ul>
+    <li>พับแถว 2 <b>เข้าด้านใน</b> แบบในโมเดล หรือพับออกด้านนอก</li>
+    <li>ขอบ "สูงมา 2 ชิ้น" คือ 2 แถวรอบฐานแบบในโมเดลใช่ไหม ถ้าใช่ ใบหนึ่งใช้ 07 ถึง __N__ ชิ้น</li>
+    <li>ปลายกลีบของขอบแถว 1 โผล่ใต้ฐาน __LOBE__ ซม. รอบถาด จะพับเก็บใต้ฐาน หรือใช้เป็นขาถาด (ดูได้จากปุ่มใต้ถาด)</li>
+    <li>ถาดนี้วางของใช้ เช่น กุญแจ เครื่องประดับ ไม่ใช่ถาดใส่อาหาร ตามกฎ 22 ต.ค. ควรเขียนบนป้าย</li>
+  </ul>
+  <p class="note">โมเดลนี้ตรวจระยะข้อต่อจากไฟล์บล็อกจริง แต่หนังงอได้ ความแน่นตอนพับและการสอดสองชั้นลงร่องเดียว ต้องลองกับหนังจริง แล้วบันทึกผลในหน้า PD แท็บทดสอบ</p>
+</section>
+
+<section>
+  <h3>บันทึกจากเจ้าของ 23 ต.ค.</h3>
+  <ul class="small">
+    <li>ต้นแบบที่ทำวันนี้ทุกชิ้นใช้ 07</li>
+    <li>ท่อ 07 ที่ลองรอบแก้วน้ำ ขายเป็นปลอกขวดน้ำ</li>
+  </ul>
+  <p class="note">ไฟล์: product-dev-20261021/tray07/ (build.py สร้างหน้านี้จากรูปร่างบล็อก 07) · รูปต้นแบบ product-dev-20261021/prototypes/20261023/</p>
+</section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const D = __DATA__;
+const $ = s => document.querySelector(s);
+const status = $("#status");
+(function () {
+  if (!window.THREE) { status.textContent = "โหลดโมเดล 3D ไม่ได้ ดูแพตเทิร์นคลี่แบนด้านล่างแทน"; return; }
+  const T = THREE, canvas = $("#view"), TH = 1.2, P = D.P, J = D.J;
+  let renderer;
+  try { renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); }
+  catch { status.textContent = "เครื่องนี้แสดง 3D ไม่ได้ ดูแพตเทิร์นคลี่แบนด้านล่างแทน"; return; }
+  status.hidden = true;
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  const scene = new T.Scene();
+  scene.add(new T.HemisphereLight(0xffffff, 0x8a6a50, 0.9));
+  const sun = new T.DirectionalLight(0xffffff, 0.6); sun.position.set(120, -200, 260); scene.add(sun);
+
+  const shape = new T.Shape(D.poly.map(([x, y]) => new T.Vector2(x, y)));
+  const geo = new T.ExtrudeGeometry(shape, {depth: TH, bevelEnabled: false}); geo.translate(0, 0, -TH / 2);
+  const css = getComputedStyle(document.documentElement);
+  const col = n => new T.Color(css.getPropertyValue(n).trim() || "#cccccc");
+  const mats = {a: new T.MeshStandardMaterial({color: col("--leather-a"), roughness: .9}),
+                b: new T.MeshStandardMaterial({color: col("--leather-b"), roughness: .9})};
+  const cutMat = new T.LineBasicMaterial({color: 0x2A2725});
+  const pieces = [];
+  function piece(x, y, gx, gy) {                       // one 07 lying flat at (x, y); neighbours turn 90 deg
+    const g = new T.Group(), odd = (gx + gy) % 2 !== 0;
+    const m = new T.Mesh(geo, mats.a); m.userData.odd = odd; pieces.push(m); g.add(m);
+    for (const [a, b] of D.cuts) for (const z of [TH / 2 + .05, -TH / 2 - .05])
+      g.add(new T.Line(new T.BufferGeometry().setFromPoints([new T.Vector3(a[0], a[1], z), new T.Vector3(b[0], b[1], z)]), cutMat));
+    g.rotation.z = odd ? Math.PI / 2 : 0;
+    g.position.set(x, y, odd ? .7 : -.7);              // woven: every other piece sits on top at the overlaps
+    return g;
+  }
+  const tray = new T.Group(); scene.add(tray);
+  const C = D.cols, R = D.rows, xs = [...Array(C)].map((_, i) => (i - (C - 1) / 2) * P), ys = [...Array(R)].map((_, j) => (j - (R - 1) / 2) * P);
+  xs.forEach((x, i) => ys.forEach((y, j) => tray.add(piece(x, y, i, j))));
+  // each side: hinge A on the base edge lifts the rim, hinge B between the rim rows folds row 2 into the tray
+  const sides = [];
+  for (const [ox, oy] of [[0, 1], [0, -1], [1, 0], [-1, 0]]) {
+    const o = new T.Vector3(ox, oy, 0), k = new T.Vector3().crossVectors(o, new T.Vector3(0, 0, 1));
+    const along = ox ? ys : xs, half = ox ? (C - 1) / 2 * P : (R - 1) / 2 * P;
+    const A = new T.Group(); A.position.copy(o.clone().multiplyScalar(half + J)); tray.add(A);
+    const B = new T.Group(); B.position.copy(o.clone().multiplyScalar(P)); A.add(B);
+    const inner = new T.Group(); B.add(inner);
+    along.forEach((s, n) => {
+      const t = ox ? new T.Vector3(0, s, 0) : new T.Vector3(s, 0, 0);
+      const gIdx = (r) => { const g = ox ? [ox > 0 ? C - 1 + r : -r, n] : [n, oy > 0 ? R - 1 + r : -r]; return g; };
+      const p0 = piece(0, 0, ...gIdx(1)); p0.position.add(t).add(o.clone().multiplyScalar(J)); A.add(p0);
+      const p1 = piece(0, 0, ...gIdx(2)); p1.position.add(t).add(o.clone().multiplyScalar(J)); inner.add(p1);
+    });
+    sides.push({A, B, inner, k});
+  }
+  const slider = $("#fold"), label = $("#fold-label");
+  function setFold(v) {
+    const lift = Math.min(1, v / 50), fold = Math.max(0, (v - 50) / 50);
+    for (const s of sides) {
+      s.A.setRotationFromAxisAngle(s.k, lift * Math.PI / 2);
+      s.B.setRotationFromAxisAngle(s.k, fold * Math.PI);
+      s.inner.position.set(0, 0, -TH * 1.9 * fold);   // lies against row 1 on the inside once folded
+    }
+    label.textContent = v === 0 ? "ชิ้นต่อกันวางแบนบนโต๊ะ" : v < 50 ? "กำลังยกขอบ" : v === 50 ? "ขอบตั้งขึ้นสูง 2 ชิ้น" : v < 100 ? "กำลังพับแถว 2 เข้าด้านใน" : "พับเสร็จ ขอบเหลือชั้นเดียว";
+    draw();
+  }
+  slider.addEventListener("input", () => setFold(+slider.value));
+
+  // camera: drag to orbit, wheel or pinch to zoom
+  const cam = new T.PerspectiveCamera(32, 4 / 3, 1, 5000); cam.up.set(0, 0, 1);
+  const VIEWS = {iso: [-0.9, 0.62], top: [-Math.PI / 2, 1.5], side: [-Math.PI / 2, 0.12], under: [-0.9, -0.55]};
+  let [yaw, pitch] = VIEWS.iso, zoom = 1;
+  const target = new T.Vector3(0, 0, 22);
+  function draw() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.round(w * renderer.getPixelRatio()) || canvas.height !== Math.round(h * renderer.getPixelRatio())) renderer.setSize(w, h, false);
+    cam.aspect = w / h; cam.updateProjectionMatrix();
+    const d = 560 * zoom;
+    cam.position.set(target.x + d * Math.cos(pitch) * Math.cos(yaw), target.y + d * Math.cos(pitch) * Math.sin(yaw), target.z + d * Math.sin(pitch));
+    cam.lookAt(target);
+    renderer.render(scene, cam);
+  }
+  const pts = new Map(); let pinch = 0;
+  canvas.addEventListener("pointerdown", e => { canvas.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); });
+  canvas.addEventListener("pointermove", e => {
+    if (!pts.has(e.pointerId)) return;
+    const [px, py] = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
+    if (pts.size === 2) {
+      const [a, b] = [...pts.values()], dd = Math.hypot(a[0] - b[0], a[1] - b[1]);
+      if (pinch) zoom = Math.max(.45, Math.min(2.4, zoom * pinch / dd)); pinch = dd;
+    } else { yaw -= (e.clientX - px) * 0.01; pitch = Math.max(-1.45, Math.min(1.52, pitch + (e.clientY - py) * 0.01)); }
+    draw();
+  });
+  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = 0; };
+  canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up);
+  canvas.addEventListener("wheel", e => { e.preventDefault(); zoom = Math.max(.45, Math.min(2.4, zoom * (e.deltaY > 0 ? 1.08 : .93))); draw(); }, {passive: false});
+  const viewBtns = ["iso", "top", "side", "under"];
+  viewBtns.forEach(v => $("#v-" + v).addEventListener("click", () => {
+    [yaw, pitch] = VIEWS[v]; zoom = 1;
+    viewBtns.forEach(x => $("#v-" + x).setAttribute("aria-pressed", String(x === v))); draw();
+  }));
+  const tone = $("#two-tone");
+  function paint() { const two = tone.getAttribute("aria-pressed") === "true"; for (const m of pieces) m.material = two && m.userData.odd ? mats.b : mats.a; draw(); }
+  tone.addEventListener("click", () => { tone.setAttribute("aria-pressed", String(tone.getAttribute("aria-pressed") !== "true")); paint(); });
+  window.addEventListener("resize", draw);
+  paint(); setFold(+slider.value);
+})();
+</script>
