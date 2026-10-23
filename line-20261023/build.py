@@ -37,10 +37,10 @@ MSGS = [  # (key, title, where in LINE OA Manager, limit, text)
      "01 หมี · 02 กังหัน · 03 กากบาทแคปซูล · 04 สี่เหลี่ยมมน · 05 วงกลม\n\n"
      "แผ่นเดียวใช้ได้หลายอย่าง เช่น ที่รองแก้ว ที่เก็บสายชาร์จ ป้ายของขวัญ\n"
      "หนังมาจากคนละผืน สีจึงไม่เท่ากันทุกแผ่น และนั่นคือส่วนที่เราชอบ\n\n"
-     f"รูปและไอเดียใหม่ ๆ ดูได้ที่\n{LINKS}\n\n"
+     f"รูปและไอเดียใหม่ ๆ ดูได้ที่\n{LINKS}\nLINE OA {SO['line']} ({SO['line_id']})\n\n"
      "OCT. 26 · our crafted things."),
     ("auto", "3 · ตอบกลับอัตโนมัติ เมื่อพิมพ์คำว่า ไอจี / เฟซ / ช่องทาง", "LINE OA Manager → ข้อความตอบกลับ → ตั้งคำสำคัญ", 500,
-     f"ช่องทางของ OCT. 26\n{LINKS}\nLINE {SO['line_id']} (ที่นี่)"),
+     f"ช่องทางของ OCT. 26\n{LINKS}\nLINE OA {SO['line']} ({SO['line_id']})"),
 ]
 for key, _, _, limit, text in MSGS:
     assert len(text) <= limit, (key, len(text))
