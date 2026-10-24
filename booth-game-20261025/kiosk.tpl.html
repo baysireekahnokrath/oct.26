@@ -1,0 +1,122 @@
+<title>เกมบูธ OCT. 26</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@500&display=swap">
+<style>
+/* Booth kiosk: one screen at a time (follow, play, prize), big touch targets for kids, staff controls tucked at the bottom.
+   One deliberate light look on cotton, matching the printed table signs. */
+:root{--cotton:#F4F0E8;--sheet:#FBF8F2;--ink:#2A2725;--muted:#6E6A64;--line:#DCD4C7;--sun:#E9A825;--sun-soft:#F7E2AE;--indigo:#2E4A7D;--leaf:#5E7A3A;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--num:"Jost",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--cotton);color:var(--ink);font:17px/1.6 var(--body)}
+.wrap{max-width:760px;margin:0 auto;min-height:100%;padding-block:16px 24px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;grid-template-rows:auto 1fr auto;gap:16px}
+header{display:flex;align-items:center;gap:12px}
+.logo{width:56px;height:56px;display:block}
+header b{font-family:var(--display);font-weight:600;font-size:1.15rem;line-height:1.2}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,6vw,2.8rem);line-height:1.15;margin:0;text-wrap:balance}
+p{margin:0}
+.screen{display:grid;gap:18px;align-content:start}
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:center;font-size:1.1rem}
+.steps i{font-style:normal;font-family:var(--num);background:var(--ink);color:var(--cotton);border-radius:50%;width:40px;height:40px;display:grid;place-items:center}
+.qrs{display:flex;gap:16px;flex-wrap:wrap}
+.qrs a{display:grid;gap:6px;justify-items:center;text-decoration:none;color:var(--ink);font-family:var(--num)}
+.qr{width:150px;height:150px;background:#fff;padding:6px;border-radius:8px;display:block}
+.big{font:600 1.3rem var(--body);background:var(--ink);color:var(--cotton);border:0;border-radius:999px;padding:16px 28px;cursor:pointer;justify-self:start}
+.big.sun{background:var(--sun);color:var(--ink)}
+button:focus-visible,a:focus-visible{outline:3px solid var(--indigo);outline-offset:3px}
+.hud{display:flex;gap:18px;font-family:var(--num);font-variant-numeric:tabular-nums;font-size:1.05rem}
+.hud b{font-size:1.4rem}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:520px){.board{grid-template-columns:repeat(3,1fr)}}
+.card{aspect-ratio:3/4;border:0;padding:0;border-radius:14px;background:transparent;position:relative;cursor:pointer}
+.face{position:absolute;inset:0;border-radius:14px;display:grid;place-items:center;backface-visibility:hidden;transition:transform .3s}
+.back{background:var(--ink);color:var(--cotton);font-family:var(--num);font-size:1.1rem;letter-spacing:.08em}
+.front{background:var(--sheet);transform:rotateY(180deg);border:2px solid var(--line)}
+.front svg{width:72%;height:auto}
+.card.open .back{transform:rotateY(180deg)} .card.open .front{transform:rotateY(360deg)}
+.card.done .front{background:var(--sun-soft);border-color:var(--sun)}
+.prize{background:var(--sun);border-radius:24px;padding:22px;display:grid;gap:10px}
+.prize h1{font-size:clamp(2.2rem,7vw,3.4rem)}
+.more{background:var(--sheet);border:2px solid var(--ink);border-radius:20px;padding:16px;display:grid;gap:8px}
+.more .tags{font-family:var(--num);font-size:1.3rem}
+.staff{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.staff button{font:500 .85rem var(--body);background:transparent;border:1.5px solid var(--muted);color:var(--muted);border-radius:999px;padding:4px 12px;cursor:pointer}
+.staff b{color:var(--ink);font-family:var(--num);font-size:1rem}
+@media (prefers-reduced-motion:reduce){.face{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>__LOGO__<b>OCT. 26<br><span style="font-weight:500;color:var(--muted);font-size:.9rem">เกมแจกชิ้นหนัง · บูธ KIDS MARKET</span></b></header>
+
+  <main>
+    <section class="screen" id="s-follow">
+      <h1>Follow · เล่นเกม · รับชิ้นหนังฟรี</h1>
+      <ol class="steps">
+        <li><i>1</i><span>Follow IG หรือ Facebook ของเรา (ช่องทางไหนก็ได้)</span></li>
+        <li><i>2</i><span>โชว์หน้าจอให้พี่ที่บูธดู</span></li>
+        <li><i>3</i><span>เล่นเกมจับคู่ 6 ลาย เล่นจบได้ทุกคน</span></li>
+      </ol>
+      <div class="qrs"><a href="https://www.instagram.com/oct.26_brand/">__QR_IG__IG __TAG__</a><a href="https://www.facebook.com/oct26brand">__QR_FB__FB oct26brand</a></div>
+      <button class="big" type="button" id="go">Follow แล้ว เริ่มเล่น</button>
+    </section>
+
+    <section class="screen" id="s-play" hidden>
+      <h1>หาคู่ให้ครบ 6 คู่</h1>
+      <div class="hud" aria-live="polite"><span>พลิก <b id="moves">0</b></span><span>คู่ <b id="pairs">0</b>/6</span></div>
+      <div class="board" id="board"></div>
+    </section>
+
+    <section class="screen" id="s-win" hidden>
+      <div class="prize"><h1>เก่งมาก ได้รางวัล</h1><p style="font-size:1.2rem">เลือกชิ้นหนังที่ชอบ 1 ชิ้น แล้วไปแต่งต่อที่โต๊ะได้เลย</p><p id="took" class="tags" style="font-family:var(--num)"></p></div>
+      <div class="more"><b style="font-family:var(--display);font-size:1.3rem">อยากได้อีกชิ้นไหม</b>
+        <p>แต่งเสร็จแล้ว ถ่ายรูปโพสต์ลง IG หรือ Facebook แบบสาธารณะ แท็กเรา ใส่แฮชแท็ก แล้วโชว์โพสต์ให้พี่ที่บูธดู รับเพิ่มอีก 1 ชิ้น</p>
+        <p class="tags">__TAG__ · __HASH__</p>
+        <p style="color:var(--muted);font-size:.9rem">เขียนรีวิวตามจริงได้เลย ถ้าเราอยากเอารูปไปลงเว็บ จะทักขออนุญาตก่อน</p></div>
+      <button class="big sun" type="button" id="next">คนต่อไป</button>
+    </section>
+  </main>
+
+  <footer class="staff" aria-label="สำหรับพี่ที่บูธ">
+    <span>พี่ที่บูธ · วันนี้เล่นจบ <b id="today">0</b> คน · ให้รางวัลขั้น 2 <b id="bonus">0</b> ชิ้น</span>
+    <button type="button" id="plus2">+1 ขั้น 2</button>
+    <button type="button" id="restart">เริ่มใหม่</button>
+  </footer>
+</div>
+
+<script>
+// Kiosk flow: follow -> play -> prize. Counts are per device per day, only for the booth's own tally.
+const CARDS = __CARDS__;
+const $ = id => document.getElementById(id);
+const day = new Date().toISOString().slice(0, 10);
+const get = k => { try { return Number(localStorage.getItem(`b26-${k}-${day}`)) || 0 } catch { return 0 } };
+const put = (k, v) => { try { localStorage.setItem(`b26-${k}-${day}`, String(v)) } catch {} };
+const counts = { done: get("done"), bonus: get("bonus") };
+const showCounts = () => { $("today").textContent = counts.done; $("bonus").textContent = counts.bonus; };
+function show(id){ ["s-follow", "s-play", "s-win"].forEach(s => $(s).hidden = s !== id); window.scrollTo(0, 0); }
+let open = [], moves = 0, pairs = 0, lock = false;
+function deal(){
+  const keys = Object.keys(CARDS), deck = [...keys, ...keys];
+  for (let i = deck.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+  open = []; moves = 0; pairs = 0; lock = false; $("moves").textContent = 0; $("pairs").textContent = 0;
+  $("board").innerHTML = deck.map((k, i) => `<button class="card" type="button" data-k="${k}" aria-label="การ์ดใบที่ ${i+1}"><span class="face back" aria-hidden="true">OCT. 26</span><span class="face front" aria-hidden="true">${CARDS[k]}</span></button>`).join("");
+}
+$("board").addEventListener("click", e => {
+  const c = e.target.closest(".card"); if (!c || lock || c.classList.contains("open")) return;
+  c.classList.add("open"); c.setAttribute("aria-label", `ลาย ${c.dataset.k}`); open.push(c);
+  if (open.length < 2) return;
+  moves++; $("moves").textContent = moves;
+  const [a, b] = open;
+  if (a.dataset.k === b.dataset.k){
+    a.classList.add("done"); b.classList.add("done"); open = []; pairs++; $("pairs").textContent = pairs;
+    if (pairs === 6){ counts.done++; put("done", counts.done); showCounts(); $("took").textContent = `จับคู่ครบใน ${moves} ครั้ง`; setTimeout(() => show("s-win"), 500); }
+  } else { lock = true; setTimeout(() => { a.classList.remove("open"); b.classList.remove("open"); open = []; lock = false; }, 750); }
+});
+$("go").addEventListener("click", () => { deal(); show("s-play"); });
+$("next").addEventListener("click", () => show("s-follow"));
+$("restart").addEventListener("click", () => show("s-follow"));
+$("plus2").addEventListener("click", () => { counts.bonus++; put("bonus", counts.bonus); showCounts(); });
+showCounts();
+</script>
