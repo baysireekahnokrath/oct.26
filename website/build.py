@@ -6,10 +6,12 @@ piece outlines from the die files (1:1 mm), the page itself from src/ (app.css, 
 
     python3 website/build.py      # -> website/public
 
-Pages are rendered in the browser by app.js; each HTML file still carries its own title, description, canonical link,
-share image, product JSON-LD and a <noscript> version, so links, search and chat previews work without scripts.
+Pages are rendered in the browser by app.js. prerender.mjs then opens each page in Chromium and writes what app.js drew
+into the HTML file, so search engines and chat previews read the full text without running scripts; app.js redraws the
+same markup on load. Each file also carries its search title, description, canonical link, share image and JSON-LD
+(Organization and WebSite on home; Product and BreadcrumbList on product pages).
 """
-import hashlib, html, json, os, re, shutil
+import datetime, hashlib, html, json, os, re, shutil, subprocess
 from PIL import Image
 
 import catalog as C
@@ -80,7 +82,7 @@ def data_js():
     j = lambda v: json.dumps(v, ensure_ascii=False, separators=(",", ":"))
     return ("// built by website/build.py from catalog.py and the die files; do not edit\n"
             f"const SH={j({c: shape(c) for c in DIES})};\nconst LOGO={j(dict(light=logo('square-light'), dark=logo('square-dark')))};\n"
-            f"const PROD={j(prod)};\nconst PD={j(pd)};\nconst LINK={j(link)};\nconst BOOTH={j(C.BOOTH)};\n")
+            f"const PROD={j(prod)};\nconst PD={j(pd)};\nconst LINK={j(link)};\nconst BOOTH={j(C.BOOTH)};\nconst ALT={j(C.ALT)};\n")
 
 
 def stamp(path):
@@ -90,7 +92,7 @@ def stamp(path):
 def page(title, desc, path, img, page_js, noscript, ld=None):
     url = C.SITE + path
     v = {f: stamp(os.path.join(OUT, "assets", f)) for f in ("app.css", "app.js", "data.js")}
-    ldj = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""
+    ldj = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False, separators=(",", ":"))}</script>' if ld else ""
     return f"""<!doctype html><html lang="th"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{E(title)}</title><meta name="description" content="{E(desc)}"><link rel="canonical" href="{url}">
@@ -103,7 +105,7 @@ def page(title, desc, path, img, page_js, noscript, ld=None):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@300;400;500&display=swap">
 <link rel="stylesheet" href="/assets/app.css?v={v['app.css']}">{ldj}</head><body>
 {open(os.path.join(SRC, "defs.svg")).read()}
-<main id="view"><noscript>{noscript}</noscript></main>
+<main id="view" class="d2"><!--prerender--><noscript>{noscript}</noscript></main>
 <div class="toast" id="toast" role="status" hidden></div>
 <script>const PAGE={json.dumps(page_js)};</script>
 <script src="/assets/data.js?v={v['data.js']}" defer></script><script src="/assets/app.js?v={v['app.js']}" defer></script>
@@ -136,19 +138,32 @@ if __name__ == "__main__":
     og("home", ["bears", "circles", "clover03"])
     items = "".join(f'<li><a href="/p/{p["id"]}">{E(p["name"])}</a> · {p["price"]} บาท</li>' for p in C.PRODUCTS)
     contact = f'<p>สั่งซื้อทาง LINE <a href="{C.LINE}">{C.LINE_ID}</a> · Instagram <a href="{C.IG}">{C.IG_HANDLE}</a> · Shopee ร้าน {E(C.SHOPEE_NAME)}</p>'
+    org = {"@type": "Organization", "@id": C.SITE + "/#org", "name": "OCT. 26", "alternateName": C.SHOPEE_NAME, "url": C.SITE + "/",
+           "logo": C.SITE + "/assets/logo/square-light.png", "description": "ของใช้แฮนด์เมดจากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน",
+           "sameAs": [C.IG, C.FB, C.LINE]}
+    site = {"@type": "WebSite", "@id": C.SITE + "/#site", "name": "OCT. 26", "url": C.SITE + "/", "inLanguage": "th", "publisher": {"@id": C.SITE + "/#org"}}
     open(os.path.join(OUT, "index.html"), "w").write(page(
-        "OCT. 26 · our crafted things.",
-        f"ของใช้จากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน ที่รองแก้ว ป้ายห้อย ที่เก็บสายชาร์จ {len(C.PRODUCTS)} แบบ {low}–{high} บาท สั่งทาง LINE",
+        "OCT. 26 · ของใช้หนังวัวแท้แฮนด์เมดจากเศษหนัง ที่รองแก้ว ป้ายห้อยของขวัญ",
+        f"งานหนังแฮนด์เมดจากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน ที่รองแก้วหนัง ป้ายห้อยของขวัญ ที่เก็บสายชาร์จ {len(C.PRODUCTS)} แบบ {low}–{high} บาท"
+        " ของขวัญ ของที่ระลึกองค์กร และเวิร์กช็อปแต่งชิ้นหนัง สั่งทาง LINE",
         "/", "home", {"type": "home"},
-        f"<h1>OCT. 26 · our crafted things.</h1><p>ของใช้จากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน</p><ul>{items}</ul>{contact}"))
+        f"<h1>OCT. 26 · our crafted things.</h1><p>ของใช้จากเศษหนังวัวแท้ ทำกันเองทั้งบ้าน</p><ul>{items}</ul>{contact}",
+        {"@context": "https://schema.org", "@graph": [org, site]}))
     for p in C.PRODUCTS:
         og(p["id"], [p["photos"][0]])
-        ld = {"@context": "https://schema.org", "@type": "Product", "name": p["name"], "sku": p["id"], "description": p["lead"],
-              "image": f"{C.SITE}/assets/img/{p['photos'][0]}.jpg", "brand": {"@type": "Brand", "name": "OCT. 26"}, "material": "หนังวัวแท้",
-              "offers": {"@type": "Offer", "price": p["price"], "priceCurrency": "THB", "availability": "https://schema.org/InStock",
-                         "url": f"{C.SITE}/p/{p['id']}"}}
+        url = f"{C.SITE}/p/{p['id']}"
+        prod = {"@type": "Product", "name": p["name"], "sku": p["id"], "description": p["lead"],
+                "image": [f"{C.SITE}/assets/img/{ph}.jpg" for ph in p["photos"]], "brand": {"@type": "Brand", "name": "OCT. 26"},
+                "material": "หนังวัวแท้", "size": p["size"], "itemCondition": "https://schema.org/NewCondition",
+                "additionalProperty": [{"@type": "PropertyValue", "name": "ความหนา", "value": "1.0–1.2 มม."}],
+                "offers": {"@type": "Offer", "price": p["price"], "priceCurrency": "THB", "availability": "https://schema.org/InStock",
+                           "url": url, "seller": {"@type": "Organization", "name": "OCT. 26", "url": C.SITE + "/"}}}
+        crumbs = {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "หน้าแรก", "item": C.SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": p["name"], "item": url}]}
+        ld = {"@context": "https://schema.org", "@graph": [prod, crumbs]}
         open(os.path.join(OUT, "p", p["id"] + ".html"), "w").write(page(
-            f"{p['name']} · OCT. 26", f"{p['lead']} · {p['price']} บาท · หนังวัวแท้จากเศษหนัง · สั่งทาง LINE",
+            f"{p['seo']} · OCT. 26", f"{p['lead']} · {p['price']} บาท · งานหนังแฮนด์เมดจากเศษหนังวัวแท้ · สั่งทาง LINE",
             f"/p/{p['id']}", p["id"], {"type": "product", "id": p["id"]},
             f"<h1>{E(p['name'])}</h1><p>{E(p['lead'])}</p><p>{p['price']} บาท · {E(p['size'])}"
             + (" · ไม่ใช่ภาชนะใส่อาหาร" if p["food"] else "") + f"</p>{contact}<p><a href=\"/\">หน้าแรก</a></p>", ld))
@@ -167,6 +182,8 @@ if __name__ == "__main__":
     open(os.path.join(OUT, "_redirects"), "w").write("\n".join(red) + "\n")
     urls = ["/"] + [f"/p/{p['id']}" for p in C.PRODUCTS]
     open(os.path.join(OUT, "sitemap.xml"), "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-        + "".join(f"<url><loc>{C.SITE}{u}</loc></url>" for u in urls) + "</urlset>\n")
+        + "".join(f"<url><loc>{C.SITE}{u}</loc><lastmod>{datetime.date.today()}</lastmod></url>" for u in urls) + "</urlset>\n")
     open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {C.SITE}/sitemap.xml\n")
+    # write the drawn pages into the HTML (needs node + the Playwright Chromium these sessions have)
+    subprocess.run(["node", os.path.join(HERE, "prerender.mjs"), OUT], check=True)
     print("built home +", len(C.PRODUCTS), "product pages ->", OUT)
