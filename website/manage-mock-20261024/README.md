@@ -1,5 +1,7 @@
 # Product manager mock (24 Oct 2026)
 
+**Done:** the owner approved it the same day; the real page is `../manage/` at the same Artifact URL.
+
 The owner asked (24 Oct) for a page to manage products. This is the mock, before any real change: a claude.ai Artifact
 https://claude.ai/artifact/B9RyXagkt8KCB43kaLk3Hd built from `website/catalog.py`.
 

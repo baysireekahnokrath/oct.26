@@ -1,9 +1,9 @@
 # Apply a Web Builder request (for Claude)
 
-**Paused (22 Oct 2026).** The site was rebuilt from `website/catalog.py` (7 products, Brand Book v2). `apply.py` still
+**Retired (24 Oct 2026): use `../manage/APPLY.md`.** Paused since 22 Oct. The site was rebuilt from `website/catalog.py` (7 products, Brand Book v2). `apply.py` still
 patches the old 30-product table in `brand-20261014/brand.py`, which no longer drives the site. Do not apply requests:
 set the request to `{"status": "failed", "result": "Web Builder ยังไม่รองรับเว็บใหม่ แก้ใน website/catalog.py แทน"}` and
-tell the owner the builder needs rewiring to catalog.py.
+tell the owner to use the product manager page https://claude.ai/artifact/B9RyXagkt8KCB43kaLk3Hd instead.
 
 The owner edits the website on the Web Builder page (https://claude.ai/artifact/NrAfdYHGTETkYWbMjT9QXG) and presses
 "ขึ้นเว็บ". That saves a document `requests/<id>` in the page's database and starts a Claude Code session in the OCT.26

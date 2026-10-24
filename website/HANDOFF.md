@@ -7,12 +7,12 @@ every deliverable) and `brand-20261014/HANDOFF.md` (brand decisions not to reope
 
 ## New site (22 Oct 2026, owner: "แก้เว็บจริงเลยครับ")
 - Rebuilt in the design the owner chose (direction 2, mock-ups in `web-directions-20261022/`): home + 7 product pages
-  (`/p/OC-…`), content in `website/catalog.py`, page code in `website/src/`, see `website/README.md`.
+  (`/p/OC-…`), content in `website/catalog.json` (the owner edits it on the product manager page `website/manage/`), page code in `website/src/`, see `website/README.md`.
 - Went to `main` by PR from `claude/funny-tesla-4dkwm7`; the owner merges. Old 30-product pages and the pattern play
   redirect (`public/_redirects`).
 - Open: painted faces on 01 in the hero/workshop clash with the status doc's "no bear face" rule (the owner approved the
   mock with them; ask before keeping them long term) · prices are the 7 SKU prices in the status doc · Shopee link,
-  shipping cost, whether 03 includes cord, a real photo of 02 · Web Builder paused until it edits catalog.py.
+  shipping cost, whether 03 includes cord, a real photo of 02 · Web Builder retired 24 Oct: the product manager page replaces it.
 
 ## Live
 - **https://oct26brand.com** works (custom domain on the Cloudflare Worker `oct-26`, account arthitbay@gmail.com).

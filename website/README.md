@@ -8,8 +8,9 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
 
     python3 website/build.py      # -> website/public (the Worker serves only this folder); needs node + Playwright Chromium
 
-- `catalog.py` — the 7 products (names, search titles `seo`, prices, sizes, photos, page text), photo descriptions
-  (`ALT`), links (LINE, IG, FB, Shopee name), booth.
+- `catalog.json` — the products (status on/out/off, names, search titles `seo`, prices, sizes, photos, page text), the
+  Shopee link, the booth and photo descriptions; the product manager edits it. `catalog.py` loads it, holds the fixed
+  links (LINE, IG, FB), old addresses and the rules (`BANNED`, `problems()`) that build.py checks before building.
   Change things here, rebuild, commit, PR to `main`; the owner merges and Cloudflare deploys.
 - `src/` — `app.css`, `app.js` (renders the pages in the browser), `defs.svg` (paint filter for the faces).
 - `assets/` — real photos (`img/`), flat-lay pieces on transparent ground (`cut/`), Brand Book v2 logos, the 07 die
@@ -21,12 +22,13 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
 - `prerender.mjs` — run by build.py: opens each page in Chromium and writes what app.js drew into the HTML, so search
   engines and LINE/Facebook previews read the full text without scripts (app.js redraws the same markup on load). It
   also draws `assets/logo/square-light.png` for the Organization logo.
-- The booth notice hides itself in the browser after `BOOTH["until"]` in catalog.py; rebuild once after that date so
+- The booth notice hides itself in the browser after ``until` in catalog.json; rebuild once after that date so
   the written-in text drops it too.
 - SEO plan (22–24 Oct): search titles per product, photo descriptions, full text in HTML, structured data. Still to do:
   Google Search Console (owner verifies the domain, then submit `sitemap.xml`), pattern pages 01–07, a leather care
   page, a workshop page and an ideas page, same keywords in Shopee titles.
-- `builder/` — the Web Builder (paused: it still edits the old brand.py table).
+- `manage/` — the product manager page (status, prices, text, photos, Shopee link, booth; sends a PR): https://claude.ai/artifact/B9RyXagkt8KCB43kaLk3Hd
+- `builder/` — the old Web Builder, retired 24 Oct (it edited the old brand.py table).
 - `summary/` — Thai summary for the owner: https://claude.ai/artifact/FZ9KmqHeKZTpBu24TnGwjo · PR https://github.com/baysireekahnokrath/oct.26/pull/3
 - `summary-seo/` — Thai summary of the SEO round: https://claude.ai/artifact/Pg49fYeseXDQhsfGdsz8SN · PR https://github.com/baysireekahnokrath/oct.26/pull/4
 
