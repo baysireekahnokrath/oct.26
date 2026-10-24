@@ -1,7 +1,8 @@
 # Product manager (24 Oct 2026)
 
 The owner's page for what oct26brand.com sells, a claude.ai Artifact: https://claude.ai/artifact/B9RyXagkt8KCB43kaLk3Hd
-(private; the owner shares it from the page's Share menu, Editor level, to let someone else edit). It replaces the Web
+(private; the owner shares it from the page's Share menu, Editor level, to let someone else edit); Thai summary
+https://claude.ai/artifact/9VWiNDSQagtoBATCBQsjNp (`summary/`). It replaces the Web
 Builder in `../builder/`, which edited the old 30-product table. Mock first: `../manage-mock-20261024/`.
 
 On the page, from a phone:
