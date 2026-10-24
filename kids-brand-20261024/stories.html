@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>นิทานซีซัน 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mali:wght@500;700&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@500&display=swap">
+<link rel="stylesheet" href="kids.css">
+<script src="kit.js"></script><script src="stories.js"></script>
+<style>
+.story{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.panel{margin:0;background:var(--sheet);border:2px solid var(--ink);border-radius:6px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.panel svg{width:100%;height:auto;display:block;background:var(--paper)}
+.panel p{padding:10px 12px 12px;font-family:var(--play);font-weight:500;line-height:1.45}
+.panel .n{font-family:var(--num);color:var(--muted);font-size:.8rem;margin-right:6px}
+.eps{display:grid;gap:10px}
+.ep{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:start;background:var(--sheet);border-radius:16px;padding:12px 14px}
+.ep svg{width:64px;height:64px}
+.ep .no{font-family:var(--num);font-size:.8rem;color:var(--muted);letter-spacing:.08em}
+.ep p{font-size:.95rem}
+.ep .lesson{color:var(--muted);font-size:.88rem}
+.posts{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+.posts img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:6px}
+</style></head>
+<body><div class="wrap">
+  <nav class="nav" aria-label="หน้าในแบรนด์เด็ก"><a class="home" href="index.html" data-brand>บีสาม</a><a href="memory.html">เกมจับคู่</a><a href="decorate.html">แต่งชิ้นหนัง</a><a href="stories.html" aria-current="page">นิทาน</a><a href="parents.html">สำหรับพ่อแม่</a></nav>
+  <header style="display:grid;gap:8px"><span class="draft">ร่าง ให้เด็ก ๆ แก้หรือเขียนใหม่ได้ทุกตอน</span><h1>นิทานซีซัน 1</h1><p class="muted">6 ตอน ตอนละแพตเทิร์น ลงโพสต์ละตอน ตอนละ 4 ภาพ + ปก</p></header>
+  <section><h2>ตอนที่ 1 · เพื่อนที่ยังไม่มา</h2><div class="story" id="ep1"></div></section>
+  <section><h2>ทั้งซีซัน</h2><div class="eps" id="eps"></div></section>
+  <section><h2>แม่แบบโพสต์</h2><p class="muted">ปก + 4 ภาพ ขนาด IG 1080×1350 และสตอรี่ 1080×1920 ไฟล์จริงอยู่ในโฟลเดอร์ posts/ ของงานนี้ ตอนอื่นใช้แม่แบบเดียวกัน ใส่ภาพและข้อความใหม่</p>
+    <div class="posts"><img src="posts/ep01-0.png" alt="ปกตอนที่ 1"><img src="posts/ep01-1.png" alt="ภาพที่ 1"><img src="posts/ep01-2.png" alt="ภาพที่ 2"><img src="posts/ep01-3.png" alt="ภาพที่ 3"><img src="posts/ep01-4.png" alt="ภาพที่ 4"></div></section>
+</div>
+<script>
+document.querySelectorAll("[data-brand]").forEach(a => a.textContent = KIT.DATA.brand.th);
+document.getElementById("ep1").innerHTML = STORIES.EP1.map((p, i) =>
+  `<figure class="panel"><svg viewBox="0 0 210 140" role="img" aria-label="ภาพที่ ${i+1}">${p.art}</svg><p><span class="n">${i+1}/4</span>${p.text}</p></figure>`).join("");
+document.getElementById("eps").innerHTML = STORIES.SEASON.map(e => {
+  const art = `<svg viewBox="${KIT.viewBox(e.pattern)}" aria-hidden="true">${KIT.shape(e.pattern, "#B07A4A")}</svg>`;
+  return `<div class="ep">${art}<div><span class="no">EP ${String(e.ep).padStart(2, "0")} · ${e.pattern}</span><h3>${e.title}</h3><p>${e.idea}</p><p class="lesson">ข้อคิด: ${e.lesson}</p></div></div>`;
+}).join("");
+</script>
+</body></html>

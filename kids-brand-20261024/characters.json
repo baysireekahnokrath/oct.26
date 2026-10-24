@@ -1,0 +1,12 @@
+{
+  "_note": "The one place for the kids' choices. Change a name, colour or pattern here, run python3 kit.py, and every page (games, story, posts) follows. confirmed=false until each child says yes.",
+  "brand": {"th": "บีสาม", "en": "B3", "confirmed": false},
+  "characters": [
+    {"id": "beiya", "kid": "Beiya", "name": "ตะวัน", "color": "#E9A825", "soft": "#F7E2AE", "color_name": "เหลืองทานตะวัน",
+     "pattern": "05", "traits": ["ร่าเริง", "ชอบเป็นคนเริ่มก่อน"], "item": "ดินสอสี", "confirmed": false},
+    {"id": "beana", "kid": "Beana", "name": "อินทนิล", "color": "#B9A3D6", "soft": "#E6DDF1", "color_name": "ม่วงดอกอินทนิล",
+     "pattern": "03", "traits": ["ช่างสังเกต", "ชอบเก็บของสวย"], "item": "สมุดเล่มเล็ก", "confirmed": false},
+    {"id": "bene", "kid": "Bene", "name": "คราม", "color": "#2E4A7D", "soft": "#D3DAE8", "color_name": "น้ำเงินคราม",
+     "pattern": "04", "traits": ["ชอบสร้าง", "ชอบซ้อน"], "item": "บล็อกไม้", "confirmed": false}
+  ]
+}

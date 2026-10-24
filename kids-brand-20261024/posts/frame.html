@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<title>Story post frame</title>
+<!-- Local render frame for story posts: open as frame.html#post-0 .. #post-4 or #story-0 .. #story-4 (render.cjs does this). -->
+<style>
+@font-face{font-family:Mali;font-weight:700;src:url(../fonts/Mali-Bold.ttf)}
+@font-face{font-family:Mali;font-weight:500;src:url(../fonts/Mali-Medium.ttf)}
+@font-face{font-family:Jost;font-weight:500;src:url(../../brand-20261014/fonts/alt/Jost-Medium.ttf)}
+html,body{margin:0}
+body{width:1080px;background:#F4F0E8;color:#2A2725;font-family:Mali,sans-serif}
+.f{width:1080px;position:relative;overflow:hidden;background:#F4F0E8}
+.top{position:absolute;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;font-family:Jost;font-size:28px;letter-spacing:.12em;color:#6E6A64}
+.top b{font-family:Mali;font-weight:700;font-size:40px;letter-spacing:0;color:#2A2725}
+.art{position:absolute;left:48px;right:48px;border:5px solid #2A2725;border-radius:18px;overflow:hidden;background:#FBF8F2}
+.art svg{width:100%;height:100%;display:block}
+.txt{position:absolute;left:64px;right:64px;font-weight:500;font-size:50px;line-height:1.4}
+.pg{position:absolute;right:64px;font-family:Jost;font-size:30px;color:#6E6A64}
+.cover h1{position:absolute;left:64px;right:64px;margin:0;font-weight:700;font-size:96px;line-height:1.15}
+.cover .ep{position:absolute;left:64px;font-family:Jost;font-size:34px;letter-spacing:.14em;color:#6E6A64}
+.trio{position:absolute;left:64px;right:64px;display:flex;justify-content:space-between;align-items:flex-end}
+.trio svg{width:290px;height:290px}
+.band{position:absolute;left:0;right:0;bottom:0;height:22px;display:flex}.band i{flex:1}
+</style>
+<script src="../kit.js"></script><script src="../stories.js"></script>
+</head><body><div class="f" id="f"></div>
+<script>
+const [kind, idx] = (location.hash.slice(1) || "post-0").split("-"), i = +idx, H = kind === "story" ? 1920 : 1350;
+const top0 = kind === "story" ? 210 : 64;          // story frames keep clear of the app's top bar
+const f = document.getElementById("f"); f.style.height = H + "px";
+const band = `<div class="band">${KIT.DATA.characters.map(c => `<i style="background:${c.color}"></i>`).join("")}</div>`;
+const head = `<div class="top" style="top:${top0}px"><b>${KIT.DATA.brand.th}</b><span>EP 01</span></div>`;
+if (i === 0){
+  const trio = KIT.DATA.characters.map(c => `<svg viewBox="${KIT.viewBox(c.pattern, 4)}">${KIT.character(c.id)}</svg>`).join("");
+  f.className = "f cover";
+  f.innerHTML = head + `<span class="ep" style="top:${top0 + 160}px">ตอนที่ 1</span><h1 style="top:${top0 + 250}px">เพื่อนที่<br>ยังไม่มา</h1>` +
+    `<div class="trio" style="bottom:${kind === "story" ? 360 : 140}px">${trio}</div>` + band;
+} else {
+  const p = STORIES.EP1[i - 1], artH = 656;
+  f.innerHTML = head + `<div class="art" style="top:${top0 + 110}px;height:${artH}px"><svg viewBox="0 0 210 140" preserveAspectRatio="xMidYMid meet">${p.art}</svg></div>` +
+    `<p class="txt" style="top:${top0 + 140 + artH}px">${p.text}</p><span class="pg" style="bottom:${kind === "story" ? 300 : 70}px">${i}/4</span>` + band;
+}
+</script></body></html>

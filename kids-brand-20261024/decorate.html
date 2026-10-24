@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>แต่งชิ้นหนัง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mali:wght@500;700&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@500&display=swap">
+<link rel="stylesheet" href="kids.css">
+<script src="kit.js"></script>
+<style>
+.studio{display:grid;gap:16px;grid-template-columns:minmax(0,1fr) 300px;align-items:start}
+@media (max-width:760px){.studio{grid-template-columns:1fr}}
+.stage{background:var(--sheet);border:2px solid var(--ink);border-radius:20px;padding:10px;display:grid;place-items:center}
+canvas{width:100%;max-width:560px;aspect-ratio:1/1;touch-action:none;display:block;border-radius:12px;background:var(--paper);cursor:crosshair}
+.panel{display:grid;gap:14px}
+.grp{display:grid;gap:6px}
+.grp b{font-family:var(--play);font-size:1rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pick{border:2px solid var(--line);background:var(--sheet);border-radius:12px;padding:4px;width:52px;height:52px;display:grid;place-items:center;cursor:pointer}
+.pick svg{width:40px;height:40px}
+.pick[aria-pressed="true"]{border-color:var(--ink);background:var(--sun-soft)}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid var(--ink);cursor:pointer;padding:0}
+.sw[aria-pressed="true"]{outline:3px solid var(--ink);outline-offset:2px}
+.tool{background:var(--sheet);border:2px solid var(--line);color:var(--ink);padding:6px 12px}
+.tool[aria-pressed="true"]{border-color:var(--ink);background:var(--lilac-soft)}
+input[type=text]{font:500 1rem var(--play);padding:8px 12px;border:2px solid var(--ink);border-radius:12px;width:100%;background:var(--sheet);color:var(--ink)}
+.out{display:grid;gap:8px;justify-items:start}
+.out img{max-width:280px;width:100%;border-radius:12px;border:2px solid var(--ink)}
+</style></head>
+<body><div class="wrap">
+  <nav class="nav" aria-label="หน้าในแบรนด์เด็ก"><a class="home" href="index.html" data-brand>บีสาม</a><a href="memory.html">เกมจับคู่</a><a href="decorate.html" aria-current="page">แต่งชิ้นหนัง</a><a href="stories.html">นิทาน</a><a href="parents.html">สำหรับพ่อแม่</a></nav>
+  <header style="display:grid;gap:8px"><h1>แต่งชิ้นหนัง</h1><p class="muted">เลือกรูปร่าง เลือกสีหนัง แล้ววาด ปั๊มหน้า ใส่ชื่อ เหมือนแต่งชิ้นหนังจริงที่บูธ</p></header>
+  <div class="studio">
+    <div class="stage"><canvas id="cv" width="1200" height="1200" aria-label="พื้นที่วาดบนชิ้นหนัง"></canvas></div>
+    <div class="panel">
+      <div class="grp"><b>รูปร่าง</b><div class="row" id="shapes"></div></div>
+      <div class="grp"><b>สีหนัง</b><div class="row" id="hides"></div></div>
+      <div class="grp"><b>เครื่องมือ</b><div class="row" id="tools">
+        <button class="tool" type="button" data-tool="pen" aria-pressed="true">ดินสอ</button>
+        <button class="tool" type="button" data-tool="eyes" aria-pressed="false">ตา</button>
+        <button class="tool" type="button" data-tool="smile" aria-pressed="false">ยิ้ม</button>
+        <button class="tool" type="button" data-tool="star" aria-pressed="false">ดาว</button>
+        <button class="tool" type="button" data-tool="dot" aria-pressed="false">จุด</button>
+      </div></div>
+      <div class="grp"><b>สีดินสอ</b><div class="row" id="inks"></div></div>
+      <div class="grp"><label for="name"><b>ชื่อบนชิ้นหนัง</b></label><input id="name" type="text" maxlength="14" value="ตะวัน" autocomplete="off"></div>
+      <div class="row"><button class="tool" type="button" id="undo">ย้อน</button><button class="tool" type="button" id="clear">ล้าง</button><button type="button" id="done">เสร็จแล้ว</button></div>
+      <div class="out" id="out" hidden><img id="result" alt="ชิ้นหนังที่แต่งเสร็จ"><p class="muted">กดค้างที่รูปเพื่อบันทึก หรือแคปหน้าจอไว้ แล้วเอาไปแต่งชิ้นจริงที่บูธ</p></div>
+    </div>
+  </div>
+  <p class="muted">เกมนี้ไม่เก็บข้อมูลอะไร รูปที่วาดอยู่ในเครื่องที่เล่นเท่านั้น</p>
+</div>
+<script>
+// Canvas studio: the real die outline is the clip, so every stroke stays on the leather.
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+const S = cv.width, PIECE = 0.74 * S;                 // piece box in canvas px
+const draw = document.createElement("canvas"); draw.width = draw.height = S;
+const dctx = draw.getContext("2d");
+const HIDES = ["#B07A4A", "#8B5E3C", "#D9C3A0", "#4A4542", ...KIT.DATA.characters.map(c => c.color), "#A9442B", "#5E7A3A"];
+const INKS = [KIT.INK, KIT.PAPER, "#E9A825", "#B9A3D6", "#2E4A7D", "#A9442B", "#5E7A3A"];
+let code = KIT.DATA.characters[0].pattern, hide = KIT.DATA.characters[0].color, ink = KIT.INK, tool = "pen";
+let history = [], shapePath = null, slits = [], xform = null;
+document.querySelectorAll("[data-brand]").forEach(a => a.textContent = KIT.DATA.brand.th);
+document.getElementById("name").value = KIT.DATA.characters[0].name;
+
+function parse(code){
+  // pull paths, lines and the optional group transform out of the kit markup
+  const p = KIT.PATTERNS[code];
+  const doc = new DOMParser().parseFromString(`<svg xmlns="http://www.w3.org/2000/svg">${p.cut}${p.slit}</svg>`, "image/svg+xml");
+  const path = new Path2D();
+  doc.querySelectorAll("path").forEach(el => path.addPath(new Path2D(el.getAttribute("d"))));
+  const lines = [...doc.querySelectorAll("line")].map(l => ["x1","y1","x2","y2"].map(a => +l.getAttribute(a)));
+  const g = doc.querySelector("g[transform]")?.getAttribute("transform") || "";
+  const tr = g.match(/translate\(([-\d.]+)[ ,]+([-\d.]+)\)/), rt = g.match(/rotate\(([-\d.]+)[ ,]+([-\d.]+)[ ,]+([-\d.]+)\)/);
+  return { path, lines, w: p.w, h: p.h, tr: tr ? [+tr[1], +tr[2]] : [0, 0], rt: rt ? [+rt[1], +rt[2], +rt[3]] : null };
+}
+function toPiece(c){
+  // canvas transform that maps the shape's mm box into the centre of the canvas
+  const s = PIECE / Math.max(xform.w, xform.h);
+  c.translate((S - xform.w * s) / 2, (S * 0.94 - xform.h * s) / 2); c.scale(s, s);
+  c.translate(...xform.tr);
+  if (xform.rt){ const [a, x, y] = xform.rt; c.translate(x, y); c.rotate(a * Math.PI / 180); c.translate(-x, -y); }
+  return s;
+}
+function grain(){
+  // a quiet leather grain so the piece reads as hide, not flat colour
+  ctx.save(); ctx.globalAlpha = .08;
+  for (let i = 0; i < 900; i++){ ctx.fillStyle = i % 2 ? "#000" : "#fff"; ctx.beginPath(); ctx.arc(Math.random() * S, Math.random() * S, Math.random() * 3 + 1, 0, 7); ctx.fill(); }
+  ctx.restore();
+}
+function render(){
+  ctx.fillStyle = KIT.PAPER; ctx.fillRect(0, 0, S, S);
+  ctx.save(); const s = toPiece(ctx);
+  ctx.shadowColor = "rgba(42,39,37,.25)"; ctx.shadowBlur = 24 / s; ctx.shadowOffsetY = 8 / s;
+  ctx.fillStyle = hide; ctx.fill(shapePath, "evenodd"); ctx.shadowColor = "transparent";
+  ctx.clip(shapePath, "evenodd");
+  ctx.setTransform(1, 0, 0, 1, 0, 0); grain(); ctx.drawImage(draw, 0, 0);
+  ctx.restore();
+  ctx.save(); toPiece(ctx); ctx.strokeStyle = KIT.PAPER; ctx.lineWidth = 1; ctx.lineCap = "round";
+  xform.lines.forEach(([a, b, c, d]) => { ctx.beginPath(); ctx.moveTo(a, b); ctx.lineTo(c, d); ctx.stroke(); }); ctx.restore();
+  const name = document.getElementById("name").value.trim();
+  if (name){ ctx.fillStyle = KIT.INK; ctx.font = `700 ${S * .06}px Mali, sans-serif`; ctx.textAlign = "center"; ctx.fillText(name, S / 2, S * .955); }
+}
+function setShape(c){
+  code = c; xform = parse(c); shapePath = xform.path;
+  document.querySelectorAll("#shapes .pick").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.code === c)));
+  render();
+}
+function snap(){ history.push(dctx.getImageData(0, 0, S, S)); if (history.length > 25) history.shift(); }
+function pos(e){ const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * S / r.width, (e.clientY - r.top) * S / r.height]; }
+function stamp(kind, x, y){
+  const r = S * .05; dctx.save(); dctx.translate(x, y); dctx.fillStyle = ink; dctx.strokeStyle = ink; dctx.lineCap = "round";
+  if (kind === "eyes"){ [-1, 1].forEach(k => { dctx.beginPath(); dctx.arc(k * r * 1.3, 0, r * .55, 0, 7); dctx.fill(); }); }
+  if (kind === "smile"){ dctx.lineWidth = r * .35; dctx.beginPath(); dctx.arc(0, -r * .6, r * 1.3, .2 * Math.PI, .8 * Math.PI); dctx.stroke(); }
+  if (kind === "star"){ dctx.beginPath(); for (let i = 0; i < 10; i++){ const a = i * Math.PI / 5 - Math.PI / 2, rr = i % 2 ? r * .45 : r * 1.1; dctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } dctx.fill(); }
+  if (kind === "dot"){ dctx.beginPath(); dctx.arc(0, 0, r * .45, 0, 7); dctx.fill(); }
+  dctx.restore();
+}
+let drawing = false, last = null;
+cv.addEventListener("pointerdown", e => {
+  cv.setPointerCapture(e.pointerId); snap(); const p = pos(e);
+  if (tool !== "pen"){ stamp(tool, ...p); render(); return; }
+  drawing = true; last = p; dctx.fillStyle = ink; dctx.beginPath(); dctx.arc(...p, S * .008, 0, 7); dctx.fill(); render();
+});
+cv.addEventListener("pointermove", e => {
+  if (!drawing) return; const p = pos(e);
+  dctx.strokeStyle = ink; dctx.lineWidth = S * .016; dctx.lineCap = dctx.lineJoin = "round";
+  dctx.beginPath(); dctx.moveTo(...last); dctx.lineTo(...p); dctx.stroke(); last = p; render();
+});
+["pointerup", "pointercancel"].forEach(t => cv.addEventListener(t, () => drawing = false));
+
+const shapes = document.getElementById("shapes");
+shapes.innerHTML = Object.keys(KIT.PATTERNS).map(c => `<button class="pick" type="button" data-code="${c}" aria-pressed="false" aria-label="รูป ${c} ${KIT.PATTERNS[c].th}"><svg viewBox="${KIT.viewBox(c)}">${KIT.shape(c, "#B07A4A")}</svg></button>`).join("");
+shapes.addEventListener("click", e => { const b = e.target.closest(".pick"); if (b) setShape(b.dataset.code); });
+function swatches(id, list, get, set, label){
+  const el = document.getElementById(id);
+  el.innerHTML = list.map(c => `<button class="sw" type="button" style="background:${c}" data-c="${c}" aria-label="${label} ${c}" aria-pressed="${c === get()}"></button>`).join("");
+  el.addEventListener("click", e => { const b = e.target.closest(".sw"); if (!b) return; set(b.dataset.c);
+    el.querySelectorAll(".sw").forEach(x => x.setAttribute("aria-pressed", String(x === b))); render(); });
+}
+swatches("hides", [...new Set(HIDES)], () => hide, v => hide = v, "สีหนัง");
+swatches("inks", INKS, () => ink, v => ink = v, "สีดินสอ");
+document.getElementById("tools").addEventListener("click", e => { const b = e.target.closest("[data-tool]"); if (!b) return; tool = b.dataset.tool;
+  document.querySelectorAll("[data-tool]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); });
+document.getElementById("undo").addEventListener("click", () => { const h = history.pop(); if (h){ dctx.putImageData(h, 0, 0); render(); } });
+document.getElementById("clear").addEventListener("click", () => { snap(); dctx.clearRect(0, 0, S, S); render(); });
+document.getElementById("name").addEventListener("input", render);
+document.getElementById("done").addEventListener("click", () => {
+  document.getElementById("result").src = cv.toDataURL("image/png"); document.getElementById("out").hidden = false;
+});
+// a started example so the first view shows what the studio does
+setShape(code);
+const s0 = S / 2;
+stamp("eyes", s0, s0 * .9); stamp("smile", s0, s0 * 1.04); render();
+document.fonts?.ready.then(render);
+</script>
+</body></html>

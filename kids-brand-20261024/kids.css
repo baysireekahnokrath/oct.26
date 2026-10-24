@@ -1,0 +1,31 @@
+/* Shared look for the kids' brand pages: picture-book paper, each child owns a colour, Mali for play, Plex for reading.
+   One deliberate light look (printed paper), so every colour is set explicitly. */
+:root{
+  --paper:#F4F0E8; --sheet:#FBF8F2; --ink:#2A2725; --muted:#6E6A64; --line:#DCD4C7;
+  --sun:#E9A825; --lilac:#B9A3D6; --indigo:#2E4A7D; --hide:#B07A4A; --leaf:#5E7A3A; --earth:#A9442B;
+  --sun-soft:#F7E2AE; --lilac-soft:#E6DDF1; --indigo-soft:#D3DAE8;
+  --play:"Mali","IBM Plex Sans Thai",system-ui,sans-serif; --body:"IBM Plex Sans Thai",system-ui,sans-serif; --num:"Jost",system-ui,sans-serif;
+  color-scheme:light}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.7 var(--body)}
+.wrap{max-width:900px;margin:0 auto;padding-block:20px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:44px}
+h1,h2,h3{font-family:var(--play);font-weight:700;margin:0;line-height:1.25;text-wrap:balance}
+h1{font-size:clamp(2rem,6.5vw,3.2rem)} h2{font-size:1.55rem} h3{font-size:1.12rem}
+p{margin:0;max-width:62ch}
+section{display:grid;gap:16px}
+a{color:var(--indigo)}
+.tag{font-family:var(--num);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.draft{display:inline-block;justify-self:start;background:var(--ink);color:var(--paper);font-size:.8rem;padding:2px 10px;border-radius:999px}
+.nav{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center;font-size:.92rem}
+.nav a{text-decoration:none;color:var(--ink);border-bottom:2px solid var(--line)}
+.nav a[aria-current]{border-color:var(--ink)}
+.nav .home{font-family:var(--play);font-weight:700;font-size:1.05rem;border:0;margin-right:auto}
+.band{display:flex;height:6px;width:150px;border-radius:3px;overflow:hidden} .band span{flex:1}
+button,.btn{font:600 .95rem var(--body);background:var(--sun);color:var(--ink);border:0;border-radius:999px;padding:8px 18px;cursor:pointer;text-decoration:none;display:inline-block}
+button.ghost{background:transparent;border:2px solid currentColor}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--lilac);outline-offset:3px}
+ul.plain{margin:0;padding-left:1.2em;display:grid;gap:6px;max-width:66ch}
+.c-beiya{background:var(--sun-soft)} .c-beana{background:var(--lilac-soft)} .c-bene{background:var(--indigo-soft)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
