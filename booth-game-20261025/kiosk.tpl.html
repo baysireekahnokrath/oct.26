@@ -24,6 +24,8 @@ p{margin:0}
 .qrs{display:flex;gap:16px;flex-wrap:wrap}
 .qrs a{display:grid;gap:6px;justify-items:center;text-decoration:none;color:var(--ink);font-family:var(--num)}
 .qr{width:150px;height:150px;background:#fff;padding:6px;border-radius:8px;display:block}
+.line .qr{width:min(240px,62vw);height:auto;aspect-ratio:1}
+.qrs.small .qr{width:110px;height:110px}
 .big{font:600 1.3rem var(--body);background:var(--ink);color:var(--cotton);border:0;border-radius:999px;padding:16px 28px;cursor:pointer;justify-self:start}
 .big.sun{background:var(--sun);color:var(--ink)}
 button:focus-visible,a:focus-visible{outline:3px solid var(--indigo);outline-offset:3px}
@@ -53,14 +55,14 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--indigo);outline-off
 
   <main>
     <section class="screen" id="s-follow">
-      <h1>Follow · เล่นเกม · รับชิ้นหนังฟรี</h1>
+      <h1>เพิ่มเพื่อน LINE · รับชิ้นหนังฟรี</h1>
       <ol class="steps">
-        <li><i>1</i><span>Follow IG หรือ Facebook ของเรา (ช่องทางไหนก็ได้)</span></li>
-        <li><i>2</i><span>โชว์หน้าจอให้พี่ที่บูธดู</span></li>
+        <li><i>1</i><span>สแกน QR เพิ่มเพื่อน LINE ของร้าน</span></li>
+        <li><i>2</i><span>โชว์ข้อความต้อนรับในแชตให้พี่ที่บูธดู</span></li>
         <li><i>3</i><span>เล่นเกมจับคู่ 6 ลาย เล่นจบได้ทุกคน</span></li>
       </ol>
-      <div class="qrs"><a href="https://www.instagram.com/oct.26_brand/">__QR_IG__IG __TAG__</a><a href="https://www.facebook.com/oct26brand">__QR_FB__FB oct26brand</a></div>
-      <button class="big" type="button" id="go">Follow แล้ว เริ่มเล่น</button>
+      <div class="qrs"><a href="https://lin.ee/PKopJND" class="line">__QR_LINE__LINE __LINE_ID__</a></div>
+      <button class="big" type="button" id="go">เพิ่มเพื่อนแล้ว เริ่มเล่น</button>
     </section>
 
     <section class="screen" id="s-play" hidden>
@@ -74,6 +76,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--indigo);outline-off
       <div class="more"><b style="font-family:var(--display);font-size:1.3rem">แต่งเสร็จแล้ว ช่วยอวดผลงานหน่อย</b>
         <p>ถ่ายรูปโพสต์ลง IG หรือ Facebook แบบสาธารณะ แท็กเรา ใส่แฮชแท็ก ผลงานเด่นเราจะแชร์ในเพจ (ไม่บังคับ)</p>
         <p class="tags">__TAG__ · __HASH__</p>
+        <div class="qrs small"><a href="https://www.instagram.com/oct.26_brand/">__QR_IG__IG</a><a href="https://www.facebook.com/oct26brand">__QR_FB__Facebook</a></div>
         <p style="color:var(--muted);font-size:.9rem">เขียนรีวิวตามจริงได้เลย ถ้าเราอยากเอารูปไปลงเว็บ จะทักขออนุญาตก่อน</p></div>
       <button class="big sun" type="button" id="next">คนต่อไป</button>
     </section>
