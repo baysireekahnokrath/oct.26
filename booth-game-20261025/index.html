@@ -73,8 +73,8 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--indigo);outline-off
 
     <section class="screen" id="s-win" hidden>
       <div class="prize"><h1>เก่งมาก ได้รางวัล</h1><p style="font-size:1.2rem">เลือกชิ้นหนังที่ชอบ 1 ชิ้น แล้วไปแต่งต่อที่โต๊ะได้เลย</p><p id="took" class="tags" style="font-family:var(--num)"></p></div>
-      <div class="more"><b style="font-family:var(--display);font-size:1.3rem">อยากได้อีกชิ้นไหม</b>
-        <p>แต่งเสร็จแล้ว ถ่ายรูปโพสต์ลง IG หรือ Facebook แบบสาธารณะ แท็กเรา ใส่แฮชแท็ก แล้วโชว์โพสต์ให้พี่ที่บูธดู รับเพิ่มอีก 1 ชิ้น</p>
+      <div class="more"><b style="font-family:var(--display);font-size:1.3rem">แต่งเสร็จแล้ว ช่วยอวดผลงานหน่อย</b>
+        <p>ถ่ายรูปโพสต์ลง IG หรือ Facebook แบบสาธารณะ แท็กเรา ใส่แฮชแท็ก ผลงานเด่นเราจะแชร์ในเพจ (ไม่บังคับ)</p>
         <p class="tags">@oct.26_brand · #OCT26ชิ้นของฉัน</p>
         <p style="color:var(--muted);font-size:.9rem">เขียนรีวิวตามจริงได้เลย ถ้าเราอยากเอารูปไปลงเว็บ จะทักขออนุญาตก่อน</p></div>
       <button class="big sun" type="button" id="next">คนต่อไป</button>
@@ -82,8 +82,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--indigo);outline-off
   </main>
 
   <footer class="staff" aria-label="สำหรับพี่ที่บูธ">
-    <span>พี่ที่บูธ · วันนี้เล่นจบ <b id="today">0</b> คน · ให้รางวัลขั้น 2 <b id="bonus">0</b> ชิ้น</span>
-    <button type="button" id="plus2">+1 ขั้น 2</button>
+    <span>พี่ที่บูธ · วันนี้เล่นจบ (แจกไป) <b id="today">0</b> ชิ้น</span>
     <button type="button" id="restart">เริ่มใหม่</button>
   </footer>
 </div>
@@ -95,8 +94,8 @@ const $ = id => document.getElementById(id);
 const day = new Date().toISOString().slice(0, 10);
 const get = k => { try { return Number(localStorage.getItem(`b26-${k}-${day}`)) || 0 } catch { return 0 } };
 const put = (k, v) => { try { localStorage.setItem(`b26-${k}-${day}`, String(v)) } catch {} };
-const counts = { done: get("done"), bonus: get("bonus") };
-const showCounts = () => { $("today").textContent = counts.done; $("bonus").textContent = counts.bonus; };
+const counts = { done: get("done") };
+const showCounts = () => { $("today").textContent = counts.done; };
 function show(id){ ["s-follow", "s-play", "s-win"].forEach(s => $(s).hidden = s !== id); window.scrollTo(0, 0); }
 let open = [], moves = 0, pairs = 0, lock = false;
 function deal(){
@@ -119,6 +118,5 @@ $("board").addEventListener("click", e => {
 $("go").addEventListener("click", () => { deal(); show("s-play"); });
 $("next").addEventListener("click", () => show("s-follow"));
 $("restart").addEventListener("click", () => show("s-follow"));
-$("plus2").addEventListener("click", () => { counts.bonus++; put("bonus", counts.bonus); showCounts(); });
 showCounts();
 </script>

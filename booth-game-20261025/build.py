@@ -1,7 +1,8 @@
 """Booth giveaway game and table signs (25 Oct 2026).
 
 Step 1: follow IG or FB, play the pattern memory game, get one leather piece.
-Step 2: post a photo of the finished piece (public, tag @oct.26_brand, #OCT26ชิ้นของฉัน), get one more.
+Step 2 (optional, no extra prize; owner 24 Oct: one piece per person): post a photo of the finished piece
+(public, tag @oct.26_brand, #OCT26ชิ้นของฉัน) so we can share it as a review.
 No chance draw, no tagging friends, no data from children; the game only counts finished rounds on the device.
 
 python3 build.py -> index.html (kiosk game) and sign.html;  node render.cjs -> OCT26-booth-game-signs-A4.pdf + previews
@@ -80,12 +81,12 @@ def sign():
           f'<div class="qrs"><div>{qr(IG)}IG {TAG}</div><div>{qr(FB)}FB oct26brand</div></div>'
           f'<p class="note">คนละ 1 ครั้งต่อวัน · ไม่ต้องกรอกชื่อหรือเบอร์ · ชิ้นหนังวัวแท้จากเศษหนัง ไม่ใช่ของเล่นสำหรับเด็กเล็ก</p>{BAND}</section>')
     p2 = (f'<section class="pg">{logo()}<div class="pieces">{pieces}</div>'
-          f'<h1>ถ่ายรูป · โพสต์<br>รับอีกชิ้น</h1><p class="sub">แต่งชิ้นหนังเสร็จแล้ว อวดผลงานหน่อย</p>'
+          f'<h1>ถ่ายรูป · โพสต์<br>อวดผลงาน</h1><p class="sub">แต่งชิ้นหนังเสร็จแล้ว ช่วยถ่ายรูปบอกต่อหน่อยนะ</p>'
           f'<ol class="steps"><li><b>1</b><span>ถ่ายรูปชิ้นที่แต่งเสร็จ (ถ่ายมือกับชิ้นหนังก็สวย)</span></li>'
           f'<li><b>2</b><span>โพสต์ลง IG หรือ Facebook แบบสาธารณะ แท็กเรา และใส่แฮชแท็ก</span></li>'
-          f'<li><b>3</b><span>โชว์โพสต์ให้พี่ที่บูธดู รับชิ้นหนังเพิ่มอีก 1 ชิ้น</span></li></ol>'
+          f'<li><b>3</b><span>เราจะกดไลก์และแชร์ผลงานเด่นในเพจ (ถามเจ้าของโพสต์ก่อนทุกครั้ง)</span></li></ol>'
           f'<p class="tag">{TAG}<br>{HASH}</p>'
-          f'<p class="note">เขียนรีวิวตามจริงได้เลย ไม่ต้องชมก็ได้ · ถ้าเราอยากเอารูปไปลงเว็บ จะทักขออนุญาตก่อนทุกครั้ง และไม่ใช้รูปที่เห็นหน้าเด็ก · คนละ 1 ครั้งต่อวัน</p>{BAND}</section>')
+          f'<p class="note">เขียนรีวิวตามจริงได้เลย ไม่ต้องชมก็ได้ · ถ้าเราอยากเอารูปไปลงเว็บ จะทักขออนุญาตก่อนทุกครั้ง และไม่ใช้รูปที่เห็นหน้าเด็ก </p>{BAND}</section>')
     return f"<!doctype html><html lang='th'><head><meta charset='utf-8'><style>{SIGN_CSS}</style></head><body>{p1}{p2}</body></html>"
 
 
