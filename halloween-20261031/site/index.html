@@ -1,0 +1,128 @@
+<title>OCT. 26 ฮาโลวีน</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<style>
+.post{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:var(--s4);align-items:start}
+.post img{border-radius:var(--s3);width:100%}
+.post .body{display:flex;flex-direction:column;align-items:flex-start;gap:var(--s3);min-width:0}.post .body>.ch{align-self:stretch}
+@media (max-width:600px){.post{grid-template-columns:1fr}.post img{max-width:260px}}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">ฝ่ายการตลาด · ฮาโลวีน ส. 31 ต.ค. 2569</span><h1>ฮาโลวีนแบบเงียบ ๆ</h1>
+<p class="lead">โพสต์ 4 ชิ้น ไอเดียสินค้า 5 ข้อ และกิจกรรม 10 ข้อพร้อมคะแนน ใช้ชิ้นหนังจริง สีดำ ส้ม ขาวที่มีอยู่แล้ว
+ไม่ทำสินค้าใหม่ ไม่ลดราคา และเริ่มโพสต์ 27 ต.ค. เพื่อไม่ทับวันเกิดแบรนด์ 26 ต.ค.</p></header>
+<section><h2>ทำก่อน: 4 อันดับแรก</h2><div class="card"><ol><li>ส่งบรอดแคสต์ LINE 1 ข้อความ 30 ต.ค.</li><li>ให้เลือกโทนฮาโลวีน ดำ ส้ม ขาว</li><li>ลงโพสต์ฮาโลวีน 4 โพสต์ IG FB</li><li>ชวนโพสต์ #OCT26ชิ้นของฉัน ธีมฮาโลวีน</li></ol>
+<p class="cap" style="margin-top:8px">สี่ข้อนี้ใช้เงินไม่เกิน 100 บาท และใช้คนวันละไม่เกินครึ่งชั่วโมง</p></div></section>
+<section><span class="eyebrow">Instagram · Facebook</span><h2>โพสต์ 4 ชิ้น</h2>
+<p class="cap">รูป 1080 × 1350 ใช้ได้ทั้ง IG และ FB · กดรูปค้างไว้เพื่อบันทึก</p><article class="card post"><img src="p1.jpg" alt="ดำ ส้ม ขาว" loading="lazy"><div class="body"><span class="chip">IG / FB 1 · อ. 27 ต.ค.</span><h3>ดำ ส้ม ขาว</h3><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="c1">คัดลอก</button></div><pre class="txt" id="c1">ดำ ส้ม ขาว
+สีฮาโลวีนมีอยู่แล้วในกองเศษหนังของเรา
+แต่ละแผ่นมาจากคนละผืน อยากได้โทนไหน ทักบอกทาง LINE ได้
+
+ดูชิ้นหนังทั้งหมด oct26brand.com
+LINE @155riuqj
+
+#OCT26 #ourcraftedthings #หนังแท้ #halloween #ฮาโลวีน</pre></div></div></article><article class="card post"><img src="p2.jpg" alt="03 ป้ายถุงขนม" loading="lazy"><div class="body"><span class="chip">IG / FB 2 · พ. 28 ต.ค.</span><h3>03 ป้ายถุงขนม</h3><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="c2">คัดลอก</button></div><pre class="txt" id="c2">03 ป้ายห้อยของขวัญ
+คืนวันที่ 31 ใช้เป็นป้ายถุงขนม
+เขียนชื่อด้วยปากกาสีขาว ร้อยเชือกผ่านร่อง ผูกที่ปากถุง
+ขนมหมดแล้ว ป้ายยังเก็บไว้ใช้ปีหน้าได้
+
+ผูกไว้ด้านนอกถุง ไม่ใส่ปนกับขนม
+
+oct26brand.com
+
+#OCT26 #ourcraftedthings #หนังแท้ #halloween #ฮาโลวีน</pre></div></div></article><article class="card post"><img src="p3.jpg" alt="05 รองโหลเทียน" loading="lazy"><div class="body"><span class="chip">IG / FB 3 · พฤ. 29 ต.ค.</span><h3>05 รองโหลเทียน</h3><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="c3">คัดลอก</button></div><pre class="txt" id="c3">05 ที่รองแก้ว
+คืนฮาโลวีน ลองรองใต้โหลเทียน
+กันคราบเทียนและรอยบนโต๊ะไม้
+
+ใช้เทียนในโหลแก้วหรือเทียน LED ไม่วางเทียนเปลือยบนหนัง
+
+oct26brand.com
+
+#OCT26 #ourcraftedthings #หนังแท้ #halloween #ฮาโลวีน</pre></div></div></article><article class="card post"><img src="p4.jpg" alt="31.10" loading="lazy"><div class="body"><span class="chip">IG / FB 4 · ส. 31 ต.ค.</span><h3>31.10</h3><div class="ch"><div class="h"><span class="cap">แคปชัน</span><button class="copy" data-for="c4">คัดลอก</button></div><pre class="txt" id="c4">31.10
+คืนนี้จะออกไปเดินหรืออยู่บ้าน ก็ขอให้สนุก
+
+OCT. 26 · our crafted things.
+
+#OCT26 #ourcraftedthings #หนังแท้ #halloween #ฮาโลวีน</pre></div></div></article></section>
+<section><h2>ไอเดียสินค้าจากชิ้นหนัง</h2><p class="cap">ทุกข้อใช้ชิ้นเดียว ส่วนใหญ่เป็นไอเดียบนการ์ดของสินค้าเดิม ไม่เพิ่ม SKU ส่งให้ฝ่ายพัฒนาสินค้าดูต่อ</p>
+<div style="display:flex;flex-direction:column;gap:12px"><article class="card" style="display:flex;flex-direction:column;gap:6px"><h3>03 ป้ายถุงขนม</h3><p>เขียนชื่อด้วยปากกาสีขาว ร้อยเชือกผ่านร่อง ผูกปากถุงขนม เก็บไว้ใช้ปีหน้า</p><p class="cap"><b>ชิ้น</b> 03 · <b>เป็นสินค้าแบบไหน</b> ไอเดียบนการ์ดของ 03 ป้ายห้อยของขวัญ (OC-03-26) ไม่ใช่ SKU ใหม่</p><p class="cap"><b>ของเพิ่ม</b> เชือกปอ ปากกาเขียนหนังสีขาว · <b>เช็กกฎ</b> ผูกด้านนอกถุง ไม่โดนขนม · ชิ้นเดียว ไม่ต่อชิ้น</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><h3>05 รองโหลเทียน</h3><p>รองใต้โหลเทียนหรือเทียน LED คืนฮาโลวีน กันคราบและรอยบนโต๊ะ</p><p class="cap"><b>ชิ้น</b> 05 · <b>เป็นสินค้าแบบไหน</b> ไอเดียบนการ์ดของ 05 ที่รองแก้ว (PD มีข้อนี้แล้ว) ไม่ใช่ SKU ใหม่</p><p class="cap"><b>ของเพิ่ม</b> ไม่มี · <b>เช็กกฎ</b> เขียนว่าใช้เทียนในโหลแก้วหรือ LED ไม่วางเทียนเปลือยบนหนัง</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><h3>โทนฮาโลวีน ดำ ส้ม ขาว</h3><p>ลูกค้าเลือกโทนหนังเป็นดำ ส้ม หรือขาว ในชุดที่รองแก้ว 4 ลายที่มีอยู่</p><p class="cap"><b>ชิ้น</b> 01 02 04 05 · <b>เป็นสินค้าแบบไหน</b> ตัวเลือกโทนในสินค้าเดิม (OC-MX-29) ไม่ใช่ SKU ใหม่ · เว็บมีตัวเลือกโทนหนังอยู่แล้ว</p><p class="cap"><b>ของเพิ่ม</b> ไม่มี · คัดแผ่นสีเข้มแยกไว้ 30 นาที · <b>เช็กกฎ</b> ชั้น 3 ชุดไม่เกิน 2 ยังเท่าเดิม</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><h3>ปั๊มคำบนชิ้นหนัง</h3><p>ปั๊มคำสั้น เช่น BOO หรือวันที่ 31.10 หรือชื่อ ลงบนชิ้นหนัง</p><p class="cap"><b>ชิ้น</b> ทุกลาย · <b>เป็นสินค้าแบบไหน</b> ชั้น 2 ปั๊มชื่อหรือวันที่ (PD เสนอ 20 บาทต่อชิ้น) ทดสอบได้ในรอบ 26–29 ต.ค.</p><p class="cap"><b>ของเพิ่ม</b> ชุดตัวปั๊มตัวอักษร (ยังไม่มีราคา) · <b>เช็กกฎ</b> ลองกับหนัง 1.0–1.2 มม. ก่อนว่าปั๊มติดชัด</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><h3>02 คั่นหนังสือเรื่องผี</h3><p>สอดมุมหน้าหนังสือเข้าร่อง คั่นนิยายสยองที่อ่านค้าง</p><p class="cap"><b>ชิ้น</b> 02 · <b>เป็นสินค้าแบบไหน</b> ไอเดียบนการ์ดของ 02 (PD มีข้อนี้แล้ว) ไม่ใช่ SKU ใหม่</p><p class="cap"><b>ของเพิ่ม</b> ไม่มี · <b>เช็กกฎ</b> ยังไม่มีรูปจริงของ 02 ต้องถ่ายก่อนโพสต์</p></article></div>
+<div class="card" style="margin-top:12px"><b>ไม่ทำ</b><ul><li>ชามหรือจานใส่ขนม: โดนอาหาร</li><li>หน้ากาก ชุดแต่งตัว ของเล่นเด็ก: ของใช้เด็กเล็ก</li><li>ป้ายแขวนประตูหรือโมบาย: ของแขวนต้องรอหนัง 2 มม. และโมบายไม่ผ่านแล้ว</li><li>วาดหน้าผีหรือหน้าฟักทองบนชิ้น 01: ห้ามหน้าหมี · ลายอื่นรอพ่อเบตัดสิน</li><li>ลดราคาฮาโลวีน: เล่มแบรนด์ไม่ลดราคาแรง และเพิ่งตั้งราคาไป</li></ul></div></section>
+<section><h2>กิจกรรม 10 ข้อ: คะแนน</h2><div class="card" style="display:flex;flex-direction:column;gap:12px"><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">1. ส่งบรอดแคสต์ LINE 1 ข้อความ 30 ต.ค.</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:80%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">80</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">2. ให้เลือกโทนฮาโลวีน ดำ ส้ม ขาว</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:78%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">78</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">3. ลงโพสต์ฮาโลวีน 4 โพสต์ IG FB</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:76%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">76</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">4. ชวนโพสต์ #OCT26ชิ้นของฉัน ธีมฮาโลวีน</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:72%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">72</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">5. คลิปสั้น 15 วินาที เลือกหนังสีดำ</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:69%;border-radius:5px;background:#B07A4A"></div></div></div><b class="mono" style="text-align:right">69</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">6. จัดโต๊ะโทนฮาโลวีน ถ้าไปบูธ 31 ต.ค.</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:68%;border-radius:5px;background:#B07A4A"></div></div></div><b class="mono" style="text-align:right">68</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">7. ห่อของขวัญโทนฮาโลวีน สำหรับออเดอร์ออนไลน์ 27–31 ต.ค.</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:63%;border-radius:5px;background:#B07A4A"></div></div></div><b class="mono" style="text-align:right">63</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">8. ทดสอบปั๊มคำ BOO / 31.10 ในรอบทดสอบชั้น 2</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:56%;border-radius:5px;background:#B07A4A"></div></div></div><b class="mono" style="text-align:right">56</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">9. ฝากขายที่ร้านกาแฟหรือร้านขนมใกล้บ้าน</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:56%;border-radius:5px;background:#B07A4A"></div></div></div><b class="mono" style="text-align:right">56</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 44px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">10. นิทานตอนฮาโลวีนของแบรนด์เด็ก B3</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:50%;border-radius:5px;background:#B07A4A"></div></div></div><b class="mono" style="text-align:right">50</b></div></div>
+<p class="cap">น้ำหนัก: รายได้ช่วงฮาโลวีน 25% · มูลค่าหลังงาน 25% · ต้นทุนเงิน 15% · ค่าเสียโอกาส 20% · ทำได้จริง 15% · ต้นทุนและค่าเสียโอกาส 5 = ถูก / เสียน้อย · สีเข้ม = ทำก่อน</p>
+<div style="display:flex;flex-direction:column;gap:12px;margin-top:12px"><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>1. ส่งบรอดแคสต์ LINE 1 ข้อความ 30 ต.ค.</h3><b class="mono" style="font-size:20px">80</b></div><p><b>เพื่อ</b> เตือนเพื่อนที่แอดจากบูธก่อนวันจริง</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> 10 นาที</p><p><b>เงินและโอกาส</b> รายได้จากคนที่รู้จักแบรนด์แล้ว ซื้อง่ายกว่าคนใหม่</p><p class="cap">ส่งครั้งเดียว ไม่ถี่</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>2. ให้เลือกโทนฮาโลวีน ดำ ส้ม ขาว</h3><b class="mono" style="font-size:20px">78</b></div><p><b>เพื่อ</b> ขายชุดที่รองแก้ว 4 ลายที่มีอยู่ ด้วยเหตุผลใหม่</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> คัดแผ่นสีเข้มแยกไว้ 30 นาที</p><p><b>เงินและโอกาส</b> ชุดละ 179 บาท (ต้นทุนชิ้นหนังราว 16 บาท) ไม่ต้องทำสินค้าใหม่ · ใช้แผ่นสีเข้มที่มีมาก</p><p class="cap">เว็บมีตัวเลือกโทนหนังแล้ว ใน Shopee เขียนให้ทักบอกโทน</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>3. ลงโพสต์ฮาโลวีน 4 โพสต์ IG FB</h3><b class="mono" style="font-size:20px">76</b></div><p><b>เพื่อ</b> ให้คนเห็นว่าชิ้นเดียวใช้ในคืนฮาโลวีนได้ และพาไปเว็บ</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> ลงวันละ 5 นาที 27–31 ต.ค.</p><p><b>เงินและโอกาส</b> ขายผ่านเว็บและ LINE หลังเห็นโพสต์ · ได้คนติดตามเพิ่ม</p><p class="cap">รูปทำให้แล้วในหน้านี้</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>4. ชวนโพสต์ #OCT26ชิ้นของฉัน ธีมฮาโลวีน</h3><b class="mono" style="font-size:20px">72</b></div><p><b>เพื่อ</b> ได้รูปจริงจากลูกค้า</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> ตอบคอมเมนต์</p><p><b>เงินและโอกาส</b> ไม่ขายทันที · รูปลูกค้าช่วยให้คนใหม่เชื่อ</p><p class="cap">ไม่มีของรางวัล ไม่สุ่ม ตามกติกาเดิม</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>5. คลิปสั้น 15 วินาที เลือกหนังสีดำ</h3><b class="mono" style="font-size:20px">69</b></div><p><b>เพื่อ</b> Reels และ YouTube Shorts คนเห็นมากกว่าโพสต์รูป</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> ถ่ายและตัด 40 นาที</p><p><b>เงินและโอกาส</b> ยังไม่ขายทันที · ได้คนเห็นมากขึ้น</p><p class="cap">ไม่ถ่ายหน้าเด็ก</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>6. จัดโต๊ะโทนฮาโลวีน ถ้าไปบูธ 31 ต.ค.</h3><b class="mono" style="font-size:20px">68</b></div><p><b>เพื่อ</b> วันจริงตรงกับวันเสาร์ ถ้างานยังเปิดอยู่</p><p><b>ต้นทุนเงิน</b> ผ้าปูโต๊ะสีเข้มที่มีอยู่ 0–100 บาท · <b>คนและเวลา</b> จัดโต๊ะใหม่ 20 นาที</p><p><b>เงินและโอกาส</b> ยอดขายวันเสาร์ แผ่นละ 30 บาท กำไรราว 26 บาท</p><p class="cap">ต้องรู้ก่อนว่างานเปิดถึงวันไหน</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>7. ห่อของขวัญโทนฮาโลวีน สำหรับออเดอร์ออนไลน์ 27–31 ต.ค.</h3><b class="mono" style="font-size:20px">63</b></div><p><b>เพื่อ</b> ให้คนซื้อเป็นของฝากปาร์ตี้</p><p><b>ต้นทุนเงิน</b> ราว 5–10 บาทต่อออเดอร์ (กระดาษคราฟต์สีเข้ม เชือก) · <b>คนและเวลา</b> ห่อเพิ่ม 3 นาทีต่อออเดอร์</p><p><b>เงินและโอกาส</b> คุ้มเมื่อมีคนซื้อเพราะห่อสวยอย่างน้อย 1 ใน 5 ออเดอร์</p><p class="cap">ใช้ป้าย 03 และสติกเกอร์ที่มี</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>8. ทดสอบปั๊มคำ BOO / 31.10 ในรอบทดสอบชั้น 2</h3><b class="mono" style="font-size:20px">56</b></div><p><b>เพื่อ</b> ดูว่าปั๊มติดชัดไหม ก่อนขายเป็นบริการเสริม</p><p><b>ต้นทุนเงิน</b> ชุดตัวปั๊ม ยังไม่มีราคา · <b>คนและเวลา</b> ทดสอบ 1 ชั่วโมงในรอบ 26–29 ต.ค.</p><p><b>เงินและโอกาส</b> ถ้าผ่าน ได้บริการเสริมชิ้นละ 20 บาทใช้ได้ทั้งปี</p><p class="cap">ไม่ทันขายฮาโลวีนนี้ แต่ใช้ปีใหม่ได้</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>9. ฝากขายที่ร้านกาแฟหรือร้านขนมใกล้บ้าน</h3><b class="mono" style="font-size:20px">56</b></div><p><b>เพื่อ</b> ที่รองแก้วโทนฮาโลวีนบนโต๊ะร้าน</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> ไปคุยกับร้าน 1–2 ชั่วโมง</p><p><b>เงินและโอกาส</b> ได้ช่องทางขายใหม่ แต่ยังไม่มีราคาส่ง</p><p class="cap">ต้องตั้งราคาส่งก่อน</p></article><article class="card" style="display:flex;flex-direction:column;gap:6px"><div style="display:flex;justify-content:space-between;gap:12px"><h3>10. นิทานตอนฮาโลวีนของแบรนด์เด็ก B3</h3><b class="mono" style="font-size:20px">50</b></div><p><b>เพื่อ</b> ใช้ตัวละครที่ทำไว้แล้ว</p><p><b>ต้นทุนเงิน</b> 0 บาท · <b>คนและเวลา</b> เขียนและวาด 2–3 ชั่วโมง</p><p><b>เงินและโอกาส</b> ไม่มีรายได้ · แบรนด์เด็กยังไม่ได้ตัดสิน</p><p class="cap">รอเด็ก ๆ ยืนยันชื่อและตัวละครก่อน</p></article></div></section>
+<section><h2>ต้องเช็ก</h2><div class="card"><ol>
+<li>งานบูธเปิดถึงวันที่ 31 ต.ค. หรือไม่ ถ้าไม่เปิด ข้อจัดโต๊ะโทนฮาโลวีนตัดออก</li>
+<li>ยังไม่มีรูปจริงของ 02 โพสต์ชุดนี้จึงไม่มี 02</li>
+<li>คำว่า trick or treat บนรูปที่ 2 เป็นตัวอย่างการเขียนบนชิ้นหนัง ไม่ใช่ลายที่พิมพ์มากับสินค้า</li>
+<li>ราคาชุดที่รองแก้ว 4 ลาย 179 บาทตามที่ลงใน Shopee</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">halloween-20261031/posts/</td><td>รูปโพสต์ 4 รูป PNG</td></tr>
+<tr><td class="mono" style="white-space:nowrap">halloween-20261031/captions.txt</td><td>แคปชันทั้ง 4 โพสต์</td></tr>
+<tr><td class="mono" style="white-space:nowrap">halloween-20261031/build.py</td><td>แก้แคปชัน ไอเดีย คะแนน แล้วรันใหม่</td></tr>
+<tr><td>Google Doc "OCT. 26 ฮาโลวีน 31 ต.ค."</td><td>ในโฟลเดอร์ OCT. 26 ไฟล์งาน</td></tr>
+</tbody></table></div></section></div><script>
+document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
+const t=document.getElementById(b.dataset.for);const s=t.innerText;
+const done=()=>{const o=b.textContent;b.textContent='คัดลอกแล้ว';setTimeout(()=>b.textContent=o,1400)};
+const sel=()=>{const r=document.createRange();r.selectNodeContents(t);const w=getSelection();w.removeAllRanges();w.addRange(r);b.textContent='เลือกข้อความแล้ว กดคัดลอก'};
+try{navigator.clipboard.writeText(s).then(done,sel)}catch(_){sel()}});
+</script>
