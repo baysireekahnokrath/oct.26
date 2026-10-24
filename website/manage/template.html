@@ -1,0 +1,561 @@
+<title>OCT. 26 จัดการสินค้า</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Jost:wght@400;500&display=swap">
+<style>
+/* A shop counter on the phone: product list, one product open at a time, a send step that turns drafts into a PR.
+   Drafts live in the page's database; sending starts a Claude Code session that edits catalog.json and opens a PR.
+   Brand Book v2: cotton ground, charcoal ink, dad red for actions, the five family colours as the stripe and states. */
+:root{
+  --bg:#F4F0E8;--surface:#FBF9F4;--sunk:#ECE6DB;--ink:#2A2725;--muted:#6B645D;--line:#DDD5C8;
+  --accent:#A9442B;--accent-ink:#FBF9F4;--ok:#5E7A3A;--warn:#B7801A;--warn-bg:#F6E7C2;--hide:#7E6AA6;--hide-bg:#E9E1F3;--info:#2E4A7D;--bad:#A9442B;--bad-bg:#F5DDD5;
+  --dad:#A9442B;--mom:#5E7A3A;--eldest:#E9A825;--middle:#B9A3D6;--youngest:#2E4A7D;
+  --serp-bg:#FFFFFF;--serp-title:#1A0DAB;--serp-text:#4D5156;
+  --th:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--latin:"Jost","IBM Plex Sans Thai",system-ui,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1B1A;--surface:#272423;--sunk:#322E2C;--ink:#F1ECE3;--muted:#ABA298;--line:#3E3936;
+  --accent:#D46A4E;--accent-ink:#1D1B1A;--ok:#94B567;--warn:#E9B44A;--warn-bg:#3D3220;--hide:#C3B2E2;--hide-bg:#352F42;--info:#8EA7D6;--bad:#E07E62;--bad-bg:#3F2620;
+  --serp-bg:#202124;--serp-title:#8AB4F8;--serp-text:#BDC1C6;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D1B1A;--surface:#272423;--sunk:#322E2C;--ink:#F1ECE3;--muted:#ABA298;--line:#3E3936;
+  --accent:#D46A4E;--accent-ink:#1D1B1A;--ok:#94B567;--warn:#E9B44A;--warn-bg:#3D3220;--hide:#C3B2E2;--hide-bg:#352F42;--info:#8EA7D6;--bad:#E07E62;--bad-bg:#3F2620;
+  --serp-bg:#202124;--serp-title:#8AB4F8;--serp-text:#BDC1C6;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--th);font-weight:500;line-height:1.3;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.latin,.code,.num{font-family:var(--latin);font-variant-numeric:tabular-nums}
+.cap{font-size:13px;color:var(--muted)}
+
+/* header: wordmark, save state, family stripe */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:12px;padding-block:10px;max-width:1080px;margin:0 auto}
+.mark{font-family:var(--latin);font-weight:500;font-size:15px;line-height:1.05;letter-spacing:.04em}
+.mark i{font-style:normal;color:var(--mom)}
+.bar h1{font-size:18px;flex:1;min-width:0}
+.flag{font-size:12px;padding:3px 10px;border-radius:99px;background:var(--warn-bg);color:var(--ink);white-space:nowrap}
+.stripe{display:grid;grid-template-columns:repeat(5,1fr);height:4px}
+.stripe span:nth-child(1){background:var(--dad)}.stripe span:nth-child(2){background:var(--mom)}.stripe span:nth-child(3){background:var(--eldest)}.stripe span:nth-child(4){background:var(--middle)}.stripe span:nth-child(5){background:var(--youngest)}
+nav.tabs{display:flex;gap:4px;max-width:1080px;margin:0 auto;padding-bottom:8px;overflow-x:auto}
+nav.tabs button{border:0;background:none;padding:8px 14px;border-radius:99px;cursor:pointer;white-space:nowrap;color:var(--muted)}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--surface)}
+nav.tabs .badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;margin-left:6px;border-radius:99px;background:var(--accent);color:var(--accent-ink);font-family:var(--latin);font-size:12px}
+
+main{max-width:1080px;margin:0 auto;padding-block:16px 120px}
+.view[hidden]{display:none}
+
+/* summary strip */
+.sum{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:12px}
+.sum b{font-family:var(--latin);font-weight:500;font-size:20px;margin-right:4px}
+.sum .sp{flex:1}
+
+/* products: list + editor; two columns on wide screens */
+.shop{display:grid;gap:16px}
+@media (min-width:900px){.shop{grid-template-columns:340px minmax(0,1fr);align-items:start}.shop .list{position:sticky;top:132px}}
+.list{display:flex;flex-direction:column;gap:6px;min-width:0}
+.row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line);cursor:pointer;text-align:left;width:100%}
+.row:hover{border-color:var(--muted)}
+.row[aria-current="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.row img{width:56px;height:56px;border-radius:10px;object-fit:cover;display:block}
+.row .t{min-width:0}
+.row .t b{display:block;font-family:var(--th);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .t span{font-size:13px;color:var(--muted)}
+.row .r{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.row .price{font-family:var(--latin);font-weight:500}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:4px;vertical-align:middle}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:1px 9px;border-radius:99px;white-space:nowrap}
+.pill.on{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.pill.out{background:var(--warn-bg);color:var(--warn)}
+.pill.off{background:var(--hide-bg);color:var(--hide)}
+.addnew{border:1px dashed var(--line);background:none;border-radius:var(--r);padding:12px;cursor:pointer;color:var(--muted);text-align:left}
+.addnew:hover{border-color:var(--muted);color:var(--ink)}
+
+.editor{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:22px;min-width:0}
+.back{display:none;border:0;background:none;padding:0;color:var(--accent);cursor:pointer;align-self:flex-start}
+@media (max-width:899px){.shop.open .list{display:none}.back{display:inline}.shop:not(.open) .editor{display:none}}
+.ehead{display:flex;gap:14px;align-items:center}
+.ehead img{width:72px;height:72px;border-radius:12px;object-fit:cover}
+.ehead h2{font-size:22px}
+.group{display:flex;flex-direction:column;gap:14px}
+.group>h3{font-size:13px;font-family:var(--body);font-weight:600;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f label,.f .lab{font-weight:500;display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.f label small,.f .lab small{font-weight:400;color:var(--muted);font-size:12px}
+input[type=text],input[type=number],input[type=url],input[type=date],textarea{width:100%;min-width:0;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+textarea{resize:vertical;min-height:84px;line-height:1.55}
+input:focus,textarea:focus{border-color:var(--ink);outline:none}
+.f.changed input,.f.changed textarea{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--bg))}
+.was{font-size:12px;color:var(--muted);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.was s{overflow-wrap:anywhere}
+.was button{border:0;background:none;padding:0;color:var(--accent);cursor:pointer;font-size:12px;text-decoration:underline}
+.err{font-size:13px;color:var(--bad);background:var(--bad-bg);padding:6px 10px;border-radius:8px}
+.tip{font-size:13px;color:var(--warn);}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.money{position:relative}.money input{padding-right:46px;font-family:var(--latin);font-size:18px}.money span{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.seg button{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:10px 8px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
+.seg button small{font-size:12px;color:var(--muted);line-height:1.35}
+.seg button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink);background:var(--surface)}
+.seg button[data-s="on"][aria-pressed="true"] b{color:var(--ok)}.seg button[data-s="out"][aria-pressed="true"] b{color:var(--warn)}.seg button[data-s="off"][aria-pressed="true"] b{color:var(--hide)}
+@media (max-width:420px){.seg{grid-template-columns:1fr}.seg button{flex-direction:row;align-items:baseline;gap:8px}}
+
+.lock{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:var(--sunk);font-size:14px}
+.lock svg{flex:none}
+
+.photos{display:flex;flex-wrap:wrap;gap:10px}
+.ph{width:96px;display:flex;flex-direction:column;gap:4px}
+.ph .im{position:relative}
+.ph img{width:96px;height:96px;object-fit:cover;border-radius:10px;display:block}
+.ph .cover{position:absolute;left:6px;top:6px;font-size:11px;background:var(--ink);color:var(--surface);padding:0 6px;border-radius:6px}
+.ph .new{position:absolute;right:6px;top:6px;font-size:11px;background:var(--accent);color:var(--accent-ink);padding:0 6px;border-radius:6px}
+.ph .ctl{display:flex;justify-content:space-between}
+.ph .ctl button{border:1px solid var(--line);background:var(--bg);border-radius:8px;width:30px;height:28px;cursor:pointer;line-height:1}
+.ph .ctl button:disabled{opacity:.35;cursor:default}
+.addph{width:96px;height:96px;border:1px dashed var(--line);border-radius:10px;display:grid;place-items:center;text-align:center;font-size:13px;color:var(--muted);cursor:pointer;padding:6px}
+.addph:hover{border-color:var(--muted);color:var(--ink)}
+.addph input{position:absolute;width:1px;height:1px;opacity:0}
+
+.serp{background:var(--serp-bg);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:2px;font-family:Arial,var(--body)}
+.serp .u{font-size:12px;color:var(--serp-text)}
+.serp .h{font-size:18px;line-height:1.35;color:var(--serp-title);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.serp .d{font-size:14px;line-height:1.5;color:var(--serp-text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meter{height:6px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--ok)}
+.meter.long i{background:var(--warn)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 18px;border-radius:99px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-family:var(--th);font-weight:500}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.quiet{border-color:transparent;background:none;color:var(--muted);padding-inline:8px}
+
+/* send dock: fixed to the bottom on phones */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--surface);border-top:1px solid var(--line);padding-block:10px calc(10px + env(safe-area-inset-bottom,0px))}
+.dock .in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.dock .in p{flex:1;min-width:0;font-size:14px}
+.dock[hidden]{display:none}
+
+/* shop settings + send */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:16px;max-width:720px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.chg{display:flex;flex-direction:column;gap:8px}
+.chg h3{font-size:16px;display:flex;gap:8px;align-items:center}
+.chg ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.chg li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 10px;padding:8px 10px;border-radius:10px;background:var(--bg);font-size:14px}
+.chg li .k{color:var(--muted)}
+.chg li .v{min-width:0;overflow-wrap:anywhere}
+.chg li .v s{color:var(--muted)}
+.chg li .v b{font-weight:500}
+@media (max-width:480px){.chg li{grid-template-columns:1fr}}
+.empty{padding:28px 18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+.steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:0}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;padding-bottom:16px;position:relative}
+.steps li::before{content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--line)}
+.steps li:last-child::before{display:none}
+.steps .n{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--latin);font-size:13px;background:var(--sunk);color:var(--muted)}
+.steps li.done .n{background:var(--ok);color:var(--surface)}
+.steps li.now .n{background:var(--accent);color:var(--accent-ink)}
+.steps b{font-family:var(--th);font-weight:500;display:block}
+.how{font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:9;background:var(--ink);color:var(--surface);padding:8px 16px;border-radius:99px;font-size:14px;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:no-preference){.row,.btn,.seg button{transition:border-color .15s,background .15s}}
+.f .fx{display:flex;flex-direction:column;gap:6px}
+.f .fx:empty{display:none}
+select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);font-size:16px}
+input:disabled,textarea:disabled,.seg button:disabled{opacity:.7;cursor:not-allowed}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.ro{margin:0 0 12px;padding:10px 14px;border-radius:12px;background:var(--warn-bg);font-size:14px}
+.req{display:flex;flex-direction:column;gap:4px;padding:12px;border-radius:12px;background:var(--bg)}
+.req .rh{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.req .rh b{font-weight:500}
+.req p{font-size:14px}
+.row-links{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:4px}
+.row-links:empty{display:none}
+.fallback{display:flex;flex-direction:column;gap:8px}
+.fallback pre{margin:0;padding:10px 12px;border-radius:10px;background:var(--sunk);font-size:13px;white-space:pre-wrap;overflow-wrap:anywhere}
+.confirm{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:12px;background:var(--bad-bg)}
+</style>
+<header class="gut"><div class="bar"><a class="mark" href="https://oct26brand.com" target="_blank" rel="noopener" aria-label="เปิดเว็บ OCT. 26" style="color:inherit;text-decoration:none">OCT<i>.</i><br>26</a><h1>จัดการสินค้า</h1><span class="flag" id="conn">กำลังเชื่อม…</span></div>
+<nav class="tabs" role="tablist" aria-label="ส่วนของหน้า">
+<button role="tab" id="t-products" aria-selected="true" data-tab="products">สินค้า</button>
+<button role="tab" id="t-shop" aria-selected="false" data-tab="shop">ร้านและบูธ</button>
+<button role="tab" id="t-send" aria-selected="false" data-tab="send">ส่งขึ้นเว็บ<span class="badge" id="nbadge" hidden>0</span></button>
+</nav></header>
+<div class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+<main class="gut">
+<p class="ro" id="ro" hidden>ดูได้อย่างเดียว · เปิดหน้านี้ด้วยบัญชี claude.ai ของเจ้าของร้าน หรือคนที่ได้สิทธิ์ Editor เพื่อแก้</p>
+<section class="view" id="v-products" role="tabpanel" aria-labelledby="t-products">
+<div class="sum" id="sum"></div>
+<div class="shop" id="shopgrid"><div class="list" id="list"></div><div class="editor" id="editor"></div></div>
+</section>
+<section class="view" id="v-shop" role="tabpanel" aria-labelledby="t-shop" hidden><div class="stack" id="shopform"></div></section>
+<section class="view" id="v-send" role="tabpanel" aria-labelledby="t-send" hidden><div class="stack" id="send"></div></section>
+</main>
+
+<div class="dock gut" id="dock" hidden><div class="in"><p id="dockt"></p><button class="btn solid" type="button" data-tab="send">ตรวจแล้วส่ง</button></div></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+const DATA = /*DATA*/null;
+const LIVE = DATA.products, SHOP = DATA.shop, ALT = DATA.alt, CFG = DATA.cfg, BANNED = DATA.banned;
+const STATUS = {on:["ขายอยู่","แสดงทุกที่ สั่งได้"],out:["ของหมด","หน้ายังอยู่ ปุ่มสั่งเปลี่ยนเป็นถามรอบหน้า"],off:["ซ่อน","ไม่ขึ้นหน้าแรก ลิงก์เดิมพาไปหน้าแรก"]};
+const FIELDS = {status:"สถานะ",name:"ชื่อบนเว็บ",price:"ราคา",size:"ขนาด",lead:"ข้อความหน้าสินค้า",uses:"ใช้ทำอะไรได้",photos:"รูป",seo:"ชื่อสำหรับค้นหา"};
+const SHOPF = {shopee:"ลิงก์ร้าน Shopee",fair:"ชื่องาน",place:"สถานที่",dates:"วันที่",hours:"เวลา",until:"ประกาศบูธถึงวันที่"};
+const REQ = {waiting:["รอ Claude","off"],working:["Claude กำลังทำ","out"],review:["รอกด Merge","out"],live:["ขึ้นเว็บแล้ว","on"],failed:["ไม่ผ่าน","bad"]};
+
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+const use = n => (window.claude && window.claude.use) ? window.claude.use(n).catch(() => null) : Promise.resolve(null);
+
+// drafts mirror the db: drafts/<SKU> and drafts/shop hold only the fields the owner changed; adds/<id> are new-product requests
+let D = {p:{}, shop:{}}, ADDS = [], REQS = [];
+let db = null, assets = null, me = "", canWrite = false, ready = false;
+let cur = LIVE[0].id, sent = null, busy = false;
+const timers = {}, inflight = {};
+
+const live = id => LIVE.find(p => p.id === id);
+const val = (id, f) => (D.p[id] && f in D.p[id]) ? D.p[id][f] : live(id)[f];
+const shopVal = f => f in D.shop ? D.shop[f] : SHOP[f];
+const diffs = id => Object.keys(D.p[id] || {}).filter(f => f in FIELDS && !same(D.p[id][f], live(id)[f]));
+const shopDiffs = () => Object.keys(D.shop).filter(f => f in SHOPF && !same(D.shop[f], SHOP[f]));
+// a photo is a catalog name (thumbs/<name>.jpg) or "asset:<id>" uploaded from this page
+const thumb = ph => ph.startsWith("asset:") ? "/_blob/" + ph.slice(6) : `thumbs/${ph}.jpg`;
+
+function setVal(id, f, v, typing){ if (!canWrite) return; D.p[id] = D.p[id] || {}; if (same(v, live(id)[f])) delete D.p[id][f]; else D.p[id][f] = v; queue(id); refresh(typing); }
+function setShop(f, v, typing){ if (!canWrite) return; if (same(v, SHOP[f])) delete D.shop[f]; else D.shop[f] = v; queue("shop"); refresh(typing); }
+// one write per draft doc, after typing pauses
+function queue(doc){ clearTimeout(timers[doc]); timers[doc] = setTimeout(() => flush(doc), 600); }
+async function flush(doc){
+  clearTimeout(timers[doc]); delete timers[doc];
+  if (!db) return;
+  const body = doc === "shop" ? D.shop : (D.p[doc] || {});
+  inflight[doc] = true;
+  try {
+    if (Object.keys(body).length) await db.doc("drafts/" + doc).set(Object.assign({}, body, {at: Date.now(), by: me}));
+    else await db.doc("drafts/" + doc).delete();
+  } catch (e) { failWrite(e); }
+  delete inflight[doc];
+}
+const flushAll = () => Promise.all(Object.keys(timers).map(flush));
+function failWrite(e){
+  if (e && (e.code === "invalid_argument" || e.code === "not_granted")) { canWrite = false; $("#ro").hidden = false; refresh(); }
+  else toast("บันทึกไม่ได้ตอนนี้ ลองอีกครั้ง");
+}
+
+function bannedIn(text){
+  const t = String(text).toLowerCase().replaceAll("ไม่ใช่ภาชนะใส่อาหาร", "");
+  return BANNED.filter(b => t.includes(b[0].toLowerCase()));
+}
+// problems that stop a send (the build checks the same rules again)
+function problems(id){
+  const out = [], name = val(id,"name"), price = val(id,"price"), lead = val(id,"lead"), seo = val(id,"seo");
+  if (!name.trim() || name.length > 40) out.push(["name","ชื่อต้องมี 1–40 ตัวอักษร"]);
+  if (!Number.isInteger(price) || price < 1 || price > 9999) out.push(["price","ราคาเป็นบาทเต็ม 1–9,999"]);
+  if (lead.length > 160) out.push(["lead",`ยาวเกิน 160 ตัวอักษร (ตอนนี้ ${lead.length})`]);
+  if (!seo.trim()) out.push(["seo","ใส่ชื่อสำหรับค้นหา"]);
+  if (!val(id,"photos").length) out.push(["photos","ต้องมีรูปอย่างน้อย 1 รูป"]);
+  for (const f of ["name","lead","seo","size"]) for (const b of bannedIn(val(id,f))) out.push([f,`ใช้คำว่า "${b[0]}" ไม่ได้ (${b[1]})`]);
+  val(id,"uses").forEach(u => bannedIn(u).forEach(b => out.push(["uses",`ใช้คำว่า "${b[0]}" ไม่ได้ (${b[1]})`])));
+  return out;
+}
+function shopProblems(){
+  const out = [], s = shopVal("shopee");
+  if (s && !/^https:\/\/(shopee\.co\.th|s\.shopee\.co\.th)\//.test(s)) out.push(["shopee","ลิงก์ต้องขึ้นต้นด้วย https://shopee.co.th/"]);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(shopVal("until"))) out.push(["until","เลือกวันที่"]);
+  for (const f of ["fair","place","dates","hours"]) for (const b of bannedIn(shopVal(f))) out.push([f,`ใช้คำว่า "${b[0]}" ไม่ได้ (${b[1]})`]);
+  return out;
+}
+function allProblems(){
+  const out = LIVE.flatMap(p => problems(p.id).map(x => [p.name, x[1]])).concat(shopProblems().map(x => ["ร้านและบูธ", x[1]]));
+  if (LIVE.every(p => val(p.id,"status") === "off")) out.push(["สินค้า","ต้องมีสินค้าแสดงบนเว็บอย่างน้อย 1 ชิ้น"]);
+  return out;
+}
+const changeCount = () => LIVE.reduce((n, p) => n + diffs(p.id).length, 0) + shopDiffs().length + ADDS.length;
+
+/* ---------- product list ---------- */
+function renderList(){
+  const counts = {on:0,out:0,off:0}; LIVE.forEach(p => counts[val(p.id,"status")]++);
+  $("#sum").innerHTML = `<span><b>${counts.on}</b>ขายอยู่</span><span><b>${counts.out}</b>ของหมด</span><span><b>${counts.off}</b>ซ่อน</span><span class="sp"></span>
+    <a class="cap" href="${CFG.site}" target="_blank" rel="noopener">เปิดเว็บจริง</a>`;
+  $("#list").innerHTML = LIVE.map(p => { const st = val(p.id,"status"), ch = diffs(p.id).length;
+    return `<button type="button" class="row" data-open="${p.id}" aria-current="${p.id===cur}"><img src="${thumb(val(p.id,"photos")[0])}" alt="">
+      <span class="t"><b>${ch?'<i class="dot" title="แก้แล้ว ยังไม่ขึ้นเว็บ"></i>':""}${esc(val(p.id,"name"))}</b><span class="code">${p.id}</span></span>
+      <span class="r"><span class="price">${val(p.id,"price")}.-</span><span class="pill ${st}">${STATUS[st][0]}</span></span></button>`; }).join("")
+    + ADDS.map(a => `<div class="row" style="cursor:default"><img src="${a.photo?thumb("asset:"+a.photo):""}" alt="" style="background:var(--sunk)"><span class="t"><b><i class="dot"></i>${esc(a.name)}</b><span>ใหม่ · แพตเทิร์น ${esc(a.code)}${a.sku?" · "+esc(a.sku):""}</span></span><span class="r"><span class="price">${a.price}.-</span>${canWrite?`<button type="button" class="btn quiet" data-unadd="${a.id}">ยกเลิก</button>`:""}</span></div>`).join("")
+    + (canWrite ? `<button type="button" class="addnew" data-new="1">+ ขอเพิ่มสินค้าใหม่<br><span class="cap">ใส่ชื่อ ราคา แพตเทิร์น และรูป Claude ทำหน้าสินค้าให้</span></button>` : "");
+}
+
+/* ---------- editor ---------- */
+function fieldWrap(id, f, inner, hint=""){
+  const ch = diffs(id).includes(f), errs = problems(id).filter(x => x[0] === f);
+  const was = ch ? `<div class="was">บนเว็บตอนนี้ <s>${esc(Array.isArray(live(id)[f]) ? live(id)[f].join(" · ") : f==="status" ? STATUS[live(id)[f]][0] : live(id)[f])}</s>${canWrite?`<button type="button" data-reset="${f}">คืนค่าเดิม</button>`:""}</div>` : "";
+  return `<div class="f${ch?" changed":""}" data-f="${f}">${inner}<div class="fx">${hint}${was}${errs.map(e => `<p class="err">${esc(e[1])}</p>`).join("")}</div></div>`;
+}
+function renderEditor(){ $("#editor").innerHTML = editorHTML(); }
+function editorHTML(){
+  const id = cur, p = live(id), st = val(id,"status"), photos = val(id,"photos"), seo = val(id,"seo"), lead = val(id,"lead"), price = val(id,"price");
+  const ro = canWrite ? "" : " disabled";
+  const desc = `${lead} · ${price} บาท · งานหนังแฮนด์เมดจากเศษหนังวัวแท้ · ${st==="out"?"ของหมด ทัก LINE ถามรอบหน้า":"สั่งทาง LINE"}`, title = `${seo} · OCT. 26`, tl = [...title].length;
+  return `<button type="button" class="back" data-back="1">‹ สินค้าทั้งหมด</button>
+  <div class="ehead"><img src="${thumb(photos[0])}" alt=""><div><span class="code cap">${p.id} · แพตเทิร์น ${p.kind==="set"?"01 · 02 · 04 · 05":p.code}</span><h2>${esc(val(id,"name"))}</h2>
+  ${st==="off"?"":`<a class="cap" href="${CFG.site}/p/${p.id}" target="_blank" rel="noopener">ดูหน้านี้บนเว็บ</a>`}</div></div>
+
+  <div class="group"><h3>ขายอยู่ไหม</h3>${fieldWrap(id,"status",`<div class="seg" role="group" aria-label="สถานะ">${Object.entries(STATUS).map(([k,v]) => `<button type="button" data-s="${k}" aria-pressed="${st===k}"${ro}><b>${v[0]}</b><small>${v[1]}</small></button>`).join("")}</div>`)}</div>
+
+  <div class="group"><h3>บนหน้าเว็บ</h3>
+  ${fieldWrap(id,"name",`<label for="f-name">ชื่อสินค้า <small data-count="name">${[...val(id,"name")].length}/40</small></label><input type="text" id="f-name" data-in="name" value="${esc(val(id,"name"))}" maxlength="60"${ro}>`,`<p class="cap">ตามเล่มแบรนด์ ขึ้นต้นด้วยเลขแพตเทิร์น เช่น 04 ที่รองแก้ว</p>`)}
+  <div class="two">${fieldWrap(id,"price",`<label for="f-price">ราคา</label><div class="money"><input type="number" id="f-price" inputmode="numeric" min="1" max="9999" step="1" data-in="price" value="${price}"${ro}><span>บาท</span></div>`)}
+  ${fieldWrap(id,"size",`<label for="f-size">ขนาด</label><input type="text" id="f-size" data-in="size" value="${esc(val(id,"size"))}"${ro}>`)}</div>
+  ${fieldWrap(id,"lead",`<label for="f-lead">ข้อความหน้าสินค้า <small data-count="lead">${[...lead].length}/160</small></label><textarea id="f-lead" data-in="lead" rows="3"${ro}>${esc(lead)}</textarea>`)}
+  ${fieldWrap(id,"uses",`<span class="lab">ใช้ทำอะไรได้ <small>3 ข้อ</small></span>${val(id,"uses").map((u,i) => `<input type="text" id="f-use${i}" aria-label="ข้อ ${i+1}" data-use="${i}" value="${esc(u)}"${ro}>`).join("")}`)}
+  ${p.food?`<div class="lock"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>"ไม่ใช่ภาชนะใส่อาหาร" ขึ้นทุกที่รองแก้วเสมอ แก้ไม่ได้</span></div>`:""}
+  </div>
+
+  <div class="group"><h3>รูป</h3>${fieldWrap(id,"photos",`<div class="photos">${photos.map((ph,i) => `<div class="ph"><div class="im"><img src="${thumb(ph)}" alt="${esc(ALT[ph]||"รูปใหม่")}">${i===0?'<span class="cover">รูปแรก</span>':""}${ph.startsWith("asset:")?'<span class="new">ใหม่</span>':""}</div>
+    ${canWrite?`<div class="ctl"><button type="button" data-mv="${i}" data-d="-1" aria-label="เลื่อนไปซ้าย" ${i===0?"disabled":""}>‹</button><button type="button" data-rm="${i}" aria-label="เอารูปออก" ${photos.length<2?"disabled":""}>×</button><button type="button" data-mv="${i}" data-d="1" aria-label="เลื่อนไปขวา" ${i===photos.length-1?"disabled":""}>›</button></div>`:""}</div>`).join("")}
+    ${canWrite&&assets?`<label class="addph" for="f-up">+ เพิ่มรูป<br>จากมือถือ<input type="file" id="f-up" accept="image/*"></label>`:""}</div>`,`<p class="cap">รูปแรกขึ้นบนหน้าสินค้า ตอนแชร์ลิงก์ใน LINE และใน Google</p>`)}</div>
+
+  <div class="group"><h3>ตอนขึ้นใน Google</h3>
+  ${fieldWrap(id,"seo",`<label for="f-seo">ชื่อสำหรับค้นหา <small data-count="seo">${tl} ตัวอักษร</small></label><input type="text" id="f-seo" data-in="seo" value="${esc(seo)}"${ro}>`,
+    `<div class="meter${tl>65?" long":""}" aria-hidden="true"><i style="width:${Math.min(100,tl/65*100)}%"></i></div><p class="${tl>65?"tip":"cap"}">${tl>65?"ยาวเกิน Google อาจตัดท้าย":"ใส่คำที่คนค้น เช่น หนังวัวแท้ แฮนด์เมด ของขวัญ"}</p>`)}
+  <div class="serp" aria-label="ตัวอย่างผลค้นหา"><span class="u">oct26brand.com › p › ${p.id}</span><span class="h">${esc(title)}</span><span class="d">${esc(desc)}</span></div>
+  <p class="cap">คำอธิบายใต้ชื่อ สร้างจากข้อความหน้าสินค้าและราคาให้เอง</p></div>`;
+}
+
+/* ---------- shop and booth ---------- */
+function shopField(f, label, type, hint=""){
+  const ch = shopDiffs().includes(f), errs = shopProblems().filter(x => x[0] === f);
+  return `<div class="f${ch?" changed":""}" data-f="shop-${f}"><label for="s-${f}">${label}</label><input type="${type}" id="s-${f}" data-shop="${f}" value="${esc(shopVal(f))}" ${f==="shopee"?'placeholder="https://shopee.co.th/…"':""}${canWrite?"":" disabled"}><div class="fx">${hint}
+    ${ch?`<div class="was">บนเว็บตอนนี้ <s>${esc(SHOP[f]||"ว่าง")}</s>${canWrite?`<button type="button" data-sreset="${f}">คืนค่าเดิม</button>`:""}</div>`:""}${errs.map(e => `<p class="err">${esc(e[1])}</p>`).join("")}</div></div>`;
+}
+function renderShop(){ $("#shopform").innerHTML = shopHTML(); }
+function shopHTML(){
+  const on = Date.now() <= Date.parse(shopVal("until") + "T23:59:59+07:00");
+  return `<div class="card"><h2>ช่องทางสั่ง</h2>
+    ${shopField("shopee","ลิงก์ร้าน Shopee","url",SHOP.shopee?"":`<p class="cap">ยังไม่มีลิงก์ เว็บจึงบอกให้ค้นชื่อร้าน "${esc(SHOP.shopeeName)}" ใส่ลิงก์แล้วปุ่ม Shopee ขึ้นทุกหน้า</p>`)}
+    <div class="f"><span class="lab">LINE</span><p class="code">${esc(SHOP.lineId)} <span class="cap">· เปลี่ยนต้องบอก Claude เพราะผูกกับริชเมนูและ QR</span></p></div></div>
+    <div class="card"><h2>ประกาศบูธ <span class="pill ${on?"on":"off"}" data-count="booth">${on?"ขึ้นอยู่":"ซ่อนแล้ว"}</span></h2>
+    ${shopField("fair","ชื่องาน","text")}${shopField("place","สถานที่","text")}
+    <div class="two">${shopField("dates","วันที่","text")}${shopField("hours","เวลา","text")}</div>
+    ${shopField("until","ประกาศถึงวันที่","date",`<p class="cap">หลังวันนี้ประกาศหายจากหน้าแรกเอง</p>`)}</div>`;
+}
+
+/* ---------- send ---------- */
+function fmt(f, v){ if (f === "status") return STATUS[v][0]; if (f === "price") return v + " บาท"; if (f === "photos") return v.length + " รูป · รูปแรก " + (v[0].startsWith("asset:") ? "รูปใหม่" : (ALT[v[0]]||v[0])); if (Array.isArray(v)) return v.join(" · "); return v || "ว่าง"; }
+function changeTexts(){
+  const out = [];
+  for (const p of LIVE) for (const f of diffs(p.id)) out.push(`${p.name}: ${FIELDS[f]} ${fmt(f, p[f])} → ${fmt(f, D.p[p.id][f])}`);
+  for (const f of shopDiffs()) out.push(`${SHOPF[f]}: ${SHOP[f]||"ว่าง"} → ${D.shop[f]||"ว่าง"}`);
+  for (const a of ADDS) out.push(`สินค้าใหม่: ${a.name} ${a.price} บาท แพตเทิร์น ${a.code}`);
+  return out;
+}
+function snapshot(){
+  const products = {}, shop = {};
+  for (const p of LIVE){ const ds = diffs(p.id); if (ds.length){ products[p.id] = {}; for (const f of ds) products[p.id][f] = D.p[p.id][f]; } }
+  for (const f of shopDiffs()) shop[f] = D.shop[f];
+  return {products, shop, added: ADDS.map(a => ({sku:a.sku||"", name:a.name, code:a.code, price:a.price, photo:a.photo||""}))};
+}
+function reqCard(r){
+  const d = r.data(), st = REQ[d.status] ? d.status : "waiting";
+  return `<div class="req"><div class="rh"><b>${new Date(d.at||0).toLocaleString("th-TH",{dateStyle:"medium",timeStyle:"short"})}</b><span class="pill ${REQ[st][1]}">${REQ[st][0]}</span></div>
+    <span class="cap">${(d.changes||[]).length} รายการ${d.commit?" · commit "+esc(String(d.commit).slice(0,7)):""}</span>
+    ${(d.changes||[]).slice(0,5).map(c => `<span class="cap">• ${esc(c)}</span>`).join("")}
+    ${d.result?`<p>${esc(d.result)}</p>`:""}
+    <div class="row-links">${d.pr&&/^https:\/\/github\.com\//.test(d.pr)?`<a class="btn${st==="review"?" solid":""}" href="${esc(d.pr)}" target="_blank" rel="noopener">${st==="review"?"เปิด GitHub แล้วกด Merge":"ดูใน GitHub"}</a>`:""}
+    ${d.session&&/^session_[A-Za-z0-9]+$/.test(d.session)?`<a class="cap" href="https://claude.ai/code/${d.session}" target="_blank" rel="noopener">ดูที่ Claude ทำ</a>`:""}</div></div>`;
+}
+function renderSend(){
+  const n = changeCount(), probs = allProblems();
+  const reqs = REQS.length ? `<div class="card"><h2>คำขอล่าสุด</h2>${REQS.map(reqCard).join("")}</div>` : "";
+  let top;
+  if (sent) top = `<div class="card"><h2>ส่งแล้ว</h2><p class="cap">คำขอ ${esc(sent.id)}</p>
+    <ol class="steps"><li class="done"><span class="n">✓</span><div><b>ส่งคำขอ</b><span class="cap">ร่างค้างไว้จนเว็บเปลี่ยน แก้ต่อได้</span></div></li>
+    <li class="${sent.started?"now":""}"><span class="n">2</span><div><b>Claude แก้ข้อมูล สร้างเว็บใหม่ แล้วเปิด PR</b><span class="cap">ประมาณ 5–15 นาที สถานะขึ้นในคำขอล่าสุดด้านล่าง</span></div></li>
+    <li><span class="n">3</span><div><b>คุณกด Merge ใน GitHub</b><span class="cap">ปุ่มขึ้นที่คำขอด้านล่าง</span></div></li>
+    <li><span class="n">4</span><div><b>เว็บเปลี่ยน</b><span class="cap">Cloudflare ขึ้นให้ใน 2–3 นาที</span></div></li></ol>
+    ${sent.started?"":`<div class="fallback"><p class="err">${esc(sent.why||"สั่ง Claude เองไม่ได้จากหน้านี้")}</p><p class="cap">วางข้อความนี้ใน Claude Code (สภาพแวดล้อม OCT.26) แทนได้</p><pre id="msg">${esc(sent.msg)}</pre><button type="button" class="btn" data-copymsg="1">คัดลอกข้อความ</button></div>`}
+    <button type="button" class="btn quiet" data-again="1">กลับไปแก้ต่อ</button></div>`;
+  else if (!n) top = `<div class="empty"><b>ยังไม่มีอะไรแก้</b><br>เลือกสินค้าในแท็บ "สินค้า" แล้วแก้ได้เลย ทุกช่องบันทึกเป็นร่างทันที เว็บยังไม่เปลี่ยนจนกว่าจะส่งและกด Merge</div>`;
+  else {
+    const blocks = LIVE.filter(p => diffs(p.id).length).map(p => `<div class="chg"><h3><img src="${thumb(val(p.id,"photos")[0])}" alt="" width="32" height="32" style="border-radius:8px;object-fit:cover">${esc(val(p.id,"name"))} <span class="code cap">${p.id}</span></h3>
+      <ul>${diffs(p.id).map(f => `<li><span class="k">${FIELDS[f]}</span><span class="v"><s>${esc(fmt(f, p[f]))}</s> → <b>${esc(fmt(f, D.p[p.id][f]))}</b></span></li>`).join("")}</ul></div>`).join("")
+    + (shopDiffs().length ? `<div class="chg"><h3>ร้านและบูธ</h3><ul>${shopDiffs().map(f => `<li><span class="k">${SHOPF[f]}</span><span class="v"><s>${esc(SHOP[f]||"ว่าง")}</s> → <b>${esc(D.shop[f]||"ว่าง")}</b></span></li>`).join("")}</ul></div>` : "")
+    + (ADDS.length ? `<div class="chg"><h3>สินค้าใหม่</h3><ul>${ADDS.map(a => `<li><span class="k">แพตเทิร์น ${esc(a.code)}</span><span class="v"><b>${esc(a.name)}</b> · ${a.price} บาท${a.sku?" · "+esc(a.sku):""}</span></li>`).join("")}</ul></div>` : "");
+    const open = REQS.some(r => ["waiting","working","review"].includes(r.data().status));
+    top = `<div class="card"><h2>ตรวจก่อนส่ง · ${n} รายการ</h2>${blocks}
+      ${probs.length ? `<div class="stack" style="gap:6px">${probs.map(x => `<p class="err">${esc(x[0])}: ${esc(x[1])}</p>`).join("")}<p class="cap">แก้ข้อที่แดงก่อน แล้วปุ่มส่งจะกดได้</p></div>` : ""}
+      ${open?`<p class="cap">มีคำขอที่ยังไม่ขึ้นเว็บอยู่ ส่งเพิ่มได้ Claude รวมเข้า PR เดียวกัน</p>`:""}
+      <div class="f"><label for="note">ฝากบอก Claude <small>ไม่บังคับ</small></label><textarea id="note" rows="2" maxlength="300" placeholder="เช่น ลดราคาหลังงานบูธ ถึงสิ้นเดือน"${canWrite?"":" disabled"}></textarea></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn solid" data-send="1" ${probs.length||!canWrite||busy?"disabled":""}>${busy?"กำลังส่ง…":"ส่งขึ้นเว็บ"}</button>${canWrite?`<button type="button" class="btn quiet" data-clear="1">ล้างร่างทั้งหมด</button>`:""}</div>
+      <div id="clearAsk" class="confirm" hidden><p>ล้างร่างทุกอย่างที่ยังไม่ส่ง? เว็บจริงไม่เปลี่ยน</p><div style="display:flex;gap:8px"><button type="button" class="btn" data-clearyes="1">ล้าง</button><button type="button" class="btn quiet" data-clearno="1">ไม่ล้าง</button></div></div></div>`;
+  }
+  const keepNote = $("#note") ? $("#note").value : "";
+  $("#send").innerHTML = top + reqs + howCard();
+  if ($("#note")) $("#note").value = keepNote;
+}
+const howCard = () => `<div class="card how"><h2 style="color:var(--ink)">ทำงานยังไง</h2>
+  <p>ทุกช่องบันทึกเป็นร่างทันที เปิดจากมือถือหรือคอมก็เห็นเหมือนกัน แก้ได้เฉพาะเจ้าของร้านและคนที่ได้สิทธิ์ Editor</p>
+  <p>กดส่ง Claude แก้ข้อมูลสินค้า ตรวจคำต้องห้าม สร้างเว็บใหม่ แล้วเปิด PR ให้กด Merge เว็บไม่เปลี่ยนจนกว่าคุณกด Merge</p>
+  <p>หลังเว็บเปลี่ยน ร่างที่ขึ้นแล้วหายเอง</p></div>`;
+
+async function send(){
+  if (busy || !canWrite) return;
+  busy = true; renderSend();
+  await flushAll();
+  const changes = changeTexts();
+  if (!changes.length || allProblems().length){ busy = false; renderSend(); return; }
+  const ref = db.collection("requests").doc();
+  try { await ref.set({at: Date.now(), by: me, status: "waiting", changes, drafts: snapshot(), note: ($("#note") ? $("#note").value : "").trim().slice(0, 300)}); }
+  catch (e) { busy = false; failWrite(e); renderSend(); return; }
+  const msg = `จัดการสินค้า OCT.26 คำขอ ${ref.id}\nทำตาม website/manage/APPLY.md · หน้าจัดการสินค้า: ${CFG.url}`;
+  sent = {id: ref.id, msg, started: false, why: ""};
+  const mcp = await use("mcp");
+  if (!mcp) sent.why = "หน้านี้สั่ง Claude เองไม่ได้ในมุมมองนี้";
+  else {
+    try {
+      const r = await mcp.callTool("Claude Code Remote", "create_session", {environment_id: CFG.env, source_url: CFG.repo, source_revision: CFG.base,
+        outcome_branch: CFG.work, title: "OCT.26 จัดการสินค้า · " + ref.id, prompt: msg});
+      const sid = (JSON.stringify(r.payload ?? r).match(/session_[A-Za-z0-9]+/) || [])[0] || "";
+      try { await ref.update({status: "working", session: sid, startedAt: Date.now()}); } catch (_) {}
+      sent.started = true; toast("ส่งให้ Claude แล้ว");
+    } catch (e) {
+      sent.why = ({server_not_connected:"ยังไม่ได้เพิ่ม Claude Code Remote ใน claude.ai Settings → Connectors", needs_reauth:"ต้องเชื่อม Claude Code Remote ใหม่ใน claude.ai Settings → Connectors",
+        approval_required:"ต้องกดอนุญาตให้หน้านี้สั่ง Claude Code ก่อน กดส่งอีกครั้งแล้วเลือกอนุญาต", not_in_manifest:"หน้านี้ยังไม่ได้รับอนุญาตให้สั่ง Claude Code",
+        server_unavailable:"Claude Code ไม่ตอบตอนนี้ อาจเริ่มไปแล้ว ดูคำขอล่าสุดก่อนกดใหม่", upstream_error:"Claude Code ไม่ตอบตอนนี้ อาจเริ่มไปแล้ว ดูคำขอล่าสุดก่อนกดใหม่"})[e && e.code] || "สั่ง Claude Code ไม่สำเร็จ";
+    }
+  }
+  busy = false; refresh();
+}
+
+/* ---------- new product request ---------- */
+function newForm(){
+  $("#shopgrid").classList.add("open");
+  document.querySelectorAll(".row[aria-current]").forEach(r => r.setAttribute("aria-current","false"));
+  $("#editor").innerHTML = `<button type="button" class="back" data-back="1">‹ สินค้าทั้งหมด</button><h2>ขอเพิ่มสินค้าใหม่</h2>
+  <p class="cap">Claude ทำหน้าสินค้า ขนาดจริงจากบล็อกตัด และชื่อสำหรับค้นหาให้ ต้องเป็นสินค้าชิ้นเดียว (ยังไม่ขายสินค้าที่ต่อชิ้น)</p>
+  <form class="group" id="nf"><div class="f"><label for="n-name">ชื่อสินค้า</label><input type="text" id="n-name" required maxlength="40" placeholder="เช่น 07 ที่รองแก้ว"></div>
+  <div class="two"><div class="f"><label for="n-code">แพตเทิร์น</label><select id="n-code">${["01","02","03","04","05","07"].map(c => `<option>${c}</option>`).join("")}</select></div>
+  <div class="f"><label for="n-price">ราคา</label><div class="money"><input type="number" id="n-price" inputmode="numeric" min="1" max="9999" step="1" required><span>บาท</span></div></div></div>
+  <div class="f"><label for="n-sku">รหัสสินค้า <small>ถ้ามีในชีตหรือ Shopee</small></label><input type="text" id="n-sku" maxlength="20" placeholder="เช่น OC-07-30"></div>
+  <div class="f"><label for="n-photo">รูปจริง <small>อย่างน้อย 1 รูป</small></label><input type="file" id="n-photo" accept="image/*" required></div>
+  <p class="err" id="n-err" hidden></p><button class="btn solid" type="submit" id="n-go">เพิ่มในรายการที่จะส่ง</button></form>`;
+}
+
+/* ---------- wiring ---------- */
+// while someone types, the field they are in is never redrawn (a redrawn input closes the phone keyboard):
+// only the counters, warnings and previews around it are patched in
+const typing = () => { const a = document.activeElement; return !!(a && /^(INPUT|TEXTAREA)$/.test(a.tagName) && a.closest("#editor, #shopform")); };
+function patch(W, html){
+  const N = document.createElement("div"); N.innerHTML = html;
+  W.querySelectorAll(".f[data-f]").forEach(w => { const n = N.querySelector(`.f[data-f="${w.dataset.f}"]`); if (!n) return;
+    w.className = n.className; const a = w.querySelector(".fx"), b = n.querySelector(".fx"); if (a && b) a.innerHTML = b.innerHTML; });
+  W.querySelectorAll("[data-count]").forEach(c => { const m = N.querySelector(`[data-count="${c.dataset.count}"]`); if (m){ c.textContent = m.textContent; c.className = m.className; } });
+  for (const sel of [".serp", ".ehead h2"]){ const a = W.querySelector(sel), b = N.querySelector(sel); if (a && b) a.innerHTML = b.innerHTML; }
+}
+function refresh(light){
+  renderList();
+  if (light || typing()){ if (!$("#nf") && $("#editor").innerHTML) patch($("#editor"), editorHTML()); patch($("#shopform"), shopHTML()); }
+  else { if (!$("#nf")) renderEditor(); renderShop(); }
+  if (!(document.activeElement && document.activeElement.id === "note")) renderSend();
+  const n = changeCount(); $("#nbadge").hidden = !n; $("#nbadge").textContent = n;
+  $("#dock").hidden = !n || !$("#v-send").hidden || !!sent;
+  $("#dockt").innerHTML = `<b>${n}</b> การเปลี่ยนแปลงยังไม่ขึ้นเว็บ`;
+}
+function tab(t){ document.querySelectorAll("nav.tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab===t))); ["products","shop","send"].forEach(v => $("#v-"+v).hidden = v!==t); scrollTo({top:0}); refresh(); }
+let tt; function toast(m){ const el = $("#toast"); el.textContent = m; el.hidden = false; clearTimeout(tt); tt = setTimeout(() => el.hidden = true, 2400); }
+
+document.addEventListener("click", async e => {
+  const t = e.target.closest("button"); if (!t || t.disabled) return;
+  if (t.dataset.tab) return tab(t.dataset.tab);
+  if (t.dataset.open){ cur = t.dataset.open; $("#shopgrid").classList.add("open"); renderEditor(); renderList(); if (innerWidth < 900) scrollTo({top:0}); return; }
+  if (t.dataset.back){ $("#shopgrid").classList.remove("open"); $("#editor").innerHTML = ""; refresh(); return; }
+  if (t.dataset.new) return newForm();
+  if (t.dataset.unadd){ try { await db.doc("adds/" + t.dataset.unadd).delete(); } catch (err) { failWrite(err); } return; }
+  if (t.dataset.s) return setVal(cur, "status", t.dataset.s);
+  if (t.dataset.reset) return setVal(cur, t.dataset.reset, live(cur)[t.dataset.reset]);
+  if (t.dataset.sreset) return setShop(t.dataset.sreset, SHOP[t.dataset.sreset]);
+  if (t.dataset.mv){ const a = [...val(cur,"photos")], i = +t.dataset.mv, j = i + (+t.dataset.d); [a[i],a[j]] = [a[j],a[i]]; return setVal(cur,"photos",a); }
+  if (t.dataset.rm){ const a = [...val(cur,"photos")]; a.splice(+t.dataset.rm,1); return setVal(cur,"photos",a); }
+  if (t.dataset.send) return send();
+  if (t.dataset.again){ sent = null; refresh(); return; }
+  if (t.dataset.clear){ $("#clearAsk").hidden = false; return; }
+  if (t.dataset.clearno){ $("#clearAsk").hidden = true; return; }
+  if (t.dataset.clearyes){
+    D = {p:{}, shop:{}}; for (const k of Object.keys(timers)) clearTimeout(timers[k]);
+    try { const s = await db.collection("drafts").get(); for (const d of s.docs) await db.doc("drafts/" + d.id).delete(); for (const a of ADDS) await db.doc("adds/" + a.id).delete(); toast("ล้างร่างแล้ว"); }
+    catch (err) { failWrite(err); }
+    refresh(); return;
+  }
+  if (t.dataset.copymsg){ const m = $("#msg"); const sel = () => { const r = document.createRange(); r.selectNodeContents(m); const w = getSelection(); w.removeAllRanges(); w.addRange(r); toast("เลือกข้อความแล้ว กดคัดลอก"); };
+    try { navigator.clipboard.writeText(m.textContent).then(() => toast("คัดลอกแล้ว"), sel); } catch (_) { sel(); } }
+});
+document.addEventListener("input", e => {
+  const el = e.target;
+  if (el.dataset.in){ const f = el.dataset.in; setVal(cur, f, f === "price" ? (el.value === "" ? 0 : Number(el.value)) : el.value, true); }
+  else if (el.dataset.use){ const a = [...val(cur,"uses")]; a[+el.dataset.use] = el.value; setVal(cur,"uses",a, true); }
+  else if (el.dataset.shop) setShop(el.dataset.shop, el.value, true);
+});
+async function upload(file){
+  if (!assets) throw {message: "อัปโหลดรูปไม่ได้จากหน้านี้"};
+  if (!file.type.startsWith("image/")) throw {message: "เลือกไฟล์รูปภาพ"};
+  const r = await assets.upload(file);
+  return r.id;
+}
+document.addEventListener("change", async e => {
+  const el = e.target;
+  if (el.id === "f-up" && el.files[0]){
+    toast("กำลังอัปโหลดรูป…");
+    try { const id = await upload(el.files[0]); setVal(cur, "photos", [...val(cur,"photos"), "asset:" + id]); toast("เพิ่มรูปแล้ว"); }
+    catch (err) { toast(err && err.code === "too_large" ? "รูปใหญ่เกิน 20 MB" : (err && err.message) || "อัปโหลดไม่สำเร็จ"); }
+  }
+});
+document.addEventListener("submit", async e => {
+  if (e.target.id !== "nf") return; e.preventDefault();
+  const name = $("#n-name").value.trim(), price = Number($("#n-price").value), code = $("#n-code").value, sku = $("#n-sku").value.trim(), file = $("#n-photo").files[0], err = $("#n-err");
+  const show = m => { err.hidden = false; err.textContent = m; };
+  const bad = bannedIn(name)[0];
+  if (!name || !Number.isInteger(price) || price < 1 || price > 9999) return show("ใส่ชื่อและราคาเป็นบาทเต็ม 1–9,999");
+  if (bad) return show(`ใช้คำว่า "${bad[0]}" ไม่ได้ (${bad[1]})`);
+  if (sku && LIVE.some(p => p.id === sku)) return show(`รหัส ${sku} มีอยู่แล้ว`);
+  if (!file) return show("เลือกรูปจริงอย่างน้อย 1 รูป");
+  $("#n-go").disabled = true; $("#n-go").textContent = "กำลังอัปโหลด…";
+  try {
+    const photo = await upload(file);
+    await db.collection("adds").add({name, price, code, sku, photo, at: Date.now(), by: me});
+    $("#shopgrid").classList.remove("open"); $("#editor").innerHTML = ""; refresh(); toast("เพิ่มในรายการที่จะส่งแล้ว");
+  } catch (x) { $("#n-go").disabled = false; $("#n-go").textContent = "เพิ่มในรายการที่จะส่ง"; show((x && x.message) || "บันทึกไม่ได้ ลองอีกครั้ง"); }
+});
+
+async function start(){
+  refresh();
+  db = await use("db");
+  const user = await use("user");
+  if (!db){ $("#conn").textContent = "ดูได้อย่างเดียว"; $("#ro").hidden = false; refresh(); return; }
+  me = user ? await user.id().catch(() => "") : "";
+  const w = user ? await Promise.resolve(user.can("data.write")).catch(() => null) : null;
+  canWrite = w !== false; $("#ro").hidden = canWrite;
+  if (canWrite) assets = await use("assets");
+  $("#conn").textContent = canWrite ? "บันทึกอัตโนมัติ" : "ดูได้อย่างเดียว";
+  const strip = o => { const b = Object.assign({}, o); delete b.at; delete b.by; return b; };
+  db.collection("drafts").onSnapshot(s => {
+    const seen = new Set(s.docs.map(d => d.id));
+    for (const d of s.docs){ if (timers[d.id] || inflight[d.id]) continue; if (d.id === "shop") D.shop = strip(d.data()); else D.p[d.id] = strip(d.data()); }
+    for (const k of Object.keys(D.p)) if (!seen.has(k) && !timers[k] && !inflight[k]) delete D.p[k];
+    if (!seen.has("shop") && !timers.shop && !inflight.shop) D.shop = {};
+    refresh();
+  }, () => {});
+  db.collection("adds").onSnapshot(s => { ADDS = s.docs.map(d => Object.assign({id: d.id}, d.data())).sort((a, b) => (a.at||0) - (b.at||0)); refresh(); }, () => {});
+  db.collection("requests").orderBy("at","desc").limit(6).onSnapshot(s => { REQS = s.docs; refresh(); }, () => {});
+  refresh();
+}
+start();
+</script>

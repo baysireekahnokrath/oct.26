@@ -68,7 +68,16 @@ function storyText(){ return `<p class="lead">OCT. 26 คือวันเก�
 <p>ห้าสีในหน้านี้คือสีของคนในบ้าน แดงดินลูกรัง เขียวใบตอง เหลืองทานตะวัน ม่วงดอกอินทนิล น้ำเงินคราม ส่วนขอบหนังเราไม่ทาสี ให้เห็นเนื้อหนังจริง</p>`; }
 function famRow(){ return `<div class="row" style="gap:var(--s3)">${FAM.map(f=>`<span class="cap" style="display:flex;align-items:center;gap:6px;opacity:1"><i style="width:16px;height:16px;border-radius:50%;background:${f[2]};display:inline-block;box-shadow:0 0 0 2px var(--sbg),0 0 0 3px currentColor"></i>${f[0]} · ${f[1]}</span>`).join("")}</div>`; }
 function facts(){ return `<div class="row" style="gap:var(--s5)">${[["6","แพตเทิร์น 01–05 และ 07"],["1.0–1.2","มม. หนังวัวแท้"],["0","สีทาขอบ เห็นเนื้อหนังจริง"]].map(f=>`<div><div class="latin" style="font-size:40px;font-weight:300;line-height:1">${f[0]}</div><div class="cap">${f[1]}</div></div>`).join("")}</div>`; }
-const DIYNOTE = `<p class="cap">สินค้าทุกชิ้นเป็นชิ้นเรียบ ไม่ได้วาดหน้า · สั่งทาง LINE ${LINK.lineId} ไอจี ${LINK.igHandle} หรือค้นหาร้าน ${esc(LINK.shopee)} ใน Shopee</p>`;
+// buying besides LINE: the Shopee shop link once catalog.json has it, else the shop's name to search for
+const shopee = () => LINK.shopeeUrl ? `<a href="${esc(LINK.shopeeUrl)}" target="_blank" rel="noopener">ซื้อใน Shopee</a>` : `ค้นหาร้าน ${esc(LINK.shopee)} ใน Shopee`;
+const DIYNOTE = `<p class="cap">สินค้าทุกชิ้นเป็นชิ้นเรียบ ไม่ได้วาดหน้า · สั่งทาง LINE ${LINK.lineId} ไอจี ${LINK.igHandle} หรือ${shopee()}</p>`;
+// what a card shows: the cut-out, else the photo; only a die drawing (no real photo yet) becomes the die outline
+function piece(x, note){
+  if(x.cut) return pc(x.cut,null,"",`${x.name} หนังวัวแท้`);
+  if(x.kind==="set") return pc("05-1",null);
+  if(!x.img.startsWith("die")) return `<img src="/assets/img/${x.img}.jpg" alt="${esc(ALT[x.img]||x.name)}" loading="lazy">`;
+  return `<span class="pc" style="width:62%">${sil(x.n,"#B07A4A",{slit:"rgba(0,0,0,.3)"})}</span>${note?'<span class="note02">ยังไม่มีรูปจริง</span>':""}`;
+}
 
 function media(p, mode, t){
   const bg=t?`style="--t:${t}"`:"";
@@ -82,8 +91,7 @@ function media(p, mode, t){
       <g transform="translate(${(a[0]-a[2]/2)/s.w} ${(a[1]-a[2]/2)/s.h}) scale(${a[2]/s.w/100} ${a[2]/s.h/100})">${faceG(p.face[0],p.face[1])}</g></svg><span class="tagdiy">ตัวอย่างแต่ง</span></div>`;
   }
   // product cards always show the plain piece: what the customer receives
-  const img = p.cut?pc(p.cut,null,"",`${p.name} หนังวัวแท้`):`<span class="pc" style="width:62%">${sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"})}</span><span class="note02">ยังไม่มีรูปจริง</span>`;
-  return `<div class="media" ${bg}>${img}</div>`;
+  return `<div class="media" ${bg}>${piece(p,true)}</div>`;
 }
 function card(p, mode, t){
   const food = p.food?`<span class="food">ไม่ใช่ภาชนะใส่อาหาร</span>`:"";
@@ -93,7 +101,7 @@ function card(p, mode, t){
   if(mode==="swatch") return `<article class="card">${media(p,"cut",t)}<div class="lab"><span class="code">${p.id}</span><h3>${esc(p.name)}</h3><span class="spec">${p.size}</span>${food}<div class="row" style="justify-content:space-between"><span class="price">${p.price}.-</span>${buy}</div></div></article>`;
   if(mode==="tile") return `<article class="card" data-kind="${p.kind}">${media(p,"tile",t)}<h3>${esc(p.name)}</h3><span class="spec">${p.size}</span>${food}<div class="row"><span class="price">${p.price}.-</span>${buy}</div></article>`;
   if(mode==="shape") return `<article class="card">${media(p,"shape")}<h3>${esc(p.name)}</h3>${food}<div class="pill"><span class="price">${p.price}.-</span>${buy}</div></article>`;
-  return `<article class="card"><a class="plink" href="/p/${p.id}">${media(p,mode,t)}<h3>${esc(p.name)}</h3></a><span class="spec">${p.size} · หนังวัวแท้จากเศษหนัง</span>${food}<span class="price">${p.price} บาท</span><a class="buy" href="/p/${p.id}">ดูรายละเอียด</a></article>`;
+  return `<article class="card"><a class="plink" href="/p/${p.id}">${media(p,mode,t)}<h3>${esc(p.name)}</h3></a><span class="spec">${p.size} · หนังวัวแท้จากเศษหนัง</span>${food}${p.out?'<span class="soldout">ของหมด</span>':""}<span class="price">${p.price} บาท</span><a class="buy" href="/p/${p.id}">ดูรายละเอียด</a></article>`;
 }
 function shop(mode, tints){ return `<div class="shop">${PROD.map((p,i)=>card(p,mode,tints?tints[i%tints.length]:null)).join("")}</div>${DIYNOTE}`; }
 
@@ -122,7 +130,7 @@ function work(){ return `<div class="split"><div class="stack">
 const sim = () => `<div class="sim-slot"></div>`;
 function foot(cls="bg-charcoal stitch"){ return `<footer class="sec mfoot gut ${cls}"><div class="in">
 <div>${LOGO.light}</div>
-<div class="col"><b>สั่งซื้อ</b><a href="${LINK.line}" target="_blank" rel="noopener">LINE ${LINK.lineId}</a><span>Shopee: ${esc(LINK.shopee)}</span></div>
+<div class="col"><b>สั่งซื้อ</b><a href="${LINK.line}" target="_blank" rel="noopener">LINE ${LINK.lineId}</a>${LINK.shopeeUrl?`<a href="${esc(LINK.shopeeUrl)}" target="_blank" rel="noopener">Shopee</a>`:`<span>Shopee: ${esc(LINK.shopee)}</span>`}</div>
 <div class="col"><b>ติดตาม</b><a href="${LINK.ig}" target="_blank" rel="noopener">Instagram ${LINK.igHandle}</a><a href="${LINK.fb}" target="_blank" rel="noopener">Facebook oct26brand</a></div>
 <div class="col"><b>OCT. 26</b><span>our crafted things.</span>${band()}<span class="cap">© 2569 OCT. 26</span></div></div></footer>`; }
 // links work from any page: the home sections live at /#id
@@ -146,7 +154,7 @@ function home(){
 ${strip("bg-charcoal stitch",booth())}
 ${sec("story","bg-mom p-ging","เรื่องของเรา","ห้าคน ห้าสี ในบ้านเดียว",`<div class="who">${FAM.map((f,i)=>`<div><span style="width:56px;height:56px;border-radius:50%;background:${f[2]};display:block;box-shadow:0 0 0 3px var(--cotton)"><svg viewBox="0 0 100 100" style="width:100%;height:100%">${faceG(fs[i],i===2||i===3?"#24201E":"#FBF7EE","#FBF7EE")}</svg></span>${f[0]}<br>${f[1]}</div>`).join("")}</div>`+storyText()+facts(),1)}
 ${sec("sim","bg-beiya stitch","ตัวจำลอง 3D","เลือกหน้าตาของชิ้นคุณ",sim(),2)}
-${sec("shop","bg-beana p-dots","ของพร้อมส่ง","ซื้อได้เลย 7 ชิ้น",shop("cut",["#FBF9F4"]),3)}
+${sec("shop","bg-beana p-dots","ของพร้อมส่ง",`ซื้อได้เลย ${PROD.filter(x=>!x.out).length} ชิ้น`,shop("cut",["#FBF9F4"]),3)}
 ${sec("corp","bg-bene p-stamp","ลูกค้าองค์กร","ของที่ระลึก ที่ไม่ซ้ำกันสักชิ้น",corp(),4)}
 ${sec("work","bg-cotton stitch","เวิร์กช็อป","มาแต่งหน้าตาให้ชิ้นของคุณ",band()+work())}${foot()}`;
 }
@@ -175,20 +183,21 @@ function slides(p, d){
 function productPage(id){
   const p=PROD.find(x=>x.id===id)||PROD[0], d=PD[p.id], i=PROD.indexOf(p), sl=slides(p,d), s=SH[d.code];
   const prev=PROD[(i+PROD.length-1)%PROD.length], next=PROD[(i+1)%PROD.length];
-  const others=PROD.filter(x=>x!==p).map(x=>`<a href="/p/${x.id}"><div class="media">${x.cut?pc(x.cut,null):x.kind==="set"?pc("05-1",null):`<span class="pc" style="width:62%">${sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"})}</span>`}</div><b style="font-family:var(--th);font-weight:500;font-size:15px">${esc(x.name)}</b><span class="latin">${x.price}.-</span></a>`).join("");
+  const others=PROD.filter(x=>x!==p).map(x=>`<a href="/p/${x.id}"><div class="media">${piece(x)}</div><b style="font-family:var(--th);font-weight:500;font-size:15px">${esc(x.name)}</b><span class="latin">${x.price}.-</span></a>`).join("");
   return `<div class="sec gut bg-dad" style="padding-block:0">${head()}</div>
 <section class="sec gut bg-cotton" id="top" style="padding-block:var(--s4) var(--s6)"><div class="in">
 <nav class="crumb" aria-label="ตำแหน่ง"><a href="/">หน้าแรก</a><span>›</span><a href="/#shop">ของพร้อมส่ง</a><span>›</span><span>${esc(p.name)}</span></nav>
 <div class="pp"><div><div class="gal" id="gal">${sl.map(x=>`<figure class="${x[3]||""}">${x[0]}<figcaption>${x[1]}</figcaption></figure>`).join("")}</div>
 <div class="thumbs" role="group" aria-label="รูปสินค้า">${sl.map((x,k)=>`<button type="button" data-slide="${k}" aria-pressed="${k===0}" aria-label="รูปที่ ${k+1}">${x[2]}</button>`).join("")}</div></div>
 <div class="pinfo"><span class="eyebrow">${p.id} · แพตเทิร์น ${d.set?"01 · 02 · 04 · 05":d.code+" "+s.name}</span><h1>${esc(p.name)}</h1>
-<div class="row"><span class="chip">● พร้อมส่ง</span>${p.food?'<span class="chip food">ไม่ใช่ภาชนะใส่อาหาร</span>':""}</div>
+<div class="row">${p.out?'<span class="chip out">ของหมด</span>':'<span class="chip">● พร้อมส่ง</span>'}${p.food?'<span class="chip food">ไม่ใช่ภาชนะใส่อาหาร</span>':""}</div>
 <p class="lead">${esc(d.lead)}</p><div class="bigprice">${p.price}.-<span class="cap" style="font-family:var(--body);font-size:14px"> / ${d.set?"ชุด":"ชิ้น"}</span></div>
-<div class="field"><label>โทนสีหนังที่อยากได้</label><div class="opts" data-tone>${TONES.map((t,k)=>`<button type="button" data-t="${k}" aria-pressed="${k===P.tone}">${t}</button>`).join("")}</div></div>
+${p.out?`<p class="cap">ตอนนี้หมดชั่วคราว ทัก LINE ถามรอบหน้าได้ เราตอบว่าจะมีเมื่อไร</p>
+<div class="row"><a class="btn solid" href="${LINK.line}" target="_blank" rel="noopener" data-order="1">ถามรอบหน้าทาง LINE</a></div>`:`<div class="field"><label>โทนสีหนังที่อยากได้</label><div class="opts" data-tone>${TONES.map((t,k)=>`<button type="button" data-t="${k}" aria-pressed="${k===P.tone}">${t}</button>`).join("")}</div></div>
 <p class="cap">เศษหนังแต่ละชิ้นสีไม่ซ้ำกัน เราส่งรูปชิ้นจริงให้ดูในแชทก่อนโอนทุกครั้ง</p>
 <div class="field"><label>จำนวน</label><div class="qty"><button type="button" data-q="-1" aria-label="ลด">−</button><output id="qty">${P.qty}</output><button type="button" data-q="1" aria-label="เพิ่ม">+</button></div></div>
 <div class="row"><a class="btn solid" href="${LINK.line}" target="_blank" rel="noopener" data-order="1">สั่งทาง LINE</a></div>
-<p class="cap">หรือค้นหาร้าน ${esc(LINK.shopee)} ใน Shopee · ค่าส่งแจ้งในแชท</p>${d.note?`<p class="cap">${esc(d.note)}</p>`:""}
+<p class="cap">หรือ${shopee()} · ค่าส่งแจ้งในแชท</p>`}${d.note?`<p class="cap">${esc(d.note)}</p>`:""}
 <div class="row cap"><a href="/p/${prev.id}">‹ ${esc(prev.name)}</a><span style="flex:1"></span><a href="/p/${next.id}">${esc(next.name)} ›</a></div></div></div></div></section>
 ${sec("detail","bg-mom p-ging","รายละเอียด","ชิ้นนี้ทำจากอะไร",`<table class="spec"><tbody>
 <tr><th>รหัส</th><td>${p.id}</td></tr><tr><th>แพตเทิร์น</th><td>${d.set?"01 หมี · 02 กังหัน · 04 สี่เหลี่ยมมน · 05 วงกลม":d.code+" "+s.name}</td></tr>
@@ -203,10 +212,11 @@ ${sec("howto","bg-beana p-dots","สั่งยังไง","สั่ง จ�
 <ul class="ticks"><li>ค่าส่งแจ้งในแชท ตามจำนวนชิ้น</li>${boothOn()?`<li>รับที่บูธ: ${esc(BOOTH.fair)} ${esc(BOOTH.dates)} ${esc(BOOTH.hours)}</li>`:""}<li>สั่งจำนวนมากหรือของที่ระลึกองค์กร <a href="/#corp">ดูบริการองค์กร</a></li></ul>`,3)}
 ${sec("more","bg-bene p-stamp","ชิ้นอื่น","ดูต่ออีก "+(PROD.length-1)+" ชิ้น",`<div class="more">${others}</div>`,4)}
 ${foot()}
-<div class="buybar" role="region" aria-label="สั่งซื้อ"><div class="in"><div class="tot"><b id="tot">${p.price*P.qty}.-</b><small id="totd">${esc(p.name)} × ${P.qty}</small></div>
-<a class="btn" href="${LINK.line}" target="_blank" rel="noopener" data-order="1">สั่งทาง LINE</a></div></div>`;
+<div class="buybar" role="region" aria-label="สั่งซื้อ"><div class="in">${p.out?`<div class="tot"><b>ของหมด</b><small>${esc(p.name)}</small></div>
+<a class="btn" href="${LINK.line}" target="_blank" rel="noopener" data-order="1">ถามรอบหน้า</a>`:`<div class="tot"><b id="tot">${p.price*P.qty}.-</b><small id="totd">${esc(p.name)} × ${P.qty}</small></div>
+<a class="btn" href="${LINK.line}" target="_blank" rel="noopener" data-order="1">สั่งทาง LINE</a>`}</div></div>`;
 }
-function orderText(){ const p=PROD.find(x=>x.id===P.id); return `สนใจ ${p.id} ${p.name} × ${P.qty} ${p.kind==="set"?"ชุด":"ชิ้น"} · ${TONES[P.tone]} · รวม ${p.price*P.qty} บาท`; }
+function orderText(){ const p=PROD.find(x=>x.id===P.id); if(p.out) return `สอบถาม ${p.id} ${p.name} ที่หมดอยู่ รอบหน้ามีเมื่อไรครับ`; return `สนใจ ${p.id} ${p.name} × ${P.qty} ${p.kind==="set"?"ชุด":"ชิ้น"} · ${TONES[P.tone]} · รวม ${p.price*P.qty} บาท`; }
 function updTotal(){ const p=PROD.find(x=>x.id===P.id); if(!p) return; $("#qty").textContent=P.qty; $("#tot").textContent=(p.price*P.qty)+".-"; $("#totd").textContent=`${p.name} × ${P.qty}`; }
 // on a product page the piece opens plain, the way it ships; faces stay one tap away as a DIY idea
 function simSet(code){ S.face="none"; simEl.querySelectorAll("[data-face]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.face==="none"))); S.code=code; simEl.querySelectorAll("[data-code]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.code===code))); if(S.three) buildMesh(); else if(S.three===false) flat(); simText(); }
@@ -322,7 +332,7 @@ const still=matchMedia("(prefers-reduced-motion: reduce)").matches;
 // orders, quotes and bookings go to the shop's LINE chat as a ready-made message
 function copyThen(text, msg){ try{ navigator.clipboard.writeText(text).then(()=>toast(msg),()=>toast("เปิด LINE แล้วพิมพ์บอกเราได้เลย")); }catch(_){ toast("เปิด LINE แล้วพิมพ์บอกเราได้เลย"); } }
 document.addEventListener("click",e=>{
-  const od=e.target.closest("[data-order]"); if(od){ copyThen(orderText(),"คัดลอกข้อความสั่งแล้ว วางในแชท LINE ได้เลย"); return; }
+  const od=e.target.closest("[data-order]"); if(od){ copyThen(orderText(),"คัดลอกข้อความแล้ว วางในแชท LINE ได้เลย"); return; }
   const cp=e.target.closest("[data-corp]"); if(cp){ const org=(($("#org")||{}).value||"").trim();
     copyThen(`สนใจของที่ระลึกองค์กร${org&&org!=="บริษัทของคุณ"?" · "+org:""} · แพตเทิร์น ${S.code} หนัง${LEATHER[S.leather][0]}`,"คัดลอกข้อความแล้ว วางในแชท LINE ได้เลย"); return; }
   const c=e.target.closest("[data-copy]"); if(c&&c.dataset.copy){ copyThen(c.dataset.copy,"คัดลอกข้อความแล้ว วางในแชท LINE ได้เลย"); }
