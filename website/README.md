@@ -28,6 +28,7 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
   page, a workshop page and an ideas page, same keywords in Shopee titles.
 - `builder/` — the Web Builder (paused: it still edits the old brand.py table).
 - `summary/` — Thai summary for the owner: https://claude.ai/artifact/FZ9KmqHeKZTpBu24TnGwjo · PR https://github.com/baysireekahnokrath/oct.26/pull/3
+- `summary-seo/` — Thai summary of the SEO round: https://claude.ai/artifact/Pg49fYeseXDQhsfGdsz8SN · PR https://github.com/baysireekahnokrath/oct.26/pull/4
 
 ## Cloudflare (set up by the owner)
 Workers Builds from GitHub, production branch `main`, root directory `website`, build command none, deploy command
