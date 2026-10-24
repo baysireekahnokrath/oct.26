@@ -41,10 +41,10 @@ function faceG(style, ink, cheek="#D9765F", filt=true){
 }
 function faceSvg(style, ink, w){ return `<svg class="face" viewBox="0 0 100 100" style="${w}" aria-hidden="true">${faceG(style,ink)}</svg>`; }
 // a cut-out photo with an optional painted face
-function pc(cut, face, extra=""){
+function pc(cut, face, extra="", alt=""){
   const a=ANCHOR[cut]||[50,50,48];
   const f=face&&face[0]!=="none"?faceSvg(face[0],face[1],`left:${a[0]}%;top:${a[1]}%;width:${a[2]}%`):"";
-  return `<span class="pc" ${extra}><img src="/assets/cut/${cut}.webp" alt="" loading="lazy">${f}</span>`;
+  return `<span class="pc" ${extra}><img src="/assets/cut/${cut}.webp" alt="${esc(alt)}" loading="lazy">${f}</span>`;
 }
 
 /* ---------- craft textures, built once from the die files ---------- */
@@ -72,7 +72,7 @@ const DIYNOTE = `<p class="cap">สินค้าทุกชิ้นเป็
 
 function media(p, mode, t){
   const bg=t?`style="--t:${t}"`:"";
-  if(mode==="photo") return `<div class="media" ${bg}><img src="/assets/img/${p.img}.jpg" alt="${esc(p.name)}" loading="lazy">${p.n==="02"?'<span class="note02">ภาพจากบล็อกตัด</span>':""}</div>`;
+  if(mode==="photo") return `<div class="media" ${bg}><img src="/assets/img/${p.img}.jpg" alt="${esc(ALT[p.img]||p.name)}" loading="lazy">${p.n==="02"?'<span class="note02">ภาพจากบล็อกตัด</span>':""}</div>`;
   if(p.kind==="set") return `<div class="media mx" ${bg}>${p.cuts.map(c=>c==="02"?sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"}):pc(c,null)).join("")}</div>`;
   if(mode==="shape"){
     const inner = p.cut?`<image href="/assets/cut/${p.cut}.webp" x="-.06" y="-.06" width="1.12" height="1.12" preserveAspectRatio="xMidYMid slice"/>`:`<rect width="1" height="1" fill="#B07A4A"/>`;
@@ -82,7 +82,7 @@ function media(p, mode, t){
       <g transform="translate(${(a[0]-a[2]/2)/s.w} ${(a[1]-a[2]/2)/s.h}) scale(${a[2]/s.w/100} ${a[2]/s.h/100})">${faceG(p.face[0],p.face[1])}</g></svg><span class="tagdiy">ตัวอย่างแต่ง</span></div>`;
   }
   // product cards always show the plain piece: what the customer receives
-  const img = p.cut?pc(p.cut,null):`<span class="pc" style="width:62%">${sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"})}</span><span class="note02">ยังไม่มีรูปจริง</span>`;
+  const img = p.cut?pc(p.cut,null,"",`${p.name} หนังวัวแท้`):`<span class="pc" style="width:62%">${sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"})}</span><span class="note02">ยังไม่มีรูปจริง</span>`;
   return `<div class="media" ${bg}>${img}</div>`;
 }
 function card(p, mode, t){
@@ -166,9 +166,9 @@ function diagram(code){
 }
 function slides(p, d){
   const out=[];
-  d.photos.forEach((ph,i)=>out.push([`<img src="/assets/img/${ph}.jpg" alt="${esc(p.name)} รูปที่ ${i+1}" ${i?'loading="lazy"':""}>`, ph==="hand05"?"ขนาดเทียบมือ":ph==="die02"?"บล็อกตัด 02":"รูปจริง", `<img src="/assets/img/${ph}.jpg" alt="">`]));
+  d.photos.forEach((ph,i)=>out.push([`<img src="/assets/img/${ph}.jpg" alt="${esc(ALT[ph]||p.name)}" ${i?'loading="lazy"':""}>`, ph==="hand05"?"ขนาดเทียบมือ":ph==="die02"?"บล็อกตัด 02":"รูปจริง", `<img src="/assets/img/${ph}.jpg" alt="">`]));
   if(d.set) out.push([p.cuts.map(c=>c==="02"?sil("02","#B07A4A",{slit:"rgba(0,0,0,.3)"}):pc(c,null)).join(""),"4 ชิ้นในชุด",sil("05","#B07A4A",{slit:"rgba(0,0,0,.3)"}),"mx"]);
-  d.cuts.forEach(c=>out.push([pc(c,null),"ตัวอย่างสีหนัง",`<img src="/assets/cut/${c}.webp" alt="" style="object-fit:contain;padding:6px">`]));
+  d.cuts.forEach(c=>out.push([pc(c,null,"",`${p.name} ตัวอย่างสีหนัง`),"ตัวอย่างสีหนัง",`<img src="/assets/cut/${c}.webp" alt="" style="object-fit:contain;padding:6px">`]));
   if(!d.set) out.push([diagram(d.code),"ขนาดจริง",sil(d.code,"#B07A4A",{slit:"rgba(0,0,0,.3)"})]);
   return out;
 }
