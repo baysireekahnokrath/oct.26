@@ -70,5 +70,9 @@ def problems(products=None, shop=None, alt=None):
         for b in banned_in(shop["booth"].get(k, "")): out.append(f'บูธ: ใช้คำว่า "{b[0]}" ไม่ได้ ({b[1]})')
     return out
 
+# booth game at /game (30 Oct–1 Nov 2026, KIDS MARKET): six pairs of real die-cut photos (no real photo of 02 yet);
+# after `until` both /game and /game/done say the booth activity has ended
+GAME = dict(cards=["01-3", "03-1", "04-2", "05-6", "07-4", "05-2"], until="2026-11-01T17:00:00+07:00")
+
 # old product pages (p/NN.html, 30 products) -> the page that sells the same thing now; everything else goes home
 OLD = {1: "OC-01-01", 22: "OC-01-22", 24: "OC-02-24", 26: "OC-03-26", 27: "OC-04-27", 28: "OC-05-28", 29: "OC-MX-29"}

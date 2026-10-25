@@ -27,6 +27,13 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
 - SEO plan (22–24 Oct): search titles per product, photo descriptions, full text in HTML, structured data. Still to do:
   Google Search Console (owner verifies the domain, then submit `sitemap.xml`), pattern pages 01–07, a leather care
   page, a workshop page and an ideas page, same keywords in Shopee titles.
+- `/game` and `/game/done` — the booth game for 30 Oct–1 Nov 2026 (KIDS MARKET, from the LINE rich menu "รับชิ้นหนังฟรี"):
+  match 6 pairs of real die-cut photos (`assets/game/`, from pattern-intro-20261022/plan-web, 360 px webp, ~264 KB),
+  then /game/done shows the time and "โชว์หน้านี้ที่บูธ OCT. 26 · รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น". Page: `src/game.html`,
+  cards and end time: `catalog.GAME`. Finishing loads the real address /game/done so request stats can count it. No form,
+  no cookie, no storage; anyone may open /game/done directly (owner's choice). noindex, not in the sitemap or menu. After
+  1 Nov 17:00 (Thai time) both pages say the booth activity has ended; rebuild once after that date so the files say it
+  too. Not /play: _redirects sends that home (301).
 - `manage/` — the product manager page (status, prices, text, photos, Shopee link, booth; sends a PR): https://claude.ai/artifact/B9RyXagkt8KCB43kaLk3Hd
 - `builder/` — the old Web Builder, retired 24 Oct (it edited the old brand.py table).
 - `summary/` — Thai summary for the owner: https://claude.ai/artifact/FZ9KmqHeKZTpBu24TnGwjo · PR https://github.com/baysireekahnokrath/oct.26/pull/3

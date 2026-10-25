@@ -11,7 +11,7 @@ into the HTML file, so search engines and chat previews read the full text witho
 same markup on load. Each file also carries its search title, description, canonical link, share image and JSON-LD
 (Organization and WebSite on home; Product and BreadcrumbList on product pages).
 """
-import datetime, hashlib, html, json, os, re, shutil, subprocess
+import datetime, hashlib, html, json, os, re, shutil, subprocess, time
 from PIL import Image
 
 import catalog as C
@@ -117,6 +117,26 @@ def page(title, desc, path, img, page_js, noscript, ld=None):
 </body></html>"""
 
 
+def game_pages():
+    """/game (the matching game) and /game/done (show at the booth), noindex, not in the sitemap or menu. Built ended
+    after GAME["until"]; before that the browser switches to the ended view itself at that time."""
+    ended = time.time() > datetime.datetime.fromisoformat(C.GAME["until"]).timestamp()
+    names = {k: f"ชิ้นหนัง {k[:2]} {NAMES[k[:2]]}" for k in C.GAME["cards"]}
+    tpl = open(os.path.join(SRC, "game.html")).read()
+    os.makedirs(os.path.join(OUT, "game"), exist_ok=True)
+    for kind, path, title in (("game", "game.html", "จับคู่ชิ้นหนัง"), ("done", os.path.join("game", "done.html"), "เล่นจบแล้ว")):
+        show = "ended" if ended else kind
+        imgs = [] if ended else (C.GAME["cards"] if kind == "game" else ["01-3"])
+        s = tpl
+        for k, v in {"title": title if not ended else "กิจกรรมจบแล้ว", "kind": kind, "ig": C.IG, "fb": C.FB,
+                     "preload": "".join(f'<link rel="preload" as="image" href="/assets/game/{i}.webp">' for i in imgs),
+                     "hide_game": "" if show == "game" else "hidden", "hide_done": "" if show == "done" else "hidden",
+                     "hide_ended": "" if show == "ended" else "hidden",
+                     "config": json.dumps(dict(kind=kind, cards=C.GAME["cards"], names=names, until=C.GAME["until"]), ensure_ascii=False)}.items():
+            s = s.replace("{{" + k + "}}", v)
+        open(os.path.join(OUT, path), "w").write(s)
+
+
 def og(name, photos):
     """1200 x 630 share image: one photo cropped to fill, or several side by side."""
     W, H = 1200, 630
@@ -136,7 +156,7 @@ if __name__ == "__main__":
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(os.path.join(OUT, "p")); os.makedirs(os.path.join(OUT, "assets", "og"))
-    for d in ("img", "cut", "logo", "js"):
+    for d in ("img", "cut", "logo", "js", "game"):
         shutil.copytree(os.path.join(A, d), os.path.join(OUT, "assets", d))
     shutil.copyfile(os.path.join(SRC, "app.css"), os.path.join(OUT, "assets", "app.css"))
     shutil.copyfile(os.path.join(SRC, "app.js"), os.path.join(OUT, "assets", "app.js"))
@@ -177,6 +197,7 @@ if __name__ == "__main__":
             f"/p/{p['id']}", p["id"], {"type": "product", "id": p["id"]},
             f"<h1>{E(p['name'])}</h1><p>{E(p['lead'])}</p><p>{p['price']} บาท · {E(p['size'])}" + (" · ของหมด" if out else "")
             + (" · ไม่ใช่ภาชนะใส่อาหาร" if p["food"] else "") + f"</p>{contact}<p><a href=\"/\">หน้าแรก</a></p>", ld))
+    game_pages()
     open(os.path.join(OUT, "404.html"), "w").write(
         '<!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
         '<title>ไม่พบหน้านี้ · OCT. 26</title><link rel="icon" href="/assets/logo/square-light.svg" type="image/svg+xml">'
