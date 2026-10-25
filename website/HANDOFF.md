@@ -30,6 +30,9 @@ every deliverable) and `brand-20261014/HANDOFF.md` (brand decisions not to reope
 - `website/public/` is committed (no build step on Cloudflare). Change → `python3 website/build.py`
   (and `node website/render.mjs` then build again if the pattern play's look changes) → commit → PR to `main`
   → the owner merges → Cloudflare deploys. The owner wants to approve each change by merging.
+  Exception (owner, 25 Oct 2026): requests sent from the product manager page (`website/manage/`) merge themselves
+  once Cloudflare's preview build is green, because pressing "ส่งขึ้นเว็บ" is the approval; new products and any
+  code or design change still wait for the owner's merge.
 - PR #2 (https://github.com/baysireekahnokrath/oct.26/pull/2, canonical links, share images and sitemap at
   oct26brand.com) is merged into `main` (c711375).
 

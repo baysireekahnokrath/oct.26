@@ -379,8 +379,8 @@ function renderSend(){
   let top;
   if (sent) top = `<div class="card"><h2>ส่งแล้ว</h2><p class="cap">คำขอ ${esc(sent.id)}</p>
     <ol class="steps"><li class="done"><span class="n">✓</span><div><b>ส่งคำขอ</b><span class="cap">ร่างค้างไว้จนเว็บเปลี่ยน แก้ต่อได้</span></div></li>
-    <li class="${sent.started?"now":""}"><span class="n">2</span><div><b>Claude แก้ข้อมูล สร้างเว็บใหม่ แล้วเปิด PR</b><span class="cap">ประมาณ 5–15 นาที สถานะขึ้นในคำขอล่าสุดด้านล่าง</span></div></li>
-    <li><span class="n">3</span><div><b>คุณกด Merge ใน GitHub</b><span class="cap">ปุ่มขึ้นที่คำขอด้านล่าง</span></div></li>
+    <li class="${sent.started?"now":""}"><span class="n">2</span><div><b>Claude แก้ข้อมูล สร้างเว็บใหม่ แล้วตรวจ</b><span class="cap">ประมาณ 5–15 นาที สถานะขึ้นในคำขอล่าสุดด้านล่าง</span></div></li>
+    <li><span class="n">3</span><div><b>Cloudflare ลองสร้างเว็บตัวอย่าง ผ่านแล้ว Claude ขึ้นเว็บให้เอง</b><span class="cap">ไม่ผ่านจะหยุดและบอกเหตุผลในคำขอด้านล่าง · สินค้าใหม่รอคุณกด Merge เพราะ Claude เขียนข้อความให้</span></div></li>
     <li><span class="n">4</span><div><b>เว็บเปลี่ยน</b><span class="cap">Cloudflare ขึ้นให้ใน 2–3 นาที</span></div></li></ol>
     ${sent.started?"":`<div class="fallback"><p class="err">${esc(sent.why||"สั่ง Claude เองไม่ได้จากหน้านี้")}</p><p class="cap">วางข้อความนี้ใน Claude Code (สภาพแวดล้อม OCT.26) แทนได้</p><pre id="msg">${esc(sent.msg)}</pre><button type="button" class="btn" data-copymsg="1">คัดลอกข้อความ</button></div>`}
     <button type="button" class="btn quiet" data-again="1">กลับไปแก้ต่อ</button></div>`;
@@ -404,7 +404,8 @@ function renderSend(){
 }
 const howCard = () => `<div class="card how"><h2 style="color:var(--ink)">ทำงานยังไง</h2>
   <p>ทุกช่องบันทึกเป็นร่างทันที เปิดจากมือถือหรือคอมก็เห็นเหมือนกัน แก้ได้เฉพาะเจ้าของร้านและคนที่ได้สิทธิ์ Editor</p>
-  <p>กดส่ง Claude แก้ข้อมูลสินค้า ตรวจคำต้องห้าม สร้างเว็บใหม่ แล้วเปิด PR ให้กด Merge เว็บไม่เปลี่ยนจนกว่าคุณกด Merge</p>
+  <p>กดส่งคือคุณตกลงขึ้นเว็บแล้ว Claude แก้ข้อมูลสินค้า ตรวจคำต้องห้าม สร้างเว็บใหม่ เปิด PR ไว้เป็นบันทึก รอ Cloudflare ลองสร้างผ่าน แล้วขึ้นเว็บให้เอง ไม่ผ่านจะหยุดไว้ เว็บจริงไม่เปลี่ยน</p>
+  <p>สินค้าใหม่ยังรอคุณกด Merge เพราะ Claude เขียนข้อความหน้าสินค้าให้ · อยากย้อน แก้กลับในหน้านี้แล้วส่งใหม่ หรือกด Revert ใน GitHub</p>
   <p>หลังเว็บเปลี่ยน ร่างที่ขึ้นแล้วหายเอง</p></div>`;
 
 async function send(){
