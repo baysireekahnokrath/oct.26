@@ -33,7 +33,7 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
   cards and end time: `catalog.GAME`. Finishing loads the real address /game/done so request stats can count it. No form,
   no cookie, no storage; anyone may open /game/done directly (owner's choice). noindex, not in the sitemap or menu. After
   1 Nov 17:00 (Thai time) both pages say the booth activity has ended; rebuild once after that date so the files say it
-  too. Not /play: _redirects sends that home (301).
+  too. Not /play: _redirects sends that home (301). Thai summary: https://claude.ai/artifact/BYHS92GPtQr18ZFWDRQDrx (`summary-game/`).
 - `manage/` — the product manager page (status, prices, text, photos, Shopee link, booth; sends a PR): https://claude.ai/artifact/B9RyXagkt8KCB43kaLk3Hd
 - `builder/` — the old Web Builder, retired 24 Oct (it edited the old brand.py table).
 - `summary/` — Thai summary for the owner: https://claude.ai/artifact/FZ9KmqHeKZTpBu24TnGwjo · PR https://github.com/baysireekahnokrath/oct.26/pull/3
