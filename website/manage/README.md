@@ -13,8 +13,9 @@ On the page, from a phone:
 - **ส่งขึ้นเว็บ**: every change as old -> new; words the status doc rules out (`catalog.BANNED`) block the send. Sending
   saves a request and starts a Claude Code session (Claude Code Remote connector, `create_session`) that follows
   `APPLY.md`: `apply.py` edits `../catalog.json`, `../build.py` rebuilds and checks the site, one PR from
-  `manage-products` to `main`. The owner merges; Cloudflare deploys; the session republishes this page and clears the
-  drafts that went live. The latest requests show their state and the PR button.
+  `manage-products` to `main`. When Cloudflare's preview build of that PR is green, the session merges it itself
+  (owner's decision, 25 Oct 2026: sending is the approval); new products and anything outside catalog data still wait
+  for the owner's merge. Cloudflare deploys; the session republishes this page and clears the drafts that went live. The latest requests show their state and the PR button.
 
     python3 website/manage/build.py                   # template.html + catalog.json -> index.html, thumbs/ (prints the files map)
     python3 website/manage/apply.py request.json [--write]
