@@ -121,6 +121,8 @@ const PRODUCTS = [
   {sku:"OC-05-28", nick:"05 ที่รองแก้ว",      name:"05 ที่รองแก้ว",                 price:49,  icon:"circle"},
   {sku:"OC-03-26", nick:"03 ป้ายห้อยของขวัญ",  name:"03 ป้ายห้อยของขวัญ",            price:39,  icon:"tag"},
   {sku:"OC-MX-29", nick:"ชุดที่รองแก้ว 4 แบบ", name:"ชุดที่รองแก้ว 01 · 02 · 04 · 05", price:179, icon:"set"},
+  {sku:"OC-PO-32", nick:"กระเป๋าซิป",         name:"กระเป๋าซิปหนัง (ดำ ครีม น้ำตาล)",   price:200, icon:"pouch"},
+  {sku:"OC-ST-33", nick:"สายห้อย",            name:"สายห้อยข้อมือ (ดำ น้ำตาล ครีม)",    price:20,  icon:"strap"},
 ];
 const BY_SKU = Object.fromEntries(PRODUCTS.map(p => [p.sku, p]));
 const PAY_LABEL = {cash:"เงินสด", transfer:"โอน / พร้อมเพย์"};
@@ -134,6 +136,8 @@ function icon(kind){
     square: `<rect x="10" y="10" width="60" height="60" rx="16" fill="${c}"/>`,
     circle: `<circle cx="40" cy="40" r="31" fill="${c}"/>`,
     tag: [[26,26],[54,26],[26,54],[54,54]].map(([x,y]) => `<circle cx="${x}" cy="${y}" r="17" fill="${c}"/>`).join("") + `<rect x="24" y="24" width="32" height="32" fill="${c}"/><circle cx="26" cy="26" r="4" fill="var(--card)"/>`,
+    pouch: `<rect x="8" y="16" width="64" height="50" rx="9" fill="${c}"/><path d="M14 26h52" stroke="${k}" stroke-width="3" stroke-linecap="round"/><circle cx="66" cy="26" r="4" fill="${k}"/>`,
+    strap: `<path d="M40 8 C20 8 22 50 34 56 M40 8 C60 8 58 50 46 56" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round"/><rect x="31" y="50" width="18" height="12" rx="4" fill="${k}"/><circle cx="40" cy="70" r="7" fill="none" stroke="${k}" stroke-width="3"/>`,
     set: `<circle cx="24" cy="24" r="15" fill="${c}"/><rect x="42" y="9" width="30" height="30" rx="9" fill="${c}"/><circle cx="24" cy="56" r="15" fill="${c}"/><circle cx="57" cy="56" r="15" fill="${c}"/>`,
   };
   return `<svg viewBox="0 0 80 80" aria-hidden="true">${shapes[kind]}</svg>`;
