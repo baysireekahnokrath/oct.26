@@ -89,7 +89,7 @@ details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);fo
 <div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
 <span class="eyebrow">ฝ่ายการตลาด · mock ให้ตรวจ · บูธ 30 ต.ค.–1 พ.ย.</span><h1>รับชิ้นหนังฟรีผ่าน LINE</h1>
 <p class="lead">ลองกดในโทรศัพท์ข้างล่างได้เลย ตั้งแต่แอด LINE จนได้รูปกลับมาในแชต ยังไม่ได้แก้เว็บหรือ LINE จริง
-ถ้าผ่านแล้วจะทำหน้า oct26brand.com/play จริงเป็น PR ให้กด Merge</p></header>
+ถ้าผ่านแล้วจะทำหน้า oct26brand.com/game จริงเป็น PR ให้กด Merge</p></header>
 <section><h2>ลองกด</h2>
 <div class="steps" id="steps"></div>
 <div class="phone">
@@ -97,12 +97,12 @@ details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);fo
 <div class="chat" id="chat"><div class="b">ขอบคุณที่แอด OCT. 26<br><br>ถ้าอยู่ที่บูธ กดปุ่ม &quot;รับชิ้นหนังฟรี&quot; ในเมนูด้านล่าง เล่นเกมจับคู่ให้จบ แล้วโชว์หน้าจอที่บูธ รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น (คนละ 1 แผ่น)<br><br>บูธ KIDS MARKET งานบ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี ฮอลล์ชาเลนเจอร์ 2–3<br>30 ต.ค.–1 พ.ย. 2569 · 10:00–17:00<br><br>ดูของทั้งหมด oct26brand.com</div></div>
 <button class="rich" id="rich" type="button" aria-label="ริชเมนู กดรับชิ้นหนังฟรี"><img src="richmenu-booth.jpg" alt="ริชเมนูช่วงบูธ"></button>
 <div class="rbar">แตะช่องบน "รับชิ้นหนังฟรี"</div></div>
-<div class="scr" id="s2" hidden><div class="url">oct26brand.com/play</div><div class="web">
+<div class="scr" id="s2" hidden><div class="url">oct26brand.com/game</div><div class="web">
 <img src="logo.svg" alt="OCT. 26" style="width:56px">
 <h2 style="font-size:24px">จับคู่ชิ้นหนัง</h2><p style="font-size:14px;color:#6E6A64">เปิดการ์ดทีละ 2 ใบ หาชิ้นหนังที่เหมือนกันให้ครบ 6 คู่</p>
 <div class="board" id="board"></div><p style="font-size:13px;color:#6E6A64">เปิดไป <b id="moves">0</b> ครั้ง · ได้ <b id="pairs">0</b> / 6 คู่</p>
 <button class="btn line" id="skip" type="button">ข้ามเกม (เฉพาะ mock)</button></div></div>
-<div class="scr" id="s3" hidden><div class="url">oct26brand.com/play</div><div class="web" style="text-align:center;align-items:center">
+<div class="scr" id="s3" hidden><div class="url">oct26brand.com/game</div><div class="web" style="text-align:center;align-items:center">
 <img src="logo.svg" alt="OCT. 26" style="width:56px"><h2 style="font-size:30px;margin-top:6px">เล่นจบแล้ว</h2>
 <p style="font-size:14px;color:#6E6A64" id="took"></p>
 <div style="background:#fff;border:2px solid #2A2725;border-radius:16px;padding:14px;width:100%">
@@ -132,7 +132,7 @@ details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);fo
 30 ต.ค.–1 พ.ย. 2569 · 10:00–17:00
 
 ดูของทั้งหมด oct26brand.com</pre></div></article><article class="card" style="display:flex;flex-direction:column;gap:8px"><h3>ตอบกลับอัตโนมัติ เมื่อมีคำว่า &quot;รับชิ้นหนังฟรี&quot;</h3><div class="ch"><div class="h"><span class="cap">ข้อความ</span><button class="copy" data-for="m-reply">คัดลอก</button></div><pre class="txt" id="m-reply">เกมจับคู่ชิ้นหนัง 6 คู่ ใช้เวลาราว 1 นาที
-https://oct26brand.com/play
+https://oct26brand.com/game
 
 เล่นจบแล้วโชว์หน้าจอที่บูธ รับชิ้นหนัง 01 ฟรี 1 แผ่น
 คนละ 1 แผ่น รับที่บูธเท่านั้น ถึง 1 พ.ย. 17:00</pre></div></article><article class="card" style="display:flex;flex-direction:column;gap:8px"><h3>ส่งพร้อมรูป หลังถ่ายที่บูธ (คนในบูธส่งเองในแชต)</h3><div class="ch"><div class="h"><span class="cap">ข้อความ</span><button class="copy" data-for="m-photo">คัดลอก</button></div><pre class="txt" id="m-photo">รูปชิ้นของคุณจากบูธวันนี้ เก็บไว้ได้เลย
@@ -148,12 +148,53 @@ Facebook https://www.facebook.com/oct26brand</pre></div></article></div>
 <p class="cap">ตั้งค่าการตอบกลับใน LINE OA ให้เปิดทั้งแชตและข้อความตอบกลับอัตโนมัติ ไม่อย่างนั้นปุ่มจะไม่ส่งลิงก์</p></section>
 <section><h2>ของพิมพ์ A4</h2><div class="grid"><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="a4-1.png" alt="ป้าย A4 รับชิ้นหนังฟรี" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">ป้าย A4 รับชิ้นหนังฟรี</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="a4-2.png" alt="แผ่นพื้นหลังถ่ายรูป A4" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">แผ่นพื้นหลังถ่ายรูป A4</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="a4-3.png" alt="การ์ดคนในบูธ + ช่องนับ" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">การ์ดคนในบูธ + ช่องนับ</figcaption></figure></div>
 <p class="cap">พิมพ์จากเครื่องที่บ้าน ขนาดจริง 100% · แผ่นพื้นหลังถ้ามีกระดาษสีครีมจะเข้ากับแบรนด์ที่สุด</p></section>
+<section><h2>คำสั่งสำหรับทีมเว็บ</h2><p class="cap">กดคัดลอกแล้วส่งให้ session เว็บได้เลย · เกมอยู่ที่ /game เพราะ /play ถูกตั้งให้เด้งไปหน้าแรกอยู่แล้ว</p>
+<div class="ch"><div class="h"><span class="cap">คำสั่ง</span><button class="copy" data-for="brief">คัดลอก</button></div><pre class="txt" id="brief">งานเว็บ: หน้าเกมรับชิ้นหนังฟรี oct26brand.com/game (บูธ 30 ต.ค.–1 พ.ย. 2569)
+
+ที่มา: เจ้าของอนุมัติขั้นตอนแล้ว 25 ต.ค. · mock กดลองได้ https://claude.ai/artifact/SUi5Vk48WTEUXtRdNguctK
+ไฟล์อ้างอิง: กิ่ง claude/vigilant-faraday-00e92g โฟลเดอร์ booth-flow-20261030/ (build.py มีข้อความทุกคำในตัวแปร END และ MSG รายการการ์ดใน CARDS และโค้ดเกมใน mock() ใช้เป็นต้นแบบได้)
+
+ขั้นตอนลูกค้า: แอด LINE OA → กดริชเมนู &quot;รับชิ้นหนังฟรี&quot; → LINE ตอบลิงก์ https://oct26brand.com/game → เล่นเกม → หน้าจบเกม โชว์ที่บูธ รับชิ้น 01 คนละ 1 แผ่น
+ส่วนของ LINE (ริชเมนู ข้อความ) เจ้าของตั้งเอง ไม่ใช่งานเว็บ
+
+ต้องทำ
+1. หน้า /game
+   - โลโก้สี่เหลี่ยม หัวข้อ &quot;จับคู่ชิ้นหนัง&quot; คำอธิบาย &quot;เปิดการ์ดทีละ 2 ใบ หาชิ้นหนังที่เหมือนกันให้ครบ 6 คู่&quot;
+   - การ์ด 12 ใบ (6 คู่) สุ่มตำแหน่งทุกครั้ง ตาราง 3 คอลัมน์ หลังการ์ดพื้นดำถ่านเขียน &quot;OCT. 26&quot;
+   - หน้าการ์ดเป็นรูปชิ้นหนังจริงไดคัต 01-3, 03-1, 04-2, 05-6, 07-4, 05-2 จาก pattern-intro-20261022/plan-web/ ในกิ่ง claude/brand-guidelines-doc (ย่อเหลือราว 360 px webp · ยังไม่มีรูปจริงของ 02)
+   - ตัวนับ &quot;เปิดไป N ครั้ง · ได้ X / 6 คู่&quot;
+   - ไม่มีปุ่มข้ามเกม (มีแค่ใน mock)
+2. จับคู่ครบ 6 คู่ → ไปหน้า /game/done (เปลี่ยน URL จริง ไม่ใช้ #) เพื่อให้สถิติ Cloudflare นับจำนวนคนเล่นจบได้
+3. หน้า /game/done ใช้ข้อความตามนี้ทุกคำ
+   - เล่นจบแล้ว
+   - เวลาตอนนี้ เช่น &quot;14:32 · 30 ต.ค.&quot; ให้คนในบูธเห็นว่าเพิ่งเล่น
+   - กล่องขอบดำ: &quot;โชว์หน้านี้ที่บูธ OCT. 26&quot; / &quot;รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น&quot; พร้อมรูป 01-3
+   - &quot;ที่บูธมีมุมวาดลายหรือเขียนชื่อบนชิ้นหนัง&quot;
+   - &quot;ระหว่างรอ ฝากติดตามเราด้วย&quot; ปุ่ม Instagram https://www.instagram.com/oct.26_brand/ และ Facebook https://www.facebook.com/oct26brand
+   - &quot;ไม่ติดตามก็รับได้ · คนละ 1 แผ่น&quot;
+4. หลัง 1 พ.ย. 2569 17:00 เวลาไทย: ทั้ง /game และ /game/done แสดง &quot;กิจกรรมที่บูธจบแล้ว ขอบคุณที่แวะมา&quot; พร้อมลิงก์หน้าแรก IG FB แทนเกม (เช็กเวลาในเบราว์เซอร์ และ build ใหม่หลังวันนั้น แบบเดียวกับข้อความบูธเดิม)
+5. ไม่ใส่ /game ใน sitemap ใส่ noindex และไม่ใส่ในเมนูเว็บ
+6. ห้ามใช้ /play เพราะ _redirects ส่ง /play ไปหน้าแรกแบบ 301 อยู่แล้ว (เบราว์เซอร์จำไว้)
+
+กฎ
+- ไม่เก็บข้อมูลใด ๆ: ไม่มีฟอร์ม ไม่ขอชื่อ เบอร์ หรือ LINE ID ไม่ใช้ cookie หรือ localStorage ติดตามคน (งาน KIDS MARKET มีเด็กเล่น)
+- ไม่กันรับซ้ำ (เจ้าของตกลงแล้ว) ใครเปิด /game/done ตรง ๆ ก็ไม่เป็นไร
+- Brand Book v2: พื้นขาวฝ้าย #F4F0E8 ตัวหนังสือดำถ่าน #2A2725 ฟอนต์ Anuphan / IBM Plex Sans Thai / Jost โลโก้จากไฟล์ ห้าสีของบ้านใช้เป็นแถบเล็กเท่านั้น
+- ห้ามคำว่า &quot;ไม่ต้องเย็บ&quot; &quot;ต่อเองได้&quot; · ไม่มีหน้าหมี หัวใจ · การติดตาม IG FB เป็นการชวน ไม่ใช่เงื่อนไข
+- ใช้ดีบนมือถือกว้าง 360 px ขึ้นไป โหลดเร็ว (รูปรวมไม่เกินราว 300 KB) การ์ดใหญ่พอให้กดด้วยนิ้ว ปุ่มอ่านได้ด้วยโปรแกรมอ่านหน้าจอ
+
+ส่งงาน
+- PR เข้า main พร้อมลิงก์ preview ของ Cloudflare ให้เจ้าของลองบนมือถือก่อนกด Merge
+- เสร็จภายใน 28 ต.ค. · เจ้าของลองกับมือถือจริง 29 ต.ค.
+- อัปเดต website/README.md และเอกสาร &quot;OCT. 26 สถานะล่าสุด&quot; ใน Drive
+</pre></div></section>
 <section><h2>ต้องเช็ก</h2><div class="card"><ol>
 <li>ชิ้นที่แจกคือ 01 เลือกสีได้ (มี 369 แผ่น)</li>
 <li>ใครในบูธเป็นคนถ่ายรูปและส่งในแชต ต้องล็อกอินแอป LINE OA ในมือถือเครื่องนั้น</li>
 <li>หน้าเกมจริงไม่เก็บชื่อ เบอร์ หรือข้อมูลใด ๆ นับแค่จำนวนคนเล่นจบจากสถิติเว็บ</li>
-<li>ถ้าผ่าน mock: ทำหน้า /play จริง (PR) ริชเมนู ข้อความ และไฟล์พิมพ์ PDF ให้เสร็จภายใน 28 ต.ค. ลองกับมือถือจริง 29 ต.ค.</li></ol></div></section>
+<li>ถ้าผ่าน mock: ทำหน้า /game จริง (PR) ริชเมนู ข้อความ และไฟล์พิมพ์ PDF ให้เสร็จภายใน 28 ต.ค. ลองกับมือถือจริง 29 ต.ค.</li></ol></div></section>
 <section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/WEB-BRIEF.md</td><td>คำสั่งสำหรับทีมเว็บ</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/build.py</td><td>ข้อความ ปุ่ม และของพิมพ์ทั้งหมด</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/richmenu-booth.jpg</td><td>รูปริชเมนูช่วงบูธ 2500 × 1686</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/booth-flow-a4.pdf</td><td>ป้าย แผ่นพื้นหลัง การ์ดคนในบูธ</td></tr>
@@ -170,7 +211,7 @@ $("rich").addEventListener("click", () => {
   if (asked) return; asked = true;
   const c = $("chat");
   c.insertAdjacentHTML("beforeend", `<div class="b me">รับชิ้นหนังฟรี</div>`);
-  setTimeout(() => { c.insertAdjacentHTML("beforeend", `<div class="b">เกมจับคู่ชิ้นหนัง 6 คู่ ใช้เวลาราว 1 นาที<br><a href="#" id="playlink">https://oct26brand.com/play</a><br><br>เล่นจบแล้วโชว์หน้าจอที่บูธ รับชิ้นหนัง 01 ฟรี 1 แผ่น<br>คนละ 1 แผ่น รับที่บูธเท่านั้น ถึง 1 พ.ย. 17:00</div>`);
+  setTimeout(() => { c.insertAdjacentHTML("beforeend", `<div class="b">เกมจับคู่ชิ้นหนัง 6 คู่ ใช้เวลาราว 1 นาที<br><a href="#" id="playlink">https://oct26brand.com/game</a><br><br>เล่นจบแล้วโชว์หน้าจอที่บูธ รับชิ้นหนัง 01 ฟรี 1 แผ่น<br>คนละ 1 แผ่น รับที่บูธเท่านั้น ถึง 1 พ.ย. 17:00</div>`);
     c.scrollTop = c.scrollHeight; $("playlink").addEventListener("click", e => { e.preventDefault(); deal(); show("s2"); }); }, 500);
   c.scrollTop = c.scrollHeight;
 });

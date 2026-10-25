@@ -1,7 +1,7 @@
 """Booth giveaway flow for 30 Oct–1 Nov, MOCK for the owner to check (owner, 25 Oct: "ตามที่เสนอ ขอดู mock ก่อน").
 
 Flow: scan the LINE QR at the booth -> the greeting says tap the rich menu -> "รับชิ้นหนังฟรี" sends a keyword, the
-auto-reply sends the game link oct26brand.com/play -> play the pattern memory game (real die-cut photos) -> the end
+auto-reply sends the game link oct26brand.com/game -> play the pattern memory game (real die-cut photos) -> the end
 screen says show this at the booth, with IG and FB as an invitation only -> get one 01 piece, draw on it at the DIY
 corner -> staff photograph hands and piece only on the A4 backdrop, with consent, and send the photo in the LINE chat.
 Decided 25 Oct: piece 01, a separate booth rich menu with a display period, the existing matching game, staff take
@@ -30,7 +30,7 @@ IMG = "file://" + os.path.join(HERE, "img")
 INK, COTTON, MUTED, LINE = C["charcoal"], C["cotton"], "#6E6A64", "#DCD4C7"
 
 IG, FB, WEB = "https://www.instagram.com/oct.26_brand/", "https://www.facebook.com/oct26brand", "https://oct26brand.com"
-PLAY = "https://oct26brand.com/play"
+PLAY = "https://oct26brand.com/game"
 KEYWORD = "รับชิ้นหนังฟรี"
 PIECE = "01"
 BOOTH = "บูธ KIDS MARKET งานบ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี ฮอลล์ชาเลนเจอร์ 2–3"
@@ -214,7 +214,7 @@ def mock():
 <div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
 <span class="eyebrow">ฝ่ายการตลาด · mock ให้ตรวจ · บูธ 30 ต.ค.–1 พ.ย.</span><h1>รับชิ้นหนังฟรีผ่าน LINE</h1>
 <p class="lead">ลองกดในโทรศัพท์ข้างล่างได้เลย ตั้งแต่แอด LINE จนได้รูปกลับมาในแชต ยังไม่ได้แก้เว็บหรือ LINE จริง
-ถ้าผ่านแล้วจะทำหน้า oct26brand.com/play จริงเป็น PR ให้กด Merge</p></header>
+ถ้าผ่านแล้วจะทำหน้า oct26brand.com/game จริงเป็น PR ให้กด Merge</p></header>
 <section><h2>ลองกด</h2>
 <div class="steps" id="steps"></div>
 <div class="phone">
@@ -222,12 +222,12 @@ def mock():
 <div class="chat" id="chat"><div class="b">{msgs["greeting"]}</div></div>
 <button class="rich" id="rich" type="button" aria-label="ริชเมนู กดรับชิ้นหนังฟรี"><img src="richmenu-booth.jpg" alt="ริชเมนูช่วงบูธ"></button>
 <div class="rbar">แตะช่องบน "{KEYWORD}"</div></div>
-<div class="scr" id="s2" hidden><div class="url">oct26brand.com/play</div><div class="web">
+<div class="scr" id="s2" hidden><div class="url">oct26brand.com/game</div><div class="web">
 <img src="logo.svg" alt="OCT. 26" style="width:56px">
 <h2 style="font-size:24px">จับคู่ชิ้นหนัง</h2><p style="font-size:14px;color:#6E6A64">เปิดการ์ดทีละ 2 ใบ หาชิ้นหนังที่เหมือนกันให้ครบ 6 คู่</p>
 <div class="board" id="board"></div><p style="font-size:13px;color:#6E6A64">เปิดไป <b id="moves">0</b> ครั้ง · ได้ <b id="pairs">0</b> / 6 คู่</p>
 <button class="btn line" id="skip" type="button">ข้ามเกม (เฉพาะ mock)</button></div></div>
-<div class="scr" id="s3" hidden><div class="url">oct26brand.com/play</div><div class="web" style="text-align:center;align-items:center">
+<div class="scr" id="s3" hidden><div class="url">oct26brand.com/game</div><div class="web" style="text-align:center;align-items:center">
 <img src="logo.svg" alt="OCT. 26" style="width:56px"><h2 style="font-size:30px;margin-top:6px">{E(END["title"])}</h2>
 <p style="font-size:14px;color:#6E6A64" id="took"></p>
 <div style="background:#fff;border:2px solid #2A2725;border-radius:16px;padding:14px;width:100%">
@@ -253,12 +253,15 @@ def mock():
 <p class="cap">ตั้งค่าการตอบกลับใน LINE OA ให้เปิดทั้งแชตและข้อความตอบกลับอัตโนมัติ ไม่อย่างนั้นปุ่มจะไม่ส่งลิงก์</p></section>
 <section><h2>ของพิมพ์ A4</h2><div class="grid">{prints}</div>
 <p class="cap">พิมพ์จากเครื่องที่บ้าน ขนาดจริง 100% · แผ่นพื้นหลังถ้ามีกระดาษสีครีมจะเข้ากับแบรนด์ที่สุด</p></section>
+<section><h2>คำสั่งสำหรับทีมเว็บ</h2><p class="cap">กดคัดลอกแล้วส่งให้ session เว็บได้เลย · เกมอยู่ที่ /game เพราะ /play ถูกตั้งให้เด้งไปหน้าแรกอยู่แล้ว</p>
+{S.copybox("brief", open(os.path.join(HERE, "WEB-BRIEF.md")).read(), "คำสั่ง")}</section>
 <section><h2>ต้องเช็ก</h2><div class="card"><ol>
 <li>ชิ้นที่แจกคือ 01 เลือกสีได้ (มี 369 แผ่น)</li>
 <li>ใครในบูธเป็นคนถ่ายรูปและส่งในแชต ต้องล็อกอินแอป LINE OA ในมือถือเครื่องนั้น</li>
 <li>หน้าเกมจริงไม่เก็บชื่อ เบอร์ หรือข้อมูลใด ๆ นับแค่จำนวนคนเล่นจบจากสถิติเว็บ</li>
-<li>ถ้าผ่าน mock: ทำหน้า /play จริง (PR) ริชเมนู ข้อความ และไฟล์พิมพ์ PDF ให้เสร็จภายใน 28 ต.ค. ลองกับมือถือจริง 29 ต.ค.</li></ol></div></section>
+<li>ถ้าผ่าน mock: ทำหน้า /game จริง (PR) ริชเมนู ข้อความ และไฟล์พิมพ์ PDF ให้เสร็จภายใน 28 ต.ค. ลองกับมือถือจริง 29 ต.ค.</li></ol></div></section>
 <section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/WEB-BRIEF.md</td><td>คำสั่งสำหรับทีมเว็บ</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/build.py</td><td>ข้อความ ปุ่ม และของพิมพ์ทั้งหมด</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/richmenu-booth.jpg</td><td>รูปริชเมนูช่วงบูธ 2500 × 1686</td></tr>
 <tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/booth-flow-a4.pdf</td><td>ป้าย แผ่นพื้นหลัง การ์ดคนในบูธ</td></tr>
@@ -275,7 +278,7 @@ $("rich").addEventListener("click", () => {{
   if (asked) return; asked = true;
   const c = $("chat");
   c.insertAdjacentHTML("beforeend", `<div class="b me">{E(KEYWORD)}</div>`);
-  setTimeout(() => {{ c.insertAdjacentHTML("beforeend", `<div class="b">{msgs["reply"].replace("https://oct26brand.com/play", '<a href="#" id="playlink">https://oct26brand.com/play</a>')}</div>`);
+  setTimeout(() => {{ c.insertAdjacentHTML("beforeend", `<div class="b">{msgs["reply"].replace("https://oct26brand.com/game", '<a href="#" id="playlink">https://oct26brand.com/game</a>')}</div>`);
     c.scrollTop = c.scrollHeight; $("playlink").addEventListener("click", e => {{ e.preventDefault(); deal(); show("s2"); }}); }}, 500);
   c.scrollTop = c.scrollHeight;
 }});
