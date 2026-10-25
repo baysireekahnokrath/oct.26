@@ -1,0 +1,202 @@
+<title>OCT. 26 รับชิ้นหนังฟรี mock</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<style>
+.phone{width:100%;max-width:360px;margin:0 auto;border:10px solid #2A2725;border-radius:34px;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(42,39,37,.18)}
+.scr{height:640px;display:flex;flex-direction:column;position:relative}
+.scr[hidden]{display:none}
+.lhead{background:#2A2725;color:#F4F0E8;padding:12px 14px;font:500 15px Jost,sans-serif;display:flex;gap:10px;align-items:center}
+.lhead img{width:26px;height:26px;border-radius:50%;background:#F4F0E8}
+.chat{flex:1;overflow:auto;background:#C9D4DE;padding:12px;display:flex;flex-direction:column;gap:10px}
+.b{max-width:84%;padding:10px 12px;border-radius:16px;font-size:13.5px;line-height:1.5;background:#fff;color:#2A2725;align-self:flex-start}
+.b.me{align-self:flex-end;background:#A8E28A}
+.b a{color:#2E4A7D;word-break:break-all}
+.rich{display:block;width:100%;border:0;padding:0;background:none;cursor:pointer}
+.rich img{display:block;width:100%}
+.rbar{background:#fff;border-top:1px solid #ddd;text-align:center;font-size:12px;padding:6px;color:#6E6A64}
+.web{flex:1;overflow:auto;background:#F4F0E8;padding:18px 16px;display:flex;flex-direction:column;gap:12px;color:#2A2725}
+.url{background:#eee;font:12px Jost,sans-serif;padding:6px 10px;color:#555}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cd{aspect-ratio:1;border:0;border-radius:10px;background:#2A2725;color:#F4F0E8;font:500 12px Jost,sans-serif;cursor:pointer;padding:6px;display:grid;place-items:center}
+.cd img{width:100%;height:100%;object-fit:contain;display:none}
+.cd.open,.cd.done{background:#fff}.cd.open img,.cd.done img{display:block}.cd.open span,.cd.done span{display:none}
+.cd.done{outline:2px solid #5E7A3A}
+.btn{display:block;text-align:center;border-radius:999px;padding:12px;font-weight:600;font-size:14px;border:0;cursor:pointer;text-decoration:none}
+.btn.dark{background:#2A2725;color:#F4F0E8}.btn.line{background:#fff;color:#2A2725;border:1px solid #DCD4C7}
+.steps{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.steps button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
+.steps button.on{background:#2A2725;color:#F4F0E8}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">ฝ่ายการตลาด · mock ให้ตรวจ · บูธ 30 ต.ค.–1 พ.ย.</span><h1>รับชิ้นหนังฟรีผ่าน LINE</h1>
+<p class="lead">ลองกดในโทรศัพท์ข้างล่างได้เลย ตั้งแต่แอด LINE จนได้รูปกลับมาในแชต ยังไม่ได้แก้เว็บหรือ LINE จริง
+ถ้าผ่านแล้วจะทำหน้า oct26brand.com/play จริงเป็น PR ให้กด Merge</p></header>
+<section><h2>ลองกด</h2>
+<div class="steps" id="steps"></div>
+<div class="phone">
+<div class="scr" id="s1"><div class="lhead"><img src="logo.svg" alt="">OCT. 26</div>
+<div class="chat" id="chat"><div class="b">ขอบคุณที่แอด OCT. 26<br><br>ถ้าอยู่ที่บูธ กดปุ่ม &quot;รับชิ้นหนังฟรี&quot; ในเมนูด้านล่าง เล่นเกมจับคู่ให้จบ แล้วโชว์หน้าจอที่บูธ รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น (คนละ 1 แผ่น)<br><br>บูธ KIDS MARKET งานบ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี ฮอลล์ชาเลนเจอร์ 2–3<br>30 ต.ค.–1 พ.ย. 2569 · 10:00–17:00<br><br>ดูของทั้งหมด oct26brand.com</div></div>
+<button class="rich" id="rich" type="button" aria-label="ริชเมนู กดรับชิ้นหนังฟรี"><img src="richmenu-booth.jpg" alt="ริชเมนูช่วงบูธ"></button>
+<div class="rbar">แตะช่องบน "รับชิ้นหนังฟรี"</div></div>
+<div class="scr" id="s2" hidden><div class="url">oct26brand.com/play</div><div class="web">
+<img src="logo.svg" alt="OCT. 26" style="width:56px">
+<h2 style="font-size:24px">จับคู่ชิ้นหนัง</h2><p style="font-size:14px;color:#6E6A64">เปิดการ์ดทีละ 2 ใบ หาชิ้นหนังที่เหมือนกันให้ครบ 6 คู่</p>
+<div class="board" id="board"></div><p style="font-size:13px;color:#6E6A64">เปิดไป <b id="moves">0</b> ครั้ง · ได้ <b id="pairs">0</b> / 6 คู่</p>
+<button class="btn line" id="skip" type="button">ข้ามเกม (เฉพาะ mock)</button></div></div>
+<div class="scr" id="s3" hidden><div class="url">oct26brand.com/play</div><div class="web" style="text-align:center;align-items:center">
+<img src="logo.svg" alt="OCT. 26" style="width:56px"><h2 style="font-size:30px;margin-top:6px">เล่นจบแล้ว</h2>
+<p style="font-size:14px;color:#6E6A64" id="took"></p>
+<div style="background:#fff;border:2px solid #2A2725;border-radius:16px;padding:14px;width:100%">
+<b style="font-size:17px">โชว์หน้านี้ที่บูธ OCT. 26</b><br><span style="font-size:15px">รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น</span>
+<img src="01-3.webp" alt="ชิ้นหนัง 01" style="width:110px;display:block;margin:10px auto 0"></div>
+<p style="font-size:13px">ที่บูธมีมุมวาดลายหรือเขียนชื่อบนชิ้นหนัง</p>
+<p style="font-size:13px;color:#6E6A64;margin-top:4px">ระหว่างรอ ฝากติดตามเราด้วย</p>
+<div style="display:flex;gap:8px;width:100%"><a class="btn dark" style="flex:1" href="https://www.instagram.com/oct.26_brand/" target="_blank" rel="noopener">Instagram</a>
+<a class="btn line" style="flex:1" href="https://www.facebook.com/oct26brand" target="_blank" rel="noopener">Facebook</a></div>
+<p style="font-size:12px;color:#6E6A64">ไม่ติดตามก็รับได้ · คนละ 1 แผ่น</p>
+<button class="btn line" id="tobooth" type="button" style="width:100%">ถัดไป: ที่บูธ (mock)</button></div></div>
+<div class="scr" id="s4" hidden><div class="lhead"><img src="logo.svg" alt="">OCT. 26</div>
+<div class="chat"><div class="b me" style="font-size:12px">(ที่บูธ: รับชิ้น 01 · วาดลาย · คนในบูธถ่ายรูปมือกับชิ้นหนัง)</div>
+<div class="b" style="padding:4px"><img src="photo-sample.jpg" alt="ตัวอย่างรูปที่ส่งให้ลูกค้า" style="width:100%;border-radius:12px;display:block"></div>
+<div class="b">รูปชิ้นของคุณจากบูธวันนี้ เก็บไว้ได้เลย<br>ถ้าโพสต์ แท็ก @oct.26_brand #OCT26ชิ้นของฉัน ได้ เราจะตามไปดู<br>ถ้าไม่อยากให้เราลงรูปนี้ในเพจ บอกในแชตนี้ได้<br><br>ขอบคุณที่แวะมา</div></div>
+<div class="rbar"><button class="btn line" id="again" type="button" style="display:inline-block;padding:6px 14px">เริ่มใหม่</button></div></div>
+</div>
+<p class="cap" style="text-align:center;margin-top:8px">หน้าตาแชตเป็นแบบจำลอง ของจริงคือแอป LINE · รูปในขั้นสุดท้ายเป็นตัวอย่าง ของจริงคือรูปมือถือชิ้นหนังบนแผ่นพื้นหลัง</p></section>
+<section><h2>ริชเมนูช่วงบูธ</h2><img src="richmenu-booth.jpg" alt="ริชเมนูช่วงบูธ" style="width:100%;border:1px solid var(--line);border-radius:6px">
+<div class="tbl" style="margin-top:10px"><table><thead><tr><th>ช่อง</th><th>ปุ่ม</th><th>ประเภท</th><th>ตั้งเป็น</th></tr></thead><tbody><tr><td>A (บนเต็มแถว)</td><td><b>รับชิ้นหนังฟรี</b></td><td>ข้อความ</td><td class="mono" style="word-break:break-all">รับชิ้นหนังฟรี</td></tr><tr><td>B (ล่างซ้าย)</td><td><b>เว็บไซต์</b></td><td>ลิงก์</td><td class="mono" style="word-break:break-all">https://oct26brand.com/</td></tr><tr><td>C (ล่างกลาง)</td><td><b>Instagram</b></td><td>ลิงก์</td><td class="mono" style="word-break:break-all">https://www.instagram.com/oct.26_brand/</td></tr><tr><td>D (ล่างขวา)</td><td><b>Facebook</b></td><td>ลิงก์</td><td class="mono" style="word-break:break-all">https://www.facebook.com/oct26brand</td></tr></tbody></table></div>
+<p class="cap">LINE OA Manager → ริชเมนู → สร้าง → เทมเพลตขนาดใหญ่ แบบช่องบน 1 ช่องล่าง 3 · ตั้งช่วงเวลาแสดง 30 ต.ค. 09:00 – 1 พ.ย. 18:00 แล้วเมนูปกติ 6 ปุ่มกลับมาเอง</p></section>
+<section><h2>ข้อความ LINE 4 ข้อความ</h2><div style="display:flex;flex-direction:column;gap:12px"><article class="card" style="display:flex;flex-direction:column;gap:8px"><h3>ข้อความทักทาย ช่วงบูธ 30 ต.ค.–1 พ.ย.</h3><div class="ch"><div class="h"><span class="cap">ข้อความ</span><button class="copy" data-for="m-greeting">คัดลอก</button></div><pre class="txt" id="m-greeting">ขอบคุณที่แอด OCT. 26
+
+ถ้าอยู่ที่บูธ กดปุ่ม &quot;รับชิ้นหนังฟรี&quot; ในเมนูด้านล่าง เล่นเกมจับคู่ให้จบ แล้วโชว์หน้าจอที่บูธ รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น (คนละ 1 แผ่น)
+
+บูธ KIDS MARKET งานบ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี ฮอลล์ชาเลนเจอร์ 2–3
+30 ต.ค.–1 พ.ย. 2569 · 10:00–17:00
+
+ดูของทั้งหมด oct26brand.com</pre></div></article><article class="card" style="display:flex;flex-direction:column;gap:8px"><h3>ตอบกลับอัตโนมัติ เมื่อมีคำว่า &quot;รับชิ้นหนังฟรี&quot;</h3><div class="ch"><div class="h"><span class="cap">ข้อความ</span><button class="copy" data-for="m-reply">คัดลอก</button></div><pre class="txt" id="m-reply">เกมจับคู่ชิ้นหนัง 6 คู่ ใช้เวลาราว 1 นาที
+https://oct26brand.com/play
+
+เล่นจบแล้วโชว์หน้าจอที่บูธ รับชิ้นหนัง 01 ฟรี 1 แผ่น
+คนละ 1 แผ่น รับที่บูธเท่านั้น ถึง 1 พ.ย. 17:00</pre></div></article><article class="card" style="display:flex;flex-direction:column;gap:8px"><h3>ส่งพร้อมรูป หลังถ่ายที่บูธ (คนในบูธส่งเองในแชต)</h3><div class="ch"><div class="h"><span class="cap">ข้อความ</span><button class="copy" data-for="m-photo">คัดลอก</button></div><pre class="txt" id="m-photo">รูปชิ้นของคุณจากบูธวันนี้ เก็บไว้ได้เลย
+ถ้าโพสต์ แท็ก @oct.26_brand #OCT26ชิ้นของฉัน ได้ เราจะตามไปดู
+ถ้าไม่อยากให้เราลงรูปนี้ในเพจ บอกในแชตนี้ได้
+
+ขอบคุณที่แวะมา</pre></div></article><article class="card" style="display:flex;flex-direction:column;gap:8px"><h3>บรอดแคสต์ขอบคุณ 2 พ.ย.</h3><div class="ch"><div class="h"><span class="cap">ข้อความ</span><button class="copy" data-for="m-thanks">คัดลอก</button></div><pre class="txt" id="m-thanks">ขอบคุณที่แวะบูธ OCT. 26 ที่งานบ้านและสวนแฟร์
+ชิ้นหนังที่ได้ไป ใช้เป็นที่รองแก้ว ป้ายของขวัญ หรือที่เก็บสายชาร์จก็ได้
+
+ไอเดียและของทั้งหมด https://oct26brand.com
+Instagram https://www.instagram.com/oct.26_brand/
+Facebook https://www.facebook.com/oct26brand</pre></div></article></div>
+<p class="cap">ตั้งค่าการตอบกลับใน LINE OA ให้เปิดทั้งแชตและข้อความตอบกลับอัตโนมัติ ไม่อย่างนั้นปุ่มจะไม่ส่งลิงก์</p></section>
+<section><h2>ของพิมพ์ A4</h2><div class="grid"><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="a4-1.png" alt="ป้าย A4 รับชิ้นหนังฟรี" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">ป้าย A4 รับชิ้นหนังฟรี</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="a4-2.png" alt="แผ่นพื้นหลังถ่ายรูป A4" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">แผ่นพื้นหลังถ่ายรูป A4</figcaption></figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px"><img src="a4-3.png" alt="การ์ดคนในบูธ + ช่องนับ" loading="lazy" style="border:1px solid var(--line);border-radius:6px;background:#fff"><figcaption class="cap">การ์ดคนในบูธ + ช่องนับ</figcaption></figure></div>
+<p class="cap">พิมพ์จากเครื่องที่บ้าน ขนาดจริง 100% · แผ่นพื้นหลังถ้ามีกระดาษสีครีมจะเข้ากับแบรนด์ที่สุด</p></section>
+<section><h2>ต้องเช็ก</h2><div class="card"><ol>
+<li>ชิ้นที่แจกคือ 01 เลือกสีได้ (มี 369 แผ่น)</li>
+<li>ใครในบูธเป็นคนถ่ายรูปและส่งในแชต ต้องล็อกอินแอป LINE OA ในมือถือเครื่องนั้น</li>
+<li>หน้าเกมจริงไม่เก็บชื่อ เบอร์ หรือข้อมูลใด ๆ นับแค่จำนวนคนเล่นจบจากสถิติเว็บ</li>
+<li>ถ้าผ่าน mock: ทำหน้า /play จริง (PR) ริชเมนู ข้อความ และไฟล์พิมพ์ PDF ให้เสร็จภายใน 28 ต.ค. ลองกับมือถือจริง 29 ต.ค.</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/build.py</td><td>ข้อความ ปุ่ม และของพิมพ์ทั้งหมด</td></tr>
+<tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/richmenu-booth.jpg</td><td>รูปริชเมนูช่วงบูธ 2500 × 1686</td></tr>
+<tr><td class="mono" style="white-space:nowrap">booth-flow-20261030/booth-flow-a4.pdf</td><td>ป้าย แผ่นพื้นหลัง การ์ดคนในบูธ</td></tr>
+</tbody></table></div></section></div>
+<script>
+const CARDS = ["01-3", "03-1", "04-2", "05-6", "07-4", "05-2"];
+const $ = id => document.getElementById(id);
+const SCR = ["s1", "s2", "s3", "s4"], NAMES = ["1 แชต LINE", "2 เกม", "3 จบเกม", "4 รูปในแชต"];
+function show(id){ SCR.forEach(s => $(s).hidden = s !== id); [...$("steps").children].forEach((b, i) => b.classList.toggle("on", SCR[i] === id)); }
+$("steps").innerHTML = NAMES.map((n, i) => `<button type="button" data-s="${SCR[i]}">${n}</button>`).join("");
+$("steps").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return; if (b.dataset.s === "s2") deal(); if (b.dataset.s === "s3") $("took").textContent = ""; show(b.dataset.s); });
+let asked = false;
+$("rich").addEventListener("click", () => {
+  if (asked) return; asked = true;
+  const c = $("chat");
+  c.insertAdjacentHTML("beforeend", `<div class="b me">รับชิ้นหนังฟรี</div>`);
+  setTimeout(() => { c.insertAdjacentHTML("beforeend", `<div class="b">เกมจับคู่ชิ้นหนัง 6 คู่ ใช้เวลาราว 1 นาที<br><a href="#" id="playlink">https://oct26brand.com/play</a><br><br>เล่นจบแล้วโชว์หน้าจอที่บูธ รับชิ้นหนัง 01 ฟรี 1 แผ่น<br>คนละ 1 แผ่น รับที่บูธเท่านั้น ถึง 1 พ.ย. 17:00</div>`);
+    c.scrollTop = c.scrollHeight; $("playlink").addEventListener("click", e => { e.preventDefault(); deal(); show("s2"); }); }, 500);
+  c.scrollTop = c.scrollHeight;
+});
+let open = [], moves = 0, pairs = 0, lock = false;
+function deal(){
+  const deck = [...CARDS, ...CARDS];
+  for (let i = deck.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+  open = []; moves = 0; pairs = 0; lock = false; $("moves").textContent = 0; $("pairs").textContent = 0;
+  $("board").innerHTML = deck.map((k, i) => `<button class="cd" type="button" data-k="${k}" aria-label="การ์ดใบที่ ${i + 1}"><span>OCT. 26</span><img src="${k}.webp" alt=""></button>`).join("");
+}
+function win(){ $("took").textContent = moves ? `จับคู่ครบใน ${moves} ครั้ง · ` + new Date().toLocaleTimeString("th-TH", {hour: "2-digit", minute: "2-digit"}) : ""; show("s3"); }
+$("board").addEventListener("click", e => {
+  const c = e.target.closest(".cd"); if (!c || lock || c.classList.contains("open") || c.classList.contains("done")) return;
+  c.classList.add("open"); open.push(c); if (open.length < 2) return;
+  moves++; $("moves").textContent = moves; const [a, b] = open;
+  if (a.dataset.k === b.dataset.k){ a.classList.replace("open", "done"); b.classList.replace("open", "done"); open = []; pairs++; $("pairs").textContent = pairs; if (pairs === 6) setTimeout(win, 500); }
+  else { lock = true; setTimeout(() => { a.classList.remove("open"); b.classList.remove("open"); open = []; lock = false; }, 750); }
+});
+$("skip").addEventListener("click", () => { moves = 0; win(); });
+$("tobooth").addEventListener("click", () => show("s4"));
+$("again").addEventListener("click", () => { asked = false; $("chat").innerHTML = `<div class="b">ขอบคุณที่แอด OCT. 26<br><br>ถ้าอยู่ที่บูธ กดปุ่ม &quot;รับชิ้นหนังฟรี&quot; ในเมนูด้านล่าง เล่นเกมจับคู่ให้จบ แล้วโชว์หน้าจอที่บูธ รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น (คนละ 1 แผ่น)<br><br>บูธ KIDS MARKET งานบ้านและสวนแฟร์ อิมแพ็ค เมืองทองธานี ฮอลล์ชาเลนเจอร์ 2–3<br>30 ต.ค.–1 พ.ย. 2569 · 10:00–17:00<br><br>ดูของทั้งหมด oct26brand.com</div>`; show("s1"); });
+show("s1");
+</script><script>
+document.addEventListener('click',e=>{const b=e.target.closest('.copy');if(!b)return;
+const t=document.getElementById(b.dataset.for);const s=t.innerText;
+const done=()=>{const o=b.textContent;b.textContent='คัดลอกแล้ว';setTimeout(()=>b.textContent=o,1400)};
+const sel=()=>{const r=document.createRange();r.selectNodeContents(t);const w=getSelection();w.removeAllRanges();w.addRange(r);b.textContent='เลือกข้อความแล้ว กดคัดลอก'};
+try{navigator.clipboard.writeText(s).then(done,sel)}catch(_){sel()}});
+</script>
