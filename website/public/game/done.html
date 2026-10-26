@@ -1,0 +1,115 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>เล่นจบแล้ว · OCT. 26</title><meta name="robots" content="noindex,nofollow"><meta name="description" content="จับคู่ชิ้นหนังที่บูธ OCT. 26">
+<link rel="icon" href="/assets/logo/square-light.svg" type="image/svg+xml"><meta name="theme-color" content="#F4F0E8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<link rel="preload" as="image" href="/assets/game/01-3.webp">
+<style>
+/* Booth game (30 Oct–1 Nov 2026): one narrow column on cotton, charcoal type, the five family colours only as a thin band.
+   No form, no cookie, no storage: finishing loads /game/done, which the site's request stats can count. */
+:root{--cotton:#F4F0E8;--paper:#FBF9F4;--sheet:#FBF8F2;--sun:#E9A825;--sun-soft:#F7E2AE;--charcoal:#2A2725;--muted:#6E6A64;--line:#DCD4C7;--mom:#5E7A3A;
+  --th:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cotton);color:var(--charcoal);font-family:var(--body);font-size:16px;line-height:1.6}
+.band{display:grid;grid-template-columns:repeat(5,1fr);height:5px}
+.band i:nth-child(1){background:#A9442B}.band i:nth-child(2){background:#5E7A3A}.band i:nth-child(3){background:#E9A825}.band i:nth-child(4){background:#B9A3D6}.band i:nth-child(5){background:#2E4A7D}
+main{max-width:440px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
+.view[hidden]{display:none}
+.view{display:flex;flex-direction:column;gap:14px}
+.logo{width:56px;height:56px;display:block}
+h1{font-family:var(--th);font-weight:500;font-size:24px;line-height:1.25;margin:0}
+.end h1{font-size:30px}
+p{margin:0}
+.muted{color:var(--muted);font-size:14px;text-wrap:pretty}
+h1{text-wrap:balance}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+/* cards as in the first booth game (booth-game-20261025): charcoal back, a flat drawing of each pattern on the front,
+   a flip; a matched pair turns sunflower */
+.cd{position:relative;aspect-ratio:3/4;border:0;padding:0;border-radius:14px;background:transparent;cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.face{position:absolute;inset:0;border-radius:14px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.back{background:var(--charcoal);color:var(--cotton);font:500 15px var(--latin);letter-spacing:.08em}
+.front{background:var(--sheet);transform:rotateY(180deg);border:2px solid var(--line)}
+.front svg{width:72%;height:auto}
+.cd.open .back,.cd.done .back{transform:rotateY(180deg)}.cd.open .front,.cd.done .front{transform:rotateY(360deg)}
+.cd.done{cursor:default}.cd.done .front{background:var(--sun-soft);border-color:var(--sun)}
+.cd:focus-visible{outline:3px solid #2E4A7D;outline-offset:3px;border-radius:14px}
+@media (prefers-reduced-motion:no-preference){.face{transition:transform .3s}}
+.count{font-size:14px;color:var(--muted)}.count b{color:var(--charcoal);font-family:var(--latin);font-weight:500}
+.end{text-align:center;align-items:center}
+.time{font-family:var(--latin);font-size:18px;color:var(--muted)}
+.ticket{width:100%;background:#fff;border:2px solid var(--charcoal);border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ticket b{font-family:var(--th);font-weight:500;font-size:17px;line-height:1.3}
+.ticket span{font-size:15px}
+.ticket img{width:110px;height:110px;margin-top:6px}
+.btns{display:flex;gap:10px;width:100%}
+.btn{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none}
+.btn.dark{background:var(--charcoal);color:var(--cotton)}.btn.light{background:var(--paper);color:var(--charcoal);border:1px solid var(--line)}
+.small{font-size:13px;color:var(--muted)}
+.diy{font-size:13px}
+</style></head><body>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<main>
+<section class="view" id="v-game" hidden>
+<img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
+<h1>จับคู่ชิ้นหนัง</h1>
+<p class="muted">เปิดการ์ดทีละ 2 ใบ หาชิ้นหนังที่เหมือนกันให้ครบ 6 คู่</p>
+<div class="board" id="board" role="group" aria-label="การ์ด 12 ใบ"></div>
+<p class="count" aria-live="polite">เปิดไป <b id="moves">0</b> ครั้ง · ได้ <b id="pairs">0</b> / 6 คู่</p>
+<noscript><p class="small">เบราว์เซอร์นี้เปิดเกมไม่ได้ แวะมาที่บูธ OCT. 26 ได้เลย</p></noscript>
+</section>
+<section class="view end" id="v-done" >
+<img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
+<h1>เล่นจบแล้ว</h1>
+<p class="time" id="now" aria-label="เวลาตอนนี้"></p>
+<div class="ticket"><b>โชว์หน้านี้ที่บูธ OCT. 26</b><span>รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น</span>
+<img src="/assets/game/01-3.webp" alt="ชิ้นหนังวัวแท้แพตเทิร์น 01" width="110" height="110"></div>
+<p class="diy">ที่บูธมีมุมวาดลายหรือเขียนชื่อบนชิ้นหนัง</p>
+<p class="small">ระหว่างรอ ฝากติดตามเราด้วย</p>
+<div class="btns"><a class="btn dark" href="https://www.instagram.com/oct.26_brand/" target="_blank" rel="noopener">Instagram</a><a class="btn light" href="https://www.facebook.com/oct26brand" target="_blank" rel="noopener">Facebook</a></div>
+<p class="small">ไม่ติดตามก็รับได้ · คนละ 1 แผ่น</p>
+</section>
+<section class="view end" id="v-ended" hidden>
+<img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
+<h1>กิจกรรมที่บูธจบแล้ว ขอบคุณที่แวะมา</h1>
+<div class="btns"><a class="btn dark" href="/">หน้าแรก</a></div>
+<div class="btns"><a class="btn light" href="https://www.instagram.com/oct.26_brand/" target="_blank" rel="noopener">Instagram</a><a class="btn light" href="https://www.facebook.com/oct26brand" target="_blank" rel="noopener">Facebook</a></div>
+</section>
+</main>
+<script>
+// done page; after the last booth day both pages show the "ended" view (build.py also writes it once rebuilt)
+const G = {"kind": "done", "cards": ["01", "02", "03", "04", "05", "07"], "names": {"01": "แพตเทิร์น 01 หมี", "02": "แพตเทิร์น 02 กังหัน", "03": "แพตเทิร์น 03 กากบาทแคปซูล", "04": "แพตเทิร์น 04 สี่เหลี่ยมมน", "05": "แพตเทิร์น 05 วงกลม", "07": "แพตเทิร์น 07 กากบาทข้อต่อวงกลม"}, "until": "2026-11-01T17:00:00+07:00", "svgs": {}};
+const $ = id => document.getElementById(id);
+function view(v){ ["game","done","ended"].forEach(k => $("v-" + k).hidden = k !== v); }
+if (Date.now() > Date.parse(G.until)) view("ended");
+else if (G.kind === "done") {
+  const d = new Date(), tz = {timeZone: "Asia/Bangkok"};
+  const hm = d.toLocaleTimeString("en-GB", Object.assign({hour: "2-digit", minute: "2-digit", hour12: false}, tz));
+  $("now").textContent = hm + " · " + d.toLocaleDateString("th-TH", Object.assign({day: "numeric", month: "short"}, tz));
+} else {
+  const deck = [...G.cards, ...G.cards];
+  for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+  const closed = i => `การ์ดใบที่ ${i + 1} ยังปิดอยู่`;
+  $("board").innerHTML = deck.map((k, i) => `<button class="cd" type="button" data-k="${k}" data-i="${i}" aria-label="${closed(i)}"><span class="face back" aria-hidden="true">OCT. 26</span><span class="face front" aria-hidden="true">${G.svgs[k]}</span></button>`).join("");
+  let open = [], moves = 0, pairs = 0, lock = false;
+  $("board").addEventListener("click", e => {
+    const c = e.target.closest(".cd");
+    if (!c || lock || c.classList.contains("open") || c.classList.contains("done")) return;
+    c.classList.add("open"); c.setAttribute("aria-label", `การ์ดใบที่ ${+c.dataset.i + 1}: ${G.names[c.dataset.k]}`);
+    open.push(c); if (open.length < 2) return;
+    moves++; $("moves").textContent = moves;
+    const [a, b] = open; open = [];
+    if (a.dataset.k === b.dataset.k) {
+      for (const x of [a, b]) { x.classList.replace("open", "done"); x.setAttribute("aria-disabled", "true"); x.setAttribute("aria-label", `จับคู่แล้ว: ${G.names[x.dataset.k]}`); }
+      pairs++; $("pairs").textContent = pairs;
+      if (pairs === G.cards.length) { lock = true; setTimeout(() => location.assign("/game/done"), 700); }
+    } else {
+      lock = true;
+      setTimeout(() => { for (const x of [a, b]) { x.classList.remove("open"); x.setAttribute("aria-label", closed(+x.dataset.i)); } lock = false; }, 800);
+    }
+  });
+}
+</script>
+</body></html>

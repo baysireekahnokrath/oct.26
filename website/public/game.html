@@ -1,0 +1,115 @@
+<!doctype html><html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>จับคู่ชิ้นหนัง · OCT. 26</title><meta name="robots" content="noindex,nofollow"><meta name="description" content="จับคู่ชิ้นหนังที่บูธ OCT. 26">
+<link rel="icon" href="/assets/logo/square-light.svg" type="image/svg+xml"><meta name="theme-color" content="#F4F0E8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+
+<style>
+/* Booth game (30 Oct–1 Nov 2026): one narrow column on cotton, charcoal type, the five family colours only as a thin band.
+   No form, no cookie, no storage: finishing loads /game/done, which the site's request stats can count. */
+:root{--cotton:#F4F0E8;--paper:#FBF9F4;--sheet:#FBF8F2;--sun:#E9A825;--sun-soft:#F7E2AE;--charcoal:#2A2725;--muted:#6E6A64;--line:#DCD4C7;--mom:#5E7A3A;
+  --th:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cotton);color:var(--charcoal);font-family:var(--body);font-size:16px;line-height:1.6}
+.band{display:grid;grid-template-columns:repeat(5,1fr);height:5px}
+.band i:nth-child(1){background:#A9442B}.band i:nth-child(2){background:#5E7A3A}.band i:nth-child(3){background:#E9A825}.band i:nth-child(4){background:#B9A3D6}.band i:nth-child(5){background:#2E4A7D}
+main{max-width:440px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
+.view[hidden]{display:none}
+.view{display:flex;flex-direction:column;gap:14px}
+.logo{width:56px;height:56px;display:block}
+h1{font-family:var(--th);font-weight:500;font-size:24px;line-height:1.25;margin:0}
+.end h1{font-size:30px}
+p{margin:0}
+.muted{color:var(--muted);font-size:14px;text-wrap:pretty}
+h1{text-wrap:balance}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+/* cards as in the first booth game (booth-game-20261025): charcoal back, a flat drawing of each pattern on the front,
+   a flip; a matched pair turns sunflower */
+.cd{position:relative;aspect-ratio:3/4;border:0;padding:0;border-radius:14px;background:transparent;cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.face{position:absolute;inset:0;border-radius:14px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.back{background:var(--charcoal);color:var(--cotton);font:500 15px var(--latin);letter-spacing:.08em}
+.front{background:var(--sheet);transform:rotateY(180deg);border:2px solid var(--line)}
+.front svg{width:72%;height:auto}
+.cd.open .back,.cd.done .back{transform:rotateY(180deg)}.cd.open .front,.cd.done .front{transform:rotateY(360deg)}
+.cd.done{cursor:default}.cd.done .front{background:var(--sun-soft);border-color:var(--sun)}
+.cd:focus-visible{outline:3px solid #2E4A7D;outline-offset:3px;border-radius:14px}
+@media (prefers-reduced-motion:no-preference){.face{transition:transform .3s}}
+.count{font-size:14px;color:var(--muted)}.count b{color:var(--charcoal);font-family:var(--latin);font-weight:500}
+.end{text-align:center;align-items:center}
+.time{font-family:var(--latin);font-size:18px;color:var(--muted)}
+.ticket{width:100%;background:#fff;border:2px solid var(--charcoal);border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ticket b{font-family:var(--th);font-weight:500;font-size:17px;line-height:1.3}
+.ticket span{font-size:15px}
+.ticket img{width:110px;height:110px;margin-top:6px}
+.btns{display:flex;gap:10px;width:100%}
+.btn{flex:1;display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;font-weight:600;font-size:16px;text-decoration:none}
+.btn.dark{background:var(--charcoal);color:var(--cotton)}.btn.light{background:var(--paper);color:var(--charcoal);border:1px solid var(--line)}
+.small{font-size:13px;color:var(--muted)}
+.diy{font-size:13px}
+</style></head><body>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<main>
+<section class="view" id="v-game" >
+<img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
+<h1>จับคู่ชิ้นหนัง</h1>
+<p class="muted">เปิดการ์ดทีละ 2 ใบ หาชิ้นหนังที่เหมือนกันให้ครบ 6 คู่</p>
+<div class="board" id="board" role="group" aria-label="การ์ด 12 ใบ"></div>
+<p class="count" aria-live="polite">เปิดไป <b id="moves">0</b> ครั้ง · ได้ <b id="pairs">0</b> / 6 คู่</p>
+<noscript><p class="small">เบราว์เซอร์นี้เปิดเกมไม่ได้ แวะมาที่บูธ OCT. 26 ได้เลย</p></noscript>
+</section>
+<section class="view end" id="v-done" hidden>
+<img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
+<h1>เล่นจบแล้ว</h1>
+<p class="time" id="now" aria-label="เวลาตอนนี้"></p>
+<div class="ticket"><b>โชว์หน้านี้ที่บูธ OCT. 26</b><span>รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น</span>
+<img src="/assets/game/01-3.webp" alt="ชิ้นหนังวัวแท้แพตเทิร์น 01" width="110" height="110"></div>
+<p class="diy">ที่บูธมีมุมวาดลายหรือเขียนชื่อบนชิ้นหนัง</p>
+<p class="small">ระหว่างรอ ฝากติดตามเราด้วย</p>
+<div class="btns"><a class="btn dark" href="https://www.instagram.com/oct.26_brand/" target="_blank" rel="noopener">Instagram</a><a class="btn light" href="https://www.facebook.com/oct26brand" target="_blank" rel="noopener">Facebook</a></div>
+<p class="small">ไม่ติดตามก็รับได้ · คนละ 1 แผ่น</p>
+</section>
+<section class="view end" id="v-ended" hidden>
+<img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
+<h1>กิจกรรมที่บูธจบแล้ว ขอบคุณที่แวะมา</h1>
+<div class="btns"><a class="btn dark" href="/">หน้าแรก</a></div>
+<div class="btns"><a class="btn light" href="https://www.instagram.com/oct.26_brand/" target="_blank" rel="noopener">Instagram</a><a class="btn light" href="https://www.facebook.com/oct26brand" target="_blank" rel="noopener">Facebook</a></div>
+</section>
+</main>
+<script>
+// game page; after the last booth day both pages show the "ended" view (build.py also writes it once rebuilt)
+const G = {"kind": "game", "cards": ["01", "02", "03", "04", "05", "07"], "names": {"01": "แพตเทิร์น 01 หมี", "02": "แพตเทิร์น 02 กังหัน", "03": "แพตเทิร์น 03 กากบาทแคปซูล", "04": "แพตเทิร์น 04 สี่เหลี่ยมมน", "05": "แพตเทิร์น 05 วงกลม", "07": "แพตเทิร์น 07 กากบาทข้อต่อวงกลม"}, "until": "2026-11-01T17:00:00+07:00", "svgs": {"01": "<svg viewBox=\"-2 -2 100.5 94.1\" aria-hidden=\"true\"><g fill=\"#B07A4A\" fill-rule=\"evenodd\" stroke=\"none\" stroke-linejoin=\"round\"><g transform=\"translate(-3.900 -18.800) rotate(-45 52.18 52.18)\"><path d=\"M100.650,53.709 C95.699,48.758 87.670,48.758 82.719,53.709 C82.629,53.799 82.544,53.893 82.457,53.985 C80.841,46.368 77.077,39.115 71.161,33.199 C65.245,27.283 57.992,23.519 50.375,21.903 C50.468,21.816 50.561,21.731 50.651,21.641 C55.602,16.689 55.602,8.661 50.651,3.710 C45.699,-1.242 37.671,-1.242 32.720,3.710 C27.768,8.661 27.768,16.689 32.720,21.641 C32.810,21.731 32.903,21.816 32.995,21.903 C25.378,23.519 18.126,27.283 12.210,33.199 C-4.070,49.478 -4.070,75.872 12.209,92.151 C28.488,108.430 54.882,108.430 71.161,92.151 C77.077,86.234 80.841,78.982 82.457,71.365 C82.544,71.457 82.629,71.550 82.719,71.641 C87.670,76.592 95.699,76.592 100.650,71.641 C105.602,66.689 105.602,58.661 100.650,53.709 Z\"/></g></g><g fill=\"none\" stroke=\"#F4F0E8\" stroke-width=\"0.9\" stroke-linecap=\"round\"><g transform=\"translate(-3.900 -18.800) rotate(-45 52.18 52.18)\"> <line x1=\"11.200\" y1=\"71.615\" x2=\"11.200\" y2=\"53.705\"/> <line x1=\"32.745\" y1=\"93.160\" x2=\"50.655\" y2=\"93.160\"/> </g></g></svg>", "02": "<svg viewBox=\"-2 -2 94.0 94.0\" aria-hidden=\"true\"><g fill=\"#A9442B\" fill-rule=\"evenodd\" stroke=\"none\" stroke-linejoin=\"round\"><path d=\"M90.000,45.000 C90.000,32.834 82.599,22.398 72.053,17.946 C67.602,7.401 57.166,0.000 45.000,0.000 C32.834,0.000 22.398,7.401 17.947,17.946 C7.401,22.398 0.000,32.834 0.000,45.000 C0.000,57.166 7.401,67.602 17.947,72.053 C22.398,82.599 32.834,90.000 45.000,90.000 C57.166,90.000 67.602,82.599 72.053,72.053 C82.599,67.602 90.000,57.166 90.000,45.000 Z\"/></g><g fill=\"none\" stroke=\"#F4F0E8\" stroke-width=\"0.9\" stroke-linecap=\"round\"><line x1=\"73.054\" y1=\"72.054\" x2=\"45.000\" y2=\"72.054\"/> <line x1=\"17.946\" y1=\"73.054\" x2=\"17.946\" y2=\"45.000\"/> <line x1=\"72.054\" y1=\"16.946\" x2=\"72.054\" y2=\"45.000\"/> <line x1=\"16.946\" y1=\"17.946\" x2=\"45.000\" y2=\"17.946\"/></g></svg>", "03": "<svg viewBox=\"-2 -2 94.01 94.0\" aria-hidden=\"true\"><g fill=\"#B9A3D6\" fill-rule=\"evenodd\" stroke=\"none\" stroke-linejoin=\"round\"><path d=\"M67.508,22.500 C67.505,22.500 67.503,22.501 67.499,22.501 C67.499,22.499 67.500,22.497 67.500,22.496 C67.500,10.070 57.426,-0.004 45.000,-0.004 C32.573,-0.004 22.499,10.070 22.499,22.496 C22.499,22.497 22.500,22.499 22.500,22.500 C10.073,22.500 0.000,32.574 0.000,45.000 C0.000,57.427 10.073,67.500 22.500,67.500 C22.501,67.500 22.503,67.500 22.504,67.500 C22.504,79.926 32.578,90.000 45.004,90.000 C57.430,90.000 67.504,79.926 67.504,67.500 C67.505,67.500 67.507,67.500 67.508,67.500 C79.934,67.500 90.008,57.427 90.008,45.000 C90.008,32.574 79.934,22.500 67.508,22.500 Z\"/></g><g fill=\"none\" stroke=\"#F4F0E8\" stroke-width=\"0.9\" stroke-linecap=\"round\"><line x1=\"22.500\" y1=\"56.250\" x2=\"22.500\" y2=\"33.750\"/> <line x1=\"67.500\" y1=\"56.250\" x2=\"67.500\" y2=\"33.750\"/> <line x1=\"68.500\" y1=\"22.500\" x2=\"56.000\" y2=\"22.500\"/> <line x1=\"21.500\" y1=\"22.500\" x2=\"34.000\" y2=\"22.500\"/> <line x1=\"68.500\" y1=\"67.500\" x2=\"56.000\" y2=\"67.500\"/> <line x1=\"21.500\" y1=\"67.500\" x2=\"34.000\" y2=\"67.500\"/></g></svg>", "04": "<svg viewBox=\"-2 -2 94.0 94.0\" aria-hidden=\"true\"><g fill=\"#2E4A7D\" fill-rule=\"evenodd\" stroke=\"none\" stroke-linejoin=\"round\"><path d=\"M90.000,5.000 L90.000,85.000 C90.000,87.761 87.761,90.000 85.000,90.000 L5.000,90.000 C2.238,90.000 0.000,87.761 0.000,85.000 L0.000,5.000 C0.000,2.238 2.238,0.000 5.000,0.000 L85.000,0.000 C87.761,0.000 90.000,2.238 90.000,5.000 Z\"/></g><g fill=\"none\" stroke=\"#F4F0E8\" stroke-width=\"0.9\" stroke-linecap=\"round\"><line x1=\"56.893\" y1=\"78.107\" x2=\"78.107\" y2=\"56.893\"/> <line x1=\"11.893\" y1=\"33.107\" x2=\"33.107\" y2=\"11.893\"/> <line x1=\"90.707\" y1=\"45.707\" x2=\"77.930\" y2=\"32.930\"/> <line x1=\"44.293\" y1=\"-0.707\" x2=\"57.070\" y2=\"12.070\"/> <line x1=\"45.707\" y1=\"90.707\" x2=\"32.930\" y2=\"77.930\"/> <line x1=\"-0.707\" y1=\"44.293\" x2=\"12.070\" y2=\"57.070\"/></g></svg>", "05": "<svg viewBox=\"-2 -2 94.0 94.0\" aria-hidden=\"true\"><g fill=\"#E9A825\" fill-rule=\"evenodd\" stroke=\"none\" stroke-linejoin=\"round\"><path d=\"M90.000,45.000 C90.000,69.852 69.853,90.000 45.000,90.000 C20.147,90.000 0.000,69.852 0.000,45.000 C0.000,20.147 20.147,-0.001 45.000,-0.001 C69.853,-0.001 90.000,20.147 90.000,45.000 Z\"/></g><g fill=\"none\" stroke=\"#F4F0E8\" stroke-width=\"0.9\" stroke-linecap=\"round\"><line x1=\"30.000\" y1=\"13.180\" x2=\"60.000\" y2=\"13.180\"/> <line x1=\"30.000\" y1=\"76.820\" x2=\"60.000\" y2=\"76.820\"/> <line x1=\"76.820\" y1=\"12.180\" x2=\"76.820\" y2=\"30.250\"/> <line x1=\"76.820\" y1=\"77.820\" x2=\"76.820\" y2=\"59.750\"/> <line x1=\"13.180\" y1=\"12.180\" x2=\"13.180\" y2=\"30.250\"/> <line x1=\"13.180\" y1=\"77.820\" x2=\"13.180\" y2=\"59.750\"/></g></svg>", "07": "<svg viewBox=\"-2 -2 94.0 94.0\" aria-hidden=\"true\"><g fill=\"#5E7A3A\" fill-rule=\"evenodd\" stroke=\"none\" stroke-linejoin=\"round\"><path d=\"M90.000,45.000 C90.000,35.846 82.580,28.426 73.427,28.426 C73.401,28.426 73.377,28.429 73.352,28.429 L73.333,28.410 C66.888,28.359 61.672,23.160 61.592,16.722 L61.584,16.714 C61.584,16.667 61.588,16.621 61.588,16.573 C61.588,7.420 54.168,0.000 45.015,0.000 C35.861,0.000 28.441,7.420 28.441,16.573 C28.441,16.617 28.445,16.660 28.445,16.704 L28.408,16.742 C28.318,23.167 23.112,28.353 16.678,28.409 L16.658,28.429 C16.630,28.429 16.602,28.426 16.573,28.426 C7.420,28.426 0.000,35.846 0.000,45.000 C0.000,54.153 7.420,61.573 16.573,61.573 C16.575,61.573 16.577,61.573 16.579,61.573 L16.579,61.573 C23.111,61.577 28.406,66.870 28.412,73.402 L28.441,73.432 C28.445,82.582 35.863,90.000 45.015,90.000 C54.168,90.000 61.588,82.580 61.588,73.427 C61.588,73.425 61.588,73.423 61.588,73.421 L61.588,73.421 C61.588,73.418 61.588,73.415 61.588,73.412 C61.588,66.874 66.888,61.573 73.427,61.573 C73.428,61.573 73.430,61.573 73.432,61.573 L73.432,61.573 C82.583,61.570 90.000,54.151 90.000,45.000 Z\"/></g><g fill=\"none\" stroke=\"#F4F0E8\" stroke-width=\"0.9\" stroke-linecap=\"round\"><line x1=\"36.460\" y1=\"16.570\" x2=\"53.560\" y2=\"16.570\"/> <line x1=\"36.460\" y1=\"73.430\" x2=\"53.560\" y2=\"73.430\"/> <line x1=\"73.440\" y1=\"27.427\" x2=\"73.440\" y2=\"36.700\"/> <line x1=\"73.440\" y1=\"62.573\" x2=\"73.440\" y2=\"53.300\"/> <line x1=\"16.580\" y1=\"27.427\" x2=\"16.580\" y2=\"36.700\"/> <line x1=\"16.580\" y1=\"62.574\" x2=\"16.580\" y2=\"53.300\"/></g></svg>"}};
+const $ = id => document.getElementById(id);
+function view(v){ ["game","done","ended"].forEach(k => $("v-" + k).hidden = k !== v); }
+if (Date.now() > Date.parse(G.until)) view("ended");
+else if (G.kind === "done") {
+  const d = new Date(), tz = {timeZone: "Asia/Bangkok"};
+  const hm = d.toLocaleTimeString("en-GB", Object.assign({hour: "2-digit", minute: "2-digit", hour12: false}, tz));
+  $("now").textContent = hm + " · " + d.toLocaleDateString("th-TH", Object.assign({day: "numeric", month: "short"}, tz));
+} else {
+  const deck = [...G.cards, ...G.cards];
+  for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+  const closed = i => `การ์ดใบที่ ${i + 1} ยังปิดอยู่`;
+  $("board").innerHTML = deck.map((k, i) => `<button class="cd" type="button" data-k="${k}" data-i="${i}" aria-label="${closed(i)}"><span class="face back" aria-hidden="true">OCT. 26</span><span class="face front" aria-hidden="true">${G.svgs[k]}</span></button>`).join("");
+  let open = [], moves = 0, pairs = 0, lock = false;
+  $("board").addEventListener("click", e => {
+    const c = e.target.closest(".cd");
+    if (!c || lock || c.classList.contains("open") || c.classList.contains("done")) return;
+    c.classList.add("open"); c.setAttribute("aria-label", `การ์ดใบที่ ${+c.dataset.i + 1}: ${G.names[c.dataset.k]}`);
+    open.push(c); if (open.length < 2) return;
+    moves++; $("moves").textContent = moves;
+    const [a, b] = open; open = [];
+    if (a.dataset.k === b.dataset.k) {
+      for (const x of [a, b]) { x.classList.replace("open", "done"); x.setAttribute("aria-disabled", "true"); x.setAttribute("aria-label", `จับคู่แล้ว: ${G.names[x.dataset.k]}`); }
+      pairs++; $("pairs").textContent = pairs;
+      if (pairs === G.cards.length) { lock = true; setTimeout(() => location.assign("/game/done"), 700); }
+    } else {
+      lock = true;
+      setTimeout(() => { for (const x of [a, b]) { x.classList.remove("open"); x.setAttribute("aria-label", closed(+x.dataset.i)); } lock = false; }, 800);
+    }
+  });
+}
+</script>
+</body></html>
