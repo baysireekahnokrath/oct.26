@@ -129,7 +129,7 @@ def page():
 
 
 def text():
-    out = ["OCT. 26 เกมช่วยขาย (26 ต.ค. 2569)", "", "เช็กก่อน:"] + [f"- {a}: {b}" for a, b in CHECK_FIRST]
+    out = ["OCT. 26 เกมช่วยขาย (26 ต.ค. 2569)", "หน้าสรุป: https://claude.ai/artifact/TZK1fNJqb6cxxkjcc5UQSe · repo gamify-20261026/", "", "เช็กก่อน:"] + [f"- {a}: {b}" for a, b in CHECK_FIRST]
     out += ["", "โมเดลรายได้: สะสมครบลาย + ปลดล็อกรอบใหม่"] + [f"{k}. {a} ← {b}" for k, (a, b) in enumerate(FUNNEL, 1)]
     out += ["", "น้ำหนัก: " + " · ".join(f"{n} {p}%" for n, p in WEIGHTS), ""]
     for k, i in enumerate(RANK, 1):
