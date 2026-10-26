@@ -28,9 +28,10 @@ LINE order bar that copies the full order. Brand Book v2 colours, square logo, A
   Google Search Console (owner verifies the domain, then submit `sitemap.xml`), pattern pages 01–07, a leather care
   page, a workshop page and an ideas page, same keywords in Shopee titles.
 - `/game` and `/game/done` — the booth game for 30 Oct–1 Nov 2026 (KIDS MARKET, from the LINE rich menu "รับชิ้นหนังฟรี"):
-  match 6 pairs of real die-cut photos (`assets/game/`: the same files as the approved mock, booth-flow-20261030/site, 360 px webp with their soft shadow, ~273 KB),
+  match 6 pairs of patterns 01–05 and 07 drawn flat in the house colours, the same cards as the first booth game
+  (booth-game-20261025; owner 26 Oct: keep that look; drawings in `src/game-cards.json`, no image files to load),
   then /game/done shows the time and "โชว์หน้านี้ที่บูธ OCT. 26 · รับชิ้นหนังวัวแท้ 01 ฟรี 1 แผ่น". Page: `src/game.html`,
-  cards and end time: `catalog.GAME`. Finishing loads the real address /game/done so request stats can count it. No form,
+  cards and end time: `catalog.GAME`, the 01 photo on /game/done: `assets/game/01-3.webp`. Finishing loads the real address /game/done so request stats can count it. No form,
   no cookie, no storage; anyone may open /game/done directly (owner's choice). noindex, not in the sitemap or menu. After
   1 Nov 17:00 (Thai time) both pages say the booth activity has ended; rebuild once after that date so the files say it
   too. Not /play: _redirects sends that home (301). Thai summary: https://claude.ai/artifact/BYHS92GPtQr18ZFWDRQDrx (`summary-game/`).

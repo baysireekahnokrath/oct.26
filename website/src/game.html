@@ -8,7 +8,7 @@
 <style>
 /* Booth game (30 Oct–1 Nov 2026): one narrow column on cotton, charcoal type, the five family colours only as a thin band.
    No form, no cookie, no storage: finishing loads /game/done, which the site's request stats can count. */
-:root{--cotton:#F4F0E8;--paper:#FBF9F4;--face:#FFFFFF;--charcoal:#2A2725;--muted:#6E6A64;--line:#DCD4C7;--mom:#5E7A3A;
+:root{--cotton:#F4F0E8;--paper:#FBF9F4;--sheet:#FBF8F2;--sun:#E9A825;--sun-soft:#F7E2AE;--charcoal:#2A2725;--muted:#6E6A64;--line:#DCD4C7;--mom:#5E7A3A;
   --th:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -20,22 +20,25 @@ main{max-width:440px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-rig
 .view{display:flex;flex-direction:column;gap:14px}
 .logo{width:56px;height:56px;display:block}
 h1{font-family:var(--th);font-weight:500;font-size:24px;line-height:1.25;margin:0}
-.done h1{font-size:30px}
+.end h1{font-size:30px}
 p{margin:0}
 .muted{color:var(--muted);font-size:14px;text-wrap:pretty}
 h1{text-wrap:balance}
-.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.cd{position:relative;aspect-ratio:1/1;border:0;border-radius:10px;padding:0;cursor:pointer;background:var(--charcoal);color:var(--cotton);
-  font:500 14px var(--latin);letter-spacing:.04em;display:grid;place-items:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-.cd img{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);object-fit:contain;opacity:0}
-.cd.open,.cd.done{background:var(--face)}
-.cd.open img,.cd.done img{opacity:1}
-.cd.open span,.cd.done span{opacity:0}
-.cd.done{outline:2px solid var(--mom);cursor:default}
-.cd:focus-visible{outline:3px solid #E9A825;outline-offset:2px}
-@media (prefers-reduced-motion:no-preference){.cd{transition:background .18s}.cd img,.cd span{transition:opacity .18s}}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+/* cards as in the first booth game (booth-game-20261025): charcoal back, a flat drawing of each pattern on the front,
+   a flip; a matched pair turns sunflower */
+.cd{position:relative;aspect-ratio:3/4;border:0;padding:0;border-radius:14px;background:transparent;cursor:pointer;
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.face{position:absolute;inset:0;border-radius:14px;display:grid;place-items:center;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.back{background:var(--charcoal);color:var(--cotton);font:500 15px var(--latin);letter-spacing:.08em}
+.front{background:var(--sheet);transform:rotateY(180deg);border:2px solid var(--line)}
+.front svg{width:72%;height:auto}
+.cd.open .back,.cd.done .back{transform:rotateY(180deg)}.cd.open .front,.cd.done .front{transform:rotateY(360deg)}
+.cd.done{cursor:default}.cd.done .front{background:var(--sun-soft);border-color:var(--sun)}
+.cd:focus-visible{outline:3px solid #2E4A7D;outline-offset:3px;border-radius:14px}
+@media (prefers-reduced-motion:no-preference){.face{transition:transform .3s}}
 .count{font-size:14px;color:var(--muted)}.count b{color:var(--charcoal);font-family:var(--latin);font-weight:500}
-.done{text-align:center;align-items:center}
+.end{text-align:center;align-items:center}
 .time{font-family:var(--latin);font-size:18px;color:var(--muted)}
 .ticket{width:100%;background:#fff;border:2px solid var(--charcoal);border-radius:16px;padding:18px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
 .ticket b{font-family:var(--th);font-weight:500;font-size:17px;line-height:1.3}
@@ -57,7 +60,7 @@ h1{text-wrap:balance}
 <p class="count" aria-live="polite">เปิดไป <b id="moves">0</b> ครั้ง · ได้ <b id="pairs">0</b> / 6 คู่</p>
 <noscript><p class="small">เบราว์เซอร์นี้เปิดเกมไม่ได้ แวะมาที่บูธ OCT. 26 ได้เลย</p></noscript>
 </section>
-<section class="view done" id="v-done" {{hide_done}}>
+<section class="view end" id="v-done" {{hide_done}}>
 <img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
 <h1>เล่นจบแล้ว</h1>
 <p class="time" id="now" aria-label="เวลาตอนนี้"></p>
@@ -68,7 +71,7 @@ h1{text-wrap:balance}
 <div class="btns"><a class="btn dark" href="{{ig}}" target="_blank" rel="noopener">Instagram</a><a class="btn light" href="{{fb}}" target="_blank" rel="noopener">Facebook</a></div>
 <p class="small">ไม่ติดตามก็รับได้ · คนละ 1 แผ่น</p>
 </section>
-<section class="view done" id="v-ended" {{hide_ended}}>
+<section class="view end" id="v-ended" {{hide_ended}}>
 <img class="logo" src="/assets/logo/square-light.svg" alt="OCT. 26">
 <h1>กิจกรรมที่บูธจบแล้ว ขอบคุณที่แวะมา</h1>
 <div class="btns"><a class="btn dark" href="/">หน้าแรก</a></div>
@@ -89,7 +92,7 @@ else if (G.kind === "done") {
   const deck = [...G.cards, ...G.cards];
   for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
   const closed = i => `การ์ดใบที่ ${i + 1} ยังปิดอยู่`;
-  $("board").innerHTML = deck.map((k, i) => `<button class="cd" type="button" data-k="${k}" data-i="${i}" aria-label="${closed(i)}"><span aria-hidden="true">OCT. 26</span><img src="/assets/game/${k}.webp" alt=""></button>`).join("");
+  $("board").innerHTML = deck.map((k, i) => `<button class="cd" type="button" data-k="${k}" data-i="${i}" aria-label="${closed(i)}"><span class="face back" aria-hidden="true">OCT. 26</span><span class="face front" aria-hidden="true">${G.svgs[k]}</span></button>`).join("");
   let open = [], moves = 0, pairs = 0, lock = false;
   $("board").addEventListener("click", e => {
     const c = e.target.closest(".cd");

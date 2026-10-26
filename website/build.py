@@ -121,18 +121,20 @@ def game_pages():
     """/game (the matching game) and /game/done (show at the booth), noindex, not in the sitemap or menu. Built ended
     after GAME["until"]; before that the browser switches to the ended view itself at that time."""
     ended = time.time() > datetime.datetime.fromisoformat(C.GAME["until"]).timestamp()
-    names = {k: f"ชิ้นหนัง {k[:2]} {NAMES[k[:2]]}" for k in C.GAME["cards"]}
+    names = {k: f"แพตเทิร์น {k} {NAMES[k]}" for k in C.GAME["cards"]}
+    svgs = json.load(open(os.path.join(SRC, "game-cards.json")))
     tpl = open(os.path.join(SRC, "game.html")).read()
     os.makedirs(os.path.join(OUT, "game"), exist_ok=True)
     for kind, path, title in (("game", "game.html", "จับคู่ชิ้นหนัง"), ("done", os.path.join("game", "done.html"), "เล่นจบแล้ว")):
         show = "ended" if ended else kind
-        imgs = [] if ended else (C.GAME["cards"] if kind == "game" else ["01-3"])
+        imgs = [] if ended or kind == "game" else ["01-3"]
         s = tpl
         for k, v in {"title": title if not ended else "กิจกรรมจบแล้ว", "kind": kind, "ig": C.IG, "fb": C.FB,
                      "preload": "".join(f'<link rel="preload" as="image" href="/assets/game/{i}.webp">' for i in imgs),
                      "hide_game": "" if show == "game" else "hidden", "hide_done": "" if show == "done" else "hidden",
                      "hide_ended": "" if show == "ended" else "hidden",
-                     "config": json.dumps(dict(kind=kind, cards=C.GAME["cards"], names=names, until=C.GAME["until"]), ensure_ascii=False)}.items():
+                     "config": json.dumps(dict(kind=kind, cards=C.GAME["cards"], names=names, until=C.GAME["until"],
+                                             svgs={k: svgs[k] for k in C.GAME["cards"]} if kind == "game" else {}), ensure_ascii=False)}.items():
             s = s.replace("{{" + k + "}}", v)
         open(os.path.join(OUT, path), "w").write(s)
 
