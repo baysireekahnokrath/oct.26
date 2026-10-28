@@ -69,9 +69,10 @@ td.warn{color:var(--warn);font-weight:600}
 </style>
 <div class="wrap">
 <header style="display:grid;gap:10px">
-  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · 27 ต.ค. 2569</p>
+  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · 28 ต.ค. 2569</p>
   <h1>โคมไฟ OCT. 26</h1>
-  <p class="muted lede">โคมแขวนและโคมตั้งพื้น ทำจากชิ้นหนังที่ตัดไว้แล้ว ต่อกันด้วยปีกกับร่องแบบเดียวกับปลอกขวดน้ำที่ลองจริง
+  <p class="muted lede">เจ้าของเลือก 28 ต.ค.: โคมตั้งโต๊ะ ตั้งพื้น และแขวน เริ่มที่ลาย 01 หัวหมี กับ 07 ใช้อะไหล่สำเร็จให้มากที่สุด
+    ทำจากชิ้นหนังที่ตัดไว้แล้ว ต่อกันด้วยปีกกับร่องแบบเดียวกับปลอกขวดน้ำที่ลองจริง
     น้ำหนักทั้งหมดอยู่บนโครงลวดกับชุดสายไฟสำเร็จ หนังเป็นแค่ผิวโคม ช่องว่างระหว่างชิ้นคือที่แสงลอดออกมาเป็นลาย</p>
 </header>
 
@@ -83,19 +84,19 @@ td.warn{color:var(--warn);font-weight:600}
   </div>
   <div class="pick">
     <div class="row" role="group" aria-label="แบบโคม"><span>แบบ</span>
-      <button class="btn" type="button" data-kind="pendant-drum" aria-pressed="true">แขวน ทรงกระบอก</button>
+      <button class="btn" type="button" data-kind="table-drum" aria-pressed="true">ตั้งโต๊ะ</button>
+      <button class="btn" type="button" data-kind="pendant-drum" aria-pressed="false">แขวน ทรงกระบอก</button>
       <button class="btn" type="button" data-kind="pendant-globe" aria-pressed="false">แขวน ทรงกลม</button>
       <button class="btn" type="button" data-kind="floor-drum" aria-pressed="false">ตั้งพื้น</button>
     </div>
     <div class="row" role="group" aria-label="ลายชิ้นหนัง"><span>ลาย</span>
-      <button class="btn" type="button" data-die="07" aria-pressed="true">07</button>
-      <button class="btn" type="button" data-die="05" aria-pressed="false">05</button>
-      <button class="btn" type="button" data-die="03" aria-pressed="false">03</button>
+      <button class="btn" type="button" data-die="01" aria-pressed="true">01 หัวหมี</button>
+      <button class="btn" type="button" data-die="07" aria-pressed="false">07 กากบาทข้อต่อวงกลม</button>
     </div>
     <div class="row" role="group" aria-label="การแสดงผล"><span>ดู</span>
       <button class="btn" type="button" id="light" aria-pressed="false">เปิดไฟ</button>
       <button class="btn" type="button" id="tone" aria-pressed="true">สองสีสลับ</button>
-      <button class="btn" type="button" id="whole" aria-pressed="false" hidden>ทั้งตัวโคม</button>
+      <button class="btn" type="button" id="whole" aria-pressed="false">ทั้งตัวโคม</button>
     </div>
   </div>
   <div class="readout num" id="readout"></div>
@@ -116,11 +117,13 @@ td.warn{color:var(--warn);font-weight:600}
 
 <section>
   <h2>ขนาดที่เสนอ</h2>
-  <p class="muted lede">ตั้งให้หลอด LED ทรงกลม (A60) อยู่ห่างผิวหนังอย่างน้อย 10 ซม. โคมแขวนกว้างราว 29–30 ซม. โคมตั้งพื้นราว 36 ซม. ค่าหนังคิดจากต้นทุนชิ้นในชีต ยังไม่รวมโครงและชุดไฟ</p>
+  <p class="muted lede">ตั้งให้หลอดอยู่ห่างผิวหนังอย่างน้อย 10 ซม.: โคมตั้งโต๊ะใช้หลอด LED E14 เล็ก กว้างราว 25 ซม. · โคมแขวนใช้ LED E27 กว้างราว 29–30 ซม. · โคมตั้งพื้นราว 36 ซม.
+    ค่าหนังคิดจากต้นทุนชิ้นในชีต ยังไม่รวมขาโคม โครง และหลอด · 01 มี 369 ชิ้น 07 มีราว 200 ชิ้น</p>
   <div class="scroll"><table>
     <thead><tr><th>ลาย</th><th>แบบ</th><th>ขนาด</th><th>วางชิ้น</th><th>ชิ้น</th><th>ค่าหนัง ฿</th><th>ชิ้นที่มีพอทำ</th></tr></thead>
     <tbody>__SPEC__</tbody></table></div>
-  <p class="note">ทรงกลมเว้นขั้วบนไว้ใส่ขาแมงมุม และขั้วล่างไว้เปลี่ยนหลอด ทรงกลมใช้ชิ้นแบนไปโค้งสองทาง หนังต้องงอตาม ต้องลองจริงก่อน ทรงกระบอกโค้งทางเดียวเหมือนปลอกขวดน้ำที่ทำแล้ว จึงเสี่ยงน้อยกว่า</p>
+  <p class="note">01 ทุกตัวหันทางเดียวกัน แถวบนสุดเหลือหูชี้ขึ้น ให้พับหูคล้องห่วงลวดบน ส่วนแถวล่างสุดร้อยห่วงผ่านร่องคาง · 07 ร้อยห่วงผ่านร่องได้ทั้งบนและล่าง ·
+    ทรงกลมเว้นขั้วบนไว้ใส่ขาแมงมุม และขั้วล่างไว้เปลี่ยนหลอด ทรงกลมใช้ชิ้นแบนไปโค้งสองทาง หนังต้องงอตาม ต้องลองจริงก่อน ทรงกระบอกโค้งทางเดียวเหมือนปลอกขวดน้ำที่ทำแล้ว จึงเสี่ยงน้อยกว่า</p>
 </section>
 
 <section>
@@ -156,7 +159,7 @@ td.warn{color:var(--warn);font-weight:600}
       </ol>
     </div>
     <div class="panel">
-      <h3>โคมตั้งพื้น</h3>
+      <h3>โคมตั้งพื้นและตั้งโต๊ะ</h3>
       <svg class="diagram" viewBox="0 0 320 330" role="img" aria-label="ภาพตัดโคมตั้งพื้น: โป๊ะหนังบนโครงห่วง เสาโคม ฐาน">
         <ellipse cx="160" cy="40" rx="96" ry="9" class="wire"/>
         <ellipse cx="160" cy="150" rx="96" ry="9" class="wire"/>
@@ -175,7 +178,7 @@ td.warn{color:var(--warn);font-weight:600}
         <text x="4" y="100" class="dim">ห่วงบน</text>
       </svg>
       <ol class="small">
-        <li><b>ซื้อขาโคมตั้งพื้นสำเร็จ</b> ที่มีขั้ว E27 สายไฟ และสวิตช์มาแล้ว เราทำเฉพาะโป๊ะ</li>
+        <li><b>ซื้อขาโคมสำเร็จ</b> ที่มีขั้ว สายไฟ และสวิตช์มาแล้ว เราทำเฉพาะโป๊ะ · ตั้งพื้นใช้ขั้ว E27 · ขาโคมตั้งโต๊ะของ IKEA ใช้หลอด E14</li>
         <li><b>โครงโป๊ะ</b> ห่วงบน ห่วงล่าง และขาแมงมุมที่วางบนขั้วหลอด แบบโป๊ะผ้าทั่วไป</li>
         <li>ผิวหนังร้อยห่วงบนกับห่วงล่างเหมือนโคมแขวน</li>
         <li>ขาโคมต้องมีฐานหนักพอ เพราะโป๊ะกว้างกว่าฐาน</li>
@@ -193,6 +196,7 @@ td.warn{color:var(--warn);font-weight:600}
     <li><b>ลองเปิดทิ้ง 3 ชั่วโมง</b> แล้วจับผิวหนังด้านใน ต้องแค่อุ่น ไม่ร้อน ไม่มีกลิ่น หนังไม่หด บันทึกผลในหน้า PD แท็บทดสอบ</li>
     <li>ติดป้ายที่โคม: "ใช้หลอด LED ไม่เกิน 9 วัตต์ เท่านั้น"</li>
     <li>หนังไม่รับน้ำหนักโคม โครงลวดกับชุดสายไฟรับแทน จึงไม่ขัดมติ 16 ต.ค. เรื่องของห้อย</li>
+    <li><b>โคมหมี 01</b> คนมักซื้อไปห้องเด็ก แต่กฎ 22 ต.ค. ไม่ทำของสำหรับเด็กเล็ก และโคมมีไฟฟ้า เสนอให้โคมหมีเน้นแบบแขวนกับตั้งพื้น (พ้นมือเด็ก) และติดป้าย "ไม่ใช่ของเล่น" เจ้าของตัดสิน</li>
   </ul>
 </section>
 
@@ -202,6 +206,7 @@ td.warn{color:var(--warn);font-weight:600}
     <div class="panel buy">
       <h3>ซื้อสำเร็จ</h3>
       <ul class="small">
+        <li><b>ขาโคมตั้งโต๊ะ:</b> IKEA ไทย SKAFTET ขาโคมตั้งโต๊ะ 30 ซม. 499 บาท ใช้หลอด E14 หลอด LED SOLHETTA E14 แพ็ก 2 ดวง 99 บาท <a href="https://www.ikea.com/th/en/p/skaftet-table-lamp-base-nickel-plated-40404103/" target="_blank" rel="noopener">ikea.com/th</a></li>
         <li><b>ขาโคมตั้งพื้น:</b> IKEA ไทย SKAFTET ขาโคมตั้งพื้น 1,490 บาท (ไม่รวมหลอดและโป๊ะ) <a href="https://www.ikea.com/th/en/p/skaftet-floor-lamp-base-nickel-plated-80405394/" target="_blank" rel="noopener">ikea.com/th</a></li>
         <li><b>ชุดสายไฟห้อย:</b> IKEA มีชุดสายไฟ SUNNEBY และ HEMMA ขายหลายประเทศ ยังหาราคาไทยไม่เจอ ต้องเช็กที่สาขาหรือเว็บ IKEA ไทย <a href="https://www.ikea.com/ma/en/p/sunneby-cord-set-white-textile-20420175/" target="_blank" rel="noopener">ตัวอย่างสินค้า</a></li>
         <li><b>ขั้วหลอด E27:</b> HomePro มีหลายยี่ห้อ ราคาราว 37–48 บาท <a href="https://www.homepro.co.th/p/1140085" target="_blank" rel="noopener">homepro.co.th</a> · Lazada มีขั้ว E27 พร้อมสายและปลั๊ก <a href="https://www.lazada.co.th/trending/Lighting-Installation-Accessories-Top-Deals-This-Month/783925599" target="_blank" rel="noopener">lazada.co.th</a></li>
@@ -213,20 +218,73 @@ td.warn{color:var(--warn);font-weight:600}
       <ul class="small">
         <li><b>โครงลวด:</b> ร้านดัดลวดตามแบบ รับลวดเหล็ก ลวดสแตนเลส 2–6 มม. เช่นรายการ "งานขึ้นรูปลวดดัด" ในสมุดหน้าเหลือง <a href="https://www.yellowpages.co.th/lp/thairungruengspring/catalog/item/%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99%E0%B8%A3%E0%B8%B9%E0%B8%9B%E0%B8%A5%E0%B8%A7%E0%B8%94%E0%B8%94%E0%B8%B1%E0%B8%94-q5FMlGi" target="_blank" rel="noopener">yellowpages.co.th</a> ยังไม่ได้ติดต่อ ต้องโทรถามราคาเอง</li>
         <li><b>สเปกที่ส่งให้ร้าน:</b> ลวดเหล็ก 3–4 มม. พ่นสีดำหรือขาว · ห่วงบน Ø 29 ซม. มีขาแมงมุม 3 ขา รูกลาง E27 · ห่วงล่าง Ø 29 ซม. · ห่วงทั้งสองปลดได้ 1 จุด · โป๊ะตั้งพื้นใช้ห่วง Ø 36 ซม.</li>
-        <li><b>ทางเลือก:</b> ซื้อโคมไฟสำเร็จราคาถูกที่มีโครงทรงกระบอก แล้วเปลี่ยนผิวเป็นหนัง เร็วที่สุดสำหรับต้นแบบชิ้นแรก</li>
+        <li><b>ทางที่ใช้ของสำเร็จมากที่สุด (เจ้าของเลือก):</b> ซื้อโป๊ะผ้าทรงกระบอกที่ใส่กับขา SKAFTET ได้ แล้วลอกผ้าออกใช้แค่โครง ขนาดต้องใกล้ตารางข้างบน ต้องเช็กที่ IKEA ว่ามีรุ่นไหนเป็นโครงลวดเปลือย</li>
       </ul>
       <p class="note">แหล่งในไทยที่ค้นเจอยังมีน้อย ร้านดัดลวดและราคาต้องโทรยืนยันก่อนสั่ง</p>
     </div>
   </div>
 </section>
 
+<section>
+  <h2>ราคา: สำรวจตลาด</h2>
+  <p class="muted lede">ราคาที่ค้นเจอ แบ่งเป็นชั้น ใช้เทียบว่าโคมหนังทำมือของเราควรอยู่ตรงไหน (ราคาต่างประเทศคงสกุลเงินเดิม)</p>
+  <div class="scroll"><table>
+    <thead><tr><th>ชั้นตลาด</th><th>ตัวอย่าง</th><th>ราคา</th></tr></thead>
+    <tbody>
+      <tr><th>ของสำเร็จราคาถูก</th><td>IKEA ไทย ขาโคมตั้งโต๊ะ SKAFTET / ขาโคมตั้งพื้น SKAFTET (ยังไม่รวมโป๊ะ)</td><td class="num">499 / 1,490 ฿</td></tr>
+      <tr><th>งานจักสานทำมือไทย</th><td>โคมจักสาน หวาย ไม้ไผ่ ตามวัสดุและความยาก (บทความร้านโคมไทย)</td><td class="num">300–20,000 ฿</td></tr>
+      <tr><th>แบรนด์ทำมือไทยขายออนไลน์</th><td>Lanna Passa โคมแขวนจากไซดักปลาไม้ไผ่</td><td class="num">45–170 USD</td></tr>
+      <tr><th>ร้านโคมดีไซน์ในไทย</th><td>Lamp &amp; Light ตัวอย่างโคมแขวน</td><td class="num">5,565 ฿ (ปกติ 7,950)</td></tr>
+      <tr><th>โคมหนังทำมือต่างประเทศ</th><td>Lighting Collective (ออสเตรเลีย) 420–485 ดอลลาร์ · Lostine (อเมริกา) เริ่ม 345 USD</td><td class="num">345–485</td></tr>
+      <tr><th>ดีไซเนอร์ไทยระดับโลก</th><td>Ango โคมหวายและรังไหม บน 1stdibs</td><td class="num">~1,129 USD</td></tr>
+    </tbody></table></div>
+  <div class="two">
+    <div class="panel">
+      <h3>ต้นทุนที่รู้แล้ว (ยังไม่รวมโครงลวด)</h3>
+      <ul class="small num">
+        <li>ตั้งโต๊ะ 01: หนัง 22 ชิ้น 86 + ขา 499 + หลอด 50 ≈ <b>635 ฿</b></li>
+        <li>ตั้งโต๊ะ 07: หนัง 42 ชิ้น 145 + ขา 499 + หลอด 50 ≈ <b>694 ฿</b></li>
+        <li>แขวน 01: หนัง 39 ชิ้น 152 + ชุดสายไฟ (ยังไม่รู้ราคาไทย) + หลอด</li>
+        <li>ตั้งพื้น 01: หนัง 64 ชิ้น 249 + ขา 1,490 + หลอด 50 ≈ <b>1,789 ฿</b></li>
+        <li>ตั้งพื้น 07: หนัง 100 ชิ้น 345 + ขา 1,490 + หลอด 50 ≈ <b>1,885 ฿</b></li>
+      </ul>
+      <p class="note">ยังไม่รวมโครงลวด แพ็กเกจ ค่าแรงต่อชิ้น และค่าส่ง ขาโคมที่ซื้อมาทำให้กำไรต่ำกว่าชิ้นหนังเดี่ยวมาก</p>
+    </div>
+    <div class="panel">
+      <h3>ราคาเปิดที่เสนอ (สมมติฐาน ต้องทดสอบ)</h3>
+      <ul class="small num">
+        <li>ตั้งโต๊ะ <b>1,690–1,990 ฿</b></li>
+        <li>แขวน <b>1,990–2,490 ฿</b> ไม่รวมค่าช่างติดตั้ง</li>
+        <li>ตั้งพื้น <b>3,990–4,490 ฿</b></li>
+        <li>โป๊ะอย่างเดียว (ลูกค้ามีขาเอง หรือส่งต่างประเทศ) <b>790–1,690 ฿</b> ตามขนาด</li>
+      </ul>
+      <p class="note">อยู่สูงกว่า IKEA เพราะเป็นหนังแท้ทำมือ แต่ต่ำกว่าร้านโคมดีไซน์ในไทยและโคมหนังต่างประเทศ กำไรขั้นต้นราว 45–55% ก่อนรวมโครง ควรทดสอบราคาด้วยการรับจองก่อนผลิต</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>ขายที่ไหน: แนะนำเรียงตามลำดับ</h2>
+  <ol class="small" style="display:grid;gap:10px;margin:0;padding-left:1.3em">
+    <li><b>รับจองก่อนผลิต ทาง LINE OA, IG และเว็บ</b> ทำตามสั่ง ไม่ต้องมีของในสต็อก ได้รู้ราคาที่คนยอมจ่ายจริง เริ่มได้ทันทีเมื่อมีต้นแบบ 1 ใบ</li>
+    <li><b>ตั้งโคมเปิดไฟโชว์ที่บูธ</b> 1 ใบ พร้อมป้ายราคาและ QR จอง ดึงคนเข้าบูธ ไม่ต้องขนของไปขายหลายใบ</li>
+    <li><b>Bangkok Design Week 2027</b> 18–28 ก.พ. 2570 ธีม DESIGN TO LAST ตรงกับงานหนังทำมือที่ใช้ได้นาน เหมาะเปิดตัวคอลเลกชันโคม</li>
+    <li><b>ลูกค้าธุรกิจ</b> คาเฟ่ ร้านอาหาร โรงแรมบูทีค สั่งโคมแขวนหลายใบ เลือกสีหนังตามร้าน ยอดต่อออเดอร์สูง ใช้ชั้น "สั่งทำ" ที่มีอยู่แล้ว</li>
+    <li><b>ฝากขายร้านดีไซน์</b> ร้านที่ขายโคมของนักออกแบบไทย เช่น Surround Living (ยังไม่ได้ติดต่อ ต้องถามเงื่อนไขเอง)</li>
+    <li><b>ต่างประเทศ (ภายหลัง)</b> Pinkoi หรือ Etsy ขายเป็นโป๊ะอย่างเดียว ไม่รวมอุปกรณ์ไฟฟ้า จะไม่ติดมาตรฐานไฟฟ้าของแต่ละประเทศ · งาน BIG+BIH 10–14 มี.ค. 2570 สำหรับผู้ซื้อส่งออก (วันที่จากเว็บรวมงาน ยังไม่ยืนยันกับผู้จัด)</li>
+  </ol>
+</section>
+
 <section class="panel ask">
-  <h2>ให้เจ้าของตัดสิน</h2>
+  <h2>เจ้าของตัดสินแล้ว 28 ต.ค. และขั้นต่อไป</h2>
+  <ul class="small">
+    <li>เริ่มที่ 01 กับ 07 · ทำโคมตั้งโต๊ะ ตั้งพื้น และแขวน · ใช้อะไหล่สำเร็จให้มากที่สุด</li>
+  </ul>
   <ol class="small">
-    <li>เริ่มที่ลาย 07 ใช่ไหม (ลายเดียวที่ต่อจริงแล้ว) ตอนนี้ 07 เหลือไม่ถึง 200 ชิ้น โคมแขวนทรงกระบอกใช้ใบละ 64 ชิ้น</li>
-    <li>ทำแบบไหนก่อน แนะนำ <b>โคมแขวนทรงกระบอก</b> เพราะโค้งทางเดียวเหมือนปลอกขวดน้ำ</li>
-    <li>ให้ใครทำโครงลวด สั่งร้านดัดลวด หรือดัดลวดต้นแบบเองก่อน</li>
-    <li>ขายที่ไหน ราคาเท่าไร โคมเป็นของชิ้นใหญ่ ราคาจะสูงกว่าของในบูธทุกตัว</li>
+    <li>ซื้อขาโคมตั้งโต๊ะ SKAFTET 2 อัน (499) กับหลอด E14 แล้วทำต้นแบบโคมตั้งโต๊ะ 01 หนึ่งใบ 07 หนึ่งใบ</li>
+    <li>ลองต่อ 01 กับหนังจริงครั้งแรก (ยังไม่เคยลอง) และเปิดไฟทดสอบความร้อน 3 ชั่วโมง</li>
+    <li>ถ่ายรูปเปิดไฟ ลงรับจองใน LINE OA และ IG ที่ราคาเปิด ดูว่ามีคนจองที่ราคาไหน</li>
+    <li>เจ้าของตัดสิน: โคมหมี 01 ทำแบบตั้งโต๊ะด้วยไหม หรือเน้นแขวนกับตั้งพื้น (เรื่องห้องเด็ก)</li>
   </ol>
   <p class="note">ไฟล์: product-dev-20261021/lamps/ (build.py คำนวณจากรูปร่างบล็อกจริง) · โมเดลเป็นการจัดวางตามระยะข้อต่อ หนังจริงงอได้ ต้องลองต้นแบบก่อน</p>
 </section>
@@ -236,9 +294,9 @@ td.warn{color:var(--warn);font-weight:600}
 <script>
 const D = __DATA__;
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
-const KIND = {"pendant-drum": "โคมแขวนทรงกระบอก", "pendant-globe": "โคมแขวนทรงกลม", "floor-drum": "โคมตั้งพื้น"};
-const COST = {"07": 3.45, "05": 3.84, "03": 3.61};
-let kind = "pendant-drum", dieCode = "07";
+const KIND = {"table-drum": "โคมตั้งโต๊ะ", "pendant-drum": "โคมแขวนทรงกระบอก", "pendant-globe": "โคมแขวนทรงกลม", "floor-drum": "โคมตั้งพื้น"};
+const COST = {"01": 3.89, "07": 3.45};
+let kind = "table-drum", dieCode = "01";
 function readout() {
   const L = D.lamps[dieCode][kind], d = D.dies[dieCode];
   const size = kind.includes("drum") ? `Ø ${(2 * L.R / 10).toFixed(1)} × ${(L.H / 10).toFixed(1)}` : `Ø ${(2 * L.R / 10).toFixed(0)}`;
@@ -248,7 +306,8 @@ function readout() {
       f.innerHTML = `<span class="small muted"></span><b></b><span class="small muted"></span>`;
       f.children[0].textContent = a; f.children[1].textContent = b; f.children[2].textContent = c; return f;
     }));
-  $("#readnote").textContent = dieCode === "07" ? "07 ต่อจริงแล้ว 23 ต.ค. ลายอื่นยังเป็นตัวเลขจากไฟล์บล็อก ยังไม่ได้ลองต่อ" : `ลาย ${dieCode} ยังไม่ได้ลองต่อกับหนังจริง ตัวเลขมาจากไฟล์บล็อก`;
+  $("#readnote").textContent = dieCode === "07" ? "07 ต่อจริงแล้ว 23 ต.ค. (ที่ห้อยกระเป๋า ปลอกขวดน้ำ กระเป๋า)"
+    : "01 ยังไม่ได้ลองต่อกับหนังจริง ตัวเลขมาจากไฟล์บล็อก หมีทุกตัวหันทางเดียวกัน หูขวาสอดร่องแก้มของตัวถัดไป หูบนสอดร่องคางของแถวบน";
 }
 readout();
 (function () {
@@ -280,9 +339,9 @@ readout();
     if (lamp) scene.remove(lamp);
     lamp = new T.Group(); pieces = [];
     const L = D.lamps[dieCode][kind], d = D.dies[dieCode], geo = shapeGeo(dieCode);
-    for (const [x, y, z, ux, uy, uz, vx, vy, vz, odd] of L.pieces) {
+    for (const [x, y, z, ux, uy, uz, vx, vy, vz, odd, tone] of L.pieces) {
       const u = new T.Vector3(ux, uy, uz), v = new T.Vector3(vx, vy, vz), n = new T.Vector3().crossVectors(u, v);
-      const m = new T.Mesh(geo, mats.a); m.userData.odd = !!odd; pieces.push(m);
+      const m = new T.Mesh(geo, mats.a); m.userData.odd = !!tone; pieces.push(m);
       const g = new T.Group(); g.add(m);
       m.rotation.z = d.turn + (odd ? Math.PI / 2 : 0);
       g.matrixAutoUpdate = false;
@@ -292,12 +351,12 @@ readout();
     }
     const rings = L.rings.map(([z, r]) => { const t = new T.Mesh(new T.TorusGeometry(r, 1.8, 8, 120), metal); t.position.z = z; lamp.add(t); return [z, r]; });
     const [zt, rt] = rings[0], zb = rings[1][0];
-    const floor = kind === "floor-drum";
+    const floor = kind === "floor-drum" || kind === "table-drum", table = kind === "table-drum";
     // spider on the top ring to a washer at the centre
     const hub = new T.Vector3(0, 0, zt - (floor ? 0 : 8));
     for (let k = 0; k < 3; k++) { const f = k * 2 * Math.PI / 3; lamp.add(rod(new T.Vector3(rt * Math.cos(f), rt * Math.sin(f), zt), hub, 1.4)); }
     const bulbZ = floor ? (zt + zb) / 2 + 10 : zt - 95;
-    const bulb = new T.Mesh(new T.SphereGeometry(30, 24, 16), bulbMat); bulb.position.z = bulbZ; lamp.add(bulb);
+    const bulb = new T.Mesh(new T.SphereGeometry(table ? 22 : 30, 24, 16), bulbMat); bulb.position.z = bulbZ; lamp.add(bulb);
     glow.position.set(0, 0, bulbZ);
     if (!floor) {
       const sock = new T.Mesh(new T.CylinderGeometry(20, 20, 55, 20), metal); sock.rotation.x = Math.PI / 2; sock.position.z = zt - 30; lamp.add(sock);
@@ -308,9 +367,9 @@ readout();
     } else {
       const sock = new T.Mesh(new T.CylinderGeometry(18, 18, 50, 20), metal); sock.rotation.x = Math.PI / 2; sock.position.z = bulbZ - 55; lamp.add(sock);
       lamp.add(rod(new T.Vector3(0, 0, bulbZ - 80), hub, 1.2));
-      const ground = bulbZ - 1350;
-      lamp.add(rod(new T.Vector3(0, 0, ground + 20), new T.Vector3(0, 0, bulbZ - 80), 9));
-      const base = new T.Mesh(new T.CylinderGeometry(150, 160, 22, 48), metal); base.rotation.x = Math.PI / 2; base.position.z = ground + 11; lamp.add(base);
+      const ground = bulbZ - (table ? 300 : 1350), br = table ? 70 : 150;
+      lamp.add(rod(new T.Vector3(0, 0, ground + 20), new T.Vector3(0, 0, bulbZ - 80), table ? 6 : 9));
+      const base = new T.Mesh(new T.CylinderGeometry(br, br + 8, table ? 18 : 22, 48), metal); base.rotation.x = Math.PI / 2; base.position.z = ground + 10; lamp.add(base);
       frame.target.set(0, 0, (zt + zb) / 2); frame.size = Math.max(L.R * 2, zt - zb) * 1.9;
       frame.wholeTarget.set(0, 0, (zt + ground) / 2); frame.whole = (zt - ground) * 1.45;
     }
@@ -344,7 +403,6 @@ readout();
   const press = (sel, el) => $$(sel).forEach(b => b.setAttribute("aria-pressed", String(b === el)));
   $$("[data-kind]").forEach(b => b.addEventListener("click", () => {
     kind = b.dataset.kind; press("[data-kind]", b);
-    $("#whole").hidden = kind !== "floor-drum"; if (kind !== "floor-drum") { showWhole = false; $("#whole").setAttribute("aria-pressed", "false"); }
     build();
   }));
   $$("[data-die]").forEach(b => b.addEventListener("click", () => { dieCode = b.dataset.die; press("[data-die]", b); build(); }));
