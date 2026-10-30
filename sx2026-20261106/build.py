@@ -184,18 +184,10 @@ def ev():
     return '<p class="ev">SUSTAINABILITY EXPO 2026<br>6–15 NOV · QSNCC</p>'
 
 
-def signs():
-    facts = "".join(f'<div class="fact"><b>{n}</b><p>{th}</p><p class="en">{en}</p></div>' for n, th, en in FACTS)
+def collect_pages(event=True):
+    """The collect-all-six sign and the sheet of four collector cards; event=False drops the SX header for other booths."""
     row6 = "".join(f'<div>{photo(c, pl)}{c}</div>' for c, _, _, pl in PATTERNS)
-    p1 = f'''<section class="pg">{logo()}{ev()}
-<h1>หนังที่เหลือ ได้ชีวิตที่สอง</h1><p class="en">Leftover leather, a second life.</p>
-<div class="body"><p>{STORY_TH}</p><p class="en">{STORY_EN}</p></div>
-<div class="facts">{facts}</div>
-<div class="honest" style="max-width:135mm"><p>{HONEST_TH}</p><p class="en">{HONEST_EN}</p></div>
-<div class="lineq">{qr(LINE)}LINE {LINE_ID}</div>
-{band()}</section>'''
-
-    p2 = f'''<section class="pg">{logo()}{ev()}
+    p2 = f'''<section class="pg">{logo()}{ev() if event else ''}
 <h1>สะสมครบ 6 ลาย</h1><p class="en">Collect all six patterns.</p>
 <div class="row6">{row6}</div>
 <ol class="steps">
@@ -214,6 +206,26 @@ def signs():
 <p class="rw"><b>ครบ 6 ช่อง:</b> {REWARD_TH}</p>
 <p class="no">No. ______ · {WEB} · LINE {LINE_ID}</p>{band()}</div>'''
     p3 = f'<section class="pg cards">{card * 4}</section>'
+
+    return p2, p3
+
+
+def collect_doc(event=False):
+    return (f'<!doctype html><html lang="th"><meta charset="utf-8"><title>OCT. 26 collect all six</title>'
+            f'<style>{css("A4", "210mm", "297mm", SIGN_CSS)}</style>{"".join(collect_pages(event))}</html>')
+
+
+def signs():
+    facts = "".join(f'<div class="fact"><b>{n}</b><p>{th}</p><p class="en">{en}</p></div>' for n, th, en in FACTS)
+    p1 = f'''<section class="pg">{logo()}{ev()}
+<h1>หนังที่เหลือ ได้ชีวิตที่สอง</h1><p class="en">Leftover leather, a second life.</p>
+<div class="body"><p>{STORY_TH}</p><p class="en">{STORY_EN}</p></div>
+<div class="facts">{facts}</div>
+<div class="honest" style="max-width:135mm"><p>{HONEST_TH}</p><p class="en">{HONEST_EN}</p></div>
+<div class="lineq">{qr(LINE)}LINE {LINE_ID}</div>
+{band()}</section>'''
+
+    p2, p3 = collect_pages()
 
     p4 = f'''<section class="pg staff">{logo()}<h1 style="margin-top:8mm;font-size:12mm">สำหรับพี่ที่บูธ</h1><p class="note" style="margin-top:2mm">เก็บไว้หลังโต๊ะ ไม่ต้องตั้งโชว์</p>
 <h2>บัตรสะสม</h2>

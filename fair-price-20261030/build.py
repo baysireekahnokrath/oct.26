@@ -4,13 +4,15 @@ Owner 30 Oct: people at the fair don't know what the pieces are for or what they
 in case they then don't buy. So every sign answers both before anyone has to ask, and says it is fine to just look.
 Uses are single pieces only (no joining, no food contact). Booth price is 30 baht per piece (owner 22 Oct).
 
-python3 build.py -> signs.html;  node render.cjs -> OCT26-fair-price-signs-A4.pdf + preview/*.png
+Collect all six (owner 30 Oct): the sign and collector cards come from sx2026-20261106 without the SX header.
+
+python3 build.py -> signs.html, collect.html;  node render.cjs -> OCT26-fair-price-signs-A4.pdf, OCT26-fair-collect-A4.pdf + preview/*.png
 """
 import os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "sx2026-20261106"))
-from build import LINE, LINE_ID, logo, photo, band, qr, css  # noqa: E402
+from build import LINE, LINE_ID, REWARD_TH, logo, photo, band, qr, css, collect_doc  # noqa: E402
 
 PRICE = 30
 # code, Thai name, plan photo, uses (single piece only)
@@ -34,13 +36,16 @@ EXTRA = """
 .pg{padding:14mm 14mm 0}
 .logo{width:22mm;height:22mm;display:block}
 .price{display:flex;align-items:baseline;gap:4mm;margin-top:8mm}
-.price b{font-family:Jost;font-weight:500;font-size:62mm;line-height:.9}
+.price b{font-family:Jost;font-weight:500;font-size:52mm;line-height:.9}
 .price span{font-family:Anuphan;font-size:16mm}
 .h1{font-family:Anuphan;font-size:13mm;line-height:1.15;margin-top:2mm}
-.calm{margin-top:12mm;font-size:6.6mm;line-height:1.45;background:#FBF8F2;border-radius:4mm;padding:4mm 6mm}
-.uses{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:8mm}
+.collect{margin-top:5mm;background:#E9A825;border-radius:4mm;padding:4mm 6mm;display:grid;gap:1mm}
+.collect b{font-family:Anuphan;font-weight:500;font-size:8mm;line-height:1.15}
+.collect span{font-size:5mm}
+.calm{margin-top:6mm;font-size:6.6mm;line-height:1.45;background:#FBF8F2;border-radius:4mm;padding:4mm 6mm}
+.uses{display:grid;grid-template-columns:repeat(3,1fr);gap:5mm;margin-top:6mm}
 .use{display:grid;justify-items:center;text-align:center;gap:2mm}
-.use svg{width:44mm;height:44mm}
+.use svg{width:34mm;height:34mm}
 .use b{font-family:Anuphan;font-weight:500;font-size:7.5mm}
 .use span{font-size:5mm;color:#4A4542;line-height:1.35}
 .others{position:absolute;left:14mm;right:14mm;bottom:12mm;display:flex;gap:6mm;align-items:center;border-top:.4mm solid #DCD4C7;padding-top:4mm}
@@ -84,6 +89,7 @@ def build():
 <p class="h1">ชิ้นหนังวัวแท้ เอาไปทำอะไรได้บ้าง</p>
 <div class="uses">{uses}</div>
 <p class="calm">หยิบดูได้ ลองจับได้ ถามได้ทุกอย่าง <b>ไม่ซื้อก็ไม่เป็นไรครับ</b></p>
+<div class="collect"><b>สะสมครบ 6 ลาย {REWARD_TH}</b><span>ขอบัตรสะสมฟรีที่โต๊ะ ซื้อลายไหน พี่เซ็นช่องนั้นให้ · เลือกลายเองทุกชิ้น ไม่มีการสุ่ม</span></div>
 <div class="others"><ul>{others}</ul><div class="q">{qr(LINE)}LINE {LINE_ID}</div></div>
 {band()}</section>'''
 
@@ -97,8 +103,8 @@ def build():
 
     cards = [f'<div class="card">{photo(c, pl)}<div><h3><i>{c}</i>{th}</h3><p>{" · ".join(u)}</p><p class="pr">{PRICE}<small> บาท</small></p></div>{band()}</div>'
              for c, th, pl, u in PIECES]
-    gen = (f'<div class="card"><div style="display:grid;place-items:center">{ICONS["pen"]}</div><div><h3>แต่งเองได้</h3>'
-           f'<p>วาดลาย เขียนชื่อ ที่โต๊ะนี้</p><p class="pr">{PRICE}<small> บาท</small></p></div>{band()}</div>')
+    gen = (f'<div class="card" style="grid-template-columns:1fr;background:#E9A825"><div><h3>สะสมครบ 6 ลาย</h3>'
+           f'<p>{REWARD_TH}</p><p style="margin-top:2mm">ขอบัตรสะสมฟรีที่โต๊ะ ไม่มีการสุ่ม</p></div>{band()}</div>')
     calm = (f'<div class="card" style="grid-template-columns:1fr"><div><h3>หยิบดูได้เลยครับ</h3><p>ลองจับ ลองวางแก้วได้ ถามได้ทุกอย่าง<br>ไม่ซื้อก็ไม่เป็นไรครับ</p>'
             f'<p class="pr">{PRICE}<small> บาท ทุกชิ้น</small></p></div>{band()}</div>')
     p3 = f'<section class="pg cards">{"".join(cards)}{gen}{calm}</section>'
@@ -115,6 +121,11 @@ def build():
 <li>การ์ดเล็กวางหน้าตะกร้าทุกใบ ให้ตรงลาย</li>
 <li>ตั้งแก้วน้ำ 1 ใบบนชิ้นหนังให้เห็นว่าเป็นที่รองแก้ว (แก้วเปล่า ไม่ต้องใส่น้ำ)</li>
 <li>วางป้ายห้อยของขวัญที่เขียนชื่อแล้ว 1 อันบนกล่องของขวัญ ให้เห็นตัวอย่าง</li></ul>
+<h2>บัตรสะสม 6 ลาย</h2>
+<ul><li>แจกบัตรฟรีทุกคนที่ซื้อ หรือคนที่ขอ พร้อมบอก "ซื้อครบ 6 ลาย ได้ชิ้นที่ 7 ฟรีครับ"</li>
+<li>ซื้อลายไหน เซ็นชื่อย่อกับวันที่ในช่องนั้น 1 ช่องต่อ 1 ชิ้นที่ซื้อ ลายซ้ำไม่ได้ช่องเพิ่ม · ชิ้นฟรีจากเกม LINE ไม่นับ</li>
+<li>ครบ 6 ช่อง: ให้เลือกชิ้นฟรี 1 ชิ้น เขียนเลขนักสะสมบนบัตร เริ่ม 001 จดเลขกับวันที่ในสมุด แล้วขีดฆ่าบัตร</li>
+<li>ไม่สุ่ม ห้ามบอกว่ามีลายลับหรือลายหายาก</li></ul>
 <h2>ห้ามพูด</h2>
 <ul><li>ต่อเองได้ ไม่ต้องเย็บ · ใช้กับอาหารได้ · ของเล่นเด็ก · หนังรักษ์โลก</li></ul>
 </section>'''
@@ -124,4 +135,5 @@ def build():
 
 if __name__ == "__main__":
     open(os.path.join(HERE, "signs.html"), "w", encoding="utf-8").write(build())
-    print("signs.html")
+    open(os.path.join(HERE, "collect.html"), "w", encoding="utf-8").write(collect_doc(event=False))
+    print("signs.html, collect.html")
