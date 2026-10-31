@@ -218,29 +218,42 @@ p{{margin:0;font-size:{h*0.042:.0f}px;line-height:1.35;color:#4A4542}}
 
 # ------------------------------------------------------------------ LINE stamp QR card (owner 31 Oct)
 # Kept behind the table and shown only after someone pays, so the stamp QR can't be photographed and reused.
-# A6 cards, four to an A4 sheet. assets/line-reward-qr.png is the owner's QR from LINE OA Manager, unchanged.
+# Owner 31 Oct: A5 artwork on A4, folded in half for a front and a back. A4 landscape folded like a book cover:
+# right half is the front (customer side, QR), left half is the back (staff side, steps); both print upright.
+# assets/line-reward-qr.png is the owner's QR from LINE OA Manager, unchanged.
 STAMP_CSS = """
-.pg{padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;background:#fff}
-.sc{position:relative;background:#F4F0E8;border:.3mm dashed #B8B0A4;overflow:hidden;display:grid;justify-items:center;align-content:start;text-align:center;padding:7mm 8mm 0}
-.sc .logo{width:13mm;height:13mm}
-.sc h3{font-family:Anuphan;font-weight:500;font-size:7.4mm;margin-top:3mm;line-height:1.1}
-.sc .q{margin-top:3.5mm;background:#fff;border-radius:3mm;padding:3mm}
-.sc .q img{width:66mm;height:66mm;display:block}
-.sc p{font-size:4mm;line-height:1.4;margin-top:3mm}
+.pg{padding:0;display:grid;grid-template-columns:1fr 1fr;background:#F4F0E8;position:relative}
+.sc{position:relative;overflow:hidden;display:grid;justify-items:center;align-content:start;text-align:center;padding:14mm 12mm 0}
+.sc .logo{width:18mm;height:18mm}
+.sc h3{font-family:Anuphan;font-weight:500;font-size:11mm;margin-top:5mm;line-height:1.1}
+.sc .q{margin-top:6mm;background:#fff;border-radius:4mm;padding:4mm}
+.sc .q img{width:92mm;height:92mm;display:block}
+.sc p{font-size:5.6mm;line-height:1.45;margin-top:6mm}
 .sc p b{font-weight:600}
-.sc .st{position:absolute;left:0;right:0;bottom:4.5mm;font-size:2.8mm;color:#8C8A85}
-.sc .band{height:2.2mm}
+.sc .band{height:3mm}
+.back{text-align:left;justify-items:start}
+.back ol{margin:7mm 0 0;padding:0;list-style:none;display:grid;gap:5mm}
+.back li{display:grid;grid-template-columns:10mm 1fr;gap:4mm;font-size:5mm;line-height:1.45}
+.back li>b{font-family:Jost;font-weight:500;background:#2A2725;color:#F4F0E8;border-radius:50%;width:10mm;height:10mm;display:grid;place-items:center;font-size:5mm}
+.back .warn{margin-top:8mm;border-left:1.5mm solid #A9442B;padding:2mm 0 2mm 4mm;font-size:4.6mm;line-height:1.5}
+.tk{position:absolute;width:.2mm;height:1mm;background:#8C8A85;left:148.5mm;transform:translateX(-50%)}
+.dt{position:absolute;left:148.5mm;top:105mm;width:1px;height:1px;background:#8C8A85;transform:translate(-50%,-50%)}
 """
 
 
 def stampcard():
-    card = (f'<div class="sc">{logo()}<h3>สแกนรับแต้ม</h3>'
-            f'<div class="q"><img src="file://{os.path.join(HERE, "assets", "line-reward-qr.png")}" alt=""></div>'
-            f'<p>ซื้อ 1 ชิ้น = สแกน 1 ครั้ง<br><b>ครบ 6 แต้ม รับชิ้นที่ 7 ฟรี</b></p>'
-            f'<span class="st">พี่ที่บูธ: เก็บหลังโต๊ะ โชว์หลังลูกค้าจ่ายเงินเท่านั้น</span>{band()}</div>')
+    front = (f'<div class="sc">{logo()}<h3>สแกนรับแต้ม</h3>'
+             f'<div class="q"><img src="file://{os.path.join(HERE, "assets", "line-reward-qr.png")}" alt=""></div>'
+             f'<p>ซื้อ 1 ชิ้น = สแกน 1 ครั้ง<br><b>ครบ 6 แต้ม รับชิ้นที่ 7 ฟรี เลือกลายเอง</b></p>{band()}</div>')
+    back = (f'<div class="sc back">{logo()}<h3>สำหรับพี่ที่บูธ</h3><ol>'
+            f'<li><b>1</b><span>รับเงินก่อน แล้วค่อยหันหน้า QR ให้ลูกค้า</span></li>'
+            f'<li><b>2</b><span>ซื้อ 1 ชิ้น สแกน 1 ครั้ง ซื้อ 3 ชิ้นสแกน 3 ครั้ง</span></li>'
+            f'<li><b>3</b><span>ครั้งแรก บอกลูกค้าว่า "ครบ 6 แต้ม ได้ชิ้นที่ 7 ฟรี ให้กดใช้คูปองต่อหน้าพี่ที่บูธนะครับ"</span></li>'
+            f'<li><b>4</b><span>ลูกค้าครบ 6 แต้ม: ให้กดใช้คูปองต่อหน้า ดูว่าขึ้นว่าใช้แล้ว แล้วให้เลือกชิ้นฟรี 1 ชิ้น</span></li></ol>'
+            f'<p class="warn">เก็บการ์ดนี้หลังโต๊ะ ห้ามตั้งให้สแกนเอง ห้ามให้ถ่ายรูป QR<br>ถ้าการ์ดหาย บอกพ่อเบทันที</p>{band()}</div>')
+    marks = '<i class="tk" style="top:4mm"></i><i class="tk" style="bottom:4mm"></i><i class="dt"></i>'
     return (f'<!doctype html><html lang="th"><meta charset="utf-8"><title>OCT. 26 LINE stamp card</title>'
-            f'<style>{css("A4", "210mm", "297mm", STAMP_CSS)}</style><section class="pg">{card * 4}</section></html>')
-
+            f'<style>{css("A4 landscape", "297mm", "210mm", STAMP_CSS)}</style><section class="pg">{back}{front}{marks}</section></html>')
 
 if __name__ == "__main__":
     open(os.path.join(HERE, "signs.html"), "w", encoding="utf-8").write(build())
