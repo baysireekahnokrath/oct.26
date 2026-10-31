@@ -135,14 +135,16 @@ def build():
 
 # ------------------------------------------------------------------ table tents (owner 31 Oct)
 # A4 portrait folded across into four 74.25 mm strips (owner 31 Oct: the long-side fold was too long, 21 cm is right).
-# Strip 1 and 2 are the two faces (strip 1 printed upside down so both read upright once folded),
-# strip 3 is the base, strip 4 folds up inside strip 1 and is taped to it.
+# Owner 31 Oct: artwork in the middle, top and bottom strips fold in and overlap as the base. So strip 2 and 3 are
+# the two faces (strip 2 upside down, ridge on the centre fold) and strips 1 and 4 are blank, which also means the
+# Epson L3150's 3 mm unprintable edge only ever lands on blank paper. Folds at 74.25, 148.5 and 222.75 mm from the top.
 TENT_CSS = """
 .pg{padding:0;display:grid;grid-template-rows:repeat(4,1fr);background:#fff}
 .strip{position:relative;overflow:hidden;border-bottom:.3mm dashed #B8B0A4;display:grid;align-content:center;padding:0 10mm}
 .strip:last-child{border-bottom:0}
 .face{background:#F4F0E8}
 .face.flip{transform:rotate(180deg)}
+.face:not(.flip){border-top:.3mm dashed #B8B0A4}
 .face .band{height:2.4mm}
 .trow{display:flex;align-items:center;gap:5mm}
 .face .logo{width:16mm;height:16mm;flex:none}
@@ -162,9 +164,10 @@ def tent_face(inner, flip=False):
 
 
 def tent_page(inner):
-    return (f'<section class="pg">{tent_face(inner, flip=True)}{tent_face(inner)}'
-            f'<div class="strip blank">3 · ฐาน วางบนโต๊ะ<br>พับตามเส้นประทุกเส้น</div>'
-            f'<div class="strip blank">4 · พับขึ้นไปทาบด้านในแถบหน้าป้ายอีกด้าน แล้วติดเทป</div></section>')
+    flap = '<div class="strip blank">{}</div>'
+    return (f'<section class="pg">{flap.format("ฐาน · พับเข้าด้านใน ซ้อนกับแถบล่างสุด แล้วติดเทป")}'
+            f'{tent_face(inner, flip=True)}{tent_face(inner)}'
+            f'{flap.format("ฐาน · พับเข้าด้านใน ซ้อนกับแถบบนสุด แล้วติดเทป")}</section>')
 
 
 def tents():
