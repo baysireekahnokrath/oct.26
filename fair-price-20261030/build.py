@@ -216,6 +216,32 @@ p{{margin:0;font-size:{h*0.042:.0f}px;line-height:1.35;color:#4A4542}}
     return f'<!doctype html><html lang="th"><meta charset="utf-8"><style>{css_}</style>{body}</html>'
 
 
+# ------------------------------------------------------------------ LINE stamp QR card (owner 31 Oct)
+# Kept behind the table and shown only after someone pays, so the stamp QR can't be photographed and reused.
+# A6 cards, four to an A4 sheet. assets/line-reward-qr.png is the owner's QR from LINE OA Manager, unchanged.
+STAMP_CSS = """
+.pg{padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;background:#fff}
+.sc{position:relative;background:#F4F0E8;border:.3mm dashed #B8B0A4;overflow:hidden;display:grid;justify-items:center;align-content:start;text-align:center;padding:7mm 8mm 0}
+.sc .logo{width:13mm;height:13mm}
+.sc h3{font-family:Anuphan;font-weight:500;font-size:7.4mm;margin-top:3mm;line-height:1.1}
+.sc .q{margin-top:3.5mm;background:#fff;border-radius:3mm;padding:3mm}
+.sc .q img{width:66mm;height:66mm;display:block}
+.sc p{font-size:4mm;line-height:1.4;margin-top:3mm}
+.sc p b{font-weight:600}
+.sc .st{position:absolute;left:0;right:0;bottom:4.5mm;font-size:2.8mm;color:#8C8A85}
+.sc .band{height:2.2mm}
+"""
+
+
+def stampcard():
+    card = (f'<div class="sc">{logo()}<h3>สแกนรับแต้ม</h3>'
+            f'<div class="q"><img src="file://{os.path.join(HERE, "assets", "line-reward-qr.png")}" alt=""></div>'
+            f'<p>ซื้อ 1 ชิ้น = สแกน 1 ครั้ง<br><b>ครบ 6 แต้ม รับชิ้นที่ 7 ฟรี</b></p>'
+            f'<span class="st">พี่ที่บูธ: เก็บหลังโต๊ะ โชว์หลังลูกค้าจ่ายเงินเท่านั้น</span>{band()}</div>')
+    return (f'<!doctype html><html lang="th"><meta charset="utf-8"><title>OCT. 26 LINE stamp card</title>'
+            f'<style>{css("A4", "210mm", "297mm", STAMP_CSS)}</style><section class="pg">{card * 4}</section></html>')
+
+
 if __name__ == "__main__":
     open(os.path.join(HERE, "signs.html"), "w", encoding="utf-8").write(build())
     open(os.path.join(HERE, "collect.html"), "w", encoding="utf-8").write(collect_doc(event=False))
@@ -224,4 +250,5 @@ if __name__ == "__main__":
         open(os.path.join(HERE, f"reward-{w}x{h}.html"), "w", encoding="utf-8").write(reward_img(w, h))
     # cover photo of the LINE reward card itself (LINE asks for 1920 x 960, other sizes get centre-cropped)
     open(os.path.join(HERE, "reward-1920x960.html"), "w", encoding="utf-8").write(reward_img(1920, 960, "บัตรสะสม OCT. 26"))
-    print("signs.html, collect.html, tent.html, reward-*.html")
+    open(os.path.join(HERE, "stampcard.html"), "w", encoding="utf-8").write(stampcard())
+    print("signs.html, collect.html, tent.html, reward-*.html, stampcard.html")

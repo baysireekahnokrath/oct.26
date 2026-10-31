@@ -1,10 +1,10 @@
-// node render.cjs -> OCT26-fair-price-signs-A4.pdf, OCT26-fair-collect-A4.pdf, OCT26-fair-table-tents-A4.pdf, OCT26-LINE-reward-*.jpg and preview/*.png
+// node render.cjs -> OCT26-fair-price-signs-A4.pdf, OCT26-fair-collect-A4.pdf, OCT26-fair-table-tents-A4.pdf, OCT26-LINE-stamp-card-A6x4.pdf, OCT26-LINE-reward-*.jpg and preview/*.png
 const { chromium } = require("playwright");
 const fs = require("node:fs"), path = require("node:path");
 (async () => {
   const out = path.join(__dirname, "preview"); fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch();
-  for (const [name, pdf, land] of [["signs", "OCT26-fair-price-signs-A4.pdf"], ["collect", "OCT26-fair-collect-A4.pdf"], ["tent", "OCT26-fair-table-tents-A4.pdf"]]) {
+  for (const [name, pdf, land] of [["signs", "OCT26-fair-price-signs-A4.pdf"], ["collect", "OCT26-fair-collect-A4.pdf"], ["tent", "OCT26-fair-table-tents-A4.pdf"], ["stampcard", "OCT26-LINE-stamp-card-A6x4.pdf"]]) {
     const p = await b.newPage({ viewport: land ? { width: 1123, height: 794 } : { width: 794, height: 1123 } });
     await p.goto("file://" + path.join(__dirname, name + ".html"));
     await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(400);
