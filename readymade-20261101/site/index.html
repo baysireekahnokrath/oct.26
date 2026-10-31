@@ -1,0 +1,75 @@
+<title>OCT. 26 ป้ายราคาของพร้อมใช้</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">บูธวันสุดท้าย 1 พ.ย. · ร่างให้ตรวจ</span><h1>ป้ายราคาของพร้อมใช้</h1>
+<p class="lead">ของที่ต่อชิ้นเสร็จแล้ว เห็นแบบ เห็นราคา หยิบ จ่าย · A4 แผ่นเดียวได้ 6 ป้าย ตัดตามขีด</p></header>
+<section><img src="cards.png" alt="ป้ายราคา 6 ใบ" style="width:100%;max-width:520px;border:1px solid var(--line);border-radius:6px;background:#fff"></section>
+<section><h2>ราคา</h2><div class="tbl"><table><tbody><tr><td>07 ปลอกแก้ว</td><td>1 ชั้น · 5 ชิ้น 189.- · 2 ชั้น · 9 ชิ้น 309.- · 3 ชั้น · 13 ชิ้น 429.-</td></tr><tr><td>07 ตะกร้าใส่ของ</td><td>ก้น 2 × 2 · 12 ชิ้น 399.- · ก้น 2 × 3 · 16 ชิ้น 519.- · ก้น 3 × 3 · 21 ชิ้น 669.-</td></tr><tr><td>07 charm คล้องกระเป๋า</td><td>S · 3 ชิ้น 149.- · M · 5 ชิ้น 209.-</td></tr><tr><td>07 ป้ายชื่อสัตว์เลี้ยง</td><td>3 ชื่อ · 3 ชิ้น 149.- · เพิ่มชื่อละ 30.-</td></tr><tr><td>07 ช่อดอกไม้</td><td>ช่อนี้ เขียนราคาเอง</td></tr></tbody></table></div>
+<p class="cap">สูตร: ชิ้นละ 30 + ค่าประกอบราว 30 (+ สาย 20) ปัดลงท้าย 9 · ปลอกแก้วชั้นละ 4 ชิ้น + ก้น 1 · ตะกร้า ก้น a × b + ขอบชั้นเดียว 2(a + b) ชิ้น (เจ้าของ 31 ต.ค.: 2 ชั้นย้วยเพราะหนังนิ่ม)</p></section>
+<section><h2>ต้องเช็ก</h2><div class="card"><ol>
+<li>สูตรนับชิ้นของตะกร้าเป็นการคำนวณ ถ้าของจริงใช้ไม่เท่านี้ บอกจำนวนจริง จะแก้ราคาให้</li>
+<li>ช่อดอกไม้เว้นราคาไว้ให้เขียนเอง เพราะแต่ละช่อใช้ชิ้นไม่เท่ากัน</li>
+<li>charm และป้ายชื่อห้อยกับกระเป๋า รอพ่อเบยืนยันว่ายกเว้นกฎของห้อยต้องใช้หนัง 2 มม.</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono">readymade-20261101/oct26-readymade-cards.pdf</td><td>พิมพ์ขนาดจริง 100%</td></tr>
+<tr><td class="mono">readymade-20261101/build.py</td><td>แก้ราคาหรือข้อความแล้วรันใหม่</td></tr></tbody></table></div></section></div>
