@@ -140,11 +140,9 @@ def build():
 # Epson L3150's 3 mm unprintable edge only ever lands on blank paper. Folds at 74.25, 148.5 and 222.75 mm from the top.
 TENT_CSS = """
 .pg{padding:0;display:grid;grid-template-rows:repeat(4,1fr);background:#fff}
-.strip{position:relative;overflow:hidden;border-bottom:.3mm dashed #B8B0A4;display:grid;align-content:center;padding:0 10mm}
-.strip:last-child{border-bottom:0}
+.strip{position:relative;overflow:hidden;display:grid;align-content:center;padding:0 10mm}
 .face{background:#F4F0E8}
 .face.flip{transform:rotate(180deg)}
-.face:not(.flip){border-top:.3mm dashed #B8B0A4}
 .face .band{height:2.4mm}
 .trow{display:flex;align-items:center;gap:5mm}
 .face .logo{width:16mm;height:16mm;flex:none}
@@ -155,6 +153,10 @@ TENT_CSS = """
 .face svg.ic{width:24mm;height:24mm;flex:none;margin-left:auto}
 .pcs{display:flex;gap:2.5mm;margin-top:3mm} .pcs .ph{width:15mm}
 .face .qr{width:50mm;height:50mm;flex:none;margin-left:auto}
+/* fold marks only: a 1 mm tick inside each side edge (past the printer's 3 mm margin) and a 1 px dot at the centre */
+.tk{position:absolute;height:.2mm;width:1mm;background:#8C8A85;transform:translateY(-50%)}
+.dt{position:absolute;left:105mm;width:1px;height:1px;background:#8C8A85;transform:translate(-50%,-50%)}
+.pg.tent{position:relative}
 .blank{justify-items:center;color:#B8B0A4;font-size:3.6mm;letter-spacing:.1em;text-align:center}
 """
 
@@ -165,9 +167,11 @@ def tent_face(inner, flip=False):
 
 def tent_page(inner):
     flap = '<div class="strip blank">{}</div>'
-    return (f'<section class="pg">{flap.format("ฐาน · พับเข้าด้านใน ซ้อนกับแถบล่างสุด แล้วติดเทป")}'
+    marks = "".join(f'<i class="tk" style="top:{y}mm;left:4mm"></i><i class="tk" style="top:{y}mm;right:4mm"></i><i class="dt" style="top:{y}mm"></i>'
+                    for y in (74.25, 148.5, 222.75))
+    return (f'<section class="pg tent">{flap.format("ฐาน · พับเข้าด้านใน ซ้อนกับแถบล่างสุด แล้วติดเทป")}'
             f'{tent_face(inner, flip=True)}{tent_face(inner)}'
-            f'{flap.format("ฐาน · พับเข้าด้านใน ซ้อนกับแถบบนสุด แล้วติดเทป")}</section>')
+            f'{flap.format("ฐาน · พับเข้าด้านใน ซ้อนกับแถบบนสุด แล้วติดเทป")}{marks}</section>')
 
 
 def tents():
