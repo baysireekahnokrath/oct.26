@@ -188,7 +188,7 @@ def tents():
             f'<style>{css("A4", "210mm", "297mm", EXTRA + TENT_CSS)}</style>{body}</html>')
 
 # ------------------------------------------------------------------ LINE coupon image (owner 31 Oct: the reward card needs one)
-def reward_img(w, h):
+def reward_img(w, h, title='ชิ้นที่ <b>7</b> ฟรี'):
     pieces = "".join(f'<div class="pc">{photo(c, pl)}<i>{c}</i></div>' for c, _, pl, _ in PIECES)
     css_ = f"""
 @font-face{{font-family:Anuphan;font-weight:500;src:url(file://{FONTS}/alt/Anuphan-Medium.ttf)}}
@@ -210,7 +210,7 @@ p{{margin:0;font-size:{h*0.042:.0f}px;line-height:1.35;color:#4A4542}}
 .seven{{width:{h*0.13:.0f}px;height:{h*0.13:.0f}px;border-radius:50%;background:#E9A825;display:grid;place-items:center;font-family:Jost;font-weight:500;font-size:{h*0.07:.0f}px;margin-bottom:{h*0.03:.0f}px}}
 .band{{position:absolute;left:0;right:0;bottom:0;height:{h*0.025:.0f}px;display:flex}} .band i{{flex:1}}
 """
-    body = (f'{logo()}<h1>ชิ้นที่ <b>7</b> ฟรี</h1>'
+    body = (f'{logo()}<h1>{title}</h1>'
             f'<div class="pcs">{pieces}<span class="plus">+</span><div class="seven">7</div></div>'
             f'<p>สะสมครบ 6 แต้ม รับชิ้นหนังวัวแท้ฟรี 1 ชิ้น<br>เลือกลายเอง · กดใช้ต่อหน้าพี่ที่บูธ OCT. 26</p>{band()}')
     return f'<!doctype html><html lang="th"><meta charset="utf-8"><style>{css_}</style>{body}</html>'
@@ -222,4 +222,6 @@ if __name__ == "__main__":
     open(os.path.join(HERE, "tent.html"), "w", encoding="utf-8").write(tents())
     for w, h in ((1040, 1040), (1200, 800)):
         open(os.path.join(HERE, f"reward-{w}x{h}.html"), "w", encoding="utf-8").write(reward_img(w, h))
+    # cover photo of the LINE reward card itself (LINE asks for 1920 x 960, other sizes get centre-cropped)
+    open(os.path.join(HERE, "reward-1920x960.html"), "w", encoding="utf-8").write(reward_img(1920, 960, "บัตรสะสม OCT. 26"))
     print("signs.html, collect.html, tent.html, reward-*.html")

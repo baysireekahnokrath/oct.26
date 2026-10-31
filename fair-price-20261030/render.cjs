@@ -13,7 +13,7 @@ const fs = require("node:fs"), path = require("node:path");
     await p.pdf({ path: path.join(__dirname, pdf), format: "A4", landscape: !!land, printBackground: true });
     await p.close();
   }
-  for (const [w, h] of [[1040, 1040], [1200, 800]]) {
+  for (const [w, h] of [[1040, 1040], [1200, 800], [1920, 960]]) {
     const p = await b.newPage({ viewport: { width: w, height: h } });
     await p.goto("file://" + path.join(__dirname, `reward-${w}x${h}.html`));
     await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(300);
