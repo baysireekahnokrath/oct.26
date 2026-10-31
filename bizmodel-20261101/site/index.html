@@ -1,0 +1,80 @@
+<title>OCT. 26 Business Model</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Mitr:wght@400;500;600&family=Jost:wght@400;500&display=swap"><style>
+:root{
+  /* Layout: one reading column of cards, every size from phi. Type steps 16 x phi^(k/2); spacing Fibonacci 5 8 13 21 34 55 89;
+     reading column 987px (a Fibonacci number); two-column splits 61.8 / 38.2. Palette #2, chosen 15 Oct 2026. */
+  --bg:#FFF6EC;--paper:#FFFFFF;--ink:#1C1B22;--muted:#4A4A55;--line:#F1DCCB;
+  --cobalt:#2449D8;--tomato:#FF5A36;--sun:#FFC23C;--mint:#2EC4A0;--pink:#FF8AC4;--leather:#B8743A;
+  --caramel:var(--cobalt);--heart:#E2401C;--brick:var(--tomato);--love:var(--pink);--honey:var(--sun);--peach:var(--pink);--sage:var(--mint);
+  --cocoa:var(--ink);--cream:var(--bg);--leaf:var(--cobalt);--chestnut:var(--ink);
+  --on-accent:#FFFFFF;--chip:#FBE9DA;
+  --t-1:12.6px;--t0:16px;--t1:20.4px;--t2:25.9px;--t3:32.9px;--t4:41.9px;
+  --s1:5px;--s2:8px;--s3:13px;--s4:21px;--s5:34px;--s6:55px;--s7:89px;
+  --logo:"Jost","Anuphan",system-ui,sans-serif;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14131A;--paper:#1F1E27;--ink:#FFF6EC;--muted:#C9C4D6;--line:#34323F;--cobalt:#7C97FF;--caramel:#7C97FF;--heart:#FF7A5C;--chip:#2A2833;color-scheme:dark}
+*{box-sizing:border-box}
+img{max-width:100%;height:auto;display:block}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:var(--t0);line-height:1.618;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 var(--s7)}
+.wrap{max-width:987px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.236;text-wrap:balance;margin:0}
+h1{font-size:clamp(var(--t3),7vw,var(--t4))}h2{font-size:clamp(var(--t2),5vw,var(--t3))}h3{font-size:var(--t1)}
+p{margin:0}
+a{color:var(--cobalt)}
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)));padding:var(--s3) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
+nav.top a{flex:none;font-family:var(--display);font-size:14px;text-decoration:none;color:var(--ink);background:var(--chip);
+  border-radius:var(--s4);padding:var(--s1) var(--s3)}
+nav.top a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--tomato);outline-offset:2px}
+section{padding-top:var(--s6);display:flex;flex-direction:column;gap:var(--s4);scroll-margin-top:var(--s7)}
+.eyebrow{font-family:var(--logo);font-weight:500;font-size:var(--t-1);letter-spacing:.12em;text-transform:uppercase;color:var(--cobalt)}
+.lead{font-size:var(--t1);color:var(--muted);max-width:61.8ch}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--s4);padding:var(--s4)}
+.paper{background:#FFFFFF;border-radius:var(--s4);padding:var(--s4);display:flex;align-items:center;justify-content:center}
+.paper.dark{background:#2449D8}
+.grid{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(233px,1fr))}
+.grid.s{grid-template-columns:repeat(auto-fill,minmax(144px,1fr))}
+.grid>*{min-width:0}
+.cap{font-size:var(--t-1);color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;font-size:var(--t-1);border-radius:var(--s4);padding:2px var(--s3);background:var(--chip)}
+.chip.ok{background:#D7F3EA;color:#0E6B55}.chip.mid{background:#FFF0C7;color:#7A5200}.chip.ext{background:#FFE1D9;color:#A0300F}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--s3);background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-weight:500;font-size:var(--t-1);color:var(--muted);white-space:nowrap}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+ol,ul{margin:0;padding-left:1.3em}
+li+li{margin-top:var(--s1)}
+.copy{font-family:var(--display);font-size:var(--t-1);border:1px solid var(--line);background:var(--chip);color:var(--ink);
+  border-radius:var(--s4);padding:var(--s1) var(--s3);cursor:pointer}
+pre.txt{white-space:pre-wrap;font-family:var(--body);font-size:14.5px;background:var(--bg);border-radius:var(--s3);padding:var(--s3);margin:0}
+details{border-top:1px solid var(--line)}
+details>summary{cursor:pointer;padding:var(--s3) 0;font-family:var(--display);font-size:15px}
+.ch{display:flex;flex-direction:column;gap:var(--s2);padding-bottom:var(--s3)}
+.ch .h{display:flex;justify-content:space-between;align-items:center;gap:var(--s2)}
+</style>
+<div class="wrap"><header style="padding-top:28px;display:flex;flex-direction:column;gap:14px">
+<span class="eyebrow">ฝ่ายการตลาด · 1 พ.ย. 2569 · จากยอดขายจริง 2 บูธ</span><h1>Business model</h1>
+<p class="lead">เปลี่ยนจากขายชิ้นหนังแบน เป็นขายของพร้อมใช้จากระบบชิ้นต่อกันได้ ใช้เศษหนังเหมือนเดิม แต่ขายเวลาและดีไซน์ ไม่ได้ขายแผ่นหนัง</p></header>
+<section><h2>ข้อมูลจริง: ยอดขาย 4,440 บาท 20 บิล</h2><div class="card" style="display:flex;flex-direction:column;gap:10px"><div style="display:grid;grid-template-columns:minmax(0,1fr) 60px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">07 ชิ้นหนัง (ลูกค้าซื้อไปต่อตามตัวอย่าง) 60 แผ่น</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:41%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">1,800</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 60px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">กระเป๋าซิปหนัง 7 ใบ (ของสปอนเซอร์ ASE)</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:32%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">1,400</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 60px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">ยังไม่ได้แยกสินค้า (DIY และอื่น ๆ จากใบจดมือ)</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:20%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">870</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 60px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">01 หมี 6 แผ่น · 03 1 แผ่น · ดอกไม้ 1</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:5%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">240</b></div><div style="display:grid;grid-template-columns:minmax(0,1fr) 60px;gap:8px;align-items:center"><div><div style="font-size:14px;margin-bottom:4px">สายคล้อง</div><div style="height:10px;border-radius:5px;background:var(--line)"><div style="height:100%;width:3%;border-radius:5px;background:#2A2725"></div></div></div><b class="mono" style="text-align:right">130</b></div></div>
+<p class="cap">จากชีตบันทึกการขาย 23–31 ต.ค. · กำไรขั้นต้นราว 4,110 บาท เทียบกับเงินที่ลงไป 8,313 บาท (ยังไม่รวมค่าบูธ) คืนทุนแล้วราวครึ่งหนึ่ง</p></section>
+<section><h2>เรียนรู้อะไร</h2><div class="card"><ol><li><b>คนซื้อของที่เห็นเสร็จแล้ว</b> 07 ขาย 60 แผ่นจาก 200 เพราะต่อให้ดูเป็นปลอกแก้ว ถาด charm · ชิ้นแบน 01–05 มี 969 แผ่น ขายได้ 7 แผ่น</li><li><b>ของราคา 200 ขายได้</b> กระเป๋าซิป 200 บาทขาย 7 ใบ เท่ากับ 1 ใน 3 ของยอด · คนพร้อมจ่ายหลักร้อยถ้าเห็นว่าใช้ทำอะไร</li><li><b>DIY วาดรูปไม่คุ้มเวลา</b> กินเวลาคนในบูธ ไม่ทำให้ยอดขึ้น (เจ้าของ 31 ต.ค.) · แต่การเขียนชื่อให้ (ป้ายชื่อสัตว์เลี้ยง) เป็นของขายได้</li><li><b>ต้นทุนจริงคือเวลาประกอบ</b> ชิ้นหนังราว 4 บาท ของ 300 บาทใช้หนังไม่ถึง 60 บาท · ที่จำกัดคือชั่วโมงของคนในบ้าน และ 07 ที่เหลือ 140 แผ่น</li></ol></div></section>
+<section><h2>โมเดลที่เสนอ: บันได 5 ขั้น</h2><p class="cap">ทุกขั้นใช้ชิ้นหนังจากบล็อกเดิม ขั้นล่างดึงคนเข้ามา ขั้นบนทำเงิน</p>
+<div style="display:flex;flex-direction:column;gap:10px"><div class="card" style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;gap:10px"><b>1 ลองก่อน</b><b class="mono" style="white-space:nowrap">0–30</b></div><div>ชิ้นหนังแผ่นละ 30 · ชิ้นฟรีจากเกม LINE</div><div class="cap">คนเดินผ่าน · ดึงคนเข้าบูธ ได้เพื่อน LINE</div></div><div class="card" style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;gap:10px"><b>2 ของเล็กพร้อมใช้</b><b class="mono" style="white-space:nowrap">149–209</b></div><div>charm S/M · ป้ายชื่อสัตว์เลี้ยง · ปลอกแก้ว 1 ชั้น</div><div class="cap">ซื้อเองหรือเป็นของขวัญ · ขายมากที่สุด ทำเร็ว</div></div><div class="card" style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;gap:10px"><b>3 ของใช้ในบ้าน</b><b class="mono" style="white-space:nowrap">299–669</b></div><div>ปลอกแก้ว 2–3 ชั้น · ตะกร้า · ช่อดอกไม้</div><div class="cap">คนแต่งบ้าน · กำไรต่อชิ้นสูง ใช้เวลาประกอบมากขึ้น</div></div><div class="card" style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;gap:10px"><b>4 สั่งทำ สั่งจำนวน</b><b class="mono" style="white-space:nowrap">ตามจำนวน</b></div><div>ขนาดพิเศษ · ของชำร่วย · ของขวัญบริษัทปลายปี · ร้านกาแฟ</div><div class="cap">บริษัท ร้าน งานแต่ง · ยอดก้อนใหญ่ ต้องตั้งราคาส่ง</div></div><div class="card" style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;justify-content:space-between;gap:10px"><b>5 ของแต่งบ้านสั่งจอง</b><b class="mono" style="white-space:nowrap">990–4,990</b></div><div>โคมไฟ · ภาพติดผนัง 3D</div><div class="cap">คนรักงานดีไซน์ โรงแรม คาเฟ่ · รับเงินจองก่อนผลิต ไม่ต้องลงเงินก่อน</div></div></div></section>
+<section><h2>กำไรต่อชิ้น</h2><div class="tbl"><table><thead><tr><th>ของ</th><th>ราคา</th><th>ชิ้น</th><th>ค่าวัสดุ</th><th>เหลือ</th><th></th></tr></thead><tbody><tr><td>charm M</td><td class="mono">209</td><td class="mono">5</td><td class="mono">~35</td><td class="mono">83%</td><td>สาย ห่วง ราว 15 (ประมาณ)</td></tr><tr><td>ปลอกแก้ว 2 ชั้น</td><td class="mono">309</td><td class="mono">9</td><td class="mono">~36</td><td class="mono">88%</td><td></td></tr><tr><td>ตะกร้า ก้น 2×3</td><td class="mono">519</td><td class="mono">16</td><td class="mono">~64</td><td class="mono">88%</td><td></td></tr><tr><td>ป้ายชื่อสัตว์เลี้ยง</td><td class="mono">149</td><td class="mono">3</td><td class="mono">~27</td><td class="mono">82%</td><td>รวมสาย</td></tr></tbody></table></div>
+<p class="cap">เหลือหลังค่าวัสดุ 80–90% แต่ยังไม่หักเวลาประกอบ ค่าบูธ และค่าส่ง · ที่จำกัดการขายคือชั่วโมงประกอบ ไม่ใช่หนัง</p></section>
+<section><h2>อยากได้เดือนละเท่าไร ต้องทำแค่ไหน</h2><div class="tbl"><table><thead><tr><th>ยอดต่อเดือน</th><th>ราคาเฉลี่ย</th><th>ต้องขาย (ชิ้น)</th><th>นาที/ชิ้น</th><th>ชั่วโมงประกอบ</th></tr></thead><tbody><tr><td class="mono">10,000</td><td class="mono">250</td><td class="mono">40</td><td class="mono">15</td><td class="mono">10</td></tr><tr><td class="mono">20,000</td><td class="mono">250</td><td class="mono">80</td><td class="mono">15</td><td class="mono">20</td></tr><tr><td class="mono">30,000</td><td class="mono">300</td><td class="mono">100</td><td class="mono">20</td><td class="mono">33</td></tr></tbody></table></div>
+<p class="cap">ตัวเลขนาทีต่อชิ้นเป็นสมมติฐาน ช่วยจับเวลาจริงตอนประกอบ แล้วผมจะแก้ตารางนี้ให้</p></section>
+<section><h2>ภาพรวมโมเดล (Business Model Canvas)</h2><div class="grid"><div class="card"><b>ลูกค้า</b><ul style="margin-top:6px"><li>คนเดินงานแฟร์ 25–45 ซื้อของใช้หรือของขวัญ 150–700 บาท</li><li>คนรักสัตว์ (ป้ายชื่อน้อง)</li><li>ร้านกาแฟ บริษัท งานแต่ง (สั่งจำนวน)</li><li>คนแต่งบ้าน (โคม ภาพติดผนัง สั่งจองก่อน)</li></ul></div><div class="card"><b>คุณค่าที่ให้</b><ul style="margin-top:6px"><li>ของหนังวัวแท้จากเศษหนัง ทุกชิ้นสีไม่ซ้ำ</li><li>ระบบชิ้นต่อกันได้ ทำได้หลายทรง หลายขนาด</li><li>เขียนชื่อให้ เป็นของเฉพาะคน</li><li>ครอบครัวทำเอง เรื่องเล่าจริง</li></ul></div><div class="card"><b>ช่องทาง</b><ul style="margin-top:6px"><li>บูธแฟร์: หาลูกค้าใหม่ ได้เงินสด</li><li>LINE OA: สั่งซ้ำ สั่งทำ สั่งจอง</li><li>เว็บ: แค็ตตาล็อกและหน้าจอง</li><li>Shopee: ของพร้อมส่ง (ยังไม่มีลิงก์ร้าน)</li></ul></div><div class="card"><b>ความสัมพันธ์</b><ul style="margin-top:6px"><li>บัตรสะสมครบ 6 ลาย</li><li>ส่งรูปของจริงทาง LINE</li><li>รอบจองแบบทำทีละรอบ</li></ul></div><div class="card"><b>รายได้</b><ul style="margin-top:6px"><li>ของพร้อมใช้ 149–669</li><li>เขียนชื่อ +30 ต่อชื่อ</li><li>สั่งทำขนาดพิเศษ</li><li>สั่งจำนวนให้ร้านและบริษัท</li><li>ของแต่งบ้านสั่งจอง 990–4,990</li><li>ชิ้นหนัง 30 สำหรับคนอยากทำเอง</li></ul></div><div class="card"><b>ทรัพยากรหลัก</b><ul style="margin-top:6px"><li>บล็อกตัด 01–07 (จ่ายแล้ว)</li><li>เศษหนังเหลือ 7 กก.</li><li>มือและเวลาของคนในบ้าน</li><li>แบรนด์และเรื่องเล่าห้าคน</li></ul></div><div class="card"><b>กิจกรรมหลัก</b><ul style="margin-top:6px"><li>ออกแบบทรงใหม่จาก 07 03 04 05</li><li>ประกอบของพร้อมใช้</li><li>ออกบูธ เล่าเรื่อง</li><li>ถ่ายรูปของจริงลง LINE IG</li></ul></div><div class="card"><b>พาร์ตเนอร์</b><ul style="margin-top:6px"><li>ร้านตัดหนัง</li><li>ASE (กระเป๋าซิป สายคล้อง)</li><li>ผู้จัดงานแฟร์</li><li>ร้านกาแฟ โรงแรม (ที่โชว์ของ)</li></ul></div><div class="card"><b>ต้นทุน</b><ul style="margin-top:6px"><li>ลงไปแล้ว 8,313 (หนัง บล็อก ค่าตัด)</li><li>ค่าบูธ (ยังไม่ได้ลงบัญชี)</li><li>สาย ห่วง ถุง ป้าย</li><li>เวลาประกอบ (ยังไม่ได้คิดเป็นเงิน)</li></ul></div></div></section>
+<section><h2>แผน 4 เดือน</h2><div class="grid"><div class="card"><span class="cap">พ.ย. สัปดาห์ 1–2</span><h3>SX2026 6–15 พ.ย. (ถ้าได้บูธ)</h3><ul><li>ขายของพร้อมใช้เป็นหลัก ชิ้นแผ่นละ 30 เป็นตัวเสริม</li><li>จดทุกบิลแยกสินค้าในแอปขายของ</li><li>จับเวลาประกอบแต่ละแบบ</li></ul></div><div class="card"><span class="cap">พ.ย. สัปดาห์ 3–4</span><h3>ออนไลน์และสั่งตัด</h3><ul><li>เปลี่ยน Shopee และเว็บจากชิ้นแบนเป็นของพร้อมใช้ 4–5 แบบ</li><li>สั่งตัด 07 เพิ่ม (เหลือ 140)</li><li>ทำแผ่นราคาของขวัญบริษัทปลายปี ส่งให้คนรู้จัก 20 ราย</li></ul></div><div class="card"><span class="cap">ธ.ค.</span><h3>ของขวัญปีใหม่</h3><ul><li>ชุดของขวัญ 2 ชุด (ตามกฎชั้น 3 ไม่เกิน 2)</li><li>รับสั่งจำนวนจากบริษัท ร้าน</li><li>เปิดจองโคมรอบแรก</li></ul></div><div class="card"><span class="cap">ม.ค.–ก.พ.</span><h3>ของแต่งบ้าน</h3><ul><li>ผลิตโคมและภาพติดผนังตามยอดจอง</li><li>เตรียมบูธ Bangkok Design Week 18–28 ก.พ.</li></ul></div></div></section>
+<section><h2>ต้องตัดสิน</h2><div class="card"><ol><li>ให้ของพร้อมใช้เป็นสินค้าหลัก และชิ้นแบน 01–05 เป็นตัวเสริม ใช่ไหม</li><li>ยกเลิกหรือปรับกฎ &quot;ยังไม่ขายของที่ต่อชิ้น&quot; (ทดสอบ 5 ข้อ) และ &quot;ของห้อยต้องใช้หนัง 2 มม.&quot; หรือไม่ เพราะตอนนี้ขายจริงแล้ว</li><li>ใครประกอบ ได้กี่ชั่วโมงต่อสัปดาห์ (ตัวนี้กำหนดว่าขายได้เดือนละเท่าไร)</li><li>กระเป๋าซิปจาก ASE: ได้ฟรีครั้งเดียว หรือรับมาขายต่อได้ ถ้าขายต่อ แบ่งรายได้อย่างไร</li><li>ชิ้น 01–05 ที่เหลือราว 900 แผ่น: ทำเป็นตะกร้าและปลอกจาก 03 04 05 (ต่อได้ตามที่ PD คำนวณ) หรือขายเป็นชุดที่รองแก้วของขวัญ</li></ol></div></section>
+<section><h2>ไฟล์</h2><div class="tbl"><table><tbody>
+<tr><td class="mono" style="white-space:nowrap">bizmodel-20261101/build.py</td><td>แก้ตัวเลข สมมติฐาน แผน แล้วรันใหม่</td></tr>
+<tr><td>Google Doc "OCT. 26 Business Model"</td><td>ในโฟลเดอร์ OCT. 26 ไฟล์งาน</td></tr></tbody></table></div></section></div>
