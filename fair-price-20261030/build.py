@@ -133,7 +133,53 @@ def build():
             f'<style>{css("A4", "210mm", "297mm", EXTRA)}</style>{p1}{p2}{p3}{p4}</html>')
 
 
+# ------------------------------------------------------------------ table tents (owner 31 Oct)
+# A4 landscape folded along its length into four 52.5 mm strips: strip 1 and 2 are the two faces (strip 1 printed
+# upside down so both read upright once folded), strip 3 is the base, strip 4 folds up inside strip 1 and is taped to it.
+TENT_CSS = """
+.pg{padding:0;display:grid;grid-template-rows:repeat(4,1fr);background:#fff}
+.strip{position:relative;overflow:hidden;border-bottom:.3mm dashed #B8B0A4;display:flex;align-items:center;gap:8mm;padding:0 12mm}
+.strip:last-child{border-bottom:0}
+.face{background:#F4F0E8}
+.face.flip{transform:rotate(180deg)}
+.face .logo{width:18mm;height:18mm;flex:none}
+.face .band{height:2mm}
+.big{font-family:Jost;font-weight:500;font-size:30mm;line-height:.8}
+.unit{font-family:Anuphan;font-size:9mm;line-height:1.1}
+.txt{display:grid;gap:1mm}
+.txt b{font-family:Anuphan;font-weight:500;font-size:8mm;line-height:1.15}
+.txt span{font-size:4.6mm;line-height:1.35;color:#4A4542}
+.face svg.ic{width:20mm;height:20mm;flex:none}
+.face .ph{width:17mm;flex:none}
+.face .qr{width:40mm;height:40mm;flex:none}
+.blank{justify-content:center;color:#B8B0A4;font-size:3.6mm;letter-spacing:.1em}
+"""
+
+
+def tent_face(inner, flip=False):
+    return f'<div class="strip face{" flip" if flip else ""}">{inner}{band()}</div>'
+
+
+def tent_page(inner):
+    return (f'<section class="pg">{tent_face(inner, flip=True)}{tent_face(inner)}'
+            f'<div class="strip blank">3 · ฐาน วางบนโต๊ะ (พับตามเส้นประทุกเส้น)</div><div class="strip blank">4 · พับขึ้นไปทาบด้านในแถบหน้าป้ายอีกด้าน แล้วติดเทป</div></section>')
+
+
+def tents():
+    ic = lambda k: ICONS[k].replace("<svg ", '<svg class="ic" ', 1)
+    price = (f'{logo()}<span class="big">{PRICE}</span><span class="unit">บาท<br>ทุกชิ้น</span>'
+             f'<div class="txt"><b>ชิ้นหนังวัวแท้ รองแก้ว ห้อยของขวัญ แต่งเอง</b><span>หยิบดูได้ ถามได้ทุกอย่าง ไม่ซื้อก็ไม่เป็นไรครับ</span></div>{ic("cup")}')
+    pieces = "".join(photo(c, pl) for c, _, pl, _ in PIECES)
+    collect = (f'{logo()}<div class="txt"><b>สะสมครบ 6 ลาย</b><span>{REWARD_TH}<br>ขอบัตรสะสมฟรีที่โต๊ะ · เลือกลายเอง ไม่มีการสุ่ม</span></div>{pieces}')
+    line = (f'{logo()}<div class="txt" style="flex:1"><b>แอด LINE เล่นเกม รับชิ้นหนังฟรี 1 ชิ้น</b>'
+            f'<span>สแกน QR → เมนู "รับชิ้นหนังฟรี" → เล่นจับคู่จบ → โชว์หน้าจอให้พี่ที่บูธ · คนละ 1 ชิ้น</span></div>{qr(LINE)}')
+    body = tent_page(price) + tent_page(collect) + tent_page(line)
+    return (f'<!doctype html><html lang="th"><meta charset="utf-8"><title>OCT. 26 table tents</title>'
+            f'<style>{css("A4 landscape", "297mm", "210mm", EXTRA + TENT_CSS)}</style>{body}</html>')
+
+
 if __name__ == "__main__":
     open(os.path.join(HERE, "signs.html"), "w", encoding="utf-8").write(build())
     open(os.path.join(HERE, "collect.html"), "w", encoding="utf-8").write(collect_doc(event=False))
-    print("signs.html, collect.html")
+    open(os.path.join(HERE, "tent.html"), "w", encoding="utf-8").write(tents())
+    print("signs.html, collect.html, tent.html")
