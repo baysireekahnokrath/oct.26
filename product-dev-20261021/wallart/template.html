@@ -4,243 +4,313 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
 <style>
 :root{
-  /* Layout: one 960px column. The framed piece in 3D leads (pick flower / bush / meadow), its numbers right under it, then build notes and price. Brand Book v2 nature palette. */
-  --bg:#F4F0E8;--card:#FFFFFF;--ink:#2A2725;--muted:#5E5953;--line:#E2DACB;--accent:#5E7A3A;--warn:#A9442B;--violet:#B9A3D6;--sun:#E9A825;
-  --stage:#E9E3D7;
+  /* v3: photo-led. Owner's reference photos lead each idea; the sketches only show layout and count. Brand Book v2 palette. */
+  --bg:#F4F0E8;--card:#FFFFFF;--ink:#2A2725;--muted:#5E5953;--line:#E2DACB;--accent:#5E7A3A;--warn:#A9442B;--sun:#E9A825;
   --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--stage:#2B2723;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--stage:#2B2723;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
-.wrap{max-width:960px;margin:0 auto;display:grid;gap:40px}
+.wrap{max-width:960px;margin:0 auto;display:grid;gap:44px}
 h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.25;text-wrap:balance;margin:0}
 h1{font-size:clamp(28px,7vw,42px)}h2{font-size:24px}h3{font-size:18px}
 p{margin:0}.muted{color:var(--muted)}.small{font-size:13px}.num{font-variant-numeric:tabular-nums}
 .eyebrow{font-family:var(--latin);font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
 .lede{max-width:66ch}
 section{display:grid;gap:16px}
-.stage{position:relative;background:var(--stage);border:1px solid var(--line);border-radius:18px;overflow:hidden}
-#view{display:block;width:100%;aspect-ratio:1/1;max-height:78vh;max-width:100%;touch-action:none;cursor:grab}
-.status{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted)}
-.hint{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--muted);pointer-events:none}
-.pick{display:grid;gap:10px}
+.finds{display:grid;gap:22px}
+.find{display:grid;gap:8px}
+.find b{font-family:var(--display);font-size:17px}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x proximity}
+.thumbs figure{margin:0;flex:0 0 auto;scroll-snap-align:start;display:grid;gap:2px}
+.thumbs img{height:132px;width:auto;border-radius:10px;border:1px solid var(--line);display:block;background:var(--card)}
+.thumbs figcaption{font-family:var(--latin);font-size:12px;color:var(--muted)}
+.dir{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:14px}
+.dir header{display:grid;gap:4px}
+.tag{font-family:var(--latin);font-size:12.5px;letter-spacing:.06em;color:var(--muted)}
+.dirgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.sketch{width:100%;height:auto;display:block;border-radius:6px}
+.side{width:100%;height:auto;display:block;max-width:420px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.fact{border:1px solid var(--line);border-radius:12px;padding:8px 12px;display:grid;gap:0;min-width:0}
+.fact span{font-size:12.5px;color:var(--muted)}
+.fact b{font-family:var(--latin);font-weight:500;font-size:20px;line-height:1.3}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.row > span{font-size:13px;color:var(--muted);min-width:44px}
-.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
 .btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.readout{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:grid;gap:2px;min-width:0}
-.fact b{font-family:var(--latin);font-weight:500;font-size:24px;line-height:1.2}
-.ideas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
-.idea{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:14px;padding:14px 16px;display:grid;gap:6px;align-content:start}
-.idea b{font-family:var(--display);font-size:17px}
+.sw{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.2)}
+.sticky{position:sticky;top:0;z-index:2;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line)}
 .scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
 table{border-collapse:collapse;width:100%;font-size:13.5px}
 th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 thead th{font-family:var(--display);font-weight:600;white-space:nowrap}
-td.num{text-align:right}
+td.num{text-align:right;white-space:nowrap}
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
-.panel ul,.panel ol{margin:0;padding-left:1.2em;display:grid;gap:6px}
+.panel ul,.panel ol{margin:0;padding-left:1.25em;display:grid;gap:7px}
 .panel a{color:var(--accent)}
 .ask{border-left:4px solid var(--warn)}
+.pick{border-left:4px solid var(--accent)}
 .note{font-size:13px;color:var(--muted)}
+.svgtext{font-family:var(--body);font-size:12px;fill:var(--muted)}
 </style>
 <div class="wrap">
 <header style="display:grid;gap:10px">
-  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · 31 ต.ค. 2569 · ฉบับ 2</p>
-  <h1>ภาพติดผนัง 3D ใส่กรอบ</h1>
-  <p class="muted lede">ฉบับแรกแบนเกินไป ฉบับนี้ให้ชิ้นหนังออกมาจากผนังเป็นก้อน: ดอกไม้ พุ่ม และทุ่งหญ้าแห่งความฝันที่พริ้วไหว
-    ใช้ข้อต่อ 90° ที่บล็อก 07 ออกแบบมาให้ทำแบบนี้ได้พอดี ทุกชิ้นวาดจากไฟล์บล็อกจริง แสงเงาในโมเดลคือความนูนจริง</p>
+  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · 31 ต.ค. 2569 · ฉบับ 3</p>
+  <h1>ภาพติดผนังหนัง ฉบับ 3</h1>
+  <p class="muted lede">ทำใหม่จากภาพอ้างอิง 20 ภาพที่คุณส่งมา ฉบับ 2 ไม่ผ่านเพราะดูเป็นคอม รูปทรงไม่สวย ชิ้นเยอะ และสีไม่ใช่
+    ฉบับนี้ใช้ชิ้นน้อยลงมาก สีเดียวต่อกรอบ และให้หนังโค้งเองด้วยมือ ไม่ใช่ชิ้นแข็งเรียงกันในโมเดล
+    ภาพวาดในหน้านี้บอกแค่ตำแหน่งกับจำนวนชิ้น หน้าตาจริงดูจากภาพอ้างอิงข้าง ๆ และจากชิ้นที่คุณลองทำ</p>
 </header>
 
-<section aria-label="โมเดล 3D">
-  <div class="stage">
-    <canvas id="view" aria-label="โมเดล 3D ของภาพติดผนังในกรอบ หมุนได้ด้วยการลาก"></canvas>
-    <p class="status" id="status">กำลังโหลดโมเดล 3D…</p>
-    <p class="hint">ลากเพื่อหมุน · หมุนล้อหรือบีบนิ้วเพื่อซูม</p>
+<section>
+  <h2>ภาพอ้างอิงบอกอะไร</h2>
+  <div class="finds">
+    <div class="find"><b>1. ชิ้นเดียว ซ้ำกัน สีเดียว</b>
+      <p class="muted">ความสวยมาจากจังหวะกับเงา ไม่ได้มาจากสีเยอะ ภาพที่ดูแพงที่สุดใช้วัสดุสีเดียวทั้งภาพ</p>
+      <div class="thumbs" data-refs="r10 r12 r11 r01 r04"></div></div>
+    <div class="find"><b>2. หนังงอเอง ไม่แข็ง</b>
+      <p class="muted">ทุกภาพที่ดูเป็นงานมือ วัสดุโค้ง ม้วน ย่นตามเนื้อของมัน ฉบับ 2 เป็นชิ้นแบนแข็งเรียงในโมเดล เลยดูเป็นคอม</p>
+      <div class="thumbs" data-refs="r06 r13 r14 r20 r12"></div></div>
+    <div class="find"><b>3. สีดิน ไม่เกิน 3 โทน</b>
+      <p class="muted">อิฐ น้ำตาลอ่อน น้ำตาลเข้ม ชมพูตุ่น เขียวมะกอก ครีม บนพื้นดำหรือครีม (ภาพ 03 กับ 17 เป็นภาพเดียวกัน)</p>
+      <div class="thumbs" data-refs="r02 r03 r16 r18 r15"></div></div>
+    <div class="find"><b>4. มีที่ว่าง</b>
+      <p class="muted">ชิ้นน้อย พื้นหลังเรียบ ให้ตาพัก ภาพกระเป๋า 07 08 สีเยอะชิ้นถี่ เก็บไว้เป็นทางเลือกสีสันทีหลัง ภาพ 09 ให้ไอเดียพับจีบ</p>
+      <div class="thumbs" data-refs="r06 r19 r01 r07 r08 r09"></div></div>
+    <div class="find"><b>คุณทำภาษานี้อยู่แล้ว</b>
+      <p class="muted">ที่ห้อยดอกไม้ 07 สีชมพู คือดอกซ้อนแบบภาพ 06 · ปลอกขวด 07 ข้อต่อดันครึ่งวงกลมให้ยื่นออกมาเอง คือเกล็ดแบบภาพ 12 · ใช้ชิ้นจริงทำได้เลย</p>
+      <div class="thumbs" data-refs="p4 p3 p1"></div></div>
   </div>
-  <div class="pick">
-    <div class="row" role="group" aria-label="งาน"><span>งาน</span>
-      <button class="btn" type="button" data-k="flower" aria-pressed="false">S ดอกไม้</button>
-      <button class="btn" type="button" data-k="bush" aria-pressed="false">M พุ่ม</button>
-      <button class="btn" type="button" data-k="meadow" aria-pressed="true">L ทุ่งหญ้าแห่งความฝัน</button>
-    </div>
-    <div class="row" role="group" aria-label="สี"><span>สี</span>
-      <button class="btn" type="button" data-pal="dream" aria-pressed="true">ทุ่งฝัน (สีของบ้าน)</button>
-      <button class="btn" type="button" data-pal="leather" aria-pressed="false">สีหนังที่มีตอนนี้</button>
-    </div>
-    <div class="row" role="group" aria-label="มุมมอง"><span>ดู</span>
-      <button class="btn" type="button" id="v-front" aria-pressed="false">หน้าตรง</button>
-      <button class="btn" type="button" id="v-angle" aria-pressed="true">มุมเฉียง</button>
-      <button class="btn" type="button" id="v-side" aria-pressed="false">ด้านข้าง (ดูความลึก)</button>
-      <button class="btn" type="button" id="sway" aria-pressed="true">พลิ้วไหว</button>
-    </div>
-  </div>
-  <div class="readout num" id="readout"></div>
 </section>
 
 <section>
-  <h2>สามงาน สามขนาด</h2>
-  <div class="ideas">
-    <div class="idea" style="--c:var(--violet)"><span class="eyebrow">S · กรอบ 30 ซม. · ลึก 8 ซม.</span><b>ดอกไม้</b>
-      <p class="small">กลีบ 3 ชั้นบนแผ่นฐานสาน 2×2 ชั้นนอกเอนลง 20° ชั้นกลาง 46° ชั้นในตั้งชัน 66° ไล่สีจากขอบเข้ากลาง เหมือนที่ห้อยกระเป๋าดอกไม้ชมพูที่ทำแล้ว แต่บานเต็มดอก</p></div>
-    <div class="idea" style="--c:var(--accent)"><span class="eyebrow">M · กรอบ 35 ซม. · ลึก 11 ซม.</span><b>พุ่ม</b>
-      <p class="small">โดมสาน 5 ลูก ขนาดไม่เท่ากัน ดันชิดกันเป็นพุ่ม สานแบบเดียวกับตัวกระเป๋าทรงถังที่ทำได้แล้ว มีดอกเล็ก 2 ดอกแซมในพุ่ม</p></div>
-    <div class="idea" style="--c:var(--sun)"><span class="eyebrow">L · กรอบ 50 ซม. · ลึก 9 ซม.</span><b>ทุ่งหญ้าแห่งความฝัน</b>
-      <p class="small">ก้านชิ้นหนังซ้อนขึ้นจากแถบพื้น 3 แถวลึก แถวหลังสูง แถวหน้าเตี้ย หันคนละนิด ยอดก้านเป็นดอกสีเหลือง ม่วง ครีม ก้านแขวนจากฐาน จึงไหวเบาๆ เมื่อมีลมหรือคนเดินผ่าน</p></div>
+  <h2>สามทาง</h2>
+  <p class="muted lede">ทุกทางใช้กรอบสำเร็จ IKEA SANNAHED 35×35 ซม. ลึก 6 ซม. ราคา __FRAMEP__ บาท (มีกระดาษรองช่อง 25×25 ในกล่อง)
+    ไม่ต้องสั่งทำกรอบ ความนูนไม่เกิน 3 ซม. จึงใส่กรอบนี้ได้ (ต้องวัดความลึกด้านในของจริง)</p>
+  <div class="sticky row" id="pal" role="group" aria-label="ชุดสี"></div>
+
+  <article class="dir" data-dir="A1">
+    <header><p class="tag">ทาง A · ดอกซ้อน</p><h3>A1 ดอกเดียว</h3>
+      <p class="muted">07 สองชิ้นวางไขว้ 45° ตรึงกลางด้วยหมุดผ่า ดึงกลางลงจากด้านหลัง กลีบชิ้นบนจะยกขึ้นเอง ดอกเดียวกลางกรอบ ที่ว่างรอบ ๆ ทำให้ดูเป็นงานศิลปะ แบบภาพ 06</p></header>
+    <div class="dirgrid"><svg class="sketch" data-sketch="bloom1" viewBox="-185 -185 370 370" role="img" aria-label="ภาพร่าง A1"></svg>
+      <div style="display:grid;gap:12px"><div class="facts" data-facts="A1"></div><div class="thumbs" data-refs="r06 p4 r01"></div></div></div>
+  </article>
+
+  <article class="dir" data-dir="A2">
+    <header><p class="tag">ทาง A · ดอกซ้อน</p><h3>A2 สวน 9 ดอก</h3>
+      <p class="muted">ดอกเดียวกัน 3×3 ห่างกัน 11 ซม. สีเดียวทั้งกรอบ แบบภาพ 12 กับ 01 · ใช้ 07 18 ชิ้น ถ้า 07 ไม่พอ ลองดอกจาก 03 (กากบาทแคปซูล มีสี่กลีบเหมือนกัน ขายช้า)</p></header>
+    <div class="dirgrid"><svg class="sketch" data-sketch="bloom9" viewBox="-185 -185 370 370" role="img" aria-label="ภาพร่าง A2"></svg>
+      <div style="display:grid;gap:12px"><div class="facts" data-facts="A2"></div><div class="thumbs" data-refs="r12 r01 r10"></div>
+        <svg class="side" viewBox="0 0 320 130" data-side="bloom" role="img" aria-label="ภาพด้านข้าง ดอกซ้อน"></svg></div></div>
+  </article>
+
+  <article class="dir" data-dir="B">
+    <header><p class="tag">ทาง B · เกล็ด</p><h3>B เกล็ด 05</h3>
+      <p class="muted">วงกลม 05 __NSCALE__ ชิ้น ซ้อนเป็นแถวแบบกระเบื้องหลังคา ทากาวแค่แถบบน 1/3 ขอบล่างลอยเอง เกิดเงาทุกแถว
+      สีเดียวแบบภาพ 04 หรือไล่สี 3 โทนจากล่างขึ้นบนแบบภาพ 05 · ใช้ 05 ที่ขายช้า ไม่แตะ 07</p></header>
+    <div class="dirgrid"><svg class="sketch" data-sketch="scales" viewBox="-185 -185 370 370" role="img" aria-label="ภาพร่าง B"></svg>
+      <div style="display:grid;gap:12px"><div class="facts" data-facts="B"></div><div class="thumbs" data-refs="r04 r05 r02"></div>
+        <svg class="side" viewBox="0 0 320 130" data-side="scales" role="img" aria-label="ภาพด้านข้าง เกล็ด"></svg></div></div>
+  </article>
+
+  <article class="dir" data-dir="C">
+    <header><p class="tag">ทาง C · ทุ่งหญ้า</p><h3>C ทุ่งหญ้าเศษหนัง</h3>
+      <p class="muted">ตัดเศษหนังที่เหลือจากการตัดบล็อกเป็นเส้นกว้าง 2.5 ซม. ยาวเส้นละ ~__STRIP__ ซม. พับจีบเป็นคลื่น ตั้งขอบขึ้นเรียง 11 แถว
+      รวมเส้นยาว ~__METRES__ เมตร ได้ทุ่งหญ้าพริ้วไหวแบบภาพ 20 ไม่ใช้ชิ้นที่ขายได้เลย เรื่องเล่า "หนังที่เหลือ ได้ชีวิตที่สอง" ชัดที่สุด</p></header>
+    <div class="dirgrid"><svg class="sketch" data-sketch="meadow" viewBox="-185 -185 370 370" role="img" aria-label="ภาพร่าง C"></svg>
+      <div style="display:grid;gap:12px"><div class="facts" data-facts="C"></div><div class="thumbs" data-refs="r20 r13 r14"></div>
+        <svg class="side" viewBox="0 0 320 130" data-side="meadow" role="img" aria-label="ภาพจากด้านบน เส้นพับจีบ"></svg></div></div>
+  </article>
+</section>
+
+<section>
+  <h2>ลองทำด้วยมือ 1 ชิ้นก่อน: A1 ดอกเดียว</h2>
+  <div class="two">
+    <div class="panel pick">
+      <h3>ของที่ต้องใช้</h3>
+      <ul>
+        <li>07 สีเดียวกัน 2 ชิ้น</li>
+        <li>หมุดผ่า (หมุดขาแยกทองเหลือง) 1 ตัว หรือเข็มกับด้ายเทียน</li>
+        <li>ตุ๊ดตู่เจาะรู 3 มม.</li>
+        <li>สักหลาดหรือผ้าลินินชิ้น 25×25 ซม. กาวยาง</li>
+        <li>กรอบ SANNAHED 35×35 (ใช้แผ่นหลังของกรอบเป็นฐาน)</li>
+      </ul>
+      <p class="note">ใช้เวลาราว 20 นาที ต้นทุนหนัง 7 บาท</p>
+    </div>
+    <div class="panel">
+      <h3>ขั้นตอน</h3>
+      <ol>
+        <li>เจาะรู 3 มม. ตรงกลางทั้งสองชิ้น (จุดตัดของเส้นที่ลากระหว่างร่องบนกับร่องล่าง)</li>
+        <li>วางชิ้นล่าง แล้ววางชิ้นบนหมุน 45° ให้กลีบบนอยู่ระหว่างกลีบล่าง</li>
+        <li>เสียบหมุดผ่าทะลุหนังสองชิ้น สักหลาด และแผ่นหลังกรอบ</li>
+        <li>ดึงขาหมุดด้านหลังให้ตึง กลางดอกยุบลง ~5 มม. กลีบบนจะยกขึ้นเอง แล้วพับขาหมุดแนบ</li>
+        <li>ถ้ากลีบยกน้อย บีบโคนกลีบ 30 วินาที หรือเช็ดหลังหนังด้วยผ้าหมาด ดัดแล้วทิ้งให้แห้ง 1 ชม.</li>
+        <li>ถ่ายรูปหน้าตรงกับเอียง 45° ใต้ไฟดวงเดียวจากซ้ายบน ส่งให้ PD</li>
+      </ol>
+    </div>
   </div>
+  <svg class="side" viewBox="0 0 320 130" data-side="bloom" role="img" aria-label="ภาพด้านข้าง ดอกซ้อน"></svg>
+  <div class="panel">
+    <h3>ดูอะไรตอนลอง</h3>
+    <ul>
+      <li>ดูเป็นหนังจริงไหม ไม่ใช่พลาสติกหรืองานคอม</li>
+      <li>ผ่านไป 1 วัน กลีบยังยกอยู่ไหม (หนังเรานิ่ม 1.0–1.2 มม. อาจคืนตัว)</li>
+      <li>กลีบสูงสุดกี่ ซม. ต้องเตี้ยกว่าความลึกด้านในกรอบอย่างน้อย 5 มม.</li>
+      <li>ลองดอกจาก 03 อีก 1 ดอกเทียบกัน ถ้าสวยพอ งานใหญ่ใช้ 03 แทน 07 ได้</li>
+      <li>แถม: ตัดเศษหนัง 2.5×40 ซม. หนึ่งเส้น พับจีบตั้งบนโต๊ะ ดู 5 นาที ไม่เสียเงิน ถ้าชอบ ทาง C ไปต่อได้</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>เทียบสี่แบบ</h2>
   <div class="scroll"><table>
-    <thead><tr><th>งาน</th><th>กรอบ ซม.</th><th>ลึก ซม.</th><th>ชิ้น 07</th><th>ค่าหนัง ฿</th><th>ราคาเสนอ ฿</th></tr></thead>
-    <tbody>__ROWS__</tbody></table></div>
-  <p class="note">ยังไม่รวมกรอบลึก ค่าแรงประกอบ และกล่องส่ง งานนูนใช้เวลาประกอบมากกว่าแผงแบนหลายเท่า ราคาจึงสูงขึ้นจากฉบับแรก ควรจับเวลาใบแรกแล้วปรับราคา</p>
+    <thead><tr><th>แบบ</th><th>ชิ้น</th><th>นูน</th><th>หนัง ฿</th><th>ต้นทุนรวม ฿</th><th>ชม.</th><th>ราคาเสนอ ฿</th></tr></thead>
+    <tbody>__ROWS__</tbody>
+  </table></div>
+  <p class="note">ต้นทุนรวม = หนัง + กรอบ __FRAMEP__ + สักหลาดและกาว ~40 + หมุด ~2/ดอก ยังไม่รวมค่าแรง บรรจุภัณฑ์ ค่าส่ง ·
+    ราคาเสนอเป็นสมมติฐาน ต่ำกว่าฉบับ 2 เพราะใช้กรอบสำเร็จ · ทุกแบบใช้ 07 รวม __N07__ ชิ้น จาก 07 ที่เหลือ __LEFT07__ (07 ขายดีที่สุด ใช้ให้น้อย)</p>
 </section>
 
 <section class="two">
-  <div class="panel">
-    <h3>วิธีทำ</h3>
-    <ul class="small">
-      <li><b>ดอกไม้:</b> สานแผ่นฐาน 2×2 แบบที่ห้อยกระเป๋า แล้วสอดปีกของกลีบแต่ละชั้นเข้าร่องของชั้นที่อยู่ใต้ กลีบที่เอนมากให้เย็บด้ายผ่านแผ่นหลัง 1 จุด</li>
-      <li><b>พุ่ม:</b> สานโดมทีละลูกแบบตัวกระเป๋า ยัดกระดาษหรือฟองน้ำในโดมให้คงทรง ติดขอบโดมกับแผ่นหลังด้วยด้าย</li>
-      <li><b>ทุ่งหญ้า:</b> วางแถบพื้นแบนที่ก้นกรอบ สอดชิ้นล่างของแต่ละก้านเข้าร่องแถบพื้นตั้งฉาก 90° (ข้อต่อที่บล็อก 07 ออกแบบไว้) แล้วต่อชิ้นขึ้นไปทีละชิ้น ก้านหลังสูงยึดกับแผ่นหลังที่ชิ้นบนสุดด้วยด้ายใส</li>
-      <li>หนังไม่รับน้ำหนักการแขวน กรอบรับแทน จึงไม่ติดมติ 16 ต.ค.</li>
-    </ul>
-  </div>
-  <div class="panel">
-    <h3>กรอบและชิ้น 07</h3>
-    <ul class="small">
-      <li><b>ต้องใช้กรอบกล่องลึก 8–11 ซม.</b> กรอบลึก IKEA SANNAHED อาจตื้นเกินไปสำหรับงานนูนชุดนี้ ต้องสั่งร้านกรอบรูปทำกล่องลึก หรือใช้กล่องอะคริลิกครอบหน้า ยังไม่รู้ราคา</li>
-      <li><b>ทำครบ 3 งานใช้ 07 รวม __N07__ ชิ้น</b> ตอนนี้ 07 เหลือไม่มาก (ขายที่บูธไปแล้ว 60 แผ่น และใช้ทำต้นแบบ) ทุ่งหญ้าใบเดียวใช้เกือบทั้งหมดที่เหลือ ต้องสั่งตัด 07 เพิ่ม (มีบล็อกแล้ว ค่าตัดชิ้นละ 2 บาท)</li>
-      <li>ทางเลือก: ดอกไม้กับพุ่มทำจาก 07 ก่อน ทุ่งหญ้ารอตัด 07 รอบใหม่</li>
-    </ul>
-  </div>
-</section>
-
-<section class="two">
-  <div class="panel">
-    <h3>ทำไมราคานี้</h3>
-    <ul class="small">
-      <li>ลูกค้าจ่ายตามความรู้สึกเวลาเห็นบนผนัง งานที่เป็นก้อนมีเงา ดูเป็นงานศิลปะ ไม่ใช่ของตกแต่งทั่วไป</li>
-      <li>ใช้ชิ้นมากขึ้นและประกอบนานขึ้นมาก ทุ่งหญ้าใช้เกือบ 80 ชิ้น</li>
-      <li>เทียบตลาด: ภาพตกแต่งสั่งทำใน HomePro ราว 11,664–23,900 บาท · งานหนัง 3D ทำมือต่างประเทศ 752–1,524 USD ของเรายังต่ำกว่ามาก</li>
-      <li>ไอเดียต่อยอด: ขายดอกไม้เป็นดอกเดี่ยวให้ลูกค้าสะสมจนเต็มทุ่ง เข้ากับเกมสะสมครบลายที่บูธ</li>
-    </ul>
-  </div>
   <div class="panel ask">
     <h3>ให้เจ้าของเลือก</h3>
-    <ol class="small">
-      <li>ชอบงานไหน หรือแนวไหนที่ใกล้ "ทุ่งหญ้าแห่งความฝัน" ที่สุด ผมจะปรับต่อจากตัวนั้น</li>
-      <li>สี: ใช้สีของบ้าน (เขียวใบตอง ม่วงอินทนิล เหลืองทานตะวัน) ต้องมีหนังสีเหล่านี้ หรือใช้สีหนังที่มีตอนนี้</li>
-      <li>สั่งตัด 07 เพิ่มกี่ชิ้น เพื่อทำทุ่งหญ้า</li>
-      <li>ราคา: เริ่มที่ S 990 · M 1,890 · L 3,990 ไหม</li>
+    <ol>
+      <li>ลอง A1 ดอกเดียวก่อนไหม (PD แนะนำ ใช้ 07 แค่ 2 ชิ้น) และลองเส้นเศษหนังของทาง C ไปด้วย</li>
+      <li>ชุดสีไหน ดิน · ถ่าน · ครีมบนดำ และหนังสีไหนมีพอ</li>
+      <li>ใช้กรอบสำเร็จ SANNAHED แทนสั่งทำ ได้ไหม</li>
+      <li>งานใหญ่ (A2) ใช้ 03 แทน 07 ได้ไหม ถ้าดอก 03 สวยพอ</li>
     </ol>
   </div>
+  <div class="panel">
+    <h3>ที่มาและไฟล์</h3>
+    <ul>
+      <li>ภาพอ้างอิง 20 ภาพจากโฟลเดอร์ Drive ของเจ้าของ ใช้ในทีมเท่านั้น ห้ามใช้ในสื่อของแบรนด์</li>
+      <li>ราคากรอบ: IKEA Thailand SANNAHED 35×35 ลึก 6 ซม. 349 บาท (31 ต.ค.)</li>
+      <li>ต้นทุนชิ้น 07 3.45 · 05 3.84 · 03 3.61 บาท (22 ต.ค.)</li>
+      <li>repo: product-dev-20261021/wallart/ (build.py, template.html) · ฉบับ 2 เก็บที่ wallart/v2/</li>
+      <li>กฎที่เกี่ยว: งานนี้ไม่ใช่ของห้อยรับแรง ไม่ใช่ของเด็ก ไม่ต่อชิ้นแบบรับน้ำหนัก ไม่ติดกฎทดสอบ 5 ข้อ</li>
+    </ul>
+  </div>
 </section>
-
-<p class="note">ไฟล์: product-dev-20261021/wallart/ (build.py จัดวางชิ้นจากรูปร่างบล็อก 07 จริง) · โมเดลแสดงทรงและขนาด หนังจริงงอได้ ต้องทำต้นแบบก่อน</p>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const D = __DATA__;
-const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const PAL = {
-  dream: {base: "#C9B58F", petal1: "#B9A3D6", petal2: "#DCCDEE", petal3: "#E9A825", bushA: "#5E7A3A", bushB: "#7F9A57", bushC: "#A7BE85",
-          accent: "#F0CD72", ground: "#4F6430", stem1: "#6F8A47", stem2: "#9DB77A", heads: ["#E9A825", "#B9A3D6", "#F4F0E8", "#2E4A7D"], back: "#F4F0E8"},
-  leather: {base: "#A87850", petal1: "#E6DCC6", petal2: "#D9B8A8", petal3: "#7A4E33", bushA: "#7A4E33", bushB: "#A87850", bushC: "#C9A27A",
-          accent: "#E6DCC6", ground: "#4A3328", stem1: "#7A4E33", stem2: "#A87850", heads: ["#E6DCC6", "#D9B8A8", "#C9A27A", "#4A3328"], back: "#EFE9DD"}};
-let key = "meadow", pal = "dream";
-const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (reduce) $("#sway").setAttribute("aria-pressed", "false");
-function readout() {
-  const f = D.frames[key];
-  $("#readout").replaceChildren(...[["งาน", `${f.size} ${f.title}`, "ชิ้น 07 ทั้งหมด"], ["กรอบ", `${f.W / 10} × ${f.W / 10} ซม.`, `ลึก ${f.D / 10} ซม.`],
-    ["ชิ้นหนัง", f.n, `ค่าหนัง ${f.leather} ฿`], ["ราคาเสนอ", `${f.price[0].toLocaleString()}–${f.price[1].toLocaleString()} ฿`, "ยังไม่รวมกรอบลึก"]].map(([a, b, c]) => {
-      const d = document.createElement("div"); d.className = "fact";
-      d.innerHTML = "<span class='small muted'></span><b></b><span class='small muted'></span>";
-      d.children[0].textContent = a; d.children[1].textContent = b; d.children[2].textContent = c; return d;
-    }));
+  earth:{name:"ดิน",lea:"#B8774B",dark:"#8E5634",light:"#D9A97C",back:"#ECE3D2",frame:"#F7F4EE",mount:"#FBF8F2",cut:"rgba(60,30,15,.45)"},
+  coal:{name:"ถ่าน",lea:"#3B3734",dark:"#272523",light:"#5A544F",back:"#1E1C1B",frame:"#121111",mount:"#1A1918",cut:"rgba(0,0,0,.6)"},
+  cream:{name:"ครีมบนดำ",lea:"#E6D9C1",dark:"#C6B291",light:"#F5EEE1",back:"#25221F",frame:"#121111",mount:"#F2EDE3",cut:"rgba(80,60,30,.4)"}
+};
+let pal = "earth";
+try { const s = localStorage.getItem("wa3-pal"); if (PAL[s]) pal = s; } catch (e) {}
+const NS = "http://www.w3.org/2000/svg";
+const dpath = code => "M" + D.dies[code].poly.map(([x, y]) => x + "," + (-y)).join("L") + "Z";
+const cuts = (code, col) => D.dies[code].cuts.map(([a, b]) => `<line x1="${a[0]}" y1="${-a[1]}" x2="${b[0]}" y2="${-b[1]}" stroke="${col}" stroke-width="1.1"/>`).join("");
+let uid = 0;
+
+function defs(p, id) {
+  return `<defs>
+  <filter id="sh${id}" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="3" dy="5" stdDeviation="3.5" flood-color="#000" flood-opacity=".38"/></filter>
+  <filter id="shs${id}" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="1.5" dy="2.5" stdDeviation="2" flood-color="#000" flood-opacity=".3"/></filter>
+  <filter id="lip${id}"><feGaussianBlur stdDeviation="4"/></filter>
+  <radialGradient id="cup${id}" cx="50%" cy="50%" r="55%"><stop offset="0" stop-color="${p.dark}"/><stop offset=".45" stop-color="${p.lea}"/><stop offset="1" stop-color="${p.light}"/></radialGradient>
+  <linearGradient id="sc${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${p.dark}"/><stop offset=".55" stop-color="${p.lea}"/><stop offset="1" stop-color="${p.light}"/></linearGradient>
+  <clipPath id="in${id}"><rect x="-175" y="-175" width="350" height="350"/></clipPath></defs>`;
 }
-readout();
-(function () {
-  const status = $("#status");
-  if (!window.THREE) { status.textContent = "โหลดโมเดล 3D ไม่ได้ ตัวเลขด้านล่างยังใช้ได้"; return; }
-  const T = THREE, canvas = $("#view"), TH = 1.4;
-  let renderer;
-  try { renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); } catch { status.textContent = "เครื่องนี้แสดง 3D ไม่ได้"; return; }
-  status.hidden = true;
-  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
-  renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
-  const scene = new T.Scene();
-  scene.add(new T.HemisphereLight(0xffffff, 0x8a7a66, 0.62));
-  const sun = new T.DirectionalLight(0xffffff, 0.75); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.normalBias = 1.2;
-  scene.add(sun); scene.add(sun.target);
-  const geo = new T.ExtrudeGeometry(new T.Shape(D.poly.map(([x, y]) => new T.Vector2(x, y))), {depth: TH, bevelEnabled: false}); geo.translate(0, 0, -TH / 2);
-  const mats = {}; const mat = c => mats[c] || (mats[c] = new T.MeshStandardMaterial({color: c, roughness: .88, side: T.DoubleSide}));
-  const frameMat = new T.MeshStandardMaterial({color: 0x2A2725, roughness: .6});
-  let art = null, cols = [], meshes = [];
-  function build() {
-    if (art) scene.remove(art);
-    art = new T.Group(); cols = []; meshes = [];
-    const f = D.frames[key], W = f.W, Dp = f.D, rail = 20, inner = W - 2 * rail, p = PAL[pal];
-    const back = new T.Mesh(new T.BoxGeometry(inner, inner, 4), mat(p.back)); back.position.z = -2; back.receiveShadow = true; art.add(back);
-    for (const [w, h, x, y] of [[W, rail, 0, (W - rail) / 2], [W, rail, 0, -(W - rail) / 2], [rail, W, (W - rail) / 2, 0], [rail, W, -(W - rail) / 2, 0]]) {
-      const b = new T.Mesh(new T.BoxGeometry(w, h, Dp + 6), frameMat); b.position.set(x, y, Dp / 2 - 3); b.castShadow = b.receiveShadow = true; art.add(b);
+function frame(p, id, body, mount) {
+  let s = `<rect x="-185" y="-185" width="370" height="370" fill="${p.frame}"/><rect x="-175" y="-175" width="350" height="350" fill="${mount ? p.mount : p.back}"/>`;
+  if (mount) s += `<rect x="-120" y="-120" width="240" height="240" fill="${p.back}"/>`;
+  s += `<g clip-path="url(#in${id})">${body}<rect x="-175" y="-175" width="350" height="350" fill="none" stroke="#000" stroke-opacity=".28" stroke-width="10" filter="url(#lip${id})"/></g>`;
+  s += `<rect x="-184.5" y="-184.5" width="369" height="369" fill="none" stroke="rgba(0,0,0,.18)"/>`;
+  return s;
+}
+function bloom(x, y, p, id) {
+  return `<g transform="translate(${x},${y}) rotate(${(x * 7 + y * 3) % 9 - 4})">
+    <g filter="url(#shs${id})"><path d="${dpath("07")}" fill="${p.dark}"/>${cuts("07", p.cut)}</g>
+    <g transform="rotate(45) scale(.84)" filter="url(#sh${id})"><path d="${dpath("07")}" fill="url(#cup${id})"/>${cuts("07", p.cut)}</g>
+    <circle r="3.4" fill="#B08D57" stroke="#6D5530" stroke-width=".8"/></g>`;
+}
+function scales(p, id, lay) {
+  return lay.slice().sort((a, b) => b[2] - a[2]).map(([x, y]) =>
+    `<g transform="translate(${x},${y})" filter="url(#shs${id})"><circle r="45" fill="url(#sc${id})"/>${cuts("05", p.cut)}</g>`).join("");
+}
+function mix(a, b, t) {
+  const h = s => [1, 3, 5].map(i => parseInt(s.slice(i, i + 2), 16));
+  const A = h(a), B = h(b);
+  return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",") + ")";
+}
+function meadow(p, id, m) {
+  let s = "";
+  const H = 17, step = 3, half = m.width / 2;
+  for (let r = 0; r < m.rows; r++) {
+    const y0 = -150 + r * m.pitch + (r * 29 % 7) - 3, ph = r * 1.7, amp = 3 + (r * 37 % 6), wl = m.wave * (.7 + (r * 53 % 7) / 10);
+    const wob = x => 1 + .35 * Math.sin(x / 41 + r * 2.3);                       // pleats are not even by hand
+    const top = x => y0 + amp * wob(x) * Math.sin(2 * Math.PI * x / wl + ph + .6 * Math.sin(x / 23 + r)) + 2.2 * Math.sin(2 * Math.PI * x / 97 + r);
+    s += `<path d="M${-half},${top(-half) + H + 4}` + Array.from({length: m.width / step + 1}, (_, k) => `L${-half + k * step},${top(-half + k * step) + H + 5}`).join("") +
+      `L${half},${y0 + H + 14}L${-half},${y0 + H + 14}Z" fill="#000" opacity=".28" filter="url(#lip${id})"/>`;
+    for (let x = -half; x < half; x += step) {
+      const t = Math.max(-1, Math.min(1, (top(x + step) - top(x)) / step * 1.6));
+      const c = t > 0 ? mix(p.lea, p.light, t * .8) : mix(p.lea, p.dark, -t * .9);
+      const a = top(x), b = top(x + step);
+      s += `<path d="M${x},${a}L${x + step + .4},${b}L${x + step + .4},${b + H}L${x},${a + H}Z" fill="${c}"/>`;
     }
-    if (key === "meadow") for (const c of D.cols) { const g = new T.Group(); g.position.set(c.x, c.y, c.z); g.userData = c; art.add(g); cols.push(g); }
-    D.pieces[key].forEach(([x, y, z, ux, uy, uz, vx, vy, vz, role, turn, col]) => {
-      const u = new T.Vector3(ux, uy, uz), v = new T.Vector3(vx, vy, vz), n = new T.Vector3().crossVectors(u, v);
-      let c = role === "head" ? p.heads[(col + 7) % p.heads.length] : p[role];
-      const m = new T.Mesh(geo, mat(c)); m.rotation.z = turn * Math.PI / 180; m.castShadow = m.receiveShadow = true; meshes.push(m);
-      const pos = new T.Vector3(x, y, z).addScaledVector(n, turn % 180 ? 0.9 : -0.9);   // woven: neighbours sit on alternate sides
-      const g = new T.Group(); g.matrixAutoUpdate = false; g.matrix.makeBasis(u, v, n).setPosition(pos); g.add(m);
-      (col >= 0 ? cols[col] : art).add(g);
-    });
-    scene.add(art);
-    sun.position.set(-W * .55, W * .9, W * 2.2); sun.target.position.set(0, 0, 0);
-    const sc = sun.shadow.camera; sc.left = sc.bottom = -W * .8; sc.right = sc.top = W * .8; sc.near = 10; sc.far = W * 5; sc.updateProjectionMatrix();
-    frame = {size: W, depth: Dp}; draw(0);
+    s += `<path d="M${-half},${top(-half)}` + Array.from({length: m.width / step + 1}, (_, k) => `L${-half + k * step},${top(-half + k * step)}`).join("") +
+      `" fill="none" stroke="${p.light}" stroke-width="1" opacity=".8"/>`;
   }
-  // camera
-  const cam = new T.PerspectiveCamera(30, 1, 1, 20000); cam.up.set(0, 1, 0);
-  const VIEWS = {front: [0, 0], angle: [-0.42, 0.22], side: [-1.25, 0.08]};
-  let [yaw, pitch] = VIEWS.angle, zoom = 1, frame = {size: 500, depth: 80};
-  function draw(t) {
-    const w = canvas.clientWidth, h = canvas.clientHeight;
-    if (canvas.width !== Math.round(w * renderer.getPixelRatio()) || canvas.height !== Math.round(h * renderer.getPixelRatio())) renderer.setSize(w, h, false);
-    cam.aspect = w / h; cam.updateProjectionMatrix();
-    for (const g of cols) { const c = g.userData; g.rotation.z = Math.sin(t / 1400 + c.phase) * c.amp * Math.PI / 180 * swayOn(); g.rotation.x = Math.sin(t / 1900 + c.phase * 1.7) * 2 * Math.PI / 180 * swayOn(); }
-    const dist = frame.size * 2.25 * zoom, tz = frame.depth * .35;
-    cam.position.set(dist * Math.sin(yaw) * Math.cos(pitch), dist * Math.sin(pitch), tz + dist * Math.cos(yaw) * Math.cos(pitch));
-    cam.lookAt(0, 0, tz); renderer.render(scene, cam);
-  }
-  const swayOn = () => $("#sway").getAttribute("aria-pressed") === "true" && key === "meadow" ? 1 : 0;
-  let raf = 0;
-  function loop(t) { draw(t); raf = swayOn() && !document.hidden ? requestAnimationFrame(loop) : 0; }
-  function kick() { if (!raf && swayOn()) raf = requestAnimationFrame(loop); else draw(performance.now()); }
-  const pts = new Map(); let pinch = 0;
-  canvas.addEventListener("pointerdown", e => { canvas.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); });
-  canvas.addEventListener("pointermove", e => {
-    if (!pts.has(e.pointerId)) return;
-    const [px, py] = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
-    if (pts.size === 2) { const [a, b] = [...pts.values()], dd = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch) zoom = Math.max(.45, Math.min(2.2, zoom * pinch / dd)); pinch = dd; }
-    else { yaw = Math.max(-1.45, Math.min(1.45, yaw - (e.clientX - px) * 0.008)); pitch = Math.max(-1.0, Math.min(1.0, pitch + (e.clientY - py) * 0.008)); }
-    if (!raf) draw(performance.now());
-  });
-  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = 0; };
-  canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up);
-  canvas.addEventListener("wheel", e => { e.preventDefault(); zoom = Math.max(.45, Math.min(2.2, zoom * (e.deltaY > 0 ? 1.08 : .93))); if (!raf) draw(performance.now()); }, {passive: false});
-  const press = (sel, el) => $$(sel).forEach(b => b.setAttribute("aria-pressed", String(b === el)));
-  $$("[data-k]").forEach(b => b.addEventListener("click", () => { key = b.dataset.k; press("[data-k]", b); readout(); build(); kick(); }));
-  $$("[data-pal]").forEach(b => b.addEventListener("click", () => { pal = b.dataset.pal; press("[data-pal]", b); build(); kick(); }));
-  for (const v of ["front", "angle", "side"]) $("#v-" + v).addEventListener("click", e => { [yaw, pitch] = VIEWS[v]; zoom = 1; press("#v-front,#v-angle,#v-side", e.currentTarget); kick(); });
-  $("#sway").addEventListener("click", e => { const b = e.currentTarget; b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); kick(); });
-  document.addEventListener("visibilitychange", kick);
-  window.addEventListener("resize", () => { if (!raf) draw(performance.now()); });
-  build(); kick();
-})();
+  return s;
+}
+function drawSketch(svg) {
+  const p = PAL[pal], id = ++uid, key = svg.dataset.sketch, d = D.dirs.find(x => x.key === key);
+  let body = "";
+  if (key === "bloom1" || key === "bloom9") body = d.layout.map(([x, y]) => bloom(x, y, p, id)).join("");
+  if (key === "scales") body = scales(p, id, d.layout);
+  if (key === "meadow") body = meadow(p, id, d.layout);
+  svg.innerHTML = defs(p, id) + frame(p, id, body, d.mount);
+}
+// side views: line drawings in the page's ink colour, so they read in both themes
+const SIDE = {
+  bloom: `<line x1="20" y1="100" x2="300" y2="100" stroke="currentColor" stroke-width="2"/><rect x="20" y="100" width="280" height="9" fill="currentColor" opacity=".18"/>
+    <text x="20" y="124" class="svgtext">แผ่นหลัง + สักหลาด</text>
+    <path d="M160,97 C130,95 95,90 62,84" fill="none" stroke="currentColor" stroke-width="3" opacity=".45"/><path d="M160,97 C190,95 225,90 258,84" fill="none" stroke="currentColor" stroke-width="3" opacity=".45"/>
+    <path d="M160,96 C140,90 112,70 92,44" fill="none" stroke="currentColor" stroke-width="3.2"/><path d="M160,96 C180,90 208,70 228,44" fill="none" stroke="currentColor" stroke-width="3.2"/>
+    <circle cx="160" cy="92" r="5" fill="#B08D57"/><line x1="160" y1="96" x2="160" y2="112" stroke="#B08D57" stroke-width="2.4"/><path d="M160,112 L148,116 M160,112 L172,116" stroke="#B08D57" stroke-width="2.4"/>
+    <path d="M182,112 v14 m-5,-6 l5,6 l5,-6" fill="none" stroke="var(--warn)" stroke-width="2"/><text x="192" y="126" class="svgtext">ดึงขาหมุดด้านหลัง</text>
+    <text x="232" y="40" class="svgtext">กลีบบนยกเอง</text><text x="262" y="80" class="svgtext">ชิ้นล่าง</text>`,
+  scales: `<line x1="40" y1="8" x2="40" y2="124" stroke="currentColor" stroke-width="2"/><rect x="31" y="8" width="9" height="116" fill="currentColor" opacity=".18"/>
+    <text x="12" y="70" class="svgtext" transform="rotate(-90 22 70)">ผนัง</text>` +
+    [12, 40, 68].map(y => `<path d="M42,${y} L46,${y + 20} C52,${y + 38} 58,${y + 50} 66,${y + 58}" fill="none" stroke="currentColor" stroke-width="3"/><line x1="42" y1="${y}" x2="46" y2="${y + 20}" stroke="var(--sun)" stroke-width="6" opacity=".9"/>`).join("") +
+    `<text x="96" y="30" class="svgtext">แถบเหลือง = ทากาว 1/3 บน</text><text x="96" y="52" class="svgtext">ขอบล่างลอยเอง เกิดเงา</text><text x="96" y="74" class="svgtext">แถวบนทับแถวล่าง</text><text x="96" y="96" class="svgtext">เริ่มติดจากแถวล่างสุดขึ้นไป</text>`,
+  meadow: `<path d="M20,60 ` + Array.from({length: 141}, (_, k) => `L${20 + k * 2},${60 + (16 + 5 * Math.sin(k / 17)) * Math.sin(k / 4.2)}`).join(" ") + `" fill="none" stroke="currentColor" stroke-width="3"/>
+    <text x="20" y="20" class="svgtext">มองจากด้านบน: เส้นเศษหนังพับจีบเป็นคลื่น ตั้งขอบขึ้น</text>
+    <text x="20" y="108" class="svgtext">ทากาวขอบล่างกับแผ่นหลัง ห่างแถวละ 2.8 ซม.</text><text x="20" y="126" class="svgtext">กว้าง 2.5 ซม. = สูงจากพื้น 2.5 ซม.</text>`
+};
+function drawAll() {
+  document.querySelectorAll("[data-sketch]").forEach(drawSketch);
+  document.querySelectorAll("#pal .btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === pal));
+}
+document.querySelectorAll("[data-side]").forEach(s => { s.innerHTML = SIDE[s.dataset.side]; s.style.color = "var(--ink)"; });
+document.querySelectorAll("[data-refs]").forEach(el => {
+  el.innerHTML = el.dataset.refs.split(" ").map(r => `<figure><img src="refs/${r}.jpg" alt="ภาพอ้างอิง ${r}" loading="lazy" onerror="this.closest('figure').hidden=true">
+    <figcaption>${r[0] === "p" ? "ของจริงของเรา" : "ภาพ " + r.slice(1)}</figcaption></figure>`).join("");
+});
+document.querySelectorAll("[data-facts]").forEach(el => {
+  const d = D.dirs.find(x => x.id === el.dataset.facts);
+  const f = [["ชิ้น", d.die ? `${d.n} × ${d.die}` : "เศษหนัง"], ["นูน", d.relief], ["ต้นทุนรวม", "฿" + d.total], ["ทำ", d.hours < 1 ? Math.round(d.hours * 60) + " นาที" : d.hours + " ชม."],
+             ["ราคาเสนอ", d.price[0].toLocaleString() + "–" + d.price[1].toLocaleString()]];
+  el.innerHTML = f.map(([k, v]) => `<div class="fact"><span>${k}</span><b>${v}</b></div>`).join("");
+});
+document.getElementById("pal").innerHTML = '<span class="small muted">ชุดสี</span>' + Object.entries(PAL).map(([k, p]) =>
+  `<button class="btn" data-p="${k}" aria-pressed="false"><span class="sw" style="background:${p.lea};box-shadow:inset -5px 0 0 ${p.back}"></span>${p.name}</button>`).join("");
+document.getElementById("pal").addEventListener("click", e => {
+  const b = e.target.closest(".btn"); if (!b) return;
+  pal = b.dataset.p; try { localStorage.setItem("wa3-pal", pal); } catch (e) {}
+  drawAll();
+});
+drawAll();
 </script>
