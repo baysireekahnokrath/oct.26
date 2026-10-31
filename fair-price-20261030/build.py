@@ -12,7 +12,7 @@ import os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(os.path.dirname(HERE), "sx2026-20261106"))
-from build import LINE, LINE_ID, REWARD_TH, logo, photo, band, qr, css, collect_doc  # noqa: E402
+from build import FONTS, LINE, LINE_ID, REWARD_TH, logo, photo, band, qr, css, collect_doc  # noqa: E402
 
 PRICE = 30
 # code, Thai name, plan photo, uses (single piece only)
@@ -187,8 +187,39 @@ def tents():
     return (f'<!doctype html><html lang="th"><meta charset="utf-8"><title>OCT. 26 table tents</title>'
             f'<style>{css("A4", "210mm", "297mm", EXTRA + TENT_CSS)}</style>{body}</html>')
 
+# ------------------------------------------------------------------ LINE coupon image (owner 31 Oct: the reward card needs one)
+def reward_img(w, h):
+    pieces = "".join(f'<div class="pc">{photo(c, pl)}<i>{c}</i></div>' for c, _, pl, _ in PIECES)
+    css_ = f"""
+@font-face{{font-family:Anuphan;font-weight:500;src:url(file://{FONTS}/alt/Anuphan-Medium.ttf)}}
+@font-face{{font-family:Plex;src:url(file://{FONTS}/IBMPlexSansThai-Regular.ttf)}}
+@font-face{{font-family:Jost;font-weight:500;src:url(file://{FONTS}/alt/Jost-Medium.ttf)}}
+*{{box-sizing:border-box}} html,body{{margin:0}}
+body{{width:{w}px;height:{h}px;background:#F4F0E8;color:#2A2725;font-family:Plex,sans-serif;position:relative;overflow:hidden;
+  display:grid;align-content:center;justify-items:center;text-align:center;gap:{h*0.03:.0f}px;padding:0 6%}}
+.logo{{width:{h*0.13:.0f}px;height:{h*0.13:.0f}px}}
+h1{{font-family:Anuphan;font-weight:500;font-size:{h*0.12:.0f}px;line-height:1.05;margin:0}}
+h1 b{{font-family:Jost;font-weight:500;font-size:1.25em}}
+p{{margin:0;font-size:{h*0.042:.0f}px;line-height:1.35;color:#4A4542}}
+.pcs{{display:flex;gap:{h*0.015:.0f}px;align-items:flex-end}}
+.pc{{display:grid;justify-items:center;gap:4px;font-family:Jost;font-style:normal}}
+.pc .ph{{width:{h*0.1:.0f}px;aspect-ratio:1;background:center/contain no-repeat;display:grid;place-items:center}}
+.pc .ph svg{{width:82%;height:82%}} .pc .ph svg path,.pc .ph svg circle,.pc .ph svg rect{{fill:#8B5E3C}}
+.pc i{{font-style:normal;font-size:{h*0.03:.0f}px}}
+.plus{{font-family:Jost;font-size:{h*0.07:.0f}px;padding:0 {h*0.01:.0f}px {h*0.04:.0f}px}}
+.seven{{width:{h*0.13:.0f}px;height:{h*0.13:.0f}px;border-radius:50%;background:#E9A825;display:grid;place-items:center;font-family:Jost;font-weight:500;font-size:{h*0.07:.0f}px;margin-bottom:{h*0.03:.0f}px}}
+.band{{position:absolute;left:0;right:0;bottom:0;height:{h*0.025:.0f}px;display:flex}} .band i{{flex:1}}
+"""
+    body = (f'{logo()}<h1>ชิ้นที่ <b>7</b> ฟรี</h1>'
+            f'<div class="pcs">{pieces}<span class="plus">+</span><div class="seven">7</div></div>'
+            f'<p>สะสมครบ 6 แต้ม รับชิ้นหนังวัวแท้ฟรี 1 ชิ้น<br>เลือกลายเอง · กดใช้ต่อหน้าพี่ที่บูธ OCT. 26</p>{band()}')
+    return f'<!doctype html><html lang="th"><meta charset="utf-8"><style>{css_}</style>{body}</html>'
+
+
 if __name__ == "__main__":
     open(os.path.join(HERE, "signs.html"), "w", encoding="utf-8").write(build())
     open(os.path.join(HERE, "collect.html"), "w", encoding="utf-8").write(collect_doc(event=False))
     open(os.path.join(HERE, "tent.html"), "w", encoding="utf-8").write(tents())
-    print("signs.html, collect.html, tent.html")
+    for w, h in ((1040, 1040), (1200, 800)):
+        open(os.path.join(HERE, f"reward-{w}x{h}.html"), "w", encoding="utf-8").write(reward_img(w, h))
+    print("signs.html, collect.html, tent.html, reward-*.html")
