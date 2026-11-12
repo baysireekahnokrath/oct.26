@@ -1,0 +1,410 @@
+<title>กล่องหนังหมอนคู่</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  /* One 900px column. The 3D box leads with its lid slider and colour sets; then numbers, drawings for the maker, cut lists, steps. Brand Book v2. */
+  --bg:#F4F0E8;--card:#FFFFFF;--ink:#2A2725;--muted:#5E5953;--line:#E2DACB;--accent:#5E7A3A;--warn:#A9442B;
+  --box:#efe6d8;--part:#e4dccd;--sheet:#f7f3ec;--pa:#E8DCC6;--pb:#8B5E3C;--pc:#B07A4A;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--box:#3a342d;--part:#463f36;--sheet:#2f2a25;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--box:#3a342d;--part:#463f36;--sheet:#2f2a25;color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:900px;margin:0 auto;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.25;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,7vw,40px)}h2{font-size:23px}h3{font-size:17.5px}
+p{margin:0}.muted{color:var(--muted)}.small{font-size:13px}.note{font-size:13px;color:var(--muted)}.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--latin);font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+.lede{max-width:64ch}
+section{display:grid;gap:16px}
+.stage{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+#view{display:block;width:100%;aspect-ratio:4/3;max-height:76vh;touch-action:none;cursor:grab}
+#view:active{cursor:grabbing}
+.status{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted)}
+.hint{position:absolute;left:12px;bottom:10px;font-size:12px;color:var(--muted);pointer-events:none}
+.controls{display:grid;gap:12px}
+.slider{display:grid;gap:4px}.slider input{width:100%;accent-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:focus-visible,.slider input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sw{display:inline-flex}.sw i{width:12px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.2);margin-left:-3px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:grid;gap:2px;min-width:0}
+.fact b{font-family:var(--latin);font-weight:500;font-size:24px;line-height:1.2}
+.fact span{font-size:13px;color:var(--muted)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.panel ul,.panel ol,ol.steps{margin:0;padding-left:1.25em;display:grid;gap:8px}
+.ask{border-left:4px solid var(--warn)}.key{border-left:4px solid var(--accent)}
+.dwgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:14px}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:8px;min-width:0}
+figcaption{font-size:13.5px;color:var(--muted)}
+.dwg{width:100%;height:auto;display:block}
+.dwg text{font-family:var(--body);fill:var(--ink)}
+.dwg .dim line{stroke:var(--ink);stroke-width:1.5}.dwg .dim text{font-size:22px}
+.dwg .lbl{font-size:22px;fill:var(--muted)}
+.dwg .box,.dwg .lid,.dwg .lidtop,.dwg .skirt,.dwg .hide{fill:var(--box);stroke:var(--ink);stroke-width:2}
+.dwg .pillow{fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:10 8}
+.dwg .rib{fill:var(--pc);opacity:.7}
+.dwg .fold{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:10 7}
+.dwg .seam{stroke:var(--warn);stroke-width:2;stroke-dasharray:3 6}
+.dwg .pc-a{fill:var(--pa);stroke:#2A2725;stroke-width:1}.dwg .pc-b{fill:var(--pb);stroke:#2A2725;stroke-width:1}.dwg .pc-c{fill:var(--pc);stroke:#2A2725;stroke-width:1}
+.dwg .cut{stroke:#2A2725;stroke-width:1.6}
+.dwg .sheetbg{fill:var(--sheet);stroke:var(--ink);stroke-width:2}.dwg .part{fill:var(--part);stroke:var(--ink);stroke-width:2}
+.sheets{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--display);font-weight:600;white-space:nowrap}
+td.num{white-space:nowrap}
+.card{background:#F4F0E8;color:#2A2725;border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;gap:8px;max-width:420px}
+.card .t{font-family:var(--display);font-size:18px}
+.card .s{font-family:var(--latin);font-size:12.5px;letter-spacing:.06em;color:#5E5953}
+</style>
+<div class="wrap">
+<header style="display:grid;gap:10px">
+  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · ของขวัญงานแต่งงาน · 12 พ.ย. 2569</p>
+  <h1>กล่องหนังใส่หมอนคู่</h1>
+  <p class="muted lede">กล่องฝาครอบหุ้มหนังแท้สีเดียว เรียบข้างนอกตามแบรนด์ บนฝามีริบบิ้นสองเส้นทำจากชิ้น 07 คนละสี แทนคนสองคน
+    ไขว้มาเจอกันที่ชิ้นกลางชิ้นเดียว ข้างในมีหมอน 55 × 55 ซม. สองใบซ้อนกัน และป้ายหนัง 05 สลักชื่อทั้งคู่</p>
+</header>
+
+<section aria-label="โมเดล 3D">
+  <div class="stage">
+    <canvas id="view" aria-label="โมเดล 3D ของกล่องหนัง หมุนได้ด้วยการลาก"></canvas>
+    <p class="status" id="status">กำลังโหลดโมเดล 3D…</p>
+    <p class="hint">ลากเพื่อหมุน · หมุนล้อหรือบีบนิ้วเพื่อซูม</p>
+  </div>
+  <div class="controls">
+    <div class="slider"><label for="open"><b>เปิดฝา</b></label><input id="open" type="range" min="0" max="100" value="0"></div>
+    <div class="row" role="group" aria-label="มุมมอง">
+      <button class="btn" type="button" data-v="iso" aria-pressed="true">มุมเฉียง</button>
+      <button class="btn" type="button" data-v="top" aria-pressed="false">มุมบน</button>
+      <button class="btn" type="button" data-v="front" aria-pressed="false">ด้านหน้า</button>
+    </div>
+    <div class="row" role="group" aria-label="ชุดสี" id="sets"></div>
+    <p class="note">สีในโมเดลเป็นตัวอย่าง สีจริงขึ้นกับหนังผืนที่หาได้ ริบบิ้นสองเส้นใช้หนังสองสีที่เรามีอยู่</p>
+  </div>
+</section>
+
+<section>
+  <h2>ตัวเลข</h2>
+  <div class="facts num">
+    <div class="fact"><span>ขนาดภายนอก (ซม.)</span><b>__OUTER__</b><span>กว้าง × ลึก × สูง ปิดฝา</span></div>
+    <div class="fact"><span>ช่องด้านใน (ซม.)</span><b>__INNER__</b><span>หมอนเข้าพอดี เผื่อพองด้านบน 2 ซม.</span></div>
+    <div class="fact"><span>ชิ้น 07 ทำริบบิ้น</span><b>__N07__</b><span>เส้นละ __NBAND__ ชิ้น ใช้ชิ้นกลางร่วมกัน · ค่าชิ้น __COST07__ บาท</span></div>
+    <div class="fact"><span>หนังผืนสำหรับหุ้ม</span><b>__AREA__ ตร.ม.</b><span>ประมาณ __SQFT__ ตร.ฟุต เผื่อเสีย 15% แล้ว</span></div>
+    <div class="fact"><span>กระดาษจั่วปัง 3 มม.</span><b>__NSHEET__ แผ่น</b><span>ขนาด 31 × 43 นิ้ว</span></div>
+  </div>
+</section>
+
+<section class="two">
+  <div class="panel key">
+    <h3>ทำไมออกแบบแบบนี้</h3>
+    <ul>
+      <li><b>เรียบข้างนอก</b> ตัวกล่องหนังสีเดียว ไม่มีโลโก้ข้างนอก ให้คนรับเป็นคนเห็นรายละเอียดเอง</li>
+      <li><b>สองเส้นมาเจอกัน</b> ริบบิ้นสองสีแทนสองคน ไขว้กันที่ชิ้นกลางชิ้นเดียว ชิ้นที่ยึดทั้งสองเส้นไว้ด้วยกัน</li>
+      <li><b>ริบบิ้นคือของขวัญ</b> เส้นละ __NBAND__ ชิ้น พาดข้ามฝา ลงขอบฝา แล้วพับเก็บใต้ขอบลึก __TUCK__ ซม. เหมือนผูกริบบิ้นจริง</li>
+      <li><b>บ้านอยู่ข้างใน</b> เปิดฝาเจอป้ายหนัง 05 สลักชื่อทั้งคู่และวันแต่งงาน วางบนหมอน</li>
+      <li>หมอนคู่เป็นของมงคลในพิธีปูที่นอนของงานแต่งแบบไทย</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h3>ข้อความบนการ์ด (ร่าง)</h3>
+    <div class="card"><p class="t">สองเส้น มาเจอกันตรงกลาง</p>
+      <p>ขอให้บ้านใหม่มีที่ให้พักหัวทุกคืน และมีกันและกันทุกวัน</p>
+      <p class="s">OCT. 26 · REAL LEATHER. NUMBERED PIECES. MADE AT HOME.</p></div>
+    <p class="note">แก้ข้อความได้ตามที่พ่อเบอยากพูด ไม่ต้องอธิบายวิธีต่อชิ้น</p>
+  </div>
+</section>
+
+<section>
+  <h2>แบบสำหรับช่าง</h2>
+  <p class="muted">หน่วยเป็นมิลลิเมตร ไฟล์พิมพ์รวมทุกแบบอยู่ที่ giftbox/drawing.svg</p>
+  <div class="dwgs">
+    <figure>__ELEV__<figcaption>ด้านหน้า ปิดฝา เส้นประคือหมอนสองใบข้างใน</figcaption></figure>
+    <figure>__NET__<figcaption>ริบบิ้นบนฝา มองจากบน คลี่ขอบฝาออก เส้นประเขียว = แนวพับขอบฝา ชิ้นข้างกันหมุนสลับ 90° ระยะ __PITCH__ มม.</figcaption></figure>
+    <figure>__LIDLEATHER__<figcaption>หนังหุ้มฝา ชิ้นเดียว ตัดมุมออก 4 มุม ถ้าไม่มีหนังผืนใหญ่ ต่อ 4 ชิ้นตามเส้นแดง ตะเข็บจะถูกริบบิ้นทับพอดี</figcaption></figure>
+  </div>
+  <h3>วางชิ้นบนกระดาษจั่วปัง</h3>
+  <div class="sheets">__SHEETS__</div>
+</section>
+
+<section>
+  <h2>รายการตัด</h2>
+  <h3>กระดาษจั่วปัง 3 มม.</h3>
+  <div class="scroll"><table><thead><tr><th>ชิ้น</th><th>ขนาด (มม.)</th><th>จำนวน</th></tr></thead><tbody>__BOARDROWS__</tbody></table></div>
+  <h3>หนังหุ้ม</h3>
+  <div class="scroll"><table><thead><tr><th>ชิ้น</th><th>ขนาด (มม.)</th><th>จำนวน</th><th>หมายเหตุ</th></tr></thead><tbody>__LEATHERROWS__</tbody></table></div>
+  <h3>ผ้าซับในและสักหลาด</h3>
+  <div class="scroll"><table><thead><tr><th>ชิ้น</th><th>ขนาด (มม.)</th><th>จำนวน</th></tr></thead><tbody>__LININGROWS__</tbody></table></div>
+  <h3>ของอื่น</h3>
+  <ul>
+    <li>07 สองสี สีละ __NSIDE__ × 2 = 12 ชิ้น + ชิ้นกลาง 1 ชิ้น (สีที่สาม หรือสีใดสีหนึ่ง) รวม __N07__ ชิ้น</li>
+    <li>05 หนึ่งชิ้น สำหรับป้ายชื่อ สลักเลเซอร์ หรือตอกตัวอักษรเหล็ก</li>
+    <li>กาวยาง (ติดหนัง) · กาวลาเท็กซ์หรือกาวร้อน (ประกอบจั่วปัง) · เทปกาวน้ำตาลปิดมุมด้านใน</li>
+    <li>กระดาษสาหรือถุงผ้าห่อหมอน</li>
+  </ul>
+  <p class="note">ราคาจั่วปัง หนังผืน และค่าเลเซอร์ ยังไม่ได้ขอราคา ราคาที่รู้แน่ตอนนี้คือชิ้น 07 รวม __COST07__ บาท</p>
+</section>
+
+<section>
+  <h2>ขั้นตอนทำ</h2>
+  <ol class="steps">
+    <li><b>วัดหมอนจริงก่อน</b> วางซ้อนสองใบ วัดกว้างและสูง ถ้าไม่ตรง 55 × 55 × 15 แก้ตัวเลขใน build.py แล้วสร้างแบบใหม่ ขนาดทุกชิ้นจะเปลี่ยนตาม</li>
+    <li><b>หาหนังผืน</b> ต้องใช้หนังสีเดียว ราว __SQFT__ ตร.ฟุต เศษหนังที่มีอยู่ชิ้นเล็กเกินไป ถามโรงงานโซฟาที่ส่งเศษหนังว่ามีหนังผืนหรือเศษชิ้นใหญ่ขนาด 60 × 40 ซม. ขึ้นไปไหม</li>
+    <li><b>ตัดและประกอบจั่วปัง</b> ตามแบบ 3 แผ่น ทากาวผนังติดก้น ปิดมุมด้านในด้วยเทปกาว รอแห้ง ทำฝาแบบเดียวกัน ลองสวมฝากับตัวกล่องก่อนหุ้ม ต้องหลวมราว 2 มม. ต่อด้าน</li>
+    <li><b>หุ้มหนัง</b> ทากาวยางทั้งสองฝั่ง รอหมาด แล้วรีด ผนังตัวกล่องเริ่มจากมุมหลัง พับหนังข้ามขอบบนเข้าด้านใน 2 ซม. ใต้ก้นติดสักหลาด ฝาใช้หนังชิ้นเดียวหรือ 4 ชิ้น</li>
+    <li><b>บุซับใน</b> ติดผ้าหรือกระดาษซับในด้านในตัวกล่องและใต้ฝา ทับขอบหนังที่พับเข้ามา</li>
+    <li><b>ต่อริบบิ้น 07 บนโต๊ะ</b> ต่อเป็นรูปบวก __NBAND__ + __NBAND__ ชิ้น ชิ้นข้างกันหมุนสลับ 90° วางบนฝาให้ชิ้นกลางอยู่กลางฝาพอดี ทากาวยางจุดเล็กใต้แต่ละชิ้น พับปลายลงขอบฝาแล้วเก็บใต้ขอบ ติดกาวด้านใน</li>
+    <li><b>ป้ายชื่อ</b> 05 สลักชื่อทั้งคู่และวันที่ วางบนหมอน ใส่การ์ด ปิดฝา</li>
+  </ol>
+  <p class="note">ใช้เวลาทำเองราว 2 วัน (กาวต้องแห้งก่อนหุ้ม) ถ้าส่งร้านทำกล่องจั่วปังเฉพาะโครง แล้วมาหุ้มหนังเอง เร็วขึ้น</p>
+</section>
+
+<section class="two">
+  <div class="panel">
+    <h3>ข้อควรระวัง</h3>
+    <ul>
+      <li>ริบบิ้น 07 เป็นของตกแต่ง ติดกาวทุกชิ้น ห้ามหิ้วกล่องจากริบบิ้น ให้อุ้มจากใต้กล่อง</li>
+      <li>กล่องกว้าง 58 ซม. ฝาจั่วปัง 3 มม. อาจแอ่นตรงกลาง ถ้าแอ่น ใช้จั่วปังสองชั้นทาบกันที่แผ่นบนฝา</li>
+      <li>หนังเรา 1.0–1.2 มม. นิ่ม หุ้มกล่องได้ดี แต่ต้องรีดให้ตึง ไม่ให้มีฟองอากาศ</li>
+      <li>เป็นงานชิ้นเดียวเพื่อเป็นของขวัญ ไม่ใช่สินค้า ไม่เขียนว่าต่อเองไม่ต้องเย็บ</li>
+    </ul>
+  </div>
+  <div class="panel ask">
+    <h3>ให้พ่อเบตอบ</h3>
+    <ol>
+      <li>งานแต่งวันไหน ต้องเสร็จก่อนวันไหน</li>
+      <li>วัดหมอนจริงได้เท่าไร (กว้าง ยาว สูงเมื่อซ้อนสองใบ)</li>
+      <li>หาหนังผืนสีเดียวราว __SQFT__ ตร.ฟุต ได้ไหม สีอะไร และริบบิ้นใช้ 07 สีไหนคู่ไหน</li>
+      <li>ชื่อทั้งคู่และวันที่บนป้าย 05</li>
+      <li>ทำเองทั้งใบ หรือส่งร้านทำโครงกล่อง แล้วหุ้มหนังเอง</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <p class="note">ไฟล์: product-dev-20261021/giftbox/ (build.py สร้างหน้านี้และ drawing.svg จากขนาดหมอนและรูปบล็อก 07) · ขนาดทุกตัวคำนวณจากหมอน 55 × 55 × 15 ซม. 2 ใบ จั่วปัง 3 มม. หนัง 1.2 มม.</p>
+</section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const D = __DATA__;
+const $ = s => document.querySelector(s);
+const SETS = {
+  black: {name: "ดำ · ครีม แทน", box: "#2E2A27", a: "#E8DCC6", b: "#B07A4A", c: "#8B5E3C"},
+  tan:   {name: "สีหนัง · ครีม น้ำตาลเข้ม", box: "#B07A4A", a: "#EDE3D0", b: "#5A3B27", c: "#2E2A27"},
+  cream: {name: "ครีม · แทน ดำ", box: "#E4D8C4", a: "#B07A4A", b: "#2E2A27", c: "#8B5E3C"},
+};
+let setKey = "black";
+try { const s = localStorage.getItem("giftbox-set"); if (SETS[s]) setKey = s; } catch (e) {}
+const status = $("#status");
+(function () {
+  const setsEl = $("#sets");
+  setsEl.innerHTML = Object.entries(SETS).map(([k, s]) =>
+    `<button class="btn" type="button" data-set="${k}" aria-pressed="${k === setKey}"><span class="sw"><i style="background:${s.box}"></i><i style="background:${s.a}"></i><i style="background:${s.b}"></i></span>${s.name}</button>`).join("");
+  if (!window.THREE) { status.textContent = "โหลดโมเดล 3D ไม่ได้ ดูแบบสำหรับช่างด้านล่างแทน"; return; }
+  const T = THREE, canvas = $("#view");
+  let renderer;
+  try { renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); }
+  catch (e) { status.textContent = "เครื่องนี้แสดง 3D ไม่ได้ ดูแบบสำหรับช่างด้านล่างแทน"; return; }
+  status.hidden = true;
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+  const scene = new T.Scene();
+  scene.add(new T.HemisphereLight(0xffffff, 0x8a7a68, 0.75));
+  const sun = new T.DirectionalLight(0xffffff, 0.75); sun.position.set(-700, -900, 1500);
+  sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, {left: -700, right: 700, top: 700, bottom: -700, near: 100, far: 4000}); sun.shadow.bias = -0.0004;
+  scene.add(sun);
+  const floor = new T.Mesh(new T.PlaneGeometry(4000, 4000), new T.ShadowMaterial({opacity: .16})); floor.receiveShadow = true; scene.add(floor);
+
+  // leather grain: soft noise used as a bump map, so faces are not flat like card
+  const gc = document.createElement("canvas"); gc.width = gc.height = 256; const gx = gc.getContext("2d"), img = gx.createImageData(256, 256);
+  let seed = 26; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 256 * 256; i++) { const v = 150 + rnd() * 80; img.data.set([v, v, v, 255], i * 4); }
+  gx.putImageData(img, 0, 0); gx.globalAlpha = .5; gx.filter = "blur(1.2px)"; gx.drawImage(gc, 0, 0);
+  const grain = new T.CanvasTexture(gc); grain.wrapS = grain.wrapT = T.RepeatWrapping; grain.repeat.set(3, 3);
+  const mat = c => new T.MeshStandardMaterial({color: c, roughness: .68, metalness: 0, bumpMap: grain, bumpScale: .35});
+  const M = {box: mat("#000"), a: mat("#000"), b: mat("#000"), c: mat("#000"),
+             lining: new T.MeshStandardMaterial({color: "#F4F0E8", roughness: .95}),
+             pillow1: new T.MeshStandardMaterial({color: "#ECE7DD", roughness: 1}), pillow2: new T.MeshStandardMaterial({color: "#DCD5C8", roughness: 1})};
+  const slab = (w, d, h, m, x, y, z, parent) => { const o = new T.Mesh(new T.BoxGeometry(w, d, h), m); o.position.set(x, y, z); o.castShadow = o.receiveShadow = true; parent.add(o); return o; };
+
+  // base: walls and bottom, leather outside, lining inside
+  const WT = D.wall, BO = D.base_out, BH = D.base_h, LO = D.lid_out, LH = D.lid_h;
+  const base = new T.Group(); scene.add(base);
+  slab(BO, BO, WT, M.box, 0, 0, WT / 2, base);
+  for (const s of [-1, 1]) { slab(BO, WT, BH, M.box, 0, s * (BO - WT) / 2, BH / 2, base); slab(WT, BO - 2 * WT, BH, M.box, s * (BO - WT) / 2, 0, BH / 2, base); }
+  slab(BO - 2 * WT - 1, BO - 2 * WT - 1, .5, M.lining, 0, 0, WT + .3, base);
+
+  // pillows: soft cushions, thinner at the edges
+  function cushion(m, z) {
+    const [pw, pd, ph] = D.pillow, g = new T.BoxGeometry(pw, pd, ph, 28, 28, 6), p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) {
+      const x = p.getX(i) / (pw / 2), y = p.getY(i) / (pd / 2);
+      const f = .3 + .7 * (1 - Math.pow(Math.abs(x), 6)) * (1 - Math.pow(Math.abs(y), 6));
+      p.setZ(i, p.getZ(i) * f * 1.06);
+      const pinch = 1 - .035 * Math.pow(Math.abs(x * y), 2);
+      p.setX(i, p.getX(i) * pinch); p.setY(i, p.getY(i) * pinch);
+    }
+    g.computeVertexNormals();
+    const o = new T.Mesh(g, m); o.position.set(0, 0, z); o.castShadow = o.receiveShadow = true; base.add(o); return o;
+  }
+  const ph = D.pillow[2];
+  for (let i = 0; i < D.npillow; i++) cushion(i % 2 ? M.pillow2 : M.pillow1, WT + ph / 2 + i * ph);
+
+  // 05 name tag on the top pillow
+  const tc = document.createElement("canvas"); tc.width = tc.height = 512; const cx = tc.getContext("2d");
+  function drawTag() {
+    cx.clearRect(0, 0, 512, 512);
+    cx.fillStyle = "#E8DCC6"; cx.beginPath(); cx.arc(256, 256, 250, 0, 7); cx.fill();
+    cx.fillStyle = "#6B4A33"; cx.textAlign = "center";
+    cx.font = "600 64px 'IBM Plex Sans Thai', sans-serif"; cx.fillText("ชื่อ & ชื่อ", 256, 250);
+    cx.font = "400 34px 'Jost', sans-serif"; cx.fillText("วันที่ · 2569", 256, 312);
+    cx.font = "500 24px 'Jost', sans-serif"; cx.fillText("OCT. 26", 256, 400);
+  }
+  drawTag();
+  const tag = new T.Mesh(new T.CircleGeometry(45, 64), new T.MeshStandardMaterial({map: new T.CanvasTexture(tc), roughness: .8}));
+  tag.position.set(110, -90, WT + D.npillow * ph + 6); tag.rotation.z = .25; tag.castShadow = true; base.add(tag);
+
+  // lid
+  const lid = new T.Group(), lidInner = new T.Group(); lid.add(lidInner); scene.add(lid);
+  slab(LO, LO, WT, M.box, 0, 0, LH - WT / 2, lidInner);
+  for (const s of [-1, 1]) { slab(LO, WT, LH, M.box, 0, s * (LO - WT) / 2, LH / 2, lidInner); slab(WT, LO - 2 * WT, LH, M.box, s * (LO - WT) / 2, 0, LH / 2, lidInner); }
+  slab(LO - 2 * WT - 1, LO - 2 * WT - 1, .5, M.lining, 0, 0, LH - WT - .3, lidInner);
+
+  // ribbon path over the lid edge: top -> fillet -> skirt -> under the edge -> up inside
+  const E = LO / 2;
+  function buildPath() {
+    const pts = [[0, LH], [E, LH], [E, 0], [E - WT, 0], [E - WT, 40]], rad = [0, 3, 1.2, 1.2, 0], out = [];
+    const push = (x, z) => { const l = out[out.length - 1]; if (!l || Math.hypot(x - l[0], z - l[1]) > 1e-6) out.push([x, z]); };
+    push(...pts[0]);
+    for (let i = 1; i < pts.length - 1; i++) {
+      const [px, pz] = pts[i - 1], [x, z] = pts[i], [nx, nz] = pts[i + 1], r = rad[i];
+      const d1 = Math.hypot(x - px, z - pz), d2 = Math.hypot(nx - x, nz - z);
+      const a = [x - (x - px) / d1 * r, z - (z - pz) / d1 * r], b = [x + (nx - x) / d2 * r, z + (nz - z) / d2 * r];
+      for (let t = 0; t <= 1.0001; t += 1 / 12) {                 // quadratic bezier through the corner, close to an arc
+        const u = 1 - t; push(u * u * a[0] + 2 * u * t * x + t * t * b[0], u * u * a[1] + 2 * u * t * z + t * t * b[1]);
+      }
+    }
+    push(...pts[pts.length - 1]);
+    const S = [{x: out[0][0], z: out[0][1], s: 0}];
+    for (let i = 1; i < out.length; i++) {
+      const [x0, z0] = out[i - 1], [x1, z1] = out[i], L = Math.hypot(x1 - x0, z1 - z0), n = Math.max(1, Math.ceil(L / .5));
+      for (let k = 1; k <= n; k++) { const t = k / n; S.push({x: x0 + (x1 - x0) * t, z: z0 + (z1 - z0) * t, s: S[S.length - 1].s + L / n}); }
+    }
+    for (let i = 0; i < S.length; i++) {
+      const a = S[Math.max(0, i - 1)], b = S[Math.min(S.length - 1, i + 1)], l = Math.hypot(b.x - a.x, b.z - a.z) || 1;
+      const tx = (b.x - a.x) / l, tz = (b.z - a.z) / l; S[i].nx = -tz; S[i].nz = tx;
+    }
+    return S;
+  }
+  const PATH = buildPath(), DS = .5;
+  function at(u) {
+    const i = Math.min(PATH.length - 1, Math.max(0, Math.round(u / DS)));
+    const p = PATH[i], extra = u - p.s;
+    if (i === PATH.length - 1 && extra > 0) return {x: p.x - p.nz * 0 + extra * (PATH[i].x - PATH[i - 1].x) / DS, z: p.z + extra * (PATH[i].z - PATH[i - 1].z) / DS, nx: p.nx, nz: p.nz};
+    return p;
+  }
+
+  // one 07, finely split so it can bend over the edge
+  const TH = 1.2;
+  const shape = new T.Shape(D.d07.poly.map(([x, y]) => new T.Vector2(x, y)));
+  const tmpl = new T.ExtrudeGeometry(shape, {depth: TH, bevelEnabled: false, curveSegments: 4});
+  const src = tmpl.attributes.position.array, tris = [];
+  for (let i = 0; i < src.length; i += 9) tris.push(Array.from(src.slice(i, i + 9)));
+  const fine = [], MAXE = 4;
+  while (tris.length) {
+    const t = tris.pop(), P0 = t.slice(0, 3), P1 = t.slice(3, 6), P2 = t.slice(6, 9);
+    const L = [[P0, P1, P2], [P1, P2, P0], [P2, P0, P1]].map(([a, b, c]) => [Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]), a, b, c]).sort((p, q) => q[0] - p[0])[0];
+    if (L[0] <= MAXE) { fine.push(...t); continue; }
+    const [, a, b, c] = L, m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2, (a[2] + b[2]) / 2];
+    tris.push([...a, ...m, ...c], [...m, ...b, ...c]);
+  }
+  const FINE = new Float32Array(fine);
+
+  const ribbon = new T.Group(); lidInner.add(ribbon);
+  const parts = [];
+  function place(px, py, rotq, lift) {          // map a 07 vertex to the lid: px/py in-plane, along X if band 0 else Y
+    return (vx, vy, vz) => {
+      const c = Math.cos(rotq), s = Math.sin(rotq), a = vx * c - vy * s, b = vx * s + vy * c, d = vz + lift;
+      const alongX = px.band === 0, sv = alongX ? px.c + a : px.c + b, w = alongX ? b : a;
+      const sg = sv < 0 ? -1 : 1, q = at(Math.abs(sv));
+      const X = sg * (q.x + q.nx * d), Z = q.z + q.nz * d;
+      return alongX ? [X, w, Z] : [w, X, Z];
+    };
+  }
+  const N = D.nside;
+  for (let band = 0; band < 2; band++) for (let k = -N; k <= N; k++) {
+    if (band === 1 && k === 0) continue;
+    const odd = Math.abs(k) % 2 === 1, rot = odd ? Math.PI / 2 : 0, lift = odd ? 1.1 : 0;
+    const f = place({band, c: k * D.P}, 0, rot, lift);
+    const pos = new Float32Array(FINE.length);
+    for (let i = 0; i < FINE.length; i += 3) { const v = f(FINE[i], FINE[i + 1], FINE[i + 2]); pos[i] = v[0]; pos[i + 1] = v[1]; pos[i + 2] = v[2]; }
+    const g = new T.BufferGeometry(); g.setAttribute("position", new T.BufferAttribute(pos, 3)); g.computeVertexNormals();
+    const m = new T.Mesh(g, k === 0 ? M.c : band === 0 ? M.a : M.b); m.castShadow = m.receiveShadow = true; ribbon.add(m);
+    for (const [p, q] of D.d07.cuts) {                       // slits, drawn on the top face
+      const ptsL = []; for (let t = 0; t <= 1.0001; t += .25) { const v = f(p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t, TH + .15); ptsL.push(new T.Vector3(...v)); }
+      ribbon.add(new T.Line(new T.BufferGeometry().setFromPoints(ptsL), new T.LineBasicMaterial({color: 0x1f1b18})));
+    }
+  }
+
+  function paint() {
+    const s = SETS[setKey]; M.box.color.set(s.box); M.a.color.set(s.a); M.b.color.set(s.b); M.c.color.set(s.c);
+    setsEl.querySelectorAll("[data-set]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.set === setKey)));
+    draw();
+  }
+  setsEl.addEventListener("click", e => { const b = e.target.closest("[data-set]"); if (!b) return; setKey = b.dataset.set; try { localStorage.setItem("giftbox-set", setKey); } catch (e) {} paint(); });
+
+  const closedZ = D.total_h - LH;
+  const openEl = $("#open");
+  function setOpen(v) {
+    const t = v / 100;
+    lid.position.set(0, -t * 120, closedZ + t * 520);
+    lid.rotation.x = -t * .5;
+    target.z = D.total_h * .5 + t * 160; draw();
+  }
+  openEl.addEventListener("input", () => setOpen(+openEl.value));
+
+  const cam = new T.PerspectiveCamera(30, 4 / 3, 10, 20000); cam.up.set(0, 0, 1);
+  const VIEWS = {iso: [-1.05, 0.55], top: [-Math.PI / 2, 1.5], front: [-Math.PI / 2, 0.1]};
+  let [yaw, pitch] = VIEWS.iso, zoom = 1;
+  const target = new T.Vector3(0, 0, D.total_h * .5);
+  function draw() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== Math.round(w * renderer.getPixelRatio()) || canvas.height !== Math.round(h * renderer.getPixelRatio())) renderer.setSize(w, h, false);
+    cam.aspect = w / h; cam.updateProjectionMatrix();
+    const dist = 2100 * zoom * Math.max(1, 1.1 / cam.aspect);
+    cam.position.set(target.x + dist * Math.cos(pitch) * Math.cos(yaw), target.y + dist * Math.cos(pitch) * Math.sin(yaw), target.z + dist * Math.sin(pitch));
+    cam.lookAt(target); renderer.render(scene, cam);
+  }
+  const pts = new Map(); let pinch = 0;
+  canvas.addEventListener("pointerdown", e => { canvas.setPointerCapture(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]); });
+  canvas.addEventListener("pointermove", e => {
+    if (!pts.has(e.pointerId)) return;
+    const [px, py] = pts.get(e.pointerId); pts.set(e.pointerId, [e.clientX, e.clientY]);
+    if (pts.size === 2) { const [a, b] = [...pts.values()], dd = Math.hypot(a[0] - b[0], a[1] - b[1]); if (pinch) zoom = Math.max(.35, Math.min(2.2, zoom * pinch / dd)); pinch = dd; }
+    else { yaw -= (e.clientX - px) * .01; pitch = Math.max(-.2, Math.min(1.52, pitch + (e.clientY - py) * .01)); }
+    draw();
+  });
+  const up = e => { pts.delete(e.pointerId); if (pts.size < 2) pinch = 0; };
+  canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up);
+  canvas.addEventListener("wheel", e => { e.preventDefault(); zoom = Math.max(.35, Math.min(2.2, zoom * (e.deltaY > 0 ? 1.08 : .93))); draw(); }, {passive: false});
+  document.querySelectorAll("[data-v]").forEach(b => b.addEventListener("click", () => {
+    [yaw, pitch] = VIEWS[b.dataset.v]; zoom = 1;
+    document.querySelectorAll("[data-v]").forEach(x => x.setAttribute("aria-pressed", String(x === b))); draw();
+  }));
+  window.addEventListener("resize", draw);
+  if (document.fonts) document.fonts.ready.then(() => { drawTag(); tag.material.map.needsUpdate = true; draw(); });
+  paint(); setOpen(0);
+})();
+</script>
