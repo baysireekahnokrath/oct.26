@@ -40,6 +40,8 @@ figcaption{font-size:13.5px;color:var(--muted)}
 .fig .seam,.fig .stitchline{fill:none;stroke:var(--warn);stroke-width:1.1;stroke-dasharray:5 3}
 .fig .centre{stroke:var(--muted);stroke-width:.8;stroke-dasharray:12 3 2 3}
 .fig .mark{fill:none;stroke:var(--blue);stroke-width:1;stroke-dasharray:3 2.5}
+.fig .foot{fill:none;stroke:var(--blue);stroke-width:.9}
+.fig .band{fill:var(--leatherf);stroke:var(--ink);stroke-width:.8}
 .fig .dim line{stroke:var(--ink);stroke-width:.9}
 .fig .big{font-family:var(--display);fill:var(--muted)}
 .fig .num{fill:var(--warn);font-weight:600}
@@ -80,7 +82,7 @@ table.cut{min-width:540px}
     <div class="fact"><span>ก้น</span><b>__BASE__ × __BASE__</b><span>ซม.</span></div>
     <div class="fact"><span>สูง</span><b>__HEIGHT__</b><span>ซม.</span></div>
     <div class="fact"><span>สายสูงจากปาก</span><b>__DROP__</b><span>ซม.</span></div>
-    <div class="fact"><span>แพตเทิร์น</span><b>7 แบบ</b><span>ตัดรวม 12 ชิ้น + แถบเสริม</span></div>
+    <div class="fact"><span>แพตเทิร์น</span><b>7 แบบ</b><span>ตัดรวม __NCUT__ ชิ้น + แถบเสริม</span></div>
     <div class="fact"><span>หนังที่ใช้</span><b>__SQFT__ ตร.ฟุต</b><span>__AREA__ ตร.ม. ซื้อ 5–6 ตร.ฟุต</span></div>
     <div class="fact"><span>เผื่อตะเข็บ</span><b>__SA__ มม.</b><span>รวมในแพตเทิร์นแล้ว</span></div>
   </div>
@@ -103,7 +105,7 @@ table.cut{min-width:540px}
     <ul>
       <li>เส้นทึบ = แนวตัด</li>
       <li>เส้นประแดง = แนวเย็บ ห่างขอบ __SA__ มม.</li>
-      <li>เส้นประน้ำเงิน = ตำแหน่งติดแม่เหล็ก แผ่นเสริม และไส้แข็ง</li>
+      <li>เส้นประน้ำเงิน = ตำแหน่งติดแม่เหล็ก แผ่นเสริม และไส้แข็ง · กรอบน้ำเงินเล็ก = ปลายปลอก C</li>
       <li>เส้นกลาง = กลางชิ้น ใช้จับคู่หน้ากับหลัง</li>
       <li>① ② = ขอบสองด้านที่จับมาชนกันตอนทำมุมก้น</li>
       <li>ปากกระเป๋าเป็นขอบตัด ไม่มีเผื่อพับ</li>
@@ -115,7 +117,7 @@ table.cut{min-width:540px}
   <h2>ชิ้นแพตเทิร์น</h2>
   <div class="figs">
     <figure>__FIG_BODY__<figcaption>A ตัวกระเป๋า ตัด 2 ชิ้น ขนาดตัด __BODY__ ซม. ตัดมุมล่างออกมุมละ __NOTCH__ × __NOTCH__ ซม.</figcaption></figure>
-    <figure>__FIG_PARTS__<figcaption>ชิ้นเล็ก: E แผ่นรองก้น · F แผ่นเสริมโคนสาย · D แผ่นหุ้มแม่เหล็ก · C ปลอกพันโคนสาย · B ปลายสาย</figcaption></figure>
+    <figure>__FIG_PARTS__<figcaption>ชิ้นเล็ก: E แผ่นรองก้น · F แผ่นเสริมโคนสาย · D แผ่นหุ้มแม่เหล็ก · C ปลอกรัดโคนสาย · B ปลายสาย</figcaption></figure>
   </div>
   <div class="scroll"><table class="cut">
     <thead><tr><th></th><th>ชิ้น</th><th>ตัด</th><th>ขนาดตัด (ซม.)</th><th>หมายเหตุ</th></tr></thead>
@@ -135,7 +137,7 @@ table.cut{min-width:540px}
   <ol class="steps">__STEPS__</ol>
   <div class="figs">
     <figure>__FIG_CORNER__<figcaption>มุมก้น: จุดที่หนาที่สุด หนังซ้อน 4 ชั้น ราว 7 มม. ถ้าหนังหนา 1.6–1.8 มม. ต้องฝานเผื่อตะเข็บก่อน แล้วใช้จักรตีนตะขาบหรือเย็บมือ</figcaption></figure>
-    <figure>__FIG_STRAP__<figcaption>สายหุ้มเชือกแกน เชือกเป็นตัวรับน้ำหนัก ฝีเข็มแรกที่โคนสายต้องเย็บทับเชือก</figcaption></figure>
+    <figure>__FIG_STRAP__<figcaption>สายหุ้มเชือกแกน ปลายสายทับด้านนอกตรงตะเข็บข้าง มีปลอก 3 เส้นรัดไว้ใต้ปาก ตามรูปอ้างอิง</figcaption></figure>
   </div>
 </section>
 
@@ -146,7 +148,8 @@ table.cut{min-width:540px}
       <li>ทำใบลองด้วยผ้าหรือหนังเทียมก่อน 1 ใบ ดูทรงและขนาด</li>
       <li>ลองความยาวสายกับใบลองก่อนเย็บปลาย ผมประมาณจากรูปว่าสายที่มองเห็นยาว 52–58 ซม. แถบ 70 ซม. เผื่อไว้แล้ว</li>
       <li>ดูหลังหนังที่จะใช้ว่าสวยพอโชว์ด้านในไหม เพราะแบบนี้ไม่มีซับใน</li>
-      <li>วิธีติดโคนสายเป็นวิธีที่ผมแนะนำ รูปอ้างอิงมองไม่เห็นด้านใน</li>
+      <li>โคนสายด้านนอกทำตามรูปอ้างอิง ส่วนรอยเย็บมือที่ซ่อนใต้ปลอกเป็นวิธีที่ผมแนะนำ รูปมองไม่เห็น</li>
+      <li>ปากกระเป๋าในรูปเว้าลงตรงกลาง ผมตัดตรงไว้เพราะหนังนิ่มจะย้วยเอง ถ้าใบลองไม่เว้าพอ ให้ตัดโค้งลง 1–2 ซม.</li>
       <li>ใบจริงเสร็จแล้ว ใส่ของ 3 กก. แขวนค้างคืน ดูโคนสายและมุมก้น</li>
     </ol>
   </div>
