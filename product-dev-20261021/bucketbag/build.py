@@ -21,12 +21,12 @@ H = HEIGHT + BASE / 2 + SA                  # top edge is a raw cut; the base ha
 N = BASE / 2                                # corner cut-out, measured from the cut corner
 CORD, LEATHER = 5, 1.6                      # strap core and the leather this pattern assumes
 STRAP_W = round((CORD + LEATHER) * math.pi + 10)      # wrap + 5 mm each side to sew and trim
-STRAP_SEEN, STRAP_END = 580, 36             # seen part is 52-58 cm by the photo; each end lies 36 mm down the outside of the side seam
+STRAP_SEEN, STRAP_END = 580, 38             # seen part is 52-58 cm by the photo; each end goes 38 mm down the INSIDE, along the side seam
 STRAP_L = 700                               # STRAP_SEEN + 2 ends + 40 spare
 CORD_L = STRAP_L                            # cut to length after fitting; the core runs to the very end of the strap
-WRAP, NWRAP = (34, 9), 6                    # bands over the strap end, three a side: 7 mm foot + over the strap + 7 mm foot
-BAND_Y = (4, 15, 26)                        # top of each band below the rim
-FOOT = (5, 12)                              # a band's foot runs 5-12 mm from the seam line
+WRAP, NWRAP = (60, 9), 6                    # bands, three a side: each goes through two slits and round the strap end inside
+BAND_Y = (5, 16.5, 28)                      # top of each slit below the rim (2.5 mm of leather left between slits)
+SLIT = 6.5                                  # slits sit this far either side of the seam line
 TAB = (44, 24); TAB_TOP = 12; MAG = (20, 10) # photo: a small bar magnet under a tab sewn at its two short ends, close under the rim
 PATCH = (40, 50)
 INS, INS_R, BOARD, BOARD_R = BASE - 5, 20, BASE - 11, 17
@@ -38,12 +38,12 @@ AREA = (2 * W * H + STRAP_L * STRAP_W + 2 * INS * INS + 2 * TAB[0] * TAB[1] + 2 
 
 CUTS = [  # letter, name, qty, cut size, note
     ("A", "ตัวกระเป๋า", "2", f"{cm(W)} × {cm(H)}", f"ตัดมุมล่างออก 2 มุม มุมละ {cm(N)} × {cm(N)} · รวมเผื่อตะเข็บ {SA} มม. แล้ว"),
-    ("B", "สาย", "1", f"{cm(STRAP_W)} × {cm(STRAP_L)}", f"หุ้มเชือกแกน {CORD} มม. ยาว {cm(CORD_L)} ซม. · ปลายทับด้านนอกตัวกระเป๋าข้างละ {cm(STRAP_END)} ซม. · ตัดหลังลองความยาว"),
-    ("C", "ปลอกรัดโคนสาย", str(NWRAP), f"{cm(WRAP[1])} × {cm(WRAP[0])}", "ข้างละ 3 เส้น คาดทับสายด้านนอก เย็บปลายสองข้าง"),
+    ("B", "สาย", "1", f"{cm(STRAP_W)} × {cm(STRAP_L)}", f"หุ้มเชือกแกน {CORD} มม. ยาว {cm(CORD_L)} ซม. · ปลายอยู่ด้านในกระเป๋าข้างละ {cm(STRAP_END)} ซม. · ตัดหลังลองความยาว"),
+    ("C", "ปลอกรัดโคนสาย", str(NWRAP), f"{cm(WRAP[1])} × {cm(WRAP[0])}", "ข้างละ 3 เส้น สอดผ่านรอยกรีดสองข้างตะเข็บ รัดสายที่อยู่ด้านใน · ตัดปลายให้พอดีตอนรัด"),
     ("D", "แผ่นหุ้มแม่เหล็ก", "2", f"{cm(TAB[0])} × {cm(TAB[1])}", f"แม่เหล็กแท่ง {cm(MAG[0])} × {cm(MAG[1])} ซม. หนา 2 มม. 2 ชิ้น · เย็บเฉพาะปลายสั้นสองข้าง"),
     ("E", "แผ่นรองก้น หนัง", "2", f"{cm(INS)} × {cm(INS)}", f"มุมมน รัศมี {cm(INS_R)}"),
     ("E2", "แผ่นรองก้น ไส้แข็ง", "1", f"{cm(BOARD)} × {cm(BOARD)}", "กระดาษอัดหรือแผ่น PE หนา 1.5–2 มม."),
-    ("F", "แผ่นเสริมโคนสาย", "2", f"{cm(PATCH[0])} × {cm(PATCH[1])}", "ติดด้านใน ทับตะเข็บข้าง รับรอยเย็บปลอกและสาย"),
+    ("F", "แผ่นเสริมโคนสาย", "2", f"{cm(PATCH[0])} × {cm(PATCH[1])}", "ติดด้านใน ทับตะเข็บข้าง เสริมรอบรอยกรีด"),
     ("G", "แถบเสริมปาก (ถ้าหนังบางกว่า 1.4 มม.)", "1", f"{cm(RIM[1])} × {cm(RIM[0])}", "ต่อ 2 ท่อนได้ ติดด้านในรอบปาก"),
 ]
 
@@ -72,15 +72,12 @@ def body(fs, dims=False):
     tx = (W - TAB[0]) / 2
     s.append(rrect(tx, TAB_TOP, TAB[0], TAB[1], 3, "mark") + txt(W / 2, TAB_TOP + TAB[1] + fs * 1.1, "D แม่เหล็ก (ด้านใน)", fs * .8))
     for x in (tx + 4, tx + TAB[0] - 4): s.append(f'<line class="seam" x1="{x}" y1="{TAB_TOP + 4}" x2="{x}" y2="{TAB_TOP + TAB[1] - 4}"/>')
-    for sx in (1, -1):                                                    # at each side seam: patch F inside, band feet outside
+    for sx in (1, -1):                                                    # at each side seam: patch F inside, three slits for the bands
         seam = SA if sx > 0 else W - SA
         s.append(rrect(min(seam, seam + sx * PATCH[0] / 2), 2, PATCH[0] / 2, PATCH[1], 0, "mark"))
-        for y0 in BAND_Y:
-            s.append(rrect(min(seam + sx * FOOT[0], seam + sx * FOOT[1]), y0, FOOT[1] - FOOT[0], WRAP[1], 0, "foot"))
-            xm = seam + sx * (FOOT[0] + FOOT[1]) / 2
-            s.append(f'<line class="seam" x1="{xm}" y1="{y0 + 1.5}" x2="{xm}" y2="{y0 + WRAP[1] - 1.5}"/>')
-        s.append(txt(seam + sx * (PATCH[0] / 2 + fs * .4), 2 + PATCH[1] * .55, "ปลอก C ด้านนอก", fs * .8, anchor="start" if sx > 0 else "end"))
-        s.append(txt(seam + sx * (PATCH[0] / 2 + fs * .4), 2 + PATCH[1] * .55 + fs, "F ด้านใน", fs * .8, anchor="start" if sx > 0 else "end"))
+        for y0 in BAND_Y: s.append(f'<line class="slit" x1="{seam + sx * SLIT}" y1="{y0}" x2="{seam + sx * SLIT}" y2="{y0 + WRAP[1]}"/>')
+        s.append(txt(seam + sx * (PATCH[0] / 2 + fs * .4), 2 + PATCH[1] * .5, "รอยกรีด 3 ช่อง", fs * .8, anchor="start" if sx > 0 else "end"))
+        s.append(txt(seam + sx * (PATCH[0] / 2 + fs * .4), 2 + PATCH[1] * .5 + fs, "F + สาย ด้านใน", fs * .8, anchor="start" if sx > 0 else "end"))
     s.append(txt(W / 2, TAB_TOP + TAB[1] + fs * 2.2, "ปากกระเป๋าเป็นขอบตัด ไม่เผื่อ", fs * .8))
     s.append(txt(W * .27, H * .42, "A", fs * 3, "big") + txt(W * .27, H * .42 + fs * 1.6, "ตัวกระเป๋า · ตัด 2 ชิ้น", fs))
     s.append(txt(W / 2, H - SA - fs * .6, "ตะเข็บก้น", fs * .8))
@@ -111,16 +108,14 @@ def patch(fs, short=False):
     return (rrect(0, 0, PATCH[0], PATCH[1], 4, "pc") + f'<line class="centre" x1="{PATCH[0] / 2}" y1="0" x2="{PATCH[0] / 2}" y2="{PATCH[1]}"/>' +
             txt(PATCH[0] / 2, PATCH[1] + fs * 1.2, "F" if short else "F แผ่นเสริม · ตัด 2", fs if short else fs * .85))
 def wrap(fs, short=False):
-    f = FOOT[1] - FOOT[0]
-    g = rrect(0, 0, WRAP[0], WRAP[1], 0, "pc") + "".join(f'<line class="mark" x1="{x}" y1="0" x2="{x}" y2="{WRAP[1]}"/>' for x in (f, WRAP[0] - f))
-    return g + txt(0, WRAP[1] + fs * 1.2, "C" if short else f"C ปลอกรัดโคนสาย · ตัด {NWRAP} ({cm(WRAP[1])} × {cm(WRAP[0])} ซม.) · เส้นประ = ปลายที่เย็บติดตัวกระเป๋า", fs if short else fs * .85, anchor="start")
+    return rrect(0, 0, WRAP[0], WRAP[1], 0, "pc") + txt(0, WRAP[1] + fs * 1.2, "C" if short else f"C ปลอกรัดโคนสาย · ตัด {NWRAP} ({cm(WRAP[1])} × {cm(WRAP[0])} ซม.) · ตัดปลายให้พอดีตอนรัด", fs if short else fs * .85, anchor="start")
 def strap_end(fs, show=150, short=False):
-    """the last part of the strap strip: the end that lies down the outside of the side seam, under the bands"""
+    """the last part of the strap strip: the end that goes inside the bag, down the side seam, held by the bands"""
     s = [f'<path class="pc" d="M{show},0H0V{STRAP_W}H{show}"/>', f'<path class="tear" d="M{show},0 l-4,{STRAP_W / 4} l4,{STRAP_W / 4} l-4,{STRAP_W / 4} l4,{STRAP_W / 4}"/>']
     s.append(f'<line class="mark" x1="{STRAP_END}" y1="0" x2="{STRAP_END}" y2="{STRAP_W}"/>')
     s.append(f'<line class="cord" x1="2" y1="{STRAP_W / 2}" x2="{show}" y2="{STRAP_W / 2}"/>')
     if short: return "".join(s) + txt(0, STRAP_W + fs * 1.2, "B ปลายสาย · เส้นหนา = เชือกแกน", fs, anchor="start")
-    s.append(txt(0, STRAP_W + fs * 1.2, f"ถึงเส้นประ {cm(STRAP_END)} ซม. = ช่วงที่ทับด้านนอกตัวกระเป๋า ใต้ปลอก C", fs * .8, anchor="start"))
+    s.append(txt(0, STRAP_W + fs * 1.2, f"ถึงเส้นประ {cm(STRAP_END)} ซม. = ช่วงที่อยู่ด้านในกระเป๋า มีปลอก C รัด", fs * .8, anchor="start"))
     s.append(txt(show - 6, STRAP_W + fs * 1.2, f"B สาย · ตัด 1 · {cm(STRAP_W)} × {cm(STRAP_L)} ซม. (แสดงแค่ปลาย) · เส้นหนา = เชือกแกน", fs * .85, anchor="end"))
     return "".join(s)
 
@@ -152,7 +147,7 @@ def fig_layout(fs=20):
     g.append(txt(x3 + 2 * PATCH[0] + 12, y2 + PATCH[1] / 2 + fs * .35, "F", fs, anchor="start"))
     for i in range(2): g.append(put(x3 + 130, y2 + i * (TAB[1] + 4), TAB[0], TAB[1], 3))
     g.append(txt(x3 + 130 + TAB[0] + fs * .5, y2 + TAB[1] + fs * .5, "D", fs, anchor="start"))
-    for i in range(NWRAP): g.append(put(x3 + (i % 3) * (WRAP[0] + 4), y2 + 2 * TAB[1] + 9 + (i // 3) * (WRAP[1] + 3), WRAP[0], WRAP[1]))
+    for i in range(NWRAP): g.append(put(x3 + (i % 3) * (WRAP[0] + 4), y2 + 2 * TAB[1] + 9 + (i // 3) * (WRAP[1] + 3), WRAP[0], WRAP[1]))  # 3 x 2
     g.append(txt(x3 + 3 * (WRAP[0] + 4) + fs * .2, y2 + 2 * TAB[1] + 9 + 16, "C", fs, anchor="start"))
     half = RIM[0] / 2                                   # the optional rim strip, as two halves
     for i in range(2):
@@ -164,15 +159,15 @@ def fig_layout(fs=20):
     g.append(dim_h(0, LW, -fs * .8, f"{cm(LW)} ซม.", fs) + dim_v(-fs * .8, 0, LH, f"{cm(LH)} ซม.", fs))
     return svg("".join(g), (-fs * 2.4, -fs * 2.4, LW + fs * 3.2, LH + fs * 3.2), label="วางชิ้นบนหนัง")
 def fig_bag(fs=15):
-    g = ['<path class="pc" d="M-72,0 Q-80,-2 -82,-20 C-90,-120 -100,-200 -97,-272 C-50,-248 50,-248 97,-272 C100,-200 90,-120 82,-20 Q80,-2 72,0 Z"/>',
-         f'<path class="strap" d="M-98,{-272 + STRAP_END} L-96,-272 C-82,-420 -40,-535 0,-535 C40,-535 82,-420 96,-272 L98,{-272 + STRAP_END}"/>']
-    for sx in (-1, 1):                                   # three bands hold each strap end on the outside, below the rim
-        for y0 in BAND_Y: g.append(rrect(sx * 98 - 8, -272 + y0, 16, WRAP[1], 2, "band"))
+    g = ['<path class="strap" d="M-96,-262 C-82,-420 -40,-535 0,-535 C40,-535 82,-420 96,-262"/>',
+         '<path class="pc" d="M-72,0 Q-80,-2 -82,-20 C-90,-120 -100,-200 -97,-272 C-50,-248 50,-248 97,-272 C100,-200 90,-120 82,-20 Q80,-2 72,0 Z"/>']
+    for sx in (-1, 1):                                   # the strap end is inside; three bands show on the outline below the rim
+        for y0 in BAND_Y: g.append(rrect(sx * 98 - 6, -272 + y0, 12, WRAP[1], 3, "band"))
     for sx in (-1, 1): g.append(f'<line class="stitch" x1="{sx * (TAB[0] / 2 - 4)}" y1="{-254 + TAB_TOP + 4}" x2="{sx * (TAB[0] / 2 - 4)}" y2="{-254 + TAB_TOP + TAB[1] - 4}"/>')
     g.append(dim_h(-75, 75, fs * 1.9, f"ก้น {cm(BASE)} × {cm(BASE)} ซม.", fs))
     g.append(dim_v(135, -272, 0, f"สูง {cm(HEIGHT)} ซม.", fs, side=1))
     g.append(dim_v(135, -535, -272, f"สาย {cm(DROP)} ซม.", fs, side=1))
-    g.append(txt(0, -254 + TAB_TOP + TAB[1] + fs * 1.1, "รอยเย็บแผ่นแม่เหล็ก", fs * .8) + txt(-112, -250, "ปลอกรัด 3 เส้น", fs * .8, anchor="end"))
+    g.append(txt(0, -254 + TAB_TOP + TAB[1] + fs * 1.1, "รอยเย็บแผ่นแม่เหล็ก", fs * .8) + txt(-110, -250, "ปลอกรัด 3 เส้น", fs * .8, anchor="end") + txt(-110, -250 + fs, "สายอยู่ด้านใน", fs * .8, anchor="end"))
     return svg("".join(g), (-200, -560, 380, 600), label="รูปกระเป๋าและขนาด")
 def fig_corner(fs=12, part=None):
     g = ['<path class="pc" d="M30,10H150V130H80V80H30Z"/>', '<line class="seam" x1="30" y1="10" x2="30" y2="80"/>', '<line class="seam" x1="80" y1="130" x2="150" y2="130"/>',
@@ -187,16 +182,23 @@ def fig_strap(fs=12, part=None):
     g = [txt(60, 0, "หน้าตัดสาย", fs * .9), '<circle class="cordc" cx="60" cy="50" r="18"/>',
          '<path class="leath" d="M52,104 V74 A26,26 0 1 1 68,74 V104"/>', '<line class="stitchline" x1="44" y1="80" x2="76" y2="80"/>',
          txt(60, 54, "เชือก", fs * .8), txt(92, 84, "เย็บชิดเชือก", fs * .8, anchor="start"), txt(92, 104, "ตัดครีบเหลือ 2 มม.", fs * .8, anchor="start"),
-         txt(300, 0, "โคนสาย มองจากด้านนอก", fs * .9),
-         '<line class="rim" x1="210" y1="50" x2="370" y2="50"/>', '<line class="seam" x1="290" y1="50" x2="290" y2="128"/>',
-         rrect(270, 52, 40, 50, 4, "mark"), f'<path class="strapd" d="M290,14 V{50 + STRAP_END}"/>']
+         txt(290, 0, "โคนสาย มองจากด้านนอก", fs * .9),
+         '<path class="strapd" d="M290,14 V50"/>', f'<path class="hidden" d="M286,50 V{50 + STRAP_END} H294 V50"/>',
+         '<line class="rim" x1="210" y1="50" x2="370" y2="50"/>', f'<line class="seam" x1="290" y1="{50 + STRAP_END}" x2="290" y2="128"/>',
+         rrect(270, 52, 40, 50, 4, "mark")]
     for y0 in BAND_Y:
-        g.append(rrect(290 - FOOT[1], 50 + y0, 2 * FOOT[1], WRAP[1], 2, "band"))
-        for x in (290 - 8.5, 290 + 8.5): g.append(f'<line class="stitchline" x1="{x}" y1="{50 + y0 + 1.5}" x2="{x}" y2="{50 + y0 + 7.5}"/>')
-    g += [txt(318, 40, f"สายทับด้านนอก {cm(STRAP_END)} ซม.", fs * .8, anchor="start"), txt(318, 62, "ปลอก C 3 เส้น คาดทับสาย", fs * .8, anchor="start"),
-          txt(318, 78, "เย็บปลายปลอกสองข้าง ทะลุถึง F", fs * .8, anchor="start"), txt(318, 100, "เส้นประ = แผ่นเสริม F ด้านใน", fs * .8, anchor="start"),
-          txt(216, 46, "ปากกระเป๋า", fs * .8, anchor="start"), txt(284, 124, "ตะเข็บข้าง", fs * .8, anchor="end")]
-    return svg("".join(g), {None: (0, -16, 470, 150), 1: (22, -16, 180, 130), 2: (205, -16, 268, 150)}[part], "fig" + ({None: "", 1: " half", 2: " half wide"}[part]), "สายและโคนสาย")
+        g.append(rrect(290 - SLIT, 50 + y0, 2 * SLIT, WRAP[1], 2.5, "band"))
+        for x in (290 - SLIT, 290 + SLIT): g.append(f'<line class="slit" x1="{x}" y1="{50 + y0}" x2="{x}" y2="{50 + y0 + WRAP[1]}"/>')
+    g += [txt(318, 40, "สายเข้าด้านในตรงปาก", fs * .8, anchor="start"), txt(318, 62, "ปลอก C 3 เส้น ข้ามตะเข็บ", fs * .8, anchor="start"),
+          txt(318, 78, "ปลายปลอกสอดเข้ารอยกรีด", fs * .8, anchor="start"), txt(318, 100, "เส้นประ = สายและ F ด้านใน", fs * .8, anchor="start"),
+          txt(216, 46, "ปากกระเป๋า", fs * .8, anchor="start"), txt(284, 124, "ตะเข็บข้าง", fs * .8, anchor="end"),
+          # section through one band, seen from above: wall, strap inside, band round both
+          txt(560, 0, "ตัดขวางตรงปลอก มองจากบน", fs * .9), txt(492, 40, "ด้านนอก", fs * .8, anchor="start"), txt(492, 76, "ด้านใน", fs * .8, anchor="start"),
+          '<path class="bandl" d="M546,58 V44 H574 V58 A15,15 0 1 1 546,58"/>', '<circle class="leathc" cx="560" cy="66" r="9.5"/>', '<circle class="cordc" cx="560" cy="66" r="5.5"/>',
+          '<line class="rim" x1="492" y1="52" x2="628" y2="52"/>', '<line class="seam" x1="560" y1="47" x2="560" y2="57"/>',
+          txt(582, 40, "ปลอก C", fs * .8, anchor="start"), txt(584, 72, "สาย", fs * .8, anchor="start"), txt(560, 104, "ปลอกสอดผ่านรอยกรีด 2 ข้างตะเข็บ", fs * .8), txt(560, 104 + fs, "รัดสายไว้กับผนังกระเป๋า", fs * .8)]
+    vb = {None: (0, -16, 640, 150), 1: (22, -16, 180, 130), 2: (205, -16, 268, 150), 3: (480, -16, 160, 140)}[part]
+    return svg("".join(g), vb, "fig" + ({None: "", 1: " half", 2: " half wide", 3: " half"}[part]), "สายและโคนสาย")
 
 # ---------------------------------------------------------------- print pages (A4, 1:1)
 PW, PH, M = 210, 297, 10
@@ -244,9 +246,10 @@ STEPS = [
     f"ทำมุมก้น: จับขอบ ① ชนขอบ ② ให้ตะเข็บข้างทับตะเข็บก้น เย็บขวาง {cm(BASE)} ซม. เย็บซ้ำ 2 รอบ ทำทั้งสองมุม",
     "กลับด้านให้หน้าหนังออก",
     "ทำสาย: พับ B หุ้มเชือกแกน เย็บชิดเชือกเฉพาะช่วงกลาง 45 ซม. ก่อน เว้นปลายข้างละราว 12 ซม. ไว้ยังไม่เย็บ",
-    f"ลองสายกับตัวกระเป๋า ให้ปลายสายทับด้านนอกตรงตะเข็บข้าง ลงมาจากปาก {cm(STRAP_END)} ซม. ขีดปลายสายทั้งสองข้าง เย็บหุ้มเชือกต่อจนถึงขีด ตัดครีบเหลือ 2 มม. แล้วตัดสายที่ขีด",
-    "ติดแผ่นเสริม F ด้านใน ทับตะเข็บข้าง ทากาวปลายสายวางทับตะเข็บด้านนอก หันครีบเข้าหาตัวกระเป๋า เย็บมือทะลุสายและเชือกแกนเข้าตัวกระเป๋าถึงแผ่น F 3 จุด ตรงตำแหน่งปลอก",
-    "คาดปลอก C ทับสาย ข้างละ 3 เส้น เย็บปลายปลอกทั้งสองข้างติดตัวกระเป๋าตามเส้นประแดง ให้ทะลุถึงแผ่น F ปลอกจะปิดรอยเย็บมือในขั้นก่อน",
+    f"ลองสายกับตัวกระเป๋า ให้ปลายสายอยู่ด้านใน แนบตะเข็บข้าง ลงมาจากปาก {cm(STRAP_END)} ซม. ขีดปลายสายทั้งสองข้าง เย็บหุ้มเชือกต่อจนถึงขีด ตัดครีบเหลือ 2 มม. แล้วตัดสายที่ขีด",
+    f"ติดแผ่นเสริม F ด้านใน ทับตะเข็บข้าง แล้วกรีดรอยกรีดตามแพตเทิร์น ข้างตะเข็บละ 3 ช่อง ยาวช่องละ {cm(WRAP[1])} ซม. ให้ทะลุผนังและแผ่น F เจาะรูกลม 1.5 มม. ที่ปลายรอยกรีดทุกช่องกันฉีก",
+    "วางปลายสายด้านใน แนบตะเข็บ หันครีบเข้าหาผนัง สอดปลอก C จากด้านนอกเข้ารอยกรีดคู่หนึ่ง อ้อมรอบสาย ดึงให้แน่น ตัดปลายให้เกยกัน 1 ซม. ทากาวแล้วเย็บปลายปลอกติดกันด้านใน ทำข้างละ 3 เส้น",
+    "เย็บมือทะลุปลอก ผนัง และสายถึงเชือกแกน เส้นละ 2 ฝีเข็ม กันสายรูด",
     "ทำแผ่นรองก้น: ประกบ E สองชิ้น มีไส้แข็ง E2 ตรงกลาง ทากาว เย็บรอบ แล้ววางลงก้น",
 ]
 steps_html = "".join(f"<li>{E(s)}</li>" for s in STEPS)
@@ -262,7 +265,7 @@ shop_rows = "".join(f"<tr><th>{E(a)}</th><td>{E(b)}</td></tr>" for a, b in SHOP)
 
 SUB = {
     "__FIG_BAG__": fig_bag(), "__FIG_BODY__": fig_body(), "__FIG_PARTS__": fig_parts(), "__FIG_LAYOUT__": fig_layout(),
-    "__FIG_CORNER__": fig_corner(12, 1) + fig_corner(12, 2), "__FIG_STRAP__": fig_strap(12, 1) + fig_strap(12, 2), "__CUTROWS__": cut_rows, "__STEPS__": steps_html, "__SHOPROWS__": shop_rows,
+    "__FIG_CORNER__": fig_corner(12, 1) + fig_corner(12, 2), "__FIG_STRAP__": fig_strap(12, 2) + fig_strap(12, 3) + fig_strap(12, 1), "__CUTROWS__": cut_rows, "__STEPS__": steps_html, "__SHOPROWS__": shop_rows,
     "__NPAGES__": str(NPAGES), "__NCUT__": str(2 + 1 + NWRAP + 2 + 2 + 1 + 2), "__T1__": str(FIRST), "__T2__": str(FIRST - 1 + COLS * ROWS), "__NTILES__": str(COLS * ROWS), "__BODY__": f"{cm(W)} × {cm(H)}", "__NOTCH__": cm(N), "__SA__": str(SA),
     "__AREA__": f"{AREA:.2f}", "__SQFT__": f"{sqft(AREA):.1f}", "__LAYOUT__": f"{cm(LAYOUT[0])} × {cm(LAYOUT[1])}",
     "__STRAP__": f"{cm(STRAP_W)} × {cm(STRAP_L)}", "__BASE__": cm(BASE), "__HEIGHT__": cm(HEIGHT), "__DROP__": cm(DROP),
@@ -289,7 +292,10 @@ svg text{{font-family:"Plex Thai",sans-serif;fill:#2A2725}}
 .seam,.stitchline{{fill:none;stroke:#A9442B;stroke-width:.3;stroke-dasharray:2 1.2}}
 .centre{{stroke:#8C8A85;stroke-width:.25;stroke-dasharray:6 1.5 1 1.5}}
 .mark{{fill:none;stroke:#2E4A7D;stroke-width:.3;stroke-dasharray:1.2 1}}
-.foot{{fill:none;stroke:#2E4A7D;stroke-width:.3}}
+.slit{{stroke:#2E4A7D;stroke-width:.5}}
+.hidden{{fill:none;stroke:#2A2725;stroke-width:.6;stroke-dasharray:2 1.5}}
+.bandl{{fill:none;stroke:#8B5E3C;stroke-width:3}}
+.leathc{{fill:#C9A27C;stroke:#2A2725;stroke-width:.6}}
 .band{{fill:#C9A27C;stroke:#2A2725;stroke-width:.6}}
 .dim line{{stroke:#2A2725;stroke-width:.25}}
 .big{{font-family:"Anuphan","Plex Thai",sans-serif;fill:#8C8A85}}
@@ -320,7 +326,7 @@ svg text{{font-family:"Plex Thai",sans-serif;fill:#2A2725}}
 .p1 .grid2{{display:grid;grid-template-columns:1fr 1fr;gap:5mm;align-items:start}}
 .p1 svg.fig{{width:100%;height:auto;display:block}}
 .p1 .fig .dim line{{stroke-width:.8}} .p1 .fig .pc{{stroke-width:1.2}} .p1 .fig .seam,.p1 .fig .stitchline{{stroke-width:1;stroke-dasharray:5 3}}
-.p1 .fig .mark{{stroke-width:.9;stroke-dasharray:3 2.5}} .p1 .fig .foot{{stroke-width:.8}} .p1 .fig .centre{{stroke-width:.7}} .p1 .fig .hide{{stroke-width:1}}
+.p1 .fig .mark{{stroke-width:.9;stroke-dasharray:3 2.5}} .p1 .fig .slit{{stroke-width:1.4}} .p1 .fig .centre{{stroke-width:.7}} .p1 .fig .hide{{stroke-width:1}}
 .p1 .check{{display:flex;gap:5mm;align-items:center;border:.3mm solid #2A2725;border-radius:2mm;padding:3mm 4mm}}
 .p1 .check svg{{width:50mm;height:50mm;flex:none}}
 .p1 .note{{font-size:8pt;color:#5E5953}}
@@ -347,8 +353,8 @@ p2 = f"""<section class="page p1">
 <h1>ลำดับเย็บ</h1>
 <ol class="big">{steps_html}</ol>
 <div style="max-width:150mm"><h2>มุมก้น</h2>{fig_corner(12)}</div>
-<div style="max-width:150mm"><h2>สายและโคนสาย</h2>{fig_strap(12)}</div>
-<p class="note">มุมก้นหนาที่สุด หนังซ้อน 4 ชั้น ราว 7 มม. ถ้าหนังหนา 1.6–1.8 มม. จึงต้องฝานก่อน แล้วใช้จักรตีนตะขาบหรือเย็บมือ · สายที่มองเห็นน่าจะยาว 52–58 ซม. ลองกับตัวกระเป๋าก่อนตัด · โคนสายด้านนอกทำตามรูปอ้างอิง ส่วนรอยเย็บมือใต้ปลอกเป็นวิธีที่แนะนำ รูปมองไม่เห็น<br>
+<div><h2>สายและโคนสาย</h2>{fig_strap(12)}</div>
+<p class="note">มุมก้นหนาที่สุด หนังซ้อน 4 ชั้น ราว 7 มม. ถ้าหนังหนา 1.6–1.8 มม. จึงต้องฝานก่อน แล้วใช้จักรตีนตะขาบหรือเย็บมือ · สายที่มองเห็นน่าจะยาว 52–58 ซม. ลองกับตัวกระเป๋าก่อนตัด · สายอยู่ด้านในและมีปลอก 3 เส้นตามรูปอ้างอิง ส่วนตำแหน่งรอยกรีด แผ่น F และรอยเย็บมือเป็นวิธีที่แนะนำ<br>
 ใบจริงเสร็จแล้ว ใส่ของ 3 กก. แขวนค้างคืน ดูโคนสายและมุมก้นก่อนใช้งานหรือขาย</p>
 </section>"""
 tiles = "".join(tile(c, r, FIRST + r * COLS + c) for r in range(ROWS) for c in range(COLS))
