@@ -1,0 +1,167 @@
+<title>แพตเทิร์นกระเป๋าทรงถัง</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  /* One 900px column: the bag and its sizes, the PDF and how to print it, the pieces, materials, steps. Brand Book v2. */
+  --bg:#F4F0E8;--card:#FFFFFF;--ink:#2A2725;--muted:#5E5953;--line:#E2DACB;--accent:#5E7A3A;--warn:#A9442B;--blue:#2E4A7D;
+  --pc:#FBF8F2;--hide:#EFE6D8;--leather:#8B5E3C;--leatherf:#C9A27C;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--blue:#8FA9D6;--pc:#322D28;--hide:#2B2622;--leather:#B98A64;--leatherf:#7A5A40;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--blue:#8FA9D6;--pc:#322D28;--hide:#2B2622;--leather:#B98A64;--leatherf:#7A5A40;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:900px;margin:0 auto;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.25;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,7vw,40px)}h2{font-size:23px}h3{font-size:17.5px}
+p{margin:0}.muted{color:var(--muted)}.note{font-size:13px;color:var(--muted)}.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--latin);font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+.lede{max-width:64ch}
+section{display:grid;gap:16px}
+a{color:var(--accent)}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;align-items:center}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:grid;gap:2px;min-width:0}
+.fact b{font-family:var(--latin);font-weight:500;font-size:24px;line-height:1.2}
+.fact span{font-size:13px;color:var(--muted)}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:8px;min-width:0}
+figcaption{font-size:13.5px;color:var(--muted)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px;align-items:start}
+.fig{width:100%;height:auto;display:block}
+.fig.half{max-width:270px;margin:0 auto}
+.fig.half.wide{max-width:400px}
+.fig text{font-family:var(--body);fill:var(--ink)}
+.fig .pc{fill:var(--pc);stroke:var(--ink);stroke-width:1.3}
+.fig .pc.opt{stroke-dasharray:6 4}
+.fig .hide{fill:var(--hide);stroke:var(--muted);stroke-width:1}
+.fig .seam,.fig .stitchline{fill:none;stroke:var(--warn);stroke-width:1.1;stroke-dasharray:5 3}
+.fig .centre{stroke:var(--muted);stroke-width:.8;stroke-dasharray:12 3 2 3}
+.fig .mark{fill:none;stroke:var(--blue);stroke-width:1;stroke-dasharray:3 2.5}
+.fig .dim line{stroke:var(--ink);stroke-width:.9}
+.fig .big{font-family:var(--display);fill:var(--muted)}
+.fig .num{fill:var(--warn);font-weight:600}
+.fig .off{fill:var(--muted)}
+.fig .tear{fill:none;stroke:var(--ink);stroke-width:1}
+.fig .cord{stroke:var(--ink);stroke-width:5;stroke-linecap:round;opacity:.5}
+.fig .strap,.fig .strapd{fill:none;stroke:var(--ink);stroke-width:9;stroke-linecap:round}
+.fig .strapd{stroke-width:8}
+.fig .wrapl{stroke:var(--card);stroke-width:1.8}
+.fig .stitch{stroke:var(--ink);stroke-width:1.2}
+.fig .arrow{fill:none;stroke:var(--ink);stroke-width:1.4}
+.fig .rim{stroke:var(--ink);stroke-width:1.8}
+.fig .cordc{fill:var(--hide);stroke:var(--ink);stroke-width:1}
+.fig .leath{fill:none;stroke:var(--leather);stroke-width:5}
+.fig .leathf{fill:var(--leatherf);stroke:var(--ink);stroke-width:.8}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.panel ul,.panel ol,ol.steps{margin:0;padding-left:1.25em;display:grid;gap:8px}
+.key{border-left:4px solid var(--accent)}.ask{border-left:4px solid var(--warn)}
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--display);font-weight:600;white-space:nowrap}
+td.num{white-space:nowrap}
+table.cut{min-width:540px}
+</style>
+<div class="wrap">
+<header style="display:grid;gap:10px">
+  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · 18 พ.ย. 2569</p>
+  <h1>แพตเทิร์นกระเป๋าทรงถัง</h1>
+  <p class="muted lede">แพตเทิร์นขนาดจริงจากรูปอ้างอิงสองรูปที่พ่อเบส่งมา ตัวกระเป๋า 2 ชิ้น ไม่มีซับใน สายกลมหุ้มเชือกแกน 1 เส้น
+    ไฟล์ PDF A4 __NPAGES__ หน้า พิมพ์ที่ 100% แล้วต่อกันได้เลย ขนาดทั้งหมดอ่านจากรูป ยังไม่ได้ทำต้นแบบ</p>
+</header>
+
+<section class="hero">
+  <figure>__FIG_BAG__<figcaption>ขนาดสำเร็จตามรูปอ้างอิง</figcaption></figure>
+  <div class="facts num">
+    <div class="fact"><span>ก้น</span><b>__BASE__ × __BASE__</b><span>ซม.</span></div>
+    <div class="fact"><span>สูง</span><b>__HEIGHT__</b><span>ซม.</span></div>
+    <div class="fact"><span>สายสูงจากปาก</span><b>__DROP__</b><span>ซม.</span></div>
+    <div class="fact"><span>แพตเทิร์น</span><b>7 แบบ</b><span>ตัดรวม 12 ชิ้น + แถบเสริม</span></div>
+    <div class="fact"><span>หนังที่ใช้</span><b>__SQFT__ ตร.ฟุต</b><span>__AREA__ ตร.ม. ซื้อ 5–6 ตร.ฟุต</span></div>
+    <div class="fact"><span>เผื่อตะเข็บ</span><b>__SA__ มม.</b><span>รวมในแพตเทิร์นแล้ว</span></div>
+  </div>
+</section>
+
+<section class="two">
+  <div class="panel key">
+    <h3>ไฟล์และวิธีพิมพ์</h3>
+    <p>ไฟล์ <b>pattern.pdf</b> ส่งไว้ในแชต (A4 __NPAGES__ หน้า) ต้นฉบับอยู่ใน repo ที่ bucketbag/pattern.pdf</p>
+    <ol>
+      <li>พิมพ์ A4 ที่ <b>100%</b> (Actual size) ห้ามเลือก Fit to page</li>
+      <li>วัดสี่เหลี่ยมทดสอบในหน้า 1 ต้องได้ 5 × 5 ซม. พอดี ถ้าไม่ได้ อย่าเพิ่งตัด</li>
+      <li>หน้า 2 คือลำดับเย็บ · หน้า __T1__–__T2__ คือชิ้น A แบ่ง __NTILES__ แผ่น ตัดตามกรอบเส้นเทา แล้วต่อชนกันด้วยเทปใส ให้สามเหลี่ยมดำชนกันเป็นข้าวหลามตัด</li>
+      <li>หน้า __NPAGES__ คือชิ้นเล็กขนาดจริง ตัดได้เลย</li>
+      <li>สาย B และแถบ G เป็นแถบตรง ตัดด้วยไม้บรรทัดตามขนาดในตาราง</li>
+    </ol>
+  </div>
+  <div class="panel">
+    <h3>อ่านเส้นบนแพตเทิร์น</h3>
+    <ul>
+      <li>เส้นทึบ = แนวตัด</li>
+      <li>เส้นประแดง = แนวเย็บ ห่างขอบ __SA__ มม.</li>
+      <li>เส้นประน้ำเงิน = ตำแหน่งติดแม่เหล็ก แผ่นเสริม และไส้แข็ง</li>
+      <li>เส้นกลาง = กลางชิ้น ใช้จับคู่หน้ากับหลัง</li>
+      <li>① ② = ขอบสองด้านที่จับมาชนกันตอนทำมุมก้น</li>
+      <li>ปากกระเป๋าเป็นขอบตัด ไม่มีเผื่อพับ</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>ชิ้นแพตเทิร์น</h2>
+  <div class="figs">
+    <figure>__FIG_BODY__<figcaption>A ตัวกระเป๋า ตัด 2 ชิ้น ขนาดตัด __BODY__ ซม. ตัดมุมล่างออกมุมละ __NOTCH__ × __NOTCH__ ซม.</figcaption></figure>
+    <figure>__FIG_PARTS__<figcaption>ชิ้นเล็ก: E แผ่นรองก้น · F แผ่นเสริมโคนสาย · D แผ่นหุ้มแม่เหล็ก · C ปลอกพันโคนสาย · B ปลายสาย</figcaption></figure>
+  </div>
+  <div class="scroll"><table class="cut">
+    <thead><tr><th></th><th>ชิ้น</th><th>ตัด</th><th>ขนาดตัด (ซม.)</th><th>หมายเหตุ</th></tr></thead>
+    <tbody>__CUTROWS__</tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>ของที่ต้องซื้อ</h2>
+  <div class="scroll"><table><tbody>__SHOPROWS__</tbody></table></div>
+  <figure>__FIG_LAYOUT__<figcaption>วางทุกชิ้นบนหนังชิ้นเดียว __LAYOUT__ ซม. ชิ้น A สองชิ้นวางคู่กัน สายวางยาวด้านล่าง</figcaption></figure>
+  <p class="note">ยังไม่ได้เช็กราคาหนังและอะไหล่ · แพตเทิร์นนี้คิดจากหนังหนา 1.6–1.8 มม. ถ้าใช้หนังเราที่หนา 1.0–1.2 มม. ให้เพิ่มแถบ G รอบปาก หรือประกบหนังสองชั้นทั้งชิ้น</p>
+</section>
+
+<section>
+  <h2>ลำดับเย็บ</h2>
+  <ol class="steps">__STEPS__</ol>
+  <div class="figs">
+    <figure>__FIG_CORNER__<figcaption>มุมก้น: จุดที่หนาที่สุด หนังซ้อน 4 ชั้น ใช้จักรตีนตะขาบหรือเย็บมือ</figcaption></figure>
+    <figure>__FIG_STRAP__<figcaption>สายหุ้มเชือกแกน เชือกเป็นตัวรับน้ำหนัก ฝีเข็มแรกที่โคนสายต้องเย็บทับเชือก</figcaption></figure>
+  </div>
+</section>
+
+<section class="two">
+  <div class="panel ask">
+    <h3>ต้องเช็กก่อนตัดหนังจริง</h3>
+    <ol>
+      <li>ทำใบลองด้วยผ้าหรือหนังเทียมก่อน 1 ใบ ดูทรงและขนาด</li>
+      <li>ลองความยาวสายด้วยเชือกจริงกับใบลอง ผมประมาณจากรูปไว้ที่ __DROP__ ซม. จากปาก</li>
+      <li>ดูหลังหนังที่จะใช้ว่าสวยพอโชว์ด้านในไหม เพราะแบบนี้ไม่มีซับใน</li>
+      <li>วิธีติดโคนสายเป็นวิธีที่ผมแนะนำ รูปอ้างอิงมองไม่เห็นด้านใน</li>
+      <li>ใบจริงเสร็จแล้ว ใส่ของ 3 กก. แขวนค้างคืน ดูโคนสายและมุมก้น</li>
+    </ol>
+  </div>
+  <div class="panel">
+    <h3>ถ้าจะปรับ</h3>
+    <ul>
+      <li>ขนาดทั้งหมดคำนวณจาก 3 ตัวเลขใน build.py คือ ก้น สูง และเผื่อตะเข็บ บอกขนาดใหม่มา ผมสร้างแพตเทิร์นใหม่ให้ได้</li>
+      <li>อยากได้ปากพับ ให้เพิ่มความสูงชิ้น A อีก 2 ซม.</li>
+      <li>แบรนด์เราไม่ทาสีขอบ ปากกระเป๋าให้ตัดคมแล้วขัดขอบ</li>
+      <li>ถ้าจะขาย ใส่รายละเอียดของเราเอง เช่น เลขแพตเทิร์น</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <p class="note">ไฟล์: product-dev-20261021/bucketbag/ · build.py สร้างหน้านี้และ print.html · render.cjs แปลงเป็น pattern.pdf · รูปอ้างอิงเป็นของคนอื่น ไม่ได้เก็บใน repo และไม่ใช้ในสื่อ</p>
+</section>
+</div>

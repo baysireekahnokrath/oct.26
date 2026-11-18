@@ -1,0 +1,167 @@
+<title>แพตเทิร์นกระเป๋าทรงถัง</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@500;600&family=IBM+Plex+Sans+Thai:wght@400;600&family=Jost:wght@400;500&display=swap">
+<style>
+:root{
+  /* One 900px column: the bag and its sizes, the PDF and how to print it, the pieces, materials, steps. Brand Book v2. */
+  --bg:#F4F0E8;--card:#FFFFFF;--ink:#2A2725;--muted:#5E5953;--line:#E2DACB;--accent:#5E7A3A;--warn:#A9442B;--blue:#2E4A7D;
+  --pc:#FBF8F2;--hide:#EFE6D8;--leather:#8B5E3C;--leatherf:#C9A27C;
+  --display:"Anuphan","IBM Plex Sans Thai",system-ui,sans-serif;--body:"IBM Plex Sans Thai","Noto Sans Thai",system-ui,sans-serif;--latin:"Jost",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--blue:#8FA9D6;--pc:#322D28;--hide:#2B2622;--leather:#B98A64;--leatherf:#7A5A40;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1C1A18;--card:#26231F;--ink:#F4F0E8;--muted:#C9C1B4;--line:#3A3530;--accent:#9DBA72;--warn:#E08A70;--blue:#8FA9D6;--pc:#322D28;--hide:#2B2622;--leather:#B98A64;--leatherf:#7A5A40;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:900px;margin:0 auto;display:grid;gap:44px}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.25;text-wrap:balance;margin:0}
+h1{font-size:clamp(28px,7vw,40px)}h2{font-size:23px}h3{font-size:17.5px}
+p{margin:0}.muted{color:var(--muted)}.note{font-size:13px;color:var(--muted)}.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--latin);font-size:12.5px;letter-spacing:.08em;color:var(--muted)}
+.lede{max-width:64ch}
+section{display:grid;gap:16px}
+a{color:var(--accent)}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;align-items:center}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px}
+.fact{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;display:grid;gap:2px;min-width:0}
+.fact b{font-family:var(--latin);font-weight:500;font-size:24px;line-height:1.2}
+.fact span{font-size:13px;color:var(--muted)}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:8px;min-width:0}
+figcaption{font-size:13.5px;color:var(--muted)}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px;align-items:start}
+.fig{width:100%;height:auto;display:block}
+.fig.half{max-width:270px;margin:0 auto}
+.fig.half.wide{max-width:400px}
+.fig text{font-family:var(--body);fill:var(--ink)}
+.fig .pc{fill:var(--pc);stroke:var(--ink);stroke-width:1.3}
+.fig .pc.opt{stroke-dasharray:6 4}
+.fig .hide{fill:var(--hide);stroke:var(--muted);stroke-width:1}
+.fig .seam,.fig .stitchline{fill:none;stroke:var(--warn);stroke-width:1.1;stroke-dasharray:5 3}
+.fig .centre{stroke:var(--muted);stroke-width:.8;stroke-dasharray:12 3 2 3}
+.fig .mark{fill:none;stroke:var(--blue);stroke-width:1;stroke-dasharray:3 2.5}
+.fig .dim line{stroke:var(--ink);stroke-width:.9}
+.fig .big{font-family:var(--display);fill:var(--muted)}
+.fig .num{fill:var(--warn);font-weight:600}
+.fig .off{fill:var(--muted)}
+.fig .tear{fill:none;stroke:var(--ink);stroke-width:1}
+.fig .cord{stroke:var(--ink);stroke-width:5;stroke-linecap:round;opacity:.5}
+.fig .strap,.fig .strapd{fill:none;stroke:var(--ink);stroke-width:9;stroke-linecap:round}
+.fig .strapd{stroke-width:8}
+.fig .wrapl{stroke:var(--card);stroke-width:1.8}
+.fig .stitch{stroke:var(--ink);stroke-width:1.2}
+.fig .arrow{fill:none;stroke:var(--ink);stroke-width:1.4}
+.fig .rim{stroke:var(--ink);stroke-width:1.8}
+.fig .cordc{fill:var(--hide);stroke:var(--ink);stroke-width:1}
+.fig .leath{fill:none;stroke:var(--leather);stroke-width:5}
+.fig .leathf{fill:var(--leatherf);stroke:var(--ink);stroke-width:.8}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:start}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:grid;gap:10px;min-width:0}
+.panel ul,.panel ol,ol.steps{margin:0;padding-left:1.25em;display:grid;gap:8px}
+.key{border-left:4px solid var(--accent)}.ask{border-left:4px solid var(--warn)}
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--display);font-weight:600;white-space:nowrap}
+td.num{white-space:nowrap}
+table.cut{min-width:540px}
+</style>
+<div class="wrap">
+<header style="display:grid;gap:10px">
+  <p class="eyebrow">OCT. 26 · PRODUCT DEVELOPMENT · 18 พ.ย. 2569</p>
+  <h1>แพตเทิร์นกระเป๋าทรงถัง</h1>
+  <p class="muted lede">แพตเทิร์นขนาดจริงจากรูปอ้างอิงสองรูปที่พ่อเบส่งมา ตัวกระเป๋า 2 ชิ้น ไม่มีซับใน สายกลมหุ้มเชือกแกน 1 เส้น
+    ไฟล์ PDF A4 7 หน้า พิมพ์ที่ 100% แล้วต่อกันได้เลย ขนาดทั้งหมดอ่านจากรูป ยังไม่ได้ทำต้นแบบ</p>
+</header>
+
+<section class="hero">
+  <figure><svg class="fig" viewBox="-190 -560 370 600" role="img" aria-label="รูปกระเป๋าและขนาด"><path class="strap" d="M-95,-262 C-80,-420 -40,-535 0,-535 C40,-535 80,-420 95,-262"/><path class="pc" d="M-72,0 Q-80,-2 -82,-20 C-90,-120 -100,-200 -97,-272 C-50,-248 50,-248 97,-272 C100,-200 90,-120 82,-20 Q80,-2 72,0 Z"/><line class="wrapl" x1="-89" y1="-276" x2="-101" y2="-274"/><line class="wrapl" x1="-89" y1="-284" x2="-101" y2="-282"/><line class="wrapl" x1="-89" y1="-292" x2="-101" y2="-290"/><line class="stitch" x1="-20" y1="-226" x2="-20" y2="-212"/><line class="wrapl" x1="89" y1="-276" x2="101" y2="-274"/><line class="wrapl" x1="89" y1="-284" x2="101" y2="-282"/><line class="wrapl" x1="89" y1="-292" x2="101" y2="-290"/><line class="stitch" x1="20" y1="-226" x2="20" y2="-212"/><g class="dim"><line x1="-75" y1="28.5" x2="75" y2="28.5"/><line x1="-75" y1="23.25" x2="-75" y2="33.75"/><line x1="75" y1="23.25" x2="75" y2="33.75"/><text x="0.0" y="22.5" font-size="15" text-anchor="middle">ก้น 15 × 15 ซม.</text></g><g class="dim"><line x1="125" y1="-272" x2="125" y2="0"/><line x1="119.75" y1="-272" x2="130.25" y2="-272"/><line x1="119.75" y1="0" x2="130.25" y2="0"/><text x="131.75" y="-136.0" font-size="15" text-anchor="middle" transform="rotate(-90 131.75 -136.0)" dy="12.0">สูง 28 ซม.</text></g><g class="dim"><line x1="125" y1="-535" x2="125" y2="-272"/><line x1="119.75" y1="-535" x2="130.25" y2="-535"/><line x1="119.75" y1="-272" x2="130.25" y2="-272"/><text x="131.75" y="-403.5" font-size="15" text-anchor="middle" transform="rotate(-90 131.75 -403.5)" dy="12.0">สาย 26 ซม.</text></g><text class="lbl" x="0" y="-200" font-size="12.0" text-anchor="middle" >รอยเย็บแม่เหล็ก</text><text class="lbl" x="-108" y="-300" font-size="12.0" text-anchor="end" >ปลอกพัน</text></svg><figcaption>ขนาดสำเร็จตามรูปอ้างอิง</figcaption></figure>
+  <div class="facts num">
+    <div class="fact"><span>ก้น</span><b>15 × 15</b><span>ซม.</span></div>
+    <div class="fact"><span>สูง</span><b>28</b><span>ซม.</span></div>
+    <div class="fact"><span>สายสูงจากปาก</span><b>26</b><span>ซม.</span></div>
+    <div class="fact"><span>แพตเทิร์น</span><b>7 แบบ</b><span>ตัดรวม 12 ชิ้น + แถบเสริม</span></div>
+    <div class="fact"><span>หนังที่ใช้</span><b>3.2 ตร.ฟุต</b><span>0.30 ตร.ม. ซื้อ 5–6 ตร.ฟุต</span></div>
+    <div class="fact"><span>เผื่อตะเข็บ</span><b>8 มม.</b><span>รวมในแพตเทิร์นแล้ว</span></div>
+  </div>
+</section>
+
+<section class="two">
+  <div class="panel key">
+    <h3>ไฟล์และวิธีพิมพ์</h3>
+    <p>ไฟล์ <b>pattern.pdf</b> ส่งไว้ในแชต (A4 7 หน้า) ต้นฉบับอยู่ใน repo ที่ bucketbag/pattern.pdf</p>
+    <ol>
+      <li>พิมพ์ A4 ที่ <b>100%</b> (Actual size) ห้ามเลือก Fit to page</li>
+      <li>วัดสี่เหลี่ยมทดสอบในหน้า 1 ต้องได้ 5 × 5 ซม. พอดี ถ้าไม่ได้ อย่าเพิ่งตัด</li>
+      <li>หน้า 2 คือลำดับเย็บ · หน้า 3–6 คือชิ้น A แบ่ง 4 แผ่น ตัดตามกรอบเส้นเทา แล้วต่อชนกันด้วยเทปใส ให้สามเหลี่ยมดำชนกันเป็นข้าวหลามตัด</li>
+      <li>หน้า 7 คือชิ้นเล็กขนาดจริง ตัดได้เลย</li>
+      <li>สาย B และแถบ G เป็นแถบตรง ตัดด้วยไม้บรรทัดตามขนาดในตาราง</li>
+    </ol>
+  </div>
+  <div class="panel">
+    <h3>อ่านเส้นบนแพตเทิร์น</h3>
+    <ul>
+      <li>เส้นทึบ = แนวตัด</li>
+      <li>เส้นประแดง = แนวเย็บ ห่างขอบ 8 มม.</li>
+      <li>เส้นประน้ำเงิน = ตำแหน่งติดแม่เหล็ก แผ่นเสริม และไส้แข็ง</li>
+      <li>เส้นกลาง = กลางชิ้น ใช้จับคู่หน้ากับหลัง</li>
+      <li>① ② = ขอบสองด้านที่จับมาชนกันตอนทำมุมก้น</li>
+      <li>ปากกระเป๋าเป็นขอบตัด ไม่มีเผื่อพับ</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>ชิ้นแพตเทิร์น</h2>
+  <div class="figs">
+    <figure><svg class="fig" viewBox="-33.800000000000004 -33.800000000000004 386.2 435.8" role="img" aria-label="แพตเทิร์นตัวกระเป๋า"><path class="pc" d="M0,0H316V288.0H241.0V363.0H75.0V288.0H0Z"/><polyline class="seam" points="8,0 8,280.0 83.0,280.0 83.0,355.0 233.0,355.0 233.0,280.0 308,280.0 308,0"/><line class="centre" x1="158.0" y1="0" x2="158.0" y2="363.0"/><rect class="mark" x="134.0" y="30" width="48" height="24" rx="3"/><text class="lbl" x="158.0" y="68.3" font-size="10.4" text-anchor="middle" >D แม่เหล็ก (ด้านใน)</text><rect class="mark" x="8" y="6" width="20.0" height="50" rx="0"/><rect class="mark" x="288.0" y="6" width="20.0" height="50" rx="0"/><text class="lbl" x="33.2" y="31.0" font-size="10.4" text-anchor="start" >F + สาย</text><text class="lbl" x="282.8" y="31.0" font-size="10.4" text-anchor="end" >F + สาย</text><text class="lbl" x="158.0" y="16.900000000000002" font-size="10.4" text-anchor="middle" >ปากกระเป๋า ขอบตัด ไม่เผื่อ</text><text class="big" x="85.32000000000001" y="152.46" font-size="39" text-anchor="middle" >A</text><text class="lbl" x="85.32000000000001" y="173.26000000000002" font-size="13" text-anchor="middle" >ตัวกระเป๋า · ตัด 2 ชิ้น</text><text class="lbl" x="158.0" y="347.2" font-size="10.4" text-anchor="middle" >ตะเข็บก้น</text><text class="lbl" x="15.8" y="172.79999999999998" font-size="10.4" text-anchor="middle" transform="rotate(-90 15.8 172.79999999999998)" dy="10.4">ตะเข็บข้าง</text><text class="num" x="14.5" y="273.5" font-size="15.6" text-anchor="start" >①</text><text class="num" x="89.5" y="329.25" font-size="15.6" text-anchor="start" >②</text><text class="off" x="37.5" y="330.05" font-size="9.75" text-anchor="middle" >ตัดออก 7.5×7.5</text><text class="num" x="301.5" y="273.5" font-size="15.6" text-anchor="end" >①</text><text class="num" x="226.5" y="329.25" font-size="15.6" text-anchor="end" >②</text><text class="off" x="278.5" y="330.05" font-size="9.75" text-anchor="middle" >ตัดออก 7.5×7.5</text><g class="dim"><line x1="0" y1="-11.700000000000001" x2="316" y2="-11.700000000000001"/><line x1="0" y1="-16.25" x2="0" y2="-7.150000000000001"/><line x1="316" y1="-16.25" x2="316" y2="-7.150000000000001"/><text x="158.0" y="-16.900000000000002" font-size="13" text-anchor="middle">31.6 ซม.</text></g><g class="dim"><line x1="-11.700000000000001" y1="0" x2="-11.700000000000001" y2="363.0"/><line x1="-16.25" y1="0" x2="-7.150000000000001" y2="0"/><line x1="-16.25" y1="363.0" x2="-7.150000000000001" y2="363.0"/><text x="-17.55" y="181.5" font-size="13" text-anchor="middle" transform="rotate(-90 -17.55 181.5)">36.3 ซม.</text></g><g class="dim"><line x1="327.7" y1="0" x2="327.7" y2="288.0"/><line x1="323.15" y1="0" x2="332.25" y2="0"/><line x1="323.15" y1="288.0" x2="332.25" y2="288.0"/><text x="333.55" y="144.0" font-size="13" text-anchor="middle" transform="rotate(-90 333.55 144.0)" dy="10.4">28.8</text></g><g class="dim"><line x1="75.0" y1="385.1" x2="241.0" y2="385.1"/><line x1="75.0" y1="380.55" x2="75.0" y2="389.65000000000003"/><line x1="241.0" y1="380.55" x2="241.0" y2="389.65000000000003"/><text x="158.0" y="379.90000000000003" font-size="13" text-anchor="middle">16.6</text></g></svg><figcaption>A ตัวกระเป๋า ตัด 2 ชิ้น ขนาดตัด 31.6 × 36.3 ซม. ตัดมุมล่างออกมุมละ 7.5 × 7.5 ซม.</figcaption></figure>
+    <figure><svg class="fig" viewBox="-5 -5 220 248" role="img" aria-label="ชิ้นเล็ก"><g><rect class="pc" x="0" y="0" width="145" height="145" rx="15"/><rect class="mark" x="3.0" y="3.0" width="139" height="139" rx="12"/><text class="big" x="72.5" y="72.5" font-size="33" text-anchor="middle" >E</text><text class="lbl" x="72.5" y="90.1" font-size="11" text-anchor="middle" >เส้นประ = ไส้แข็ง E2</text></g><g transform="translate(159,0)"><rect class="pc" x="0" y="0" width="40" height="50" rx="4"/><line class="centre" x1="20.0" y1="0" x2="20.0" y2="50"/><text class="lbl" x="20.0" y="63.2" font-size="11" text-anchor="middle" >F</text></g><g transform="translate(159,78)"><rect class="pc" x="0" y="0" width="48" height="24" rx="3"/><rect class="seam" x="3" y="3" width="42" height="18" rx="1.5"/><circle class="mark" cx="24.0" cy="12.0" r="9"/><text class="lbl" x="24.0" y="37.2" font-size="11" text-anchor="middle" >D</text></g><g transform="translate(0,159)"><rect class="pc" x="0" y="0" width="150" height="6" rx="0"/><text class="lbl" x="0" y="19.2" font-size="11" text-anchor="start" >C</text></g><g transform="translate(0,187)"><path class="pc" d="M205,0H0V31H205"/><path class="tear" d="M205,0 l-4,7.75 l4,7.75 l-4,7.75 l4,7.75"/><line class="mark" x1="40" y1="0" x2="40" y2="31"/><line class="cord" x1="25" y1="15.5" x2="205" y2="15.5"/><text class="lbl" x="0" y="44.2" font-size="11" text-anchor="start" >B ปลายสาย · เส้นหนา = เชือกแกน</text></g></svg><figcaption>ชิ้นเล็ก: E แผ่นรองก้น · F แผ่นเสริมโคนสาย · D แผ่นหุ้มแม่เหล็ก · C ปลอกพันโคนสาย · B ปลายสาย</figcaption></figure>
+  </div>
+  <div class="scroll"><table class="cut">
+    <thead><tr><th></th><th>ชิ้น</th><th>ตัด</th><th>ขนาดตัด (ซม.)</th><th>หมายเหตุ</th></tr></thead>
+    <tbody><tr><th>A</th><td>ตัวกระเป๋า</td><td class="num">2</td><td class="num">31.6 × 36.3</td><td>ตัดมุมล่างออก 2 มุม มุมละ 7.5 × 7.5 · รวมเผื่อตะเข็บ 8 มม. แล้ว</td></tr><tr><th>B</th><td>สาย</td><td class="num">1</td><td class="num">3.1 × 70</td><td>หุ้มเชือกแกน 5 มม. ยาว 61 ซม. · ตัดปลายทิ้งตอนติด</td></tr><tr><th>C</th><td>ปลอกพันโคนสาย</td><td class="num">2</td><td class="num">0.6 × 15</td><td>พันข้างละ 3 รอบ</td></tr><tr><th>D</th><td>แผ่นหุ้มแม่เหล็ก</td><td class="num">2</td><td class="num">4.8 × 2.4</td><td>แม่เหล็กกลม 18 × 2 มม. 2 เม็ด</td></tr><tr><th>E</th><td>แผ่นรองก้น หนัง</td><td class="num">2</td><td class="num">14.5 × 14.5</td><td>มุมมน รัศมี 1.5</td></tr><tr><th>E2</th><td>แผ่นรองก้น ไส้แข็ง</td><td class="num">1</td><td class="num">13.9 × 13.9</td><td>กระดาษอัดหรือแผ่น PE หนา 1.5–2 มม.</td></tr><tr><th>F</th><td>แผ่นเสริมโคนสาย</td><td class="num">2</td><td class="num">4 × 5</td><td>ติดด้านใน ทับตะเข็บข้าง</td></tr><tr><th>G</th><td>แถบเสริมปาก (ถ้าหนังบางกว่า 1.4 มม.)</td><td class="num">1</td><td class="num">2 × 61.5</td><td>ต่อ 2 ท่อนได้ ติดด้านในรอบปาก</td></tr></tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>ของที่ต้องซื้อ</h2>
+  <div class="scroll"><table><tbody><tr><th>หนังวัวนิ่มลายลิ้นจี่</th><td>หนา 1.6–1.8 มม. ชิ้นเดียวอย่างน้อย 70 × 58 ซม. หรือซื้อ 5–6 ตร.ฟุต</td></tr><tr><th>เชือกแกนสาย</th><td>ไนลอนหรือฝ้ายถัก 5 มม. ยาว 61 ซม.</td></tr><tr><th>แม่เหล็กกลม</th><td>18 × 2 มม. 2 เม็ด</td></tr><tr><th>ไส้แข็งแผ่นรองก้น</th><td>กระดาษอัดหรือแผ่น PE 1.5–2 มม. ขนาด 13.9 × 13.9 ซม.</td></tr><tr><th>ด้ายและเข็ม</th><td>ด้ายไนลอนหรือโพลีเอสเตอร์เบอร์ 20 · เข็มจักรปลายมีด เบอร์ 18–19</td></tr><tr><th>กาว</th><td>กาวยาง สำหรับแบะตะเข็บและประกบแผ่นรองก้น</td></tr></tbody></table></div>
+  <figure><svg class="fig" viewBox="-48.0 -48.0 764.0 644.0" role="img" aria-label="วางชิ้นบนหนัง"><rect class="hide" x="0" y="0" width="700" height="580" rx="0"/><path class="pc" d="M6,6H322V294.0H247.0V369.0H81.0V294.0H6Z"/><text class="big" x="164.0" y="187.5" font-size="40" text-anchor="middle" >A</text><path class="pc" d="M328,6H644V294.0H569.0V369.0H403.0V294.0H328Z"/><text class="big" x="486.0" y="187.5" font-size="40" text-anchor="middle" >A</text><rect class="pc" x="0" y="377.0" width="700" height="31" rx="0"/><text class="lbl" x="350.0" y="399.5" font-size="20" text-anchor="middle" >B สาย</text><rect class="pc" x="6" y="416.0" width="145" height="145" rx="15"/><text class="big" x="78.5" y="496.5" font-size="32.0" text-anchor="middle" >E</text><rect class="pc" x="157" y="416.0" width="145" height="145" rx="15"/><text class="big" x="229.5" y="496.5" font-size="32.0" text-anchor="middle" >E</text><rect class="pc" x="314" y="416.0" width="40" height="50" rx="4"/><rect class="pc" x="360" y="416.0" width="40" height="50" rx="4"/><text class="lbl" x="357" y="486.0" font-size="20" text-anchor="middle" >F</text><rect class="pc" x="414" y="416.0" width="48" height="24" rx="3"/><rect class="pc" x="414" y="446.0" width="48" height="24" rx="3"/><text class="lbl" x="474.0" y="448.0" font-size="20" text-anchor="start" >D</text><rect class="pc" x="314" y="498.0" width="150" height="6" rx="0"/><rect class="pc" x="314" y="510.0" width="150" height="6" rx="0"/><text class="lbl" x="474.0" y="512.0" font-size="20" text-anchor="start" >C</text><rect class="pc opt" x="314" y="541.0" width="380" height="20" rx="0"/><text class="lbl" x="504.0" y="558.0" font-size="16.0" text-anchor="middle" >G แถบเสริมปาก (ต่อ 2 ท่อน)</text><g class="dim"><line x1="0" y1="-16.0" x2="700" y2="-16.0"/><line x1="0" y1="-23.0" x2="0" y2="-9.0"/><line x1="700" y1="-23.0" x2="700" y2="-9.0"/><text x="350.0" y="-24.0" font-size="20" text-anchor="middle">70 ซม.</text></g><g class="dim"><line x1="-16.0" y1="0" x2="-16.0" y2="580"/><line x1="-23.0" y1="0" x2="-9.0" y2="0"/><line x1="-23.0" y1="580" x2="-9.0" y2="580"/><text x="-25.0" y="290.0" font-size="20" text-anchor="middle" transform="rotate(-90 -25.0 290.0)">58 ซม.</text></g></svg><figcaption>วางทุกชิ้นบนหนังชิ้นเดียว 70 × 58 ซม. ชิ้น A สองชิ้นวางคู่กัน สายวางยาวด้านล่าง</figcaption></figure>
+  <p class="note">ยังไม่ได้เช็กราคาหนังและอะไหล่ · แพตเทิร์นนี้คิดจากหนังหนา 1.6–1.8 มม. ถ้าใช้หนังเราที่หนา 1.0–1.2 มม. ให้เพิ่มแถบ G รอบปาก หรือประกบหนังสองชั้นทั้งชิ้น</p>
+</section>
+
+<section>
+  <h2>ลำดับเย็บ</h2>
+  <ol class="steps"><li>เย็บแผ่นหุ้มแม่เหล็ก D ติดด้านในของ A ทั้งสองชิ้น ตามเส้นประ ใส่แม่เหล็กไว้ข้างใน ลองให้ดูดกันก่อนเย็บ</li><li>ประกบหน้าหนังเข้าหากัน เย็บตะเข็บข้างสองด้าน แล้วเย็บตะเข็บก้น ห่างขอบ 8 มม.</li><li>แบะตะเข็บออก ทากาวยาง ตอกให้เรียบ</li><li>ทำมุมก้น: จับขอบ ① ชนขอบ ② ให้ตะเข็บข้างทับตะเข็บก้น เย็บขวาง 15 ซม. เย็บซ้ำ 2 รอบ ทำทั้งสองมุม</li><li>กลับด้านให้หน้าหนังออก</li><li>ทำสาย: พับ B หุ้มเชือกแกน เย็บชิดเชือก ตัดครีบเหลือ 2 มม. เว้นปลายข้างละ 4 ซม. ไว้แบน</li><li>ลองความยาวสายกับตัวกระเป๋าก่อน แล้วติดแผ่นเสริม F ด้านใน ทับตะเข็บข้าง เย็บปลายสายเป็นกรอบสี่เหลี่ยมมีกากบาท ให้ฝีเข็มแรกเย็บทับปลายเชือกแกน</li><li>พันปลอก C รอบโคนสาย 3 รอบ ทากาวปลายซ่อนไว้ด้านใน</li><li>ทำแผ่นรองก้น: ประกบ E สองชิ้น มีไส้แข็ง E2 ตรงกลาง ทากาว เย็บรอบ แล้ววางลงก้น</li></ol>
+  <div class="figs">
+    <figure><svg class="fig half" viewBox="4 -16 158 166" role="img" aria-label="วิธีทำมุมก้น"><path class="pc" d="M30,10H150V130H80V80H30Z"/><line class="seam" x1="30" y1="10" x2="30" y2="80"/><line class="seam" x1="80" y1="130" x2="150" y2="130"/><text class="num" x="55" y="74" font-size="14.399999999999999" text-anchor="middle" >①</text><text class="num" x="88" y="108" font-size="14.399999999999999" text-anchor="start" >②</text><text class="lbl" x="20" y="48" font-size="9.600000000000001" text-anchor="middle" transform="rotate(-90 20 48)">ตะเข็บข้าง</text><text class="lbl" x="115" y="145" font-size="9.600000000000001" text-anchor="middle" >ตะเข็บก้น</text><text class="lbl" x="90" y="0" font-size="10.8" text-anchor="middle" >1 เย็บข้างและก้นแล้ว มุมเป็นรู</text><path class="arrow" d="M165,70 H200 m-8,-6 l8,6 l-8,6"/><path class="pc" d="M220,90 L206,24 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 L360,90 Z"/><line class="seam" x1="290" y1="27" x2="290" y2="90"/><line class="stitchline" x1="228" y1="82" x2="352" y2="82"/><text class="num" x="255" y="72" font-size="14.399999999999999" text-anchor="middle" >①</text><text class="num" x="325" y="72" font-size="14.399999999999999" text-anchor="middle" >②</text><text class="off" x="290" y="46" font-size="9.600000000000001" text-anchor="middle" >ตัวกระเป๋า</text><text class="lbl" x="290" y="0" font-size="10.8" text-anchor="middle" >2 จับ ① ชน ② ตะเข็บทับกันตรงกลาง</text><g class="dim"><line x1="220" y1="118" x2="360" y2="118"/><line x1="220" y1="114.43" x2="220" y2="121.57"/><line x1="360" y1="114.43" x2="360" y2="121.57"/><text x="290.0" y="113.92" font-size="10.2" text-anchor="middle">เย็บขวาง 15 ซม. ซ้ำ 2 รอบ</text></g></svg><svg class="fig half" viewBox="204 -16 176 150" role="img" aria-label="วิธีทำมุมก้น"><path class="pc" d="M30,10H150V130H80V80H30Z"/><line class="seam" x1="30" y1="10" x2="30" y2="80"/><line class="seam" x1="80" y1="130" x2="150" y2="130"/><text class="num" x="55" y="74" font-size="14.399999999999999" text-anchor="middle" >①</text><text class="num" x="88" y="108" font-size="14.399999999999999" text-anchor="start" >②</text><text class="lbl" x="20" y="48" font-size="9.600000000000001" text-anchor="middle" transform="rotate(-90 20 48)">ตะเข็บข้าง</text><text class="lbl" x="115" y="145" font-size="9.600000000000001" text-anchor="middle" >ตะเข็บก้น</text><text class="lbl" x="90" y="0" font-size="10.8" text-anchor="middle" >1 เย็บข้างและก้นแล้ว มุมเป็นรู</text><path class="arrow" d="M165,70 H200 m-8,-6 l8,6 l-8,6"/><path class="pc" d="M220,90 L206,24 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 l14,5 l14,-5 L360,90 Z"/><line class="seam" x1="290" y1="27" x2="290" y2="90"/><line class="stitchline" x1="228" y1="82" x2="352" y2="82"/><text class="num" x="255" y="72" font-size="14.399999999999999" text-anchor="middle" >①</text><text class="num" x="325" y="72" font-size="14.399999999999999" text-anchor="middle" >②</text><text class="off" x="290" y="46" font-size="9.600000000000001" text-anchor="middle" >ตัวกระเป๋า</text><text class="lbl" x="290" y="0" font-size="10.8" text-anchor="middle" >2 จับ ① ชน ② ตะเข็บทับกันตรงกลาง</text><g class="dim"><line x1="220" y1="118" x2="360" y2="118"/><line x1="220" y1="114.43" x2="220" y2="121.57"/><line x1="360" y1="114.43" x2="360" y2="121.57"/><text x="290.0" y="113.92" font-size="10.2" text-anchor="middle">เย็บขวาง 15 ซม. ซ้ำ 2 รอบ</text></g></svg><figcaption>มุมก้น: จุดที่หนาที่สุด หนังซ้อน 4 ชั้น ใช้จักรตีนตะขาบหรือเย็บมือ</figcaption></figure>
+    <figure><svg class="fig half" viewBox="22 -16 180 130" role="img" aria-label="สายและโคนสาย"><text class="lbl" x="60" y="0" font-size="10.8" text-anchor="middle" >หน้าตัดสาย</text><circle class="cordc" cx="60" cy="50" r="18"/><path class="leath" d="M52,104 V74 A26,26 0 1 1 68,74 V104"/><line class="stitchline" x1="44" y1="80" x2="76" y2="80"/><text class="lbl" x="60" y="54" font-size="9.600000000000001" text-anchor="middle" >เชือก</text><text class="lbl" x="92" y="84" font-size="9.600000000000001" text-anchor="start" >เย็บชิดเชือก</text><text class="lbl" x="92" y="104" font-size="9.600000000000001" text-anchor="start" >ตัดครีบเหลือ 2 มม.</text><text class="lbl" x="290" y="0" font-size="10.8" text-anchor="middle" >โคนสาย มองจากด้านในกระเป๋า</text><line class="rim" x1="210" y1="50" x2="370" y2="50"/><line class="seam" x1="290" y1="50" x2="290" y2="128"/><rect class="pc" x="270" y="56" width="40" height="50" rx="4"/><rect class="leathf" x="276" y="54" width="28" height="40" rx="2"/><path class="stitchline" d="M279,60 H301 V90 H279 Z M279,60 L301,90 M301,60 L279,90"/><path class="strapd" d="M290,54 V14"/><line class="wrapl" x1="282" y1="44" x2="298" y2="42"/><line class="wrapl" x1="282" y1="37" x2="298" y2="35"/><line class="wrapl" x1="282" y1="30" x2="298" y2="28"/><text class="lbl" x="318" y="34" font-size="9.600000000000001" text-anchor="start" >ปลอกพัน 3 รอบ</text><text class="lbl" x="318" y="78" font-size="9.600000000000001" text-anchor="start" >ปลายแบน เย็บกรอบ+กากบาท</text><text class="lbl" x="318" y="100" font-size="9.600000000000001" text-anchor="start" >แผ่นเสริม F</text><text class="lbl" x="216" y="46" font-size="9.600000000000001" text-anchor="start" >ปากกระเป๋า</text><text class="lbl" x="284" y="124" font-size="9.600000000000001" text-anchor="end" >ตะเข็บข้าง</text></svg><svg class="fig half wide" viewBox="205 -16 268 150" role="img" aria-label="สายและโคนสาย"><text class="lbl" x="60" y="0" font-size="10.8" text-anchor="middle" >หน้าตัดสาย</text><circle class="cordc" cx="60" cy="50" r="18"/><path class="leath" d="M52,104 V74 A26,26 0 1 1 68,74 V104"/><line class="stitchline" x1="44" y1="80" x2="76" y2="80"/><text class="lbl" x="60" y="54" font-size="9.600000000000001" text-anchor="middle" >เชือก</text><text class="lbl" x="92" y="84" font-size="9.600000000000001" text-anchor="start" >เย็บชิดเชือก</text><text class="lbl" x="92" y="104" font-size="9.600000000000001" text-anchor="start" >ตัดครีบเหลือ 2 มม.</text><text class="lbl" x="290" y="0" font-size="10.8" text-anchor="middle" >โคนสาย มองจากด้านในกระเป๋า</text><line class="rim" x1="210" y1="50" x2="370" y2="50"/><line class="seam" x1="290" y1="50" x2="290" y2="128"/><rect class="pc" x="270" y="56" width="40" height="50" rx="4"/><rect class="leathf" x="276" y="54" width="28" height="40" rx="2"/><path class="stitchline" d="M279,60 H301 V90 H279 Z M279,60 L301,90 M301,60 L279,90"/><path class="strapd" d="M290,54 V14"/><line class="wrapl" x1="282" y1="44" x2="298" y2="42"/><line class="wrapl" x1="282" y1="37" x2="298" y2="35"/><line class="wrapl" x1="282" y1="30" x2="298" y2="28"/><text class="lbl" x="318" y="34" font-size="9.600000000000001" text-anchor="start" >ปลอกพัน 3 รอบ</text><text class="lbl" x="318" y="78" font-size="9.600000000000001" text-anchor="start" >ปลายแบน เย็บกรอบ+กากบาท</text><text class="lbl" x="318" y="100" font-size="9.600000000000001" text-anchor="start" >แผ่นเสริม F</text><text class="lbl" x="216" y="46" font-size="9.600000000000001" text-anchor="start" >ปากกระเป๋า</text><text class="lbl" x="284" y="124" font-size="9.600000000000001" text-anchor="end" >ตะเข็บข้าง</text></svg><figcaption>สายหุ้มเชือกแกน เชือกเป็นตัวรับน้ำหนัก ฝีเข็มแรกที่โคนสายต้องเย็บทับเชือก</figcaption></figure>
+  </div>
+</section>
+
+<section class="two">
+  <div class="panel ask">
+    <h3>ต้องเช็กก่อนตัดหนังจริง</h3>
+    <ol>
+      <li>ทำใบลองด้วยผ้าหรือหนังเทียมก่อน 1 ใบ ดูทรงและขนาด</li>
+      <li>ลองความยาวสายด้วยเชือกจริงกับใบลอง ผมประมาณจากรูปไว้ที่ 26 ซม. จากปาก</li>
+      <li>ดูหลังหนังที่จะใช้ว่าสวยพอโชว์ด้านในไหม เพราะแบบนี้ไม่มีซับใน</li>
+      <li>วิธีติดโคนสายเป็นวิธีที่ผมแนะนำ รูปอ้างอิงมองไม่เห็นด้านใน</li>
+      <li>ใบจริงเสร็จแล้ว ใส่ของ 3 กก. แขวนค้างคืน ดูโคนสายและมุมก้น</li>
+    </ol>
+  </div>
+  <div class="panel">
+    <h3>ถ้าจะปรับ</h3>
+    <ul>
+      <li>ขนาดทั้งหมดคำนวณจาก 3 ตัวเลขใน build.py คือ ก้น สูง และเผื่อตะเข็บ บอกขนาดใหม่มา ผมสร้างแพตเทิร์นใหม่ให้ได้</li>
+      <li>อยากได้ปากพับ ให้เพิ่มความสูงชิ้น A อีก 2 ซม.</li>
+      <li>แบรนด์เราไม่ทาสีขอบ ปากกระเป๋าให้ตัดคมแล้วขัดขอบ</li>
+      <li>ถ้าจะขาย ใส่รายละเอียดของเราเอง เช่น เลขแพตเทิร์น</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <p class="note">ไฟล์: product-dev-20261021/bucketbag/ · build.py สร้างหน้านี้และ print.html · render.cjs แปลงเป็น pattern.pdf · รูปอ้างอิงเป็นของคนอื่น ไม่ได้เก็บใน repo และไม่ใช้ในสื่อ</p>
+</section>
+</div>
